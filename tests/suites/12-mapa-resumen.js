@@ -181,6 +181,22 @@ module.exports = {
       const hs = await t.docs('hallazgos'), h = hs.sort((a, b) => b.ts - a.ts)[0];
       t.ok('guardado con especie, spot y cantidad', hs.length === n0 + 1 && h.especieId === 'boletus-edulis' && h.zonaId === 'za' && h.cantidad === '2–5' && h.identificacion === 'provisional');
     });
+    await t.case('Setas: lección del día, tu colección y «Las mías»', async () => {
+      await t.go('#setas'); await t.wait(500);
+      t.ok('tarjeta «Hoy aprendes»', /Hoy aprendes/i.test(await t.T('#v-setas .lec') || ''));
+      const L = await t.page.evaluate(() => document.querySelector('#v-setas .lec-h span').textContent);
+      t.ok('varias lecciones disponibles', /^\d+\/(\d+)$/.test(L) && +L.split('/')[1] >= 5, L);
+      const a = await t.T('#v-setas .lec-t'); await t.tap('#lec-next', 300);
+      t.ok('«Otra» cambia la lección', (await t.T('#v-setas .lec-t')) !== a);
+      t.ok('colección: 3 especies encontradas (boleto, cicuta, níscalo)', /3\s*de 56/.test(await t.T('#v-setas .col') || ''), await t.T('#v-setas .col'));
+      await t.tap('#cl [data-mias]', 300);
+      t.eq('«Las mías» deja solo las encontradas', await t.N('#slist .item'), 3);
+      t.ok('marcadas con ✓', (await t.N('#slist .item.mia')) === 3 && /×3/.test(await t.T('#slist .item.mia[data-e="boletus-edulis"] .mia-b') || ''));
+      await t.tap('#cl [data-c=""]', 300); t.eq('Todas otra vez', await t.N('#slist .item'), 56);
+      t.ok('lecciones de confusión con la cicuta (la encontraste)', await t.page.evaluate(async () => { for (let i = 0; i < 60; i++) { if (/Ojo con la confusión/.test(document.querySelector('.lec-h small').textContent)) return true; document.querySelector('#lec-next').click(); await new Promise(r => setTimeout(r, 40)); } return false; }));
+      await t.go('#mes'); await t.wait(400);
+      t.ok('Este mes: resumen con nº de peligrosas', await t.has('#v-mes .mes-sum .pel'));
+    });
     await t.case('360 px: resúmenes sin desborde', async () => {
       await t.page.setViewportSize({ width: 360, height: 640 });
       for (const [f, id] of [['verSpot', 'za'], ['verSpot', 'zb'], ['verHallazgo', 'h1']]) {

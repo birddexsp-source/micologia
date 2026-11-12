@@ -13,7 +13,7 @@ import * as trk from './track.js';
 import * as ia from './ia.js';
 import * as au from './audio.js';
 
-const APP_V = 'micologia-v14';   // = V de sw.js
+const APP_V = 'micologia-v16';   // = V de sw.js
 const S = { view: 'mapa', arg: '', map: null, pins: null, me: null, acc: null, tmp: null, mini: null, centered: false, filtro: { salida: '', especie: '' }, clase: '', q: '', syncErr: false, mes: new Date().getMonth() + 1 };
 const VIEWS = ['mapa', 'salidas', 'salida', 'setas', 'mes', 'ajustes'];
 const TITULOS = { mapa: 'Mapa', salidas: 'Salidas', salida: 'Salida', setas: 'Setas', mes: 'Este mes', ajustes: 'Ajustes' };
@@ -649,28 +649,64 @@ async function chipSalida() {
 
 /* ---------- catálogo ---------- */
 const ICO_SETA = '<svg viewBox="0 0 48 48"><path fill="#e0a458" d="M24 6C13 6 5 13.500 5 23c0 1 .8 1.700 1.700 1.700h34.600c.9 0 1.700-.7 1.700-1.700C43 13.500 35 6 24 6z"/><circle cx="16" cy="17" r="2.600" fill="#f4d9a8"/><circle cx="28" cy="13.500" r="2.200" fill="#f4d9a8"/><circle cx="33" cy="20" r="2" fill="#f4d9a8"/><path fill="#efe3cf" d="M18 25.500h12v9c0 4-2 7-6 7s-6-3-6-7z"/></svg>';
+/* ---------- aprender poco a poco: una lección al día sacada de lo que encuentras y de la temporada ---------- */
+async function encontradas() {
+  const hs = (await db.list('hallazgos')).filter(h => h.especieId && cat.byId(h.especieId)).sort((a, b) => b.ts - a.ts), c = new Map();
+  hs.forEach(h => { const r = c.get(h.especieId) || { n: 0, last: h.ts }; r.n++; c.set(h.especieId, r); });
+  return c;   // id → { n, last } (ordenado: la más reciente primero)
+}
+function lecciones(enc) {
+  const L = [], mes = new Date().getMonth() + 1, mias = [...enc.keys()].map(cat.byId);
+  const temp = tmp.delMes(cat.todas(), mes).filter(r => r.nivel >= 2).map(r => r.e);
+  mias.forEach(e => (e.confusiones || []).filter(c => c.gravedad === 'alta' && c.comoDistinguir).slice(0, 2).forEach(c => L.push({ tipo: 'Ojo con la confusión', e, e2: c.id ? cat.byId(c.id) : null, t: 'Encontraste ' + corto(e) + ': no la confundas con ' + (c.id && cat.byId(c.id) ? corto(cat.byId(c.id)) : c.nombre), x: c.comoDistinguir })));
+  temp.filter(e => !enc.has(e.id) && e.clave).forEach(e => L.push({ tipo: (e.clase === 'mortal' || e.clase === 'toxica') ? 'Peligrosa que sale ahora' : 'Sale este mes', e, t: corto(e), x: e.clave }));
+  mias.forEach(e => (e.queMirar || []).slice(0, 3).forEach(q => L.push({ tipo: 'Fíjate en', e, t: corto(e) + ': ' + q.titulo.toLowerCase(), x: q.texto })));
+  [...mias, ...temp].forEach(e => (e.curiosidades || []).slice(0, 1).forEach(c => L.push({ tipo: '¿Sabías que…?', e, t: corto(e), x: c })));
+  const vistos = new Set(); return L.filter(l => { const k = l.t + l.x; if (vistos.has(k)) return false; vistos.add(k); return true; });
+}
+const fotoGrande = e => e && e.fotos && e.fotos[0] ? '<img class="ph" src="' + esc(fi.fotoURL(e.fotos[0], 250)) + '" alt="" loading="lazy" crossorigin="anonymous">' : '';
+function leccionHTML(L) {
+  if (!L.length) return '';
+  const dia = Math.floor((Date.now() - new Date(new Date().getFullYear(), 0, 0)) / 864e5), i = ((dia + (S.lecOff || 0)) % L.length + L.length) % L.length, l = L[i];
+  return '<div class="lec"><div class="lec-h"><small>Hoy aprendes · ' + esc(l.tipo) + '</small><span>' + (i + 1) + '/' + L.length + '</span></div>' +
+    (l.e2 ? '<div class="lec-vs"><button data-e="' + l.e.id + '" style="--c:' + colorEsp(l.e) + '"><span class="pf">' + fotoGrande(l.e) + '</span><b>' + esc(corto(l.e)) + '</b></button><i>vs</i><button data-e="' + l.e2.id + '" style="--c:' + colorEsp(l.e2) + '"><span class="pf">' + fotoGrande(l.e2) + '</span><b>' + esc(corto(l.e2)) + '</b></button></div>'
+      : '<button class="lec-f" data-e="' + l.e.id + '" style="--c:' + colorEsp(l.e) + '">' + fotoGrande(l.e) + '</button>') +
+    '<b class="lec-t">' + esc(l.t) + '</b><p>' + esc(l.x) + '</p><div class="lec-b"><button class="btn" data-e="' + l.e.id + '">' + I.libro + 'Ver ficha</button><button class="btn" id="lec-next">Otra ' + I.chev + '</button></div></div>';
+}
+async function pintarAprender() {
+  const root = $('#v-setas'), enc = await encontradas(); S.enc = enc;
+  const L = lecciones(enc), tot = cat.todas().length;
+  $('#lec-w', root).innerHTML = leccionHTML(L);
+  $('#col-w', root).innerHTML = '<div class="col"><div class="col-h"><b>Tu colección</b><span><em>' + enc.size + '</em> de ' + tot + ' especies</span></div><div class="col-bar"><u style="width:' + Math.max(2, Math.round(enc.size / tot * 100)) + '%"></u></div>' +
+    (enc.size ? '<div class="col-row">' + [...enc.keys()].slice(0, 12).map(id => { const e = cat.byId(id); return '<button class="cmini" data-e="' + id + '">' + mini(e) + '</button>'; }).join('') + '</div>' : '<p class="mut sm">Cada especie que marques en el monte se añade aquí.</p>') + '</div>';
+  if (S.view === 'setas') listaSetas();
+}
 function renderSetas() {
   const root = $('#v-setas');
   if (!$('#q', root)) {
-    root.innerHTML = '<div class="pad"><div class="learn"><button class="guide-card" id="gu-open">' + ICO_SETA + '<div><b>Partes de una seta</b><small>Esquema con nombres y colores</small></div></button><button class="guide-card book" id="li-open"><span class="ic">' + lib.CAPS[0].ico + '</span><div><b>El libro para empezar</b><small>Equipo, cortar o arrancar, mitos, intoxicación</small></div></button><button class="guide-card ia" id="ia-open"><span class="ic">✨</span><div><b>Reconocer con IA</b><small>Haz 1-3 fotos y te digo a qué se parece de tu colección</small></div></button></div>' +
-      '<div class="warn" style="margin-top:10px">' + esc(cat.aviso()) + '</div><input type="search" id="q" placeholder="Buscar seta…" autocomplete="off" style="margin-top:12px"><div class="chips" id="cl" style="margin:10px 0 0"></div><div id="slist"></div>' +
+    root.innerHTML = '<div class="pad"><div id="lec-w"></div><div id="col-w"></div>' +
+      '<div class="learn2"><button class="lc" id="gu-open" style="--c:#e0a458">' + ICO_SETA + '<b>Partes de una seta</b><small>Esquema con nombres</small></button><button class="lc" id="li-open" style="--c:#7ccf8e"><span class="ic">' + lib.CAPS[0].ico + '</span><b>El libro</b><small>Para empezar</small></button><button class="lc" id="ia-open" style="--c:#b48cff"><span class="ic">✨</span><b>Reconocer con IA</b><small>Con 1–3 fotos</small></button></div>' +
+      '<div class="sbar"><input type="search" id="q" placeholder="Buscar seta por nombre (es, eu, latín)…" autocomplete="off"><div class="chips" id="cl"></div></div>' +
+      '<div class="warn sm2">' + esc(cat.aviso()) + '</div><div id="slist"></div>' +
       '<p class="note" style="margin-top:14px">Catálogo en borrador: ' + cat.todas().length + ' fichas sin revisar por una persona experta. Las comestibles llevan «según fuentes» porque lo dicen Wikipedia y guías divulgativas, no una persona experta: siguen pendientes de revisión. Fotos de Wikimedia Commons con su autoría y licencia en cada ficha.</p></div>';
     $('#q', root).oninput = e => { S.q = e.target.value; listaSetas(); };
     root.onclick = e => {
       if (e.target.closest('#gu-open')) return abrirGuia('');
       if (e.target.closest('#li-open')) return abrirLibro('');
       if (e.target.closest('#ia-open')) return abrirIA();
-      const c = e.target.closest('#cl button'); if (c) { S.clase = c.dataset.c; return listaSetas(); }
+      if (e.target.closest('#lec-next')) { S.lecOff = (S.lecOff || 0) + 1; return pintarAprender(); }
+      const c = e.target.closest('#cl button'); if (c) { if (c.dataset.mias !== undefined) S.mias = !S.mias; else { S.clase = c.dataset.c; if (!S.clase) S.mias = false; } return listaSetas(); }
       const b = e.target.closest('[data-e]'); if (b) abrirFicha(b.dataset.e);
     };
   }
-  listaSetas();
+  listaSetas(); pintarAprender();
 }
-const itemEsp = (e, extra = '') => '<button class="item sp" data-e="' + e.id + '" style="--c:' + cat.CLASES[cat.vista(e)].color + '">' + fi.avatar(e) + '<div class="t"><b><i>' + esc(e.nombreCientifico.split(' (')[0]) + '</i></b><small>' + esc(fi.nombres(e) || e.grupo) + '</small>' + extra + '</div>' + fi.tagEsp(e) + '</button>';
+const itemEsp = (e, extra = '') => { const m = S.enc && S.enc.get(e.id), cien = e.nombreCientifico.split(' (')[0], c = corto(e);
+  return '<button class="item sp' + (m ? ' mia' : '') + '" data-e="' + e.id + '" style="--c:' + cat.CLASES[cat.vista(e)].color + '">' + fi.avatar(e) + (m ? '<span class="mia-b">✓' + (m.n > 1 ? ' ×' + m.n : '') + '</span>' : '') + '<div class="t"><b>' + esc(c) + '</b><small><i>' + esc(cien) + '</i>' + (c === cien ? ' · ' + esc(fi.nombres(e) || e.grupo) : '') + '</small>' + extra + '</div>' + fi.tagEsp(e) + '</button>'; };
 function listaSetas() {
   const root = $('#v-setas');
-  $('#cl', root).innerHTML = '<button class="opt ' + (!S.clase ? 'on' : '') + '" data-c="">Todas</button>' + Object.entries(cat.CLASES).filter(([k]) => cat.todas().some(e => cat.vista(e) === k)).map(([k, v]) => '<button class="opt ' + (S.clase === k ? 'on' : '') + '" data-c="' + k + '">' + v.label + '</button>').join('');
-  const r = cat.buscar(S.q, { clase: S.clase }); let h = '', cur = '';
+  $('#cl', root).innerHTML = '<button class="opt ' + (!S.clase && !S.mias ? 'on' : '') + '" data-c="">Todas</button>' + (S.enc && S.enc.size ? '<button class="opt ' + (S.mias ? 'on' : '') + '" data-mias="">✓ Las mías</button>' : '') + Object.entries(cat.CLASES).filter(([k]) => cat.todas().some(e => cat.vista(e) === k)).map(([k, v]) => '<button class="opt ' + (S.clase === k ? 'on' : '') + '" data-c="' + k + '">' + v.label + '</button>').join('');
+  const r = cat.buscar(S.q, { clase: S.clase }).filter(e => !S.mias || (S.enc && S.enc.has(e.id))); let h = '', cur = '';
   r.forEach(e => { const v = cat.vista(e); if (v !== cur) { cur = v; const n = r.filter(x => cat.vista(x) === cur).length; h += '<div class="grp" style="--c:' + cat.CLASES[cur].color + '">' + (cur === 'sin_datos' ? 'Sin datos' : cur === 'ok_fuentes' ? 'Comestibles · según fuentes' : cur === 'cond_fuentes' ? 'Con condiciones · según fuentes' : cat.CLASES[cur].label) + '<small>' + n + '</small></div>'; } h += itemEsp(e); });
   $('#slist', root).innerHTML = r.length ? h : '<div class="empty">Nada con ese nombre.</div>';
 }
@@ -756,13 +792,17 @@ function renderMes() {
   const root = $('#v-mes'), m = S.mes, todas = cat.todas(), lista = tmp.delMes(todas, m);
   const pel = lista.filter(r => r.e.clase === 'mortal' || r.e.clase === 'toxica'), resto = lista.filter(r => !pel.includes(r)), sinDatos = todas.filter(e => !tmp.datos(e).hay).length;
   const fila = r => itemEsp(r.e, '<div class="mb">' + tmp.datos(r.e).niv.map((x, i) => '<i class="l' + x.nivel + (i + 1 === m ? ' cur' : '') + '"></i>').join('') + '</div>');
-  const sec = (t, n, c) => { const rs = resto.filter(r => r.nivel === n); return rs.length ? '<div class="grp" style="--c:' + c + '">' + t + '<small>' + rs.length + '</small></div>' + rs.map(fila).join('') : ''; };
+  const sec = (t, n, c) => { const rs = resto.filter(r => r.nivel === n); return rs.length ? '<div class="grp" style="--c:' + c + '">' + t + '<small>' + rs.length + '</small></div>' + '<div class="cg">' + rs.map(fila).join('') + '</div>' : ''; };
   root.innerHTML = '<div class="pad"><div class="mesnav"><button id="m-prev" aria-label="Mes anterior">‹</button><h2>' + tmp.mesNombre(m) + '</h2><button id="m-next" aria-label="Mes siguiente">›</button></div>' +
+    '<div class="mes-sum"><div><b>' + lista.length + '</b><span>en temporada</span></div><div><b>' + resto.filter(r => r.nivel === 3).length + '</b><span>en plena temporada</span></div><div class="pel"><b>' + pel.length + '</b><span>peligrosas</span></div></div>' +
+    '<div id="mes-mias"></div>' +
     '<p class="note">Qué se ve en la costa cantábrica en este mes, según observaciones verificadas y fuentes citadas en cada ficha. Indica <b>cuándo aparece</b> cada especie, no si se puede comer.</p>' +
-    (pel.length ? '<div class="dang" style="margin-top:12px"><h3>Peligrosas que salen ahora</h3><p>Estas pueden confundirse con comestibles. Mira bien la ficha.</p>' + pel.map(fila).join('') + '</div>' : '') +
+    (pel.length ? '<div class="dang" style="margin-top:12px"><h3>Peligrosas que salen ahora</h3><p>Estas pueden confundirse con comestibles. Mira bien la ficha.</p>' + '<div class="cg">' + pel.map(fila).join('') + '</div></div>' : '') +
     sec('En plena temporada', 3, '#e0a458') + sec('Buena época', 2, '#a98433') + sec('Posible', 1, '#7b8683') +
     (!lista.length ? '<div class="empty">Ninguna especie del catálogo tiene datos para este mes.</div>' : '') +
     '<p class="note" style="margin-top:14px">' + sinDatos + ' de ' + todas.length + ' fichas no tienen datos de temporada suficientes y no aparecen aquí. «Posible» = pocos registros. Las barras de cada ficha muestran el año entero.</p></div>';
+  db.list('hallazgos').then(hs => { const el = $('#mes-mias', root); if (!el || S.mes !== m) return; const l = hs.filter(h => h.especieId && new Date(h.ts).getMonth() + 1 === m), es = especiesDe(l).filter(Boolean);
+    el.innerHTML = es.length ? '<div class="mes-mias"><b>Tú en ' + esc(tmp.MESES[m - 1]) + '</b><span>' + plural(es.length, 'especie', 'especies') + ' que has encontrado en este mes</span><div class="col-row">' + es.slice(0, 10).map(e => '<button class="cmini" data-e="' + e.id + '">' + mini(e) + '</button>').join('') + '</div></div>' : ''; });
   $('#m-prev', root).onclick = () => { S.mes = S.mes === 1 ? 12 : S.mes - 1; renderMes(); };
   $('#m-next', root).onclick = () => { S.mes = S.mes === 12 ? 1 : S.mes + 1; renderMes(); };
   root.onclick = e => { const b = e.target.closest('[data-e]'); if (b) abrirFicha(b.dataset.e); };
