@@ -75,7 +75,7 @@ class T {
     page.on('pageerror', e => this.errs.push(String(e.stack || e).split('\n').slice(0, 3).join(' / ')));
     page.on('console', m => { if (m.type() === 'error' && !/tile|404|Failed to load resource|net::ERR/.test(m.text())) this.errs.push('console: ' + m.text()); });
     /* teselas simuladas (ign.es está bloqueado en este entorno y no queremos red real en pruebas) */
-    await page.route(/ign\.es|tile\.openstreetmap\.org/, r => { this.tileReqs.push(r.request().url()); r.fulfill({ status: 200, contentType: 'image/png', body: PNG1 }); });
+    await page.route(/ign\.es|tile\.openstreetmap\.org/, r => { this.tileReqs.push(r.request().url()); r.fulfill({ status: 200, contentType: 'image/png', body: PNG1, headers: { 'access-control-allow-origin': '*' } }); });
     return page;
   }
   async context(o = {}) {

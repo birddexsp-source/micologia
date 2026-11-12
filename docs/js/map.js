@@ -8,7 +8,8 @@ export const saveBase = b => { try { localStorage.setItem('mi.base', b); } catch
 export function createMap(el, { center = [43.26, -2.93], zoom = 10, base = getBase() } = {}) {
   const map = L.map(el, { zoomControl: false, attributionControl: true, maxZoom: 20, tap: true }).setView(center, zoom);
   map.attributionControl.setPrefix(false);
-  const sat = L.tileLayer(PNOA, { maxNativeZoom: 19, maxZoom: 20, attribution: 'Imágenes PNOA/Sentinel © IGN España · CC BY 4.0 scne.es' });
+  /* ign.es responde con Access-Control-Allow-Origin:* (verificado con una tesela de Bizkaia): crossOrigin permite que el SW guarde las teselas vistas para usarlas sin cobertura */
+  const sat = L.tileLayer(PNOA, { maxNativeZoom: 19, maxZoom: 20, crossOrigin: true, attribution: 'Imágenes PNOA/Sentinel © IGN España · CC BY 4.0 scne.es' });
   const calle = L.tileLayer(OSM, { maxNativeZoom: 19, maxZoom: 20, attribution: '© OpenStreetMap' });
   const layers = { sat, calle }; let cur = base;
   layers[cur].addTo(map);

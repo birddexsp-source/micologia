@@ -15,6 +15,8 @@ module.exports = {
       t.ok('capa OI.OrthoimageCoverage', /LAYER=OI\.OrthoimageCoverage/.test(u || ''));
       t.ok('matriz GoogleMapsCompatible', /TILEMATRIXSET=GoogleMapsCompatible/.test(u || ''));
       t.ok('formato JPEG', /FORMAT=image\/jpeg/.test(u || ''));
+      t.ok('teselas pedidas con CORS (para poder cachearlas offline)', await t.page.evaluate(() => [...document.querySelectorAll('#map img.leaflet-tile')].some(i => i.crossOrigin === 'anonymous')));
+      t.ok('las teselas cargan (no quedan rotas)', await t.page.evaluate(() => [...document.querySelectorAll('#map img.leaflet-tile')].some(i => i.complete && i.naturalWidth > 0)));
       t.ok('atribución del IGN visible', /IGN/.test(await t.T('.leaflet-control-attribution') || ''));
     });
     await t.case('conmutar a callejero (OSM) y volver', async () => {

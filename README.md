@@ -24,7 +24,7 @@ Colecciones: `salidas`, `zonas`, `hallazgos`. El token de GitHub (fine-grained, 
 ## Mapa
 
 Satélite por defecto: IGN PNOA, WMTS `https://www.ign.es/wmts/pnoa-ma`, capa `OI.OrthoimageCoverage`, matriz `GoogleMapsCompatible` (niveles 0–20 según GetCapabilities, JPEG/PNG, CC BY 4.0). Callejero conmutable: OpenStreetMap.
-Pendiente de verificar con una tesela real en navegador: respuesta/CORS de ign.es y texto exacto de atribución.
+Verificado en navegador (12-nov-2026): una tesela de Bizkaia responde 200 JPEG 256×256 con `Access-Control-Allow-Origin: *`, por eso las teselas se piden con CORS y el service worker las guarda para uso sin cobertura. Pendiente: confirmar el texto exacto de atribución (el servicio indica «CC BY 4.0 scne.es»).
 
 ## Flujo para cambiar algo
 
