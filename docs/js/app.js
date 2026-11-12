@@ -2,7 +2,8 @@ import * as db from './db.js';
 import * as geo from './geo.js';
 import * as syn from './sync.js';
 import * as cat from './catalog.js';
-import { createMap, pin, dragPin, IDENT } from './map.js';
+import { createMap, pin, spotPin, dragPin, IDENT } from './map.js';
+import { I } from './iconos.js';
 import { $, $$, esc, norm, hoy, hhmm, fecha, toast, reducirFoto } from './util.js';
 import { guiaHTML } from './guia.js';
 import * as lib from './libro.js';
@@ -12,7 +13,7 @@ import * as trk from './track.js';
 import * as ia from './ia.js';
 import * as au from './audio.js';
 
-const APP_V = 'micologia-v8';   // = V de sw.js
+const APP_V = 'micologia-v9';   // = V de sw.js
 const S = { view: 'mapa', arg: '', map: null, pins: null, me: null, acc: null, tmp: null, mini: null, centered: false, filtro: { salida: '', especie: '' }, clase: '', q: '', syncErr: false, mes: new Date().getMonth() + 1 };
 const VIEWS = ['mapa', 'salidas', 'salida', 'setas', 'mes', 'ajustes'];
 const TITULOS = { mapa: 'Mapa', salidas: 'Salidas', salida: 'Salida', setas: 'Setas', mes: 'Este mes', ajustes: 'Ajustes' };
@@ -30,6 +31,20 @@ function closeSheet() {
   const s = $('#sheet'); s.hidden = true; s.innerHTML = ''; s.onclick = null;
   if (S.rec) { S.rec.cancel(); S.rec = null; clearInterval(S.recT); }
   if (S.tmp) { S.tmp.remove(); S.tmp = null; }
+  marcarSel(null);
+}
+/* deja un punto del mapa en el hueco visible entre los filtros de arriba y la hoja de abajo */
+function encuadrar(lat, lon, sh) {
+  setTimeout(() => {
+    const m = S.map, r = m.getContainer().getBoundingClientRect(), p = m.latLngToContainerPoint([lat, lon]);
+    const top = 120, bot = (sh && sh.isConnected ? sh.getBoundingClientRect().top : r.bottom) - r.top, y = Math.max(top + 30, (top + bot) / 2);
+    m.panBy([p.x - r.width / 2, p.y - y], { animate: false });
+  }, 60);
+}
+/* spot seleccionado en el mapa (se agranda mientras su ficha está abierta) */
+function marcarSel(id) {
+  S.selId = id;
+  Object.entries(S.spotM || {}).forEach(([k, m]) => { const el = m.getElement(); if (el) el.classList.toggle('sel', k === id); });
 }
 async function hydrate(root) { for (const im of $$('img[data-blob], audio[data-blob]', root)) { const u = await db.blobURL(im.dataset.blob); if (u) im.src = u; } }
 const tag = fi.tag;
@@ -117,31 +132,56 @@ function pickerWire(root, st) {
 /* ---------- mapa ---------- */
 function initMap() {
   S.map = createMap('map'); S.trkL = L.layerGroup().addTo(S.map); S.spotsL = L.layerGroup().addTo(S.map); S.pins = L.layerGroup().addTo(S.map);
-  S.me = L.marker([0, 0], { icon: L.divIcon({ className: 'me', html: '<i></i>', iconSize: [22, 22], iconAnchor: [11, 11] }), interactive: false, opacity: 0 }).addTo(S.map);
-  S.acc = L.circle([0, 0], { radius: 0, color: '#4c9bff', weight: 1, fillOpacity: .12, interactive: false }).addTo(S.map);
+  S.me = L.marker([0, 0], { icon: L.divIcon({ className: 'me', html: '<i></i>', iconSize: [22, 22], iconAnchor: [11, 11] }), interactive: false, opacity: 0, zIndexOffset: 900 }).addTo(S.map);
+  S.acc = L.circle([0, 0], { radius: 0, color: '#4c9bff', weight: 1, fillOpacity: .1, interactive: false }).addTo(S.map);
+  $('#locate').innerHTML = I.locate; $('#layerbtn').innerHTML = I.layers; $('#spotbtn').innerHTML = I.flag; $('#filterbtn').innerHTML = I.filter; $('#fab .fi').innerHTML = I.plus;
   geo.onFix((f, err) => {
     const g = $('#gps');
     if (f) {
-      g.textContent = '±' + f.acc + ' m'; g.className = 'gps ' + (f.acc <= 20 ? 'ok' : '');
+      g.textContent = '±' + f.acc + ' m'; g.className = 'gps ' + (f.acc <= 20 ? 'ok' : 'mid');
       S.me.setLatLng([f.lat, f.lon]).setOpacity(1); S.acc.setLatLng([f.lat, f.lon]).setRadius(f.acc);
-      if (!S.centered && S.view === 'mapa') { S.centered = true; S.map.setView([f.lat, f.lon], 17); }
+      if (!S.centered && S.view === 'mapa') { S.centered = true; S.map.setView([f.lat, f.lon], 16); }
     } else if (err) { g.textContent = geo.msgError(err); g.className = 'gps bad'; }
   });
-  $('#locate').onclick = () => { const f = geo.fix(); if (f) S.map.setView([f.lat, f.lon], Math.max(S.map.getZoom(), 17)); else toast('Aún sin GPS'); };
-  $('#layerbtn').onclick = () => { const b = S.map.setBase(S.map.getBase() === 'sat' ? 'calle' : 'sat'); toast(b === 'sat' ? 'Satélite' : 'Callejero'); };
+  $('#locate').onclick = () => { const f = geo.fix(); if (f) S.map.setView([f.lat, f.lon], Math.max(S.map.getZoom(), 16)); else toast('Aún sin GPS'); };
+  $('#layerbtn').onclick = abrirCapas;
   $('#filterbtn').onclick = abrirFiltro;
   $('#fab').onclick = () => marcar();
-  $('#spotbtn').onclick = () => abrirSpot();
+  $('#spotbtn').onclick = () => editarSpot();
+  $('#mchips').onclick = e => { const b = e.target.closest('[data-capa]'); if (!b) return; S.capa = b.dataset.capa; $$('#mchips button').forEach(x => x.classList.toggle('on', x === b)); refreshPins(); };
   trk.onAdd(() => { if (S.trkId && trk.activo() === S.trkId) pintarTrack(trk.puntos()); });
   geo.start();
+  /* sin GPS todavía (en casa, en interior): enseña tus spots en vez de un mapa de Bizkaia vacío */
+  setTimeout(async () => { if (S.centered || geo.fix()) return; const zs = (await db.list('zonas')).filter(z => z.lat != null); if (zs.length && !S.centered) S.map.fitBounds(zs.map(z => [z.lat, z.lon]), { padding: [70, 70], maxZoom: 16, animate: false }); }, 1800);
+}
+function abrirCapas() {
+  const b = S.map.getBase();
+  const sh = openSheet('<h2>Tipo de mapa</h2><div class="capas">' + [['sat', 'Satélite', 'Foto aérea del IGN: se ven los bosques y los claros'], ['calle', 'Mapa', 'Pistas, caminos y pueblos (OpenStreetMap)']].map(([k, t, d]) =>
+    '<button class="capa ' + k + (b === k ? ' on' : '') + '" data-base="' + k + '"><span class="pv"></span><b>' + t + '</b><small>' + d + '</small></button>').join('') + '</div>');
+  sh.onclick = e => { const x = e.target.closest('[data-base]'); if (!x) return; S.map.setBase(x.dataset.base); closeSheet(); };
+}
+const corto = e => { const n = e.nombresComunes && e.nombresComunes.es && e.nombresComunes.es[0]; return n ? n[0].toUpperCase() + n.slice(1) : e.nombreCientifico.split(' (')[0]; };
+const nombreCorto = h => { const e = cat.byId(h.especieId); return e ? corto(e) : (h.especieTxt || 'Sin identificar'); };
+const colorEsp = e => e ? cat.CLASES[cat.vista(e)].color : '#9aa5a1';
+/* marcador de hallazgo: foto propia si hay; si no, la de referencia de la especie */
+function pinH(h, o = {}) {
+  const e = cat.byId(h.especieId), f = e && e.fotos && e.fotos[0];
+  const m = pin(h, { color: colorEsp(e), foto: f ? fi.fotoURL(f, 250) : '', ok: h.identificacion === 'confirmada', enz: !!h.zonaId, ...o });
+  if (h.fotos && h.fotos[0]) m.on('add', async () => { const u = await db.blobURL(h.fotos[0]), i = m.getElement() && m.getElement().querySelector('i'); if (!u || !i) return; const im = i.querySelector('img'); if (im) im.src = u; else i.insertAdjacentHTML('beforeend', '<img src="' + u + '" alt="">'); });
+  return m;
 }
 async function refreshPins() {
-  if (!S.map) return; S.pins.clearLayers();
-  const [hs, act] = [await db.list('hallazgos'), await activa()], f = S.filtro;
-  hs.filter(h => (!f.salida || (f.salida === 'activa' ? act && h.salidaId === act.id : h.salidaId === f.salida)) && (!f.especie || h.especieId === f.especie))
-    .forEach(h => pin(h).on('click', () => abrirHallazgo(h.id)).addTo(S.pins));
-  S.spotsL.clearLayers();
-  (await db.list('zonas')).filter(z => z.lat != null && z.lon != null).forEach(z => L.marker([z.lat, z.lon], { icon: L.divIcon({ className: 'spot' + (z.estado === 'por_visitar' ? ' por' : ''), html: '<i></i>', iconSize: [26, 26], iconAnchor: [13, 13] }), title: z.nombre }).on('click', () => abrirSpot(z.id)).addTo(S.spotsL));
+  if (!S.map) return; S.pins.clearLayers(); S.spotsL.clearLayers(); S.spotM = {};
+  const [hs, act, zs] = [await db.list('hallazgos'), await activa(), await db.list('zonas')], f = S.filtro, capa = S.capa || 'todo';
+  if (capa === 'todo' || capa === 'hallazgos')
+    hs.filter(h => (!f.salida || (f.salida === 'activa' ? act && h.salidaId === act.id : h.salidaId === f.salida)) && (!f.especie || h.especieId === f.especie))
+      .forEach(h => pinH(h).on('click', () => verHallazgo(h.id)).addTo(S.pins));
+  if (capa !== 'hallazgos')
+    zs.filter(z => z.lat != null && z.lon != null && (capa !== 'porir' || z.estado === 'por_visitar')).forEach(z => {
+      const n = new Set(hs.filter(h => h.zonaId === z.id).map(h => h.especieId || norm(h.especieTxt))).size;
+      S.spotM[z.id] = spotPin(z, { n }).on('click', () => verSpot(z.id)).addTo(S.spotsL);
+    });
+  if (S.selId) marcarSel(S.selId);
   $('#filterbtn').classList.toggle('on', !!(f.salida || f.especie));
   /* recorrido: el de la salida filtrada o, si no hay filtro, el de la salida en curso */
   S.trkId = f.salida && f.salida !== 'activa' ? f.salida : act && act.id;
@@ -187,7 +227,7 @@ async function marcar(opts = {}) {
     '<label class="l">Nota</label><input type="text" id="mk-nota" placeholder="Nota corta"><div class="row"><button class="btn" id="mk-x">Cancelar</button><button class="btn p" id="mk-ok" style="flex:2">Guardar</button></div>', { dim: !!opts.pos });
   pickerWire(sh, m.esp); vozWire(sh, vz);
   vz.onTrans = (id, t) => { const n = $('#mk-nota', sh); if (n && !n.value.trim()) n.value = t.slice(0, 300); };
-  setTimeout(() => map.panBy([0, Math.round(sh.offsetHeight / 2)], { animate: false }), 60);
+  encuadrar(pos.lat, pos.lon, sh);
   S.tmp.on('dragend', () => { const p = S.tmp.getLatLng(); pos.lat = p.lat; pos.lon = p.lng; pos.adj = true; $('#mk-pos', sh).textContent = horaTxt() + ' · ' + posTxt(); });
   const rezona = () => { $('#mk-zona', sh).innerHTML = zonaHTML(); };
   sh.addEventListener('click', async ev => {
@@ -223,35 +263,33 @@ async function marcar(opts = {}) {
 const SPOT_EST = [['visitada', 'Visitado'], ['por_visitar', 'Quiero ir']];
 const spotColor = z => z.estado === 'por_visitar' ? '#4cc3d9' : '#46b36b';
 const spotTag = z => '<span class="tag" style="--c:' + spotColor(z) + '">' + (z.estado === 'por_visitar' ? 'Quiero ir' : 'Visitado') + '</span>';
-async function abrirSpot(id) {
-  if (S.view !== 'mapa') { location.hash = '#mapa'; await new Promise(r => setTimeout(r, 250)); }
+async function irAlMapa() { if (S.view !== 'mapa') { location.hash = '#mapa'; await new Promise(r => setTimeout(r, 250)); } }
+const abrirSpot = id => id ? verSpot(id) : editarSpot();
+async function editarSpot(id) {
+  await irAlMapa();
   closeSheet();
-  const hs = id ? (await db.list('hallazgos')).filter(h => h.zonaId === id) : [];
   let z = id ? await db.get('zonas', id) : null; const nuevo = !z;
   if (nuevo) { const f = geo.fix(), c = S.map.getCenter(); z = { nombre: '', estado: 'visitada', lat: f ? f.lat : c.lat, lon: f ? f.lon : c.lng, notas: '' }; }
   const pos = { lat: z.lat, lon: z.lon }, fotos = [...(z.fotos || [])], vz = nuevoVoz(z); let estado = z.estado || 'visitada';
   S.map.setView([pos.lat, pos.lon], Math.max(S.map.getZoom(), 16));
   S.tmp = dragPin()(pos.lat, pos.lon).addTo(S.map);
-  const esp = [...new Set(hs.map(h => nombreHall(h)))];
-  const sh = openSheet('<h2>' + (nuevo ? 'Nuevo spot' : esc(z.nombre || 'Spot')) + '</h2><p class="sub" id="st-pos"></p>' +
+  const sh = openSheet('<h2>' + (nuevo ? 'Nuevo spot' : 'Editar spot') + '</h2><p class="sub" id="st-pos"></p>' +
     '<input type="text" id="st-nom" placeholder="Nombre del sitio (p. ej. Hayedo de Otzarreta)" value="' + esc(z.nombre) + '">' +
     '<label class="l">Estado</label><div class="seg" id="st-est">' + SPOT_EST.map(e => '<button data-s="' + e[0] + '" class="' + (estado === e[0] ? 'on' : '') + '">' + e[1] + '</button>').join('') + '</div>' +
     '<div class="row"><button class="btn" id="st-aqui">Usar mi posición</button>' + (nuevo ? '' : '<a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=' + z.lat + ',' + z.lon + '">Cómo llegar</a>') + '</div>' +
-    (nuevo ? '' : '<div class="note" style="margin-top:10px">' + (hs.length ? '<b>' + hs.length + ' hallazgo' + (hs.length > 1 ? 's' : '') + '</b> aquí: ' + esc(esp.slice(0, 6).join(', ')) + (esp.length > 6 ? '…' : '') : 'Aún sin hallazgos aquí.') + '</div><div class="row"><button class="btn p big" id="st-marcar">Marcar hallazgo aquí</button></div>') +
     '<label class="l">Nota</label><textarea id="st-nota" placeholder="Cómo se llega, qué árboles hay, qué esperas encontrar…">' + esc(z.notas) + '</textarea>' + vozHTML(vz) +
     '<label class="l">Fotos</label><div class="thumbs" id="st-th">' + fotos.map(f => '<img data-blob="' + f + '">').join('') + '</div><div class="row"><button class="btn" id="st-foto">Añadir foto</button></div>' +
     '<div class="row">' + (nuevo ? '' : '<button class="btn d" id="st-del">Borrar</button>') + '<button class="btn" id="st-x">Cancelar</button><button class="btn p" id="st-ok" style="flex:2">Guardar</button></div>', { dim: false });
   const posTxt = () => { $('#st-pos', sh).textContent = pos.lat.toFixed(5) + ', ' + pos.lon.toFixed(5) + (nuevo ? ' · arrastra el punto a su sitio' : ''); };
   posTxt(); vozWire(sh, vz); hydrate($('#st-th', sh));
-  setTimeout(() => S.map.panBy([0, Math.round(sh.offsetHeight / 2)], { animate: false }), 60);
+  encuadrar(pos.lat, pos.lon, sh);
   if (S.tmp) S.tmp.on('dragend', () => { const p = S.tmp.getLatLng(); pos.lat = p.lat; pos.lon = p.lng; posTxt(); });
   sh.addEventListener('click', async ev => {
     const t = ev.target.closest('button'); if (!t) return;
     if (t.dataset.s) { estado = t.dataset.s; $$('#st-est button', sh).forEach(b => b.classList.toggle('on', b.dataset.s === estado)); }
     else if (t.id === 'st-aqui') { const f = geo.fix(); if (!f) return toast('Aún sin GPS'); pos.lat = f.lat; pos.lon = f.lon; S.tmp.setLatLng([f.lat, f.lon]); S.map.setView([f.lat, f.lon], 17); posTxt(); }
     else if (t.id === 'st-foto') pickFoto(fid => { fotos.push(fid); const im = document.createElement('img'); im.dataset.blob = fid; $('#st-th', sh).appendChild(im); hydrate($('#st-th', sh)); }, { galeria: true });
-    else if (t.id === 'st-marcar') { closeSheet(); marcar({ zona: id }); }
-    else if (t.id === 'st-x') closeSheet();
+    else if (t.id === 'st-x') { closeSheet(); if (!nuevo) verSpot(id); }
     else if (t.id === 'st-del') { if (t.dataset.sure) { await db.remove('zonas', id); closeSheet(); toast('Spot borrado'); syn.auto(); } else { t.dataset.sure = 1; t.textContent = 'Pulsa otra vez para borrar'; } }
     else if (t.id === 'st-ok') {
       const nombre = $('#st-nom', sh).value.trim(); if (!nombre) { toast('Ponle un nombre al spot'); $('#st-nom', sh).focus(); return; }
@@ -261,9 +299,84 @@ async function abrirSpot(id) {
         const d = { nombre, estado, lat: pos.lat, lon: pos.lon, notas: $('#st-nota', sh).value.trim(), fotos, audios: vz.audios, transcripciones: vz.trans };
         if (estado === 'visitada' && !z.visitadaTs) d.visitadaTs = Date.now();
         if (nuevo) await db.add('zonas', { ...d, creada: Date.now() }); else await db.patch('zonas', id, d);
-        closeSheet(); toast(nuevo ? 'Spot guardado' : 'Guardado'); syn.auto();
+        closeSheet(); toast(nuevo ? 'Spot guardado' : 'Guardado'); syn.auto(); if (!nuevo) verSpot(id);
       } catch (e) { t.disabled = false; toast('No se pudo guardar: ' + (e.message || e)); }
     }
+  });
+}
+
+/* Ficha resumen de un spot: qué especies has encontrado, cuándo salen ahí y tus visitas. Sin preguntas: para editar, el lápiz. */
+const MES_C = ['E', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D'], MES_L = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+const ymd = ts => { const d = new Date(ts); return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); };
+const fechaCorta = iso => { const [y, m, d] = iso.split('-').map(Number); return new Date(y, m - 1, d).toLocaleDateString('es-ES', { day: 'numeric', month: 'short', year: 'numeric' }); };
+const fotoEsp = e => e && e.fotos && e.fotos[0] ? '<img class="ph" src="' + esc(fi.fotoURL(e.fotos[0], 250)) + '" alt="" loading="lazy" crossorigin="anonymous">' : '<span class="ph0">' + I.seta + '</span>';
+function resumenSpot(hs) {
+  const g = {}, porMes = Array(12).fill(0);
+  hs.forEach(h => {
+    const k = h.especieId || 'x:' + norm(h.especieTxt || '?'), d = new Date(h.ts);
+    const r = g[k] || (g[k] = { e: cat.byId(h.especieId), nom: nombreCorto(h), n: 0, anos: new Set(), last: 0, h, foto: null });
+    r.n++; r.anos.add(d.getFullYear()); if (h.ts > r.last) { r.last = h.ts; r.h = h; } if (!r.foto && h.fotos && h.fotos[0]) r.foto = h.fotos[0];
+    porMes[d.getMonth()]++;
+  });
+  const esp = Object.values(g).sort((a, b) => b.n - a.n || b.last - a.last);
+  return { esp, porMes, peligro: esp.filter(r => r.e && (r.e.clase === 'mortal' || r.e.clase === 'toxica')) };
+}
+const anosTxt = s => { const a = [...s].sort(); return a.length > 1 ? a[0] + '–' + String(a[a.length - 1]).slice(2) : String(a[0]); };
+async function verSpot(id) {
+  await irAlMapa();
+  const z = await db.get('zonas', id); if (!z) return;
+  closeSheet();
+  const [hs0, ss0] = [await db.list('hallazgos'), await db.list('salidas')];
+  const hs = hs0.filter(h => h.zonaId === id).sort((a, b) => b.ts - a.ts);
+  const ss = ss0.filter(s => (s.zonaIds || []).includes(id) || hs.some(h => h.salidaId === s.id)).sort((a, b) => (b.fecha || '').localeCompare(a.fecha || ''));
+  const dias = new Set([...ss.map(s => s.fecha), ...hs.filter(h => !h.salidaId).map(h => ymd(h.ts))]);
+  const ult = [...dias].sort().pop(), yo = geo.fix(), por = z.estado === 'por_visitar';
+  const { esp, porMes, peligro } = resumenSpot(hs), mesAct = new Date().getMonth(), max = Math.max(1, ...porMes), mejor = porMes.indexOf(Math.max(...porMes));
+  const meta = [spotTag(z), yo ? '<span>' + kmFmt(distM(yo, z)) + '</span>' : '', dias.size ? '<span>' + dias.size + (dias.size === 1 ? ' visita' : ' visitas') + '</span>' : '', ult ? '<span>últ. ' + esc(fechaCorta(ult).replace(' ' + new Date().getFullYear(), '')) + '</span>' : ''].filter(Boolean).join('');
+  const card = r => '<button class="spc" ' + (r.e ? 'data-e="' + r.e.id + '"' : 'data-hv="' + r.h.id + '"') + ' style="--c:' + colorEsp(r.e) + '"><span class="pf">' + (r.foto ? '<img class="ph" data-blob="' + r.foto + '" alt="">' : fotoEsp(r.e)) + '<em>×' + r.n + '</em></span><b>' + esc(r.nom) + '</b><small>' + anosTxt(r.anos) + (r.e && r.e.clase === 'mortal' ? ' · mortal' : r.e && r.e.clase === 'toxica' ? ' · tóxica' : '') + '</small></button>';
+  const delMes = esp.filter(r => hs.some(h => (h.especieId || 'x') === (r.e ? r.e.id : 'x') && new Date(h.ts).getMonth() === mesAct) && r.e);
+  const sh = openSheet('<div class="sv-h"><div class="sv-t"><h2>' + esc(z.nombre || 'Spot') + '</h2><div class="meta">' + meta + '</div></div><button class="icb" id="st-edit" aria-label="Editar spot">' + I.edit + '</button></div>' +
+    '<div class="acts"><button class="btn p" id="st-marcar">' + I.plus + 'Marcar aquí</button><a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=' + z.lat + ',' + z.lon + '">' + I.route + 'Cómo llegar</a></div>' +
+    (peligro.length ? '<div class="alerta">' + I.aviso + '<div>Aquí también has visto <b>' + esc(peligro.map(r => r.nom).join(', ')) + '</b>. Mira bien cada seta antes de cogerla.</div></div>' : '') +
+    (esp.length ? '<div class="sec">Especies encontradas<small>' + esp.length + '</small></div><div class="spcs">' + esp.map(card).join('') + '</div>' +
+      (delMes.length ? '<div class="tip">' + I.cal + '<div>En <b>' + MES_L[mesAct] + '</b> aquí te han salido: ' + esc(delMes.map(r => r.nom).join(', ')) + '.</div></div>' : '') +
+      '<div class="sec">Cuándo has encontrado aquí</div><div class="mbar">' + porMes.map((n, i) => '<div class="' + (i === mesAct ? 'cur' : '') + '"><u style="height:' + (n ? Math.max(12, Math.round(n / max * 100)) : 4) + '%" class="' + (n ? 'h' : '') + '"></u><span>' + MES_C[i] + '</span></div>').join('') + '</div>' +
+      '<p class="mut sm">Mejor mes hasta ahora: <b>' + MES_L[mejor] + '</b> (' + porMes[mejor] + (porMes[mejor] === 1 ? ' hallazgo' : ' hallazgos') + ').</p>'
+      : '<div class="sv-empty">' + I.seta + '<div>' + (por ? '<b>Aún no has ido.</b> Cuando marques algo aquí pasará a «Visitado».' : '<b>Sin especies anotadas.</b> Pulsa «Marcar aquí» la próxima vez que vengas, o añádelas desde la salida.') + '</div></div>') +
+    (ss.length ? '<div class="sec">Visitas<small>' + ss.length + '</small></div>' + ss.map(s => { const n = new Set(hs.filter(h => h.salidaId === s.id).map(h => h.especieId || h.especieTxt)).size; return '<a class="vrow" href="#salida/' + s.id + '"><span class="vd"><b>' + (s.fecha || '').slice(8, 10) + '</b>' + esc(new Date((s.fecha || '2000-01-01') + 'T12:00').toLocaleDateString('es-ES', { month: 'short' })) + '</span><span class="vt"><b>' + esc(s.titulo || fecha(s.fecha)) + '</b><small>' + (s.fecha || '').slice(0, 4) + ' · ' + (n ? n + (n === 1 ? ' especie' : ' especies') + ' aquí' : 'sin especies anotadas aquí') + '</small></span>' + I.chev + '</a>'; }).join('') : '') +
+    (z.notas || Object.values(z.transcripciones || {}).some(Boolean) ? '<div class="sec">Notas</div><div class="nota">' + (z.notas ? '<p>' + esc(z.notas) + '</p>' : '') + Object.values(z.transcripciones || {}).filter(Boolean).map(t => '<p class="vz">«' + esc(t) + '»</p>').join('') + '</div>' : '') +
+    ((z.fotos || []).length ? '<div class="sec">Fotos</div><div class="gal">' + z.fotos.map(f => '<img data-blob="' + f + '" alt="">').join('') + '</div>' : ''), { dim: false });
+  marcarSel(id);
+  S.map.setView([z.lat, z.lon], Math.max(S.map.getZoom(), 15), { animate: false });
+  encuadrar(z.lat, z.lon, sh);
+  sh.addEventListener('click', ev => {
+    const t = ev.target.closest('button'); if (!t) return;
+    if (t.id === 'st-marcar') { closeSheet(); marcar({ zona: id }); }
+    else if (t.id === 'st-edit') editarSpot(id);
+    else if (t.dataset.e) abrirFicha(t.dataset.e);
+    else if (t.dataset.hv) verHallazgo(t.dataset.hv);
+  });
+}
+
+/* Resumen de un hallazgo: foto, especie, cuándo y dónde. Para cambiar algo, «Editar». */
+async function verHallazgo(id) {
+  const h = await db.get('hallazgos', id); if (!h) return;
+  const e = cat.byId(h.especieId), z = h.zonaId ? await db.get('zonas', h.zonaId) : null, idn = IDENT[h.identificacion] || IDENT.sin_identificar;
+  const foto = h.fotos && h.fotos[0] ? '<span class="phw big"><img class="ph" data-blob="' + h.fotos[0] + '" alt="Foto del hallazgo"></span>' : e && e.fotos && e.fotos[0] ? fi.foto(e.fotos[0], 960, { cls: 'big' }) + '<span class="ref">Foto de referencia</span>' : '';
+  const dato = (k, v) => v ? '<div><dt>' + k + '</dt><dd>' + esc(v) + '</dd></div>' : '';
+  const sh = openSheet((foto ? '<div class="hv-foto">' + foto + '</div>' : '') +
+    '<div class="sv-h"><div class="sv-t"><h2>' + esc(nombreCorto(h)) + '</h2>' + (e && corto(e) !== e.nombreCientifico.split(' (')[0] ? '<p class="cien"><i>' + esc(e.nombreCientifico.split(' (')[0]) + '</i></p>' : '') + '</div><button class="icb" id="hv-edit" aria-label="Editar hallazgo">' + I.edit + '</button></div>' +
+    '<div class="meta" style="margin-top:8px">' + (e ? fi.tagEsp(e) : '') + '<span class="tag" style="--c:' + idn.color + ';color:#0a0f0e">' + idn.label + '</span></div>' +
+    '<dl class="dat">' + dato('Cuándo', new Date(h.ts).toLocaleDateString('es-ES', { day: 'numeric', month: 'short', year: 'numeric' }) + ' · ' + hhmm(h.ts)) + dato('Spot', z && z.nombre) + dato('Cantidad', h.cantidad) + dato('Estado', (ESTADOS.find(x => x[0] === h.estadoSeta) || [])[1]) + dato('Sustrato', h.sustrato) + dato('Confirmó', h.identificacion === 'confirmada' && h.confirmadoPor) + '</dl>' +
+    (h.notas || Object.values(h.transcripciones || {}).some(Boolean) ? '<div class="nota">' + (h.notas ? '<p>' + esc(h.notas) + '</p>' : '') + Object.values(h.transcripciones || {}).filter(t => t && t !== h.notas).map(t => '<p class="vz">«' + esc(t) + '»</p>').join('') + '</div>' : '') +
+    avisoComer(e) +
+    '<div class="acts">' + (e ? '<button class="btn" id="hv-ficha">' + I.libro + 'Ver ficha</button>' : '') + (z ? '<button class="btn" id="hv-spot">' + I.flag + esc(z.nombre) + '</button>' : '') + '</div>');
+  sh.addEventListener('click', ev => {
+    const t = ev.target.closest('button'); if (!t) return;
+    if (t.id === 'hv-edit') abrirHallazgo(id);
+    else if (t.id === 'hv-ficha') abrirFicha(e.id);
+    else if (t.id === 'hv-spot') verSpot(z.id);
+    else if (t.id === 'hd-antes') abrirAntesDeComer();
   });
 }
 
@@ -389,7 +502,7 @@ async function renderSalida(id) {
   S.mini = createMap('smap', { zoom: 10 }); const ls = [], capa = L.layerGroup().addTo(S.mini);
   const pintar = () => { capa.clearLayers(); trazo(live().track).addTo(capa); };
   pintar(); trk.lineas(live().track).forEach(l => l.forEach(p => ls.push([p[0], p[1]])));
-  hs.forEach(h => { pin(h, { interactive: false }).addTo(S.mini); ls.push([h.lat, h.lon]); });
+  hs.forEach(h => { pinH(h, { interactive: false }).addTo(S.mini); ls.push([h.lat, h.lon]); });
   if (ls.length) S.mini.fitBounds(ls, { padding: [30, 30], maxZoom: 17, animate: false });
   if (trk.activo() === id) S.unlive = trk.onAdd(() => { if (S.view !== 'salida' || S.arg !== id || !S.mini) return; pintar(); const k = $('#sd-km'); if (k) k.textContent = kmTxt(live()); });
   if (curso) S.tick = setInterval(() => { const d = $('#sd-dur'); if (S.view === 'salida' && S.arg === id && d) d.textContent = durTxt(s); }, 30000);
@@ -399,7 +512,7 @@ async function renderSalida(id) {
   root.onclick = async ev => {
     const im = ev.target.closest('img[data-blob]'); if (im && im.dataset.k) { verFoto(id, im.dataset.k, im.dataset.blob); return; }
     const t = ev.target.closest('button'); if (!t) return;
-    if (t.dataset.h) abrirHallazgo(t.dataset.h);
+    if (t.dataset.h) verHallazgo(t.dataset.h);
     else if (t.dataset.sa) { const z = zonas.find(x => x.id === t.dataset.sa); if (z) marcar({ zona: z.id, salida: id, pos: { lat: z.lat, lon: z.lon }, ts: curso ? Date.now() : (s.creada || Date.now()) }); }
     else if (t.id === 'sd-addspot') {
       const libres = zonas.filter(z => !zids.includes(z.id) && z.lat != null).sort((a, b) => a.nombre.localeCompare(b.nombre, 'es', { numeric: true }));
@@ -624,11 +737,11 @@ function badge() {
 function route() {
   const [v, arg] = (location.hash || '#mapa').slice(1).split('/'), view = VIEWS.includes(v) ? v : 'mapa';
   if (S.mini && view !== 'salida') { S.mini.remove(); S.mini = null; }
-  S.view = view; S.arg = arg || '';
+  if (view !== S.view || (arg || '') !== S.arg) closeSheet();
+  S.view = view; S.arg = arg || ''; document.body.dataset.view = view;
   VIEWS.forEach(x => { $('#v-' + x).hidden = x !== view; });
   $$('.nav a').forEach(a => a.classList.toggle('on', a.dataset.tab === (view === 'salida' ? 'salidas' : view)));
   $('#ttl').textContent = TITULOS[view];
-  if (S.tmp && view !== 'mapa') closeSheet();
   if (view === 'mapa') { setTimeout(() => S.map.invalidateSize(), 40); refreshPins(); }
   renderView();
 }
@@ -649,7 +762,7 @@ async function boot() {
   $('#syncbtn').onclick = () => { const c = syn.cfg(); if (!c.repo || !c.token) { location.hash = '#ajustes'; toast('Configura el repositorio y el token'); } else correrSync(); };
   if (syn.cfg().repo) syn.auto(2500);
   if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) navigator.serviceWorker.register('sw.js').catch(() => { });
-  window.__MI = { db, geo, syn, cat, trk, S, abrirHallazgo, abrirFicha, abrirLibro, abrirIA, ia, abrirSpot };
+  window.__MI = { db, geo, syn, cat, trk, S, abrirHallazgo, abrirFicha, abrirLibro, abrirIA, ia, abrirSpot, verSpot, editarSpot, verHallazgo };
   document.body.dataset.ready = '1';
 }
 boot().catch(e => { console.error(e); document.body.insertAdjacentHTML('beforeend', '<div class="warn" style="position:fixed;top:60px;left:12px;right:12px;z-index:9999">No se pudo arrancar la app: ' + esc(e.message || e) + '</div>'); });

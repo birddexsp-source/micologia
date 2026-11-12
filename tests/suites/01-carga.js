@@ -20,10 +20,12 @@ module.exports = {
       t.ok('atribución del IGN visible', /IGN/.test(await t.T('.leaflet-control-attribution') || ''));
     });
     await t.case('conmutar a callejero (OSM) y volver', async () => {
-      t.tileReqs.length = 0; await t.tap('#layerbtn', 700);
+      t.tileReqs.length = 0; await t.tap('#layerbtn', 300);
+      t.ok('selector de tipo de mapa con 2 opciones', (await t.N('#sheet [data-base]')) === 2 && await t.has('#sheet [data-base="sat"].on'));
+      await t.tap('#sheet [data-base="calle"]', 700); t.ok('el selector se cierra', !(await t.visible('#sheet .sh')));
       t.ok('callejero pide teselas a OSM', t.tileReqs.some(x => /tile\.openstreetmap\.org/.test(x)));
       t.ok('atribución de OSM', /OpenStreetMap/.test(await t.T('.leaflet-control-attribution') || ''));
-      await t.tap('#layerbtn', 500);
+      await t.tap('#layerbtn', 300); await t.tap('#sheet [data-base="sat"]', 500);
       t.eq('vuelve a satélite', await t.page.evaluate(() => window.__MI.S.map.getBase()), 'sat');
     });
     await t.case('navegación entre pestañas', async () => {

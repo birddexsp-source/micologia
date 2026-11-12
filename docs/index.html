@@ -22,14 +22,16 @@
 <main>
   <section id="v-mapa" class="view mapview">
     <div id="map"></div>
-    <div id="gps" class="gps">GPS…</div>
-    <div class="maptools">
-      <button id="locate" class="tool" aria-label="Centrar en mi posición">◎</button>
-      <button id="layerbtn" class="tool" aria-label="Cambiar mapa">▦</button>
-      <button id="spotbtn" class="tool" aria-label="Nuevo spot">⚑</button>
-      <button id="filterbtn" class="tool" aria-label="Filtrar hallazgos">⛛</button>
+    <div class="mchips" id="mchips" role="tablist" aria-label="Qué ver en el mapa">
+      <button data-capa="todo" class="on">Todo</button><button data-capa="spots">Spots</button><button data-capa="porir">Quiero ir</button><button data-capa="hallazgos">Hallazgos</button>
     </div>
-    <button id="fab" class="fab">Marcar aquí</button>
+    <div class="maptools">
+      <div class="tgrp"><button id="layerbtn" class="tool" aria-label="Tipo de mapa"></button><button id="filterbtn" class="tool" aria-label="Filtrar hallazgos"></button></div>
+      <div class="tgrp"><button id="spotbtn" class="tool" aria-label="Nuevo spot"></button></div>
+    </div>
+    <div id="gps" class="gps">GPS…</div>
+    <button id="locate" class="tool loc" aria-label="Centrar en mi posición"></button>
+    <button id="fab" class="fab"><span class="fi"></span><span>Marcar aquí</span></button>
   </section>
   <section id="v-salidas" class="view" hidden></section>
   <section id="v-salida" class="view" hidden></section>
