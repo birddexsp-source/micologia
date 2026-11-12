@@ -37,6 +37,7 @@ const ESCENAS = {
   'spot-por-ir': async p => { await p.evaluate(() => window.__MI.S.map.setView([43.1015, -2.8000], 15, { animate: false })); await p.waitForTimeout(400); await p.evaluate(() => window.__MI.abrirSpot('z5')); await p.waitForTimeout(1200); },
   'hallazgo': async p => { await p.evaluate(() => window.__MI.S.map.setView([43.1012, -2.8031], 17, { animate: false })); await p.waitForTimeout(400); await p.evaluate(() => window.__MI.verHallazgo('h0')); await p.waitForTimeout(1000); },
   'marcar': async p => { await p.evaluate(() => window.__MI.S.map.setView([43.1, -2.8], 16, { animate: false })); await p.click('#fab'); await p.waitForTimeout(1300); },
+  'marcar-spot': async p => { await p.evaluate(() => window.__MI.S.map.setView([43.1012, -2.8031], 16, { animate: false })); await p.evaluate(() => window.__MI.verSpot('z1')); await p.waitForTimeout(600); await p.click('#st-marcar'); await p.waitForTimeout(1200); },
   'capas': async p => { await p.click('#layerbtn'); await p.waitForTimeout(800); },
   'salidas': async p => { await p.evaluate(() => { location.hash = '#salidas'; }); await p.waitForTimeout(1000); },
   'salida': async p => { await p.evaluate(() => { location.hash = '#salida/s2'; }); await p.waitForTimeout(1400); },

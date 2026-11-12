@@ -495,3 +495,27 @@ a.item{text-decoration:none;color:inherit}
 .pasos>div{display:flex;gap:12px;align-items:center}
 .pasos i{flex:none;width:28px;height:28px;border-radius:50%;background:var(--s3);color:var(--acc);font:800 13px/28px var(--mono);font-style:normal;text-align:center}
 .pasos span{font-size:13px;color:var(--mut);line-height:1.35}.pasos b{display:block;color:var(--ink);font-size:14px}
+
+/* ===== v14: marcar rápido ===== */
+.mtiles{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:4px}
+.mtile{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;min-height:84px;border:1px solid var(--line);background:var(--s2);border-radius:18px;color:var(--ink);cursor:pointer;font-size:14.5px;padding:10px}
+.mtile svg{width:30px;height:30px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;color:var(--acc)}
+.mtile.grab{background:#e5484d;border-color:transparent;color:#fff;font-weight:700}
+.mtile:disabled{opacity:.45}
+#mk-th:empty,#au-list:empty{display:none}
+#mk-th{margin-top:10px}
+.gsp{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.gt{border:0;background:none;padding:0;text-align:center;cursor:pointer;color:inherit;min-width:0}
+.gt .pf{display:block;position:relative;aspect-ratio:1;border-radius:16px;overflow:hidden;background:var(--s2);border:2px solid transparent;transition:border-color .15s,transform .15s}
+.gt .pf::after{content:"";position:absolute;left:0;right:0;bottom:0;height:4px;background:var(--c,transparent)}
+.gt .pf img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.gt .ph0{position:absolute;inset:0;display:grid;place-items:center;color:#5d6c67;font:800 28px var(--mono)}
+.gt .ph0 svg{width:34px;height:34px;fill:none;stroke:currentColor;stroke-width:1.8}
+.gt.on .pf{border-color:var(--acc);transform:scale(.96);box-shadow:0 0 0 3px rgba(224,164,88,.25)}
+.gt.on b{color:var(--acc)}
+.gt b{display:block;margin-top:5px;font-size:12px;line-height:1.2;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.gt small{display:block;font-size:10.5px;color:var(--mut)}
+.cantq{display:flex;gap:6px;flex-wrap:wrap}
+#mk-det{margin-top:14px}
+#mk-det .l:first-of-type{margin-top:10px}
+.mk-bar{position:sticky;bottom:-18px;background:#121a17;padding:10px 0 4px;margin-bottom:-4px;z-index:2}

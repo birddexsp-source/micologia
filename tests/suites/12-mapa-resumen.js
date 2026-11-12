@@ -162,6 +162,25 @@ module.exports = {
       t.ok('vuelve a la salida', await t.page.evaluate(id => location.hash === '#salida/' + id, sid));
       t.eq('sale en la línea de tiempo', await t.N('#v-salida .tl'), 1);
     });
+    await t.case('marcar rápido: elegir especie en la rejilla y cantidad con un toque', async () => {
+      await t.go('#mapa'); await t.page.evaluate(() => window.__MI.verSpot('za')); await t.wait(400);
+      await t.tap('#st-marcar', 700);
+      t.ok('«No sé» marcado de inicio', await t.has('#mk-grid .gt.no.on'));
+      const g = await t.page.evaluate(() => [...document.querySelectorAll('#mk-grid .gt[data-g]:not(.no)')].map(b => [b.dataset.g, b.querySelector('small').textContent]));
+      t.ok('primero lo que ya salió en este spot', g.length >= 2 && g[0][0] === 'boletus-edulis' && g[0][1] === 'aquí', JSON.stringify(g.slice(0, 3)));
+      t.ok('como mucho 7 sugerencias + «No sé»', g.length <= 7);
+      t.ok('completa con especies de temporada', g.some(x => x[1] === 'temporada'));
+      t.ok('foto y voz como botones grandes', await t.visible('#mk-foto') && await t.visible('#au-rec'));
+      t.ok('estado y nota plegados', await t.page.evaluate(() => !document.querySelector('#mk-det').open && !!document.querySelector('#mk-det #mk-nota')));
+      await t.tap('#mk-grid .gt[data-g="boletus-edulis"]', 200);
+      t.ok('tile marcado y el buscador lo refleja', await t.has('#mk-grid .gt.on[data-g="boletus-edulis"]') && !(await t.has('#mk-grid .gt.no.on')) && /Boletus edulis/.test(await t.page.inputValue('#sp-q')));
+      await t.tap('.cantq [data-cq="2–5"]', 150);
+      t.eq('cantidad con un toque', await t.page.inputValue('#mk-cant'), '2–5');
+      const n0 = (await t.docs('hallazgos')).length;
+      await t.tap('#mk-ok', 600);
+      const hs = await t.docs('hallazgos'), h = hs.sort((a, b) => b.ts - a.ts)[0];
+      t.ok('guardado con especie, spot y cantidad', hs.length === n0 + 1 && h.especieId === 'boletus-edulis' && h.zonaId === 'za' && h.cantidad === '2–5' && h.identificacion === 'provisional');
+    });
     await t.case('360 px: resúmenes sin desborde', async () => {
       await t.page.setViewportSize({ width: 360, height: 640 });
       for (const [f, id] of [['verSpot', 'za'], ['verSpot', 'zb'], ['verHallazgo', 'h1']]) {

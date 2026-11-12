@@ -13,7 +13,7 @@ import * as trk from './track.js';
 import * as ia from './ia.js';
 import * as au from './audio.js';
 
-const APP_V = 'micologia-v13';   // = V de sw.js
+const APP_V = 'micologia-v14';   // = V de sw.js
 const S = { view: 'mapa', arg: '', map: null, pins: null, me: null, acc: null, tmp: null, mini: null, centered: false, filtro: { salida: '', especie: '' }, clase: '', q: '', syncErr: false, mes: new Date().getMonth() + 1 };
 const VIEWS = ['mapa', 'salidas', 'salida', 'setas', 'mes', 'ajustes'];
 const TITULOS = { mapa: 'Mapa', salidas: 'Salidas', salida: 'Salida', setas: 'Setas', mes: 'Este mes', ajustes: 'Ajustes' };
@@ -106,9 +106,9 @@ function vozWire(sh, st) {
     else if (t.id === 'au-rec') {
       if (!S.rec) {
         try { S.rec = await au.grabar(); } catch (e) { return toast(e && e.name === 'NotAllowedError' ? 'Permiso de micrófono denegado' : 'No puedo usar el micrófono', 3600); }
-        t.classList.add('grab'); const tick = () => { t.textContent = '⏹ Parar · ' + au.mmss(S.rec ? S.rec.seg() : 0); }; tick(); S.recT = setInterval(tick, 500);
+        t.dataset.h0 = t.innerHTML; t.classList.add('grab'); const tick = () => { t.textContent = '⏹ Parar · ' + au.mmss(S.rec ? S.rec.seg() : 0); }; tick(); S.recT = setInterval(tick, 500);
       } else {
-        const r = S.rec; S.rec = null; clearInterval(S.recT); t.classList.remove('grab'); t.textContent = '🎙 Grabar nota de voz';
+        const r = S.rec; S.rec = null; clearInterval(S.recT); t.classList.remove('grab'); if (t.dataset.h0) t.innerHTML = t.dataset.h0; else t.textContent = '🎙 Grabar nota de voz';
         const blob = await r.stop(); if (!blob.size) return toast('No se ha grabado nada');
         const id = await db.putBlob(blob); st.audios.push(id); pintar(); transcribir(id);
       }
@@ -120,10 +120,10 @@ const distM = (a, b) => { const R = 6371000, r = x => x * Math.PI / 180, dl = r(
 const kmFmt = m => m < 950 ? Math.round(m / 10) * 10 + ' m' : (m / 1000).toFixed(1).replace('.', ',') + ' km';
 
 /* ---------- selector de especie (catálogo o texto libre) ---------- */
-function pickerHTML(st) {
+function pickerHTML(st, { rejilla = false } = {}) {
   const e = cat.byId(st.id);
-  return '<label class="l">Especie</label><div class="chips"><button class="opt ' + (!st.id && !st.txt ? 'on' : '') + '" id="sp-no">No sé</button></div>' +
-    '<input type="search" id="sp-q" placeholder="Buscar en el catálogo o escribir…" autocomplete="off" style="margin-top:8px" value="' + esc(e ? cat.nombre(e) : st.txt) + '"><div id="sp-sugs" class="sugs" hidden></div>' +
+  return (rejilla ? '<button id="sp-no" hidden></button>' : '<label class="l">Especie</label><div class="chips"><button class="opt ' + (!st.id && !st.txt ? 'on' : '') + '" id="sp-no">No sé</button></div>') +
+    '<input type="search" id="sp-q" placeholder="' + (rejilla ? 'O busca otra / escribe lo que sea…' : 'Buscar en el catálogo o escribir…') + '" autocomplete="off" style="margin-top:8px" value="' + esc(e ? cat.nombre(e) : st.txt) + '"><div id="sp-sugs" class="sugs" hidden></div>' +
     '<div id="sp-sel" style="margin-top:6px">' + (e ? tag(cat.vista(e)) : '') + '</div>';
 }
 function pickerWire(root, st) {
@@ -226,24 +226,44 @@ async function marcar(opts = {}) {
   const [zonas, act] = [await db.list('zonas'), await activa()];
   /* barrido: si ya estás a menos de 150 m de un spot, se elige solo */
   if (!m.zona) { const c = zonas.filter(z => z.lat != null).map(z => [z, distM(pos, z)]).sort((a, b) => a[1] - b[1])[0]; if (c && c[1] <= 150) m.zona = c[0].id; }
+  /* rejilla de especies probables: las que ya salieron en este spot, las de hoy, las que más encuentras y las de temporada */
+  const hs0 = await db.list('hallazgos'), mes = new Date(opts.ts || Date.now()).getMonth() + 1, sal = opts.salida || (act && act.id);
+  const freq = l => { const c = {}; l.forEach(h => { if (h.especieId) c[h.especieId] = (c[h.especieId] || 0) + 1; }); return Object.keys(c).sort((a, b) => c[b] - c[a]); };
+  const sugs = () => { const c = new Map(), add = (id, why) => { if (id && !c.has(id) && cat.byId(id)) c.set(id, why); };
+    if (m.zona) freq(hs0.filter(h => h.zonaId === m.zona)).forEach(id => add(id, 'aquí'));
+    if (sal) freq(hs0.filter(h => h.salidaId === sal)).forEach(id => add(id, 'hoy'));
+    freq(hs0).forEach(id => add(id, 'de las tuyas'));
+    tmp.delMes(cat.todas(), mes).filter(r => r.nivel >= 2).forEach(r => add(r.e.id, 'temporada'));
+    return [...c].slice(0, 7); };
+  const gridHTML = () => '<button class="gt no' + (!m.esp.id && !m.esp.txt ? ' on' : '') + '" data-g=""><span class="pf"><span class="ph0">?</span></span><b>No sé</b><small>lo miro luego</small></button>' +
+    sugs().map(([id, why]) => { const e = cat.byId(id); return '<button class="gt' + (m.esp.id === id ? ' on' : '') + '" data-g="' + id + '" style="--c:' + colorEsp(e) + '"><span class="pf">' + fotoEsp(e) + '</span><b>' + esc(corto(e)) + '</b><small>' + why + '</small></button>'; }).join('');
   const posTxt = () => pos.lat.toFixed(5) + ', ' + pos.lon.toFixed(5) + (pos.manual || pos.adj ? ' · ajustado a mano' : pos.acc != null ? ' · ±' + pos.acc + ' m' : '');
   const zonasOrd = () => zonas.slice().sort((a, b) => (act && act.zonaIds.includes(b.id)) - (act && act.zonaIds.includes(a.id)) || a.nombre.localeCompare(b.nombre));
-  const zonaHTML = () => '<label class="l">Zona</label><div class="chips" id="mk-zonas">' +
+  const zonaHTML = () => '<label class="l">Spot</label><div class="chips" id="mk-zonas">' +
     zonasOrd().map(z => '<button class="opt ' + (m.zona === z.id ? 'on' : '') + '" data-z="' + z.id + '">' + esc(z.nombre) + '</button>').join('') +
-    '<button class="opt" id="mk-nz">+ Zona</button></div>' + (m.nueva ? '<div class="row" style="margin-top:8px"><input type="text" id="mk-znom" placeholder="Nombre de la zona" style="flex:1"><button class="btn p" id="mk-zok" style="flex:none">Crear</button></div>' : '');
-  const sh = openSheet('<h2>Nuevo hallazgo</h2><p class="sub" id="mk-pos">' + horaTxt() + ' · ' + posTxt() + '</p>' + pickerHTML(m.esp) +
-    '<div id="mk-zona">' + zonaHTML() + '</div><label class="l">Foto</label><div class="thumbs"><button class="btn" id="mk-foto">Hacer foto</button><span id="mk-th" class="thumbs" style="margin:0"></span></div>' +
-    vozHTML(vz) + '<label class="l">Cantidad</label><input type="text" id="mk-cant" placeholder="p. ej. 3 · ≈200 g">' +
-    '<label class="l">Estado</label><div class="seg" id="mk-est">' + ESTADOS.map(e => '<button data-e="' + e[0] + '">' + e[1] + '</button>').join('') + '</div>' +
-    '<label class="l">Nota</label><input type="text" id="mk-nota" placeholder="Nota corta"><div class="row"><button class="btn" id="mk-x">Cancelar</button><button class="btn p" id="mk-ok" style="flex:2">Guardar</button></div>', { dim: !!opts.pos });
+    '<button class="opt" id="mk-nz">+ Spot nuevo</button></div>' + (m.nueva ? '<div class="row" style="margin-top:8px"><input type="text" id="mk-znom" placeholder="Nombre del spot" style="flex:1"><button class="btn p" id="mk-zok" style="flex:none">Crear</button></div>' : '');
+  const sh = openSheet('<h2>Nuevo hallazgo</h2><p class="sub" id="mk-pos">' + horaTxt() + ' · ' + posTxt() + '</p>' +
+    '<div class="mtiles"><button class="mtile" id="mk-foto">' + I.foto + '<b>Foto</b></button><button class="mtile" id="au-rec"' + (au.soportado() ? '' : ' disabled') + '>' + I.mic + '<b>Nota de voz</b></button></div>' +
+    '<div id="mk-th" class="thumbs"></div><div id="au-list"></div>' +
+    '<label class="l">¿Qué es?</label><div class="gsp" id="mk-grid">' + gridHTML() + '</div>' + pickerHTML(m.esp, { rejilla: true }) +
+    '<div id="mk-zona">' + zonaHTML() + '</div>' +
+    '<label class="l">Cantidad</label><div class="cantq">' + ['1', '2–5', 'Muchas', '≈200 g'].map(x => '<button class="opt" data-cq="' + x + '">' + x + '</button>').join('') + '</div><input type="text" id="mk-cant" placeholder="o escríbela: 3 · ≈200 g" style="margin-top:8px">' +
+    '<details class="det" id="mk-det"><summary>Estado y nota</summary><label class="l">Estado</label><div class="seg" id="mk-est">' + ESTADOS.map(e => '<button data-e="' + e[0] + '">' + e[1] + '</button>').join('') + '</div>' +
+    '<label class="l">Nota</label><input type="text" id="mk-nota" placeholder="Nota corta (o díctala con la nota de voz)"></details>' +
+    '<div class="row mk-bar"><button class="btn" id="mk-x">Cancelar</button><button class="btn p" id="mk-ok" style="flex:2">Guardar</button></div>', { dim: !!opts.pos });
+  const regrid = () => { $('#mk-grid', sh).innerHTML = gridHTML(); };
   pickerWire(sh, m.esp); vozWire(sh, vz);
-  vz.onTrans = (id, t) => { const n = $('#mk-nota', sh); if (n && !n.value.trim()) n.value = t.slice(0, 300); };
+  vz.onTrans = (id, t) => { const n = $('#mk-nota', sh); if (n && !n.value.trim()) { n.value = t.slice(0, 300); $('#mk-det', sh).open = true; } };
+  $('#sp-q', sh).addEventListener('input', regrid);
   encuadrar(pos.lat, pos.lon, sh);
   S.tmp.on('dragend', () => { const p = S.tmp.getLatLng(); pos.lat = p.lat; pos.lon = p.lng; pos.adj = true; $('#mk-pos', sh).textContent = horaTxt() + ' · ' + posTxt(); });
-  const rezona = () => { $('#mk-zona', sh).innerHTML = zonaHTML(); };
+  const rezona = () => { $('#mk-zona', sh).innerHTML = zonaHTML(); regrid(); };
   sh.addEventListener('click', async ev => {
     const t = ev.target.closest('button'); if (!t) return;
-    if (t.dataset.z) { m.zona = m.zona === t.dataset.z ? null : t.dataset.z; rezona(); }
+    if (t.dataset.g !== undefined) { const e = cat.byId(t.dataset.g); m.esp.id = e ? e.id : null; m.esp.txt = ''; $('#sp-q', sh).value = e ? cat.nombre(e) : ''; $('#sp-sel', sh).innerHTML = e ? tag(cat.vista(e)) : ''; $('#sp-sugs', sh).hidden = true; regrid(); }
+    else if (t.closest('#sp-sugs')) regrid();
+    else if (t.dataset.cq) { $('#mk-cant', sh).value = t.dataset.cq; $$('.cantq button', sh).forEach(b => b.classList.toggle('on', b === t)); }
+    else if (t.dataset.z) { m.zona = m.zona === t.dataset.z ? null : t.dataset.z; rezona(); }
     else if (t.id === 'mk-nz') { m.nueva = true; rezona(); $('#mk-znom', sh).focus(); }
     else if (t.id === 'mk-zok') {
       const n = $('#mk-znom', sh).value.trim(); if (!n) return;
