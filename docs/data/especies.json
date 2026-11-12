@@ -1,5 +1,5 @@
 {
- "version": 1,
+ "version": 2,
  "generado": "2026-11-12",
  "nivelPorDefecto": "borrador",
  "aviso": "Ninguna seta se come por lo que diga la app, un libro o una foto. Antes de comer algo que no domines: identificación en mano, con todos los caracteres, confirmada por una persona experta o sociedad micológica. En caso de duda, no se come.",
@@ -62,9 +62,125 @@
       "notaComestibilidad"
      ],
      "nota": "Borrador que mezcla fuentes citadas y conocimiento micológico general. Contrastar con ≥2 fuentes antes de dar la ficha por buena."
+    },
+    {
+     "nombre": "Wikipedia (inglés): Amanita phalloides",
+     "url": "https://en.wikipedia.org/wiki/Amanita_phalloides",
+     "fechaConsulta": "2026-11-12",
+     "campos": [
+      "queMirar",
+      "temporada"
+     ],
+     "nota": "Fuente terciaria. Sirve para los rasgos de reconocimiento; no sustituye una guía micológica."
+    },
+    {
+     "nombre": "iNaturalist: observaciones de grado de investigación en la costa cantábrica",
+     "url": "https://www.inaturalist.org/observations?nelat=43.7&nelng=-1.0&swlat=42.6&swlng=-5.5&quality_grade=research&taxon_id=52135",
+     "fechaConsulta": "2026-11-12",
+     "campos": [
+      "temporada"
+     ],
+     "nota": "Cuenta de observaciones por mes (N=71). Muestra cuándo se ve la especie, no cuándo es segura."
+    },
+    {
+     "nombre": "Wikimedia Commons (fotos)",
+     "url": "https://commons.wikimedia.org/",
+     "fechaConsulta": "2026-11-12",
+     "campos": [
+      "fotos"
+     ],
+     "nota": "Autoría y licencia en cada foto. Las fotos son orientativas y no confirman una identificación."
     }
    ],
-   "fotos": []
+   "fotos": [
+    {
+     "sp": "Amanita phalloides",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Amanita_phalloides_-just_emerging.JPG/{w}px-Amanita_phalloides_-just_emerging.JPG",
+     "autor": "Stu's Images",
+     "licencia": "CC BY-SA 3.0",
+     "licenciaUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+     "pagina": "https://commons.wikimedia.org/wiki/File:Amanita_phalloides_-just_emerging.JPG",
+     "origen": "Wikimedia Commons"
+    },
+    {
+     "sp": "Amanita phalloides",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Amanita_phalloides_(29069664382).jpg/{w}px-Amanita_phalloides_(29069664382).jpg",
+     "autor": "Björn S...",
+     "licencia": "CC BY-SA 2.0",
+     "licenciaUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+     "pagina": "https://commons.wikimedia.org/wiki/File:Amanita_phalloides_(29069664382).jpg",
+     "origen": "Wikimedia Commons"
+    },
+    {
+     "sp": "Amanita phalloides",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Amanita_phalloides_(28889712950).jpg/{w}px-Amanita_phalloides_(28889712950).jpg",
+     "autor": "Björn S...",
+     "licencia": "CC BY-SA 2.0",
+     "licenciaUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+     "pagina": "https://commons.wikimedia.org/wiki/File:Amanita_phalloides_(28889712950).jpg",
+     "origen": "Wikimedia Commons"
+    }
+   ],
+   "clave": "Desentierra la base del pie: volva en saco + láminas blancas + anillo = no se toca.",
+   "queMirar": [
+    {
+     "parte": "volva",
+     "titulo": "Volva en saco",
+     "texto": "Bolsa membranosa en la base. Hay que desenterrar la seta entera, no cortarla por el suelo."
+    },
+    {
+     "parte": "himenio",
+     "titulo": "Láminas blancas",
+     "texto": "Siempre blancas, libres y apretadas, también en ejemplares viejos."
+    },
+    {
+     "parte": "anillo",
+     "titulo": "Anillo colgante",
+     "texto": "Falda floja, algo por debajo del sombrero."
+    },
+    {
+     "parte": "sombrero",
+     "titulo": "Sombrero verde-oliva",
+     "texto": "Verde pálido, oliváceo, amarillento o bronce (existe una forma blanca). Más claro hacia el borde; viscoso con humedad."
+    },
+    {
+     "parte": "pie",
+     "titulo": "Pie blanco con escamas",
+     "texto": "Blanco con motas gris-oliva. Cuidado: la cutícula se pela con facilidad, y eso NO prueba que sea comestible."
+    },
+    {
+     "parte": "habitat",
+     "titulo": "Bajo frondosas",
+     "texto": "Sobre todo bajo robles; también hayas, castaños y avellanos."
+    }
+   ],
+   "temporada": {
+    "inat": {
+     "n": 71,
+     "mensual": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      2,
+      5,
+      13,
+      39,
+      9,
+      3
+     ],
+     "zona": "Costa cantábrica (42,6–43,7 N · 5,5–1,0 O: Bizkaia, Gipuzkoa, Cantabria, este de Asturias y norte de Burgos, Araba y Navarra)",
+     "consulta": "2026-11-12",
+     "url": "https://www.inaturalist.org/observations?nelat=43.7&nelng=-1.0&swlat=42.6&swlng=-5.5&quality_grade=research&taxon_id=52135"
+    },
+    "texto": {
+     "meses": [],
+     "nota": null,
+     "fuente": "Wikipedia (inglés)"
+    }
+   }
   },
   {
    "id": "amanita-verna-virosa",
@@ -113,9 +229,138 @@
       "notaComestibilidad"
      ],
      "nota": "Borrador que mezcla fuentes citadas y conocimiento micológico general. Contrastar con ≥2 fuentes antes de dar la ficha por buena."
+    },
+    {
+     "nombre": "Wikipedia (inglés): Amanita verna",
+     "url": "https://en.wikipedia.org/wiki/Amanita_verna",
+     "fechaConsulta": "2026-11-12",
+     "campos": [
+      "queMirar",
+      "temporada"
+     ],
+     "nota": "Fuente terciaria. Sirve para los rasgos de reconocimiento; no sustituye una guía micológica."
+    },
+    {
+     "nombre": "Wikipedia (inglés): Amanita virosa",
+     "url": "https://en.wikipedia.org/wiki/Amanita_virosa",
+     "fechaConsulta": "2026-11-12",
+     "campos": [
+      "queMirar",
+      "temporada"
+     ],
+     "nota": "Fuente terciaria. Sirve para los rasgos de reconocimiento; no sustituye una guía micológica."
+    },
+    {
+     "nombre": "iNaturalist: observaciones de grado de investigación en la costa cantábrica",
+     "url": "https://www.inaturalist.org/observations?nelat=43.7&nelng=-1.0&swlat=42.6&swlng=-5.5&quality_grade=research&taxon_id=58684,58685",
+     "fechaConsulta": "2026-11-12",
+     "campos": [
+      "temporada"
+     ],
+     "nota": "Cuenta de observaciones por mes (N=3). Muestra cuándo se ve la especie, no cuándo es segura."
+    },
+    {
+     "nombre": "Wikimedia Commons (fotos)",
+     "url": "https://commons.wikimedia.org/",
+     "fechaConsulta": "2026-11-12",
+     "campos": [
+      "fotos"
+     ],
+     "nota": "Autoría y licencia en cada foto. Las fotos son orientativas y no confirman una identificación."
     }
    ],
-   "fotos": []
+   "fotos": [
+    {
+     "sp": "Amanita verna",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/Weisser-Knollenbl%C3%A4tterpilz.jpg/{w}px-Weisser-Knollenbl%C3%A4tterpilz.jpg",
+     "autor": "Ki7sun3",
+     "licencia": "CC0",
+     "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+     "pagina": "https://commons.wikimedia.org/wiki/File:Weisser-Knollenbl%C3%A4tterpilz.jpg",
+     "origen": "Wikimedia Commons"
+    },
+    {
+     "sp": "Amanita virosa",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Amanita_virosa_UL_03.jpg/{w}px-Amanita_virosa_UL_03.jpg",
+     "autor": "Cephas",
+     "licencia": "CC BY-SA 4.0",
+     "licenciaUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+     "pagina": "https://commons.wikimedia.org/wiki/File:Amanita_virosa_UL_03.jpg",
+     "origen": "Wikimedia Commons"
+    },
+    {
+     "sp": "Amanita virosa",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Amanita_virosa_UL_01.jpg/{w}px-Amanita_virosa_UL_01.jpg",
+     "autor": "Cephas",
+     "licencia": "CC BY-SA 4.0",
+     "licenciaUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+     "pagina": "https://commons.wikimedia.org/wiki/File:Amanita_virosa_UL_01.jpg",
+     "origen": "Wikimedia Commons"
+    }
+   ],
+   "clave": "Seta TODA blanca (sombrero, láminas, pie) con anillo y volva en saco: déjala.",
+   "queMirar": [
+    {
+     "parte": "sombrero",
+     "titulo": "Todo blanco",
+     "texto": "Sombrero, láminas y pie blancos. A. virosa suele tener un mamelón y puede conservar restos del velo."
+    },
+    {
+     "parte": "volva",
+     "titulo": "Volva en saco grande",
+     "texto": "Bolsa membranosa en la base: desentierra el pie."
+    },
+    {
+     "parte": "anillo",
+     "titulo": "Anillo membranoso",
+     "texto": "Colgante y estriado."
+    },
+    {
+     "parte": "olor",
+     "titulo": "Olor",
+     "texto": "En A. virosa se describe un olor que recuerda al rábano."
+    },
+    {
+     "parte": "habitat",
+     "titulo": "Época distinta",
+     "texto": "A. verna sale en primavera; A. virosa a finales de verano y otoño."
+    }
+   ],
+   "temporada": {
+    "inat": {
+     "n": 3,
+     "mensual": [
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      1,
+      1,
+      0,
+      0,
+      0,
+      0
+     ],
+     "zona": "Costa cantábrica (42,6–43,7 N · 5,5–1,0 O: Bizkaia, Gipuzkoa, Cantabria, este de Asturias y norte de Burgos, Araba y Navarra)",
+     "consulta": "2026-11-12",
+     "url": "https://www.inaturalist.org/observations?nelat=43.7&nelng=-1.0&swlat=42.6&swlng=-5.5&quality_grade=research&taxon_id=58684,58685"
+    },
+    "texto": {
+     "meses": [
+      3,
+      4,
+      5,
+      8,
+      9,
+      10,
+      11
+     ],
+     "nota": "A. verna: primavera. A. virosa: finales de verano y otoño.",
+     "fuente": "Wikipedia (inglés)"
+    }
+   }
   },
   {
    "id": "lepiota-brunneoincarnata",
@@ -165,9 +410,120 @@
       "notaComestibilidad"
      ],
      "nota": "Borrador que mezcla fuentes citadas y conocimiento micológico general. Contrastar con ≥2 fuentes antes de dar la ficha por buena."
+    },
+    {
+     "nombre": "Wikipedia (inglés): Lepiota brunneoincarnata",
+     "url": "https://en.wikipedia.org/wiki/Lepiota_brunneoincarnata",
+     "fechaConsulta": "2026-11-12",
+     "campos": [
+      "queMirar",
+      "temporada"
+     ],
+     "nota": "Fuente terciaria. Sirve para los rasgos de reconocimiento; no sustituye una guía micológica."
+    },
+    {
+     "nombre": "iNaturalist: observaciones de grado de investigación en la costa cantábrica",
+     "url": "https://www.inaturalist.org/observations?nelat=43.7&nelng=-1.0&swlat=42.6&swlng=-5.5&quality_grade=research&taxon_id=515954",
+     "fechaConsulta": "2026-11-12",
+     "campos": [
+      "temporada"
+     ],
+     "nota": "Cuenta de observaciones por mes (N=3). Muestra cuándo se ve la especie, no cuándo es segura."
+    },
+    {
+     "nombre": "Wikimedia Commons (fotos)",
+     "url": "https://commons.wikimedia.org/",
+     "fechaConsulta": "2026-11-12",
+     "campos": [
+      "fotos"
+     ],
+     "nota": "Autoría y licencia en cada foto. Las fotos son orientativas y no confirman una identificación."
     }
    ],
-   "fotos": []
+   "fotos": [
+    {
+     "sp": "Lepiota brunneoincarnata",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/2015-10-11_Lepiota_brunneoincarnata_Chodat_%26_C._Mart%C3%ADn_564314.jpg/{w}px-2015-10-11_Lepiota_brunneoincarnata_Chodat_%26_C._Mart%C3%ADn_564314.jpg",
+     "autor": "Murselin Guney (Mushroom Observer)",
+     "licencia": "CC BY-SA 3.0",
+     "licenciaUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+     "pagina": "https://commons.wikimedia.org/wiki/File:2015-10-11_Lepiota_brunneoincarnata_Chodat_%26_C._Mart%C3%ADn_564314.jpg",
+     "origen": "Wikimedia Commons"
+    },
+    {
+     "sp": "Lepiota brunneoincarnata",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Lepiota_brunneoincarnata_170929w.JPG/{w}px-Lepiota_brunneoincarnata_170929w.JPG",
+     "autor": "Strobilomyces",
+     "licencia": "CC BY-SA 4.0",
+     "licenciaUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+     "pagina": "https://commons.wikimedia.org/wiki/File:Lepiota_brunneoincarnata_170929w.JPG",
+     "origen": "Wikimedia Commons"
+    },
+    {
+     "sp": "Lepiota brunneoincarnata",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/Lepiota_brunneoincarnata_060823w.jpg/{w}px-Lepiota_brunneoincarnata_060823w.jpg",
+     "autor": "Strobilomyces",
+     "licencia": "CC BY-SA 3.0",
+     "licenciaUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+     "pagina": "https://commons.wikimedia.org/wiki/File:Lepiota_brunneoincarnata_060823w.jpg",
+     "origen": "Wikimedia Commons"
+    }
+   ],
+   "clave": "Seta pequeña con escamas pardas en el césped: no la mezcles con parasoles ni senderuelas.",
+   "queMirar": [
+    {
+     "parte": "sombrero",
+     "titulo": "Pequeña y escamosa",
+     "texto": "2,7–4 cm. Rojo-pardo de joven, luego rosa-pardo con escamas oscuras y una gran escama central sin romper."
+    },
+    {
+     "parte": "himenio",
+     "titulo": "Láminas blancas",
+     "texto": "Gruesas, poco apretadas y libres; entre ellas, láminas cortas."
+    },
+    {
+     "parte": "pie",
+     "titulo": "Pie con zona oscura",
+     "texto": "Corto (2–3,5 cm). Rosado-ocre arriba y cubierto de escamas pardas abajo, separado por una zona anular oscura."
+    },
+    {
+     "parte": "carne",
+     "titulo": "Carne que enrojece",
+     "texto": "Enrojece al cortarla o golpearla. Olor suave a fruta poco madura."
+    },
+    {
+     "parte": "habitat",
+     "titulo": "Césped, parques y jardines",
+     "texto": "Aparece en prados y jardines, justo donde se recogen setas “de campo”."
+    }
+   ],
+   "temporada": {
+    "inat": {
+     "n": 3,
+     "mensual": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      2,
+      1,
+      0
+     ],
+     "zona": "Costa cantábrica (42,6–43,7 N · 5,5–1,0 O: Bizkaia, Gipuzkoa, Cantabria, este de Asturias y norte de Burgos, Araba y Navarra)",
+     "consulta": "2026-11-12",
+     "url": "https://www.inaturalist.org/observations?nelat=43.7&nelng=-1.0&swlat=42.6&swlng=-5.5&quality_grade=research&taxon_id=515954"
+    },
+    "texto": {
+     "meses": [],
+     "nota": null,
+     "fuente": "Wikipedia (inglés)"
+    }
+   }
   },
   {
    "id": "galerina-marginata",
@@ -217,9 +573,122 @@
       "notaComestibilidad"
      ],
      "nota": "Borrador que mezcla fuentes citadas y conocimiento micológico general. Contrastar con ≥2 fuentes antes de dar la ficha por buena."
+    },
+    {
+     "nombre": "Wikipedia (inglés): Galerina marginata",
+     "url": "https://en.wikipedia.org/wiki/Galerina_marginata",
+     "fechaConsulta": "2026-11-12",
+     "campos": [
+      "queMirar",
+      "temporada"
+     ],
+     "nota": "Fuente terciaria. Sirve para los rasgos de reconocimiento; no sustituye una guía micológica."
+    },
+    {
+     "nombre": "iNaturalist: observaciones de grado de investigación en la costa cantábrica",
+     "url": "https://www.inaturalist.org/observations?nelat=43.7&nelng=-1.0&swlat=42.6&swlng=-5.5&quality_grade=research&taxon_id=154735",
+     "fechaConsulta": "2026-11-12",
+     "campos": [
+      "temporada"
+     ],
+     "nota": "Cuenta de observaciones por mes (N=15). Muestra cuándo se ve la especie, no cuándo es segura."
+    },
+    {
+     "nombre": "Wikimedia Commons (fotos)",
+     "url": "https://commons.wikimedia.org/",
+     "fechaConsulta": "2026-11-12",
+     "campos": [
+      "fotos"
+     ],
+     "nota": "Autoría y licencia en cada foto. Las fotos son orientativas y no confirman una identificación."
     }
    ],
-   "fotos": []
+   "fotos": [
+    {
+     "sp": "Galerina marginata",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Galerina_marginata_-_Bundelmosklokje.jpg/{w}px-Galerina_marginata_-_Bundelmosklokje.jpg",
+     "autor": "André De Kesel",
+     "licencia": "CC0",
+     "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+     "pagina": "https://commons.wikimedia.org/wiki/File:Galerina_marginata_-_Bundelmosklokje.jpg",
+     "origen": "Wikimedia Commons"
+    },
+    {
+     "sp": "Galerina marginata",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Galerina_marginata;_DSC_0662.jpg/{w}px-Galerina_marginata;_DSC_0662.jpg",
+     "autor": "EmillimeS",
+     "licencia": "CC BY-SA 4.0",
+     "licenciaUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+     "pagina": "https://commons.wikimedia.org/wiki/File:Galerina_marginata;_DSC_0662.jpg",
+     "origen": "Wikimedia Commons"
+    },
+    {
+     "sp": "Galerina marginata",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Galerina_marginata_02.jpg/{w}px-Galerina_marginata_02.jpg",
+     "autor": "Syrio",
+     "licencia": "CC BY-SA 4.0",
+     "licenciaUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+     "pagina": "https://commons.wikimedia.org/wiki/File:Galerina_marginata_02.jpg",
+     "origen": "Wikimedia Commons"
+    }
+   ],
+   "clave": "Setas pardas pequeñas en grupos sobre madera: no son “setas de madera” comestibles.",
+   "queMirar": [
+    {
+     "parte": "habitat",
+     "titulo": "Sobre madera",
+     "texto": "Crece sobre madera de coníferas (también de frondosas), a veces enterrada, por lo que parece salir del suelo."
+    },
+    {
+     "parte": "habitat",
+     "titulo": "En grupos",
+     "texto": "Suele salir en matas o grupitos, aunque puede verse sola."
+    },
+    {
+     "parte": "sombrero",
+     "titulo": "Sombrero pequeño",
+     "texto": "1–6 cm. Convexo, con el borde curvado hacia las láminas; luego aplanado y a veces con mamelón."
+    },
+    {
+     "parte": "otro",
+     "titulo": "Confusión peligrosa",
+     "texto": "Se confunde con setas de madera comestibles (ver «Se confunde con»)."
+    }
+   ],
+   "temporada": {
+    "inat": {
+     "n": 15,
+     "mensual": [
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      3,
+      10,
+      1
+     ],
+     "zona": "Costa cantábrica (42,6–43,7 N · 5,5–1,0 O: Bizkaia, Gipuzkoa, Cantabria, este de Asturias y norte de Burgos, Araba y Navarra)",
+     "consulta": "2026-11-12",
+     "url": "https://www.inaturalist.org/observations?nelat=43.7&nelng=-1.0&swlat=42.6&swlng=-5.5&quality_grade=research&taxon_id=154735"
+    },
+    "texto": {
+     "meses": [
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+     ],
+     "nota": "Verano a otoño.",
+     "fuente": "Wikipedia (inglés)"
+    }
+   }
   },
   {
    "id": "cortinarius-orellanus",
@@ -260,9 +729,130 @@
       "notaComestibilidad"
      ],
      "nota": "Borrador que mezcla fuentes citadas y conocimiento micológico general. Contrastar con ≥2 fuentes antes de dar la ficha por buena."
+    },
+    {
+     "nombre": "Wikipedia (inglés): Cortinarius orellanus",
+     "url": "https://en.wikipedia.org/wiki/Cortinarius_orellanus",
+     "fechaConsulta": "2026-11-12",
+     "campos": [
+      "queMirar",
+      "temporada"
+     ],
+     "nota": "Fuente terciaria. Sirve para los rasgos de reconocimiento; no sustituye una guía micológica."
+    },
+    {
+     "nombre": "Wikipedia (inglés): Cortinarius rubellus",
+     "url": "https://en.wikipedia.org/wiki/Cortinarius_rubellus",
+     "fechaConsulta": "2026-11-12",
+     "campos": [
+      "queMirar",
+      "temporada"
+     ],
+     "nota": "Fuente terciaria. Sirve para los rasgos de reconocimiento; no sustituye una guía micológica."
+    },
+    {
+     "nombre": "iNaturalist: observaciones de grado de investigación en la costa cantábrica",
+     "url": "https://www.inaturalist.org/observations?nelat=43.7&nelng=-1.0&swlat=42.6&swlng=-5.5&quality_grade=research&taxon_id=337849",
+     "fechaConsulta": "2026-11-12",
+     "campos": [
+      "temporada"
+     ],
+     "nota": "Cuenta de observaciones por mes (N=2). Muestra cuándo se ve la especie, no cuándo es segura."
+    },
+    {
+     "nombre": "Wikimedia Commons (fotos)",
+     "url": "https://commons.wikimedia.org/",
+     "fechaConsulta": "2026-11-12",
+     "campos": [
+      "fotos"
+     ],
+     "nota": "Autoría y licencia en cada foto. Las fotos son orientativas y no confirman una identificación."
     }
    ],
-   "fotos": []
+   "fotos": [
+    {
+     "sp": "Cortinarius orellanus",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/2013-10-16_Cortinarius_orellanus_1a.jpg/{w}px-2013-10-16_Cortinarius_orellanus_1a.jpg",
+     "autor": "Andreas Kunze",
+     "licencia": "CC BY-SA 3.0",
+     "licenciaUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+     "pagina": "https://commons.wikimedia.org/wiki/File:2013-10-16_Cortinarius_orellanus_1a.jpg",
+     "origen": "Wikimedia Commons"
+    },
+    {
+     "sp": "Cortinarius orellanus",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Cortinarius_orellanus_(1).JPG/{w}px-Cortinarius_orellanus_(1).JPG",
+     "autor": "Thomas Pruß",
+     "licencia": "CC BY-SA 3.0",
+     "licenciaUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+     "pagina": "https://commons.wikimedia.org/wiki/File:Cortinarius_orellanus_(1).JPG",
+     "origen": "Wikimedia Commons"
+    },
+    {
+     "sp": "Cortinarius orellanus",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/2013-10-16_Cortinarius_orellanus_1b.jpg/{w}px-2013-10-16_Cortinarius_orellanus_1b.jpg",
+     "autor": "Andreas Kunze",
+     "licencia": "CC BY-SA 3.0",
+     "licenciaUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+     "pagina": "https://commons.wikimedia.org/wiki/File:2013-10-16_Cortinarius_orellanus_1b.jpg",
+     "origen": "Wikimedia Commons"
+    }
+   ],
+   "clave": "Cortinarios pardo-anaranjados con láminas color óxido: se confunden con rebozuelos. No tocar.",
+   "queMirar": [
+    {
+     "parte": "sombrero",
+     "titulo": "Naranja-pardo",
+     "texto": "3–6 cm, aplanado o algo hundido, con fibrillas o escamitas finas."
+    },
+    {
+     "parte": "himenio",
+     "titulo": "Láminas ocre → óxido",
+     "texto": "Gruesas, ocre claro que se van volviendo pardo-óxido al madurar las esporas."
+    },
+    {
+     "parte": "pie",
+     "titulo": "Pie con restos de cortina",
+     "texto": "4–9 cm, de color parecido al sombrero, amarillento arriba, con restos de velo amarillo pálido."
+    },
+    {
+     "parte": "carne",
+     "titulo": "Carne ocre y olor a rábano",
+     "texto": "Carne firme ocre pálida; olor ligero a rábano."
+    },
+    {
+     "parte": "habitat",
+     "titulo": "Bosque caducifolio",
+     "texto": "Bajo haya, carpe y roble."
+    }
+   ],
+   "temporada": {
+    "inat": {
+     "n": 2,
+     "mensual": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      1,
+      0
+     ],
+     "zona": "Costa cantábrica (42,6–43,7 N · 5,5–1,0 O: Bizkaia, Gipuzkoa, Cantabria, este de Asturias y norte de Burgos, Araba y Navarra)",
+     "consulta": "2026-11-12",
+     "url": "https://www.inaturalist.org/observations?nelat=43.7&nelng=-1.0&swlat=42.6&swlng=-5.5&quality_grade=research&taxon_id=337849"
+    },
+    "texto": {
+     "meses": [],
+     "nota": null,
+     "fuente": "Wikipedia (inglés)"
+    }
+   }
   },
   {
    "id": "gyromitra",
@@ -311,9 +901,125 @@
       "notaComestibilidad"
      ],
      "nota": "Borrador que mezcla fuentes citadas y conocimiento micológico general. Contrastar con ≥2 fuentes antes de dar la ficha por buena."
+    },
+    {
+     "nombre": "Wikipedia (inglés): Gyromitra esculenta",
+     "url": "https://en.wikipedia.org/wiki/Gyromitra_esculenta",
+     "fechaConsulta": "2026-11-12",
+     "campos": [
+      "queMirar",
+      "temporada"
+     ],
+     "nota": "Fuente terciaria. Sirve para los rasgos de reconocimiento; no sustituye una guía micológica."
+    },
+    {
+     "nombre": "iNaturalist: observaciones de grado de investigación en la costa cantábrica",
+     "url": "https://www.inaturalist.org/observations?nelat=43.7&nelng=-1.0&swlat=42.6&swlng=-5.5&quality_grade=research&taxon_id=85118",
+     "fechaConsulta": "2026-11-12",
+     "campos": [
+      "temporada"
+     ],
+     "nota": "Cuenta de observaciones por mes (N=5). Muestra cuándo se ve la especie, no cuándo es segura."
+    },
+    {
+     "nombre": "Wikimedia Commons (fotos)",
+     "url": "https://commons.wikimedia.org/",
+     "fechaConsulta": "2026-11-12",
+     "campos": [
+      "fotos"
+     ],
+     "nota": "Autoría y licencia en cada foto. Las fotos son orientativas y no confirman una identificación."
     }
    ],
-   "fotos": []
+   "fotos": [
+    {
+     "sp": "Gyromitra esculenta",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Gyromitra_esculenta_(49572178278).jpg/{w}px-Gyromitra_esculenta_(49572178278).jpg",
+     "autor": "Lukas (Londres)",
+     "licencia": "CC BY-SA 2.0",
+     "licenciaUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+     "pagina": "https://commons.wikimedia.org/wiki/File:Gyromitra_esculenta_(49572178278).jpg",
+     "origen": "Wikimedia Commons"
+    },
+    {
+     "sp": "Gyromitra esculenta",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Gyromitra_esculenta_(49572686531).jpg/{w}px-Gyromitra_esculenta_(49572686531).jpg",
+     "autor": "Lukas (Londres)",
+     "licencia": "CC BY-SA 2.0",
+     "licenciaUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+     "pagina": "https://commons.wikimedia.org/wiki/File:Gyromitra_esculenta_(49572686531).jpg",
+     "origen": "Wikimedia Commons"
+    },
+    {
+     "sp": "Gyromitra esculenta",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Gyromitra_esculenta_(27717088958).jpg/{w}px-Gyromitra_esculenta_(27717088958).jpg",
+     "autor": "Lukas (Londres)",
+     "licencia": "CC BY-SA 2.0",
+     "licenciaUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+     "pagina": "https://commons.wikimedia.org/wiki/File:Gyromitra_esculenta_(27717088958).jpg",
+     "origen": "Wikimedia Commons"
+    }
+   ],
+   "clave": "Cabeza “de cerebro” con pliegues, no en panal. Si dudas entre colmenilla y Gyromitra, no la cojas.",
+   "queMirar": [
+    {
+     "parte": "sombrero",
+     "titulo": "Forma de cerebro",
+     "texto": "Irregular, arrugada y plegada (hasta ~12 cm), no con huecos tipo esponja."
+    },
+    {
+     "parte": "sombrero",
+     "titulo": "Color pardo-rojizo",
+     "texto": "Pardo, a veces rojizo, castaño o púrpura; se oscurece con la edad."
+    },
+    {
+     "parte": "pie",
+     "titulo": "Pie corto y grueso",
+     "texto": "3–6 cm de alto, unido al “cerebro” por varios puntos."
+    },
+    {
+     "parte": "olor",
+     "titulo": "Olor agradable",
+     "texto": "Puede oler a fruta y ser de sabor suave: no es indicio de seguridad."
+    },
+    {
+     "parte": "habitat",
+     "titulo": "Suelos arenosos bajo coníferas",
+     "texto": "En primavera y comienzos de verano."
+    }
+   ],
+   "temporada": {
+    "inat": {
+     "n": 5,
+     "mensual": [
+      0,
+      0,
+      0,
+      2,
+      3,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "zona": "Costa cantábrica (42,6–43,7 N · 5,5–1,0 O: Bizkaia, Gipuzkoa, Cantabria, este de Asturias y norte de Burgos, Araba y Navarra)",
+     "consulta": "2026-11-12",
+     "url": "https://www.inaturalist.org/observations?nelat=43.7&nelng=-1.0&swlat=42.6&swlng=-5.5&quality_grade=research&taxon_id=85118"
+    },
+    "texto": {
+     "meses": [
+      3,
+      4,
+      5,
+      6
+     ],
+     "nota": "Primavera y principios de verano.",
+     "fuente": "Wikipedia (inglés)"
+    }
+   }
   },
   {
    "id": "entoloma-lividum-sinuatum",
@@ -370,9 +1076,120 @@
       "notaComestibilidad"
      ],
      "nota": "Borrador que mezcla fuentes citadas y conocimiento micológico general. Contrastar con ≥2 fuentes antes de dar la ficha por buena."
+    },
+    {
+     "nombre": "Wikipedia (inglés): Entoloma sinuatum",
+     "url": "https://en.wikipedia.org/wiki/Entoloma_sinuatum",
+     "fechaConsulta": "2026-11-12",
+     "campos": [
+      "queMirar",
+      "temporada"
+     ],
+     "nota": "Fuente terciaria. Sirve para los rasgos de reconocimiento; no sustituye una guía micológica."
+    },
+    {
+     "nombre": "iNaturalist: observaciones de grado de investigación en la costa cantábrica",
+     "url": "https://www.inaturalist.org/observations?nelat=43.7&nelng=-1.0&swlat=42.6&swlng=-5.5&quality_grade=research&taxon_id=510199",
+     "fechaConsulta": "2026-11-12",
+     "campos": [
+      "temporada"
+     ],
+     "nota": "Cuenta de observaciones por mes (N=17). Muestra cuándo se ve la especie, no cuándo es segura."
+    },
+    {
+     "nombre": "Wikimedia Commons (fotos)",
+     "url": "https://commons.wikimedia.org/",
+     "fechaConsulta": "2026-11-12",
+     "campos": [
+      "fotos"
+     ],
+     "nota": "Autoría y licencia en cada foto. Las fotos son orientativas y no confirman una identificación."
     }
    ],
-   "fotos": []
+   "fotos": [
+    {
+     "sp": "Entoloma sinuatum",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Entoloma_sinuatum_573398400.jpg/{w}px-Entoloma_sinuatum_573398400.jpg",
+     "autor": "Matej Frančeškin",
+     "licencia": "CC BY 4.0",
+     "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+     "pagina": "https://commons.wikimedia.org/wiki/File:Entoloma_sinuatum_573398400.jpg",
+     "origen": "Wikimedia Commons"
+    },
+    {
+     "sp": "Entoloma sinuatum",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Entoloma_sinuatum_lau.jpg/{w}px-Entoloma_sinuatum_lau.jpg",
+     "autor": "Jose Angel Urquia Goitia",
+     "licencia": "CC BY-SA 4.0",
+     "licenciaUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+     "pagina": "https://commons.wikimedia.org/wiki/File:Entoloma_sinuatum_lau.jpg",
+     "origen": "Wikimedia Commons"
+    },
+    {
+     "sp": "Entoloma sinuatum",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Entoloma_sinuatum_573398401.jpg/{w}px-Entoloma_sinuatum_573398401.jpg",
+     "autor": "Matej Frančeškin",
+     "licencia": "CC BY 4.0",
+     "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+     "pagina": "https://commons.wikimedia.org/wiki/File:Entoloma_sinuatum_573398401.jpg",
+     "origen": "Wikimedia Commons"
+    }
+   ],
+   "clave": "Seta blancuzca y grande de láminas separadas amarillentas→rosadas: causa muy frecuente de intoxicaciones.",
+   "queMirar": [
+    {
+     "parte": "sombrero",
+     "titulo": "Grande y claro",
+     "texto": "6–20 cm. Marfil a gris-pardo claro, borde ondulado, mamelón romo; se oscurece con la edad."
+    },
+    {
+     "parte": "himenio",
+     "titulo": "Láminas separadas",
+     "texto": "Escotadas hacia el pie y amarillentas que pasan a rosa y luego rojizo. Vistas desde abajo, forman un “foso” alrededor del pie."
+    },
+    {
+     "parte": "olor",
+     "titulo": "Olor rancio",
+     "texto": "Se describe un olor rancio (la perretxiko huele a harina o pepino)."
+    },
+    {
+     "parte": "habitat",
+     "titulo": "Frondosas y suelos calizos",
+     "texto": "Finales de verano y otoño, a veces en corros."
+    }
+   ],
+   "temporada": {
+    "inat": {
+     "n": 17,
+     "mensual": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      3,
+      10,
+      3,
+      0
+     ],
+     "zona": "Costa cantábrica (42,6–43,7 N · 5,5–1,0 O: Bizkaia, Gipuzkoa, Cantabria, este de Asturias y norte de Burgos, Araba y Navarra)",
+     "consulta": "2026-11-12",
+     "url": "https://www.inaturalist.org/observations?nelat=43.7&nelng=-1.0&swlat=42.6&swlng=-5.5&quality_grade=research&taxon_id=510199"
+    },
+    "texto": {
+     "meses": [
+      8,
+      9,
+      10,
+      11
+     ],
+     "nota": "Finales de verano y otoño.",
+     "fuente": "Wikipedia (inglés)"
+    }
+   }
   },
   {
    "id": "omphalotus-illudens",
@@ -420,9 +1237,131 @@
       "notaComestibilidad"
      ],
      "nota": "Borrador que mezcla fuentes citadas y conocimiento micológico general. Contrastar con ≥2 fuentes antes de dar la ficha por buena."
+    },
+    {
+     "nombre": "Wikipedia (inglés): Omphalotus illudens",
+     "url": "https://en.wikipedia.org/wiki/Omphalotus_illudens",
+     "fechaConsulta": "2026-11-12",
+     "campos": [
+      "queMirar",
+      "temporada"
+     ],
+     "nota": "Fuente terciaria. Sirve para los rasgos de reconocimiento; no sustituye una guía micológica."
+    },
+    {
+     "nombre": "Wikipedia (inglés): Omphalotus olearius",
+     "url": "https://en.wikipedia.org/wiki/Omphalotus_olearius",
+     "fechaConsulta": "2026-11-12",
+     "campos": [
+      "queMirar",
+      "temporada"
+     ],
+     "nota": "Fuente terciaria. Sirve para los rasgos de reconocimiento; no sustituye una guía micológica."
+    },
+    {
+     "nombre": "iNaturalist: observaciones de grado de investigación en la costa cantábrica",
+     "url": "https://www.inaturalist.org/observations?nelat=43.7&nelng=-1.0&swlat=42.6&swlng=-5.5&quality_grade=research&taxon_id=64021,126831",
+     "fechaConsulta": "2026-11-12",
+     "campos": [
+      "temporada"
+     ],
+     "nota": "Cuenta de observaciones por mes (N=17). Muestra cuándo se ve la especie, no cuándo es segura."
+    },
+    {
+     "nombre": "Wikimedia Commons (fotos)",
+     "url": "https://commons.wikimedia.org/",
+     "fechaConsulta": "2026-11-12",
+     "campos": [
+      "fotos"
+     ],
+     "nota": "Autoría y licencia en cada foto. Las fotos son orientativas y no confirman una identificación."
     }
    ],
-   "fotos": []
+   "fotos": [
+    {
+     "sp": "Omphalotus olearius (Europa)",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Omphalotus_olearius_(DC.)_Singer_691729.jpg/{w}px-Omphalotus_olearius_(DC.)_Singer_691729.jpg",
+     "autor": "Glen van Niekerk (Mushroom Observer)",
+     "licencia": "CC BY-SA 3.0",
+     "licenciaUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+     "pagina": "https://commons.wikimedia.org/wiki/File:Omphalotus_olearius_(DC.)_Singer_691729.jpg",
+     "origen": "Wikimedia Commons"
+    },
+    {
+     "sp": "Omphalotus olearius (Europa)",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Omphalotus_olearius_(DC.)_Singer_691736.jpg/{w}px-Omphalotus_olearius_(DC.)_Singer_691736.jpg",
+     "autor": "Glen van Niekerk (Mushroom Observer)",
+     "licencia": "CC BY-SA 3.0",
+     "licenciaUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+     "pagina": "https://commons.wikimedia.org/wiki/File:Omphalotus_olearius_(DC.)_Singer_691736.jpg",
+     "origen": "Wikimedia Commons"
+    },
+    {
+     "sp": "Omphalotus illudens (Norteamérica)",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/081224_Jack_O'_Lantern_NC.jpg/{w}px-081224_Jack_O'_Lantern_NC.jpg",
+     "autor": "Tylerbrunnermyco",
+     "licencia": "CC BY-SA 4.0",
+     "licenciaUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+     "pagina": "https://commons.wikimedia.org/wiki/File:081224_Jack_O'_Lantern_NC.jpg",
+     "origen": "Wikimedia Commons"
+    }
+   ],
+   "clave": "Naranja intenso en mata sobre tocón o raíz, láminas finas y afiladas: no es un rebozuelo.",
+   "queMirar": [
+    {
+     "parte": "sombrero",
+     "titulo": "Naranja vivo",
+     "texto": "Hasta 15 cm. Carne anaranjada por dentro; no cambia de color al cortar."
+    },
+    {
+     "parte": "himenio",
+     "titulo": "Láminas finas y afiladas",
+     "texto": "Decurrentes, como de papel y flexibles (el rebozuelo tiene pliegues romos)."
+    },
+    {
+     "parte": "habitat",
+     "titulo": "Mata sobre madera",
+     "texto": "Crece en grupos apretados sobre tocones o raíces enterradas, no suelto en el suelo."
+    },
+    {
+     "parte": "otro",
+     "titulo": "Brilla en la oscuridad",
+     "texto": "Las láminas frescas pueden emitir un brillo verdoso muy tenue (hay que adaptar la vista a la oscuridad)."
+    }
+   ],
+   "notaNomenclatura": "Nomenclatura: en Europa la especie equivalente es Omphalotus olearius; O. illudens es norteamericana. Las fotos indican cuál es cada una.",
+   "temporada": {
+    "inat": {
+     "n": 17,
+     "mensual": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      4,
+      9,
+      3,
+      1,
+      0,
+      0
+     ],
+     "zona": "Costa cantábrica (42,6–43,7 N · 5,5–1,0 O: Bizkaia, Gipuzkoa, Cantabria, este de Asturias y norte de Burgos, Araba y Navarra)",
+     "consulta": "2026-11-12",
+     "url": "https://www.inaturalist.org/observations?nelat=43.7&nelng=-1.0&swlat=42.6&swlng=-5.5&quality_grade=research&taxon_id=64021,126831"
+    },
+    "texto": {
+     "meses": [
+      7,
+      8,
+      9,
+      10
+     ],
+     "nota": "O. olearius, sur de Europa: julio–octubre.",
+     "fuente": "Wikipedia (inglés)"
+    }
+   }
   },
   {
    "id": "tricholoma-pardinum",
@@ -461,9 +1400,113 @@
       "notaComestibilidad"
      ],
      "nota": "Borrador que mezcla fuentes citadas y conocimiento micológico general. Contrastar con ≥2 fuentes antes de dar la ficha por buena."
+    },
+    {
+     "nombre": "Wikipedia (inglés): Tricholoma pardinum",
+     "url": "https://en.wikipedia.org/wiki/Tricholoma_pardinum",
+     "fechaConsulta": "2026-11-12",
+     "campos": [
+      "queMirar",
+      "temporada"
+     ],
+     "nota": "Fuente terciaria. Sirve para los rasgos de reconocimiento; no sustituye una guía micológica."
+    },
+    {
+     "nombre": "Wikimedia Commons (fotos)",
+     "url": "https://commons.wikimedia.org/",
+     "fechaConsulta": "2026-11-12",
+     "campos": [
+      "fotos"
+     ],
+     "nota": "Autoría y licencia en cada foto. Las fotos son orientativas y no confirman una identificación."
     }
    ],
-   "fotos": []
+   "fotos": [
+    {
+     "sp": "Tricholoma pardinum",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7f/2012-03-28_Tricholoma_pardinum_Qu%C3%A9l_208648.jpg/{w}px-2012-03-28_Tricholoma_pardinum_Qu%C3%A9l_208648.jpg",
+     "autor": "David Rust (Mushroom Observer)",
+     "licencia": "CC BY-SA 3.0",
+     "licenciaUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+     "pagina": "https://commons.wikimedia.org/wiki/File:2012-03-28_Tricholoma_pardinum_Qu%C3%A9l_208648.jpg",
+     "origen": "Wikimedia Commons"
+    },
+    {
+     "sp": "Tricholoma pardinum",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Tricholoma_pardinum_1.jpg/{w}px-Tricholoma_pardinum_1.jpg",
+     "autor": "Jose Angel Urquia Goitia",
+     "licencia": "CC BY-SA 4.0",
+     "licenciaUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+     "pagina": "https://commons.wikimedia.org/wiki/File:Tricholoma_pardinum_1.jpg",
+     "origen": "Wikimedia Commons"
+    },
+    {
+     "sp": "Tricholoma pardinum",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Tricholoma_pardinum_gills.jpg/{w}px-Tricholoma_pardinum_gills.jpg",
+     "autor": "Ryane Snow",
+     "licencia": "CC BY-SA 3.0",
+     "licenciaUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+     "pagina": "https://commons.wikimedia.org/wiki/File:Tricholoma_pardinum_gills.jpg",
+     "origen": "Wikimedia Commons"
+    }
+   ],
+   "clave": "Tricholoma gris, grande y escamoso: no recojas ningún Tricholoma gris sin experto.",
+   "queMirar": [
+    {
+     "parte": "sombrero",
+     "titulo": "Gris plateado con escamas",
+     "texto": "5–15 cm. Gris con escamas concéntricas gris-pardo oscuras, más claras hacia el borde."
+    },
+    {
+     "parte": "himenio",
+     "titulo": "Láminas blancas gruesas",
+     "texto": "Blancas, a veces con tinte amarillo o verdoso; pueden gotear agua."
+    },
+    {
+     "parte": "habitat",
+     "titulo": "Haya y abeto",
+     "texto": "Suelo calcáreo, a menudo con algo de altura; suele salir solo o en pocos ejemplares."
+    },
+    {
+     "parte": "otro",
+     "titulo": "Robusta y de buen aspecto",
+     "texto": "Seta grande y carnosa, de olor y sabor agradables: justo lo que la hace peligrosa."
+    }
+   ],
+   "temporada": {
+    "inat": {
+     "n": 0,
+     "mensual": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "zona": "Costa cantábrica (42,6–43,7 N · 5,5–1,0 O: Bizkaia, Gipuzkoa, Cantabria, este de Asturias y norte de Burgos, Araba y Navarra)",
+     "consulta": "2026-11-12",
+     "url": "https://www.inaturalist.org/observations?nelat=43.7&nelng=-1.0&swlat=42.6&swlng=-5.5&quality_grade=research&taxon_id=335206"
+    },
+    "texto": {
+     "meses": [
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+     ],
+     "nota": "Verano y otoño.",
+     "fuente": "Wikipedia (inglés)"
+    }
+   }
   },
   {
    "id": "amanita-pantherina-muscaria",
@@ -511,9 +1554,137 @@
       "notaComestibilidad"
      ],
      "nota": "Borrador que mezcla fuentes citadas y conocimiento micológico general. Contrastar con ≥2 fuentes antes de dar la ficha por buena."
+    },
+    {
+     "nombre": "Wikipedia (inglés): Amanita pantherina",
+     "url": "https://en.wikipedia.org/wiki/Amanita_pantherina",
+     "fechaConsulta": "2026-11-12",
+     "campos": [
+      "queMirar",
+      "temporada"
+     ],
+     "nota": "Fuente terciaria. Sirve para los rasgos de reconocimiento; no sustituye una guía micológica."
+    },
+    {
+     "nombre": "Wikipedia (inglés): Amanita muscaria",
+     "url": "https://en.wikipedia.org/wiki/Amanita_muscaria",
+     "fechaConsulta": "2026-11-12",
+     "campos": [
+      "queMirar",
+      "temporada"
+     ],
+     "nota": "Fuente terciaria. Sirve para los rasgos de reconocimiento; no sustituye una guía micológica."
+    },
+    {
+     "nombre": "iNaturalist: observaciones de grado de investigación en la costa cantábrica",
+     "url": "https://www.inaturalist.org/observations?nelat=43.7&nelng=-1.0&swlat=42.6&swlng=-5.5&quality_grade=research&taxon_id=48418,48715",
+     "fechaConsulta": "2026-11-12",
+     "campos": [
+      "temporada"
+     ],
+     "nota": "Cuenta de observaciones por mes (N=311). Muestra cuándo se ve la especie, no cuándo es segura."
+    },
+    {
+     "nombre": "Wikimedia Commons (fotos)",
+     "url": "https://commons.wikimedia.org/",
+     "fechaConsulta": "2026-11-12",
+     "campos": [
+      "fotos"
+     ],
+     "nota": "Autoría y licencia en cada foto. Las fotos son orientativas y no confirman una identificación."
     }
    ],
-   "fotos": []
+   "fotos": [
+    {
+     "sp": "Amanita pantherina",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Amanita_pantherina_(42556666615).jpg/{w}px-Amanita_pantherina_(42556666615).jpg",
+     "autor": "xulescu_g",
+     "licencia": "CC BY-SA 2.0",
+     "licenciaUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+     "pagina": "https://commons.wikimedia.org/wiki/File:Amanita_pantherina_(42556666615).jpg",
+     "origen": "Wikimedia Commons"
+    },
+    {
+     "sp": "Amanita pantherina",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Amanita_pantherina_(30087850061).jpg/{w}px-Amanita_pantherina_(30087850061).jpg",
+     "autor": "Dr. Hans-Günter Wagner",
+     "licencia": "CC BY-SA 2.0",
+     "licenciaUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+     "pagina": "https://commons.wikimedia.org/wiki/File:Amanita_pantherina_(30087850061).jpg",
+     "origen": "Wikimedia Commons"
+    },
+    {
+     "sp": "Amanita muscaria",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/AD2009Sep20_Amanita_muscaria_02.jpg/{w}px-AD2009Sep20_Amanita_muscaria_02.jpg",
+     "autor": "Bernie",
+     "licencia": "Dominio público",
+     "licenciaUrl": null,
+     "pagina": "https://commons.wikimedia.org/wiki/File:AD2009Sep20_Amanita_muscaria_02.jpg",
+     "origen": "Wikimedia Commons"
+    }
+   ],
+   "clave": "Sombrero con verrugas blancas desprendibles + anillo + volva en la base: tóxica. No es la oronja.",
+   "queMirar": [
+    {
+     "parte": "sombrero",
+     "titulo": "Verrugas blancas",
+     "texto": "A. pantherina: pardo con verrugas blancas desprendibles. A. muscaria: rojo con verrugas blancas o amarillentas."
+    },
+    {
+     "parte": "himenio",
+     "titulo": "Láminas blancas",
+     "texto": "Libres, apretadas, blancas que pueden grisear."
+    },
+    {
+     "parte": "anillo",
+     "titulo": "Anillo y volva",
+     "texto": "Anillo en el pie y base con restos de volva (desentierra el pie)."
+    },
+    {
+     "parte": "carne",
+     "titulo": "Carne blanca",
+     "texto": "Blanca, no cambia al cortar. En ejemplares jóvenes de A. muscaria, bajo el velo se ve una capa amarillenta."
+    },
+    {
+     "parte": "habitat",
+     "titulo": "Frondosas y coníferas",
+     "texto": "Sobre todo haya; a finales de verano y otoño."
+    }
+   ],
+   "temporada": {
+    "inat": {
+     "n": 311,
+     "mensual": [
+      0,
+      0,
+      0,
+      1,
+      0,
+      2,
+      2,
+      1,
+      23,
+      184,
+      79,
+      19
+     ],
+     "zona": "Costa cantábrica (42,6–43,7 N · 5,5–1,0 O: Bizkaia, Gipuzkoa, Cantabria, este de Asturias y norte de Burgos, Araba y Navarra)",
+     "consulta": "2026-11-12",
+     "url": "https://www.inaturalist.org/observations?nelat=43.7&nelng=-1.0&swlat=42.6&swlng=-5.5&quality_grade=research&taxon_id=48418,48715"
+    },
+    "texto": {
+     "meses": [
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+     ],
+     "nota": "A. pantherina: finales de verano y otoño. A. muscaria: verano y otoño.",
+     "fuente": "Wikipedia (inglés)"
+    }
+   }
   },
   {
    "id": "paxillus-involutus",
@@ -552,9 +1723,115 @@
       "notaComestibilidad"
      ],
      "nota": "Borrador que mezcla fuentes citadas y conocimiento micológico general. Contrastar con ≥2 fuentes antes de dar la ficha por buena."
+    },
+    {
+     "nombre": "Wikipedia (inglés): Paxillus involutus",
+     "url": "https://en.wikipedia.org/wiki/Paxillus_involutus",
+     "fechaConsulta": "2026-11-12",
+     "campos": [
+      "queMirar",
+      "temporada"
+     ],
+     "nota": "Fuente terciaria. Sirve para los rasgos de reconocimiento; no sustituye una guía micológica."
+    },
+    {
+     "nombre": "iNaturalist: observaciones de grado de investigación en la costa cantábrica",
+     "url": "https://www.inaturalist.org/observations?nelat=43.7&nelng=-1.0&swlat=42.6&swlng=-5.5&quality_grade=research&taxon_id=55941",
+     "fechaConsulta": "2026-11-12",
+     "campos": [
+      "temporada"
+     ],
+     "nota": "Cuenta de observaciones por mes (N=18). Muestra cuándo se ve la especie, no cuándo es segura."
+    },
+    {
+     "nombre": "Wikimedia Commons (fotos)",
+     "url": "https://commons.wikimedia.org/",
+     "fechaConsulta": "2026-11-12",
+     "campos": [
+      "fotos"
+     ],
+     "nota": "Autoría y licencia en cada foto. Las fotos son orientativas y no confirman una identificación."
     }
    ],
-   "fotos": []
+   "fotos": [
+    {
+     "sp": "Paxillus involutus",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/2025-10-15_D500-0990_Achim-Lammerts_Paxillus-involutus.jpg/{w}px-2025-10-15_D500-0990_Achim-Lammerts_Paxillus-involutus.jpg",
+     "autor": "Achim Lammerts (Syntaxys)",
+     "licencia": "CC BY-SA 4.0",
+     "licenciaUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+     "pagina": "https://commons.wikimedia.org/wiki/File:2025-10-15_D500-0990_Achim-Lammerts_Paxillus-involutus.jpg",
+     "origen": "Wikimedia Commons"
+    },
+    {
+     "sp": "Paxillus involutus",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/2021-11-14_Paxillus_involutus_(Flickr_51690952401).jpg/{w}px-2021-11-14_Paxillus_involutus_(Flickr_51690952401).jpg",
+     "autor": "Lutz Blohm",
+     "licencia": "CC BY-SA 2.0",
+     "licenciaUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+     "pagina": "https://commons.wikimedia.org/wiki/File:2021-11-14_Paxillus_involutus_(Flickr_51690952401).jpg",
+     "origen": "Wikimedia Commons"
+    },
+    {
+     "sp": "Paxillus involutus",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/De_gewone_krulzoom_(Paxillus_involutus)._Locatie,_Paddenstoelenreservaat._11-10-2021._(actm.)_02.jpg/{w}px-De_gewone_krulzoom_(Paxillus_involutus)._Locatie,_Paddenstoelenreservaat._11-10-2021._(actm.)_02.jpg",
+     "autor": "Agnes Monkelbaan",
+     "licencia": "CC BY-SA 4.0",
+     "licenciaUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+     "pagina": "https://commons.wikimedia.org/wiki/File:De_gewone_krulzoom_(Paxillus_involutus)._Locatie,_Paddenstoelenreservaat._11-10-2021._(actm.)_02.jpg",
+     "origen": "Wikimedia Commons"
+    }
+   ],
+   "clave": "Seta parda en embudo con borde muy enrollado y láminas que se despegan: no la comas aunque “se comía antes”.",
+   "queMirar": [
+    {
+     "parte": "sombrero",
+     "titulo": "Embudo de borde enrollado",
+     "texto": "4–12 cm, pardo (rojizo, amarillento u oliva), con el margen muy enrollado; aterciopelado de joven y pegajoso con humedad."
+    },
+    {
+     "parte": "himenio",
+     "titulo": "Láminas decurrentes",
+     "texto": "Amarillo-pardas, bifurcadas y que se pelan con facilidad de la carne, como los poros de un boleto."
+    },
+    {
+     "parte": "otro",
+     "titulo": "Sin látex",
+     "texto": "Un Lactarius suelta leche al romperlo; Paxillus no."
+    },
+    {
+     "parte": "habitat",
+     "titulo": "Aparece en otoño",
+     "texto": "En la costa cantábrica se ve sobre todo de septiembre a noviembre (iNaturalist)."
+    }
+   ],
+   "temporada": {
+    "inat": {
+     "n": 18,
+     "mensual": [
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      3,
+      10,
+      3,
+      1
+     ],
+     "zona": "Costa cantábrica (42,6–43,7 N · 5,5–1,0 O: Bizkaia, Gipuzkoa, Cantabria, este de Asturias y norte de Burgos, Araba y Navarra)",
+     "consulta": "2026-11-12",
+     "url": "https://www.inaturalist.org/observations?nelat=43.7&nelng=-1.0&swlat=42.6&swlng=-5.5&quality_grade=research&taxon_id=55941"
+    },
+    "texto": {
+     "meses": [],
+     "nota": null,
+     "fuente": "Wikipedia (inglés)"
+    }
+   }
   },
   {
    "id": "boletus-satanas",
@@ -602,9 +1879,121 @@
       "notaComestibilidad"
      ],
      "nota": "Borrador que mezcla fuentes citadas y conocimiento micológico general. Contrastar con ≥2 fuentes antes de dar la ficha por buena."
+    },
+    {
+     "nombre": "Wikipedia (inglés): Rubroboletus satanas",
+     "url": "https://en.wikipedia.org/wiki/Rubroboletus_satanas",
+     "fechaConsulta": "2026-11-12",
+     "campos": [
+      "queMirar",
+      "temporada"
+     ],
+     "nota": "Fuente terciaria. Sirve para los rasgos de reconocimiento; no sustituye una guía micológica."
+    },
+    {
+     "nombre": "iNaturalist: observaciones de grado de investigación en la costa cantábrica",
+     "url": "https://www.inaturalist.org/observations?nelat=43.7&nelng=-1.0&swlat=42.6&swlng=-5.5&quality_grade=research&taxon_id=544554",
+     "fechaConsulta": "2026-11-12",
+     "campos": [
+      "temporada"
+     ],
+     "nota": "Cuenta de observaciones por mes (N=20). Muestra cuándo se ve la especie, no cuándo es segura."
+    },
+    {
+     "nombre": "Wikimedia Commons (fotos)",
+     "url": "https://commons.wikimedia.org/",
+     "fechaConsulta": "2026-11-12",
+     "campos": [
+      "fotos"
+     ],
+     "nota": "Autoría y licencia en cada foto. Las fotos son orientativas y no confirman una identificación."
     }
    ],
-   "fotos": []
+   "fotos": [
+    {
+     "sp": "Rubroboletus satanas",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Frankenwarte_10.08.2016_Satan's_Bolete_-_Rubroboletus_satanas_(29115033902).jpg/{w}px-Frankenwarte_10.08.2016_Satan's_Bolete_-_Rubroboletus_satanas_(29115033902).jpg",
+     "autor": "Björn S...",
+     "licencia": "CC BY-SA 2.0",
+     "licenciaUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+     "pagina": "https://commons.wikimedia.org/wiki/File:Frankenwarte_10.08.2016_Satan's_Bolete_-_Rubroboletus_satanas_(29115033902).jpg",
+     "origen": "Wikimedia Commons"
+    },
+    {
+     "sp": "Rubroboletus satanas",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Frankenwarte_10.08.2016_Satan's_Bolete_-_Rubroboletus_satanas_(28617327643).jpg/{w}px-Frankenwarte_10.08.2016_Satan's_Bolete_-_Rubroboletus_satanas_(28617327643).jpg",
+     "autor": "Björn S...",
+     "licencia": "CC BY-SA 2.0",
+     "licenciaUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+     "pagina": "https://commons.wikimedia.org/wiki/File:Frankenwarte_10.08.2016_Satan's_Bolete_-_Rubroboletus_satanas_(28617327643).jpg",
+     "origen": "Wikimedia Commons"
+    },
+    {
+     "sp": "Rubroboletus satanas",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Frankenwarte_10.08.2016_Satan's_Bolete_-_Rubroboletus_satanas_(28600649664).jpg/{w}px-Frankenwarte_10.08.2016_Satan's_Bolete_-_Rubroboletus_satanas_(28600649664).jpg",
+     "autor": "Björn S...",
+     "licencia": "CC BY-SA 2.0",
+     "licenciaUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+     "pagina": "https://commons.wikimedia.org/wiki/File:Frankenwarte_10.08.2016_Satan's_Bolete_-_Rubroboletus_satanas_(28600649664).jpg",
+     "origen": "Wikimedia Commons"
+    }
+   ],
+   "clave": "Boleto enorme, pálido, con poros rojos y carne que azulea fuerte: no coger.",
+   "queMirar": [
+    {
+     "parte": "sombrero",
+     "titulo": "Grande y pálido",
+     "texto": "Hasta 30 cm. Blanco-grisáceo a plateado, con tintes oliváceos o pardos al envejecer; la piel no se separa de la carne."
+    },
+    {
+     "parte": "himenio",
+     "titulo": "Poros rojos",
+     "texto": "Los tubos son amarillo-verdosos y azulean al cortar; los poros pasan de amarillo-naranja a rojo."
+    },
+    {
+     "parte": "pie",
+     "titulo": "Pie con retículo",
+     "texto": "Grueso y con red; en esta especie la carne azulea intensamente."
+    },
+    {
+     "parte": "habitat",
+     "titulo": "Bosque cálido y suelo calizo",
+     "texto": "Bajo roble y castaño, en verano y principios de otoño."
+    }
+   ],
+   "temporada": {
+    "inat": {
+     "n": 20,
+     "mensual": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      3,
+      4,
+      8,
+      5,
+      0,
+      0
+     ],
+     "zona": "Costa cantábrica (42,6–43,7 N · 5,5–1,0 O: Bizkaia, Gipuzkoa, Cantabria, este de Asturias y norte de Burgos, Araba y Navarra)",
+     "consulta": "2026-11-12",
+     "url": "https://www.inaturalist.org/observations?nelat=43.7&nelng=-1.0&swlat=42.6&swlng=-5.5&quality_grade=research&taxon_id=544554"
+    },
+    "texto": {
+     "meses": [
+      6,
+      7,
+      8,
+      9,
+      10
+     ],
+     "nota": "Verano y principios de otoño.",
+     "fuente": "Wikipedia (inglés)"
+    }
+   }
   },
   {
    "id": "coprinopsis-atramentaria",
@@ -643,9 +2032,128 @@
       "notaComestibilidad"
      ],
      "nota": "Borrador que mezcla fuentes citadas y conocimiento micológico general. Contrastar con ≥2 fuentes antes de dar la ficha por buena."
+    },
+    {
+     "nombre": "Wikipedia (inglés): Coprinopsis atramentaria",
+     "url": "https://en.wikipedia.org/wiki/Coprinopsis_atramentaria",
+     "fechaConsulta": "2026-11-12",
+     "campos": [
+      "queMirar",
+      "temporada"
+     ],
+     "nota": "Fuente terciaria. Sirve para los rasgos de reconocimiento; no sustituye una guía micológica."
+    },
+    {
+     "nombre": "iNaturalist: observaciones de grado de investigación en la costa cantábrica",
+     "url": "https://www.inaturalist.org/observations?nelat=43.7&nelng=-1.0&swlat=42.6&swlng=-5.5&quality_grade=research&taxon_id=48521",
+     "fechaConsulta": "2026-11-12",
+     "campos": [
+      "temporada"
+     ],
+     "nota": "Cuenta de observaciones por mes (N=8). Muestra cuándo se ve la especie, no cuándo es segura."
+    },
+    {
+     "nombre": "Wikimedia Commons (fotos)",
+     "url": "https://commons.wikimedia.org/",
+     "fechaConsulta": "2026-11-12",
+     "campos": [
+      "fotos"
+     ],
+     "nota": "Autoría y licencia en cada foto. Las fotos son orientativas y no confirman una identificación."
     }
    ],
-   "fotos": []
+   "fotos": [
+    {
+     "sp": "Coprinopsis atramentaria",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Coprinopsis_atramentaria,_Syn._Coprinus_atramentarius_(1)_(48991865448).jpg/{w}px-Coprinopsis_atramentaria,_Syn._Coprinus_atramentarius_(1)_(48991865448).jpg",
+     "autor": "Dr. Hans-Günter Wagner",
+     "licencia": "CC BY-SA 2.0",
+     "licenciaUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+     "pagina": "https://commons.wikimedia.org/wiki/File:Coprinopsis_atramentaria,_Syn._Coprinus_atramentarius_(1)_(48991865448).jpg",
+     "origen": "Wikimedia Commons"
+    },
+    {
+     "sp": "Coprinopsis atramentaria",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/A_group_of_common_ink_cap_mushrooms.jpg/{w}px-A_group_of_common_ink_cap_mushrooms.jpg",
+     "autor": "Michael Palmer",
+     "licencia": "CC BY-SA 4.0",
+     "licenciaUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+     "pagina": "https://commons.wikimedia.org/wiki/File:A_group_of_common_ink_cap_mushrooms.jpg",
+     "origen": "Wikimedia Commons"
+    },
+    {
+     "sp": "Coprinopsis atramentaria",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Coprinopsis_atramentaria_(35130816925).jpg/{w}px-Coprinopsis_atramentaria_(35130816925).jpg",
+     "autor": "Björn S...",
+     "licencia": "CC BY-SA 2.0",
+     "licenciaUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+     "pagina": "https://commons.wikimedia.org/wiki/File:Coprinopsis_atramentaria_(35130816925).jpg",
+     "origen": "Wikimedia Commons"
+    }
+   ],
+   "clave": "Setas grises que se licúan en tinta negra. Con alcohol dan una reacción tóxica.",
+   "queMirar": [
+    {
+     "parte": "sombrero",
+     "titulo": "Gris, surcado",
+     "texto": "3–10 cm, gris-pardusco, acampanado y con surcos; se rasga por el borde y se deshace de fuera adentro."
+    },
+    {
+     "parte": "himenio",
+     "titulo": "Láminas que ennegrecen",
+     "texto": "Muy apretadas, blancas → grises o rosadas → negras, y se licúan."
+    },
+    {
+     "parte": "pie",
+     "titulo": "Pie gris, sin anillo",
+     "texto": "5–17 cm, delgado y sin anillo."
+    },
+    {
+     "parte": "esporada",
+     "titulo": "Esporada negra",
+     "texto": "La tinta que suelta al deshacerse es negra."
+    },
+    {
+     "parte": "habitat",
+     "titulo": "Madera enterrada",
+     "texto": "Prados, bordes, suelos removidos; de finales de primavera a otoño."
+    }
+   ],
+   "temporada": {
+    "inat": {
+     "n": 8,
+     "mensual": [
+      1,
+      0,
+      0,
+      0,
+      2,
+      0,
+      0,
+      0,
+      1,
+      2,
+      1,
+      1
+     ],
+     "zona": "Costa cantábrica (42,6–43,7 N · 5,5–1,0 O: Bizkaia, Gipuzkoa, Cantabria, este de Asturias y norte de Burgos, Araba y Navarra)",
+     "consulta": "2026-11-12",
+     "url": "https://www.inaturalist.org/observations?nelat=43.7&nelng=-1.0&swlat=42.6&swlng=-5.5&quality_grade=research&taxon_id=48521"
+    },
+    "texto": {
+     "meses": [
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+     ],
+     "nota": "Finales de primavera a otoño.",
+     "fuente": "Wikipedia (inglés)"
+    }
+   }
   },
   {
    "id": "tricholoma-equestre",
@@ -684,9 +2192,115 @@
       "notaComestibilidad"
      ],
      "nota": "Borrador que mezcla fuentes citadas y conocimiento micológico general. Contrastar con ≥2 fuentes antes de dar la ficha por buena."
+    },
+    {
+     "nombre": "Wikipedia (inglés): Tricholoma equestre",
+     "url": "https://en.wikipedia.org/wiki/Tricholoma_equestre",
+     "fechaConsulta": "2026-11-12",
+     "campos": [
+      "queMirar",
+      "temporada"
+     ],
+     "nota": "Fuente terciaria. Sirve para los rasgos de reconocimiento; no sustituye una guía micológica."
+    },
+    {
+     "nombre": "iNaturalist: observaciones de grado de investigación en la costa cantábrica",
+     "url": "https://www.inaturalist.org/observations?nelat=43.7&nelng=-1.0&swlat=42.6&swlng=-5.5&quality_grade=research&taxon_id=118215",
+     "fechaConsulta": "2026-11-12",
+     "campos": [
+      "temporada"
+     ],
+     "nota": "Cuenta de observaciones por mes (N=4). Muestra cuándo se ve la especie, no cuándo es segura."
+    },
+    {
+     "nombre": "Wikimedia Commons (fotos)",
+     "url": "https://commons.wikimedia.org/",
+     "fechaConsulta": "2026-11-12",
+     "campos": [
+      "fotos"
+     ],
+     "nota": "Autoría y licencia en cada foto. Las fotos son orientativas y no confirman una identificación."
     }
    ],
-   "fotos": []
+   "fotos": [
+    {
+     "sp": "Tricholoma equestre",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/G%C4%85ska_zielonka_2927668762.jpg/{w}px-G%C4%85ska_zielonka_2927668762.jpg",
+     "autor": "Aorg1961",
+     "licencia": "CC BY-SA 4.0",
+     "licenciaUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+     "pagina": "https://commons.wikimedia.org/wiki/File:G%C4%85ska_zielonka_2927668762.jpg",
+     "origen": "Wikimedia Commons"
+    },
+    {
+     "sp": "Tricholoma equestre",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/G%C4%85ska_zielonka_2927673986.jpg/{w}px-G%C4%85ska_zielonka_2927673986.jpg",
+     "autor": "Aorg1961",
+     "licencia": "CC BY-SA 4.0",
+     "licenciaUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+     "pagina": "https://commons.wikimedia.org/wiki/File:G%C4%85ska_zielonka_2927673986.jpg",
+     "origen": "Wikimedia Commons"
+    },
+    {
+     "sp": "Tricholoma equestre",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/G%C4%85ska_zielonka_2927676032.jpg/{w}px-G%C4%85ska_zielonka_2927676032.jpg",
+     "autor": "Aorg1961",
+     "licencia": "CC BY-SA 4.0",
+     "licenciaUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+     "pagina": "https://commons.wikimedia.org/wiki/File:G%C4%85ska_zielonka_2927676032.jpg",
+     "origen": "Wikimedia Commons"
+    }
+   ],
+   "clave": "Tricholoma amarillo. Antes se vendía como comestible; este catálogo la trata como tóxica. No la recojas.",
+   "queMirar": [
+    {
+     "parte": "sombrero",
+     "titulo": "Amarillo con centro pardo",
+     "texto": "5–15 cm, amarillo con zonas pardas en el centro; cutícula viscosa que se pela."
+    },
+    {
+     "parte": "himenio",
+     "titulo": "Láminas amarillas",
+     "texto": "Amarillas; esporada blanca."
+    },
+    {
+     "parte": "pie",
+     "titulo": "Pie amarillo",
+     "texto": "4–10 cm, amarillo, pardo en la base."
+    },
+    {
+     "parte": "otro",
+     "titulo": "Parecidos",
+     "texto": "Se parece a otros Tricholoma amarillos: no es fácil de separar."
+    }
+   ],
+   "temporada": {
+    "inat": {
+     "n": 4,
+     "mensual": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      2,
+      1
+     ],
+     "zona": "Costa cantábrica (42,6–43,7 N · 5,5–1,0 O: Bizkaia, Gipuzkoa, Cantabria, este de Asturias y norte de Burgos, Araba y Navarra)",
+     "consulta": "2026-11-12",
+     "url": "https://www.inaturalist.org/observations?nelat=43.7&nelng=-1.0&swlat=42.6&swlng=-5.5&quality_grade=research&taxon_id=118215"
+    },
+    "texto": {
+     "meses": [],
+     "nota": null,
+     "fuente": "Wikipedia (inglés)"
+    }
+   }
   },
   {
    "id": "clitocybe-rivulosa",
@@ -733,9 +2347,128 @@
       "notaComestibilidad"
      ],
      "nota": "Borrador que mezcla fuentes citadas y conocimiento micológico general. Contrastar con ≥2 fuentes antes de dar la ficha por buena."
+    },
+    {
+     "nombre": "Wikipedia (inglés): Clitocybe rivulosa",
+     "url": "https://en.wikipedia.org/wiki/Clitocybe_rivulosa",
+     "fechaConsulta": "2026-11-12",
+     "campos": [
+      "queMirar",
+      "temporada"
+     ],
+     "nota": "Fuente terciaria. Sirve para los rasgos de reconocimiento; no sustituye una guía micológica."
+    },
+    {
+     "nombre": "Wikipedia (inglés): Clitocybe dealbata",
+     "url": "https://en.wikipedia.org/wiki/Clitocybe_dealbata",
+     "fechaConsulta": "2026-11-12",
+     "campos": [
+      "queMirar",
+      "temporada"
+     ],
+     "nota": "Fuente terciaria. Sirve para los rasgos de reconocimiento; no sustituye una guía micológica."
+    },
+    {
+     "nombre": "Wikimedia Commons (fotos)",
+     "url": "https://commons.wikimedia.org/",
+     "fechaConsulta": "2026-11-12",
+     "campos": [
+      "fotos"
+     ],
+     "nota": "Autoría y licencia en cada foto. Las fotos son orientativas y no confirman una identificación."
     }
    ],
-   "fotos": []
+   "fotos": [
+    {
+     "sp": "Clitocybe rivulosa",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/2016-09-14_Clitocybe_rivulosa_(Pers.)_P._Kumm_688616.jpg/{w}px-2016-09-14_Clitocybe_rivulosa_(Pers.)_P._Kumm_688616.jpg",
+     "autor": "Igor Yevdokimov (Mushroom Observer)",
+     "licencia": "CC BY-SA 3.0",
+     "licenciaUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+     "pagina": "https://commons.wikimedia.org/wiki/File:2016-09-14_Clitocybe_rivulosa_(Pers.)_P._Kumm_688616.jpg",
+     "origen": "Wikimedia Commons"
+    },
+    {
+     "sp": "Clitocybe rivulosa",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Clitocybe_rivulosa_2.jpg/{w}px-Clitocybe_rivulosa_2.jpg",
+     "autor": "Jose Angel Urquia Goitia",
+     "licencia": "CC BY-SA 4.0",
+     "licenciaUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+     "pagina": "https://commons.wikimedia.org/wiki/File:Clitocybe_rivulosa_2.jpg",
+     "origen": "Wikimedia Commons"
+    },
+    {
+     "sp": "Clitocybe rivulosa",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Clitocybe_rivulosa_Kiev2.jpg/{w}px-Clitocybe_rivulosa_Kiev2.jpg",
+     "autor": "Аимаина хикари",
+     "licencia": "CC0",
+     "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+     "pagina": "https://commons.wikimedia.org/wiki/File:Clitocybe_rivulosa_Kiev2.jpg",
+     "origen": "Wikimedia Commons"
+    }
+   ],
+   "clave": "Setas blancas pequeñas en corros de hierba: no son senderuelas. Láminas apretadas y bajan por el pie.",
+   "queMirar": [
+    {
+     "parte": "sombrero",
+     "titulo": "Blanquecina, en embudo",
+     "texto": "2–4 cm, aplanada o hundida; blanca con matices crema o rosados."
+    },
+    {
+     "parte": "himenio",
+     "titulo": "Láminas apretadas y decurrentes",
+     "texto": "Blancas (con motas rosadas en C. rivulosa) y bajan por el pie. La senderuela las tiene separadas."
+    },
+    {
+     "parte": "pie",
+     "titulo": "Pie fibroso sin anillo",
+     "texto": "2–4 cm; sin anillo."
+    },
+    {
+     "parte": "olor",
+     "titulo": "Sin olor marcado",
+     "texto": "No hay olor ni sabor característicos: no ayuda a identificarla."
+    },
+    {
+     "parte": "habitat",
+     "titulo": "Prados y corros",
+     "texto": "Hierba, a veces en corros de hadas, en verano y otoño. Mucho cuidado: salen donde también sale la senderuela."
+    }
+   ],
+   "temporada": {
+    "inat": {
+     "n": 0,
+     "mensual": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "zona": "Costa cantábrica (42,6–43,7 N · 5,5–1,0 O: Bizkaia, Gipuzkoa, Cantabria, este de Asturias y norte de Burgos, Araba y Navarra)",
+     "consulta": "2026-11-12",
+     "url": null
+    },
+    "texto": {
+     "meses": [
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+     ],
+     "nota": "Verano y otoño.",
+     "fuente": "Wikipedia (inglés)"
+    }
+   }
   },
   {
    "id": "tylopilus-felleus",
@@ -782,9 +2515,127 @@
       "notaComestibilidad"
      ],
      "nota": "Borrador que mezcla fuentes citadas y conocimiento micológico general. Contrastar con ≥2 fuentes antes de dar la ficha por buena."
+    },
+    {
+     "nombre": "Wikipedia (inglés): Tylopilus felleus",
+     "url": "https://en.wikipedia.org/wiki/Tylopilus_felleus",
+     "fechaConsulta": "2026-11-12",
+     "campos": [
+      "queMirar",
+      "temporada"
+     ],
+     "nota": "Fuente terciaria. Sirve para los rasgos de reconocimiento; no sustituye una guía micológica."
+    },
+    {
+     "nombre": "iNaturalist: observaciones de grado de investigación en la costa cantábrica",
+     "url": "https://www.inaturalist.org/observations?nelat=43.7&nelng=-1.0&swlat=42.6&swlng=-5.5&quality_grade=research&taxon_id=63489",
+     "fechaConsulta": "2026-11-12",
+     "campos": [
+      "temporada"
+     ],
+     "nota": "Cuenta de observaciones por mes (N=2). Muestra cuándo se ve la especie, no cuándo es segura."
+    },
+    {
+     "nombre": "Wikimedia Commons (fotos)",
+     "url": "https://commons.wikimedia.org/",
+     "fechaConsulta": "2026-11-12",
+     "campos": [
+      "fotos"
+     ],
+     "nota": "Autoría y licencia en cada foto. Las fotos son orientativas y no confirman una identificación."
     }
    ],
-   "fotos": []
+   "fotos": [
+    {
+     "sp": "Tylopilus felleus",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/H%C5%99ib_%C5%BElu%C4%8Dn%C3%ADk_6.jpg/{w}px-H%C5%99ib_%C5%BElu%C4%8Dn%C3%ADk_6.jpg",
+     "autor": "Dezidor",
+     "licencia": "CC BY 3.0",
+     "licenciaUrl": "https://creativecommons.org/licenses/by/3.0/",
+     "pagina": "https://commons.wikimedia.org/wiki/File:H%C5%99ib_%C5%BElu%C4%8Dn%C3%ADk_6.jpg",
+     "origen": "Wikimedia Commons"
+    },
+    {
+     "sp": "Tylopilus felleus",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Ho%C5%99%C4%8D%C3%A1k08088.JPG/{w}px-Ho%C5%99%C4%8D%C3%A1k08088.JPG",
+     "autor": "Dendrofil",
+     "licencia": "CC BY-SA 3.0",
+     "licenciaUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+     "pagina": "https://commons.wikimedia.org/wiki/File:Ho%C5%99%C4%8D%C3%A1k08088.JPG",
+     "origen": "Wikimedia Commons"
+    },
+    {
+     "sp": "Tylopilus felleus",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Lou%C4%8Dovice,_podh%C5%99ib_%C5%BElu%C4%8Dov%C3%BD.jpg/{w}px-Lou%C4%8Dovice,_podh%C5%99ib_%C5%BElu%C4%8Dov%C3%BD.jpg",
+     "autor": "Palickap",
+     "licencia": "CC BY-SA 4.0",
+     "licenciaUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+     "pagina": "https://commons.wikimedia.org/wiki/File:Lou%C4%8Dovice,_podh%C5%99ib_%C5%BElu%C4%8Dov%C3%BD.jpg",
+     "origen": "Wikimedia Commons"
+    }
+   ],
+   "clave": "Boleto con poros que se vuelven rosados y retículo oscuro: amargo, sin valor. No lo mezcles con el hongo.",
+   "queMirar": [
+    {
+     "parte": "sombrero",
+     "titulo": "Gris-pardo",
+     "texto": "Hasta 15 cm. Gris-amarillento a pardo nuez, algo aterciopelado de joven; la piel no se separa."
+    },
+    {
+     "parte": "himenio",
+     "titulo": "Poros blancos → rosados",
+     "texto": "Blancos al principio y rosados con la edad; manchan de carmín o pardo."
+    },
+    {
+     "parte": "pie",
+     "titulo": "Retículo oscuro",
+     "texto": "Con red más oscura que el fondo del pie."
+    },
+    {
+     "parte": "otro",
+     "titulo": "Sabor amargo",
+     "texto": "Es el rasgo clásico; no se recomienda probarlo para identificarlo."
+    },
+    {
+     "parte": "habitat",
+     "titulo": "Verano y otoño",
+     "texto": "De junio a octubre o noviembre en zonas templadas."
+    }
+   ],
+   "temporada": {
+    "inat": {
+     "n": 2,
+     "mensual": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      1,
+      0,
+      0,
+      0
+     ],
+     "zona": "Costa cantábrica (42,6–43,7 N · 5,5–1,0 O: Bizkaia, Gipuzkoa, Cantabria, este de Asturias y norte de Burgos, Araba y Navarra)",
+     "consulta": "2026-11-12",
+     "url": "https://www.inaturalist.org/observations?nelat=43.7&nelng=-1.0&swlat=42.6&swlng=-5.5&quality_grade=research&taxon_id=63489"
+    },
+    "texto": {
+     "meses": [
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+     ],
+     "nota": "Junio–noviembre.",
+     "fuente": "Wikipedia (inglés)"
+    }
+   }
   },
   {
    "id": "boletus-edulis",
@@ -839,9 +2690,127 @@
       "notaComestibilidad"
      ],
      "nota": "Borrador que mezcla fuentes citadas y conocimiento micológico general. Contrastar con ≥2 fuentes antes de dar la ficha por buena."
+    },
+    {
+     "nombre": "Wikipedia (inglés): Boletus edulis",
+     "url": "https://en.wikipedia.org/wiki/Boletus_edulis",
+     "fechaConsulta": "2026-11-12",
+     "campos": [
+      "queMirar",
+      "temporada"
+     ],
+     "nota": "Fuente terciaria. Sirve para los rasgos de reconocimiento; no sustituye una guía micológica."
+    },
+    {
+     "nombre": "iNaturalist: observaciones de grado de investigación en la costa cantábrica",
+     "url": "https://www.inaturalist.org/observations?nelat=43.7&nelng=-1.0&swlat=42.6&swlng=-5.5&quality_grade=research&taxon_id=48701,333772,335942",
+     "fechaConsulta": "2026-11-12",
+     "campos": [
+      "temporada"
+     ],
+     "nota": "Cuenta de observaciones por mes (N=168). Muestra cuándo se ve la especie, no cuándo es segura."
+    },
+    {
+     "nombre": "Wikimedia Commons (fotos)",
+     "url": "https://commons.wikimedia.org/",
+     "fechaConsulta": "2026-11-12",
+     "campos": [
+      "fotos"
+     ],
+     "nota": "Autoría y licencia en cada foto. Las fotos son orientativas y no confirman una identificación."
     }
    ],
-   "fotos": []
+   "fotos": [
+    {
+     "sp": "Boletus edulis",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Bayerischer_Spessart_Naturpark,_Gemeine_Steinpilz_(Boletus_edulis).jpg/{w}px-Bayerischer_Spessart_Naturpark,_Gemeine_Steinpilz_(Boletus_edulis).jpg",
+     "autor": "Thomas Fuhrmann",
+     "licencia": "CC BY-SA 4.0",
+     "licenciaUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+     "pagina": "https://commons.wikimedia.org/wiki/File:Bayerischer_Spessart_Naturpark,_Gemeine_Steinpilz_(Boletus_edulis).jpg",
+     "origen": "Wikimedia Commons"
+    },
+    {
+     "sp": "Boletus edulis",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/3_species_of_Boletus_edilus_(Eekhoorntjebrood)_just_beside_our_home_Schaarsbergen_-_panoramio.jpg/{w}px-3_species_of_Boletus_edilus_(Eekhoorntjebrood)_just_beside_our_home_Schaarsbergen_-_panoramio.jpg",
+     "autor": "Henk Monster",
+     "licencia": "CC BY 3.0",
+     "licenciaUrl": "https://creativecommons.org/licenses/by/3.0/",
+     "pagina": "https://commons.wikimedia.org/wiki/File:3_species_of_Boletus_edilus_(Eekhoorntjebrood)_just_beside_our_home_Schaarsbergen_-_panoramio.jpg",
+     "origen": "Wikimedia Commons"
+    },
+    {
+     "sp": "Boletus edulis",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/20141026_gewoon_eekhoorntjesbrood.jpeg/{w}px-20141026_gewoon_eekhoorntjesbrood.jpeg",
+     "autor": "Gouwenaar",
+     "licencia": "CC BY-SA 4.0",
+     "licenciaUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+     "pagina": "https://commons.wikimedia.org/wiki/File:20141026_gewoon_eekhoorntjesbrood.jpeg",
+     "origen": "Wikimedia Commons"
+    }
+   ],
+   "clave": "Poros blancos→amarillo oliváceo, retículo claro en el pie, carne que no azulea. Poros rojos o carne que azulea: no coger.",
+   "queMirar": [
+    {
+     "parte": "sombrero",
+     "titulo": "Pardo-rojizo",
+     "texto": "8–30 cm. Convexo, viscoso con humedad, a menudo con el borde más pálido."
+    },
+    {
+     "parte": "himenio",
+     "titulo": "Poros blancos → amarillo oliváceo",
+     "texto": "Los tubos son finos; ni rosa ni rojo."
+    },
+    {
+     "parte": "pie",
+     "titulo": "Pie grueso con retículo claro",
+     "texto": "8–25 cm, abultado de joven; red fina en la parte alta o en todo el pie."
+    },
+    {
+     "parte": "carne",
+     "titulo": "Carne que no cambia",
+     "texto": "Blanca, sin azulear de forma marcada al cortar."
+    },
+    {
+     "parte": "habitat",
+     "titulo": "Verano y otoño",
+     "texto": "Bajo frondosas y coníferas."
+    }
+   ],
+   "temporada": {
+    "inat": {
+     "n": 168,
+     "mensual": [
+      1,
+      0,
+      1,
+      1,
+      0,
+      2,
+      4,
+      9,
+      26,
+      90,
+      29,
+      5
+     ],
+     "zona": "Costa cantábrica (42,6–43,7 N · 5,5–1,0 O: Bizkaia, Gipuzkoa, Cantabria, este de Asturias y norte de Burgos, Araba y Navarra)",
+     "consulta": "2026-11-12",
+     "url": "https://www.inaturalist.org/observations?nelat=43.7&nelng=-1.0&swlat=42.6&swlng=-5.5&quality_grade=research&taxon_id=48701,333772,335942"
+    },
+    "texto": {
+     "meses": [
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+     ],
+     "nota": "Verano y otoño.",
+     "fuente": "Wikipedia (inglés)"
+    }
+   }
   },
   {
    "id": "cantharellus-cibarius",
@@ -900,9 +2869,128 @@
       "notaComestibilidad"
      ],
      "nota": "Borrador que mezcla fuentes citadas y conocimiento micológico general. Contrastar con ≥2 fuentes antes de dar la ficha por buena."
+    },
+    {
+     "nombre": "Wikipedia (inglés): Cantharellus cibarius",
+     "url": "https://en.wikipedia.org/wiki/Cantharellus_cibarius",
+     "fechaConsulta": "2026-11-12",
+     "campos": [
+      "queMirar",
+      "temporada"
+     ],
+     "nota": "Fuente terciaria. Sirve para los rasgos de reconocimiento; no sustituye una guía micológica."
+    },
+    {
+     "nombre": "iNaturalist: observaciones de grado de investigación en la costa cantábrica",
+     "url": "https://www.inaturalist.org/observations?nelat=43.7&nelng=-1.0&swlat=42.6&swlng=-5.5&quality_grade=research&taxon_id=47347",
+     "fechaConsulta": "2026-11-12",
+     "campos": [
+      "temporada"
+     ],
+     "nota": "Cuenta de observaciones por mes (N=75). Muestra cuándo se ve la especie, no cuándo es segura."
+    },
+    {
+     "nombre": "Wikimedia Commons (fotos)",
+     "url": "https://commons.wikimedia.org/",
+     "fechaConsulta": "2026-11-12",
+     "campos": [
+      "fotos"
+     ],
+     "nota": "Autoría y licencia en cada foto. Las fotos son orientativas y no confirman una identificación."
     }
    ],
-   "fotos": []
+   "fotos": [
+    {
+     "sp": "Cantharellus cibarius",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Cantharellus_cibarius_(50199063302).jpg/{w}px-Cantharellus_cibarius_(50199063302).jpg",
+     "autor": "Dr. Hans-Günter Wagner",
+     "licencia": "CC BY-SA 2.0",
+     "licenciaUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+     "pagina": "https://commons.wikimedia.org/wiki/File:Cantharellus_cibarius_(50199063302).jpg",
+     "origen": "Wikimedia Commons"
+    },
+    {
+     "sp": "Cantharellus cibarius",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Cantharellus_cibarius_(50198791306).jpg/{w}px-Cantharellus_cibarius_(50198791306).jpg",
+     "autor": "Dr. Hans-Günter Wagner",
+     "licencia": "CC BY-SA 2.0",
+     "licenciaUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+     "pagina": "https://commons.wikimedia.org/wiki/File:Cantharellus_cibarius_(50198791306).jpg",
+     "origen": "Wikimedia Commons"
+    },
+    {
+     "sp": "Cantharellus cibarius",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/Cantharellus_cibarius_(1)_(50545288211).jpg/{w}px-Cantharellus_cibarius_(1)_(50545288211).jpg",
+     "autor": "Dr. Hans-Günter Wagner",
+     "licencia": "CC BY-SA 2.0",
+     "licenciaUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+     "pagina": "https://commons.wikimedia.org/wiki/File:Cantharellus_cibarius_(1)_(50545288211).jpg",
+     "origen": "Wikimedia Commons"
+    }
+   ],
+   "clave": "Pliegues romos que bajan por el pie (no láminas), huele a albaricoque. Si son láminas finas y en mata sobre madera: no.",
+   "queMirar": [
+    {
+     "parte": "sombrero",
+     "titulo": "Amarillo-dorado",
+     "texto": "3–15 cm de ancho; de amarillo a amarillo oscuro; se mancha rojizo al dañarlo."
+    },
+    {
+     "parte": "himenio",
+     "titulo": "Pliegues, no láminas",
+     "texto": "Crestas romas y ramificadas que bajan por el pie, como arrugas."
+    },
+    {
+     "parte": "olor",
+     "titulo": "Aroma a albaricoque",
+     "texto": "Aroma y sabor suaves, afrutados."
+    },
+    {
+     "parte": "esporada",
+     "titulo": "Esporada amarillenta",
+     "texto": "Amarillenta."
+    },
+    {
+     "parte": "habitat",
+     "titulo": "Frondosas y coníferas",
+     "texto": "De junio a diciembre en Europa."
+    }
+   ],
+   "temporada": {
+    "inat": {
+     "n": 75,
+     "mensual": [
+      1,
+      0,
+      0,
+      0,
+      5,
+      6,
+      9,
+      12,
+      18,
+      16,
+      7,
+      1
+     ],
+     "zona": "Costa cantábrica (42,6–43,7 N · 5,5–1,0 O: Bizkaia, Gipuzkoa, Cantabria, este de Asturias y norte de Burgos, Araba y Navarra)",
+     "consulta": "2026-11-12",
+     "url": "https://www.inaturalist.org/observations?nelat=43.7&nelng=-1.0&swlat=42.6&swlng=-5.5&quality_grade=research&taxon_id=47347"
+    },
+    "texto": {
+     "meses": [
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+     ],
+     "nota": "De junio a diciembre.",
+     "fuente": "Wikipedia (inglés)"
+    }
+   }
   },
   {
    "id": "craterellus-cornucopioides",
@@ -943,9 +3031,120 @@
       "notaComestibilidad"
      ],
      "nota": "Borrador que mezcla fuentes citadas y conocimiento micológico general. Contrastar con ≥2 fuentes antes de dar la ficha por buena."
+    },
+    {
+     "nombre": "Wikipedia (inglés): Craterellus cornucopioides",
+     "url": "https://en.wikipedia.org/wiki/Craterellus_cornucopioides",
+     "fechaConsulta": "2026-11-12",
+     "campos": [
+      "queMirar",
+      "temporada"
+     ],
+     "nota": "Fuente terciaria. Sirve para los rasgos de reconocimiento; no sustituye una guía micológica."
+    },
+    {
+     "nombre": "iNaturalist: observaciones de grado de investigación en la costa cantábrica",
+     "url": "https://www.inaturalist.org/observations?nelat=43.7&nelng=-1.0&swlat=42.6&swlng=-5.5&quality_grade=research&taxon_id=48607",
+     "fechaConsulta": "2026-11-12",
+     "campos": [
+      "temporada"
+     ],
+     "nota": "Cuenta de observaciones por mes (N=62). Muestra cuándo se ve la especie, no cuándo es segura."
+    },
+    {
+     "nombre": "Wikimedia Commons (fotos)",
+     "url": "https://commons.wikimedia.org/",
+     "fechaConsulta": "2026-11-12",
+     "campos": [
+      "fotos"
+     ],
+     "nota": "Autoría y licencia en cada foto. Las fotos son orientativas y no confirman una identificación."
     }
    ],
-   "fotos": []
+   "fotos": [
+    {
+     "sp": "Craterellus cornucopioides",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Craterellus_cornucopioides_(29282666045).jpg/{w}px-Craterellus_cornucopioides_(29282666045).jpg",
+     "autor": "Björn S...",
+     "licencia": "CC BY-SA 2.0",
+     "licenciaUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+     "pagina": "https://commons.wikimedia.org/wiki/File:Craterellus_cornucopioides_(29282666045).jpg",
+     "origen": "Wikimedia Commons"
+    },
+    {
+     "sp": "Craterellus cornucopioides",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Craterellus_cornucopioides_(29663417746).jpg/{w}px-Craterellus_cornucopioides_(29663417746).jpg",
+     "autor": "Björn S...",
+     "licencia": "CC BY-SA 2.0",
+     "licenciaUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+     "pagina": "https://commons.wikimedia.org/wiki/File:Craterellus_cornucopioides_(29663417746).jpg",
+     "origen": "Wikimedia Commons"
+    },
+    {
+     "sp": "Craterellus cornucopioides",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Craterellus_cornucopioides_(29206066121).jpg/{w}px-Craterellus_cornucopioides_(29206066121).jpg",
+     "autor": "Björn S...",
+     "licencia": "CC BY-SA 2.0",
+     "licenciaUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+     "pagina": "https://commons.wikimedia.org/wiki/File:Craterellus_cornucopioides_(29206066121).jpg",
+     "origen": "Wikimedia Commons"
+    }
+   ],
+   "clave": "Trompeta negra sin láminas, lisa por fuera y hueca hasta el pie.",
+   "queMirar": [
+    {
+     "parte": "sombrero",
+     "titulo": "Embudo negro-gris",
+     "texto": "Hasta 8 cm de ancho y unos 10 de alto; interior negro o gris oscuro."
+    },
+    {
+     "parte": "himenio",
+     "titulo": "Cara externa lisa",
+     "texto": "Gris más claro, lisa o con arrugas que bajan; sin láminas."
+    },
+    {
+     "parte": "pie",
+     "titulo": "Pie continuo",
+     "texto": "El pie y el embudo forman una sola pieza, sin límite marcado."
+    },
+    {
+     "parte": "esporada",
+     "titulo": "Esporada crema",
+     "texto": "El polvo de esporas es crema."
+    }
+   ],
+   "temporada": {
+    "inat": {
+     "n": 62,
+     "mensual": [
+      0,
+      1,
+      0,
+      0,
+      0,
+      1,
+      0,
+      2,
+      7,
+      29,
+      18,
+      4
+     ],
+     "zona": "Costa cantábrica (42,6–43,7 N · 5,5–1,0 O: Bizkaia, Gipuzkoa, Cantabria, este de Asturias y norte de Burgos, Araba y Navarra)",
+     "consulta": "2026-11-12",
+     "url": "https://www.inaturalist.org/observations?nelat=43.7&nelng=-1.0&swlat=42.6&swlng=-5.5&quality_grade=research&taxon_id=48607"
+    },
+    "texto": {
+     "meses": [
+      8,
+      9,
+      10,
+      11
+     ],
+     "nota": "Reino Unido: agosto–noviembre.",
+     "fuente": "Wikipedia (inglés)"
+    }
+   }
   },
   {
    "id": "hydnum-repandum",
@@ -986,9 +3185,122 @@
       "notaComestibilidad"
      ],
      "nota": "Borrador que mezcla fuentes citadas y conocimiento micológico general. Contrastar con ≥2 fuentes antes de dar la ficha por buena."
+    },
+    {
+     "nombre": "Wikipedia (inglés): Hydnum repandum",
+     "url": "https://en.wikipedia.org/wiki/Hydnum_repandum",
+     "fechaConsulta": "2026-11-12",
+     "campos": [
+      "queMirar",
+      "temporada"
+     ],
+     "nota": "Fuente terciaria. Sirve para los rasgos de reconocimiento; no sustituye una guía micológica."
+    },
+    {
+     "nombre": "iNaturalist: observaciones de grado de investigación en la costa cantábrica",
+     "url": "https://www.inaturalist.org/observations?nelat=43.7&nelng=-1.0&swlat=42.6&swlng=-5.5&quality_grade=research&taxon_id=48641",
+     "fechaConsulta": "2026-11-12",
+     "campos": [
+      "temporada"
+     ],
+     "nota": "Cuenta de observaciones por mes (N=43). Muestra cuándo se ve la especie, no cuándo es segura."
+    },
+    {
+     "nombre": "Wikimedia Commons (fotos)",
+     "url": "https://commons.wikimedia.org/",
+     "fechaConsulta": "2026-11-12",
+     "campos": [
+      "fotos"
+     ],
+     "nota": "Autoría y licencia en cada foto. Las fotos son orientativas y no confirman una identificación."
     }
    ],
-   "fotos": []
+   "fotos": [
+    {
+     "sp": "Hydnum repandum",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Hydnum_repandum_(30096528225).jpg/{w}px-Hydnum_repandum_(30096528225).jpg",
+     "autor": "Lukas (Londres)",
+     "licencia": "CC BY-SA 2.0",
+     "licenciaUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+     "pagina": "https://commons.wikimedia.org/wiki/File:Hydnum_repandum_(30096528225).jpg",
+     "origen": "Wikimedia Commons"
+    },
+    {
+     "sp": "Hydnum repandum",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/2012-08-29_Hydnum_repandum_L_256175.jpg/{w}px-2012-08-29_Hydnum_repandum_L_256175.jpg",
+     "autor": "Alan Rockefeller (Mushroom Observer)",
+     "licencia": "CC BY-SA 3.0",
+     "licenciaUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+     "pagina": "https://commons.wikimedia.org/wiki/File:2012-08-29_Hydnum_repandum_L_256175.jpg",
+     "origen": "Wikimedia Commons"
+    },
+    {
+     "sp": "Hydnum repandum",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Hedgehog_mushroom_(8525112768).jpg/{w}px-Hedgehog_mushroom_(8525112768).jpg",
+     "autor": "Quinn Dombrowski",
+     "licencia": "CC BY-SA 2.0",
+     "licenciaUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+     "pagina": "https://commons.wikimedia.org/wiki/File:Hedgehog_mushroom_(8525112768).jpg",
+     "origen": "Wikimedia Commons"
+    }
+   ],
+   "clave": "Bajo el sombrero hay pinchos, no láminas ni pliegues.",
+   "queMirar": [
+    {
+     "parte": "sombrero",
+     "titulo": "Naranja-beige",
+     "texto": "Hasta 17 cm; irregular, margen ondulado y enrollado de joven; seco y liso."
+    },
+    {
+     "parte": "himenio",
+     "titulo": "Pinchos",
+     "texto": "Debajo, en vez de láminas o pliegues, tiene pinchos finos."
+    },
+    {
+     "parte": "carne",
+     "titulo": "Carne blanca y firme",
+     "texto": "Firme y quebradiza; amarillea o se vuelve naranja al tocarla."
+    },
+    {
+     "parte": "habitat",
+     "titulo": "Verano a otoño",
+     "texto": "Fructifica de verano a otoño."
+    }
+   ],
+   "temporada": {
+    "inat": {
+     "n": 43,
+     "mensual": [
+      3,
+      0,
+      0,
+      0,
+      0,
+      2,
+      4,
+      1,
+      5,
+      13,
+      11,
+      4
+     ],
+     "zona": "Costa cantábrica (42,6–43,7 N · 5,5–1,0 O: Bizkaia, Gipuzkoa, Cantabria, este de Asturias y norte de Burgos, Araba y Navarra)",
+     "consulta": "2026-11-12",
+     "url": "https://www.inaturalist.org/observations?nelat=43.7&nelng=-1.0&swlat=42.6&swlng=-5.5&quality_grade=research&taxon_id=48641"
+    },
+    "texto": {
+     "meses": [
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+     ],
+     "nota": "Verano a otoño.",
+     "fuente": "Wikipedia (inglés)"
+    }
+   }
   },
   {
    "id": "lactarius-deliciosus",
@@ -1038,9 +3350,129 @@
       "notaComestibilidad"
      ],
      "nota": "Borrador que mezcla fuentes citadas y conocimiento micológico general. Contrastar con ≥2 fuentes antes de dar la ficha por buena."
+    },
+    {
+     "nombre": "Wikipedia (inglés): Lactarius deliciosus",
+     "url": "https://en.wikipedia.org/wiki/Lactarius_deliciosus",
+     "fechaConsulta": "2026-11-12",
+     "campos": [
+      "queMirar",
+      "temporada"
+     ],
+     "nota": "Fuente terciaria. Sirve para los rasgos de reconocimiento; no sustituye una guía micológica."
+    },
+    {
+     "nombre": "iNaturalist: observaciones de grado de investigación en la costa cantábrica",
+     "url": "https://www.inaturalist.org/observations?nelat=43.7&nelng=-1.0&swlat=42.6&swlng=-5.5&quality_grade=research&taxon_id=155197,332501",
+     "fechaConsulta": "2026-11-12",
+     "campos": [
+      "temporada"
+     ],
+     "nota": "Cuenta de observaciones por mes (N=44). Muestra cuándo se ve la especie, no cuándo es segura."
+    },
+    {
+     "nombre": "Wikimedia Commons (fotos)",
+     "url": "https://commons.wikimedia.org/",
+     "fechaConsulta": "2026-11-12",
+     "campos": [
+      "fotos"
+     ],
+     "nota": "Autoría y licencia en cada foto. Las fotos son orientativas y no confirman una identificación."
     }
    ],
-   "fotos": []
+   "fotos": [
+    {
+     "sp": "Lactarius deliciosus",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Lactarius_deliciosus_-_Saffron_Milkcap_(51576323291).jpg/{w}px-Lactarius_deliciosus_-_Saffron_Milkcap_(51576323291).jpg",
+     "autor": "Lukas Large (Stourbridge)",
+     "licencia": "CC BY-SA 2.0",
+     "licenciaUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+     "pagina": "https://commons.wikimedia.org/wiki/File:Lactarius_deliciosus_-_Saffron_Milkcap_(51576323291).jpg",
+     "origen": "Wikimedia Commons"
+    },
+    {
+     "sp": "Lactarius deliciosus",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Lactarius_deliciosus,_St-Quentin-en-Tourmont,_Fr-80.jpg/{w}px-Lactarius_deliciosus,_St-Quentin-en-Tourmont,_Fr-80.jpg",
+     "autor": "APictche",
+     "licencia": "CC BY-SA 4.0",
+     "licenciaUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+     "pagina": "https://commons.wikimedia.org/wiki/File:Lactarius_deliciosus,_St-Quentin-en-Tourmont,_Fr-80.jpg",
+     "origen": "Wikimedia Commons"
+    },
+    {
+     "sp": "Lactarius deliciosus",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Lactarius_deliciosus_(32969568682).jpg/{w}px-Lactarius_deliciosus_(32969568682).jpg",
+     "autor": "Lukas (Londres)",
+     "licencia": "CC BY-SA 2.0",
+     "licenciaUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+     "pagina": "https://commons.wikimedia.org/wiki/File:Lactarius_deliciosus_(32969568682).jpg",
+     "origen": "Wikimedia Commons"
+    }
+   ],
+   "clave": "Látex naranja que verdea al manejar. Látex blanco, o que azulea o es rojo: otra especie.",
+   "queMirar": [
+    {
+     "parte": "sombrero",
+     "titulo": "Naranja zanahoria",
+     "texto": "3–20 cm; convexo a embudo, a menudo con círculos concéntricos más oscuros."
+    },
+    {
+     "parte": "himenio",
+     "titulo": "Láminas decurrentes",
+     "texto": "Apretadas; junto con la carne se manchan de verde oscuro al manipularlas."
+    },
+    {
+     "parte": "carne",
+     "titulo": "Látex naranja-rojizo",
+     "texto": "Suelta una leche naranja-rojiza que no cambia de color."
+    },
+    {
+     "parte": "pie",
+     "titulo": "Pie corto y hueco",
+     "texto": "Corto, grueso, naranja y a menudo hueco."
+    },
+    {
+     "parte": "esporada",
+     "titulo": "Esporada crema",
+     "texto": "Crema."
+    },
+    {
+     "parte": "otro",
+     "titulo": "Es un grupo de especies",
+     "texto": "La ficha agrupa varias especies parecidas; el color del látex ayuda a separarlas."
+    }
+   ],
+   "temporada": {
+    "inat": {
+     "n": 44,
+     "mensual": [
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      10,
+      17,
+      15
+     ],
+     "zona": "Costa cantábrica (42,6–43,7 N · 5,5–1,0 O: Bizkaia, Gipuzkoa, Cantabria, este de Asturias y norte de Burgos, Araba y Navarra)",
+     "consulta": "2026-11-12",
+     "url": "https://www.inaturalist.org/observations?nelat=43.7&nelng=-1.0&swlat=42.6&swlng=-5.5&quality_grade=research&taxon_id=155197,332501"
+    },
+    "texto": {
+     "meses": [
+      9,
+      10,
+      11
+     ],
+     "nota": "Otoño.",
+     "fuente": "Wikipedia (inglés)"
+    }
+   }
   },
   {
    "id": "macrolepiota-procera",
@@ -1098,9 +3530,126 @@
       "notaComestibilidad"
      ],
      "nota": "Borrador que mezcla fuentes citadas y conocimiento micológico general. Contrastar con ≥2 fuentes antes de dar la ficha por buena."
+    },
+    {
+     "nombre": "Wikipedia (inglés): Macrolepiota procera",
+     "url": "https://en.wikipedia.org/wiki/Macrolepiota_procera",
+     "fechaConsulta": "2026-11-12",
+     "campos": [
+      "queMirar",
+      "temporada"
+     ],
+     "nota": "Fuente terciaria. Sirve para los rasgos de reconocimiento; no sustituye una guía micológica."
+    },
+    {
+     "nombre": "iNaturalist: observaciones de grado de investigación en la costa cantábrica",
+     "url": "https://www.inaturalist.org/observations?nelat=43.7&nelng=-1.0&swlat=42.6&swlng=-5.5&quality_grade=research&taxon_id=63401",
+     "fechaConsulta": "2026-11-12",
+     "campos": [
+      "temporada"
+     ],
+     "nota": "Cuenta de observaciones por mes (N=142). Muestra cuándo se ve la especie, no cuándo es segura."
+    },
+    {
+     "nombre": "Wikimedia Commons (fotos)",
+     "url": "https://commons.wikimedia.org/",
+     "fechaConsulta": "2026-11-12",
+     "campos": [
+      "fotos"
+     ],
+     "nota": "Autoría y licencia en cada foto. Las fotos son orientativas y no confirman una identificación."
     }
    ],
-   "fotos": []
+   "fotos": [
+    {
+     "sp": "Macrolepiota procera",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Bedle_mezi_podzimn%C3%ADm_list%C3%ADm.jpg/{w}px-Bedle_mezi_podzimn%C3%ADm_list%C3%ADm.jpg",
+     "autor": "Rad.dekk",
+     "licencia": "CC BY-SA 4.0",
+     "licenciaUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+     "pagina": "https://commons.wikimedia.org/wiki/File:Bedle_mezi_podzimn%C3%ADm_list%C3%ADm.jpg",
+     "origen": "Wikimedia Commons"
+    },
+    {
+     "sp": "Macrolepiota procera",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/2015-11_-_Terril_Saint-Charles_-_26.JPG/{w}px-2015-11_-_Terril_Saint-Charles_-_26.JPG",
+     "autor": "A. Bourgeois P.",
+     "licencia": "CC BY-SA 4.0",
+     "licenciaUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+     "pagina": "https://commons.wikimedia.org/wiki/File:2015-11_-_Terril_Saint-Charles_-_26.JPG",
+     "origen": "Wikimedia Commons"
+    },
+    {
+     "sp": "Macrolepiota procera",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/Champignon_parasol_tachet%C3%A9_(Macrolepiota_procera).jpg/{w}px-Champignon_parasol_tachet%C3%A9_(Macrolepiota_procera).jpg",
+     "autor": "Desijwo",
+     "licencia": "CC BY-SA 4.0",
+     "licenciaUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+     "pagina": "https://commons.wikimedia.org/wiki/File:Champignon_parasol_tachet%C3%A9_(Macrolepiota_procera).jpg",
+     "origen": "Wikimedia Commons"
+    }
+   ],
+   "clave": "Pie largo y escamoso con anillo móvil y sombrero grande con mamelón. Si es pequeña y escamosa en el césped: otra cosa.",
+   "queMirar": [
+    {
+     "parte": "sombrero",
+     "titulo": "Grande con mamelón",
+     "texto": "Hasta 25 cm. Plano al madurar, con mamelón central liso y oscuro y escamas pardas fáciles de quitar."
+    },
+    {
+     "parte": "anillo",
+     "titulo": "Anillo móvil",
+     "texto": "Carnoso, se puede deslizar por el pie."
+    },
+    {
+     "parte": "pie",
+     "titulo": "Pie largo y escamoso",
+     "texto": "12–40 cm, delgado, con aspecto escamoso por debajo del anillo."
+    },
+    {
+     "parte": "otro",
+     "titulo": "De joven",
+     "texto": "Cerrada como un huevo o palillo de tambor."
+    },
+    {
+     "parte": "himenio",
+     "titulo": "Láminas",
+     "texto": "Descarta las que tengan tinte verdoso: ahí hay una especie tóxica (Chlorophyllum)."
+    }
+   ],
+   "temporada": {
+    "inat": {
+     "n": 142,
+     "mensual": [
+      0,
+      0,
+      0,
+      1,
+      3,
+      5,
+      0,
+      4,
+      23,
+      69,
+      32,
+      5
+     ],
+     "zona": "Costa cantábrica (42,6–43,7 N · 5,5–1,0 O: Bizkaia, Gipuzkoa, Cantabria, este de Asturias y norte de Burgos, Araba y Navarra)",
+     "consulta": "2026-11-12",
+     "url": "https://www.inaturalist.org/observations?nelat=43.7&nelng=-1.0&swlat=42.6&swlng=-5.5&quality_grade=research&taxon_id=63401"
+    },
+    "texto": {
+     "meses": [
+      7,
+      8,
+      9,
+      10,
+      11
+     ],
+     "nota": "Reino Unido: julio–noviembre.",
+     "fuente": "Wikipedia (inglés)"
+    }
+   }
   },
   {
    "id": "marasmius-oreades",
@@ -1153,9 +3702,128 @@
       "notaComestibilidad"
      ],
      "nota": "Borrador que mezcla fuentes citadas y conocimiento micológico general. Contrastar con ≥2 fuentes antes de dar la ficha por buena."
+    },
+    {
+     "nombre": "Wikipedia (inglés): Marasmius oreades",
+     "url": "https://en.wikipedia.org/wiki/Marasmius_oreades",
+     "fechaConsulta": "2026-11-12",
+     "campos": [
+      "queMirar",
+      "temporada"
+     ],
+     "nota": "Fuente terciaria. Sirve para los rasgos de reconocimiento; no sustituye una guía micológica."
+    },
+    {
+     "nombre": "iNaturalist: observaciones de grado de investigación en la costa cantábrica",
+     "url": "https://www.inaturalist.org/observations?nelat=43.7&nelng=-1.0&swlat=42.6&swlng=-5.5&quality_grade=research&taxon_id=118240",
+     "fechaConsulta": "2026-11-12",
+     "campos": [
+      "temporada"
+     ],
+     "nota": "Cuenta de observaciones por mes (N=44). Muestra cuándo se ve la especie, no cuándo es segura."
+    },
+    {
+     "nombre": "Wikimedia Commons (fotos)",
+     "url": "https://commons.wikimedia.org/",
+     "fechaConsulta": "2026-11-12",
+     "campos": [
+      "fotos"
+     ],
+     "nota": "Autoría y licencia en cada foto. Las fotos son orientativas y no confirman una identificación."
     }
    ],
-   "fotos": []
+   "fotos": [
+    {
+     "sp": "Marasmius oreades",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Marasmius_oreades_(38344118821).jpg/{w}px-Marasmius_oreades_(38344118821).jpg",
+     "autor": "Dr. Hans-Günter Wagner",
+     "licencia": "CC BY-SA 2.0",
+     "licenciaUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+     "pagina": "https://commons.wikimedia.org/wiki/File:Marasmius_oreades_(38344118821).jpg",
+     "origen": "Wikimedia Commons"
+    },
+    {
+     "sp": "Marasmius oreades",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/H%C3%B6sel_23.07.2017_Scotch_Bonnet_-_Marasmius_oreades_(36850138786).jpg/{w}px-H%C3%B6sel_23.07.2017_Scotch_Bonnet_-_Marasmius_oreades_(36850138786).jpg",
+     "autor": "Björn S...",
+     "licencia": "CC BY-SA 2.0",
+     "licenciaUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+     "pagina": "https://commons.wikimedia.org/wiki/File:H%C3%B6sel_23.07.2017_Scotch_Bonnet_-_Marasmius_oreades_(36850138786).jpg",
+     "origen": "Wikimedia Commons"
+    },
+    {
+     "sp": "Marasmius oreades",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Marasmius_oreades_(24473429478).jpg/{w}px-Marasmius_oreades_(24473429478).jpg",
+     "autor": "Dr. Hans-Günter Wagner",
+     "licencia": "CC BY-SA 2.0",
+     "licenciaUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+     "pagina": "https://commons.wikimedia.org/wiki/File:Marasmius_oreades_(24473429478).jpg",
+     "origen": "Wikimedia Commons"
+    }
+   ],
+   "clave": "Pie tenaz, láminas separadas y mamelón. Láminas apretadas y que bajan por el pie: otra especie.",
+   "queMirar": [
+    {
+     "parte": "sombrero",
+     "titulo": "Pequeña con mamelón",
+     "texto": "1–5 cm. Campaniforme a convexa, con una pequeña protuberancia central; cambia de color al secarse."
+    },
+    {
+     "parte": "himenio",
+     "titulo": "Láminas separadas",
+     "texto": "Gruesas, blancas o crema, bastante espaciadas."
+    },
+    {
+     "parte": "pie",
+     "titulo": "Pie delgado y duro",
+     "texto": "2–6 cm, liso y tenaz."
+    },
+    {
+     "parte": "olor",
+     "titulo": "Aroma almendrado",
+     "texto": "Se describe un olor tipo cianuro/almendra."
+    },
+    {
+     "parte": "habitat",
+     "titulo": "Céspedes y corros",
+     "texto": "Prados y corros de hadas; de mayo a noviembre."
+    }
+   ],
+   "temporada": {
+    "inat": {
+     "n": 44,
+     "mensual": [
+      0,
+      0,
+      1,
+      6,
+      9,
+      2,
+      1,
+      2,
+      3,
+      9,
+      9,
+      2
+     ],
+     "zona": "Costa cantábrica (42,6–43,7 N · 5,5–1,0 O: Bizkaia, Gipuzkoa, Cantabria, este de Asturias y norte de Burgos, Araba y Navarra)",
+     "consulta": "2026-11-12",
+     "url": "https://www.inaturalist.org/observations?nelat=43.7&nelng=-1.0&swlat=42.6&swlng=-5.5&quality_grade=research&taxon_id=118240"
+    },
+    "texto": {
+     "meses": [
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+     ],
+     "nota": "Reino Unido: mayo–noviembre; todo el año en climas cálidos.",
+     "fuente": "Wikipedia (inglés)"
+    }
+   }
   },
   {
    "id": "calocybe-gambosa",
@@ -1174,7 +3842,6 @@
    "notaComestibilidad": "Candidata a comestible según el documento de traspaso (§7). Sin ≥2 fuentes contrastadas ni revisión experta, así que NO se clasifica como comestible: se trata como no comestible hasta verificarla.",
    "himenio": "Láminas blancas muy apretadas.",
    "olor": "A harina fresca.",
-   "fenologia": "Primavera.",
    "habitat": "En corros.",
    "confusiones": [
     {
@@ -1208,9 +3875,123 @@
       "notaComestibilidad"
      ],
      "nota": "Borrador que mezcla fuentes citadas y conocimiento micológico general. Contrastar con ≥2 fuentes antes de dar la ficha por buena."
+    },
+    {
+     "nombre": "Wikipedia (inglés): Calocybe gambosa",
+     "url": "https://en.wikipedia.org/wiki/Calocybe_gambosa",
+     "fechaConsulta": "2026-11-12",
+     "campos": [
+      "queMirar",
+      "temporada"
+     ],
+     "nota": "Fuente terciaria. Sirve para los rasgos de reconocimiento; no sustituye una guía micológica."
+    },
+    {
+     "nombre": "iNaturalist: observaciones de grado de investigación en la costa cantábrica",
+     "url": "https://www.inaturalist.org/observations?nelat=43.7&nelng=-1.0&swlat=42.6&swlng=-5.5&quality_grade=research&taxon_id=450829",
+     "fechaConsulta": "2026-11-12",
+     "campos": [
+      "temporada"
+     ],
+     "nota": "Cuenta de observaciones por mes (N=18). Muestra cuándo se ve la especie, no cuándo es segura."
+    },
+    {
+     "nombre": "Wikimedia Commons (fotos)",
+     "url": "https://commons.wikimedia.org/",
+     "fechaConsulta": "2026-11-12",
+     "campos": [
+      "fotos"
+     ],
+     "nota": "Autoría y licencia en cada foto. Las fotos son orientativas y no confirman una identificación."
     }
    ],
-   "fotos": []
+   "fotos": [
+    {
+     "sp": "Calocybe gambosa",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Calocybe_gambosa_(36064595975).jpg/{w}px-Calocybe_gambosa_(36064595975).jpg",
+     "autor": "Dr. Hans-Günter Wagner",
+     "licencia": "CC BY-SA 2.0",
+     "licenciaUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+     "pagina": "https://commons.wikimedia.org/wiki/File:Calocybe_gambosa_(36064595975).jpg",
+     "origen": "Wikimedia Commons"
+    },
+    {
+     "sp": "Calocybe gambosa",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Calocybe_gambosa_(34410861793).jpg/{w}px-Calocybe_gambosa_(34410861793).jpg",
+     "autor": "Björn S...",
+     "licencia": "CC BY-SA 2.0",
+     "licenciaUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+     "pagina": "https://commons.wikimedia.org/wiki/File:Calocybe_gambosa_(34410861793).jpg",
+     "origen": "Wikimedia Commons"
+    },
+    {
+     "sp": "Calocybe gambosa",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Calocybe_gambosa_(34412661523).jpg/{w}px-Calocybe_gambosa_(34412661523).jpg",
+     "autor": "Björn S...",
+     "licencia": "CC BY-SA 2.0",
+     "licenciaUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+     "pagina": "https://commons.wikimedia.org/wiki/File:Calocybe_gambosa_(34412661523).jpg",
+     "origen": "Wikimedia Commons"
+    }
+   ],
+   "clave": "Primavera (San Jorge), olor a harina, láminas apretadas. Si huele a fruta fuerte, enrojece o huele rancio: otra.",
+   "queMirar": [
+    {
+     "parte": "sombrero",
+     "titulo": "Blanco-crema",
+     "texto": "5–15 cm; liso, con relieves; blanco a crema."
+    },
+    {
+     "parte": "himenio",
+     "titulo": "Láminas apretadas",
+     "texto": "Blancas y escotadas."
+    },
+    {
+     "parte": "pie",
+     "titulo": "Pie grueso y abultado",
+     "texto": "Rechoncho y más ancho en la base."
+    },
+    {
+     "parte": "olor",
+     "titulo": "Olor a harina o pepino",
+     "texto": "Carne densa y blanda."
+    },
+    {
+     "parte": "habitat",
+     "titulo": "Primavera",
+     "texto": "En torno al 23 de abril en Reino Unido; en mayo en Alemania."
+    }
+   ],
+   "temporada": {
+    "inat": {
+     "n": 18,
+     "mensual": [
+      0,
+      0,
+      0,
+      7,
+      8,
+      1,
+      1,
+      0,
+      0,
+      0,
+      0,
+      1
+     ],
+     "zona": "Costa cantábrica (42,6–43,7 N · 5,5–1,0 O: Bizkaia, Gipuzkoa, Cantabria, este de Asturias y norte de Burgos, Araba y Navarra)",
+     "consulta": "2026-11-12",
+     "url": "https://www.inaturalist.org/observations?nelat=43.7&nelng=-1.0&swlat=42.6&swlng=-5.5&quality_grade=research&taxon_id=450829"
+    },
+    "texto": {
+     "meses": [
+      4,
+      5
+     ],
+     "nota": "Abril–mayo.",
+     "fuente": "Wikipedia (inglés)"
+    }
+   }
   },
   {
    "id": "morchella",
@@ -1229,7 +4010,6 @@
    "sombrero": "Con alveolos.",
    "pie": "Hueco.",
    "carne": "Hueca por dentro.",
-   "fenologia": "Primavera.",
    "confusiones": [
     {
      "id": "gyromitra",
@@ -1262,9 +4042,124 @@
       "notaComestibilidad"
      ],
      "nota": "Borrador que mezcla fuentes citadas y conocimiento micológico general. Contrastar con ≥2 fuentes antes de dar la ficha por buena."
+    },
+    {
+     "nombre": "Wikipedia (inglés): Morchella esculenta",
+     "url": "https://en.wikipedia.org/wiki/Morchella_esculenta",
+     "fechaConsulta": "2026-11-12",
+     "campos": [
+      "queMirar",
+      "temporada"
+     ],
+     "nota": "Fuente terciaria. Sirve para los rasgos de reconocimiento; no sustituye una guía micológica."
+    },
+    {
+     "nombre": "iNaturalist: observaciones de grado de investigación en la costa cantábrica",
+     "url": "https://www.inaturalist.org/observations?nelat=43.7&nelng=-1.0&swlat=42.6&swlng=-5.5&quality_grade=research&taxon_id=56830",
+     "fechaConsulta": "2026-11-12",
+     "campos": [
+      "temporada"
+     ],
+     "nota": "Cuenta de observaciones por mes (N=23). Muestra cuándo se ve la especie, no cuándo es segura."
+    },
+    {
+     "nombre": "Wikimedia Commons (fotos)",
+     "url": "https://commons.wikimedia.org/",
+     "fechaConsulta": "2026-11-12",
+     "campos": [
+      "fotos"
+     ],
+     "nota": "Autoría y licencia en cada foto. Las fotos son orientativas y no confirman una identificación."
     }
    ],
-   "fotos": []
+   "fotos": [
+    {
+     "sp": "Morchella esculenta",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/2026-04-04_Z5-3750E_Achim-Lammerts_Morchella-esculenta.jpg/{w}px-2026-04-04_Z5-3750E_Achim-Lammerts_Morchella-esculenta.jpg",
+     "autor": "Achim Lammerts (Syntaxys)",
+     "licencia": "CC BY-SA 4.0",
+     "licenciaUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+     "pagina": "https://commons.wikimedia.org/wiki/File:2026-04-04_Z5-3750E_Achim-Lammerts_Morchella-esculenta.jpg",
+     "origen": "Wikimedia Commons"
+    },
+    {
+     "sp": "Morchella esculenta",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Morchella_esculenta_(26593538756).jpg/{w}px-Morchella_esculenta_(26593538756).jpg",
+     "autor": "Björn S...",
+     "licencia": "CC BY-SA 2.0",
+     "licenciaUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+     "pagina": "https://commons.wikimedia.org/wiki/File:Morchella_esculenta_(26593538756).jpg",
+     "origen": "Wikimedia Commons"
+    },
+    {
+     "sp": "Morchella esculenta",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/2026-04-05_Z5-4020E_Achim-Lammerts_Morchella-esculenta.jpg/{w}px-2026-04-05_Z5-4020E_Achim-Lammerts_Morchella-esculenta.jpg",
+     "autor": "Achim Lammerts (Syntaxys)",
+     "licencia": "CC BY-SA 4.0",
+     "licenciaUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+     "pagina": "https://commons.wikimedia.org/wiki/File:2026-04-05_Z5-4020E_Achim-Lammerts_Morchella-esculenta.jpg",
+     "origen": "Wikimedia Commons"
+    }
+   ],
+   "clave": "Cabeza en panal con huecos, no cerebro plegado. Hueca por dentro de arriba abajo.",
+   "queMirar": [
+    {
+     "parte": "sombrero",
+     "titulo": "Panal de huecos",
+     "texto": "Color crema-amarillo a pardo; los bordes de las crestas más claros que el fondo de los huecos."
+    },
+    {
+     "parte": "sombrero",
+     "titulo": "Cabeza hueca",
+     "texto": "Está unida al pie por el borde inferior, y por dentro está hueca."
+    },
+    {
+     "parte": "pie",
+     "titulo": "Pie blanquecino hueco",
+     "texto": "Blanco o amarillo pálido, granuloso y hueco."
+    },
+    {
+     "parte": "carne",
+     "titulo": "Carne quebradiza",
+     "texto": "Frágil."
+    },
+    {
+     "parte": "habitat",
+     "titulo": "Primavera",
+     "texto": "Bajo frondosas y coníferas, huertos viejos y terrenos removidos."
+    }
+   ],
+   "temporada": {
+    "inat": {
+     "n": 23,
+     "mensual": [
+      0,
+      0,
+      1,
+      16,
+      6,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "zona": "Costa cantábrica (42,6–43,7 N · 5,5–1,0 O: Bizkaia, Gipuzkoa, Cantabria, este de Asturias y norte de Burgos, Araba y Navarra)",
+     "consulta": "2026-11-12",
+     "url": "https://www.inaturalist.org/observations?nelat=43.7&nelng=-1.0&swlat=42.6&swlng=-5.5&quality_grade=research&taxon_id=56830"
+    },
+    "texto": {
+     "meses": [
+      3,
+      4,
+      5
+     ],
+     "nota": "Primavera.",
+     "fuente": "Wikipedia (inglés)"
+    }
+   }
   }
  ]
 }

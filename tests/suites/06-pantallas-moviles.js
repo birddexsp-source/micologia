@@ -16,7 +16,7 @@ module.exports = {
       await t.go('#salidas'); await t.tap('#s-new', 400); await t.go('#mapa');
       await t.marcarRapido({ zona: 'Zona con un nombre bastante largo para probar el desborde', esp: 'cicuta', cant: '≈200 g' });
       await t.marcarRapido({ zonaExistente: true, esp: 'rebozuelo' });
-      for (const h of ['#salidas', '#setas', '#ajustes']) { await t.go(h); await limpio(h); await t.shot('captura-m-' + h.slice(1)); }
+      for (const h of ['#salidas', '#setas', '#mes', '#ajustes']) { await t.go(h); await limpio(h); await t.shot('captura-m-' + h.slice(1)); }
       await t.go('#salidas'); await t.tap('#v-salidas a.item', 500); await limpio('detalle de salida'); await t.shot('captura-m-detalle');
     });
     await t.case('hojas: marcar, hallazgo, ficha y antes de comer', async () => {
@@ -27,6 +27,13 @@ module.exports = {
       await t.page.evaluate(id => window.__MI.abrirHallazgo(id), h.id); await t.wait(300); await limpio('hoja hallazgo');
       await t.tap('#hd-antes', 300); await limpio('antes de comer'); await t.page.evaluate(() => { document.querySelector('#sheet').hidden = true; });
       await t.page.evaluate(() => window.__MI.abrirFicha('boletus-edulis')); await t.wait(300); await limpio('ficha');
+    });
+    await t.case('terminar salida con fotos de lo recogido', async () => {
+      await t.page.evaluate(() => { document.querySelector('#sheet').hidden = true; });
+      const s = (await t.docs('salidas'))[0]; await t.go('#salida/' + s.id); await t.wait(400);
+      t.ok('detalle con tarjetas de grabación', await t.has('#v-salida .rec'));
+      await t.tap('#sd-fin', 400); await limpio('terminar salida'); await t.shot('captura-m-terminar');
+      t.ok('el botón Terminar es alcanzable (la hoja se desplaza)', await t.page.evaluate(() => { const sh = document.querySelector('#sheet .sh'); return sh.scrollHeight >= sh.clientHeight && !!document.querySelector('#tf-ok'); }));
     });
   }
 };

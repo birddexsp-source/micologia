@@ -1,8 +1,8 @@
 module.exports = {
   name: 'Carga: arranque, pestañas y mapa satélite',
   async run(t) {
-    await t.case('arranca con 4 pestañas y el mapa', async () => {
-      t.eq('4 pestañas', await t.N('.nav a'), 4);
+    await t.case('arranca con 5 pestañas y el mapa', async () => {
+      t.eq('5 pestañas', await t.N('.nav a'), 5);
       t.ok('mapa Leaflet montado', await t.has('#map.leaflet-container'));
       t.ok('botón «Marcar aquí» visible', await t.visible('#fab'));
       t.eq('título', await t.T('#ttl'), 'Mapa');
@@ -27,7 +27,7 @@ module.exports = {
       t.eq('vuelve a satélite', await t.page.evaluate(() => window.__MI.S.map.getBase()), 'sat');
     });
     await t.case('navegación entre pestañas', async () => {
-      for (const [h, titulo] of [['#salidas', 'Salidas'], ['#setas', 'Setas'], ['#ajustes', 'Ajustes'], ['#mapa', 'Mapa']]) {
+      for (const [h, titulo] of [['#salidas', 'Salidas'], ['#setas', 'Setas'], ['#mes', 'Este mes'], ['#ajustes', 'Ajustes'], ['#mapa', 'Mapa']]) {
         await t.go(h); t.eq('título en ' + h, await t.T('#ttl'), titulo);
         t.ok('pestaña activa en ' + h, await t.has('.nav a.on[data-tab="' + h.slice(1) + '"]'));
       }

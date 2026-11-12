@@ -4,11 +4,15 @@ import * as syn from './sync.js';
 import * as cat from './catalog.js';
 import { createMap, pin, dragPin, IDENT } from './map.js';
 import { $, $$, esc, norm, hoy, hhmm, fecha, toast, reducirFoto } from './util.js';
+import { guiaHTML } from './guia.js';
+import * as tmp from './temporada.js';
+import * as fi from './ficha.js';
+import * as trk from './track.js';
 
-const APP_V = 'micologia-v1';   // = V de sw.js
-const S = { view: 'mapa', arg: '', map: null, pins: null, me: null, acc: null, tmp: null, mini: null, centered: false, filtro: { salida: '', especie: '' }, clase: '', q: '', syncErr: false };
-const VIEWS = ['mapa', 'salidas', 'salida', 'setas', 'ajustes'];
-const TITULOS = { mapa: 'Mapa', salidas: 'Salidas', salida: 'Salida', setas: 'Setas', ajustes: 'Ajustes' };
+const APP_V = 'micologia-v2';   // = V de sw.js
+const S = { view: 'mapa', arg: '', map: null, pins: null, me: null, acc: null, tmp: null, mini: null, centered: false, filtro: { salida: '', especie: '' }, clase: '', q: '', syncErr: false, mes: new Date().getMonth() + 1 };
+const VIEWS = ['mapa', 'salidas', 'salida', 'setas', 'mes', 'ajustes'];
+const TITULOS = { mapa: 'Mapa', salidas: 'Salidas', salida: 'Salida', setas: 'Setas', mes: 'Este mes', ajustes: 'Ajustes' };
 const ICON_SYNC = '<svg viewBox="0 0 24 24"><path d="M7 18a4 4 0 0 1-.6-7.96A5.5 5.5 0 0 1 17 9.5a4.2 4.2 0 0 1 .5 8.5"/><path d="M12 12v8m0-8l-3 3m3-3l3 3"/></svg>';
 const ESTADOS = [['joven', 'Joven'], ['madura', 'Madura'], ['pasada', 'Pasada']];
 
@@ -24,14 +28,30 @@ function closeSheet() {
   if (S.tmp) { S.tmp.remove(); S.tmp = null; }
 }
 async function hydrate(root) { for (const im of $$('img[data-blob]', root)) { const u = await db.blobURL(im.dataset.blob); if (u) im.src = u; } }
-const tag = c => '<span class="tag" style="--c:' + cat.CLASES[c].color + '">' + cat.CLASES[c].label + '</span>';
+const tag = fi.tag;
 const identTag = i => '<span class="tag" style="--c:' + (IDENT[i] || IDENT.sin_identificar).color + ';color:#0a0f0e">' + (IDENT[i] || IDENT.sin_identificar).label + '</span>';
 const nombreHall = h => { const e = cat.byId(h.especieId); return e ? cat.nombre(e) : (h.especieTxt || 'Sin identificar'); };
-async function pickFoto(onId) {
-  const inp = document.createElement('input'); inp.type = 'file'; inp.accept = 'image/*'; inp.setAttribute('capture', 'environment'); inp.id = 'file-foto';
+/* galeria: elige de la galería (varias a la vez) en vez de abrir la cámara */
+async function pickFoto(onId, { galeria = false } = {}) {
+  const inp = document.createElement('input'); inp.type = 'file'; inp.accept = 'image/*'; inp.id = 'file-foto';
+  if (galeria) inp.multiple = true; else inp.setAttribute('capture', 'environment');
   inp.style.display = 'none'; document.body.appendChild(inp);
-  inp.onchange = async () => { const f = inp.files[0]; inp.remove(); if (!f) return; try { const id = await db.putBlob(await reducirFoto(f)); await onId(id); } catch (e) { toast('No se pudo guardar la foto'); } };
+  inp.onchange = async () => {
+    const fs = [...inp.files]; inp.remove(); let mal = 0;
+    for (const f of fs) { try { const id = await db.putBlob(await reducirFoto(f)); await onId(id); } catch (e) { mal++; } }
+    if (mal) toast(mal === 1 ? 'No se pudo guardar una foto' : 'No se pudieron guardar ' + mal + ' fotos');
+  };
   inp.click();
+}
+/* Línea del recorrido: borde oscuro + trazo claro, legible sobre satélite */
+function trazo(pts) {
+  const g = L.layerGroup();
+  trk.lineas(pts).forEach(l => {
+    if (l.length < 2) return; const ll = l.map(p => [p[0], p[1]]);
+    L.polyline(ll, { color: '#0b1210', weight: 7, opacity: .55, interactive: false }).addTo(g);
+    L.polyline(ll, { color: '#ffd23f', weight: 3.5, opacity: .95, interactive: false, className: 'trk-line' }).addTo(g);
+  });
+  return g;
 }
 
 /* ---------- selector de especie (catálogo o texto libre) ---------- */
@@ -55,7 +75,7 @@ function pickerWire(root, st) {
 
 /* ---------- mapa ---------- */
 function initMap() {
-  S.map = createMap('map'); S.pins = L.layerGroup().addTo(S.map);
+  S.map = createMap('map'); S.trkL = L.layerGroup().addTo(S.map); S.pins = L.layerGroup().addTo(S.map);
   S.me = L.marker([0, 0], { icon: L.divIcon({ className: 'me', html: '<i></i>', iconSize: [22, 22], iconAnchor: [11, 11] }), interactive: false, opacity: 0 }).addTo(S.map);
   S.acc = L.circle([0, 0], { radius: 0, color: '#4c9bff', weight: 1, fillOpacity: .12, interactive: false }).addTo(S.map);
   geo.onFix((f, err) => {
@@ -70,6 +90,7 @@ function initMap() {
   $('#layerbtn').onclick = () => { const b = S.map.setBase(S.map.getBase() === 'sat' ? 'calle' : 'sat'); toast(b === 'sat' ? 'Satélite' : 'Callejero'); };
   $('#filterbtn').onclick = abrirFiltro;
   $('#fab').onclick = marcar;
+  trk.onAdd(() => { if (S.trkId && trk.activo() === S.trkId) pintarTrack(trk.puntos()); });
   geo.start();
 }
 async function refreshPins() {
@@ -78,7 +99,12 @@ async function refreshPins() {
   hs.filter(h => (!f.salida || (f.salida === 'activa' ? act && h.salidaId === act.id : h.salidaId === f.salida)) && (!f.especie || h.especieId === f.especie))
     .forEach(h => pin(h).on('click', () => abrirHallazgo(h.id)).addTo(S.pins));
   $('#filterbtn').classList.toggle('on', !!(f.salida || f.especie));
+  /* recorrido: el de la salida filtrada o, si no hay filtro, el de la salida en curso */
+  S.trkId = f.salida && f.salida !== 'activa' ? f.salida : act && act.id;
+  const sd = S.trkId ? await db.get('salidas', S.trkId) : null;
+  pintarTrack(S.trkId && trk.activo() === S.trkId ? trk.puntos() : (sd && sd.track) || []);
 }
+function pintarTrack(pts) { if (!S.map) return; S.trkL.clearLayers(); if (pts && pts.length > 1) trazo(pts).addTo(S.trkL); }
 async function abrirFiltro() {
   const ss = (await db.list('salidas')).sort((a, b) => b.fecha.localeCompare(a.fecha)), hs = await db.list('hallazgos');
   const usadas = [...new Set(hs.map(h => h.especieId).filter(Boolean))];
@@ -196,9 +222,13 @@ async function activa() { return (await db.list('salidas')).find(s => s.estado =
 function mejorZonaId(hs) { const c = {}; hs.forEach(h => { if (h.zonaId) c[h.zonaId] = (c[h.zonaId] || 0) + 1; }); return Object.keys(c).sort((a, b) => c[b] - c[a])[0] || null; }
 async function empezarSalida() {
   if (await activa()) { toast('Ya hay una salida en curso'); return; }
-  const id = await db.add('salidas', { fecha: hoy(), titulo: '', notas: '', zonaIds: [], fotos: [], estado: 'en_curso', totalTxt: '', zonaMejorId: '', creada: Date.now() });
-  toast('Salida empezada'); location.hash = '#salida/' + id;
+  const id = await db.add('salidas', { fecha: hoy(), titulo: '', notas: '', zonaIds: [], fotos: [], fotosCosecha: [], track: [], grabar: true, estado: 'en_curso', totalTxt: '', zonaMejorId: '', creada: Date.now(), fin: null });
+  await trk.start(id); toast('Salida empezada · grabando el recorrido'); location.hash = '#salida/' + id;
 }
+/* Duración de la salida: desde que se empieza hasta que se termina (o hasta ahora si sigue en curso) */
+const durSeg = s => !s.creada ? 0 : Math.max(0, Math.round(((s.estado === 'en_curso' ? Date.now() : s.fin) || s.creada) - s.creada) / 1000);
+const kmTxt = s => { const m = trk.metros(s.track); return m > 0 ? trk.fmtKm(m) : '—'; };
+const durTxt = s => { const d = durSeg(s); return d >= 60 ? trk.fmtDur(d) : '—'; };
 async function renderSalidas() {
   const [ss, hs, act] = [(await db.list('salidas')).sort((a, b) => (b.creada || 0) - (a.creada || 0)), await db.list('hallazgos'), await activa()];
   const n = id => hs.filter(h => h.salidaId === id).length;
@@ -207,49 +237,87 @@ async function renderSalidas() {
     '<div class="sec">Salidas</div>' + (ss.length ? ss.map(s => '<a class="item" href="#salida/' + s.id + '" style="text-decoration:none"><div class="t"><b>' + esc(fecha(s.fecha)) + (s.titulo ? ' · ' + esc(s.titulo) : '') + '</b><small>' + n(s.id) + ' hallazgos' + (s.totalTxt ? ' · ' + esc(s.totalTxt) : '') + (s.estado === 'en_curso' ? ' · en curso' : '') + '</small></div>›</a>').join('') : '<div class="empty">Aún no hay salidas.<br>Empieza una cuando salgas al monte.</div>') + '</div>';
   const b = $('#s-new'); if (b) b.onclick = empezarSalida;
 }
+function bajarArchivo(nombre, texto, tipo) {
+  const u = URL.createObjectURL(new Blob([texto], { type: tipo })), a = document.createElement('a');
+  a.href = u; a.download = nombre; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(u), 4000);
+}
+const galHTML = (ids, k) => ids.map(f => '<img data-blob="' + f + '" data-k="' + k + '" alt="Foto">').join('');
+/* Ver una foto grande; permite quitarla de la salida */
+function verFoto(sid, k, fid) {
+  const sh = openSheet('<img data-blob="' + fid + '" class="big-foto" alt="Foto"><div class="row"><button class="btn d" id="vf-del">Quitar de la salida</button><button class="btn p" id="vf-x">Cerrar</button></div>');
+  $('#vf-x', sh).onclick = closeSheet;
+  $('#vf-del', sh).onclick = async () => { const cur = await db.get('salidas', sid); if (cur) await db.patch('salidas', sid, { [k]: (cur[k] || []).filter(x => x !== fid) }); closeSheet(); toast('Foto quitada'); syn.auto(); };
+}
+async function addFoto(sid, k, fid) { const cur = await db.get('salidas', sid); await db.patch('salidas', sid, { [k]: [...((cur && cur[k]) || []), fid] }); syn.auto(); }
 async function renderSalida(id) {
-  if (S.mini) { S.mini.remove(); S.mini = null; }
+  const gen = S.gen = (S.gen || 0) + 1;   // si llegan varios pintados seguidos (una foto, un punto…), solo vale el último
   const s = await db.get('salidas', id), root = $('#v-salida');
+  const [hs0, zonas] = [await db.list('hallazgos'), await db.list('zonas')];
+  if (gen !== S.gen) return;
+  if (S.mini) { S.mini.remove(); S.mini = null; }
+  if (S.unlive) { S.unlive(); S.unlive = null; } clearInterval(S.tick);
   if (!s) { root.innerHTML = '<div class="pad"><a class="back" href="#salidas">‹ Salidas</a><div class="empty">Esta salida no existe.</div></div>'; return; }
-  const [hs, zonas] = [(await db.list('hallazgos')).filter(h => h.salidaId === id).sort((a, b) => a.ts - b.ts), await db.list('zonas')];
+  const hs = hs0.filter(h => h.salidaId === id).sort((a, b) => a.ts - b.ts);
   const zn = zid => (zonas.find(z => z.id === zid) || {}).nombre || '—';
   const porZona = {}; hs.forEach(h => { if (h.zonaId) porZona[h.zonaId] = (porZona[h.zonaId] || 0) + 1; });
   const auto = mejorZonaId(hs), mejor = s.zonaMejorId || auto, pend = hs.filter(h => h.identificacion !== 'confirmada').length;
+  const curso = s.estado === 'en_curso', graba = curso && s.grabar !== false, cos = s.fotosCosecha || [];
+  const live = () => trk.activo() === id ? { ...s, track: trk.puntos() } : s;
   root.innerHTML = '<div class="pad"><a class="back" href="#salidas">‹ Salidas</a>' +
-    '<input type="text" id="sd-tit" value="' + esc(s.titulo) + '" placeholder="' + esc(fecha(s.fecha)) + ' · título (opcional)"><div style="margin:6px 2px 0;color:var(--mut);font-size:13px">' + esc(fecha(s.fecha)) + (s.estado === 'en_curso' ? ' · <b style="color:var(--acc)">en curso</b>' : ' · terminada') + '</div>' +
+    '<input type="text" id="sd-tit" value="' + esc(s.titulo) + '" placeholder="' + esc(fecha(s.fecha)) + ' · título (opcional)"><div style="margin:6px 2px 0;color:var(--mut);font-size:13px">' + esc(fecha(s.fecha)) + (curso ? ' · <b style="color:var(--acc)">en curso</b>' : ' · terminada') + '</div>' +
     '<div class="stats"><div><b>' + hs.length + '</b><span>hallazgos</span></div><div><b>' + Object.keys(porZona).length + '</b><span>zonas</span></div><div><b>' + pend + '</b><span>por identificar</span></div></div>' +
+    '<div class="stats" id="sd-st2"><div><b id="sd-km">' + kmTxt(live()) + '</b><span>recorrido</span></div><div><b id="sd-dur">' + durTxt(s) + '</b><span>duración</span></div><div><b>' + cos.length + '</b><span>fotos recogidas</span></div></div>' +
     '<div class="smap" id="smap"></div>' +
+    (curso ? '<div class="rec ' + (graba ? 'on' : '') + '"><span class="rdot"></span><div class="t"><b>' + (graba ? 'Grabando el recorrido' : 'Recorrido en pausa') + '</b><small>Mantén la app abierta: si el móvil bloquea la pantalla puede dejar de grabar.</small></div><button class="btn" id="sd-pau">' + (graba ? 'Pausar' : 'Reanudar') + '</button></div>' +
+      (trk.pantallaSoportada() ? '<div class="rec"><div class="t"><b>Pantalla encendida</b><small>Evita que se apague mientras andas. Gasta más batería.</small></div><button class="btn' + (trk.pantallaOn() ? ' p' : '') + '" id="sd-wake">' + (trk.pantallaOn() ? 'Activada' : 'Activar') + '</button></div>' : '') : '') +
     '<label class="l">Total recogido</label><input type="text" id="sd-tot" value="' + esc(s.totalTxt) + '" placeholder="p. ej. ≈2 kg">' +
     '<label class="l">Dónde hubo más</label><select id="sd-mej"><option value="">' + (auto ? 'Automático: ' + esc(zn(auto)) : 'Automático') + '</option>' + zonas.filter(z => porZona[z.id] || z.id === s.zonaMejorId).map(z => '<option value="' + z.id + '"' + (s.zonaMejorId === z.id ? ' selected' : '') + '>' + esc(z.nombre) + ' (' + (porZona[z.id] || 0) + ')</option>').join('') + '</select>' +
-    '<div class="sec">Fotos de la salida</div><div class="gal" id="sd-gal">' + (s.fotos || []).map(f => '<img data-blob="' + f + '">').join('') + '</div><div class="row"><button class="btn" id="sd-foto">Añadir foto</button></div>' +
+    '<div class="sec">Lo que me llevé</div><div class="gal" id="sd-cos">' + (cos.length ? galHTML(cos, 'fotosCosecha') : '<div class="empty" style="padding:6px 0;text-align:left">Saca una foto a todo lo que recojas: queda como registro de la salida.</div>') + '</div><div class="row"><button class="btn" id="sd-cos-add">Añadir foto de lo recogido</button></div>' +
+    '<div class="sec">Fotos de la salida</div><div class="gal" id="sd-gal">' + galHTML(s.fotos || [], 'fotos') + '</div><div class="row"><button class="btn" id="sd-foto">Añadir foto</button></div>' +
     '<div class="sec">Hallazgos' + (mejor ? ' · mejor zona: ' + esc(zn(mejor)) : '') + '</div>' +
-    (hs.length ? hs.map(h => '<button class="item" data-h="' + h.id + '"><span class="dot" style="--c:' + (IDENT[h.identificacion] || IDENT.sin_identificar).color + '"></span><div class="t"><b>' + esc(nombreHall(h)) + '</b><small>' + hhmm(h.ts) + (h.zonaId ? ' · ' + esc(zn(h.zonaId)) : '') + (h.cantidad ? ' · ' + esc(h.cantidad) : '') + '</small></div>›</button>').join('') : '<div class="empty">Sin hallazgos todavía.</div>') +
-    '<div class="row">' + (s.estado === 'en_curso' ? '<button class="btn p big" id="sd-fin">Terminar salida</button>' : '<button class="btn" id="sd-reab">Reabrir salida</button>') + '<button class="btn d" id="sd-del">Borrar salida</button></div></div>';
+    (hs.length ? hs.map(h => { const e = cat.byId(h.especieId); return '<button class="item" data-h="' + h.id + '">' + (e ? fi.avatar(e) : '<span class="dot" style="--c:' + (IDENT[h.identificacion] || IDENT.sin_identificar).color + '"></span>') + '<div class="t"><b>' + esc(nombreHall(h)) + '</b><small>' + hhmm(h.ts) + (h.zonaId ? ' · ' + esc(zn(h.zonaId)) : '') + (h.cantidad ? ' · ' + esc(h.cantidad) : '') + ' · ' + (IDENT[h.identificacion] || IDENT.sin_identificar).label + '</small></div>›</button>'; }).join('') : '<div class="empty">Sin hallazgos todavía.</div>') +
+    (hs.length || (s.track || []).length ? '<div class="row"><button class="btn" id="sd-gpx">Exportar recorrido (GPX)</button></div>' : '') +
+    '<div class="row">' + (curso ? '<button class="btn p big" id="sd-fin">Terminar salida</button>' : '<button class="btn" id="sd-reab">Reabrir salida</button>') + '<button class="btn d" id="sd-del">Borrar salida</button></div></div>';
   hydrate(root);
-  /* minimapa */
-  S.mini = createMap('smap', { zoom: 10 }); const ls = [];
+  /* minimapa: recorrido + hallazgos */
+  S.mini = createMap('smap', { zoom: 10 }); const ls = [], capa = L.layerGroup().addTo(S.mini);
+  const pintar = () => { capa.clearLayers(); trazo(live().track).addTo(capa); };
+  pintar(); trk.lineas(live().track).forEach(l => l.forEach(p => ls.push([p[0], p[1]])));
   hs.forEach(h => { pin(h, { interactive: false }).addTo(S.mini); ls.push([h.lat, h.lon]); });
-  if (ls.length) S.mini.fitBounds(ls, { padding: [30, 30], maxZoom: 17 });
+  if (ls.length) S.mini.fitBounds(ls, { padding: [30, 30], maxZoom: 17, animate: false });
+  if (trk.activo() === id) S.unlive = trk.onAdd(() => { if (S.view !== 'salida' || S.arg !== id || !S.mini) return; pintar(); const k = $('#sd-km'); if (k) k.textContent = kmTxt(live()); });
+  if (curso) S.tick = setInterval(() => { const d = $('#sd-dur'); if (S.view === 'salida' && S.arg === id && d) d.textContent = durTxt(s); }, 30000);
   $('#sd-tit', root).onchange = e => db.patch('salidas', id, { titulo: e.target.value.trim() });
   $('#sd-tot', root).onchange = e => db.patch('salidas', id, { totalTxt: e.target.value.trim() });
   $('#sd-mej', root).onchange = e => db.patch('salidas', id, { zonaMejorId: e.target.value });
   root.onclick = async ev => {
+    const im = ev.target.closest('img[data-blob]'); if (im && im.dataset.k) { verFoto(id, im.dataset.k, im.dataset.blob); return; }
     const t = ev.target.closest('button'); if (!t) return;
     if (t.dataset.h) abrirHallazgo(t.dataset.h);
-    else if (t.id === 'sd-foto') pickFoto(async fid => { await db.patch('salidas', id, { fotos: [...(s.fotos || []), fid] }); syn.auto(); });
+    else if (t.id === 'sd-foto') pickFoto(fid => addFoto(id, 'fotos', fid));
+    else if (t.id === 'sd-cos-add') pickFoto(fid => addFoto(id, 'fotosCosecha', fid));
+    else if (t.id === 'sd-pau') { if (graba) { await trk.stop(); await db.patch('salidas', id, { grabar: false }); toast('Recorrido en pausa'); } else { await trk.start(id, true); await db.patch('salidas', id, { grabar: true }); toast('Grabando otra vez'); } }
+    else if (t.id === 'sd-wake') { const on = !trk.pantallaOn(); await trk.pantalla(on); t.textContent = on ? 'Activada' : 'Activar'; t.classList.toggle('p', on); toast(on ? 'La pantalla no se apagará' : 'La pantalla puede apagarse'); }
+    else if (t.id === 'sd-gpx') { const cur = await db.get('salidas', id); bajarArchivo('salida-' + s.fecha + '.gpx', trk.gpx({ ...cur, track: trk.activo() === id ? trk.puntos() : cur.track }, hs, nombreHall), 'application/gpx+xml'); toast('GPX guardado en descargas'); }
     else if (t.id === 'sd-fin') terminarSalida(s, hs, zonas, porZona, mejor);
-    else if (t.id === 'sd-reab') { if (await activa()) toast('Ya hay otra salida en curso'); else { await db.patch('salidas', id, { estado: 'en_curso' }); toast('Salida reabierta'); } }
-    else if (t.id === 'sd-del') { if (t.dataset.sure) { for (const h of hs) await db.patch('hallazgos', h.id, { salidaId: null }); await db.remove('salidas', id); toast('Salida borrada (los hallazgos se conservan)'); location.hash = '#salidas'; } else { t.dataset.sure = 1; t.textContent = 'Otra vez para borrar'; } }
+    else if (t.id === 'sd-reab') { if (await activa()) toast('Ya hay otra salida en curso'); else { await trk.start(id, true); await db.patch('salidas', id, { estado: 'en_curso', fin: null, grabar: true }); toast('Salida reabierta'); } }
+    else if (t.id === 'sd-del') { if (t.dataset.sure) { if (trk.activo() === id) await trk.stop(); for (const h of hs) await db.patch('hallazgos', h.id, { salidaId: null }); await db.remove('salidas', id); toast('Salida borrada (los hallazgos se conservan)'); location.hash = '#salidas'; } else { t.dataset.sure = 1; t.textContent = 'Otra vez para borrar'; } }
   };
 }
 function terminarSalida(s, hs, zonas, porZona, mejor) {
-  const zn = zid => (zonas.find(z => z.id === zid) || {}).nombre || '—';
+  const zn = zid => (zonas.find(z => z.id === zid) || {}).nombre || '—', cos = (s.fotosCosecha || []).slice();
+  const km = trk.activo() === s.id ? trk.metros(trk.puntos()) : trk.metros(s.track);
   const sh = openSheet('<h2>Terminar salida</h2><p class="sub">' + esc(fecha(s.fecha)) + '</p><div class="stats"><div><b>' + hs.length + '</b><span>hallazgos</span></div><div><b>' + Object.keys(porZona).length + '</b><span>zonas</span></div><div><b>' + hs.filter(h => h.recogida).length + '</b><span>recogidos</span></div></div>' +
+    (km > 0 || durSeg({ ...s, estado: 'en_curso' }) >= 60 ? '<div class="stats"><div><b>' + (km > 0 ? trk.fmtKm(km) : '—') + '</b><span>recorrido</span></div><div><b>' + durTxt({ ...s, estado: 'en_curso' }) + '</b><span>duración</span></div></div>' : '') +
     (Object.keys(porZona).length ? '<div class="note">' + Object.keys(porZona).map(z => esc(zn(z)) + ': ' + porZona[z]).join(' · ') + (mejor ? '<br><b>Dónde más:</b> ' + esc(zn(mejor)) : '') + '</div>' : '') +
+    '<div class="cosecha"><b>Fotos de lo que te llevas</b><p>Saca una foto a todo lo que recoges: queda de registro de por dónde has andado y qué has cogido.</p><div class="gal" id="tf-gal">' + galHTML(cos, 'x') + '</div><div class="row"><button class="btn p" id="tf-cam">Hacer foto</button><button class="btn" id="tf-gal-b">Desde la galería</button></div></div>' +
     '<label class="l">Total recogido</label><input type="text" id="tf-tot" value="' + esc(s.totalTxt) + '" placeholder="p. ej. ≈2 kg"><label class="l">Nota</label><textarea id="tf-nota">' + esc(s.notas) + '</textarea>' +
     '<div class="row"><button class="btn" id="tf-x">Seguir</button><button class="btn p" id="tf-ok" style="flex:2">Terminar</button></div>');
+  const nueva = async fid => { cos.push(fid); await db.patch('salidas', s.id, { fotosCosecha: cos.slice() }); const im = document.createElement('img'); im.dataset.blob = fid; im.dataset.k = 'x'; $('#tf-gal', sh).appendChild(im); hydrate($('#tf-gal', sh)); syn.auto(); };
+  $('#tf-cam', sh).onclick = () => pickFoto(nueva);
+  $('#tf-gal-b', sh).onclick = () => pickFoto(nueva, { galeria: true });
   $('#tf-x', sh).onclick = closeSheet;
-  $('#tf-ok', sh).onclick = async () => { await db.patch('salidas', s.id, { estado: 'terminada', totalTxt: $('#tf-tot', sh).value.trim(), notas: $('#tf-nota', sh).value.trim(), zonaMejorId: s.zonaMejorId || mejor || '' }); closeSheet(); toast('Salida terminada'); syn.auto(1500); };
+  $('#tf-ok', sh).onclick = async () => { await trk.stop(); await db.patch('salidas', s.id, { estado: 'terminada', fin: Date.now(), totalTxt: $('#tf-tot', sh).value.trim(), notas: $('#tf-nota', sh).value.trim(), zonaMejorId: s.zonaMejorId || mejor || '' }); closeSheet(); toast('Salida terminada'); syn.auto(1500); };
 }
 async function chipSalida() {
   const a = await activa(), c = $('#chip');
@@ -259,37 +327,57 @@ async function chipSalida() {
 }
 
 /* ---------- catálogo ---------- */
+const ICO_SETA = '<svg viewBox="0 0 48 48"><path fill="#e0a458" d="M24 6C13 6 5 13.500 5 23c0 1 .8 1.700 1.700 1.700h34.600c.9 0 1.700-.7 1.700-1.700C43 13.500 35 6 24 6z"/><circle cx="16" cy="17" r="2.600" fill="#f4d9a8"/><circle cx="28" cy="13.500" r="2.200" fill="#f4d9a8"/><circle cx="33" cy="20" r="2" fill="#f4d9a8"/><path fill="#efe3cf" d="M18 25.500h12v9c0 4-2 7-6 7s-6-3-6-7z"/></svg>';
 function renderSetas() {
   const root = $('#v-setas');
   if (!$('#q', root)) {
-    root.innerHTML = '<div class="pad"><div class="warn">' + esc(cat.aviso()) + '</div><input type="search" id="q" placeholder="Buscar seta…" autocomplete="off" style="margin-top:12px"><div class="chips" id="cl" style="margin:10px 0 4px"></div><div id="slist"></div>' +
-      '<p class="note" style="margin-top:14px">Catálogo en borrador: ' + cat.todas().length + ' fichas sin contrastar. Las comestibles candidatas figuran como «sin datos» hasta verificarlas con ≥2 fuentes y una persona experta.</p></div>';
+    root.innerHTML = '<div class="pad"><button class="guide-card" id="gu-open">' + ICO_SETA + '<div><b>Guía para principiantes</b><small>Las partes de una seta y cómo mirarlas</small></div></button>' +
+      '<div class="warn" style="margin-top:10px">' + esc(cat.aviso()) + '</div><input type="search" id="q" placeholder="Buscar seta…" autocomplete="off" style="margin-top:12px"><div class="chips" id="cl" style="margin:10px 0 0"></div><div id="slist"></div>' +
+      '<p class="note" style="margin-top:14px">Catálogo en borrador: ' + cat.todas().length + ' fichas sin revisar por una persona experta. Las comestibles candidatas figuran como «candidata · sin confirmar» hasta verificarlas con ≥2 fuentes y revisión experta. Fotos de Wikimedia Commons con su autoría y licencia en cada ficha.</p></div>';
     $('#q', root).oninput = e => { S.q = e.target.value; listaSetas(); };
-    $('#cl', root).onclick = e => { const b = e.target.closest('button'); if (!b) return; S.clase = b.dataset.c; listaSetas(); };
-    $('#slist', root).onclick = e => { const b = e.target.closest('[data-e]'); if (b) abrirFicha(b.dataset.e); };
+    root.onclick = e => {
+      if (e.target.closest('#gu-open')) return abrirGuia('');
+      const c = e.target.closest('#cl button'); if (c) { S.clase = c.dataset.c; return listaSetas(); }
+      const b = e.target.closest('[data-e]'); if (b) abrirFicha(b.dataset.e);
+    };
   }
   listaSetas();
 }
+const itemEsp = (e, extra = '') => '<button class="item sp" data-e="' + e.id + '" style="--c:' + cat.CLASES[e.clase].color + '">' + fi.avatar(e) + '<div class="t"><b><i>' + esc(e.nombreCientifico.split(' (')[0]) + '</i></b><small>' + esc(fi.nombres(e) || e.grupo) + '</small>' + extra + '</div>' + fi.tagEsp(e) + '</button>';
 function listaSetas() {
   const root = $('#v-setas');
   $('#cl', root).innerHTML = '<button class="opt ' + (!S.clase ? 'on' : '') + '" data-c="">Todas</button>' + Object.entries(cat.CLASES).filter(([k]) => cat.todas().some(e => e.clase === k)).map(([k, v]) => '<button class="opt ' + (S.clase === k ? 'on' : '') + '" data-c="' + k + '">' + v.label + '</button>').join('');
-  const r = cat.buscar(S.q, { clase: S.clase });
-  $('#slist', root).innerHTML = r.length ? r.map(e => '<button class="item" data-e="' + e.id + '"><span class="dot" style="--c:' + cat.CLASES[e.clase].color + '"></span><div class="t"><b><i>' + esc(e.nombreCientifico) + '</i></b><small>' + esc([...(e.nombresComunes.es || []), ...(e.nombresComunes.eu || [])].join(', ') || e.grupo) + '</small></div>' + tag(e.clase) + '</button>').join('') : '<div class="empty">Nada con ese nombre.</div>';
+  const r = cat.buscar(S.q, { clase: S.clase }); let h = '', cur = '';
+  r.forEach(e => { if (e.clase !== cur) { cur = e.clase; const n = r.filter(x => x.clase === cur).length; h += '<div class="grp" style="--c:' + cat.CLASES[cur].color + '">' + (cur === 'sin_datos' ? 'Candidatas sin confirmar' : cat.CLASES[cur].label) + '<small>' + n + '</small></div>'; } h += itemEsp(e); });
+  $('#slist', root).innerHTML = r.length ? h : '<div class="empty">Nada con ese nombre.</div>';
 }
-const RASGOS = [['sombrero', 'Sombrero'], ['himenio', 'Himenio'], ['reticulo', 'Retículo'], ['pie', 'Pie'], ['anillo', 'Anillo'], ['volva', 'Volva'], ['carne', 'Carne'], ['olor', 'Olor'], ['esporada', 'Esporada'], ['habitat', 'Hábitat'], ['fenologia', 'Época']];
 function abrirFicha(id) {
   const e = cat.byId(id); if (!e) return;
-  const ras = RASGOS.filter(([k]) => e[k]);
-  const sh = openSheet('<h2><i>' + esc(e.nombreCientifico) + '</i></h2><p class="sub" style="font-family:inherit">' + esc([...(e.nombresComunes.es || []), ...(e.nombresComunes.eu || [])].join(' · ')) + '</p>' +
-    '<div class="chips" style="margin-bottom:10px">' + tag(e.clase) + '<span class="tag" style="--c:#3a4743">' + esc(cat.NIVELES[e.nivelVerificacion] || e.nivelVerificacion) + '</span></div>' +
-    '<div class="warn">' + esc(cat.aviso()) + '</div>' +
-    (e.notaComestibilidad ? '<div class="note" style="margin-top:10px">' + esc(e.notaComestibilidad) + '</div>' : '') +
-    (e.sindrome ? '<div class="sec">Si es tóxica</div><dl class="kv"><dt>Síndrome</dt><dd>' + esc(e.sindrome) + '</dd>' + (e.latencia ? '<dt>Aparece a las</dt><dd>' + esc(e.latencia) + '</dd>' : '') + (e.gravedad ? '<dt>Gravedad</dt><dd>' + esc(e.gravedad) + '</dd>' : '') + '</dl><p class="note" style="margin-top:8px">Intoxicación: urgencias ya (112), con restos de la seta y la hora de ingestión. No esperar a que «pase».</p>' : '') +
-    '<div class="sec">Rasgos</div>' + (ras.length ? '<dl class="kv">' + ras.map(([k, l]) => '<dt>' + l + '</dt><dd>' + esc(e[k]) + '</dd>').join('') + '</dl>' : '<div class="empty" style="padding:6px 0;text-align:left">Sin datos de rasgos todavía.</div>') +
-    ((e.confusiones || []).length ? '<div class="sec">Se confunde con</div>' + e.confusiones.map(c => (c.id ? '<button class="item" data-e="' + c.id + '">' : '<div class="item" style="cursor:default">') + '<div class="t"><b style="white-space:normal">' + esc(c.nombre) + '</b><small style="white-space:normal">' + esc(c.comoDistinguir) + '</small></div>' + (c.id ? '›</button>' : '</div>')).join('') : '') +
-    (e.candidataComestible ? '<div class="row"><button class="btn big" id="fi-antes">Antes de comer</button></div>' : '') +
-    '<div class="sec">Fuentes</div>' + e.fuentes.map(f => '<div class="note" style="margin-bottom:8px"><b>' + esc(f.nombre) + '</b>' + (f.url ? '<br><a href="' + esc(f.url) + '" target="_blank" rel="noopener">' + esc(f.url) + '</a>' : '') + (f.nota ? '<br><small style="color:var(--mut)">' + esc(f.nota) + '</small>' : '') + '</div>').join(''));
-  sh.addEventListener('click', ev => { const b = ev.target.closest('button'); if (!b) return; if (b.dataset.e) abrirFicha(b.dataset.e); else if (b.id === 'fi-antes') abrirAntesDeComer(); });
+  const sh = openSheet(fi.fichaHTML(e, S.mes)), hero = $('#hero', sh), dots = $$('#dots i', sh);
+  if (hero && dots.length) hero.onscroll = () => { const i = Math.round(hero.scrollLeft / Math.max(1, hero.clientWidth)); dots.forEach((d, k) => d.classList.toggle('on', k === i)); };
+  sh.addEventListener('click', ev => { const b = ev.target.closest('button'); if (!b) return; if (b.dataset.e) abrirFicha(b.dataset.e); else if (b.dataset.g !== undefined) abrirGuia(b.dataset.g, id); else if (b.id === 'fi-antes') abrirAntesDeComer(); });
+}
+function abrirGuia(sel, volverA) {
+  const sh = openSheet(guiaHTML(sel) .replace('<button class="btn p" id="gu-x">Cerrar</button>', (volverA ? '<button class="btn" id="gu-b">‹ Volver a la ficha</button>' : '') + '<button class="btn p" id="gu-x">Cerrar</button>'));
+  const on = $('.lg.on', sh); if (on) on.scrollIntoView({ block: 'center' });
+  sh.addEventListener('click', ev => { const b = ev.target.closest('button'); if (!b) return; if (b.id === 'gu-x') closeSheet(); else if (b.id === 'gu-b') abrirFicha(volverA); });
+}
+
+/* ---------- este mes ---------- */
+function renderMes() {
+  const root = $('#v-mes'), m = S.mes, todas = cat.todas(), lista = tmp.delMes(todas, m);
+  const pel = lista.filter(r => r.e.clase === 'mortal' || r.e.clase === 'toxica'), resto = lista.filter(r => !pel.includes(r)), sinDatos = todas.filter(e => !tmp.datos(e).hay).length;
+  const fila = r => itemEsp(r.e, '<div class="mb">' + tmp.datos(r.e).niv.map((x, i) => '<i class="l' + x.nivel + (i + 1 === m ? ' cur' : '') + '"></i>').join('') + '</div>');
+  const sec = (t, n, c) => { const rs = resto.filter(r => r.nivel === n); return rs.length ? '<div class="grp" style="--c:' + c + '">' + t + '<small>' + rs.length + '</small></div>' + rs.map(fila).join('') : ''; };
+  root.innerHTML = '<div class="pad"><div class="mesnav"><button id="m-prev" aria-label="Mes anterior">‹</button><h2>' + tmp.mesNombre(m) + '</h2><button id="m-next" aria-label="Mes siguiente">›</button></div>' +
+    '<p class="note">Qué se ve en la costa cantábrica en este mes, según observaciones verificadas y fuentes citadas en cada ficha. Indica <b>cuándo aparece</b> cada especie, no si se puede comer.</p>' +
+    (pel.length ? '<div class="dang" style="margin-top:12px"><h3>Peligrosas que salen ahora</h3><p>Estas pueden confundirse con comestibles. Mira bien la ficha.</p>' + pel.map(fila).join('') + '</div>' : '') +
+    sec('En plena temporada', 3, '#e0a458') + sec('Buena época', 2, '#a98433') + sec('Posible', 1, '#7b8683') +
+    (!lista.length ? '<div class="empty">Ninguna especie del catálogo tiene datos para este mes.</div>' : '') +
+    '<p class="note" style="margin-top:14px">' + sinDatos + ' de ' + todas.length + ' fichas no tienen datos de temporada suficientes y no aparecen aquí. «Posible» = pocos registros. Las barras de cada ficha muestran el año entero.</p></div>';
+  $('#m-prev', root).onclick = () => { S.mes = S.mes === 1 ? 12 : S.mes - 1; renderMes(); };
+  $('#m-next', root).onclick = () => { S.mes = S.mes === 12 ? 1 : S.mes + 1; renderMes(); };
+  root.onclick = e => { const b = e.target.closest('[data-e]'); if (b) abrirFicha(b.dataset.e); };
 }
 const COMPROBAR = [
   'He identificado la seta por todos los caracteres (sombrero, himenio, pie, anillo, volva, carne, olor, hábitat), no solo por uno ni por una foto.',
@@ -313,6 +401,7 @@ async function renderAjustes() {
     '<label class="l">Token de GitHub</label><input type="password" id="a-tok" placeholder="' + (c.token ? '•••••• guardado (déjalo vacío para conservarlo)' : 'github_pat_…') + '" autocomplete="off">' +
     '<div class="row"><button class="btn p" id="a-sync">Guardar y sincronizar</button></div><div class="note" id="a-st" style="margin-top:10px">' + (last ? 'Última sincronización: ' + new Date(last).toLocaleString('es-ES') : 'Aún no has sincronizado.') + (db.dirtyCount() ? '<br>Pendiente de subir: ' + db.dirtyCount() : '') + '</div></div>' +
     '<div class="card"><h3>Datos</h3><div class="row"><button class="btn" id="a-exp">Exportar copia (JSON)</button></div></div>' +
+    '<div class="card"><h3>Fotos sin conexión</h3><p class="sub" style="font-family:inherit;color:var(--mut);margin:4px 0 0">Guarda las fotos de las fichas en este móvil para verlas en el monte sin cobertura (unos 15 MB).</p><div class="row"><button class="btn" id="a-fotos">Descargar fotos</button></div><div class="note" id="a-fst" style="margin-top:10px">Comprobando…</div></div>' +
     '<div class="card"><h3>Zonas</h3>' + (zonas.length ? zonas.map(z => '<div class="row" style="margin-top:8px"><input type="text" data-z="' + z.id + '" value="' + esc(z.nombre) + '" style="flex:1"><button class="btn d" data-zd="' + z.id + '" style="flex:none">Borrar</button></div>').join('') : '<p style="color:var(--mut);margin:8px 0 0">Las zonas se crean al marcar un hallazgo.</p>') + '</div>' +
     '<div class="card"><h3>Acerca de</h3><p style="margin:6px 0;color:var(--mut);font-size:13.5px">Versión ' + APP_V + '<br>Las coordenadas de tus sitios solo viven en este móvil y en tu repositorio privado. La app nunca certifica que una seta sea comestible.<br>Mapa: imágenes PNOA/Sentinel © IGN España (CC BY 4.0 scne.es) · callejero © OpenStreetMap.</p></div></div>';
   $('#a-sync', root).onclick = async () => {
@@ -322,7 +411,19 @@ async function renderAjustes() {
   };
   $('#a-exp', root).onclick = async () => { const a = document.createElement('a'); a.href = URL.createObjectURL(await db.exportAll()); a.download = 'micologia-copia-' + hoy() + '.json'; document.body.appendChild(a); a.click(); a.remove(); };
   root.onchange = e => { const z = e.target.dataset.z; if (z && e.target.value.trim()) db.patch('zonas', z, { nombre: e.target.value.trim() }); };
+  fotosEstado($('#a-fst', root));
+  $('#a-fotos', root).onclick = async ev => { const st = $('#a-fst', root); ev.target.disabled = true; const r = await descargarFotos(m => { st.textContent = m; }); ev.target.disabled = false; st.textContent = r.fail ? 'Listo con ' + r.fail + ' fallos de ' + r.total + '. Vuelve a pulsar para reintentar.' : 'Listo: ' + r.ok + ' fotos guardadas.'; };
   root.onclick = async e => { const b = e.target.closest('[data-zd]'); if (!b) return; if (b.dataset.sure) { await db.remove('zonas', b.dataset.zd); toast('Zona borrada'); } else { b.dataset.sure = 1; b.textContent = '¿Seguro?'; } };
+}
+function urlsFotos() { const u = []; cat.todas().forEach(e => (e.fotos || []).forEach(f => { u.push(fi.fotoURL(f, 250)); u.push(fi.fotoURL(f, 960)); })); return u; }
+async function fotosEstado(el) {
+  try { const c = await caches.open('fotos-v1'), n = (await c.keys()).length, t = urlsFotos().length; el.textContent = n >= t ? 'Todas las fotos están guardadas (' + n + ').' : n + ' de ' + t + ' fotos guardadas.'; }
+  catch (e) { el.textContent = 'Este navegador no permite guardar fotos sin conexión.'; }
+}
+async function descargarFotos(setStat) {
+  const urls = urlsFotos(), q = [...urls]; let ok = 0, fail = 0;
+  const w = async () => { while (q.length) { const u = q.shift(); try { const r = await fetch(u, { mode: 'cors' }); if (r.ok) { await r.blob(); ok++; } else fail++; } catch (e) { fail++; } setStat('Descargando fotos… ' + (ok + fail) + '/' + urls.length); } };
+  await Promise.all([w(), w(), w()]); return { ok, fail, total: urls.length };
 }
 async function correrSync(setStat = () => { }) {
   S.syncErr = false;
@@ -352,18 +453,21 @@ function route() {
 async function renderView() {
   const a = document.activeElement;
   if (a && /INPUT|TEXTAREA|SELECT/.test(a.tagName) && a.closest('.view') && S.view !== 'ajustes') return;
-  if (S.view === 'salidas') await renderSalidas(); else if (S.view === 'salida') await renderSalida(S.arg); else if (S.view === 'setas') renderSetas(); else if (S.view === 'ajustes') await renderAjustes();
+  if (S.view === 'salidas') await renderSalidas(); else if (S.view === 'salida') await renderSalida(S.arg); else if (S.view === 'setas') renderSetas(); else if (S.view === 'mes') renderMes(); else if (S.view === 'ajustes') await renderAjustes();
 }
 async function boot() {
   await db.init(); await cat.load();
   initMap(); badge(); route(); chipSalida();
+  /* si había una salida en curso (la app se cerró o se recargó), sigue grabando el recorrido */
+  { const a = await activa(); if (a && a.grabar !== false) await trk.start(a.id); }
   addEventListener('hashchange', route);
-  db.onChange(() => { badge(); refreshPins(); chipSalida(); if (S.view !== 'setas') renderView(); });
+  document.addEventListener('error', e => { if (e.target.tagName === 'IMG' && e.target.classList.contains('ph')) e.target.classList.add('x'); }, true);
+  db.onChange(() => { badge(); refreshPins(); chipSalida(); if (S.view !== 'setas' && S.view !== 'mes' && !trk.guardando()) renderView(); });
   addEventListener('online', badge); addEventListener('offline', badge);
   $('#syncbtn').onclick = () => { const c = syn.cfg(); if (!c.repo || !c.token) { location.hash = '#ajustes'; toast('Configura el repositorio y el token'); } else correrSync(); };
   if (syn.cfg().repo) syn.auto(2500);
   if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) navigator.serviceWorker.register('sw.js').catch(() => { });
-  window.__MI = { db, geo, syn, cat, S, abrirHallazgo, abrirFicha };
+  window.__MI = { db, geo, syn, cat, trk, S, abrirHallazgo, abrirFicha };
   document.body.dataset.ready = '1';
 }
 boot().catch(e => { console.error(e); document.body.insertAdjacentHTML('beforeend', '<div class="warn" style="position:fixed;top:60px;left:12px;right:12px;z-index:9999">No se pudo arrancar la app: ' + esc(e.message || e) + '</div>'); });

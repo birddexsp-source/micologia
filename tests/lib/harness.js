@@ -56,7 +56,7 @@ class FakeGH {
 }
 
 class T {
-  constructor(opts) { this.opts = opts; this.pass = 0; this.fail = 0; this.fails = []; this.errs = []; this.suite = ''; this.n = 0; this.tileReqs = []; }
+  constructor(opts) { this.opts = opts; this.pass = 0; this.fail = 0; this.fails = []; this.errs = []; this.suite = ''; this.n = 0; this.tileReqs = []; this.photoReqs = []; }
   ok(name, cond, detail) {
     if (cond) { this.pass++; if (this.opts.verbose) console.log('   ✓ ' + name); }
     else { this.fail++; this.fails.push(this.suite + ' › ' + name + (detail ? ' (' + detail + ')' : '')); console.log('   ✗ ' + name + (detail ? '  → ' + detail : '')); }
@@ -67,15 +67,17 @@ class T {
     console.log('  · ' + name); const before = this.fail;
     try { await fn(); } catch (e) { this.ok(name + ' (no debería lanzar)', false, String(e.message || e).split('\n')[0]); }
     if (this.fail > before && this.page) await this.shot('fallo-' + this.suite.replace(/\W+/g, '_') + '-' + (++this.n));
-    if (this.errs.length) { const e = this.errs.splice(0); this.ok('sin errores de JS en «' + name + '»', false, e[0].slice(0, 200)); }
+    if (this.errs.length) { const e = this.errs.splice(0); this.ok('sin errores de JS en «' + name + '»', false, e[0].slice(0, 1500)); }
   }
   /* ---------- navegador ---------- */
   async newPage(ctx) {
     const page = await ctx.newPage();
-    page.on('pageerror', e => this.errs.push(String(e.stack || e).split('\n').slice(0, 3).join(' / ')));
+    page.on('pageerror', e => this.errs.push(String(e.stack || e).split('\n').slice(0, 14).join(' / ')));
     page.on('console', m => { if (m.type() === 'error' && !/tile|404|Failed to load resource|net::ERR/.test(m.text())) this.errs.push('console: ' + m.text()); });
     /* teselas simuladas (ign.es está bloqueado en este entorno y no queremos red real en pruebas) */
     await page.route(/ign\.es|tile\.openstreetmap\.org/, r => { this.tileReqs.push(r.request().url()); r.fulfill({ status: 200, contentType: 'image/png', body: PNG1, headers: { 'access-control-allow-origin': '*' } }); });
+    /* fotos del catálogo (Wikimedia Commons): también simuladas */
+    await page.route(/upload\.wikimedia\.org/, r => { this.photoReqs.push(r.request().url()); r.fulfill({ status: 200, contentType: 'image/png', body: PNG1, headers: { 'access-control-allow-origin': '*' } }); });
     return page;
   }
   async context(o = {}) {

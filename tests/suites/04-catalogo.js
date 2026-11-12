@@ -38,10 +38,10 @@ module.exports = {
     });
     await t.case('confusiones enlazadas entre fichas (recíprocas)', async () => {
       await t.page.fill('#q', 'Lepiota'); await t.wait(150); await t.tap('#slist .item', 300);
-      await t.tap('#sheet .item[data-e="macrolepiota-procera"]', 300);
+      await t.tap('#sheet .lnk[data-e="macrolepiota-procera"]', 300);
       t.ok('abre la ficha del parasol', /Macrolepiota procera/.test(await t.T('#sheet h2') || ''));
-      t.ok('el parasol enlaza de vuelta a la Lepiota', await t.has('#sheet .item[data-e="lepiota-brunneoincarnata"]'));
-      t.ok('las candidatas se tratan como sin datos', /Sin datos/.test(await t.T('#sheet') || ''));
+      t.ok('el parasol enlaza de vuelta a la Lepiota', await t.has('#sheet .lnk[data-e="lepiota-brunneoincarnata"]'));
+      t.ok('las candidatas salen como «Candidata · sin confirmar», nunca como comestibles', /Candidata · sin confirmar/.test(await t.T('#sheet') || '') && !/comestible buena/i.test(await t.T('#sheet') || ''));
     });
     await t.case('«Antes de comer» solo en candidatas y con 6 comprobaciones', async () => {
       t.ok('botón presente', await t.visible('#fi-antes')); await t.tap('#fi-antes', 300);

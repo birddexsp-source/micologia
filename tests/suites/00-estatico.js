@@ -9,7 +9,7 @@ module.exports = {
   name: 'Estático: archivos, SW, catálogo y seguridad', static: true,
   async run(t) {
     await t.case('archivos básicos y service worker', async () => {
-      ['index.html', 'sw.js', 'manifest.webmanifest', 'icon.svg', 'icon-192.png', 'icon-512.png', 'css/app.css', 'js/app.js', 'js/db.js', 'js/sync.js', 'js/geo.js', 'js/map.js', 'js/catalog.js', 'js/util.js', 'vendor/leaflet/leaflet.js', 'vendor/leaflet/leaflet.css', 'data/especies.json']
+      ['index.html', 'sw.js', 'manifest.webmanifest', 'icon.svg', 'icon-192.png', 'icon-512.png', 'css/app.css', 'js/app.js', 'js/db.js', 'js/sync.js', 'js/geo.js', 'js/map.js', 'js/catalog.js', 'js/util.js', 'js/guia.js', 'js/ficha.js', 'js/temporada.js', 'js/track.js', 'vendor/leaflet/leaflet.js', 'vendor/leaflet/leaflet.css', 'data/especies.json']
         .forEach(f => t.ok('existe docs/' + f, fs.existsSync(path.join(DOCS, f))));
       const sw = rd('sw.js'), shell = JSON.parse(sw.match(/const SHELL = (\[[\s\S]*?\]);/)[1].replace(/'/g, '"'));
       shell.forEach(f => t.ok('SHELL del SW existe: ' + f, f === './' || fs.existsSync(path.join(DOCS, f))));
@@ -52,6 +52,25 @@ module.exports = {
       });
       t.ok('las 9 candidatas a comestible están como sin_datos', E.filter(e => e.candidataComestible).length === 9);
       ['amanita-phalloides', 'amanita-verna-virosa', 'lepiota-brunneoincarnata', 'galerina-marginata', 'cortinarius-orellanus'].forEach(id => t.eq(id + ' es mortal', (E.find(e => e.id === id) || {}).clase, 'mortal'));
+    });
+    await t.case('catálogo v2: fotos con licencia y autoría, qué mirar y temporada con fuente', async () => {
+      const E = JSON.parse(rd('data/especies.json')).especies, LIC = ['CC BY 3.0', 'CC BY 4.0', 'CC BY-SA 2.0', 'CC BY-SA 3.0', 'CC BY-SA 4.0', 'CC0', 'Dominio público'];
+      const PARTES = ['sombrero', 'cutis', 'himenio', 'carne', 'pie', 'anillo', 'volva', 'micelio', 'olor', 'esporada', 'habitat', 'otro'];
+      E.forEach(e => {
+        t.ok(e.id + ': ≥3 fotos o las que haya (mín. 3)', (e.fotos || []).length >= 3, String((e.fotos || []).length));
+        (e.fotos || []).forEach((f, i) => {
+          t.ok(e.id + ' foto ' + i + ': autor, licencia libre y página de origen', !!f.autor && LIC.includes(f.licencia) && /^https:\/\/commons\.wikimedia\.org\/wiki\/File:/.test(f.pagina), f.licencia);
+          t.ok(e.id + ' foto ' + i + ': URL de Commons con {w}', /^https:\/\/upload\.wikimedia\.org\/wikipedia\/commons\/thumb\/.+\/\{w\}px-/.test(f.url));
+          if (f.licencia !== 'Dominio público') t.ok(e.id + ' foto ' + i + ': enlace a la licencia', /^https:\/\/creativecommons\.org\//.test(f.licenciaUrl || ''));
+        });
+        t.ok(e.id + ': «qué mirar» con ≥3 puntos y partes válidas', (e.queMirar || []).length >= 3 && e.queMirar.every(x => PARTES.includes(x.parte) && x.titulo && x.texto));
+        t.ok(e.id + ': tiene regla clave', !!e.clave && e.clave.length > 20);
+        t.ok(e.id + ': cita Wikipedia con URL y fecha', e.fuentes.some(f => /^Wikipedia/.test(f.nombre) && /^https:\/\/en\.wikipedia\.org\/wiki\//.test(f.url || '') && /^\d{4}-\d\d-\d\d$/.test(f.fechaConsulta || '')));
+        const ins = (e.temporada || {}).inat || {};
+        t.ok(e.id + ': temporada con 12 meses y N coherente', Array.isArray(ins.mensual) && ins.mensual.length === 12 && ins.mensual.reduce((a, b) => a + b, 0) === ins.n, JSON.stringify(ins.mensual));
+        if (ins.n > 0) t.ok(e.id + ': cita iNaturalist si usa sus datos', e.fuentes.some(f => /iNaturalist/.test(f.nombre) && /^https:\/\/www\.inaturalist\.org\//.test(f.url || '')));
+        if (e.candidataComestible) t.ok(e.id + ': las pistas de una candidata no la declaran comestible', !/\bes comestible\b|\bse puede comer\b|\bbuen comestible\b/i.test([e.clave, ...(e.queMirar || []).map(x => x.texto)].join(' ')));
+      });
     });
   }
 };

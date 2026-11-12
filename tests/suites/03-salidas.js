@@ -25,7 +25,7 @@ module.exports = {
     });
     await t.case('detalle: contadores, mejor zona y minimapa', async () => {
       await t.tap('#chip', 600);
-      const stats = await t.page.evaluate(() => [...document.querySelectorAll('#v-salida .stats b')].map(b => b.textContent));
+      const stats = await t.page.evaluate(() => [...document.querySelectorAll('#v-salida .stats:not(#sd-st2) b')].map(b => b.textContent));
       t.eq('hallazgos · zonas · por identificar', stats, ['3', '2', '3']);
       t.ok('mejor zona automática: Pinar A', /Automático: Pinar A/.test(await t.T('#sd-mej') || ''), await t.T('#sd-mej'));
       t.ok('minimapa montado con 3 marcadores', await t.has('#smap.leaflet-container') && await t.N('#smap .pin i') === 3, 'pins: ' + await t.N('#smap .pin i'));
