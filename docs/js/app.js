@@ -13,7 +13,7 @@ import * as trk from './track.js';
 import * as ia from './ia.js';
 import * as au from './audio.js';
 
-const APP_V = 'micologia-v12';   // = V de sw.js
+const APP_V = 'micologia-v13';   // = V de sw.js
 const S = { view: 'mapa', arg: '', map: null, pins: null, me: null, acc: null, tmp: null, mini: null, centered: false, filtro: { salida: '', especie: '' }, clase: '', q: '', syncErr: false, mes: new Date().getMonth() + 1 };
 const VIEWS = ['mapa', 'salidas', 'salida', 'setas', 'mes', 'ajustes'];
 const TITULOS = { mapa: 'Mapa', salidas: 'Salidas', salida: 'Salida', setas: 'Setas', mes: 'Este mes', ajustes: 'Ajustes' };
@@ -561,7 +561,8 @@ async function renderSalida(id) {
   root.innerHTML = '<div class="pad sal-pg"><a class="back" href="#salidas">‹ Salidas</a>' +
     '<div class="hero-m"><div class="smap big" id="smap"></div>' + (curso ? '<span class="live"><i></i>En curso · ' + durTxt(s).replace('—', 'recién empezada') + '</span>' : '') + '</div>' +
     '<div class="sd-hd"><div class="sd-tt"><input type="text" id="sd-tit" class="tit" value="' + esc(s.titulo) + '" placeholder="Ponle un título"><div class="sd-date">' + esc(fecha(s.fecha)) + (curso ? '' : ' · terminada') + '</div></div>' + (curso ? '<button class="btn p" id="sd-fin">Terminar</button>' : '') + '</div>' +
-    '<div class="kpis"><div class="stats"><div><b>' + hs.length + '</b><span>hallazgos</span></div><div><b>' + zids.length + '</b><span>spots</span></div><div><b>' + nEsp + '</b><span>especies</span></div><div><b>' + pend + '</b><span>por identificar</span></div></div></div>' +
+    (curso && !hs.length && !zids.length ? '<div class="pasos"><div><i>1</i><span><b>Llegas a un sitio bueno</b>«Spot aquí» y queda guardado</span></div><div><i>2</i><span><b>Ves una seta</b>«Especie aquí»: foto y nota de voz</span></div><div><i>3</i><span><b>En casa</b>foto de lo recogido y «Terminar»</span></div></div>' : '') +
+    (!hs.length && !zids.length ? '' : '<div class="kpis"><div class="stats"><div><b>' + hs.length + '</b><span>hallazgos</span></div><div><b>' + zids.length + '</b><span>spots</span></div><div><b>' + nEsp + '</b><span>especies</span></div><div><b>' + pend + '</b><span>por identificar</span></div></div></div>') +
     (curso ? '<div class="quick"><button class="qb p" id="sd-mk">' + I.plus + '<span><b>Especie aquí</b><small>con tu GPS</small></span></button><button class="qb" id="sd-sp">' + I.flag + '<span><b>Spot aquí</b><small>nuevo sitio</small></span></button></div>' : '') +
     '<div class="tabs" role="tablist">' + TABS.map(([k, t, n]) => '<button data-tb="' + k + '" class="' + (k === tab ? 'on' : '') + '">' + t + (n ? '<em>' + n + '</em>' : '') + '</button>').join('') + '</div>' +
     panel('spots', pSpots) + panel('hall', pHall) + panel('fotos', pFotos) + panel('mas', pMas) + '</div>';
@@ -572,6 +573,7 @@ async function renderSalida(id) {
   pintar(); trk.lineas(live().track).forEach(l => l.forEach(p => ls.push([p[0], p[1]])));
   hs.forEach(h => { pinH(h, { interactive: false }).addTo(S.mini); ls.push([h.lat, h.lon]); });
   orden.forEach((zid, i) => { const z = zonas.find(x => x.id === zid); if (!z || z.lat == null) return; L.marker([z.lat, z.lon], { interactive: false, zIndexOffset: 500, icon: L.divIcon({ className: 'tnm', html: '<b>' + (i + 1) + '</b>', iconSize: [24, 24], iconAnchor: [12, 12] }) }).addTo(S.mini); ls.push([z.lat, z.lon]); });
+  if (!ls.length) { const f = geo.fix(); if (f) { S.mini.setView([f.lat, f.lon], 15); L.marker([f.lat, f.lon], { interactive: false, icon: L.divIcon({ className: 'me', html: '<i></i>', iconSize: [22, 22], iconAnchor: [11, 11] }) }).addTo(S.mini); } }
   if (ls.length) S.mini.fitBounds(ls, { padding: [30, 30], maxZoom: 17, animate: false });
   if (trk.activo() === id) S.unlive = trk.onAdd(() => { if (S.view !== 'salida' || S.arg !== id || !S.mini) return; pintar(); const k = $('#sd-km'); if (k) k.textContent = kmTxt(live()); });
   if (curso) S.tick = setInterval(() => { const d = $('#sd-dur'); if (S.view === 'salida' && S.arg === id && d) d.textContent = durTxt(s); }, 30000);

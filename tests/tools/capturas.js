@@ -42,6 +42,7 @@ const ESCENAS = {
   'salida': async p => { await p.evaluate(() => { location.hash = '#salida/s2'; }); await p.waitForTimeout(1400); },
   'salida-curso': async p => { await p.evaluate(async () => { await window.__MI.db.patch('salidas', 's2', { estado: 'en_curso', fin: null, creada: Date.now() - 4800000 }); location.hash = '#salida/s2'; }); await p.waitForTimeout(1400); },
   'salida-fotos': async p => { await p.evaluate(() => { location.hash = '#salida/s2'; }); await p.waitForTimeout(1200); await p.click('.tabs [data-tb="hall"]'); await p.waitForTimeout(500); },
+  'salida-nueva': async p => { await p.evaluate(async () => { await window.__MI.db.set('salidas', 's9', { fecha: '2026-11-12', titulo: '', zonaIds: [], estado: 'en_curso', creada: Date.now() - 600000, fin: null, grabar: false, fotos: [], fotosCosecha: [], track: [], totalTxt: '', notas: '' }); location.hash = '#salida/s9'; }); await p.waitForTimeout(1400); },
   'salida-abajo': async p => { await p.evaluate(() => { location.hash = '#salida/s2'; }); await p.waitForTimeout(1400); await p.evaluate(() => { const v = document.querySelector('#v-salida'); v.scrollTop = 560; }); await p.waitForTimeout(400); },
   'salida-fin': async p => { await p.evaluate(() => { location.hash = '#salida/s2'; }); await p.waitForTimeout(1400); await p.evaluate(() => { const v = document.querySelector('#v-salida'); v.scrollTop = 1250; }); await p.waitForTimeout(400); },
   'setas': async p => { await p.evaluate(() => { location.hash = '#setas'; }); await p.waitForTimeout(1000); },
