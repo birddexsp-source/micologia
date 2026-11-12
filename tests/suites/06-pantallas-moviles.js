@@ -27,6 +27,10 @@ module.exports = {
       await t.page.evaluate(id => window.__MI.abrirHallazgo(id), h.id); await t.wait(300); await limpio('hoja hallazgo');
       await t.tap('#hd-antes', 300); await limpio('antes de comer'); await t.page.evaluate(() => { document.querySelector('#sheet').hidden = true; });
       await t.page.evaluate(() => window.__MI.abrirFicha('boletus-edulis')); await t.wait(300); await limpio('ficha');
+      for (const id of ['amanita-phalloides', 'boletos-poros-rojos', 'agaricus-campestris', 'craterellus-tubaeformis']) { await t.page.evaluate(i => window.__MI.abrirFicha(i), id); await t.wait(250); await limpio('ficha libro ' + id); }
+      await t.shot('captura-m-ficha-libro');
+      await t.page.evaluate(() => window.__MI.abrirLibro('')); await t.wait(200); await limpio('libro: índice');
+      for (const c of ['antes', 'recoger', 'identificar', 'mitos', 'casa', 'intox', 'normas']) { await t.page.evaluate(i => window.__MI.abrirLibro(i), c); await t.wait(200); await limpio('libro: ' + c); }
     });
     await t.case('terminar salida con fotos de lo recogido', async () => {
       await t.page.evaluate(() => { document.querySelector('#sheet').hidden = true; });

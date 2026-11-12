@@ -5,11 +5,12 @@ import * as cat from './catalog.js';
 import { createMap, pin, dragPin, IDENT } from './map.js';
 import { $, $$, esc, norm, hoy, hhmm, fecha, toast, reducirFoto } from './util.js';
 import { guiaHTML } from './guia.js';
+import * as lib from './libro.js';
 import * as tmp from './temporada.js';
 import * as fi from './ficha.js';
 import * as trk from './track.js';
 
-const APP_V = 'micologia-v3';   // = V de sw.js
+const APP_V = 'micologia-v4';   // = V de sw.js
 const S = { view: 'mapa', arg: '', map: null, pins: null, me: null, acc: null, tmp: null, mini: null, centered: false, filtro: { salida: '', especie: '' }, clase: '', q: '', syncErr: false, mes: new Date().getMonth() + 1 };
 const VIEWS = ['mapa', 'salidas', 'salida', 'setas', 'mes', 'ajustes'];
 const TITULOS = { mapa: 'Mapa', salidas: 'Salidas', salida: 'Salida', setas: 'Setas', mes: 'Este mes', ajustes: 'Ajustes' };
@@ -331,12 +332,13 @@ const ICO_SETA = '<svg viewBox="0 0 48 48"><path fill="#e0a458" d="M24 6C13 6 5 
 function renderSetas() {
   const root = $('#v-setas');
   if (!$('#q', root)) {
-    root.innerHTML = '<div class="pad"><button class="guide-card" id="gu-open">' + ICO_SETA + '<div><b>Guía para principiantes</b><small>Las partes de una seta y cómo mirarlas</small></div></button>' +
+    root.innerHTML = '<div class="pad"><div class="learn"><button class="guide-card" id="gu-open">' + ICO_SETA + '<div><b>Partes de una seta</b><small>Esquema con nombres y colores</small></div></button><button class="guide-card book" id="li-open"><span class="ic">' + lib.CAPS[0].ico + '</span><div><b>El libro para empezar</b><small>Equipo, cortar o arrancar, mitos, intoxicación</small></div></button></div>' +
       '<div class="warn" style="margin-top:10px">' + esc(cat.aviso()) + '</div><input type="search" id="q" placeholder="Buscar seta…" autocomplete="off" style="margin-top:12px"><div class="chips" id="cl" style="margin:10px 0 0"></div><div id="slist"></div>' +
       '<p class="note" style="margin-top:14px">Catálogo en borrador: ' + cat.todas().length + ' fichas sin revisar por una persona experta. Las comestibles candidatas figuran como «candidata · sin confirmar» hasta verificarlas con ≥2 fuentes y revisión experta. Fotos de Wikimedia Commons con su autoría y licencia en cada ficha.</p></div>';
     $('#q', root).oninput = e => { S.q = e.target.value; listaSetas(); };
     root.onclick = e => {
       if (e.target.closest('#gu-open')) return abrirGuia('');
+      if (e.target.closest('#li-open')) return abrirLibro('');
       const c = e.target.closest('#cl button'); if (c) { S.clase = c.dataset.c; return listaSetas(); }
       const b = e.target.closest('[data-e]'); if (b) abrirFicha(b.dataset.e);
     };
@@ -355,12 +357,18 @@ function abrirFicha(id) {
   const e = cat.byId(id); if (!e) return;
   const sh = openSheet(fi.fichaHTML(e, S.mes)), hero = $('#hero', sh), dots = $$('#dots i', sh);
   if (hero && dots.length) hero.onscroll = () => { const i = Math.round(hero.scrollLeft / Math.max(1, hero.clientWidth)); dots.forEach((d, k) => d.classList.toggle('on', k === i)); };
-  sh.addEventListener('click', ev => { const b = ev.target.closest('button'); if (!b) return; if (b.dataset.e) abrirFicha(b.dataset.e); else if (b.dataset.g !== undefined) abrirGuia(b.dataset.g, id); else if (b.id === 'fi-antes') abrirAntesDeComer(); });
+  sh.addEventListener('click', ev => { const b = ev.target.closest('button'); if (!b) return; if (b.dataset.e) abrirFicha(b.dataset.e); else if (b.dataset.g !== undefined) abrirGuia(b.dataset.g, id); else if (b.dataset.l !== undefined) abrirLibro(b.dataset.l, id); else if (b.id === 'fi-antes') abrirAntesDeComer(); });
 }
 function abrirGuia(sel, volverA) {
   const sh = openSheet(guiaHTML(sel) .replace('<button class="btn p" id="gu-x">Cerrar</button>', (volverA ? '<button class="btn" id="gu-b">‹ Volver a la ficha</button>' : '') + '<button class="btn p" id="gu-x">Cerrar</button>'));
   const on = $('.lg.on', sh); if (on) on.scrollIntoView({ block: 'center' });
   sh.addEventListener('click', ev => { const b = ev.target.closest('button'); if (!b) return; if (b.id === 'gu-x') closeSheet(); else if (b.id === 'gu-b') abrirFicha(volverA); });
+}
+
+function abrirLibro(cap, volverA) {
+  const volver = '<button class="btn" id="li-b">‹ Volver a la ficha</button>$&';
+  const sh = openSheet((cap ? lib.capHTML(cap) : lib.indiceHTML()).replace('<button class="btn p" id="gu-x">Cerrar</button>', volverA ? volver : '$&'));
+  sh.addEventListener('click', ev => { const b = ev.target.closest('button'); if (!b) return; if (b.id === 'gu-x') closeSheet(); else if (b.id === 'li-b') abrirFicha(volverA); else if (b.dataset.l !== undefined) abrirLibro(b.dataset.l, volverA); });
 }
 
 /* ---------- este mes ---------- */
@@ -401,7 +409,7 @@ async function renderAjustes() {
     '<label class="l">Token de GitHub</label><input type="password" id="a-tok" placeholder="' + (c.token ? '•••••• guardado (déjalo vacío para conservarlo)' : 'github_pat_…') + '" autocomplete="off">' +
     '<div class="row"><button class="btn p" id="a-sync">Guardar y sincronizar</button></div><div class="note" id="a-st" style="margin-top:10px">' + (last ? 'Última sincronización: ' + new Date(last).toLocaleString('es-ES') : 'Aún no has sincronizado.') + (db.dirtyCount() ? '<br>Pendiente de subir: ' + db.dirtyCount() : '') + '</div></div>' +
     '<div class="card"><h3>Datos</h3><div class="row"><button class="btn" id="a-exp">Exportar copia (JSON)</button></div></div>' +
-    '<div class="card"><h3>Fotos sin conexión</h3><p class="sub" style="font-family:inherit;color:var(--mut);margin:4px 0 0">Guarda las fotos de las fichas en este móvil para verlas en el monte sin cobertura (unos 15 MB).</p><div class="row"><button class="btn" id="a-fotos">Descargar fotos</button></div><div class="note" id="a-fst" style="margin-top:10px">Comprobando…</div></div>' +
+    '<div class="card"><h3>Fotos sin conexión</h3><p class="sub" style="font-family:inherit;color:var(--mut);margin:4px 0 0">Guarda las fotos de las fichas en este móvil para verlas en el monte sin cobertura (unos ' + Math.round(cat.todas().reduce((n, e) => n + (e.fotos || []).length, 0) * 0.2 / 5) * 5 + ' MB, estimado).</p><div class="row"><button class="btn" id="a-fotos">Descargar fotos</button></div><div class="note" id="a-fst" style="margin-top:10px">Comprobando…</div></div>' +
     '<div class="card"><h3>Zonas</h3>' + (zonas.length ? zonas.map(z => '<div class="row" style="margin-top:8px"><input type="text" data-z="' + z.id + '" value="' + esc(z.nombre) + '" style="flex:1"><button class="btn d" data-zd="' + z.id + '" style="flex:none">Borrar</button></div>').join('') : '<p style="color:var(--mut);margin:8px 0 0">Las zonas se crean al marcar un hallazgo.</p>') + '</div>' +
     '<div class="card"><h3>Acerca de</h3><p style="margin:6px 0;color:var(--mut);font-size:13.5px">Versión ' + APP_V + '<br>Las coordenadas de tus sitios solo viven en este móvil y en tu repositorio privado. La app nunca certifica que una seta sea comestible.<br>Mapa: imágenes PNOA/Sentinel © IGN España (CC BY 4.0 scne.es) · callejero © OpenStreetMap.</p></div></div>';
   $('#a-sync', root).onclick = async () => {
@@ -467,7 +475,7 @@ async function boot() {
   $('#syncbtn').onclick = () => { const c = syn.cfg(); if (!c.repo || !c.token) { location.hash = '#ajustes'; toast('Configura el repositorio y el token'); } else correrSync(); };
   if (syn.cfg().repo) syn.auto(2500);
   if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) navigator.serviceWorker.register('sw.js').catch(() => { });
-  window.__MI = { db, geo, syn, cat, trk, S, abrirHallazgo, abrirFicha };
+  window.__MI = { db, geo, syn, cat, trk, S, abrirHallazgo, abrirFicha, abrirLibro };
   document.body.dataset.ready = '1';
 }
 boot().catch(e => { console.error(e); document.body.insertAdjacentHTML('beforeend', '<div class="warn" style="position:fixed;top:60px;left:12px;right:12px;z-index:9999">No se pudo arrancar la app: ' + esc(e.message || e) + '</div>'); });

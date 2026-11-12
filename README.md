@@ -26,7 +26,7 @@ Colecciones: `salidas`, `zonas`, `hallazgos`. El token de GitHub (fine-grained, 
 
 ## Pantallas
 
-Cinco pestañas: **Mapa** (Marcar aquí), **Salidas**, **Setas** (catálogo + guía de partes de la seta), **Este mes** (qué se puede encontrar ahora, con las peligrosas arriba) y **Ajustes**.
+Cinco pestañas: **Mapa** (Marcar aquí), **Salidas**, **Setas** (catálogo de 56 fichas tipo libro, guía de partes de la seta y «El libro para empezar»), **Este mes** (qué se puede encontrar ahora, con las peligrosas arriba) y **Ajustes**.
 
 ### Salida y recorrido
 Al empezar una salida se graba el recorrido (`docs/js/track.js`): un punto cada ≥12 m y solo con precisión ≤40 m, guardado en la propia salida como `track: [[lat, lon, segundos], …]`. Pausar/reanudar y los huecos de más de 20 min abren un tramo nuevo (no se dibuja ni se mide una línea falsa entre tramos). Se dibuja en el mapa y en el minimapa de la salida; se exporta a GPX (recorrido + hallazgos como puntos).
@@ -34,10 +34,12 @@ Al empezar una salida se graba el recorrido (`docs/js/track.js`): un punto cada 
 Al terminar, el bloque «Fotos de lo que te llevas» guarda fotos de lo recogido (cámara o galería) en `fotosCosecha`, como registro de la salida.
 
 ## Catálogo visual
-- **Fotos:** Wikimedia Commons, enlazadas (no copiadas). Cada foto lleva autor, licencia (solo CC BY, CC BY-SA, CC0 o dominio público) y página de origen, que se muestran en la ficha. Se piden con CORS y el service worker las guarda (`fotos-v1`); «Descargar fotos» en Ajustes las baja todas (~15 MB) para usarlas sin cobertura.
+- **Fotos:** Wikimedia Commons, enlazadas (no copiadas). Cada foto lleva autor, licencia (solo CC BY, CC BY-SA, CC0 o dominio público) y página de origen, que se muestran en la ficha. Se piden con CORS y el service worker las guarda (`fotos-v1`); «Descargar fotos» en Ajustes las baja todas (~35 MB, 168 fotos) para usarlas sin cobertura.
 - **Qué mirar y confusiones:** texto en cada ficha con su fuente. Hoy proceden de Wikipedia (fuente terciaria) y siguen en nivel **borrador** hasta que las revise una persona experta.
 - **Temporada:** observaciones verificadas de iNaturalist por mes en la costa cantábrica (42,6–43,7 N · 5,5–1,0 O) + el rango que cita Wikipedia. Con menos de 15 observaciones solo se usa el rango citado (marcado «orientativo»); con menos de 2 registros en un mes ese mes no cuenta. Sin datos suficientes, la ficha lo dice. La temporada dice cuándo se ve la especie, nunca si es segura.
-- **Regenerar:** `python3 tools/enriquecer.py` (lista de fotos y textos en `tools/`; es idempotente).
+- **Ficha tipo libro:** hábitat con iconos y texto, color de esporada, «Cómo recogerla» (cortar / sacar entera / no recoger, con su fuente, p. ej. La Rioja), curiosidades y nombres en castellano y euskera. Los datos de cada especie están en `tools/datos/` (`n*.py` fichas nuevas, `x*.py` ampliación de las 25 anteriores), cada dato con la fuente de la que sale.
+- **El libro para empezar** (`docs/js/libro.js`): 7 capítulos (equipo, cortar o arrancar, identificar y esporada, mitos, en casa, intoxicación, normas). Citan La Rioja, OCU, Consumer, Instituto Nacional de Toxicología, SUMMA 112 y la Universidad de Tampere. La normativa de Bizkaia/Euskadi **no está verificada** y la pantalla lo dice.
+- **Regenerar:** `python3 tools/enriquecer.py` (v2: fotos, qué mirar, temporada) y después `python3 tools/ampliar.py` (v3: +31 fichas y datos de libro). Ambos son idempotentes.
 
 ## Mapa
 
@@ -53,4 +55,4 @@ Verificado en navegador (12-nov-2026): una tesela de Bizkaia responde 200 JPEG 2
 
 ## Catálogo
 
-25 fichas en **borrador** (lista del MVP: 16 peligrosas o pares de confusión y 9 comestibles candidatas). Las candidatas están como `sin_datos` hasta tener ≥2 fuentes contrastadas y revisión experta; ninguna ficha pasa a `comestible_buena` sin eso (lo comprueba `tests/suites/00-estatico.js`).
+56 fichas en **borrador** (25 del MVP: 16 peligrosas o pares de confusión y 9 candidatas, más 31 de la ampliación v3: 22 candidatas, 5 tóxicas, 1 mortal y 3 no comestibles; en total 31 candidatas, 14 tóxicas, 7 mortales y 4 no comestibles). Las candidatas están como `sin_datos` hasta tener ≥2 fuentes contrastadas y revisión experta; ninguna ficha pasa a `comestible_buena` sin eso (lo comprueba `tests/suites/00-estatico.js`).

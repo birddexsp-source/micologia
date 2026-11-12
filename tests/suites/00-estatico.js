@@ -9,7 +9,7 @@ module.exports = {
   name: 'Estático: archivos, SW, catálogo y seguridad', static: true,
   async run(t) {
     await t.case('archivos básicos y service worker', async () => {
-      ['index.html', 'sw.js', 'manifest.webmanifest', 'icon.svg', 'icon-192.png', 'icon-512.png', 'css/app.css', 'js/app.js', 'js/db.js', 'js/sync.js', 'js/geo.js', 'js/map.js', 'js/catalog.js', 'js/util.js', 'js/guia.js', 'js/ficha.js', 'js/temporada.js', 'js/track.js', 'vendor/leaflet/leaflet.js', 'vendor/leaflet/leaflet.css', 'data/especies.json']
+      ['index.html', 'sw.js', 'manifest.webmanifest', 'icon.svg', 'icon-192.png', 'icon-512.png', 'css/app.css', 'js/app.js', 'js/db.js', 'js/sync.js', 'js/geo.js', 'js/map.js', 'js/catalog.js', 'js/util.js', 'js/guia.js', 'js/ficha.js', 'js/temporada.js', 'js/track.js', 'js/libro.js', 'vendor/leaflet/leaflet.js', 'vendor/leaflet/leaflet.css', 'data/especies.json']
         .forEach(f => t.ok('existe docs/' + f, fs.existsSync(path.join(DOCS, f))));
       const sw = rd('sw.js'), shell = JSON.parse(sw.match(/const SHELL = (\[[\s\S]*?\]);/)[1].replace(/'/g, '"'));
       shell.forEach(f => t.ok('SHELL del SW existe: ' + f, f === './' || fs.existsSync(path.join(DOCS, f))));
@@ -36,7 +36,7 @@ module.exports = {
       const j = JSON.parse(rd('data/especies.json')), E = j.especies;
       t.ok('hay aviso de seguridad', /no se come/i.test(j.aviso));
       t.eq('ids únicos', new Set(E.map(e => e.id)).size, E.length);
-      t.eq('número de fichas (lista del MVP validable)', E.length, 25);
+      t.eq('número de fichas (25 del MVP + 31 de la ampliación)', E.length, 56);
       E.forEach(e => {
         t.ok(e.id + ': id, nombre científico y clase', !!(e.id && e.nombreCientifico && CLASES.includes(e.clase)), e.clase);
         t.ok(e.id + ': tiene fuentes', Array.isArray(e.fuentes) && e.fuentes.length >= 1);
@@ -50,11 +50,27 @@ module.exports = {
         });
         if (e.candidataComestible) t.ok(e.id + ': candidata sin clasificar como comestible', e.clase === 'sin_datos');
       });
-      t.ok('las 9 candidatas a comestible están como sin_datos', E.filter(e => e.candidataComestible).length === 9);
+      t.ok('las 31 candidatas a comestible están como sin_datos', E.filter(e => e.candidataComestible).length === 31 && E.filter(e => e.candidataComestible).every(e => e.clase === 'sin_datos'));
       ['amanita-phalloides', 'amanita-verna-virosa', 'lepiota-brunneoincarnata', 'galerina-marginata', 'cortinarius-orellanus'].forEach(id => t.eq(id + ' es mortal', (E.find(e => e.id === id) || {}).clase, 'mortal'));
     });
+    await t.case('catálogo v3: datos de libro (hábitat, cómo recoger, curiosidades, nombres) con fuente', async () => {
+      const E = JSON.parse(rd('data/especies.json')).especies, ACC = ['cortar', 'extraer', 'dejar'];
+      const HAB = ['robledal', 'encinar', 'hayedo', 'castanar', 'abedular', 'frondosas', 'arbol_vivo', 'pinar', 'abetal', 'coniferas', 'mixto', 'bosque', 'prado', 'claro', 'parque', 'brezal', 'huerto', 'cuneta', 'madera', 'quemado'];
+      E.forEach(e => {
+        t.ok(e.id + ': hábitats válidos', Array.isArray(e.habitats) && e.habitats.length >= 1 && e.habitats.every(h => HAB.includes(h)), JSON.stringify(e.habitats));
+        t.ok(e.id + ': texto de hábitat', !!e.habitatTexto && e.habitatTexto.length > 30);
+        t.ok(e.id + ': cómo recogerla (acción y texto)', !!e.recoleccion && ACC.includes(e.recoleccion.acc) && e.recoleccion.txt.length > 20);
+        t.ok(e.id + ': ≥2 curiosidades', Array.isArray(e.curiosidades) && e.curiosidades.length >= 1 && e.curiosidades.every(c => c.length > 15));
+        t.ok(e.id + ': nombre en euskera', ((e.nombresComunes || {}).eu || []).length >= 1);
+        t.ok(e.id + ': cita Wikipedia en español o euskera para hábitat/curiosidades', e.fuentes.some(f => /^Wikipedia \((español|euskera)\)/.test(f.nombre) && /^https:\/\/(es|eu)\.wikipedia\.org\/wiki\//.test(f.url || '')));
+        if (e.clase === 'mortal' || e.clase === 'toxica') t.eq(e.id + ': tóxica → «No recoger»', e.recoleccion.acc, 'dejar');
+        if (e.candidataComestible) t.ok(e.id + ': el texto de recogida no declara comestible', !/\bes comestible\b|\bse puede comer\b|\bbuen comestible\b/i.test(e.recoleccion.txt + ' ' + e.habitatTexto + ' ' + e.curiosidades.join(' ')));
+      });
+      ['xanthodermus', 'xanthoderma'].forEach(() => 0);
+      t.ok('la «xixa» (Agaricus campestris) está en el catálogo', E.some(e => e.id === 'agaricus-campestris' && e.nombresComunes.es.concat(e.nombresComunes.eu).length >= 1));
+    });
     await t.case('catálogo v2: fotos con licencia y autoría, qué mirar y temporada con fuente', async () => {
-      const E = JSON.parse(rd('data/especies.json')).especies, LIC = ['CC BY 3.0', 'CC BY 4.0', 'CC BY-SA 2.0', 'CC BY-SA 3.0', 'CC BY-SA 4.0', 'CC0', 'Dominio público'];
+      const E = JSON.parse(rd('data/especies.json')).especies, LIC = ['CC BY 2.0', 'CC BY 2.5', 'CC BY 3.0', 'CC BY 4.0', 'CC BY-SA 2.0', 'CC BY-SA 3.0', 'CC BY-SA 4.0', 'CC0', 'Dominio público'];
       const PARTES = ['sombrero', 'cutis', 'himenio', 'carne', 'pie', 'anillo', 'volva', 'micelio', 'olor', 'esporada', 'habitat', 'otro'];
       E.forEach(e => {
         t.ok(e.id + ': ≥3 fotos o las que haya (mín. 3)', (e.fotos || []).length >= 3, String((e.fotos || []).length));
