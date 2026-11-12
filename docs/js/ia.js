@@ -42,28 +42,44 @@ export function limpiar(r, especies) {
 
 const b64 = blob => new Promise((ok, ko) => { const f = new FileReader(); f.onload = () => ok(String(f.result).split(',')[1]); f.onerror = ko; f.readAsDataURL(blob); });
 
-export async function reconocer(files, { key = getKey(), fetchImpl = fetch } = {}) {
-  const especies = cat.todas();
+/* Llama a Gemini con los modelos de respaldo y devuelve el texto de la respuesta. */
+async function generar(partes, gen, { key = getKey(), fetchImpl = fetch } = {}) {
   if (!key) throw new Error('sin-clave');
-  const partes = [{ text: prompt(especies) }];
-  for (const f of files) partes.push({ inline_data: { mime_type: 'image/jpeg', data: await b64(await reducirFoto(f, 1024, 0.7)) } });
   let ultimo = 'red';
   for (let i = 0; i < MODELOS.length; i++) {
-    const m = MODELOS[i], ctl = new AbortController(), t = setTimeout(() => ctl.abort(), 25000);
+    const m = MODELOS[i], ctl = new AbortController(), t = setTimeout(() => ctl.abort(), 30000);
     try {
       const res = await fetchImpl('https://generativelanguage.googleapis.com/v1beta/models/' + m + ':generateContent', {
         method: 'POST', headers: { 'Content-Type': 'application/json', 'x-goog-api-key': key }, signal: ctl.signal,
-        body: JSON.stringify({ contents: [{ parts: partes }], generationConfig: { responseMimeType: 'application/json', responseSchema: SCHEMA, temperature: 0.4, maxOutputTokens: 1024,
-          thinkingConfig: m.startsWith('gemini-2.5') ? { thinkingBudget: 0 } : { thinkingLevel: 'minimal' } } })
+        body: JSON.stringify({ contents: [{ parts: partes }], generationConfig: { ...gen, thinkingConfig: m.startsWith('gemini-2.5') ? { thinkingBudget: 0 } : { thinkingLevel: 'minimal' } } })
       });
-      if (res.status === 400 || res.status === 403) throw Object.assign(new Error('clave'), { fatal: true });
+      if (res.status === 403 || res.status === 400) {
+        const tx = await res.text().catch(() => '');
+        if (res.status === 403 || /API key|API_KEY|permission/i.test(tx)) throw Object.assign(new Error('clave'), { fatal: true });
+        ultimo = 'formato'; continue;
+      }
       if (!res.ok) { ultimo = 'http-' + res.status; continue; }
       const body = await res.json(), c = body.candidates && body.candidates[0];
       if (!c || c.finishReason !== 'STOP') { ultimo = 'incompleta'; continue; }
-      return limpiar(JSON.parse(c.content.parts.filter(p => !p.thought).map(p => p.text || '').join('')), especies);
+      return c.content.parts.filter(p => !p.thought).map(p => p.text || '').join('');
     } catch (e) { if (e.fatal) throw e; ultimo = e.name === 'AbortError' ? 'tiempo' : 'red'; }
     finally { clearTimeout(t); }
   }
   throw new Error(ultimo);
 }
-export const mensajeError = e => ({ 'sin-clave': 'Falta la clave de Gemini (Ajustes).', clave: 'Google no acepta la clave: revísala en Ajustes.', red: 'No hay conexión. Prueba cuando tengas cobertura.', tiempo: 'Ha tardado demasiado. Prueba otra vez.' }[e && e.message] || 'No se ha podido reconocer ahora. Prueba más tarde.');
+export async function reconocer(files, opts = {}) {
+  const especies = cat.todas(), partes = [{ text: prompt(especies) }];
+  for (const f of files) partes.push({ inline_data: { mime_type: 'image/jpeg', data: await b64(await reducirFoto(f, 1024, 0.7)) } });
+  const txt = await generar(partes, { responseMimeType: 'application/json', responseSchema: SCHEMA, temperature: 0.4, maxOutputTokens: 1024 }, opts);
+  let r; try { r = JSON.parse(txt); } catch (e) { throw new Error('incompleta'); }
+  return limpiar(r, especies);
+}
+/* Transcribe una nota de voz (castellano, a veces con palabras en euskera). Solo texto: no interpreta ni resume. */
+export async function transcribir(blob, opts = {}) {
+  const partes = [{ text: 'Transcribe literalmente este audio (castellano; puede haber palabras en euskera o nombres de setas). Devuelve SOLO el texto transcrito, sin comentarios. Si no se entiende nada, devuelve una cadena vacía.' },
+    { inline_data: { mime_type: (blob.type || 'audio/webm').split(';')[0], data: await b64(blob) } }];
+  const t = (await generar(partes, { temperature: 0, maxOutputTokens: 2048 }, opts)).trim();
+  if (!t) throw new Error('vacio');
+  return t.slice(0, 4000);
+}
+export const mensajeError = e => ({ 'sin-clave': 'Falta la clave de Gemini (Ajustes).', clave: 'Google no acepta la clave: revísala en Ajustes.', red: 'No hay conexión. Prueba cuando tengas cobertura.', tiempo: 'Ha tardado demasiado. Prueba otra vez.', formato: 'Google no ha podido leer este audio.', vacio: 'No se ha entendido nada en el audio.' }[e && e.message] || 'No se ha podido reconocer ahora. Prueba más tarde.');

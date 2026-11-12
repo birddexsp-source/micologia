@@ -14,7 +14,7 @@ export const syncing = () => SYNCING;
 const b64enc = s => { const u = new TextEncoder().encode(s); let r = ''; for (let i = 0; i < u.length; i += 0x8000) r += String.fromCharCode.apply(null, u.subarray(i, i + 0x8000)); return btoa(r); };
 const b64dec = b => { const s = atob(b.replace(/\n/g, '')), u = new Uint8Array(s.length); for (let i = 0; i < s.length; i++) u[i] = s.charCodeAt(i); return u; };
 const blobB64 = bl => new Promise((ok, ko) => { const r = new FileReader(); r.onload = () => ok(String(r.result).split(',')[1]); r.onerror = ko; r.readAsDataURL(bl); });
-const tipo = u => (u[0] === 0xFF && u[1] === 0xD8) ? 'image/jpeg' : (u[0] === 0x89 && u[1] === 0x50) ? 'image/png' : (u[0] === 0x52 && u[1] === 0x49) ? 'image/webp' : 'application/octet-stream';
+const tipo = u => (u[0] === 0xFF && u[1] === 0xD8) ? 'image/jpeg' : (u[0] === 0x89 && u[1] === 0x50) ? 'image/png' : (u[0] === 0x52 && u[1] === 0x49) ? 'image/webp' : (u[0] === 0x1A && u[1] === 0x45 && u[2] === 0xDF && u[3] === 0xA3) ? 'audio/webm' : (u[4] === 0x66 && u[5] === 0x74 && u[6] === 0x79 && u[7] === 0x70) ? 'audio/mp4' : (u[0] === 0x4F && u[1] === 0x67 && u[2] === 0x67 && u[3] === 0x53) ? 'audio/ogg' : 'application/octet-stream';
 
 function gh(c) {
   const base = 'https://api.github.com/repos/' + c.repo;

@@ -60,3 +60,8 @@ Verificado en navegador (12-nov-2026): una tesela de Bizkaia responde 200 JPEG 2
 ## Reconocer con IA (Gemini)
 Setas → «Reconocer con IA»: 1-3 fotos (arriba, por debajo, base del pie) → Gemini devuelve candidatas que se cruzan con las 56 fichas; si no está en la colección lo dice. Solo es una pista: se abstiene si las fotos no bastan, avisa si entre las candidatas hay tóxicas y nunca habla de comestibilidad.
 La clave (gratis, aistudio.google.com/apikey) **no está en el repo**: se pega en la pantalla o en Ajustes y vive solo en el localStorage del móvil. Las fotos se envían a Google solo al pulsar «Reconocer». Módulo: `docs/js/ia.js`; pruebas: `tests/suites/09-ia.js`.
+
+## Spots y notas de voz
+- **Spot = zona** con estado «Visitado» o «Quiero ir» (bandera verde / azul discontinua en el mapa; lista en Salidas → Mis spots, por cercanía). Botón ⚑ del mapa para crear uno; desde un spot, «Marcar hallazgo aquí» (también se elige solo si estás a menos de 150 m). Al marcar un hallazgo en un «Quiero ir» pasa a «Visitado».
+- **Nota de voz** (`docs/js/audio.js`) en hallazgos y spots: se guarda como blob (`blobs/<id>` en el repo de datos) y, con conexión, Gemini la transcribe sola (`ia.transcribir`); la transcripción se puede corregir y rellena la nota. Sin conexión queda el audio y se transcribe luego.
+- Datos nuevos (opcionales) en `zonas`: `estado`, `fotos`, `audios`, `transcripciones`, `visitadaTs`; en `hallazgos`: `audios`, `transcripciones`.

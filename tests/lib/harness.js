@@ -124,7 +124,7 @@ class T {
     await this.fixGPS(); await this.tap('#fab', 350);
     if (extra.esp) { await this.page.fill('#sp-q', extra.esp); await this.wait(120); await this.tap('#sp-sugs button'); }
     if (extra.zona) { await this.tap('#mk-nz'); await this.page.fill('#mk-znom', extra.zona); await this.tap('#mk-zok'); }
-    else if (extra.zonaExistente) await this.tap('#mk-zonas button[data-z]');
+    else if (extra.zonaExistente) { if (!(await this.has('#mk-zonas button[data-z].on'))) await this.tap('#mk-zonas button[data-z]'); }   /* si ya hay una a menos de 150 m, la app la elige sola */
     if (extra.cant) await this.page.fill('#mk-cant', extra.cant);
     await this.tap('#mk-ok', 350);
   }

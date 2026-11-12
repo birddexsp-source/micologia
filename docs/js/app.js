@@ -10,8 +10,9 @@ import * as tmp from './temporada.js';
 import * as fi from './ficha.js';
 import * as trk from './track.js';
 import * as ia from './ia.js';
+import * as au from './audio.js';
 
-const APP_V = 'micologia-v6';   // = V de sw.js
+const APP_V = 'micologia-v7';   // = V de sw.js
 const S = { view: 'mapa', arg: '', map: null, pins: null, me: null, acc: null, tmp: null, mini: null, centered: false, filtro: { salida: '', especie: '' }, clase: '', q: '', syncErr: false, mes: new Date().getMonth() + 1 };
 const VIEWS = ['mapa', 'salidas', 'salida', 'setas', 'mes', 'ajustes'];
 const TITULOS = { mapa: 'Mapa', salidas: 'Salidas', salida: 'Salida', setas: 'Setas', mes: 'Este mes', ajustes: 'Ajustes' };
@@ -27,9 +28,10 @@ function openSheet(html, { dim = true } = {}) {
 }
 function closeSheet() {
   const s = $('#sheet'); s.hidden = true; s.innerHTML = ''; s.onclick = null;
+  if (S.rec) { S.rec.cancel(); S.rec = null; clearInterval(S.recT); }
   if (S.tmp) { S.tmp.remove(); S.tmp = null; }
 }
-async function hydrate(root) { for (const im of $$('img[data-blob]', root)) { const u = await db.blobURL(im.dataset.blob); if (u) im.src = u; } }
+async function hydrate(root) { for (const im of $$('img[data-blob], audio[data-blob]', root)) { const u = await db.blobURL(im.dataset.blob); if (u) im.src = u; } }
 const tag = fi.tag;
 const identTag = i => '<span class="tag" style="--c:' + (IDENT[i] || IDENT.sin_identificar).color + ';color:#0a0f0e">' + (IDENT[i] || IDENT.sin_identificar).label + '</span>';
 const nombreHall = h => { const e = cat.byId(h.especieId); return e ? cat.nombre(e) : (h.especieTxt || 'Sin identificar'); };
@@ -56,6 +58,43 @@ function trazo(pts) {
   return g;
 }
 
+/* ---------- notas de voz: grabar, escuchar y transcribir (Gemini) ---------- */
+const vozLista = st => st.audios.map(id => '<div class="au"><audio controls preload="none" data-blob="' + id + '"></audio><div class="row"><button class="btn" data-at="' + id + '">' + (st.pend.has(id) ? 'Transcribiendo…' : st.trans[id] ? 'Transcribir otra vez' : 'Transcribir') + '</button><button class="btn d" data-ad="' + id + '">Quitar</button></div>' +
+  '<textarea data-tt="' + id + '" placeholder="Aquí aparece lo que dices (puedes corregirlo)">' + esc(st.trans[id] || '') + '</textarea></div>').join('');
+const vozHTML = st => '<label class="l">Nota de voz</label><div class="row"><button class="btn big" id="au-rec"' + (au.soportado() ? '' : ' disabled') + '>🎙 Grabar nota de voz</button></div><div id="au-list">' + vozLista(st) + '</div>' +
+  (au.soportado() ? '' : '<p class="note">Este navegador no puede grabar audio.</p>');
+function vozWire(sh, st) {
+  const pintar = () => { $('#au-list', sh).innerHTML = vozLista(st); hydrate($('#au-list', sh)); };
+  const transcribir = async id => {
+    const r = db.B.get(id); if (!r || !r.blob || st.pend.has(id)) return;
+    if (!navigator.onLine) return toast('Sin conexión: el audio queda guardado y lo transcribes luego');
+    st.pend.add(id); pintar();
+    try { const t = await ia.transcribir(r.blob); st.trans[id] = t; if (st.onTrans) st.onTrans(id, t); }
+    catch (e) { toast(ia.mensajeError(e) + ' El audio queda guardado.', 3800); }
+    st.pend.delete(id); if (sh.isConnected) pintar();
+  };
+  pintar();
+  sh.addEventListener('input', e => { const k = e.target.dataset && e.target.dataset.tt; if (k) st.trans[k] = e.target.value; });
+  sh.addEventListener('click', async ev => {
+    const t = ev.target.closest('button'); if (!t) return;
+    if (t.dataset.at) transcribir(t.dataset.at);
+    else if (t.dataset.ad) { st.audios = st.audios.filter(x => x !== t.dataset.ad); delete st.trans[t.dataset.ad]; pintar(); }
+    else if (t.id === 'au-rec') {
+      if (!S.rec) {
+        try { S.rec = await au.grabar(); } catch (e) { return toast(e && e.name === 'NotAllowedError' ? 'Permiso de micrófono denegado' : 'No puedo usar el micrófono', 3600); }
+        t.classList.add('grab'); const tick = () => { t.textContent = '⏹ Parar · ' + au.mmss(S.rec ? S.rec.seg() : 0); }; tick(); S.recT = setInterval(tick, 500);
+      } else {
+        const r = S.rec; S.rec = null; clearInterval(S.recT); t.classList.remove('grab'); t.textContent = '🎙 Grabar nota de voz';
+        const blob = await r.stop(); if (!blob.size) return toast('No se ha grabado nada');
+        const id = await db.putBlob(blob); st.audios.push(id); pintar(); transcribir(id);
+      }
+    }
+  });
+}
+const nuevoVoz = h => ({ audios: [...((h && h.audios) || [])], trans: { ...((h && h.transcripciones) || {}) }, pend: new Set() });
+const distM = (a, b) => { const R = 6371000, r = x => x * Math.PI / 180, dl = r(b.lat - a.lat), dn = r(b.lon - a.lon), q = Math.sin(dl / 2) ** 2 + Math.cos(r(a.lat)) * Math.cos(r(b.lat)) * Math.sin(dn / 2) ** 2; return 2 * R * Math.asin(Math.sqrt(q)); };
+const kmFmt = m => m < 950 ? Math.round(m / 10) * 10 + ' m' : (m / 1000).toFixed(1).replace('.', ',') + ' km';
+
 /* ---------- selector de especie (catálogo o texto libre) ---------- */
 function pickerHTML(st) {
   const e = cat.byId(st.id);
@@ -77,7 +116,7 @@ function pickerWire(root, st) {
 
 /* ---------- mapa ---------- */
 function initMap() {
-  S.map = createMap('map'); S.trkL = L.layerGroup().addTo(S.map); S.pins = L.layerGroup().addTo(S.map);
+  S.map = createMap('map'); S.trkL = L.layerGroup().addTo(S.map); S.spotsL = L.layerGroup().addTo(S.map); S.pins = L.layerGroup().addTo(S.map);
   S.me = L.marker([0, 0], { icon: L.divIcon({ className: 'me', html: '<i></i>', iconSize: [22, 22], iconAnchor: [11, 11] }), interactive: false, opacity: 0 }).addTo(S.map);
   S.acc = L.circle([0, 0], { radius: 0, color: '#4c9bff', weight: 1, fillOpacity: .12, interactive: false }).addTo(S.map);
   geo.onFix((f, err) => {
@@ -91,7 +130,8 @@ function initMap() {
   $('#locate').onclick = () => { const f = geo.fix(); if (f) S.map.setView([f.lat, f.lon], Math.max(S.map.getZoom(), 17)); else toast('Aún sin GPS'); };
   $('#layerbtn').onclick = () => { const b = S.map.setBase(S.map.getBase() === 'sat' ? 'calle' : 'sat'); toast(b === 'sat' ? 'Satélite' : 'Callejero'); };
   $('#filterbtn').onclick = abrirFiltro;
-  $('#fab').onclick = marcar;
+  $('#fab').onclick = () => marcar();
+  $('#spotbtn').onclick = () => abrirSpot();
   trk.onAdd(() => { if (S.trkId && trk.activo() === S.trkId) pintarTrack(trk.puntos()); });
   geo.start();
 }
@@ -100,6 +140,8 @@ async function refreshPins() {
   const [hs, act] = [await db.list('hallazgos'), await activa()], f = S.filtro;
   hs.filter(h => (!f.salida || (f.salida === 'activa' ? act && h.salidaId === act.id : h.salidaId === f.salida)) && (!f.especie || h.especieId === f.especie))
     .forEach(h => pin(h).on('click', () => abrirHallazgo(h.id)).addTo(S.pins));
+  S.spotsL.clearLayers();
+  (await db.list('zonas')).filter(z => z.lat != null && z.lon != null).forEach(z => L.marker([z.lat, z.lon], { icon: L.divIcon({ className: 'spot' + (z.estado === 'por_visitar' ? ' por' : ''), html: '<i></i>', iconSize: [26, 26], iconAnchor: [13, 13] }), title: z.nombre }).on('click', () => abrirSpot(z.id)).addTo(S.spotsL));
   $('#filterbtn').classList.toggle('on', !!(f.salida || f.especie));
   /* recorrido: el de la salida filtrada o, si no hay filtro, el de la salida en curso */
   S.trkId = f.salida && f.salida !== 'activa' ? f.salida : act && act.id;
@@ -120,28 +162,31 @@ async function abrirFiltro() {
 }
 
 /* ---------- marcar un hallazgo (flujo de campo: Marcar aquí → Guardar) ---------- */
-async function marcar() {
+async function marcar(opts = {}) {
   const map = S.map; let pos;
   const f = geo.fix() || await geo.waitFix(2500);
   if (f) pos = { lat: f.lat, lon: f.lon, acc: f.acc };
   else { const c = map.getCenter(); pos = { lat: c.lat, lon: c.lng, acc: null, manual: true }; toast('Sin GPS: arrastra el punto a su sitio', 3800); }
   if (map.getZoom() < 16) map.setView([pos.lat, pos.lon], 17);
   closeSheet(); S.tmp = dragPin()(pos.lat, pos.lon).addTo(map);
-  const m = { esp: { id: null, txt: '' }, fotos: [], zona: null, estado: '', nueva: false };
+  const m = { esp: { id: null, txt: '' }, fotos: [], zona: opts.zona || null, estado: '', nueva: false }, vz = nuevoVoz();
   const [zonas, act] = [await db.list('zonas'), await activa()];
+  /* barrido: si ya estás a menos de 150 m de un spot, se elige solo */
+  if (!m.zona) { const c = zonas.filter(z => z.lat != null).map(z => [z, distM(pos, z)]).sort((a, b) => a[1] - b[1])[0]; if (c && c[1] <= 150) m.zona = c[0].id; }
   const posTxt = () => pos.lat.toFixed(5) + ', ' + pos.lon.toFixed(5) + (pos.manual || pos.adj ? ' · ajustado a mano' : pos.acc != null ? ' · ±' + pos.acc + ' m' : '');
   const zonasOrd = () => zonas.slice().sort((a, b) => (act && act.zonaIds.includes(b.id)) - (act && act.zonaIds.includes(a.id)) || a.nombre.localeCompare(b.nombre));
   const zonaHTML = () => '<label class="l">Zona</label><div class="chips" id="mk-zonas">' +
     zonasOrd().map(z => '<button class="opt ' + (m.zona === z.id ? 'on' : '') + '" data-z="' + z.id + '">' + esc(z.nombre) + '</button>').join('') +
     '<button class="opt" id="mk-nz">+ Zona</button></div>' + (m.nueva ? '<div class="row" style="margin-top:8px"><input type="text" id="mk-znom" placeholder="Nombre de la zona" style="flex:1"><button class="btn p" id="mk-zok" style="flex:none">Crear</button></div>' : '');
-  const sh = openSheet('<h2>Nuevo hallazgo</h2><p class="sub" id="mk-pos">' + posTxt() + '</p>' + pickerHTML(m.esp) +
+  const sh = openSheet('<h2>Nuevo hallazgo</h2><p class="sub" id="mk-pos">' + hhmm(Date.now()) + ' · ' + posTxt() + '</p>' + pickerHTML(m.esp) +
     '<div id="mk-zona">' + zonaHTML() + '</div><label class="l">Foto</label><div class="thumbs"><button class="btn" id="mk-foto">Hacer foto</button><span id="mk-th" class="thumbs" style="margin:0"></span></div>' +
-    '<label class="l">Cantidad</label><input type="text" id="mk-cant" placeholder="p. ej. 3 · ≈200 g">' +
+    vozHTML(vz) + '<label class="l">Cantidad</label><input type="text" id="mk-cant" placeholder="p. ej. 3 · ≈200 g">' +
     '<label class="l">Estado</label><div class="seg" id="mk-est">' + ESTADOS.map(e => '<button data-e="' + e[0] + '">' + e[1] + '</button>').join('') + '</div>' +
     '<label class="l">Nota</label><input type="text" id="mk-nota" placeholder="Nota corta"><div class="row"><button class="btn" id="mk-x">Cancelar</button><button class="btn p" id="mk-ok" style="flex:2">Guardar</button></div>', { dim: false });
-  pickerWire(sh, m.esp);
+  pickerWire(sh, m.esp); vozWire(sh, vz);
+  vz.onTrans = (id, t) => { const n = $('#mk-nota', sh); if (n && !n.value.trim()) n.value = t.slice(0, 300); };
   setTimeout(() => map.panBy([0, Math.round(sh.offsetHeight / 2)], { animate: false }), 60);
-  S.tmp.on('dragend', () => { const p = S.tmp.getLatLng(); pos.lat = p.lat; pos.lon = p.lng; pos.adj = true; $('#mk-pos', sh).textContent = posTxt(); });
+  S.tmp.on('dragend', () => { const p = S.tmp.getLatLng(); pos.lat = p.lat; pos.lon = p.lng; pos.adj = true; $('#mk-pos', sh).textContent = hhmm(Date.now()) + ' · ' + posTxt(); });
   const rezona = () => { $('#mk-zona', sh).innerHTML = zonaHTML(); };
   sh.addEventListener('click', async ev => {
     const t = ev.target.closest('button'); if (!t) return;
@@ -149,7 +194,7 @@ async function marcar() {
     else if (t.id === 'mk-nz') { m.nueva = true; rezona(); $('#mk-znom', sh).focus(); }
     else if (t.id === 'mk-zok') {
       const n = $('#mk-znom', sh).value.trim(); if (!n) return;
-      const id = await db.add('zonas', { nombre: n, lat: pos.lat, lon: pos.lon, notas: '' });
+      const id = await db.add('zonas', { nombre: n, lat: pos.lat, lon: pos.lon, notas: '', estado: 'visitada', visitadaTs: Date.now() });
       zonas.push({ id, nombre: n, lat: pos.lat, lon: pos.lon }); m.zona = id; m.nueva = false; rezona();
     }
     else if (t.dataset.e) { m.estado = m.estado === t.dataset.e ? '' : t.dataset.e; $$('#mk-est button', sh).forEach(b => b.classList.toggle('on', b.dataset.e === m.estado)); }
@@ -161,10 +206,60 @@ async function marcar() {
         const a = await activa(), q = $('#sp-q', sh).value.trim();
         const h = { salidaId: a ? a.id : null, zonaId: m.zona, lat: pos.lat, lon: pos.lon, precisionM: pos.acc, ts: Date.now(), especieId: m.esp.id, especieTxt: m.esp.id ? '' : q,
           cantidad: $('#mk-cant', sh).value.trim(), estadoSeta: m.estado, sustrato: '', notas: $('#mk-nota', sh).value.trim(), fotos: m.fotos,
-          identificacion: m.esp.id ? 'provisional' : 'sin_identificar', confirmadoPor: '', recogida: false, ajustadoAMano: !!(pos.adj || pos.manual) };
+          identificacion: m.esp.id ? 'provisional' : 'sin_identificar', confirmadoPor: '', recogida: false, ajustadoAMano: !!(pos.adj || pos.manual), audios: vz.audios, transcripciones: vz.trans };
+        if (S.rec) { S.rec.cancel(); S.rec = null; clearInterval(S.recT); }
         await db.add('hallazgos', h);
+        { const zz = m.zona && zonas.find(z => z.id === m.zona); if (zz && zz.estado === 'por_visitar') await db.patch('zonas', zz.id, { estado: 'visitada', visitadaTs: Date.now() }); }
         if (a && m.zona && !a.zonaIds.includes(m.zona)) await db.patch('salidas', a.id, { zonaIds: [...a.zonaIds, m.zona] });
         closeSheet(); toast(a ? 'Hallazgo guardado en la salida' : 'Hallazgo guardado (sin salida en curso)'); syn.auto();
+      } catch (e) { t.disabled = false; toast('No se pudo guardar: ' + (e.message || e)); }
+    }
+  });
+}
+
+/* ---------- spots (= zonas): sitios visitados y por visitar ---------- */
+const SPOT_EST = [['visitada', 'Visitado'], ['por_visitar', 'Quiero ir']];
+const spotColor = z => z.estado === 'por_visitar' ? '#4cc3d9' : '#46b36b';
+const spotTag = z => '<span class="tag" style="--c:' + spotColor(z) + '">' + (z.estado === 'por_visitar' ? 'Quiero ir' : 'Visitado') + '</span>';
+async function abrirSpot(id) {
+  if (S.view !== 'mapa') { location.hash = '#mapa'; await new Promise(r => setTimeout(r, 250)); }
+  closeSheet();
+  const hs = id ? (await db.list('hallazgos')).filter(h => h.zonaId === id) : [];
+  let z = id ? await db.get('zonas', id) : null; const nuevo = !z;
+  if (nuevo) { const f = geo.fix(), c = S.map.getCenter(); z = { nombre: '', estado: 'visitada', lat: f ? f.lat : c.lat, lon: f ? f.lon : c.lng, notas: '' }; }
+  const pos = { lat: z.lat, lon: z.lon }, fotos = [...(z.fotos || [])], vz = nuevoVoz(z); let estado = z.estado || 'visitada';
+  S.map.setView([pos.lat, pos.lon], Math.max(S.map.getZoom(), 16));
+  S.tmp = dragPin()(pos.lat, pos.lon).addTo(S.map);
+  const esp = [...new Set(hs.map(h => nombreHall(h)))];
+  const sh = openSheet('<h2>' + (nuevo ? 'Nuevo spot' : esc(z.nombre || 'Spot')) + '</h2><p class="sub" id="st-pos"></p>' +
+    '<input type="text" id="st-nom" placeholder="Nombre del sitio (p. ej. Hayedo de Otzarreta)" value="' + esc(z.nombre) + '">' +
+    '<label class="l">Estado</label><div class="seg" id="st-est">' + SPOT_EST.map(e => '<button data-s="' + e[0] + '" class="' + (estado === e[0] ? 'on' : '') + '">' + e[1] + '</button>').join('') + '</div>' +
+    '<div class="row"><button class="btn" id="st-aqui">Usar mi posición</button>' + (nuevo ? '' : '<a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=' + z.lat + ',' + z.lon + '">Cómo llegar</a>') + '</div>' +
+    (nuevo ? '' : '<div class="note" style="margin-top:10px">' + (hs.length ? '<b>' + hs.length + ' hallazgo' + (hs.length > 1 ? 's' : '') + '</b> aquí: ' + esc(esp.slice(0, 6).join(', ')) + (esp.length > 6 ? '…' : '') : 'Aún sin hallazgos aquí.') + '</div><div class="row"><button class="btn p big" id="st-marcar">Marcar hallazgo aquí</button></div>') +
+    '<label class="l">Nota</label><textarea id="st-nota" placeholder="Cómo se llega, qué árboles hay, qué esperas encontrar…">' + esc(z.notas) + '</textarea>' + vozHTML(vz) +
+    '<label class="l">Fotos</label><div class="thumbs" id="st-th">' + fotos.map(f => '<img data-blob="' + f + '">').join('') + '</div><div class="row"><button class="btn" id="st-foto">Añadir foto</button></div>' +
+    '<div class="row">' + (nuevo ? '' : '<button class="btn d" id="st-del">Borrar</button>') + '<button class="btn" id="st-x">Cancelar</button><button class="btn p" id="st-ok" style="flex:2">Guardar</button></div>', { dim: false });
+  const posTxt = () => { $('#st-pos', sh).textContent = pos.lat.toFixed(5) + ', ' + pos.lon.toFixed(5) + (nuevo ? ' · arrastra el punto a su sitio' : ''); };
+  posTxt(); vozWire(sh, vz); hydrate($('#st-th', sh));
+  setTimeout(() => S.map.panBy([0, Math.round(sh.offsetHeight / 2)], { animate: false }), 60);
+  if (S.tmp) S.tmp.on('dragend', () => { const p = S.tmp.getLatLng(); pos.lat = p.lat; pos.lon = p.lng; posTxt(); });
+  sh.addEventListener('click', async ev => {
+    const t = ev.target.closest('button'); if (!t) return;
+    if (t.dataset.s) { estado = t.dataset.s; $$('#st-est button', sh).forEach(b => b.classList.toggle('on', b.dataset.s === estado)); }
+    else if (t.id === 'st-aqui') { const f = geo.fix(); if (!f) return toast('Aún sin GPS'); pos.lat = f.lat; pos.lon = f.lon; S.tmp.setLatLng([f.lat, f.lon]); S.map.setView([f.lat, f.lon], 17); posTxt(); }
+    else if (t.id === 'st-foto') pickFoto(fid => { fotos.push(fid); const im = document.createElement('img'); im.dataset.blob = fid; $('#st-th', sh).appendChild(im); hydrate($('#st-th', sh)); }, { galeria: true });
+    else if (t.id === 'st-marcar') { closeSheet(); marcar({ zona: id }); }
+    else if (t.id === 'st-x') closeSheet();
+    else if (t.id === 'st-del') { if (t.dataset.sure) { await db.remove('zonas', id); closeSheet(); toast('Spot borrado'); syn.auto(); } else { t.dataset.sure = 1; t.textContent = 'Pulsa otra vez para borrar'; } }
+    else if (t.id === 'st-ok') {
+      const nombre = $('#st-nom', sh).value.trim(); if (!nombre) { toast('Ponle un nombre al spot'); $('#st-nom', sh).focus(); return; }
+      t.disabled = true;
+      try {
+        if (S.rec) { S.rec.cancel(); S.rec = null; clearInterval(S.recT); }
+        const d = { nombre, estado, lat: pos.lat, lon: pos.lon, notas: $('#st-nota', sh).value.trim(), fotos, audios: vz.audios, transcripciones: vz.trans };
+        if (estado === 'visitada' && !z.visitadaTs) d.visitadaTs = Date.now();
+        if (nuevo) await db.add('zonas', { ...d, creada: Date.now() }); else await db.patch('zonas', id, d);
+        closeSheet(); toast(nuevo ? 'Spot guardado' : 'Guardado'); syn.auto();
       } catch (e) { t.disabled = false; toast('No se pudo guardar: ' + (e.message || e)); }
     }
   });
@@ -174,7 +269,7 @@ async function marcar() {
 async function abrirHallazgo(id) {
   const h = await db.get('hallazgos', id); if (!h) return;
   const st = { id: h.especieId, txt: h.especieTxt || '' }, e = cat.byId(h.especieId);
-  let ident = h.identificacion, estado = h.estadoSeta, recogida = h.recogida, fotos = [...(h.fotos || [])];
+  let ident = h.identificacion, estado = h.estadoSeta, recogida = h.recogida, fotos = [...(h.fotos || [])]; const vz = nuevoVoz(h);
   const zona = h.zonaId ? await db.get('zonas', h.zonaId) : null;
   const sh = openSheet('<h2>' + esc(nombreHall(h)) + '</h2><p class="sub">' + hhmm(h.ts) + ' · ' + new Date(h.ts).toLocaleDateString('es-ES') + (h.precisionM != null ? ' · ±' + h.precisionM + ' m' : '') + (zona ? ' · ' + esc(zona.nombre) : '') + '</p>' +
     pickerHTML(st) + '<div id="hd-aviso">' + avisoComer(e) + '</div>' +
@@ -183,11 +278,11 @@ async function abrirHallazgo(id) {
     '<label class="l">Cantidad</label><input type="text" id="hd-cant" value="' + esc(h.cantidad) + '">' +
     '<label class="l">Estado</label><div class="seg" id="hd-est">' + ESTADOS.map(x => '<button data-e="' + x[0] + '" class="' + (estado === x[0] ? 'on' : '') + '">' + x[1] + '</button>').join('') + '</div>' +
     '<label class="l">Sustrato / árbol</label><input type="text" id="hd-sus" value="' + esc(h.sustrato) + '" placeholder="p. ej. haya, pino, pradera">' +
-    '<label class="l">Nota</label><textarea id="hd-nota">' + esc(h.notas) + '</textarea>' +
+    '<label class="l">Nota</label><textarea id="hd-nota">' + esc(h.notas) + '</textarea>' + vozHTML(vz) +
     '<label class="l">Fotos</label><div class="thumbs" id="hd-th">' + fotos.map(f => '<img data-blob="' + f + '">').join('') + '</div><div class="row"><button class="btn" id="hd-foto">Añadir foto</button></div>' +
     '<div class="row"><label class="check" style="border:0;padding:0;flex:1"><input type="checkbox" id="hd-rec" ' + (recogida ? 'checked' : '') + '> La he recogido</label></div>' +
     '<div class="row"><button class="btn d" id="hd-del">Borrar</button><button class="btn" id="hd-mov">Mover punto</button><button class="btn p" id="hd-ok">Guardar</button></div>');
-  pickerWire(sh, st);
+  pickerWire(sh, st); vozWire(sh, vz);
   $('#sp-sugs', sh).addEventListener('click', () => { $('#hd-aviso', sh).innerHTML = avisoComer(cat.byId(st.id)); });
   sh.addEventListener('click', async ev => {
     const t = ev.target.closest('button'); if (!t) return;
@@ -201,7 +296,7 @@ async function abrirHallazgo(id) {
       const por = $('#hd-por', sh).value.trim();
       if (ident === 'confirmada' && !por) { toast('Indica quién lo ha confirmado'); return; }
       await db.patch('hallazgos', id, { especieId: st.id, especieTxt: st.id ? '' : ($('#sp-q', sh).value.trim()), identificacion: ident, confirmadoPor: ident === 'confirmada' ? por : '',
-        cantidad: $('#hd-cant', sh).value.trim(), estadoSeta: estado, sustrato: $('#hd-sus', sh).value.trim(), notas: $('#hd-nota', sh).value.trim(), fotos, recogida: $('#hd-rec', sh).checked });
+        cantidad: $('#hd-cant', sh).value.trim(), estadoSeta: estado, sustrato: $('#hd-sus', sh).value.trim(), notas: $('#hd-nota', sh).value.trim(), fotos, recogida: $('#hd-rec', sh).checked, audios: vz.audios, transcripciones: vz.trans });
       closeSheet(); toast('Guardado'); syn.auto();
     }
   });
@@ -233,11 +328,16 @@ const kmTxt = s => { const m = trk.metros(s.track); return m > 0 ? trk.fmtKm(m) 
 const durTxt = s => { const d = durSeg(s); return d >= 60 ? trk.fmtDur(d) : '—'; };
 async function renderSalidas() {
   const [ss, hs, act] = [(await db.list('salidas')).sort((a, b) => (b.creada || 0) - (a.creada || 0)), await db.list('hallazgos'), await activa()];
-  const n = id => hs.filter(h => h.salidaId === id).length;
+  const n = id => hs.filter(h => h.salidaId === id).length, zs = (await db.list('zonas')).filter(z => z.lat != null), yo = geo.fix();
+  const lugar = z => (hs.filter(h => h.zonaId === z.id).length + ' hallazgos') + (yo ? ' · ' + kmFmt(distM(yo, z)) : '');
+  const grupo = (est, tit) => { const l = zs.filter(z => (z.estado || 'visitada') === est).sort((a, b) => yo ? distM(yo, a) - distM(yo, b) : a.nombre.localeCompare(b.nombre)); return l.length ? '<div class="grp" style="--c:' + spotColor({ estado: est }) + '">' + tit + '<small>' + l.length + '</small></div>' + l.map(z => '<button class="item" data-spot="' + z.id + '"><div class="t"><b>' + esc(z.nombre) + '</b><small>' + lugar(z) + '</small></div>' + spotTag(z) + '</button>').join('') : ''; };
   $('#v-salidas').innerHTML = '<div class="pad">' + (act ? '<a class="item" href="#salida/' + act.id + '" style="border-color:#5a4220;background:#1d160b"><div class="t"><b>Salida en curso</b><small>' + esc(fecha(act.fecha)) + ' · ' + n(act.id) + ' hallazgos</small></div><span class="tag" style="--c:#e0a458;color:#1a1206">Abrir</span></a>'
     : '<button class="btn p big" id="s-new">Empezar salida</button>') +
-    '<div class="sec">Salidas</div>' + (ss.length ? ss.map(s => '<a class="item" href="#salida/' + s.id + '" style="text-decoration:none"><div class="t"><b>' + esc(fecha(s.fecha)) + (s.titulo ? ' · ' + esc(s.titulo) : '') + '</b><small>' + n(s.id) + ' hallazgos' + (s.totalTxt ? ' · ' + esc(s.totalTxt) : '') + (s.estado === 'en_curso' ? ' · en curso' : '') + '</small></div>›</a>').join('') : '<div class="empty">Aún no hay salidas.<br>Empieza una cuando salgas al monte.</div>') + '</div>';
+    '<div class="sec">Salidas</div>' + (ss.length ? ss.map(s => '<a class="item" href="#salida/' + s.id + '" style="text-decoration:none"><div class="t"><b>' + esc(fecha(s.fecha)) + (s.titulo ? ' · ' + esc(s.titulo) : '') + '</b><small>' + n(s.id) + ' hallazgos' + (s.totalTxt ? ' · ' + esc(s.totalTxt) : '') + (s.estado === 'en_curso' ? ' · en curso' : '') + '</small></div>›</a>').join('') : '<div class="empty">Aún no hay salidas.<br>Empieza una cuando salgas al monte.</div>') +
+    '<div class="sec">Mis spots</div><div class="row"><button class="btn" id="s-spot">＋ Nuevo spot</button></div>' + (zs.length ? grupo('por_visitar', 'Quiero ir') + grupo('visitada', 'Visitados') : '<div class="empty">Marca sitios que has visitado o que quieres visitar y aparecerán aquí y en el mapa.</div>') + '</div>';
   const b = $('#s-new'); if (b) b.onclick = empezarSalida;
+  $('#s-spot').onclick = () => abrirSpot();
+  $('#v-salidas').onclick = e => { const b = e.target.closest('[data-spot]'); if (b) abrirSpot(b.dataset.spot); };
 }
 function bajarArchivo(nombre, texto, tipo) {
   const u = URL.createObjectURL(new Blob([texto], { type: tipo })), a = document.createElement('a');
@@ -539,7 +639,7 @@ async function boot() {
   $('#syncbtn').onclick = () => { const c = syn.cfg(); if (!c.repo || !c.token) { location.hash = '#ajustes'; toast('Configura el repositorio y el token'); } else correrSync(); };
   if (syn.cfg().repo) syn.auto(2500);
   if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) navigator.serviceWorker.register('sw.js').catch(() => { });
-  window.__MI = { db, geo, syn, cat, trk, S, abrirHallazgo, abrirFicha, abrirLibro, abrirIA, ia };
+  window.__MI = { db, geo, syn, cat, trk, S, abrirHallazgo, abrirFicha, abrirLibro, abrirIA, ia, abrirSpot };
   document.body.dataset.ready = '1';
 }
 boot().catch(e => { console.error(e); document.body.insertAdjacentHTML('beforeend', '<div class="warn" style="position:fixed;top:60px;left:12px;right:12px;z-index:9999">No se pudo arrancar la app: ' + esc(e.message || e) + '</div>'); });
