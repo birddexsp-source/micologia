@@ -33,7 +33,7 @@ module.exports = {
       t.ok('en las coordenadas del spot', Math.abs(h.lat - 43.4007) < 1e-6 && Math.abs(h.lon + 2.7447) < 1e-6);
       t.eq('a la hora de la salida', h.ts, ini); t.eq('sin marcar como ajustado a mano', h.ajustadoAMano, false);
       await t.wait(300);
-      t.ok('el spot lista la especie', /Boletus 2[\s\S]*Cantharellus/i.test(await t.T('#v-salida') || ''));
+      t.ok('el spot lista la especie', /Boletus 2[\s\S]*(Rebozuelo|Cantharellus)/i.test(await t.T('#v-salida') || ''));
       await t.shot('captura-11-salida-spots');
     });
     await t.case('salida terminada: no se mezcla con la salida en curso', async () => {

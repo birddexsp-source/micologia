@@ -116,6 +116,22 @@ module.exports = {
       t.ok('hallazgo en las coordenadas del spot', h && Math.abs(h.lat - 43.2) < 1e-6 && Math.abs(h.lon + 2.6) < 1e-6, h && h.lat + ',' + h.lon);
       t.ok('cerca del spot sigue diciendo «Marcar aquí»', await t.page.evaluate(async () => { await window.__MI.verSpot('za'); await new Promise(r => setTimeout(r, 300)); return /Marcar aquí/.test(document.querySelector('#st-marcar').textContent); }));
     });
+    await t.case('Salidas: tarjetas con caritas de especies y salida en línea de tiempo', async () => {
+      await t.go('#salidas'); await t.wait(300);
+      t.eq('la salida muestra 2 especies (boleto y cicuta)', await t.N('#v-salidas a.sal[href="#salida/sa"] .mav'), 2);
+      t.ok('resumen de la salida en la tarjeta', /1 spot · 3 hallazgos/.test(await t.T('#v-salidas a.sal') || ''), await t.T('#v-salidas a.sal'));
+      t.ok('spot visitado con nº de especies', /Hayedo A[\s\S]*3 especies/.test(await t.T('#v-salidas [data-spot="za"]') || ''));
+      t.ok('spot por visitar: «sin visitar»', /sin visitar/.test(await t.T('#v-salidas [data-spot="zb"]') || ''));
+      await t.go('#salida/sa'); await t.wait(500);
+      t.eq('1 spot en la línea de tiempo, numerado', await t.T('#v-salida .tl .tn'), '1');
+      t.ok('franja horaria del spot', /\d\d:00–17:00/.test(await t.T('#v-salida .tl') || ''), await t.T('#v-salida .tl'));
+      t.eq('2 especies en chips', await t.N('#v-salida .tl .ech'), 2);
+      t.ok('×2 en la repetida', /×2/.test(await t.T('#v-salida .tl') || ''));
+      t.eq('número del spot también en el minimapa', await t.N('#smap .tnm'), 1);
+      await t.tap('#v-salida .ech[data-e="amanita-phalloides"]', 500);
+      t.ok('el chip abre la ficha', /phalloides/i.test(await t.T('#sheet') || ''));
+      await t.go('#mapa');
+    });
     await t.case('360 px: resúmenes sin desborde', async () => {
       await t.page.setViewportSize({ width: 360, height: 640 });
       for (const [f, id] of [['verSpot', 'za'], ['verSpot', 'zb'], ['verHallazgo', 'h1']]) {

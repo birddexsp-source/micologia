@@ -411,3 +411,54 @@ dl.dat dd{margin:2px 0 0;font-weight:600;overflow-wrap:anywhere}
 .grab{position:relative;cursor:pointer;width:44px;height:5px}
 .grab::before{content:"";position:absolute;left:-40px;right:-40px;top:-14px;bottom:-12px}
 .sv-h .icb+.icb{margin-left:-4px}
+
+/* ===== v11: salidas y spots ===== */
+.mavs{display:flex;margin-top:7px;padding-left:4px}
+.mav{position:relative;flex:none;width:26px;height:26px;border-radius:50%;overflow:hidden;background:var(--c);border:2px solid var(--s1);box-shadow:0 0 0 1.5px var(--c);margin-left:-4px}
+.mav img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.mav.more{background:var(--s3);box-shadow:none;color:var(--mut);font:700 10.5px/22px var(--mono);text-align:center}
+.item svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;color:var(--mut);flex:none}
+.item.sal,.item.spotc{align-items:center;padding:12px;border-radius:18px}
+.item.sal .vd{width:48px;height:52px;border-radius:14px}
+.spotc .sico{flex:none;width:44px;height:44px;border-radius:14px;display:grid;place-items:center;background:rgba(63,174,106,.14);color:var(--spot)}
+.spotc.por .sico{background:rgba(76,195,217,.12);color:var(--por)}
+.spotc .sico svg{width:22px;height:22px;color:inherit}
+.start{display:flex;align-items:center;gap:14px;width:100%;text-align:left;border:0;border-radius:20px;padding:16px;background:linear-gradient(135deg,#e9b36a,#c98a3c);color:#1a1206;cursor:pointer;box-shadow:0 10px 26px rgba(224,164,88,.18)}
+.start .ic{flex:none;width:46px;height:46px;border-radius:14px;background:rgba(26,18,6,.14);display:grid;place-items:center}
+.start svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2.6;stroke-linecap:round}
+.start b{display:block;font-size:17px}.start small{display:block;font-size:13px;opacity:.75;margin-top:1px}
+.item.cur-sal{border-color:#5a4220;background:#1d160b}
+.item.cur-sal .rdot{width:10px;height:10px;border-radius:50%;background:var(--acc);flex:none;animation:pulse 1.6s infinite}
+.pad>.sec:first-of-type{margin-top:22px}
+/* página de salida */
+.sal-pg .back{padding-bottom:8px}
+.smap.big{height:250px;border-radius:20px;margin:0 0 14px}
+input.tit{border:0;background:none;padding:0;font-size:24px;font-weight:700;letter-spacing:-.01em;border-radius:0}
+input.tit:focus{border-bottom:1px solid var(--acc)}
+.sd-date{color:var(--mut);font-size:13.5px;margin:4px 0 12px}
+.kpis{background:var(--s1);border:1px solid var(--line);border-radius:18px;padding:4px 0}
+.kpis .stats{margin:0;gap:0}
+.kpis .stats>div{background:none;border:0;border-radius:0;padding:10px 4px}
+.kpis .stats>div+div{border-left:1px solid var(--line)}
+.kpis .stats+.stats{border-top:1px solid var(--line)}
+.kpis .stats b{font-size:19px}
+.tline{position:relative}
+.tl{display:flex;gap:12px;position:relative;padding-bottom:12px}
+.tl:not(:last-child)::before{content:"";position:absolute;left:13px;top:30px;bottom:0;width:2px;background:var(--line)}
+.tn{flex:none;width:28px;height:28px;border-radius:50%;background:var(--spot);color:#06140b;font:800 13px/28px var(--mono);text-align:center;margin-top:10px}
+.tc{flex:1;min-width:0;background:var(--s1);border:1px solid var(--line);border-radius:16px;padding:11px 12px}
+.th{display:flex;align-items:center;gap:10px}.th>div{flex:1;min-width:0}
+.th b{display:block;overflow-wrap:anywhere}.th small{color:var(--mut);font-size:12.5px}
+.btn.sm{padding:8px 12px;font-size:13.5px;flex:none}
+.echs{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.ech{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--line);background:var(--s2);border-radius:999px;padding:3px 10px 3px 3px;font-size:13px;font-weight:600;cursor:pointer;max-width:100%}
+.ech .mav{width:24px;height:24px;margin:0;border-width:1.5px}
+.ech span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ech em{font-style:normal;color:var(--acc);font-family:var(--mono);font-size:12px}
+.tnm b{display:block;width:24px;height:24px;border-radius:50%;background:var(--spot);color:#06140b;font:800 12px/20px var(--mono);text-align:center;border:2px solid #0b1210;box-shadow:0 2px 6px rgba(0,0,0,.5)}
+.sal-pg .cosecha{margin-top:0}
+.sal-pg .cosecha .gal:empty{display:none}
+.sal-pg .cosecha p{margin:0}
+a.item{text-decoration:none;color:inherit}
+.sec{display:flex;align-items:baseline;gap:8px}
+.sec small{font-weight:500;letter-spacing:0;color:var(--mut);margin-left:auto}

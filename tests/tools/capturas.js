@@ -40,6 +40,8 @@ const ESCENAS = {
   'capas': async p => { await p.click('#layerbtn'); await p.waitForTimeout(800); },
   'salidas': async p => { await p.evaluate(() => { location.hash = '#salidas'; }); await p.waitForTimeout(1000); },
   'salida': async p => { await p.evaluate(() => { location.hash = '#salida/s2'; }); await p.waitForTimeout(1400); },
+  'salida-abajo': async p => { await p.evaluate(() => { location.hash = '#salida/s2'; }); await p.waitForTimeout(1400); await p.evaluate(() => { const v = document.querySelector('#v-salida'); v.scrollTop = 560; }); await p.waitForTimeout(400); },
+  'salida-fin': async p => { await p.evaluate(() => { location.hash = '#salida/s2'; }); await p.waitForTimeout(1400); await p.evaluate(() => { const v = document.querySelector('#v-salida'); v.scrollTop = 1250; }); await p.waitForTimeout(400); },
   'setas': async p => { await p.evaluate(() => { location.hash = '#setas'; }); await p.waitForTimeout(1000); },
   'ficha': async p => { await p.evaluate(() => { location.hash = '#setas'; }); await p.waitForTimeout(500); await p.evaluate(() => window.__MI.abrirFicha('boletus-edulis')); await p.waitForTimeout(1000); },
   'mes': async p => { await p.evaluate(() => { location.hash = '#mes'; }); await p.waitForTimeout(1000); },

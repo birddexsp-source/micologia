@@ -13,7 +13,7 @@ import * as trk from './track.js';
 import * as ia from './ia.js';
 import * as au from './audio.js';
 
-const APP_V = 'micologia-v10';   // = V de sw.js
+const APP_V = 'micologia-v11';   // = V de sw.js
 const S = { view: 'mapa', arg: '', map: null, pins: null, me: null, acc: null, tmp: null, mini: null, centered: false, filtro: { salida: '', especie: '' }, clase: '', q: '', syncErr: false, mes: new Date().getMonth() + 1 };
 const VIEWS = ['mapa', 'salidas', 'salida', 'setas', 'mes', 'ajustes'];
 const TITULOS = { mapa: 'Mapa', salidas: 'Salidas', salida: 'Salida', setas: 'Setas', mes: 'Este mes', ajustes: 'Ajustes' };
@@ -454,17 +454,30 @@ async function empezarSalida() {
 const durSeg = s => !s.creada ? 0 : Math.max(0, Math.round(((s.estado === 'en_curso' ? Date.now() : s.fin) || s.creada) - s.creada) / 1000);
 const kmTxt = s => { const m = trk.metros(s.track); return m > 0 ? trk.fmtKm(m) : '—'; };
 const durTxt = s => { const d = durSeg(s); return d >= 60 ? trk.fmtDur(d) : '—'; };
+/* fila de caritas de especie (foto pequeña con el color de su clase) */
+const mini = e => '<span class="mav" style="--c:' + colorEsp(e) + '">' + (e && e.fotos && e.fotos[0] ? '<img class="ph" src="' + esc(fi.fotoURL(e.fotos[0], 250)) + '" alt="" loading="lazy" crossorigin="anonymous">' : '') + '</span>';
+const especiesDe = hs => [...new Map(hs.map(h => [h.especieId || 'x:' + norm(h.especieTxt), cat.byId(h.especieId)])).values()];
+const avatares = (hs, max = 6) => { const es = especiesDe(hs); return es.length ? '<span class="mavs">' + es.slice(0, max).map(mini).join('') + (es.length > max ? '<span class="mav more">+' + (es.length - max) + '</span>' : '') + '</span>' : ''; };
+const plural = (n, a, b) => n + ' ' + (n === 1 ? a : b);
+const diaMes = iso => { const d = new Date((iso || '2000-01-01') + 'T12:00'); return '<span class="vd"><b>' + d.getDate() + '</b>' + esc(d.toLocaleDateString('es-ES', { month: 'short' }).replace('.', '')) + '</span>'; };
 async function renderSalidas() {
-  const [ss, hs, act] = [(await db.list('salidas')).sort((a, b) => (b.creada || 0) - (a.creada || 0)), await db.list('hallazgos'), await activa()];
-  const n = id => hs.filter(h => h.salidaId === id).length, zs = (await db.list('zonas')).filter(z => z.lat != null), yo = geo.fix();
-  const lugar = z => (hs.filter(h => h.zonaId === z.id).length + ' hallazgos') + (yo ? ' · ' + kmFmt(distM(yo, z)) : '');
-  const grupo = (est, tit) => { const l = zs.filter(z => (z.estado || 'visitada') === est).sort((a, b) => yo ? distM(yo, a) - distM(yo, b) : a.nombre.localeCompare(b.nombre)); return l.length ? '<div class="grp" style="--c:' + spotColor({ estado: est }) + '">' + tit + '<small>' + l.length + '</small></div>' + l.map(z => '<button class="item" data-spot="' + z.id + '"><div class="t"><b>' + esc(z.nombre) + '</b><small>' + lugar(z) + '</small></div>' + spotTag(z) + '</button>').join('') : ''; };
-  $('#v-salidas').innerHTML = '<div class="pad">' + (act ? '<a class="item" href="#salida/' + act.id + '" style="border-color:#5a4220;background:#1d160b"><div class="t"><b>Salida en curso</b><small>' + esc(fecha(act.fecha)) + ' · ' + n(act.id) + ' hallazgos</small></div><span class="tag" style="--c:#e0a458;color:#1a1206">Abrir</span></a>'
-    : '<button class="btn p big" id="s-new">Empezar salida</button>') +
-    '<div class="sec">Salidas</div>' + (ss.length ? ss.map(s => '<a class="item" href="#salida/' + s.id + '" style="text-decoration:none"><div class="t"><b>' + esc(fecha(s.fecha)) + (s.titulo ? ' · ' + esc(s.titulo) : '') + '</b><small>' + n(s.id) + ' hallazgos' + (s.totalTxt ? ' · ' + esc(s.totalTxt) : '') + (s.estado === 'en_curso' ? ' · en curso' : '') + '</small></div>›</a>').join('') : '<div class="empty">Aún no hay salidas.<br>Empieza una cuando salgas al monte.</div>') +
-    '<div class="sec">Mis spots</div><div class="row"><button class="btn" id="s-spot">＋ Nuevo spot</button></div>' + (zs.length ? grupo('por_visitar', 'Quiero ir') + grupo('visitada', 'Visitados') : '<div class="empty">Marca sitios que has visitado o que quieres visitar y aparecerán aquí y en el mapa.</div>') + '</div>';
+  const [ss, hs, act] = [(await db.list('salidas')).sort((a, b) => (b.fecha || '').localeCompare(a.fecha || '') || (b.creada || 0) - (a.creada || 0)), await db.list('hallazgos'), await activa()];
+  const zs = (await db.list('zonas')).filter(z => z.lat != null), yo = geo.fix();
+  const deS = id => hs.filter(h => h.salidaId === id), deZ = id => hs.filter(h => h.zonaId === id);
+  const nSpots = s => new Set([...(s.zonaIds || []), ...deS(s.id).map(h => h.zonaId).filter(Boolean)]).size;
+  const ultZ = z => { const t = Math.max(0, ...deZ(z.id).map(h => h.ts), ...ss.filter(s => (s.zonaIds || []).includes(z.id)).map(s => new Date(s.fecha + 'T12:00').getTime())); return t ? 'últ. ' + new Date(t).toLocaleDateString('es-ES', { day: 'numeric', month: 'short' }) : ''; };
+  const filaZ = z => { const h = deZ(z.id), ne = especiesDe(h).length, por = z.estado === 'por_visitar';
+    return '<button class="item spotc' + (por ? ' por' : '') + '" data-spot="' + z.id + '"><span class="sico">' + (por ? I.flag : I.seta) + '</span><div class="t"><b>' + esc(z.nombre) + '</b><small>' + [ne ? plural(ne, 'especie', 'especies') : (por ? 'sin visitar' : 'sin especies'), yo ? kmFmt(distM(yo, z)) : '', ultZ(z)].filter(Boolean).join(' · ') + '</small>' + avatares(h) + '</div>' + I.chev + '</button>'; };
+  const grupo = (est, tit) => { const l = zs.filter(z => (z.estado || 'visitada') === est).sort((a, b) => yo ? distM(yo, a) - distM(yo, b) : a.nombre.localeCompare(b.nombre, 'es', { numeric: true })); return l.length ? '<div class="grp" style="--c:' + spotColor({ estado: est }) + '">' + tit + '<small>' + l.length + '</small></div>' + l.map(filaZ).join('') : ''; };
+  const filaS = s => { const h = deS(s.id), n = nSpots(s);
+    return '<a class="item sal" href="#salida/' + s.id + '">' + diaMes(s.fecha) + '<div class="t"><b>' + esc(s.titulo || fecha(s.fecha)) + '</b><small>' + [(s.fecha || '').slice(0, 4), n ? plural(n, 'spot', 'spots') : '', plural(h.length, 'hallazgo', 'hallazgos'), s.totalTxt ? esc(s.totalTxt) : '', s.estado === 'en_curso' ? 'en curso' : ''].filter(Boolean).join(' · ') + '</small>' + avatares(h) + '</div>' + I.chev + '</a>'; };
+  $('#v-salidas').innerHTML = '<div class="pad">' + (act ? '<a class="item cur-sal" href="#salida/' + act.id + '"><span class="rdot"></span><div class="t"><b>Salida en curso</b><small>' + esc(fecha(act.fecha)) + ' · ' + plural(deS(act.id).length, 'hallazgo', 'hallazgos') + ' · ' + durTxt(act) + '</small></div><span class="tag" style="--c:#e0a458;color:#1a1206">Abrir</span></a>'
+    : '<button class="start" id="s-new"><span class="ic">' + I.plus + '</span><span class="t"><b>Empezar salida</b><small>Graba el recorrido y lo que encuentres en cada spot</small></span></button>') +
+    '<div class="sec">Salidas<small>' + (ss.length || '') + '</small></div>' + (ss.length ? ss.map(filaS).join('') : '<div class="empty">Aún no hay salidas.<br>Empieza una cuando salgas al monte.</div>') +
+    '<div class="sec">Mis spots<small>' + (zs.length || '') + '</small></div>' + (zs.length ? grupo('por_visitar', 'Quiero ir') + grupo('visitada', 'Visitados') : '<div class="empty">Marca sitios que has visitado o que quieres visitar y aparecerán aquí y en el mapa.</div>') +
+    '<div class="row"><button class="btn" id="s-spot">' + I.flag + ' Nuevo spot</button></div></div>';
   const b = $('#s-new'); if (b) b.onclick = empezarSalida;
-  $('#s-spot').onclick = () => abrirSpot();
+  $('#s-spot').onclick = () => editarSpot();
   $('#v-salidas').onclick = e => { const b = e.target.closest('[data-spot]'); if (b) abrirSpot(b.dataset.spot); };
 }
 function bajarArchivo(nombre, texto, tipo) {
@@ -494,28 +507,37 @@ async function renderSalida(id) {
   const auto = mejorZonaId(hs), mejor = s.zonaMejorId || auto, pend = hs.filter(h => h.identificacion !== 'confirmada').length;
   const curso = s.estado === 'en_curso', graba = curso && s.grabar !== false, cos = s.fotosCosecha || [];
   const live = () => trk.activo() === id ? { ...s, track: trk.puntos() } : s;
-  root.innerHTML = '<div class="pad"><a class="back" href="#salidas">‹ Salidas</a>' +
-    '<input type="text" id="sd-tit" value="' + esc(s.titulo) + '" placeholder="' + esc(fecha(s.fecha)) + ' · título (opcional)"><div style="margin:6px 2px 0;color:var(--mut);font-size:13px">' + esc(fecha(s.fecha)) + (curso ? ' · <b style="color:var(--acc)">en curso</b>' : ' · terminada') + '</div>' +
-    '<div class="stats"><div><b>' + hs.length + '</b><span>hallazgos</span></div><div><b>' + zids.length + '</b><span>zonas</span></div><div><b>' + pend + '</b><span>por identificar</span></div></div>' +
-    '<div class="stats" id="sd-st2"><div><b id="sd-km">' + kmTxt(live()) + '</b><span>recorrido</span></div><div><b id="sd-dur">' + durTxt(s) + '</b><span>duración</span></div><div><b>' + cos.length + '</b><span>fotos recogidas</span></div></div>' +
-    '<div class="smap" id="smap"></div>' +
-    '<div class="sec">Spots de la salida</div>' + (zids.length ? zids.map(zid => { const z = zonas.find(x => x.id === zid), esp = [...new Set(hs.filter(h => h.zonaId === zid).map(nombreHall))]; return '<div class="item spot-s" style="--c:#46b36b"><div class="t"><b>' + esc(z.nombre) + '</b><small>' + (esp.length ? esc(esp.join(', ')) : 'Sin especies anotadas') + '</small></div><button class="btn" data-sa="' + zid + '">＋ Especie</button></div>'; }).join('') : '<div class="empty" style="padding:6px 0;text-align:left">Aún sin spots. Marca hallazgos en un spot o añádelo aquí.</div>') + '<div class="row"><button class="btn" id="sd-addspot">＋ Añadir spot a la salida</button></div>' +
+  /* spots en el orden en que se recorrieron (por la hora del primer hallazgo) */
+  const t0 = zid => Math.min(Infinity, ...hs.filter(h => h.zonaId === zid).map(h => h.ts));
+  const orden = zids.slice().sort((a, b) => t0(a) - t0(b));
+  const tramo = zid => { const ts = hs.filter(h => h.zonaId === zid).map(h => h.ts); if (!ts.length) return ''; const a = hhmm(Math.min(...ts)), b = hhmm(Math.max(...ts)); return a === b ? a : a + '–' + b; };
+  const chips = zid => { const g = {}; hs.filter(h => h.zonaId === zid).forEach(h => { const k = h.especieId || 'x:' + norm(h.especieTxt); (g[k] = g[k] || { h, n: 0 }).n++; });
+    const l = Object.values(g); return l.length ? '<div class="echs">' + l.map(r => { const e = cat.byId(r.h.especieId); return '<button class="ech" ' + (e ? 'data-e="' + e.id + '"' : 'data-h="' + r.h.id + '"') + '>' + mini(e) + '<span>' + esc(nombreCorto(r.h)) + (r.n > 1 ? ' <em>×' + r.n + '</em>' : '') + '</span></button>'; }).join('') + '</div>' : '<p class="mut sm" style="margin:4px 0 0">Sin especies anotadas</p>'; };
+  const nEsp = especiesDe(hs).length;
+  root.innerHTML = '<div class="pad sal-pg"><a class="back" href="#salidas">‹ Salidas</a>' +
+    '<div class="smap big" id="smap"></div>' +
+    '<input type="text" id="sd-tit" class="tit" value="' + esc(s.titulo) + '" placeholder="Ponle un título (opcional)"><div class="sd-date">' + esc(fecha(s.fecha)) + (curso ? ' · <b style="color:var(--acc)">en curso</b>' : ' · terminada') + (nEsp ? ' · ' + plural(nEsp, 'especie', 'especies') : '') + '</div>' +
+    '<div class="kpis"><div class="stats"><div><b>' + hs.length + '</b><span>hallazgos</span></div><div><b>' + zids.length + '</b><span>spots</span></div><div><b>' + pend + '</b><span>por identificar</span></div></div>' +
+    '<div class="stats" id="sd-st2"><div><b id="sd-km">' + kmTxt(live()) + '</b><span>recorrido</span></div><div><b id="sd-dur">' + durTxt(s) + '</b><span>duración</span></div><div><b>' + cos.length + '</b><span>fotos recogidas</span></div></div></div>' +
     (curso ? '<div class="rec ' + (graba ? 'on' : '') + '"><span class="rdot"></span><div class="t"><b>' + (graba ? 'Grabando el recorrido' : 'Recorrido en pausa') + '</b><small>Mantén la app abierta: si el móvil bloquea la pantalla puede dejar de grabar.</small></div><button class="btn" id="sd-pau">' + (graba ? 'Pausar' : 'Reanudar') + '</button></div>' +
       (trk.pantallaSoportada() ? '<div class="rec"><div class="t"><b>Pantalla encendida</b><small>Evita que se apague mientras andas. Gasta más batería.</small></div><button class="btn' + (trk.pantallaOn() ? ' p' : '') + '" id="sd-wake">' + (trk.pantallaOn() ? 'Activada' : 'Activar') + '</button></div>' : '') : '') +
-    '<label class="l">Total recogido</label><input type="text" id="sd-tot" value="' + esc(s.totalTxt) + '" placeholder="p. ej. ≈2 kg">' +
-    '<label class="l">Dónde hubo más</label><select id="sd-mej"><option value="">' + (auto ? 'Automático: ' + esc(zn(auto)) : 'Automático') + '</option>' + zonas.filter(z => porZona[z.id] || z.id === s.zonaMejorId).map(z => '<option value="' + z.id + '"' + (s.zonaMejorId === z.id ? ' selected' : '') + '>' + esc(z.nombre) + ' (' + (porZona[z.id] || 0) + ')</option>').join('') + '</select>' +
-    '<div class="sec">Lo que me llevé</div><div class="gal" id="sd-cos">' + (cos.length ? galHTML(cos, 'fotosCosecha') : '<div class="empty" style="padding:6px 0;text-align:left">Saca una foto a todo lo que recojas: queda como registro de la salida.</div>') + '</div><div class="row"><button class="btn" id="sd-cos-add">Añadir foto de lo recogido</button></div>' +
-    '<div class="sec">Fotos de la salida</div><div class="gal" id="sd-gal">' + galHTML(s.fotos || [], 'fotos') + '</div><div class="row"><button class="btn" id="sd-foto">Añadir foto</button></div>' +
-    '<div class="sec">Hallazgos' + (mejor ? ' · mejor zona: ' + esc(zn(mejor)) : '') + '</div>' +
-    (hs.length ? hs.map(h => { const e = cat.byId(h.especieId); return '<button class="item" data-h="' + h.id + '">' + (e ? fi.avatar(e) : '<span class="dot" style="--c:' + (IDENT[h.identificacion] || IDENT.sin_identificar).color + '"></span>') + '<div class="t"><b>' + esc(nombreHall(h)) + '</b><small>' + hhmm(h.ts) + (h.zonaId ? ' · ' + esc(zn(h.zonaId)) : '') + (h.cantidad ? ' · ' + esc(h.cantidad) : '') + ' · ' + (IDENT[h.identificacion] || IDENT.sin_identificar).label + '</small></div>›</button>'; }).join('') : '<div class="empty">Sin hallazgos todavía.</div>') +
-    (hs.length || (s.track || []).length ? '<div class="row"><button class="btn" id="sd-gpx">Exportar recorrido (GPX)</button></div>' : '') +
-    '<div class="row">' + (curso ? '<button class="btn p big" id="sd-fin">Terminar salida</button>' : '<button class="btn" id="sd-reab">Reabrir salida</button>') + '<button class="btn d" id="sd-del">Borrar salida</button></div></div>';
+    '<div class="sec">Spots de la salida<small>' + (zids.length || '') + '</small></div>' + (orden.length ? '<div class="tline">' + orden.map((zid, i) => { const z = zonas.find(x => x.id === zid), n = hs.filter(h => h.zonaId === zid).length;
+      return '<div class="tl"><span class="tn">' + (i + 1) + '</span><div class="tc"><div class="th"><div><b>' + esc(z.nombre) + '</b><small>' + [tramo(zid), n ? plural(n, 'hallazgo', 'hallazgos') : ''].filter(Boolean).join(' · ') + '</small></div><button class="btn sm" data-sa="' + zid + '">＋ Especie</button></div>' + chips(zid) + '</div></div>'; }).join('') + '</div>'
+      : '<div class="empty" style="padding:6px 0;text-align:left">Aún sin spots. Marca hallazgos en un spot o añádelo aquí.</div>') + '<div class="row"><button class="btn" id="sd-addspot">＋ Añadir spot a la salida</button></div>' +
+    '<div class="sec">Lo que me llevé</div><div class="cosecha"><div class="gal" id="sd-cos">' + (cos.length ? galHTML(cos, 'fotosCosecha') : '<p>Saca una foto a todo lo que recojas: queda como registro de la salida.</p>') + '</div><div class="row"><button class="btn" id="sd-cos-add">Añadir foto de lo recogido</button></div>' +
+    '<label class="l">Total recogido</label><input type="text" id="sd-tot" value="' + esc(s.totalTxt) + '" placeholder="p. ej. ≈2 kg"></div>' +
+    '<div class="sec">Hallazgos' + (mejor ? '<small>más en ' + esc(zn(mejor)) + '</small>' : '') + '</div>' +
+    (hs.length ? hs.map(h => { const e = cat.byId(h.especieId); return '<button class="item" data-h="' + h.id + '">' + (e ? fi.avatar(e) : '<span class="dot" style="--c:' + (IDENT[h.identificacion] || IDENT.sin_identificar).color + '"></span>') + '<div class="t"><b>' + esc(nombreCorto(h)) + '</b><small>' + hhmm(h.ts) + (h.zonaId ? ' · ' + esc(zn(h.zonaId)) : '') + (h.cantidad ? ' · ' + esc(h.cantidad) : '') + ' · ' + (IDENT[h.identificacion] || IDENT.sin_identificar).label + '</small></div>' + I.chev + '</button>'; }).join('') : '<div class="empty">Sin hallazgos todavía.</div>') +
+    '<div class="sec">Más</div><label class="l" style="margin-top:0">Dónde hubo más</label><select id="sd-mej"><option value="">' + (auto ? 'Automático: ' + esc(zn(auto)) : 'Automático') + '</option>' + zonas.filter(z => porZona[z.id] || z.id === s.zonaMejorId).map(z => '<option value="' + z.id + '"' + (s.zonaMejorId === z.id ? ' selected' : '') + '>' + esc(z.nombre) + ' (' + (porZona[z.id] || 0) + ')</option>').join('') + '</select>' +
+    '<label class="l">Fotos de la salida</label><div class="gal" id="sd-gal">' + galHTML(s.fotos || [], 'fotos') + '</div><div class="row"><button class="btn" id="sd-foto">Añadir foto</button>' + (hs.length || (s.track || []).length ? '<button class="btn" id="sd-gpx">Exportar recorrido (GPX)</button>' : '') + '</div>' +
+    '<div class="row" style="margin-top:22px">' + (curso ? '<button class="btn p big" id="sd-fin">Terminar salida</button>' : '<button class="btn" id="sd-reab">Reabrir salida</button>') + '<button class="btn d" id="sd-del">Borrar salida</button></div></div>';
   hydrate(root);
   /* minimapa: recorrido + hallazgos */
   S.mini = createMap('smap', { zoom: 10 }); const ls = [], capa = L.layerGroup().addTo(S.mini);
   const pintar = () => { capa.clearLayers(); trazo(live().track).addTo(capa); };
   pintar(); trk.lineas(live().track).forEach(l => l.forEach(p => ls.push([p[0], p[1]])));
   hs.forEach(h => { pinH(h, { interactive: false }).addTo(S.mini); ls.push([h.lat, h.lon]); });
+  orden.forEach((zid, i) => { const z = zonas.find(x => x.id === zid); if (!z || z.lat == null) return; L.marker([z.lat, z.lon], { interactive: false, zIndexOffset: 500, icon: L.divIcon({ className: 'tnm', html: '<b>' + (i + 1) + '</b>', iconSize: [24, 24], iconAnchor: [12, 12] }) }).addTo(S.mini); ls.push([z.lat, z.lon]); });
   if (ls.length) S.mini.fitBounds(ls, { padding: [30, 30], maxZoom: 17, animate: false });
   if (trk.activo() === id) S.unlive = trk.onAdd(() => { if (S.view !== 'salida' || S.arg !== id || !S.mini) return; pintar(); const k = $('#sd-km'); if (k) k.textContent = kmTxt(live()); });
   if (curso) S.tick = setInterval(() => { const d = $('#sd-dur'); if (S.view === 'salida' && S.arg === id && d) d.textContent = durTxt(s); }, 30000);
@@ -526,6 +548,7 @@ async function renderSalida(id) {
     const im = ev.target.closest('img[data-blob]'); if (im && im.dataset.k) { verFoto(id, im.dataset.k, im.dataset.blob); return; }
     const t = ev.target.closest('button'); if (!t) return;
     if (t.dataset.h) verHallazgo(t.dataset.h);
+    else if (t.dataset.e) abrirFicha(t.dataset.e);
     else if (t.dataset.sa) { const z = zonas.find(x => x.id === t.dataset.sa); if (z) marcar({ zona: z.id, salida: id, pos: { lat: z.lat, lon: z.lon }, ts: curso ? Date.now() : (s.creada || Date.now()) }); }
     else if (t.id === 'sd-addspot') {
       const libres = zonas.filter(z => !zids.includes(z.id) && z.lat != null).sort((a, b) => a.nombre.localeCompare(b.nombre, 'es', { numeric: true }));
