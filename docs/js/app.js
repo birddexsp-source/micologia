@@ -404,7 +404,7 @@ function abrirIA() {
     if (a) { e.preventDefault(); ia.setKey(''); return pintar(); }
     if (b.id === 'gu-x') { urls.forEach(u => u && URL.revokeObjectURL(u)); return closeSheet(); }
     if (b.dataset.e) return abrirFicha(b.dataset.e);
-    if (b.id === 'ia-ks') { const k = $('#ia-k', sh).value; if (!ia.claveValida(k)) return pintar(null, 'Esa clave no tiene la forma correcta (empieza por AIza…).'); ia.setKey(k); return pintar(); }
+    if (b.id === 'ia-ks') { const k = $('#ia-k', sh).value; if (!ia.claveValida(k)) return pintar(null, 'Esa clave no tiene la forma correcta (la de Google AI Studio, empieza por AIza… o AQ.…).'); ia.setKey(k); return pintar(); }
     if (b.id === 'ia-go') {
       if (!navigator.onLine) return pintar(null, ia.mensajeError(new Error('red')));
       pintar(null, '', true);
@@ -479,7 +479,7 @@ async function renderAjustes() {
     if (!/^[\w.-]+\/[\w.-]+$/.test(repo) || !tok) { st.textContent = 'Pon el repositorio como usuario/nombre y pega el token.'; return; }
     syn.setCfg({ ...c, repo, token: tok }); await correrSync(m => { st.textContent = m; });
   };
-  $('#a-gks', root).onclick = () => { const k = $('#a-gk', root).value, st = $('#a-gst', root); if (!ia.claveValida(k)) { st.textContent = 'La clave empieza por AIza… y es larga.'; return; } ia.setKey(k); toast('Clave guardada'); renderAjustes(); };
+  $('#a-gks', root).onclick = () => { const k = $('#a-gk', root).value, st = $('#a-gst', root); if (!ia.claveValida(k)) { st.textContent = 'La clave de AI Studio empieza por AIza… o AQ. y es larga.'; return; } ia.setKey(k); toast('Clave guardada'); renderAjustes(); };
   const gd = $('#a-gkd', root); if (gd) gd.onclick = () => { ia.setKey(''); toast('Clave borrada'); renderAjustes(); };
   $('#a-exp', root).onclick = async () => { const a = document.createElement('a'); a.href = URL.createObjectURL(await db.exportAll()); a.download = 'micologia-copia-' + hoy() + '.json'; document.body.appendChild(a); a.click(); a.remove(); };
   root.onchange = e => { const z = e.target.dataset.z; if (z && e.target.value.trim()) db.patch('zonas', z, { nombre: e.target.value.trim() }); };

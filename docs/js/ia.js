@@ -7,7 +7,7 @@ export const MODELOS = ['gemini-2.5-flash', 'gemini-2.5-flash', 'gemini-3.1-flas
 const KEY = 'mi_gemini_key';
 export const getKey = () => { try { return localStorage.getItem(KEY) || ''; } catch (e) { return ''; } };
 export const setKey = k => { try { k ? localStorage.setItem(KEY, k.trim()) : localStorage.removeItem(KEY); } catch (e) { } };
-export const claveValida = k => /^AIza[\w-]{30,}$/.test((k || '').trim());
+export const claveValida = k => /^(AIza[\w-]{30,}|AQ\.[\w.-]{30,})$/.test((k || '').trim());
 
 const SCHEMA = { type: 'OBJECT', properties: {
   esSeta: { type: 'BOOLEAN' },

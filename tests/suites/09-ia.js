@@ -10,7 +10,7 @@ module.exports = {
   async run(t) {
     await t.case('seguridad: ninguna clave de Google en docs/', async () => {
       const walk = d => fs.readdirSync(d, { withFileTypes: true }).flatMap(x => x.isDirectory() ? walk(path.join(d, x.name)) : [path.join(d, x.name)]);
-      const bad = walk(DOCS).filter(f => !/\.(png|jpg|webp)$/.test(f)).filter(f => /AIza[\w-]{30,}/.test(fs.readFileSync(f, 'utf8')));
+      const bad = walk(DOCS).filter(f => !/\.(png|jpg|webp)$/.test(f)).filter(f => /AIza[\w-]{30,}|AQ\.[A-Za-z0-9_-]{30,}/.test(fs.readFileSync(f, 'utf8')));
       t.eq('sin claves AIza… en el repo público', bad, []);
       const s = fs.readFileSync(path.join(DOCS, 'js/ia.js'), 'utf8');
       t.ok('el prompt exige no inventar rasgos y abstenerse', /no inventes rasgos/i.test(s) && /no bastan/i.test(s));
@@ -26,7 +26,7 @@ module.exports = {
       });
       t.eq('id inventado queda vacío', r.id0, ''); t.ok('id real se conserva', r.id1); t.eq('confianza acotada a 100', r.conf, 100);
       t.eq('no seta → 0 candidatas', r.b, 0); t.eq('respuesta rara → error', r.c, 'error');
-      t.ok('forma de la clave', await t.page.evaluate(([k]) => window.__MI.ia.claveValida(k) && !window.__MI.ia.claveValida('hola'), [KEY]));
+      t.ok('forma de la clave', await t.page.evaluate(([k]) => window.__MI.ia.claveValida(k) && !window.__MI.ia.claveValida('hola') && window.__MI.ia.claveValida('AQ.' + 'x'.repeat(40)), [KEY]));
     });
     let llamadas = [], modo = 'ok', ids = [];
     await t.page.route('https://generativelanguage.googleapis.com/**', async r => {
