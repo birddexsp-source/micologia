@@ -12,7 +12,7 @@ module.exports = {
       await t.put('zonas', 'zc1', { nombre: 'Boletus 3', estado: 'por_visitar', lat: 43.4024, lon: -2.7421 });
       sid = 's11'; await t.put('salidas', sid, { fecha: '2026-11-11', titulo: 'Boletus · 4 spots', notas: '', zonaIds: [za], fotos: [], fotosCosecha: [], track: [], grabar: false, estado: 'terminada', totalTxt: '', zonaMejorId: '', creada: ini, fin: ini + 9000000 });
       await t.go('#salida/' + sid);
-      t.ok('sección de spots con el spot', /Spots de la salida[\s\S]*Boletus 1[\s\S]*Sin especies anotadas/i.test(await t.T('#v-salida') || ''));
+      t.ok('sección de spots con el spot', /Spots[\s\S]*Boletus 1[\s\S]*Sin especies anotadas/i.test(await t.T('#v-salida') || ''));
       t.eq('estadística de zonas = 1', await t.T('#v-salida .stats div:nth-child(2) b'), '1');
     });
     await t.case('añadir un spot a la salida lo marca como visitado', async () => {

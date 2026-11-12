@@ -108,6 +108,7 @@ class T {
   wait(ms) { return this.page ? this.page.waitForTimeout(ms) : new Promise(r => setTimeout(r, ms)); }
   /* ---------- usar la app ---------- */
   async tap(sel, ms = 250) { await this.page.waitForSelector(sel, { state: 'visible', timeout: 6000 }); await this.page.evaluate(s => document.querySelector(s).click(), sel); await this.wait(ms); }
+  async tab(k) { await this.tap('.tabs [data-tb="' + k + '"]', 250); }   /* pestañas de la salida */
   async T(sel) { return this.page.evaluate(s => { const e = document.querySelector(s); return e ? e.innerText.replace(/\s+/g, ' ').trim() : null; }, sel); }
   async N(sel) { return this.page.evaluate(s => document.querySelectorAll(s).length, sel); }
   async has(sel) { return (await this.N(sel)) > 0; }

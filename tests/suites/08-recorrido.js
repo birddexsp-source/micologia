@@ -10,10 +10,15 @@ module.exports = {
     const pts = () => t.page.evaluate(() => window.__MI.trk.puntos().length);
     const paso = async (n = 1, acc = 8) => { for (let i = 0; i < n; i++) { lat += PASO; await t.setGeo(lat, LON, acc); await t.wait(350); } };
 
-    await t.case('empezar salida: empieza a grabar el recorrido', async () => {
+    await t.case('empezar salida: no graba el GPS hasta que lo pides', async () => {
       await t.go('#salidas'); await t.tap('#s-new', 600);
-      const s = (await t.docs('salidas'))[0]; sid = s.id;
-      t.ok('campos nuevos de la salida', Array.isArray(s.track) && s.grabar === true && Array.isArray(s.fotosCosecha) && s.fin === null);
+      let s = (await t.docs('salidas'))[0]; sid = s.id;
+      t.ok('campos nuevos de la salida', Array.isArray(s.track) && s.grabar === false && Array.isArray(s.fotosCosecha) && s.fin === null);
+      t.eq('el grabador está parado', await t.page.evaluate(() => window.__MI.trk.activo()), null);
+      t.ok('botones rápidos «Especie aquí» y «Spot aquí»', await t.visible('#sd-mk') && await t.visible('#sd-sp'));
+      await t.tab('mas'); t.ok('opción de grabar en «Más»', /Grabar/.test(await t.T('#sd-pau') || ''));
+      await t.tap('#sd-pau', 500); s = (await t.docs('salidas'))[0];
+      t.ok('al pulsar, graba', s.grabar === true);
       t.eq('el grabador está activo para esta salida', await t.page.evaluate(() => window.__MI.trk.activo()), sid);
       t.ok('aviso «Grabando el recorrido»', /Grabando el recorrido/.test(await t.T('#v-salida .rec') || ''));
       t.ok('avisa de la limitación al bloquear la pantalla', /bloquea la pantalla/.test(await t.T('#v-salida .rec') || ''));
@@ -90,7 +95,7 @@ module.exports = {
     });
     await t.case('pantalla encendida: botón y wake lock (simulado)', async () => {
       await t.page.evaluate(() => { window.__wl = 0; Object.defineProperty(navigator, 'wakeLock', { configurable: true, value: { request: async () => { window.__wl++; return { release: async () => { window.__wl--; }, addEventListener() { } }; } } }); });
-      await t.go('#salidas'); await t.go('#salida/' + sid); await t.wait(500);
+      await t.go('#salidas'); await t.go('#salida/' + sid); await t.wait(500); await t.tab('mas');
       t.ok('hay botón de pantalla encendida', await t.has('#sd-wake'));
       await t.tap('#sd-wake', 300);
       t.eq('pide el bloqueo', await t.page.evaluate(() => window.__wl), 1);
@@ -127,7 +132,7 @@ module.exports = {
       await t.go('#salida/' + sid); await t.wait(500);
       t.eq('3 fotos en «Lo que me llevé»', await t.N('#sd-cos img'), 3);
       t.ok('la duración y los km se ven en las estadísticas', /^\d+ m$|^\d,\d km$/.test(await t.T('#sd-km') || '') && !/^—$/.test(await t.T('#sd-km') || ''), await t.T('#sd-km'));
-      t.eq('el contador de fotos recogidas', await t.page.evaluate(() => document.querySelectorAll('#sd-st2 b')[2].textContent), '3');
+      t.eq('el contador de la pestaña Fotos', await t.T('.tabs [data-tb="fotos"] em'), '3');
       t.ok('el recorrido sigue dibujado', (await t.N('#smap .trk-line')) >= 2);
       await t.page.evaluate(() => document.querySelector('#sd-cos img').click()); await t.wait(400);
       t.ok('visor de foto con botón Quitar', await t.has('#sheet img.big-foto') && await t.has('#vf-del'));
@@ -145,10 +150,11 @@ module.exports = {
       t.eq('un waypoint por hallazgo', ok.wpt, 1);
       t.ok('el waypoint lleva el nombre de la especie', /Amanita phalloides/i.test(ok.name || ''), ok.name);
     });
-    await t.case('reabrir graba otra vez y borrar la salida detiene el grabador', async () => {
-      await t.tap('#sd-reab', 600);
+    await t.case('reabrir (sin grabar) y borrar la salida', async () => {
+      await t.tab('mas'); await t.tap('#sd-reab', 600);
       t.eq('en curso y sin hora de fin', [(await t.docs('salidas'))[0].estado, (await t.docs('salidas'))[0].fin], ['en_curso', null]);
-      t.eq('grabador activo', await t.page.evaluate(() => window.__MI.trk.activo()), sid);
+      t.eq('reabrir no enciende el GPS', await t.page.evaluate(() => window.__MI.trk.activo()), null);
+      await t.tab('mas');
       await t.tap('#sd-del', 200); await t.tap('#sd-del', 600);
       t.eq('salida borrada', (await t.docs('salidas')).length, 0);
       t.eq('grabador parado', await t.page.evaluate(() => window.__MI.trk.activo()), null);

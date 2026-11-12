@@ -462,3 +462,30 @@ input.tit:focus{border-bottom:1px solid var(--acc)}
 a.item{text-decoration:none;color:inherit}
 .sec{display:flex;align-items:baseline;gap:8px}
 .sec small{font-weight:500;letter-spacing:0;color:var(--mut);margin-left:auto}
+
+/* ===== v12: salida con pestañas y botones rápidos ===== */
+.hero-m{position:relative}
+.hero-m .smap.big{height:230px;margin-bottom:12px}
+.live{position:absolute;left:10px;top:10px;z-index:500;display:flex;align-items:center;gap:7px;background:rgba(8,12,11,.8);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid var(--glass-b);border-radius:999px;padding:5px 11px;font-size:12.5px;font-weight:650}
+.live i{width:8px;height:8px;border-radius:50%;background:var(--acc);animation:pulse 1.6s infinite}
+.sd-hd{display:flex;align-items:flex-start;gap:10px}
+.sd-tt{flex:1;min-width:0}
+.sd-hd .btn{flex:none;padding:10px 16px;margin-top:2px}
+.kpis .stats>div{padding:10px 2px}
+.kpis .stats span{font-size:11px;line-height:1.2;display:block}
+.quick{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.qb{display:flex;align-items:center;gap:10px;text-align:left;border:1px solid var(--line);background:var(--s2);border-radius:18px;padding:14px 12px;cursor:pointer;color:var(--ink);min-width:0}
+.qb.p{background:linear-gradient(135deg,#e9b36a,#c98a3c);border-color:transparent;color:#1a1206}
+.qb svg{width:26px;height:26px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.qb b{display:block;font-size:15px}.qb small{display:block;font-size:12px;opacity:.7}
+.qb span{min-width:0}
+.tabs{position:sticky;top:0;z-index:5;display:flex;gap:4px;background:var(--bg);padding:12px 0 10px;margin-top:4px}
+.tabs button{flex:1;border:0;background:var(--s1);border-radius:12px;padding:10px 4px;font-size:13.5px;font-weight:650;color:var(--mut);cursor:pointer;white-space:nowrap}
+.tabs button.on{background:var(--s3);color:var(--ink);box-shadow:inset 0 -2px 0 var(--acc)}
+.tabs em{font-style:normal;font:700 11px var(--mono);margin-left:5px;color:var(--acc)}
+.tabp{min-height:120px}
+.tabp .cosecha{margin-top:0}.tabp .cosecha p{margin:4px 0 0}
+.trk-c{margin:0}
+.kv2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.kv2 div{background:var(--s2);border-radius:12px;padding:8px 10px}
+.kv2 b{display:block;font-size:18px}.kv2 span{font-size:11.5px;color:var(--mut)}

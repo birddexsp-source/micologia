@@ -35,7 +35,7 @@ module.exports = {
     await t.case('terminar salida con fotos de lo recogido', async () => {
       await t.page.evaluate(() => { document.querySelector('#sheet').hidden = true; });
       const s = (await t.docs('salidas'))[0]; await t.go('#salida/' + s.id); await t.wait(400);
-      t.ok('detalle con tarjetas de grabación', await t.has('#v-salida .rec'));
+      t.ok('detalle con botones rápidos', await t.has('#v-salida #sd-mk'));
       await t.tap('#sd-fin', 400); await limpio('terminar salida'); await t.shot('captura-m-terminar');
       t.ok('el botón Terminar es alcanzable (la hoja se desplaza)', await t.page.evaluate(() => { const sh = document.querySelector('#sheet .sh'); return sh.scrollHeight >= sh.clientHeight && !!document.querySelector('#tf-ok'); }));
     });

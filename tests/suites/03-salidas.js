@@ -26,7 +26,7 @@ module.exports = {
     await t.case('detalle: contadores, mejor zona y minimapa', async () => {
       await t.tap('#chip', 600);
       const stats = await t.page.evaluate(() => [...document.querySelectorAll('#v-salida .stats:not(#sd-st2) b')].map(b => b.textContent));
-      t.eq('hallazgos · zonas · por identificar', stats, ['3', '2', '3']);
+      t.eq('hallazgos · spots · por identificar', [stats[0], stats[1], stats[3]], ['3', '2', '3']);
       t.ok('mejor zona automática: Pinar A', /Automático: Pinar A/.test(await t.T('#sd-mej') || ''), await t.T('#sd-mej'));
       t.ok('minimapa montado con 3 marcadores', await t.has('#smap.leaflet-container') && await t.N('#smap .pin i') === 3, 'pins: ' + await t.N('#smap .pin i'));
       t.eq('3 filas de hallazgos', await t.N('#v-salida .item[data-h]'), 3);
@@ -46,7 +46,7 @@ module.exports = {
       await t.go('#salida/' + sid);
       await t.page.fill('#sd-tit', 'Salida de prueba'); await t.page.evaluate(() => document.querySelector('#sd-tit').blur()); await t.wait(300);
       t.eq('título guardado', (await t.docs('salidas'))[0].titulo, 'Salida de prueba');
-      const hay = (await t.docs('zonas')).find(z => z.nombre === 'Hayedo B');
+      const hay = (await t.docs('zonas')).find(z => z.nombre === 'Hayedo B'); await t.tab('mas');
       await t.page.selectOption('#sd-mej', hay.id); await t.wait(300);
       t.eq('mejor zona manual', (await t.docs('salidas'))[0].zonaMejorId, hay.id);
     });
@@ -58,7 +58,7 @@ module.exports = {
       t.eq('3 pines al quitar el filtro', await t.N('#map .pin i'), 3);
     });
     await t.case('reabrir y borrar salida conserva los hallazgos', async () => {
-      await t.go('#salida/' + sid); await t.tap('#sd-reab', 400);
+      await t.go('#salida/' + sid); await t.tab('mas'); await t.tap('#sd-reab', 400); await t.tab('mas');
       t.eq('vuelve a en curso', (await t.docs('salidas'))[0].estado, 'en_curso');
       await t.tap('#sd-del', 200); await t.tap('#sd-del', 500);
       t.eq('salida borrada', (await t.docs('salidas')).length, 0);
