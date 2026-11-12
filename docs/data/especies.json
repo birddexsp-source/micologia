@@ -1,0 +1,1270 @@
+{
+ "version": 1,
+ "generado": "2026-11-12",
+ "nivelPorDefecto": "borrador",
+ "aviso": "Ninguna seta se come por lo que diga la app, un libro o una foto. Antes de comer algo que no domines: identificación en mano, con todos los caracteres, confirmada por una persona experta o sociedad micológica. En caso de duda, no se come.",
+ "especies": [
+  {
+   "id": "amanita-phalloides",
+   "nombreCientifico": "Amanita phalloides",
+   "sinonimos": [],
+   "nombresComunes": {
+    "es": [
+     "cicuta verde"
+    ],
+    "eu": []
+   },
+   "clase": "mortal",
+   "grupo": "laminar",
+   "notaComestibilidad": "Causa clásica de intoxicaciones mortales. Las amatoxinas resisten la cocción.",
+   "himenio": "Láminas blancas.",
+   "anillo": "Presente.",
+   "volva": "En saco en la base: hay que desenterrar la base del pie.",
+   "habitat": "Bajo robles, castaños, hayas.",
+   "sindrome": "Faloidiano (amatoxinas)",
+   "latencia": "6–24 h, con falsa mejoría",
+   "gravedad": "Mortal",
+   "confusiones": [
+    {
+     "id": null,
+     "nombre": "Russula verdes (R. virescens, R. heterophylla, R. aeruginea)",
+     "comoDistinguir": "La Amanita tiene anillo y volva (desenterrar la base) y láminas blancas; Russula: sin anillo ni volva, carne quebradiza.",
+     "gravedad": "alta"
+    },
+    {
+     "id": null,
+     "nombre": "Agaricus (champiñones silvestres) y otras setas blancas de campo",
+     "comoDistinguir": "Agaricus: láminas rosadas→marrón chocolate y anillo; Amanita: láminas siempre blancas y volva.",
+     "gravedad": "alta"
+    }
+   ],
+   "nivelVerificacion": "borrador",
+   "fuentes": [
+    {
+     "nombre": "Aranzadi — Setas tóxicas e intoxicaciones (Munibe, 2005)",
+     "url": null,
+     "fechaConsulta": null,
+     "campos": [
+      "clase",
+      "sindrome",
+      "latencia",
+      "confusiones"
+     ],
+     "nota": "Citada en el documento de traspaso Micología 3/3 (12-nov-2026). URL y contenido sin releer ni contrastar en esta sesión."
+    },
+    {
+     "nombre": "Documento de traspaso Micología 3/3 (12-nov-2026)",
+     "url": null,
+     "fechaConsulta": "2026-11-12",
+     "campos": [
+      "rasgos",
+      "confusiones",
+      "notaComestibilidad"
+     ],
+     "nota": "Borrador que mezcla fuentes citadas y conocimiento micológico general. Contrastar con ≥2 fuentes antes de dar la ficha por buena."
+    }
+   ],
+   "fotos": []
+  },
+  {
+   "id": "amanita-verna-virosa",
+   "nombreCientifico": "Amanita verna / Amanita virosa",
+   "sinonimos": [],
+   "nombresComunes": {
+    "es": [],
+    "eu": []
+   },
+   "clase": "mortal",
+   "grupo": "laminar",
+   "notaComestibilidad": "Setas blancas. Confusión con champiñones y otras setas blancas.",
+   "himenio": "Láminas blancas.",
+   "sindrome": "Faloidiano (amatoxinas)",
+   "latencia": "6–24 h, con falsa mejoría",
+   "gravedad": "Mortal",
+   "confusiones": [
+    {
+     "id": null,
+     "nombre": "Agaricus (champiñones silvestres) y otras setas blancas de campo",
+     "comoDistinguir": "Agaricus: láminas rosadas→marrón chocolate y anillo; Amanita: láminas siempre blancas y volva.",
+     "gravedad": "alta"
+    }
+   ],
+   "nivelVerificacion": "borrador",
+   "fuentes": [
+    {
+     "nombre": "Aranzadi — Setas tóxicas e intoxicaciones (Munibe, 2005)",
+     "url": null,
+     "fechaConsulta": null,
+     "campos": [
+      "clase",
+      "sindrome",
+      "latencia",
+      "confusiones"
+     ],
+     "nota": "Citada en el documento de traspaso Micología 3/3 (12-nov-2026). URL y contenido sin releer ni contrastar en esta sesión."
+    },
+    {
+     "nombre": "Documento de traspaso Micología 3/3 (12-nov-2026)",
+     "url": null,
+     "fechaConsulta": "2026-11-12",
+     "campos": [
+      "rasgos",
+      "confusiones",
+      "notaComestibilidad"
+     ],
+     "nota": "Borrador que mezcla fuentes citadas y conocimiento micológico general. Contrastar con ≥2 fuentes antes de dar la ficha por buena."
+    }
+   ],
+   "fotos": []
+  },
+  {
+   "id": "lepiota-brunneoincarnata",
+   "nombreCientifico": "Lepiota brunneoincarnata / Lepiota josserandii",
+   "sinonimos": [],
+   "nombresComunes": {
+    "es": [],
+    "eu": []
+   },
+   "clase": "mortal",
+   "grupo": "laminar",
+   "notaComestibilidad": "No comer lepiotas pequeñas (Aranzadi).",
+   "sombrero": "Pequeño, con escamas.",
+   "anillo": "Fugaz.",
+   "habitat": "Jardines y prados.",
+   "sindrome": "Faloidiano (amatoxinas)",
+   "gravedad": "Mortal",
+   "confusiones": [
+    {
+     "id": "macrolepiota-procera",
+     "nombre": "Macrolepiota procera (parasol)",
+     "comoDistinguir": "Parasol: grande (>15 cm), pie con dibujo atigrado y anillo doble móvil. Lepiota pequeñas: anillo fugaz y sombrero con escamas. Solo grandes, solo sombreros (verificar).",
+     "gravedad": "alta"
+    }
+   ],
+   "nivelVerificacion": "borrador",
+   "fuentes": [
+    {
+     "nombre": "Aranzadi — Setas tóxicas e intoxicaciones (Munibe, 2005)",
+     "url": null,
+     "fechaConsulta": null,
+     "campos": [
+      "clase",
+      "sindrome",
+      "latencia",
+      "confusiones"
+     ],
+     "nota": "Citada en el documento de traspaso Micología 3/3 (12-nov-2026). URL y contenido sin releer ni contrastar en esta sesión."
+    },
+    {
+     "nombre": "Documento de traspaso Micología 3/3 (12-nov-2026)",
+     "url": null,
+     "fechaConsulta": "2026-11-12",
+     "campos": [
+      "rasgos",
+      "confusiones",
+      "notaComestibilidad"
+     ],
+     "nota": "Borrador que mezcla fuentes citadas y conocimiento micológico general. Contrastar con ≥2 fuentes antes de dar la ficha por buena."
+    }
+   ],
+   "fotos": []
+  },
+  {
+   "id": "galerina-marginata",
+   "nombreCientifico": "Galerina marginata",
+   "sinonimos": [],
+   "nombresComunes": {
+    "es": [],
+    "eu": []
+   },
+   "clase": "mortal",
+   "grupo": "laminar",
+   "notaComestibilidad": "Confusión con setas de madera comestibles.",
+   "anillo": "Presente.",
+   "esporada": "Marrón-oxidada.",
+   "habitat": "En madera.",
+   "sindrome": "Faloidiano (amatoxinas)",
+   "gravedad": "Mortal",
+   "confusiones": [
+    {
+     "id": null,
+     "nombre": "Armillaria mellea (Aranzadi no la recomienda)",
+     "comoDistinguir": "Ambas en madera y con anillo; esporada distinta: blanca en Armillaria, marrón-oxidada en Galerina. No recoger armilarias siendo novato.",
+     "gravedad": "alta"
+    }
+   ],
+   "nivelVerificacion": "borrador",
+   "fuentes": [
+    {
+     "nombre": "Aranzadi — Setas tóxicas e intoxicaciones (Munibe, 2005)",
+     "url": null,
+     "fechaConsulta": null,
+     "campos": [
+      "clase",
+      "sindrome",
+      "latencia",
+      "confusiones"
+     ],
+     "nota": "Citada en el documento de traspaso Micología 3/3 (12-nov-2026). URL y contenido sin releer ni contrastar en esta sesión."
+    },
+    {
+     "nombre": "Documento de traspaso Micología 3/3 (12-nov-2026)",
+     "url": null,
+     "fechaConsulta": "2026-11-12",
+     "campos": [
+      "rasgos",
+      "confusiones",
+      "notaComestibilidad"
+     ],
+     "nota": "Borrador que mezcla fuentes citadas y conocimiento micológico general. Contrastar con ≥2 fuentes antes de dar la ficha por buena."
+    }
+   ],
+   "fotos": []
+  },
+  {
+   "id": "cortinarius-orellanus",
+   "nombreCientifico": "Cortinarius orellanus / Cortinarius speciosissimus",
+   "sinonimos": [],
+   "nombresComunes": {
+    "es": [],
+    "eu": []
+   },
+   "clase": "mortal",
+   "grupo": "laminar",
+   "notaComestibilidad": "Los síntomas tardíos son engañosos.",
+   "sombrero": "Rojo-naranja.",
+   "sindrome": "Orellánico (orellanina): daño renal",
+   "latencia": "3–17 días",
+   "gravedad": "Mortal",
+   "nivelVerificacion": "borrador",
+   "fuentes": [
+    {
+     "nombre": "Aranzadi — Setas tóxicas e intoxicaciones (Munibe, 2005)",
+     "url": null,
+     "fechaConsulta": null,
+     "campos": [
+      "clase",
+      "sindrome",
+      "latencia",
+      "confusiones"
+     ],
+     "nota": "Citada en el documento de traspaso Micología 3/3 (12-nov-2026). URL y contenido sin releer ni contrastar en esta sesión."
+    },
+    {
+     "nombre": "Documento de traspaso Micología 3/3 (12-nov-2026)",
+     "url": null,
+     "fechaConsulta": "2026-11-12",
+     "campos": [
+      "rasgos",
+      "confusiones",
+      "notaComestibilidad"
+     ],
+     "nota": "Borrador que mezcla fuentes citadas y conocimiento micológico general. Contrastar con ≥2 fuentes antes de dar la ficha por buena."
+    }
+   ],
+   "fotos": []
+  },
+  {
+   "id": "gyromitra",
+   "nombreCientifico": "Gyromitra esculenta (y otras Gyromitra)",
+   "sinonimos": [],
+   "nombresComunes": {
+    "es": [],
+    "eu": []
+   },
+   "clase": "mortal",
+   "grupo": "ascomiceto",
+   "notaComestibilidad": "Clasificada con el aviso más alto de forma provisional: el documento de traspaso la lista como «tóxica» en una tabla (§5) y cita la giromitrina entre las toxinas que pueden ser mortales (§2). Fuentes discrepan: contrastar. No consumir (Aranzadi).",
+   "sombrero": "Cerebriforme.",
+   "carne": "Con cámaras.",
+   "sindrome": "Giromitriano (giromitrina)",
+   "gravedad": "Grave",
+   "confusiones": [
+    {
+     "id": "morchella",
+     "nombre": "Morchella (colmenilla)",
+     "comoDistinguir": "Colmenilla: sombrero con alveolos, hueca por dentro y pie hueco. Gyromitra: sombrero cerebriforme y carne con cámaras.",
+     "gravedad": "alta"
+    }
+   ],
+   "nivelVerificacion": "borrador",
+   "fuentes": [
+    {
+     "nombre": "Aranzadi — Setas tóxicas e intoxicaciones (Munibe, 2005)",
+     "url": null,
+     "fechaConsulta": null,
+     "campos": [
+      "clase",
+      "sindrome",
+      "latencia",
+      "confusiones"
+     ],
+     "nota": "Citada en el documento de traspaso Micología 3/3 (12-nov-2026). URL y contenido sin releer ni contrastar en esta sesión."
+    },
+    {
+     "nombre": "Documento de traspaso Micología 3/3 (12-nov-2026)",
+     "url": null,
+     "fechaConsulta": "2026-11-12",
+     "campos": [
+      "rasgos",
+      "confusiones",
+      "notaComestibilidad"
+     ],
+     "nota": "Borrador que mezcla fuentes citadas y conocimiento micológico general. Contrastar con ≥2 fuentes antes de dar la ficha por buena."
+    }
+   ],
+   "fotos": []
+  },
+  {
+   "id": "entoloma-lividum-sinuatum",
+   "nombreCientifico": "Entoloma lividum / Entoloma sinuatum",
+   "sinonimos": [],
+   "nombresComunes": {
+    "es": [],
+    "eu": []
+   },
+   "clase": "toxica",
+   "grupo": "laminar",
+   "notaComestibilidad": "La causa más frecuente de intoxicación en Euskadi según Aranzadi.",
+   "sombrero": "Algo satinado.",
+   "himenio": "Láminas que acaban rosadas.",
+   "esporada": "Rosada.",
+   "olor": "Harinoso-rancio.",
+   "sindrome": "Gastroenterítico grave",
+   "gravedad": "Grave",
+   "confusiones": [
+    {
+     "id": "calocybe-gambosa",
+     "nombre": "Calocybe gambosa (perretxiko, seta de San Jorge)",
+     "comoDistinguir": "Entoloma: láminas que acaban rosadas y esporada rosada, olor harinoso-rancio; sombrero algo satinado. Perretxiko: primavera, olor a harina fresca, láminas blancas muy apretadas, en corros.",
+     "gravedad": "alta"
+    },
+    {
+     "id": null,
+     "nombre": "Lepista nebularis (pardilla)",
+     "comoDistinguir": "Mismo criterio que con el perretxiko: el Entoloma tiene láminas que acaban rosadas, esporada rosada y olor harinoso-rancio.",
+     "gravedad": "alta"
+    }
+   ],
+   "nivelVerificacion": "borrador",
+   "fuentes": [
+    {
+     "nombre": "Aranzadi — Setas tóxicas e intoxicaciones (Munibe, 2005)",
+     "url": null,
+     "fechaConsulta": null,
+     "campos": [
+      "clase",
+      "sindrome",
+      "latencia",
+      "confusiones"
+     ],
+     "nota": "Citada en el documento de traspaso Micología 3/3 (12-nov-2026). URL y contenido sin releer ni contrastar en esta sesión."
+    },
+    {
+     "nombre": "Documento de traspaso Micología 3/3 (12-nov-2026)",
+     "url": null,
+     "fechaConsulta": "2026-11-12",
+     "campos": [
+      "rasgos",
+      "confusiones",
+      "notaComestibilidad"
+     ],
+     "nota": "Borrador que mezcla fuentes citadas y conocimiento micológico general. Contrastar con ≥2 fuentes antes de dar la ficha por buena."
+    }
+   ],
+   "fotos": []
+  },
+  {
+   "id": "omphalotus-illudens",
+   "nombreCientifico": "Omphalotus illudens",
+   "sinonimos": [],
+   "nombresComunes": {
+    "es": [],
+    "eu": []
+   },
+   "clase": "toxica",
+   "grupo": "laminar",
+   "himenio": "Láminas verdaderas.",
+   "habitat": "En grupos sobre madera.",
+   "sindrome": "Gastroenterítico",
+   "gravedad": "Media",
+   "confusiones": [
+    {
+     "id": "cantharellus-cibarius",
+     "nombre": "Cantharellus cibarius (rebozuelo, ziza)",
+     "comoDistinguir": "Rebozuelo: pliegues bajo el sombrero (no láminas verdaderas), carne blanca fibrosa, olor a albaricoque. Omphalotus: láminas verdaderas, en grupos sobre madera.",
+     "gravedad": "alta"
+    }
+   ],
+   "nivelVerificacion": "borrador",
+   "fuentes": [
+    {
+     "nombre": "Aranzadi — Setas tóxicas e intoxicaciones (Munibe, 2005)",
+     "url": null,
+     "fechaConsulta": null,
+     "campos": [
+      "clase",
+      "sindrome",
+      "latencia",
+      "confusiones"
+     ],
+     "nota": "Citada en el documento de traspaso Micología 3/3 (12-nov-2026). URL y contenido sin releer ni contrastar en esta sesión."
+    },
+    {
+     "nombre": "Documento de traspaso Micología 3/3 (12-nov-2026)",
+     "url": null,
+     "fechaConsulta": "2026-11-12",
+     "campos": [
+      "rasgos",
+      "confusiones",
+      "notaComestibilidad"
+     ],
+     "nota": "Borrador que mezcla fuentes citadas y conocimiento micológico general. Contrastar con ≥2 fuentes antes de dar la ficha por buena."
+    }
+   ],
+   "fotos": []
+  },
+  {
+   "id": "tricholoma-pardinum",
+   "nombreCientifico": "Tricholoma pardinum",
+   "sinonimos": [],
+   "nombresComunes": {
+    "es": [],
+    "eu": []
+   },
+   "clase": "toxica",
+   "grupo": "laminar",
+   "notaComestibilidad": "Confusión con setas del género Tricholoma comestibles.",
+   "sindrome": "Gastroenterítico",
+   "gravedad": "Media",
+   "nivelVerificacion": "borrador",
+   "fuentes": [
+    {
+     "nombre": "Aranzadi — Setas tóxicas e intoxicaciones (Munibe, 2005)",
+     "url": null,
+     "fechaConsulta": null,
+     "campos": [
+      "clase",
+      "sindrome",
+      "latencia",
+      "confusiones"
+     ],
+     "nota": "Citada en el documento de traspaso Micología 3/3 (12-nov-2026). URL y contenido sin releer ni contrastar en esta sesión."
+    },
+    {
+     "nombre": "Documento de traspaso Micología 3/3 (12-nov-2026)",
+     "url": null,
+     "fechaConsulta": "2026-11-12",
+     "campos": [
+      "rasgos",
+      "confusiones",
+      "notaComestibilidad"
+     ],
+     "nota": "Borrador que mezcla fuentes citadas y conocimiento micológico general. Contrastar con ≥2 fuentes antes de dar la ficha por buena."
+    }
+   ],
+   "fotos": []
+  },
+  {
+   "id": "amanita-pantherina-muscaria",
+   "nombreCientifico": "Amanita pantherina / Amanita muscaria",
+   "sinonimos": [],
+   "nombresComunes": {
+    "es": [],
+    "eu": []
+   },
+   "clase": "toxica",
+   "grupo": "laminar",
+   "notaComestibilidad": "A. muscaria: verrugas blancas sobre sombrero rojo y láminas blancas.",
+   "volva": "Anular.",
+   "sindrome": "Panterínico (neurotóxico)",
+   "gravedad": "Media",
+   "confusiones": [
+    {
+     "id": null,
+     "nombre": "Amanita caesarea (oronja; rara en Bizkaia, verificar)",
+     "comoDistinguir": "Oronja: láminas y pie amarillos, volva blanca en saco, anillo amarillo, sombrero anaranjado sin verrugas.",
+     "gravedad": "alta"
+    }
+   ],
+   "nivelVerificacion": "borrador",
+   "fuentes": [
+    {
+     "nombre": "Aranzadi — Setas tóxicas e intoxicaciones (Munibe, 2005)",
+     "url": null,
+     "fechaConsulta": null,
+     "campos": [
+      "clase",
+      "sindrome",
+      "latencia",
+      "confusiones"
+     ],
+     "nota": "Citada en el documento de traspaso Micología 3/3 (12-nov-2026). URL y contenido sin releer ni contrastar en esta sesión."
+    },
+    {
+     "nombre": "Documento de traspaso Micología 3/3 (12-nov-2026)",
+     "url": null,
+     "fechaConsulta": "2026-11-12",
+     "campos": [
+      "rasgos",
+      "confusiones",
+      "notaComestibilidad"
+     ],
+     "nota": "Borrador que mezcla fuentes citadas y conocimiento micológico general. Contrastar con ≥2 fuentes antes de dar la ficha por buena."
+    }
+   ],
+   "fotos": []
+  },
+  {
+   "id": "paxillus-involutus",
+   "nombreCientifico": "Paxillus involutus",
+   "sinonimos": [],
+   "nombresComunes": {
+    "es": [],
+    "eu": []
+   },
+   "clase": "toxica",
+   "grupo": "laminar",
+   "notaComestibilidad": "No consumir (Aranzadi). La toxicidad es acumulativa.",
+   "sindrome": "Hemolítico (acumulativo)",
+   "gravedad": "Grave",
+   "nivelVerificacion": "borrador",
+   "fuentes": [
+    {
+     "nombre": "Aranzadi — Setas tóxicas e intoxicaciones (Munibe, 2005)",
+     "url": null,
+     "fechaConsulta": null,
+     "campos": [
+      "clase",
+      "sindrome",
+      "latencia",
+      "confusiones"
+     ],
+     "nota": "Citada en el documento de traspaso Micología 3/3 (12-nov-2026). URL y contenido sin releer ni contrastar en esta sesión."
+    },
+    {
+     "nombre": "Documento de traspaso Micología 3/3 (12-nov-2026)",
+     "url": null,
+     "fechaConsulta": "2026-11-12",
+     "campos": [
+      "rasgos",
+      "confusiones",
+      "notaComestibilidad"
+     ],
+     "nota": "Borrador que mezcla fuentes citadas y conocimiento micológico general. Contrastar con ≥2 fuentes antes de dar la ficha por buena."
+    }
+   ],
+   "fotos": []
+  },
+  {
+   "id": "boletus-satanas",
+   "nombreCientifico": "Boletus satanas / Rubroboletus",
+   "sinonimos": [],
+   "nombresComunes": {
+    "es": [],
+    "eu": []
+   },
+   "clase": "toxica",
+   "grupo": "boleto",
+   "himenio": "Poros rojos.",
+   "carne": "Azulea.",
+   "sindrome": "Gastroenterítico",
+   "gravedad": "Media",
+   "confusiones": [
+    {
+     "id": "boletus-edulis",
+     "nombre": "Boletus edulis (grupo)",
+     "comoDistinguir": "Edulis: poros blancos→amarillo oliváceo, retículo claro en el pie, carne que no cambia. Poros rojos o carne que azulea fuerte: no coger sin experto.",
+     "gravedad": "alta"
+    }
+   ],
+   "nivelVerificacion": "borrador",
+   "fuentes": [
+    {
+     "nombre": "Aranzadi — Setas tóxicas e intoxicaciones (Munibe, 2005)",
+     "url": null,
+     "fechaConsulta": null,
+     "campos": [
+      "clase",
+      "sindrome",
+      "latencia",
+      "confusiones"
+     ],
+     "nota": "Citada en el documento de traspaso Micología 3/3 (12-nov-2026). URL y contenido sin releer ni contrastar en esta sesión."
+    },
+    {
+     "nombre": "Documento de traspaso Micología 3/3 (12-nov-2026)",
+     "url": null,
+     "fechaConsulta": "2026-11-12",
+     "campos": [
+      "rasgos",
+      "confusiones",
+      "notaComestibilidad"
+     ],
+     "nota": "Borrador que mezcla fuentes citadas y conocimiento micológico general. Contrastar con ≥2 fuentes antes de dar la ficha por buena."
+    }
+   ],
+   "fotos": []
+  },
+  {
+   "id": "coprinopsis-atramentaria",
+   "nombreCientifico": "Coprinopsis atramentaria",
+   "sinonimos": [],
+   "nombresComunes": {
+    "es": [],
+    "eu": []
+   },
+   "clase": "toxica",
+   "grupo": "laminar",
+   "notaComestibilidad": "Síndrome coprínico: la intoxicación es con alcohol. Sin alcohol durante días.",
+   "sindrome": "Coprínico (con alcohol)",
+   "gravedad": "Media",
+   "nivelVerificacion": "borrador",
+   "fuentes": [
+    {
+     "nombre": "Aranzadi — Setas tóxicas e intoxicaciones (Munibe, 2005)",
+     "url": null,
+     "fechaConsulta": null,
+     "campos": [
+      "clase",
+      "sindrome",
+      "latencia",
+      "confusiones"
+     ],
+     "nota": "Citada en el documento de traspaso Micología 3/3 (12-nov-2026). URL y contenido sin releer ni contrastar en esta sesión."
+    },
+    {
+     "nombre": "Documento de traspaso Micología 3/3 (12-nov-2026)",
+     "url": null,
+     "fechaConsulta": "2026-11-12",
+     "campos": [
+      "rasgos",
+      "confusiones",
+      "notaComestibilidad"
+     ],
+     "nota": "Borrador que mezcla fuentes citadas y conocimiento micológico general. Contrastar con ≥2 fuentes antes de dar la ficha por buena."
+    }
+   ],
+   "fotos": []
+  },
+  {
+   "id": "tricholoma-equestre",
+   "nombreCientifico": "Tricholoma equestre",
+   "sinonimos": [],
+   "nombresComunes": {
+    "es": [],
+    "eu": []
+   },
+   "clase": "toxica",
+   "grupo": "laminar",
+   "notaComestibilidad": "Evitar. Antes se consideraba comestible. Venta prohibida.",
+   "sindrome": "Rabdomiolisis",
+   "gravedad": "Grave",
+   "nivelVerificacion": "borrador",
+   "fuentes": [
+    {
+     "nombre": "Aranzadi — Setas tóxicas e intoxicaciones (Munibe, 2005)",
+     "url": null,
+     "fechaConsulta": null,
+     "campos": [
+      "clase",
+      "sindrome",
+      "latencia",
+      "confusiones"
+     ],
+     "nota": "Citada en el documento de traspaso Micología 3/3 (12-nov-2026). URL y contenido sin releer ni contrastar en esta sesión."
+    },
+    {
+     "nombre": "Documento de traspaso Micología 3/3 (12-nov-2026)",
+     "url": null,
+     "fechaConsulta": "2026-11-12",
+     "campos": [
+      "rasgos",
+      "confusiones",
+      "notaComestibilidad"
+     ],
+     "nota": "Borrador que mezcla fuentes citadas y conocimiento micológico general. Contrastar con ≥2 fuentes antes de dar la ficha por buena."
+    }
+   ],
+   "fotos": []
+  },
+  {
+   "id": "clitocybe-rivulosa",
+   "nombreCientifico": "Clitocybe rivulosa / Clitocybe dealbata",
+   "sinonimos": [],
+   "nombresComunes": {
+    "es": [],
+    "eu": []
+   },
+   "clase": "toxica",
+   "grupo": "laminar",
+   "habitat": "En el mismo césped que la senderuela.",
+   "sindrome": "Muscarínico",
+   "gravedad": "Media",
+   "confusiones": [
+    {
+     "id": "marasmius-oreades",
+     "nombre": "Marasmius oreades (senderuela)",
+     "comoDistinguir": "Senderuela: pie elástico y tenaz, láminas separadas, olor a almendra amarga. Los Clitocybe blancos crecen en el mismo césped: confusión clásica.",
+     "gravedad": "alta"
+    }
+   ],
+   "nivelVerificacion": "borrador",
+   "fuentes": [
+    {
+     "nombre": "Aranzadi — Setas tóxicas e intoxicaciones (Munibe, 2005)",
+     "url": null,
+     "fechaConsulta": null,
+     "campos": [
+      "clase",
+      "sindrome",
+      "latencia",
+      "confusiones"
+     ],
+     "nota": "Citada en el documento de traspaso Micología 3/3 (12-nov-2026). URL y contenido sin releer ni contrastar en esta sesión."
+    },
+    {
+     "nombre": "Documento de traspaso Micología 3/3 (12-nov-2026)",
+     "url": null,
+     "fechaConsulta": "2026-11-12",
+     "campos": [
+      "rasgos",
+      "confusiones",
+      "notaComestibilidad"
+     ],
+     "nota": "Borrador que mezcla fuentes citadas y conocimiento micológico general. Contrastar con ≥2 fuentes antes de dar la ficha por buena."
+    }
+   ],
+   "fotos": []
+  },
+  {
+   "id": "tylopilus-felleus",
+   "nombreCientifico": "Tylopilus felleus",
+   "sinonimos": [],
+   "nombresComunes": {
+    "es": [],
+    "eu": []
+   },
+   "clase": "no_comestible",
+   "grupo": "boleto",
+   "notaComestibilidad": "Amargo: no se come.",
+   "himenio": "Poros rosados.",
+   "reticulo": "Oscuro.",
+   "confusiones": [
+    {
+     "id": "boletus-edulis",
+     "nombre": "Boletus edulis (grupo)",
+     "comoDistinguir": "Edulis: poros blancos→amarillo oliváceo, retículo claro en el pie, carne que no cambia, sabor suave. Tylopilus: poros rosados, retículo oscuro, amargo.",
+     "gravedad": "media"
+    }
+   ],
+   "nivelVerificacion": "borrador",
+   "fuentes": [
+    {
+     "nombre": "Aranzadi — Setas tóxicas e intoxicaciones (Munibe, 2005)",
+     "url": null,
+     "fechaConsulta": null,
+     "campos": [
+      "clase",
+      "sindrome",
+      "latencia",
+      "confusiones"
+     ],
+     "nota": "Citada en el documento de traspaso Micología 3/3 (12-nov-2026). URL y contenido sin releer ni contrastar en esta sesión."
+    },
+    {
+     "nombre": "Documento de traspaso Micología 3/3 (12-nov-2026)",
+     "url": null,
+     "fechaConsulta": "2026-11-12",
+     "campos": [
+      "rasgos",
+      "confusiones",
+      "notaComestibilidad"
+     ],
+     "nota": "Borrador que mezcla fuentes citadas y conocimiento micológico general. Contrastar con ≥2 fuentes antes de dar la ficha por buena."
+    }
+   ],
+   "fotos": []
+  },
+  {
+   "id": "boletus-edulis",
+   "nombreCientifico": "Boletus edulis (grupo: edulis, aereus, aestivalis, pinophilus)",
+   "sinonimos": [],
+   "nombresComunes": {
+    "es": [],
+    "eu": []
+   },
+   "clase": "sin_datos",
+   "grupo": "boleto",
+   "candidataComestible": true,
+   "notaComestibilidad": "Candidata a comestible según el documento de traspaso (§7). Sin ≥2 fuentes contrastadas ni revisión experta, así que NO se clasifica como comestible: se trata como no comestible hasta verificarla.",
+   "himenio": "Poros blancos→amarillo oliváceo.",
+   "reticulo": "Claro en el pie.",
+   "carne": "No cambia al corte.",
+   "confusiones": [
+    {
+     "id": "tylopilus-felleus",
+     "nombre": "Tylopilus felleus",
+     "comoDistinguir": "Edulis: poros blancos→amarillo oliváceo, retículo claro en el pie, carne que no cambia, sabor suave. Tylopilus: poros rosados, retículo oscuro, amargo.",
+     "gravedad": "media"
+    },
+    {
+     "id": "boletus-satanas",
+     "nombre": "Boletus satanas / Rubroboletus",
+     "comoDistinguir": "Edulis: poros blancos→amarillo oliváceo, retículo claro en el pie, carne que no cambia. Poros rojos o carne que azulea fuerte: no coger sin experto.",
+     "gravedad": "alta"
+    }
+   ],
+   "nivelVerificacion": "borrador",
+   "fuentes": [
+    {
+     "nombre": "Aranzadi — Setas tóxicas e intoxicaciones (Munibe, 2005)",
+     "url": null,
+     "fechaConsulta": null,
+     "campos": [
+      "clase",
+      "sindrome",
+      "latencia",
+      "confusiones"
+     ],
+     "nota": "Citada en el documento de traspaso Micología 3/3 (12-nov-2026). URL y contenido sin releer ni contrastar en esta sesión."
+    },
+    {
+     "nombre": "Documento de traspaso Micología 3/3 (12-nov-2026)",
+     "url": null,
+     "fechaConsulta": "2026-11-12",
+     "campos": [
+      "rasgos",
+      "confusiones",
+      "notaComestibilidad"
+     ],
+     "nota": "Borrador que mezcla fuentes citadas y conocimiento micológico general. Contrastar con ≥2 fuentes antes de dar la ficha por buena."
+    }
+   ],
+   "fotos": []
+  },
+  {
+   "id": "cantharellus-cibarius",
+   "nombreCientifico": "Cantharellus cibarius",
+   "sinonimos": [],
+   "nombresComunes": {
+    "es": [
+     "rebozuelo"
+    ],
+    "eu": [
+     "ziza"
+    ]
+   },
+   "clase": "sin_datos",
+   "grupo": "pliegues",
+   "candidataComestible": true,
+   "notaComestibilidad": "Candidata a comestible según el documento de traspaso (§7). Sin ≥2 fuentes contrastadas ni revisión experta, así que NO se clasifica como comestible: se trata como no comestible hasta verificarla.",
+   "himenio": "Pliegues bajo el sombrero (no láminas verdaderas).",
+   "carne": "Blanca, fibrosa.",
+   "olor": "A albaricoque.",
+   "confusiones": [
+    {
+     "id": "omphalotus-illudens",
+     "nombre": "Omphalotus illudens (tóxica)",
+     "comoDistinguir": "Rebozuelo: pliegues bajo el sombrero (no láminas verdaderas), carne blanca fibrosa, olor a albaricoque. Omphalotus: láminas verdaderas, en grupos sobre madera.",
+     "gravedad": "alta"
+    },
+    {
+     "id": null,
+     "nombre": "Hygrophoropsis aurantiaca (no comestible)",
+     "comoDistinguir": "El documento de traspaso la cita como confusión; el carácter diferenciador está por contrastar.",
+     "gravedad": "baja"
+    }
+   ],
+   "nivelVerificacion": "borrador",
+   "fuentes": [
+    {
+     "nombre": "Aranzadi — Setas tóxicas e intoxicaciones (Munibe, 2005)",
+     "url": null,
+     "fechaConsulta": null,
+     "campos": [
+      "clase",
+      "sindrome",
+      "latencia",
+      "confusiones"
+     ],
+     "nota": "Citada en el documento de traspaso Micología 3/3 (12-nov-2026). URL y contenido sin releer ni contrastar en esta sesión."
+    },
+    {
+     "nombre": "Documento de traspaso Micología 3/3 (12-nov-2026)",
+     "url": null,
+     "fechaConsulta": "2026-11-12",
+     "campos": [
+      "rasgos",
+      "confusiones",
+      "notaComestibilidad"
+     ],
+     "nota": "Borrador que mezcla fuentes citadas y conocimiento micológico general. Contrastar con ≥2 fuentes antes de dar la ficha por buena."
+    }
+   ],
+   "fotos": []
+  },
+  {
+   "id": "craterellus-cornucopioides",
+   "nombreCientifico": "Craterellus cornucopioides",
+   "sinonimos": [],
+   "nombresComunes": {
+    "es": [
+     "trompeta de los muertos"
+    ],
+    "eu": []
+   },
+   "clase": "sin_datos",
+   "grupo": "pliegues",
+   "candidataComestible": true,
+   "notaComestibilidad": "Candidata a comestible según el documento de traspaso (§7). Sin ≥2 fuentes contrastadas ni revisión experta, así que NO se clasifica como comestible: se trata como no comestible hasta verificarla.",
+   "himenio": "Sin láminas.",
+   "nivelVerificacion": "borrador",
+   "fuentes": [
+    {
+     "nombre": "Aranzadi — Setas tóxicas e intoxicaciones (Munibe, 2005)",
+     "url": null,
+     "fechaConsulta": null,
+     "campos": [
+      "clase",
+      "sindrome",
+      "latencia",
+      "confusiones"
+     ],
+     "nota": "Citada en el documento de traspaso Micología 3/3 (12-nov-2026). URL y contenido sin releer ni contrastar en esta sesión."
+    },
+    {
+     "nombre": "Documento de traspaso Micología 3/3 (12-nov-2026)",
+     "url": null,
+     "fechaConsulta": "2026-11-12",
+     "campos": [
+      "rasgos",
+      "confusiones",
+      "notaComestibilidad"
+     ],
+     "nota": "Borrador que mezcla fuentes citadas y conocimiento micológico general. Contrastar con ≥2 fuentes antes de dar la ficha por buena."
+    }
+   ],
+   "fotos": []
+  },
+  {
+   "id": "hydnum-repandum",
+   "nombreCientifico": "Hydnum repandum",
+   "sinonimos": [],
+   "nombresComunes": {
+    "es": [
+     "lengua de gato"
+    ],
+    "eu": []
+   },
+   "clase": "sin_datos",
+   "grupo": "pinchos",
+   "candidataComestible": true,
+   "notaComestibilidad": "Candidata a comestible según el documento de traspaso (§7). Sin ≥2 fuentes contrastadas ni revisión experta, así que NO se clasifica como comestible: se trata como no comestible hasta verificarla. El documento indica pocas confusiones peligrosas (verificar) y la propone como buena especie para iniciarse, con verificación.",
+   "himenio": "Pinchos en lugar de láminas.",
+   "nivelVerificacion": "borrador",
+   "fuentes": [
+    {
+     "nombre": "Aranzadi — Setas tóxicas e intoxicaciones (Munibe, 2005)",
+     "url": null,
+     "fechaConsulta": null,
+     "campos": [
+      "clase",
+      "sindrome",
+      "latencia",
+      "confusiones"
+     ],
+     "nota": "Citada en el documento de traspaso Micología 3/3 (12-nov-2026). URL y contenido sin releer ni contrastar en esta sesión."
+    },
+    {
+     "nombre": "Documento de traspaso Micología 3/3 (12-nov-2026)",
+     "url": null,
+     "fechaConsulta": "2026-11-12",
+     "campos": [
+      "rasgos",
+      "confusiones",
+      "notaComestibilidad"
+     ],
+     "nota": "Borrador que mezcla fuentes citadas y conocimiento micológico general. Contrastar con ≥2 fuentes antes de dar la ficha por buena."
+    }
+   ],
+   "fotos": []
+  },
+  {
+   "id": "lactarius-deliciosus",
+   "nombreCientifico": "Lactarius deliciosus (y afines: agrupa varias especies)",
+   "sinonimos": [],
+   "nombresComunes": {
+    "es": [
+     "níscalo"
+    ],
+    "eu": []
+   },
+   "clase": "sin_datos",
+   "grupo": "laminar",
+   "candidataComestible": true,
+   "notaComestibilidad": "Candidata a comestible según el documento de traspaso (§7). Sin ≥2 fuentes contrastadas ni revisión experta, así que NO se clasifica como comestible: se trata como no comestible hasta verificarla.",
+   "carne": "Látex anaranjado/zanahoria que verdea la carne.",
+   "habitat": "Bajo pino.",
+   "confusiones": [
+    {
+     "id": null,
+     "nombre": "Lactarius torminosus (tóxica), L. chrysorrheus…",
+     "comoDistinguir": "Otros Lactarius con látex blanco o picante: no.",
+     "gravedad": "media"
+    }
+   ],
+   "nivelVerificacion": "borrador",
+   "fuentes": [
+    {
+     "nombre": "Aranzadi — Setas tóxicas e intoxicaciones (Munibe, 2005)",
+     "url": null,
+     "fechaConsulta": null,
+     "campos": [
+      "clase",
+      "sindrome",
+      "latencia",
+      "confusiones"
+     ],
+     "nota": "Citada en el documento de traspaso Micología 3/3 (12-nov-2026). URL y contenido sin releer ni contrastar en esta sesión."
+    },
+    {
+     "nombre": "Documento de traspaso Micología 3/3 (12-nov-2026)",
+     "url": null,
+     "fechaConsulta": "2026-11-12",
+     "campos": [
+      "rasgos",
+      "confusiones",
+      "notaComestibilidad"
+     ],
+     "nota": "Borrador que mezcla fuentes citadas y conocimiento micológico general. Contrastar con ≥2 fuentes antes de dar la ficha por buena."
+    }
+   ],
+   "fotos": []
+  },
+  {
+   "id": "macrolepiota-procera",
+   "nombreCientifico": "Macrolepiota procera",
+   "sinonimos": [],
+   "nombresComunes": {
+    "es": [
+     "apagador",
+     "parasol"
+    ],
+    "eu": []
+   },
+   "clase": "sin_datos",
+   "grupo": "laminar",
+   "candidataComestible": true,
+   "notaComestibilidad": "Candidata a comestible según el documento de traspaso (§7). Sin ≥2 fuentes contrastadas ni revisión experta, así que NO se clasifica como comestible: se trata como no comestible hasta verificarla. Solo ejemplares grandes y solo sombreros (verificar).",
+   "sombrero": "Grande (>15 cm).",
+   "pie": "Con dibujo atigrado.",
+   "anillo": "Doble y móvil.",
+   "confusiones": [
+    {
+     "id": "lepiota-brunneoincarnata",
+     "nombre": "Lepiota brunneoincarnata y otras Lepiota (mortales)",
+     "comoDistinguir": "Parasol: grande (>15 cm), pie con dibujo atigrado y anillo doble móvil. Lepiota pequeñas: anillo fugaz y sombrero con escamas. Solo grandes, solo sombreros (verificar).",
+     "gravedad": "alta"
+    },
+    {
+     "id": null,
+     "nombre": "Chlorophyllum",
+     "comoDistinguir": "Confusión citada en el documento de traspaso; carácter diferenciador por contrastar.",
+     "gravedad": "media"
+    }
+   ],
+   "nivelVerificacion": "borrador",
+   "fuentes": [
+    {
+     "nombre": "Aranzadi — Setas tóxicas e intoxicaciones (Munibe, 2005)",
+     "url": null,
+     "fechaConsulta": null,
+     "campos": [
+      "clase",
+      "sindrome",
+      "latencia",
+      "confusiones"
+     ],
+     "nota": "Citada en el documento de traspaso Micología 3/3 (12-nov-2026). URL y contenido sin releer ni contrastar en esta sesión."
+    },
+    {
+     "nombre": "Documento de traspaso Micología 3/3 (12-nov-2026)",
+     "url": null,
+     "fechaConsulta": "2026-11-12",
+     "campos": [
+      "rasgos",
+      "confusiones",
+      "notaComestibilidad"
+     ],
+     "nota": "Borrador que mezcla fuentes citadas y conocimiento micológico general. Contrastar con ≥2 fuentes antes de dar la ficha por buena."
+    }
+   ],
+   "fotos": []
+  },
+  {
+   "id": "marasmius-oreades",
+   "nombreCientifico": "Marasmius oreades",
+   "sinonimos": [],
+   "nombresComunes": {
+    "es": [
+     "senderuela",
+     "corros de hadas"
+    ],
+    "eu": []
+   },
+   "clase": "sin_datos",
+   "grupo": "laminar",
+   "candidataComestible": true,
+   "notaComestibilidad": "Candidata a comestible según el documento de traspaso (§7). Sin ≥2 fuentes contrastadas ni revisión experta, así que NO se clasifica como comestible: se trata como no comestible hasta verificarla.",
+   "pie": "Elástico y tenaz.",
+   "himenio": "Láminas separadas.",
+   "olor": "A almendra amarga.",
+   "habitat": "Césped.",
+   "confusiones": [
+    {
+     "id": "clitocybe-rivulosa",
+     "nombre": "Clitocybe rivulosa / dealbata (muscarínica)",
+     "comoDistinguir": "Senderuela: pie elástico y tenaz, láminas separadas, olor a almendra amarga. Los Clitocybe blancos crecen en el mismo césped: confusión clásica.",
+     "gravedad": "alta"
+    }
+   ],
+   "nivelVerificacion": "borrador",
+   "fuentes": [
+    {
+     "nombre": "Aranzadi — Setas tóxicas e intoxicaciones (Munibe, 2005)",
+     "url": null,
+     "fechaConsulta": null,
+     "campos": [
+      "clase",
+      "sindrome",
+      "latencia",
+      "confusiones"
+     ],
+     "nota": "Citada en el documento de traspaso Micología 3/3 (12-nov-2026). URL y contenido sin releer ni contrastar en esta sesión."
+    },
+    {
+     "nombre": "Documento de traspaso Micología 3/3 (12-nov-2026)",
+     "url": null,
+     "fechaConsulta": "2026-11-12",
+     "campos": [
+      "rasgos",
+      "confusiones",
+      "notaComestibilidad"
+     ],
+     "nota": "Borrador que mezcla fuentes citadas y conocimiento micológico general. Contrastar con ≥2 fuentes antes de dar la ficha por buena."
+    }
+   ],
+   "fotos": []
+  },
+  {
+   "id": "calocybe-gambosa",
+   "nombreCientifico": "Calocybe gambosa",
+   "sinonimos": [],
+   "nombresComunes": {
+    "es": [
+     "perretxiko",
+     "seta de San Jorge"
+    ],
+    "eu": []
+   },
+   "clase": "sin_datos",
+   "grupo": "laminar",
+   "candidataComestible": true,
+   "notaComestibilidad": "Candidata a comestible según el documento de traspaso (§7). Sin ≥2 fuentes contrastadas ni revisión experta, así que NO se clasifica como comestible: se trata como no comestible hasta verificarla.",
+   "himenio": "Láminas blancas muy apretadas.",
+   "olor": "A harina fresca.",
+   "fenologia": "Primavera.",
+   "habitat": "En corros.",
+   "confusiones": [
+    {
+     "id": "entoloma-lividum-sinuatum",
+     "nombre": "Entoloma lividum / sinuatum (tóxica)",
+     "comoDistinguir": "Entoloma: láminas que acaban rosadas y esporada rosada, olor harinoso-rancio; sombrero algo satinado. Perretxiko: primavera, olor a harina fresca, láminas blancas muy apretadas, en corros.",
+     "gravedad": "alta"
+    }
+   ],
+   "nivelVerificacion": "borrador",
+   "fuentes": [
+    {
+     "nombre": "Aranzadi — Setas tóxicas e intoxicaciones (Munibe, 2005)",
+     "url": null,
+     "fechaConsulta": null,
+     "campos": [
+      "clase",
+      "sindrome",
+      "latencia",
+      "confusiones"
+     ],
+     "nota": "Citada en el documento de traspaso Micología 3/3 (12-nov-2026). URL y contenido sin releer ni contrastar en esta sesión."
+    },
+    {
+     "nombre": "Documento de traspaso Micología 3/3 (12-nov-2026)",
+     "url": null,
+     "fechaConsulta": "2026-11-12",
+     "campos": [
+      "rasgos",
+      "confusiones",
+      "notaComestibilidad"
+     ],
+     "nota": "Borrador que mezcla fuentes citadas y conocimiento micológico general. Contrastar con ≥2 fuentes antes de dar la ficha por buena."
+    }
+   ],
+   "fotos": []
+  },
+  {
+   "id": "morchella",
+   "nombreCientifico": "Morchella",
+   "sinonimos": [],
+   "nombresComunes": {
+    "es": [
+     "colmenilla"
+    ],
+    "eu": []
+   },
+   "clase": "sin_datos",
+   "grupo": "ascomiceto",
+   "candidataComestible": true,
+   "notaComestibilidad": "Candidata a comestible según el documento de traspaso (§7). Sin ≥2 fuentes contrastadas ni revisión experta, así que NO se clasifica como comestible: se trata como no comestible hasta verificarla. Verificar: el documento indica que no se come sin cocer a fondo.",
+   "sombrero": "Con alveolos.",
+   "pie": "Hueco.",
+   "carne": "Hueca por dentro.",
+   "fenologia": "Primavera.",
+   "confusiones": [
+    {
+     "id": "gyromitra",
+     "nombre": "Gyromitra esculenta (tóxica)",
+     "comoDistinguir": "Colmenilla: sombrero con alveolos, hueca por dentro y pie hueco. Gyromitra: sombrero cerebriforme y carne con cámaras.",
+     "gravedad": "alta"
+    }
+   ],
+   "nivelVerificacion": "borrador",
+   "fuentes": [
+    {
+     "nombre": "Aranzadi — Setas tóxicas e intoxicaciones (Munibe, 2005)",
+     "url": null,
+     "fechaConsulta": null,
+     "campos": [
+      "clase",
+      "sindrome",
+      "latencia",
+      "confusiones"
+     ],
+     "nota": "Citada en el documento de traspaso Micología 3/3 (12-nov-2026). URL y contenido sin releer ni contrastar en esta sesión."
+    },
+    {
+     "nombre": "Documento de traspaso Micología 3/3 (12-nov-2026)",
+     "url": null,
+     "fechaConsulta": "2026-11-12",
+     "campos": [
+      "rasgos",
+      "confusiones",
+      "notaComestibilidad"
+     ],
+     "nota": "Borrador que mezcla fuentes citadas y conocimiento micológico general. Contrastar con ≥2 fuentes antes de dar la ficha por buena."
+    }
+   ],
+   "fotos": []
+  }
+ ]
+}

@@ -1,0 +1,7 @@
+{
+  "name": "micologia-tests",
+  "private": true,
+  "description": "Pruebas automáticas de la app de micología (docs/)",
+  "scripts": { "test": "node run.js", "test:estatico": "node run.js estatico", "test:lista": "node run.js --list" },
+  "devDependencies": { "playwright": "^1.40.0" }
+}

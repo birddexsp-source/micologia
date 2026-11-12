@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0a0f0e">
+<title>Micología</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<link rel="stylesheet" href="vendor/leaflet/leaflet.css">
+<link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+<header class="top">
+  <h1 id="ttl">Mapa</h1>
+  <button id="chip" class="chip live" hidden></button>
+  <button id="syncbtn" class="syncbtn" aria-label="Sincronizar"></button>
+</header>
+<main>
+  <section id="v-mapa" class="view mapview">
+    <div id="map"></div>
+    <div id="gps" class="gps">GPS…</div>
+    <div class="maptools">
+      <button id="locate" class="tool" aria-label="Centrar en mi posición">◎</button>
+      <button id="layerbtn" class="tool" aria-label="Cambiar mapa">▦</button>
+      <button id="filterbtn" class="tool" aria-label="Filtrar hallazgos">⛛</button>
+    </div>
+    <button id="fab" class="fab">Marcar aquí</button>
+  </section>
+  <section id="v-salidas" class="view" hidden></section>
+  <section id="v-salida" class="view" hidden></section>
+  <section id="v-setas" class="view" hidden></section>
+  <section id="v-ajustes" class="view" hidden></section>
+</main>
+<nav class="nav">
+  <a href="#mapa" data-tab="mapa"><i>◉</i>Mapa</a>
+  <a href="#salidas" data-tab="salidas"><i>☰</i>Salidas</a>
+  <a href="#setas" data-tab="setas"><i>✿</i>Setas</a>
+  <a href="#ajustes" data-tab="ajustes"><i>⚙</i>Ajustes</a>
+</nav>
+<div id="sheet" class="sheet" hidden></div>
+<div id="toast" class="toast" role="status"></div>
+<script src="vendor/leaflet/leaflet.js"></script>
+<script type="module" src="js/app.js"></script>
+</body>
+</html>
