@@ -12,5 +12,6 @@ export const I = {
   aviso: s('<path d="M12 3.5l9.5 16.5h-19z"/><path d="M12 10v4.5M12 17.3v.2"/>'),
   libro: s('<path d="M4 5.5C6.5 4.5 9.5 4.5 12 6c2.5-1.5 5.5-1.5 8-.5v13c-2.5-1-5.5-1-8 .5-2.5-1.5-5.5-1.5-8-.5z"/><path d="M12 6v13"/>'),
   cal: s('<rect x="4" y="5" width="16" height="15" rx="3"/><path d="M8 3v4M16 3v4M4 10h16"/>'),
+  close: s('<path d="M6 6l12 12M18 6L6 18"/>'),
   chev: s('<path d="M9 5l7 7-7 7"/>')
 };

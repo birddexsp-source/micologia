@@ -406,3 +406,8 @@ dl.dat dd{margin:2px 0 0;font-weight:600;overflow-wrap:anywhere}
 .nav a.on::before{display:none}
 .nav a svg{padding:3px 14px;box-sizing:content-box;border-radius:999px;transition:background .2s}
 .nav a.on svg{background:rgba(224,164,88,.16)}
+
+/* cerrar hojas: barrita más fácil de tocar y arrastrar */
+.grab{position:relative;cursor:pointer;width:44px;height:5px}
+.grab::before{content:"";position:absolute;left:-40px;right:-40px;top:-14px;bottom:-12px}
+.sv-h .icb+.icb{margin-left:-4px}

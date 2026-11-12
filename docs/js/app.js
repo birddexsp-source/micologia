@@ -13,7 +13,7 @@ import * as trk from './track.js';
 import * as ia from './ia.js';
 import * as au from './audio.js';
 
-const APP_V = 'micologia-v9';   // = V de sw.js
+const APP_V = 'micologia-v10';   // = V de sw.js
 const S = { view: 'mapa', arg: '', map: null, pins: null, me: null, acc: null, tmp: null, mini: null, centered: false, filtro: { salida: '', especie: '' }, clase: '', q: '', syncErr: false, mes: new Date().getMonth() + 1 };
 const VIEWS = ['mapa', 'salidas', 'salida', 'setas', 'mes', 'ajustes'];
 const TITULOS = { mapa: 'Mapa', salidas: 'Salidas', salida: 'Salida', setas: 'Setas', mes: 'Este mes', ajustes: 'Ajustes' };
@@ -25,7 +25,15 @@ function openSheet(html, { dim = true } = {}) {
   const s = $('#sheet'); s.className = 'sheet' + (dim ? ' dim' : '');
   s.innerHTML = '<div class="sh"><div class="grab"></div>' + html + '</div>'; s.hidden = false;
   s.onclick = dim ? e => { if (e.target === s) closeSheet(); } : null;
-  hydrate(s); return s.firstChild;
+  hydrate(s); gestosHoja(s.firstChild); return s.firstChild;
+}
+/* Cerrar una hoja: tocar la barrita de arriba o arrastrarla hacia abajo. No en las que tienen un punto que mover (marcar, editar spot). */
+function gestosHoja(sh) {
+  const g = $('.grab', sh); let y0 = null, dy = 0;
+  g.onclick = () => { if (!S.tmp) closeSheet(); };
+  sh.addEventListener('touchstart', e => { if (S.tmp || (sh.scrollTop > 0 && !e.target.closest('.grab'))) return; y0 = e.touches[0].clientY; dy = 0; sh.style.transition = 'none'; }, { passive: true });
+  sh.addEventListener('touchmove', e => { if (y0 == null) return; dy = e.touches[0].clientY - y0; sh.style.transform = dy > 0 ? 'translateY(' + dy + 'px)' : ''; }, { passive: true });
+  sh.addEventListener('touchend', () => { if (y0 == null) return; y0 = null; sh.style.transition = 'transform .2s'; if (dy > 90) closeSheet(); else sh.style.transform = ''; });
 }
 function closeSheet() {
   const s = $('#sheet'); s.hidden = true; s.innerHTML = ''; s.onclick = null;
@@ -148,6 +156,8 @@ function initMap() {
   $('#filterbtn').onclick = abrirFiltro;
   $('#fab').onclick = () => marcar();
   $('#spotbtn').onclick = () => editarSpot();
+  /* tocar el mapa fuera de un marcador cierra el resumen abierto */
+  S.map.on('click', () => { const s = $('#sheet'); if (!S.tmp && !s.hidden && !s.classList.contains('dim')) closeSheet(); });
   $('#mchips').onclick = e => { const b = e.target.closest('[data-capa]'); if (!b) return; S.capa = b.dataset.capa; $$('#mchips button').forEach(x => x.classList.toggle('on', x === b)); refreshPins(); };
   trk.onAdd(() => { if (S.trkId && trk.activo() === S.trkId) pintarTrack(trk.puntos()); });
   geo.start();
@@ -331,12 +341,13 @@ async function verSpot(id) {
   const ss = ss0.filter(s => (s.zonaIds || []).includes(id) || hs.some(h => h.salidaId === s.id)).sort((a, b) => (b.fecha || '').localeCompare(a.fecha || ''));
   const dias = new Set([...ss.map(s => s.fecha), ...hs.filter(h => !h.salidaId).map(h => ymd(h.ts))]);
   const ult = [...dias].sort().pop(), yo = geo.fix(), por = z.estado === 'por_visitar';
+  const lejos = !yo || distM(yo, z) > 300;   /* desde casa: el hallazgo va en el sitio del spot, no donde estás */
   const { esp, porMes, peligro } = resumenSpot(hs), mesAct = new Date().getMonth(), max = Math.max(1, ...porMes), mejor = porMes.indexOf(Math.max(...porMes));
   const meta = [spotTag(z), yo ? '<span>' + kmFmt(distM(yo, z)) + '</span>' : '', dias.size ? '<span>' + dias.size + (dias.size === 1 ? ' visita' : ' visitas') + '</span>' : '', ult ? '<span>últ. ' + esc(fechaCorta(ult).replace(' ' + new Date().getFullYear(), '')) + '</span>' : ''].filter(Boolean).join('');
   const card = r => '<button class="spc" ' + (r.e ? 'data-e="' + r.e.id + '"' : 'data-hv="' + r.h.id + '"') + ' style="--c:' + colorEsp(r.e) + '"><span class="pf">' + (r.foto ? '<img class="ph" data-blob="' + r.foto + '" alt="">' : fotoEsp(r.e)) + '<em>×' + r.n + '</em></span><b>' + esc(r.nom) + '</b><small>' + anosTxt(r.anos) + (r.e && r.e.clase === 'mortal' ? ' · mortal' : r.e && r.e.clase === 'toxica' ? ' · tóxica' : '') + '</small></button>';
   const delMes = esp.filter(r => hs.some(h => (h.especieId || 'x') === (r.e ? r.e.id : 'x') && new Date(h.ts).getMonth() === mesAct) && r.e);
-  const sh = openSheet('<div class="sv-h"><div class="sv-t"><h2>' + esc(z.nombre || 'Spot') + '</h2><div class="meta">' + meta + '</div></div><button class="icb" id="st-edit" aria-label="Editar spot">' + I.edit + '</button></div>' +
-    '<div class="acts"><button class="btn p" id="st-marcar">' + I.plus + 'Marcar aquí</button><a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=' + z.lat + ',' + z.lon + '">' + I.route + 'Cómo llegar</a></div>' +
+  const sh = openSheet('<div class="sv-h"><div class="sv-t"><h2>' + esc(z.nombre || 'Spot') + '</h2><div class="meta">' + meta + '</div></div><button class="icb" id="st-edit" aria-label="Editar spot">' + I.edit + '</button><button class="icb" id="sv-x" aria-label="Cerrar">' + I.close + '</button></div>' +
+    '<div class="acts"><button class="btn p" id="st-marcar">' + I.plus + (lejos ? 'Añadir especie' : 'Marcar aquí') + '</button><a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=' + z.lat + ',' + z.lon + '">' + I.route + 'Cómo llegar</a></div>' +
     (peligro.length ? '<div class="alerta">' + I.aviso + '<div>Aquí también has visto <b>' + esc(peligro.map(r => r.nom).join(', ')) + '</b>. Mira bien cada seta antes de cogerla.</div></div>' : '') +
     (esp.length ? '<div class="sec">Especies encontradas<small>' + esp.length + '</small></div><div class="spcs">' + esp.map(card).join('') + '</div>' +
       (delMes.length ? '<div class="tip">' + I.cal + '<div>En <b>' + MES_L[mesAct] + '</b> aquí te han salido: ' + esc(delMes.map(r => r.nom).join(', ')) + '.</div></div>' : '') +
@@ -351,7 +362,8 @@ async function verSpot(id) {
   encuadrar(z.lat, z.lon, sh);
   sh.addEventListener('click', ev => {
     const t = ev.target.closest('button'); if (!t) return;
-    if (t.id === 'st-marcar') { closeSheet(); marcar({ zona: id }); }
+    if (t.id === 'st-marcar') { closeSheet(); marcar(lejos ? { zona: id, pos: { lat: z.lat, lon: z.lon } } : { zona: id }); }
+    else if (t.id === 'sv-x') closeSheet();
     else if (t.id === 'st-edit') editarSpot(id);
     else if (t.dataset.e) abrirFicha(t.dataset.e);
     else if (t.dataset.hv) verHallazgo(t.dataset.hv);
@@ -365,7 +377,7 @@ async function verHallazgo(id) {
   const foto = h.fotos && h.fotos[0] ? '<span class="phw big"><img class="ph" data-blob="' + h.fotos[0] + '" alt="Foto del hallazgo"></span>' : e && e.fotos && e.fotos[0] ? fi.foto(e.fotos[0], 960, { cls: 'big' }) + '<span class="ref">Foto de referencia</span>' : '';
   const dato = (k, v) => v ? '<div><dt>' + k + '</dt><dd>' + esc(v) + '</dd></div>' : '';
   const sh = openSheet((foto ? '<div class="hv-foto">' + foto + '</div>' : '') +
-    '<div class="sv-h"><div class="sv-t"><h2>' + esc(nombreCorto(h)) + '</h2>' + (e && corto(e) !== e.nombreCientifico.split(' (')[0] ? '<p class="cien"><i>' + esc(e.nombreCientifico.split(' (')[0]) + '</i></p>' : '') + '</div><button class="icb" id="hv-edit" aria-label="Editar hallazgo">' + I.edit + '</button></div>' +
+    '<div class="sv-h"><div class="sv-t"><h2>' + esc(nombreCorto(h)) + '</h2>' + (e && corto(e) !== e.nombreCientifico.split(' (')[0] ? '<p class="cien"><i>' + esc(e.nombreCientifico.split(' (')[0]) + '</i></p>' : '') + '</div><button class="icb" id="hv-edit" aria-label="Editar hallazgo">' + I.edit + '</button><button class="icb" id="sv-x" aria-label="Cerrar">' + I.close + '</button></div>' +
     '<div class="meta" style="margin-top:8px">' + (e ? fi.tagEsp(e) : '') + '<span class="tag" style="--c:' + idn.color + ';color:#0a0f0e">' + idn.label + '</span></div>' +
     '<dl class="dat">' + dato('Cuándo', new Date(h.ts).toLocaleDateString('es-ES', { day: 'numeric', month: 'short', year: 'numeric' }) + ' · ' + hhmm(h.ts)) + dato('Spot', z && z.nombre) + dato('Cantidad', h.cantidad) + dato('Estado', (ESTADOS.find(x => x[0] === h.estadoSeta) || [])[1]) + dato('Sustrato', h.sustrato) + dato('Confirmó', h.identificacion === 'confirmada' && h.confirmadoPor) + '</dl>' +
     (h.notas || Object.values(h.transcripciones || {}).some(Boolean) ? '<div class="nota">' + (h.notas ? '<p>' + esc(h.notas) + '</p>' : '') + Object.values(h.transcripciones || {}).filter(t => t && t !== h.notas).map(t => '<p class="vz">«' + esc(t) + '»</p>').join('') + '</div>' : '') +
@@ -374,6 +386,7 @@ async function verHallazgo(id) {
   sh.addEventListener('click', ev => {
     const t = ev.target.closest('button'); if (!t) return;
     if (t.id === 'hv-edit') abrirHallazgo(id);
+    else if (t.id === 'sv-x') closeSheet();
     else if (t.id === 'hv-ficha') abrirFicha(e.id);
     else if (t.id === 'hv-spot') verSpot(z.id);
     else if (t.id === 'hd-antes') abrirAntesDeComer();

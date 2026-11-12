@@ -88,6 +88,34 @@ module.exports = {
       t.ok('resumen (no formulario)', await t.has('#sheet #hv-edit') && !(await t.has('#sheet #hd-ok')));
       await t.go('#mapa'); t.ok('al cambiar de pestaña se cierra la hoja', !(await t.visible('#sheet .sh')));
     });
+    await t.case('cerrar el resumen: barrita, tocar el mapa, ×, arrastrar', async () => {
+      const abierto = () => t.visible('#sheet .sh');
+      await t.page.evaluate(() => window.__MI.verSpot('za')); await t.wait(400);
+      await t.tap('#sheet .grab', 300); t.ok('tocar la barrita cierra', !(await abierto()));
+      await t.page.evaluate(() => window.__MI.verSpot('za')); await t.wait(400);
+      await t.page.evaluate(() => window.__MI.S.map.fire('click', { latlng: L.latLng(43.2, -2.7) })); await t.wait(300);
+      t.ok('tocar el mapa cierra', !(await abierto()) && !(await t.has('#map .spot.sel')));
+      await t.page.evaluate(() => window.__MI.verSpot('za')); await t.wait(400);
+      await t.tap('#sv-x', 300); t.ok('× cierra', !(await abierto()));
+      await t.page.evaluate(() => window.__MI.verSpot('za')); await t.wait(400);
+      const b = await t.page.$('#sheet .grab'), r = await b.boundingBox();
+      await t.page.evaluate(([x, y]) => { const el = document.querySelector('#sheet .grab'), mk = yy => [new Touch({ identifier: 1, target: el, clientX: x, clientY: yy })];
+        el.dispatchEvent(new TouchEvent('touchstart', { bubbles: true, touches: mk(y), changedTouches: mk(y) }));
+        el.dispatchEvent(new TouchEvent('touchmove', { bubbles: true, touches: mk(y + 160), changedTouches: mk(y + 160) }));
+        el.dispatchEvent(new TouchEvent('touchend', { bubbles: true, touches: [], changedTouches: mk(y + 160) })); }, [r.x + 5, r.y + 2]);
+      await t.wait(300); t.ok('arrastrar hacia abajo cierra', !(await abierto()));
+      await t.tap('#fab', 400); await t.tap('#sheet .grab', 200);
+      t.ok('la hoja de marcar no se cierra sin querer', await abierto()); await t.tap('#mk-x', 300);
+    });
+    await t.case('desde casa: «Añadir especie» lo pone en el sitio del spot, no donde estás', async () => {
+      await t.put('zonas', 'zc', { nombre: 'Lejano C', lat: 43.2, lon: -2.6, estado: 'visitada', notas: '', fotos: [], audios: [], transcripciones: {} });
+      await t.page.evaluate(() => window.__MI.verSpot('zc')); await t.wait(500);
+      t.ok('el botón dice «Añadir especie»', /Añadir especie/.test(await t.T('#st-marcar') || ''));
+      await t.tap('#st-marcar', 600); await t.page.fill('#sp-q', 'níscalo'); await t.wait(120); await t.tap('#sp-sugs button'); await t.tap('#mk-ok', 500);
+      const h = (await t.docs('hallazgos')).find(x => x.zonaId === 'zc');
+      t.ok('hallazgo en las coordenadas del spot', h && Math.abs(h.lat - 43.2) < 1e-6 && Math.abs(h.lon + 2.6) < 1e-6, h && h.lat + ',' + h.lon);
+      t.ok('cerca del spot sigue diciendo «Marcar aquí»', await t.page.evaluate(async () => { await window.__MI.verSpot('za'); await new Promise(r => setTimeout(r, 300)); return /Marcar aquí/.test(document.querySelector('#st-marcar').textContent); }));
+    });
     await t.case('360 px: resúmenes sin desborde', async () => {
       await t.page.setViewportSize({ width: 360, height: 640 });
       for (const [f, id] of [['verSpot', 'za'], ['verSpot', 'zb'], ['verHallazgo', 'h1']]) {
