@@ -13,7 +13,7 @@ import * as trk from './track.js';
 import * as ia from './ia.js';
 import * as au from './audio.js';
 
-const APP_V = 'micologia-v16';   // = V de sw.js
+const APP_V = 'micologia-v17';   // = V de sw.js
 const S = { view: 'mapa', arg: '', map: null, pins: null, me: null, acc: null, tmp: null, mini: null, centered: false, filtro: { salida: '', especie: '' }, clase: '', q: '', syncErr: false, mes: new Date().getMonth() + 1 };
 const VIEWS = ['mapa', 'salidas', 'salida', 'setas', 'mes', 'ajustes'];
 const TITULOS = { mapa: 'Mapa', salidas: 'Salidas', salida: 'Salida', setas: 'Setas', mes: 'Este mes', ajustes: 'Ajustes' };
@@ -143,6 +143,7 @@ function initMap() {
   S.map = createMap('map'); S.trkL = L.layerGroup().addTo(S.map); S.spotsL = L.layerGroup().addTo(S.map); S.pins = L.layerGroup().addTo(S.map);
   S.me = L.marker([0, 0], { icon: L.divIcon({ className: 'me', html: '<i></i>', iconSize: [22, 22], iconAnchor: [11, 11] }), interactive: false, opacity: 0, zIndexOffset: 900 }).addTo(S.map);
   S.acc = L.circle([0, 0], { radius: 0, color: '#4c9bff', weight: 1, fillOpacity: .1, interactive: false }).addTo(S.map);
+  $('#v-mapa').insertAdjacentHTML('beforeend', '<div class="mhint" id="mhint" hidden>' + I.flag + '<div><b>Tu mapa está vacío</b><small>Crea tu primer spot con la bandera de la derecha, o pulsa «Marcar aquí» cuando encuentres una seta.</small></div></div>');
   $('#locate').innerHTML = I.locate; $('#layerbtn').innerHTML = I.layers; $('#spotbtn').innerHTML = I.flag; $('#filterbtn').innerHTML = I.filter; $('#fab .fi').innerHTML = I.plus;
   geo.onFix((f, err) => {
     const g = $('#gps');
@@ -193,6 +194,7 @@ async function refreshPins() {
       S.spotM[z.id] = spotPin(z, { n }).on('click', () => verSpot(z.id)).addTo(S.spotsL);
     });
   if (S.selId) marcarSel(S.selId);
+  $('#mhint').hidden = !!(hs.length || zs.length);
   $('#filterbtn').classList.toggle('on', !!(f.salida || f.especie));
   /* recorrido: el de la salida filtrada o, si no hay filtro, el de la salida en curso */
   S.trkId = f.salida && f.salida !== 'activa' ? f.salida : act && act.id;
@@ -824,15 +826,25 @@ async function renderAjustes() {
   const root = $('#v-ajustes'), c = syn.cfg(), zonas = (await db.list('zonas')).sort((a, b) => a.nombre.localeCompare(b.nombre));
   if (root.contains(document.activeElement) && /INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)) return;
   const last = syn.lastSync();
-  root.innerHTML = '<div class="pad"><div class="card"><h3>Sincronización</h3><p class="sub" style="font-family:inherit;color:var(--mut);margin:4px 0 0">Los datos viven en este móvil y se suben a tu repositorio privado de GitHub.</p>' +
-    '<label class="l">Repositorio de datos</label><input type="text" id="a-repo" placeholder="usuario/micologia-datos" autocapitalize="off" autocomplete="off" value="' + esc(c.repo || '') + '">' +
-    '<label class="l">Token de GitHub</label><input type="password" id="a-tok" placeholder="' + (c.token ? '•••••• guardado (déjalo vacío para conservarlo)' : 'github_pat_…') + '" autocomplete="off">' +
-    '<div class="row"><button class="btn p" id="a-sync">Guardar y sincronizar</button></div><div class="note" id="a-st" style="margin-top:10px">' + (last ? 'Última sincronización: ' + new Date(last).toLocaleString('es-ES') : 'Aún no has sincronizado.') + (db.dirtyCount() ? '<br>Pendiente de subir: ' + db.dirtyCount() : '') + '</div></div>' +
-    '<div class="card"><h3>Reconocer con IA</h3><p class="sub" style="font-family:inherit;color:var(--mut);margin:4px 0 0">Clave gratuita de Gemini (aistudio.google.com/apikey). Se guarda solo en este móvil.</p><input type="password" id="a-gk" placeholder="' + (ia.getKey() ? '•••••• guardada' : 'AIza…') + '" autocomplete="off" autocapitalize="off" style="margin-top:8px"><div class="row"><button class="btn p" id="a-gks">Guardar</button>' + (ia.getKey() ? '<button class="btn d" id="a-gkd">Borrar</button>' : '') + '</div><div class="note" id="a-gst" style="margin-top:8px"></div></div>' +
-    '<div class="card"><h3>Datos</h3><div class="row"><button class="btn" id="a-exp">Exportar copia (JSON)</button></div></div>' +
-    '<div class="card"><h3>Fotos sin conexión</h3><p class="sub" style="font-family:inherit;color:var(--mut);margin:4px 0 0">Guarda las fotos de las fichas en este móvil para verlas en el monte sin cobertura (unos ' + Math.round(cat.todas().reduce((n, e) => n + (e.fotos || []).length, 0) * 0.2 / 5) * 5 + ' MB, estimado).</p><div class="row"><button class="btn" id="a-fotos">Descargar fotos</button></div><div class="note" id="a-fst" style="margin-top:10px">Comprobando…</div></div>' +
-    '<div class="card"><h3>Zonas</h3>' + (zonas.length ? zonas.map(z => '<div class="row" style="margin-top:8px"><input type="text" data-z="' + z.id + '" value="' + esc(z.nombre) + '" style="flex:1"><button class="btn d" data-zd="' + z.id + '" style="flex:none">Borrar</button></div>').join('') : '<p style="color:var(--mut);margin:8px 0 0">Las zonas se crean al marcar un hallazgo.</p>') + '</div>' +
-    '<div class="card"><h3>Acerca de</h3><p style="margin:6px 0;color:var(--mut);font-size:13.5px">Versión ' + APP_V + '<br>Las coordenadas de tus sitios solo viven en este móvil y en tu repositorio privado. La app nunca certifica que una seta sea comestible.<br>Mapa: imágenes PNOA/Sentinel © IGN España (CC BY 4.0 scne.es) · callejero © OpenStreetMap.</p></div></div>';
+  const pend = db.dirtyCount(), ok = !!(c.repo && c.token);
+  const est = !ok ? ['off', 'Sin configurar', 'Tus datos solo están en este móvil.'] : pend ? ['pend', plural(pend, 'cambio por subir', 'cambios por subir'), last ? 'Última vez: ' + new Date(last).toLocaleString('es-ES', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }) : 'Aún sin sincronizar'] : ['ok', 'Todo al día', last ? 'Última vez: ' + new Date(last).toLocaleString('es-ES', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }) : ''];
+  const sec = (ic, t, sub, body) => '<section class="aj"><div class="aj-h"><span class="aj-i">' + ic + '</span><div><h3>' + t + '</h3>' + (sub ? '<small>' + sub + '</small>' : '') + '</div></div>' + body + '</section>';
+  const nf = Math.round(cat.todas().reduce((n, e) => n + (e.fotos || []).length, 0) * 0.2 / 5) * 5;
+  root.innerHTML = '<div class="pad">' +
+    '<div class="aj-st ' + est[0] + '"><span class="aj-d"></span><div><b>' + est[1] + '</b><small>' + est[2] + '</small></div></div>' +
+    sec(ICON_SYNC, 'Sincronización', 'Copia en tu repositorio privado de GitHub',
+      '<label class="l">Repositorio de datos</label><input type="text" id="a-repo" placeholder="usuario/micologia-datos" autocapitalize="off" autocomplete="off" value="' + esc(c.repo || '') + '">' +
+      '<label class="l">Token de GitHub</label><input type="password" id="a-tok" placeholder="' + (c.token ? '•••••• guardado (déjalo vacío para conservarlo)' : 'github_pat_…') + '" autocomplete="off">' +
+      '<div class="row"><button class="btn p" id="a-sync">' + (ok ? 'Sincronizar ahora' : 'Guardar y sincronizar') + '</button></div><div class="note" id="a-st" style="margin-top:10px">' + (last ? 'Última sincronización: ' + new Date(last).toLocaleString('es-ES') : 'Aún no has sincronizado.') + (pend ? '<br>Pendiente de subir: ' + pend : '') + '</div>') +
+    sec('<span style="font-size:20px">✨</span>', 'Reconocer con IA', ia.getKey() ? '<span class="okc">✓ Clave guardada en este móvil</span>' : 'Clave gratuita de aistudio.google.com/apikey',
+      '<input type="password" id="a-gk" placeholder="' + (ia.getKey() ? '•••••• guardada' : 'AIza… o AQ.…') + '" autocomplete="off" autocapitalize="off" style="margin-top:8px"><div class="row"><button class="btn p" id="a-gks">Guardar</button>' + (ia.getKey() ? '<button class="btn d" id="a-gkd">Borrar</button>' : '') + '</div><div class="note" id="a-gst" style="margin-top:8px"></div>') +
+    sec(I.foto, 'Fotos sin conexión', 'Las fichas con foto en el monte sin cobertura (≈' + nf + ' MB)',
+      '<div class="row"><button class="btn" id="a-fotos">Descargar fotos</button></div><div class="note" id="a-fst" style="margin-top:10px">Comprobando…</div>') +
+    sec(I.flag, 'Tus datos', plural(zonas.length, 'spot', 'spots'),
+      '<div class="row"><button class="btn" id="a-exp">Exportar copia (JSON)</button></div>' +
+      (zonas.length ? '<details class="det"><summary>Renombrar o borrar spots</summary>' + zonas.map(z => '<div class="row" style="margin-top:8px"><input type="text" data-z="' + z.id + '" value="' + esc(z.nombre) + '" style="flex:1"><button class="btn d" data-zd="' + z.id + '" style="flex:none">Borrar</button></div>').join('') + '</details>' : '')) +
+    '<div class="aj-about"><img src="icon.svg" alt="" width="44" height="44"><div><b>Micología</b><small>Versión ' + APP_V + '</small></div></div>' +
+    '<p class="aj-legal">Las coordenadas de tus sitios solo viven en este móvil y en tu repositorio privado. La app nunca certifica que una seta sea comestible.<br>Mapa: imágenes PNOA/Sentinel © IGN España (CC BY 4.0 scne.es) · callejero © OpenStreetMap.</p></div>';
   $('#a-sync', root).onclick = async () => {
     const repo = $('#a-repo', root).value.trim().replace(/^https?:\/\/github\.com\//, '').replace(/\.git$/, ''), tok = $('#a-tok', root).value.trim() || c.token, st = $('#a-st', root);
     if (!/^[\w.-]+\/[\w.-]+$/.test(repo) || !tok) { st.textContent = 'Pon el repositorio como usuario/nombre y pega el token.'; return; }
@@ -875,7 +887,7 @@ function route() {
   if (S.mini && view !== 'salida') { S.mini.remove(); S.mini = null; }
   if (view !== S.view || (arg || '') !== S.arg) closeSheet();
   S.view = view; S.arg = arg || ''; document.body.dataset.view = view;
-  VIEWS.forEach(x => { $('#v-' + x).hidden = x !== view; });
+  VIEWS.forEach(x => { const el = $('#v-' + x), on = x === view; if (on && el.hidden) { el.classList.remove('entra'); void el.offsetWidth; el.classList.add('entra'); } el.hidden = !on; });
   $$('.nav a').forEach(a => a.classList.toggle('on', a.dataset.tab === (view === 'salida' ? 'salidas' : view)));
   $('#ttl').textContent = TITULOS[view];
   if (view === 'mapa') { setTimeout(() => S.map.invalidateSize(), 40); refreshPins(); }
