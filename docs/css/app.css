@@ -257,3 +257,15 @@ dl.gl{grid-template-columns:118px 1fr}
 .com p{margin:6px 0 4px;font-size:14px;color:#dbe5e1}
 .com small{display:block;color:var(--mut);font-size:12px;line-height:1.4}
 .com,.com p,.com small{overflow-wrap:anywhere}
+
+/* reconocer con IA */
+.guide-card.ia .ic{font-size:28px;width:46px;text-align:center;flex:none}
+.ia-slots{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:10px 0}
+.ia-slot{position:relative;aspect-ratio:1;border:1px dashed var(--line);border-radius:12px;background:var(--s3);display:flex;align-items:center;justify-content:center;overflow:hidden;cursor:pointer}
+.ia-slot.ok{border-style:solid}
+.ia-slot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.ia-slot span{font-size:28px;color:var(--mut)}
+.ia-slot small{position:absolute;left:0;right:0;bottom:0;text-align:center;font-size:11px;padding:3px;background:rgba(0,0,0,.6);color:#fff}
+.ia-res{margin-top:12px;display:grid;gap:8px}
+.ia-c{display:block;color:var(--mut)}
+.ia-fuera{cursor:default}

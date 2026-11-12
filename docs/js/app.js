@@ -9,8 +9,9 @@ import * as lib from './libro.js';
 import * as tmp from './temporada.js';
 import * as fi from './ficha.js';
 import * as trk from './track.js';
+import * as ia from './ia.js';
 
-const APP_V = 'micologia-v5';   // = V de sw.js
+const APP_V = 'micologia-v6';   // = V de sw.js
 const S = { view: 'mapa', arg: '', map: null, pins: null, me: null, acc: null, tmp: null, mini: null, centered: false, filtro: { salida: '', especie: '' }, clase: '', q: '', syncErr: false, mes: new Date().getMonth() + 1 };
 const VIEWS = ['mapa', 'salidas', 'salida', 'setas', 'mes', 'ajustes'];
 const TITULOS = { mapa: 'Mapa', salidas: 'Salidas', salida: 'Salida', setas: 'Setas', mes: 'Este mes', ajustes: 'Ajustes' };
@@ -332,13 +333,14 @@ const ICO_SETA = '<svg viewBox="0 0 48 48"><path fill="#e0a458" d="M24 6C13 6 5 
 function renderSetas() {
   const root = $('#v-setas');
   if (!$('#q', root)) {
-    root.innerHTML = '<div class="pad"><div class="learn"><button class="guide-card" id="gu-open">' + ICO_SETA + '<div><b>Partes de una seta</b><small>Esquema con nombres y colores</small></div></button><button class="guide-card book" id="li-open"><span class="ic">' + lib.CAPS[0].ico + '</span><div><b>El libro para empezar</b><small>Equipo, cortar o arrancar, mitos, intoxicación</small></div></button></div>' +
+    root.innerHTML = '<div class="pad"><div class="learn"><button class="guide-card" id="gu-open">' + ICO_SETA + '<div><b>Partes de una seta</b><small>Esquema con nombres y colores</small></div></button><button class="guide-card book" id="li-open"><span class="ic">' + lib.CAPS[0].ico + '</span><div><b>El libro para empezar</b><small>Equipo, cortar o arrancar, mitos, intoxicación</small></div></button><button class="guide-card ia" id="ia-open"><span class="ic">✨</span><div><b>Reconocer con IA</b><small>Haz 1-3 fotos y te digo a qué se parece de tu colección</small></div></button></div>' +
       '<div class="warn" style="margin-top:10px">' + esc(cat.aviso()) + '</div><input type="search" id="q" placeholder="Buscar seta…" autocomplete="off" style="margin-top:12px"><div class="chips" id="cl" style="margin:10px 0 0"></div><div id="slist"></div>' +
       '<p class="note" style="margin-top:14px">Catálogo en borrador: ' + cat.todas().length + ' fichas sin revisar por una persona experta. Las comestibles llevan «según fuentes» porque lo dicen Wikipedia y guías divulgativas, no una persona experta: siguen pendientes de revisión. Fotos de Wikimedia Commons con su autoría y licencia en cada ficha.</p></div>';
     $('#q', root).oninput = e => { S.q = e.target.value; listaSetas(); };
     root.onclick = e => {
       if (e.target.closest('#gu-open')) return abrirGuia('');
       if (e.target.closest('#li-open')) return abrirLibro('');
+      if (e.target.closest('#ia-open')) return abrirIA();
       const c = e.target.closest('#cl button'); if (c) { S.clase = c.dataset.c; return listaSetas(); }
       const b = e.target.closest('[data-e]'); if (b) abrirFicha(b.dataset.e);
     };
@@ -369,6 +371,65 @@ function abrirLibro(cap, volverA) {
   const volver = '<button class="btn" id="li-b">‹ Volver a la ficha</button>$&';
   const sh = openSheet((cap ? lib.capHTML(cap) : lib.indiceHTML()).replace('<button class="btn p" id="gu-x">Cerrar</button>', volverA ? volver : '$&'));
   sh.addEventListener('click', ev => { const b = ev.target.closest('button'); if (!b) return; if (b.id === 'gu-x') closeSheet(); else if (b.id === 'li-b') abrirFicha(volverA); else if (b.dataset.l !== undefined) abrirLibro(b.dataset.l, volverA); });
+}
+
+/* ---------- reconocer con IA ---------- */
+const IA_SLOTS = [['Sombrero (desde arriba)', 'Por encima'], ['Láminas o poros (por debajo)', 'Por debajo'], ['Base del pie (con la volva si hay)', 'Base del pie']];
+function abrirIA() {
+  const fotos = [null, null, null], urls = [];
+  const sh = openSheet('');
+  const pintar = (res, err, cargando) => {
+    const hay = fotos.some(Boolean), key = ia.getKey();
+    let h = '<h2>Reconocer con IA</h2>';
+    if (!key) {
+      h += '<p class="sub" style="font-family:inherit">Necesito una clave gratuita de Gemini. Se queda solo en este móvil.</p><ol class="note" style="margin:8px 0 0 18px;padding:0"><li>Entra en <b>aistudio.google.com/apikey</b></li><li>«Crear clave de API» (gratis, sin tarjeta)</li><li>Cópiala y pégala aquí</li></ol>' +
+        '<input type="password" id="ia-k" placeholder="AIza…" autocomplete="off" autocapitalize="off" style="margin-top:10px"><div class="row"><button class="btn p" id="ia-ks">Guardar clave</button><button class="btn" id="gu-x">Cerrar</button></div>' + (err ? '<div class="warn" style="margin-top:10px">' + esc(err) + '</div>' : '');
+      sh.innerHTML = h; return;
+    }
+    h += '<p class="sub" style="font-family:inherit">Cuantas más vistas, mejor: arriba, por debajo y la base del pie.</p><div class="ia-slots">' +
+      IA_SLOTS.map((s, i) => '<label class="ia-slot' + (fotos[i] ? ' ok' : '') + '" data-i="' + i + '">' + (fotos[i] ? '<img src="' + urls[i] + '" alt="">' : '<span>＋</span>') + '<small>' + s[1] + '</small><input type="file" accept="image/*" data-i="' + i + '" hidden></label>').join('') + '</div>';
+    if (cargando) h += '<div class="note" style="margin-top:12px">Mirando las fotos…</div>';
+    if (err) h += '<div class="warn" style="margin-top:12px">' + esc(err) + '</div>';
+    if (res) h += resultadoIA(res);
+    h += '<div class="row"><button class="btn p" id="ia-go"' + (hay && !cargando ? '' : ' disabled') + '>Reconocer</button><button class="btn" id="gu-x">Cerrar</button></div>' +
+      '<p class="note" style="margin-top:12px">Es una pista, no una identificación. Nunca se come una seta por lo que diga una IA ni esta app. Las fotos se envían a Google (Gemini) solo al pulsar «Reconocer». <a href="#" id="ia-kc" style="color:var(--acc)">Cambiar clave</a></p>';
+    sh.innerHTML = h;
+  };
+  sh.onchange = e => {
+    const f = e.target.files && e.target.files[0], i = +e.target.dataset.i; if (!f || isNaN(i)) return;
+    fotos[i] = f; if (urls[i]) URL.revokeObjectURL(urls[i]); urls[i] = URL.createObjectURL(f); pintar();
+  };
+  sh.onclick = async e => {
+    const b = e.target.closest('button'), a = e.target.closest('#ia-kc');
+    if (a) { e.preventDefault(); ia.setKey(''); return pintar(); }
+    if (b.id === 'gu-x') { urls.forEach(u => u && URL.revokeObjectURL(u)); return closeSheet(); }
+    if (b.dataset.e) return abrirFicha(b.dataset.e);
+    if (b.id === 'ia-ks') { const k = $('#ia-k', sh).value; if (!ia.claveValida(k)) return pintar(null, 'Esa clave no tiene la forma correcta (empieza por AIza…).'); ia.setKey(k); return pintar(); }
+    if (b.id === 'ia-go') {
+      if (!navigator.onLine) return pintar(null, ia.mensajeError(new Error('red')));
+      pintar(null, '', true);
+      try { pintar(await ia.reconocer(fotos.filter(Boolean))); }
+      catch (err) { if (err.message === 'clave') ia.setKey(''); pintar(null, ia.mensajeError(err)); }
+    }
+  };
+  pintar();
+}
+function resultadoIA(r) {
+  const alta = c => c >= 75 ? 'confianza alta' : c >= 40 ? 'confianza media' : 'confianza baja';
+  if (!r.esSeta) return '<div class="ia-res"><b>No parece una seta.</b><p class="note">Prueba con una foto más cercana.</p></div>';
+  const peligro = r.candidatas.some(c => { const e = cat.byId(c.id); return e && (e.clase === 'mortal' || e.clase === 'toxica'); });
+  let h = '<div class="ia-res">';
+  if (!r.candidatas.length || r.candidatas.every(c => c.confianza < 25)) h += '<b>Con estas fotos no puedo decidirlo.</b>';
+  else h += '<b>Se parece a:</b>';
+  h += r.candidatas.map(c => {
+    const e = cat.byId(c.id);
+    if (e) return itemEsp(e, '<small class="ia-c">' + alta(c.confianza) + (c.rasgos ? ' · ' + esc(c.rasgos) : '') + '</small>');
+    return '<div class="item sp ia-fuera" style="--c:#7b8683"><div class="t"><b><i>' + esc(c.nombreCientifico) + '</i></b><small>' + esc(c.nombreComun) + ' · no está en tu colección</small><small class="ia-c">' + alta(c.confianza) + (c.rasgos ? ' · ' + esc(c.rasgos) : '') + '</small></div></div>';
+  }).join('');
+  if (peligro) h += '<div class="warn" style="margin-top:8px">Entre las candidatas hay una tóxica o mortal: con más motivo, no se come.</div>';
+  if (r.faltaVer) h += '<p class="note" style="margin-top:8px"><b>Para afinar:</b> ' + esc(r.faltaVer) + '</p>';
+  if (r.calidad === 'mala') h += '<p class="note">Las fotos no se ven bien: la respuesta es poco fiable.</p>';
+  return h + '</div>';
 }
 
 /* ---------- este mes ---------- */
@@ -408,6 +469,7 @@ async function renderAjustes() {
     '<label class="l">Repositorio de datos</label><input type="text" id="a-repo" placeholder="usuario/micologia-datos" autocapitalize="off" autocomplete="off" value="' + esc(c.repo || '') + '">' +
     '<label class="l">Token de GitHub</label><input type="password" id="a-tok" placeholder="' + (c.token ? '•••••• guardado (déjalo vacío para conservarlo)' : 'github_pat_…') + '" autocomplete="off">' +
     '<div class="row"><button class="btn p" id="a-sync">Guardar y sincronizar</button></div><div class="note" id="a-st" style="margin-top:10px">' + (last ? 'Última sincronización: ' + new Date(last).toLocaleString('es-ES') : 'Aún no has sincronizado.') + (db.dirtyCount() ? '<br>Pendiente de subir: ' + db.dirtyCount() : '') + '</div></div>' +
+    '<div class="card"><h3>Reconocer con IA</h3><p class="sub" style="font-family:inherit;color:var(--mut);margin:4px 0 0">Clave gratuita de Gemini (aistudio.google.com/apikey). Se guarda solo en este móvil.</p><input type="password" id="a-gk" placeholder="' + (ia.getKey() ? '•••••• guardada' : 'AIza…') + '" autocomplete="off" autocapitalize="off" style="margin-top:8px"><div class="row"><button class="btn p" id="a-gks">Guardar</button>' + (ia.getKey() ? '<button class="btn d" id="a-gkd">Borrar</button>' : '') + '</div><div class="note" id="a-gst" style="margin-top:8px"></div></div>' +
     '<div class="card"><h3>Datos</h3><div class="row"><button class="btn" id="a-exp">Exportar copia (JSON)</button></div></div>' +
     '<div class="card"><h3>Fotos sin conexión</h3><p class="sub" style="font-family:inherit;color:var(--mut);margin:4px 0 0">Guarda las fotos de las fichas en este móvil para verlas en el monte sin cobertura (unos ' + Math.round(cat.todas().reduce((n, e) => n + (e.fotos || []).length, 0) * 0.2 / 5) * 5 + ' MB, estimado).</p><div class="row"><button class="btn" id="a-fotos">Descargar fotos</button></div><div class="note" id="a-fst" style="margin-top:10px">Comprobando…</div></div>' +
     '<div class="card"><h3>Zonas</h3>' + (zonas.length ? zonas.map(z => '<div class="row" style="margin-top:8px"><input type="text" data-z="' + z.id + '" value="' + esc(z.nombre) + '" style="flex:1"><button class="btn d" data-zd="' + z.id + '" style="flex:none">Borrar</button></div>').join('') : '<p style="color:var(--mut);margin:8px 0 0">Las zonas se crean al marcar un hallazgo.</p>') + '</div>' +
@@ -417,6 +479,8 @@ async function renderAjustes() {
     if (!/^[\w.-]+\/[\w.-]+$/.test(repo) || !tok) { st.textContent = 'Pon el repositorio como usuario/nombre y pega el token.'; return; }
     syn.setCfg({ ...c, repo, token: tok }); await correrSync(m => { st.textContent = m; });
   };
+  $('#a-gks', root).onclick = () => { const k = $('#a-gk', root).value, st = $('#a-gst', root); if (!ia.claveValida(k)) { st.textContent = 'La clave empieza por AIza… y es larga.'; return; } ia.setKey(k); toast('Clave guardada'); renderAjustes(); };
+  const gd = $('#a-gkd', root); if (gd) gd.onclick = () => { ia.setKey(''); toast('Clave borrada'); renderAjustes(); };
   $('#a-exp', root).onclick = async () => { const a = document.createElement('a'); a.href = URL.createObjectURL(await db.exportAll()); a.download = 'micologia-copia-' + hoy() + '.json'; document.body.appendChild(a); a.click(); a.remove(); };
   root.onchange = e => { const z = e.target.dataset.z; if (z && e.target.value.trim()) db.patch('zonas', z, { nombre: e.target.value.trim() }); };
   fotosEstado($('#a-fst', root));
@@ -475,7 +539,7 @@ async function boot() {
   $('#syncbtn').onclick = () => { const c = syn.cfg(); if (!c.repo || !c.token) { location.hash = '#ajustes'; toast('Configura el repositorio y el token'); } else correrSync(); };
   if (syn.cfg().repo) syn.auto(2500);
   if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) navigator.serviceWorker.register('sw.js').catch(() => { });
-  window.__MI = { db, geo, syn, cat, trk, S, abrirHallazgo, abrirFicha, abrirLibro };
+  window.__MI = { db, geo, syn, cat, trk, S, abrirHallazgo, abrirFicha, abrirLibro, abrirIA, ia };
   document.body.dataset.ready = '1';
 }
 boot().catch(e => { console.error(e); document.body.insertAdjacentHTML('beforeend', '<div class="warn" style="position:fixed;top:60px;left:12px;right:12px;z-index:9999">No se pudo arrancar la app: ' + esc(e.message || e) + '</div>'); });

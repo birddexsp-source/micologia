@@ -56,3 +56,7 @@ Verificado en navegador (12-nov-2026): una tesela de Bizkaia responde 200 JPEG 2
 ## Catálogo
 
 56 fichas en **borrador** (25 del MVP: 16 peligrosas o pares de confusión y 9 candidatas, más 31 de la ampliación v3: 22 candidatas, 5 tóxicas, 1 mortal y 3 no comestibles; en total 31 candidatas, 14 tóxicas, 7 mortales y 4 no comestibles). Las comestibles se muestran como «Comestible» o «Con condiciones» **según fuentes** (Wikipedia y guías divulgativas, campo `comestibilidad`, datos en `tools/datos/com.py`); internamente siguen como `sin_datos` + `candidataComestible` y en borrador hasta tener ≥2 fuentes contrastadas y revisión experta; ninguna ficha pasa a `comestible_buena` sin eso (lo comprueba `tests/suites/00-estatico.js`).
+
+## Reconocer con IA (Gemini)
+Setas → «Reconocer con IA»: 1-3 fotos (arriba, por debajo, base del pie) → Gemini devuelve candidatas que se cruzan con las 56 fichas; si no está en la colección lo dice. Solo es una pista: se abstiene si las fotos no bastan, avisa si entre las candidatas hay tóxicas y nunca habla de comestibilidad.
+La clave (gratis, aistudio.google.com/apikey) **no está en el repo**: se pega en la pantalla o en Ajustes y vive solo en el localStorage del móvil. Las fotos se envían a Google solo al pulsar «Reconocer». Módulo: `docs/js/ia.js`; pruebas: `tests/suites/09-ia.js`.
