@@ -12,7 +12,7 @@ import * as trk from './track.js';
 import * as ia from './ia.js';
 import * as au from './audio.js';
 
-const APP_V = 'micologia-v7';   // = V de sw.js
+const APP_V = 'micologia-v8';   // = V de sw.js
 const S = { view: 'mapa', arg: '', map: null, pins: null, me: null, acc: null, tmp: null, mini: null, centered: false, filtro: { salida: '', especie: '' }, clase: '', q: '', syncErr: false, mes: new Date().getMonth() + 1 };
 const VIEWS = ['mapa', 'salidas', 'salida', 'setas', 'mes', 'ajustes'];
 const TITULOS = { mapa: 'Mapa', salidas: 'Salidas', salida: 'Salida', setas: 'Setas', mes: 'Este mes', ajustes: 'Ajustes' };
@@ -164,12 +164,14 @@ async function abrirFiltro() {
 /* ---------- marcar un hallazgo (flujo de campo: Marcar aquí → Guardar) ---------- */
 async function marcar(opts = {}) {
   const map = S.map; let pos;
-  const f = geo.fix() || await geo.waitFix(2500);
-  if (f) pos = { lat: f.lat, lon: f.lon, acc: f.acc };
+  const f = opts.pos ? null : (geo.fix() || await geo.waitFix(2500));
+  if (opts.pos) pos = { lat: opts.pos.lat, lon: opts.pos.lon, acc: null };   /* añadir una especie a un spot de una salida ya hecha: sin GPS, en el sitio del spot */
+  else if (f) pos = { lat: f.lat, lon: f.lon, acc: f.acc };
   else { const c = map.getCenter(); pos = { lat: c.lat, lon: c.lng, acc: null, manual: true }; toast('Sin GPS: arrastra el punto a su sitio', 3800); }
   if (map.getZoom() < 16) map.setView([pos.lat, pos.lon], 17);
   closeSheet(); S.tmp = dragPin()(pos.lat, pos.lon).addTo(map);
   const m = { esp: { id: null, txt: '' }, fotos: [], zona: opts.zona || null, estado: '', nueva: false }, vz = nuevoVoz();
+  const horaTxt = () => (opts.ts ? new Date(opts.ts).toLocaleDateString('es-ES') + ' ' : '') + hhmm(opts.ts || Date.now());
   const [zonas, act] = [await db.list('zonas'), await activa()];
   /* barrido: si ya estás a menos de 150 m de un spot, se elige solo */
   if (!m.zona) { const c = zonas.filter(z => z.lat != null).map(z => [z, distM(pos, z)]).sort((a, b) => a[1] - b[1])[0]; if (c && c[1] <= 150) m.zona = c[0].id; }
@@ -178,15 +180,15 @@ async function marcar(opts = {}) {
   const zonaHTML = () => '<label class="l">Zona</label><div class="chips" id="mk-zonas">' +
     zonasOrd().map(z => '<button class="opt ' + (m.zona === z.id ? 'on' : '') + '" data-z="' + z.id + '">' + esc(z.nombre) + '</button>').join('') +
     '<button class="opt" id="mk-nz">+ Zona</button></div>' + (m.nueva ? '<div class="row" style="margin-top:8px"><input type="text" id="mk-znom" placeholder="Nombre de la zona" style="flex:1"><button class="btn p" id="mk-zok" style="flex:none">Crear</button></div>' : '');
-  const sh = openSheet('<h2>Nuevo hallazgo</h2><p class="sub" id="mk-pos">' + hhmm(Date.now()) + ' · ' + posTxt() + '</p>' + pickerHTML(m.esp) +
+  const sh = openSheet('<h2>Nuevo hallazgo</h2><p class="sub" id="mk-pos">' + horaTxt() + ' · ' + posTxt() + '</p>' + pickerHTML(m.esp) +
     '<div id="mk-zona">' + zonaHTML() + '</div><label class="l">Foto</label><div class="thumbs"><button class="btn" id="mk-foto">Hacer foto</button><span id="mk-th" class="thumbs" style="margin:0"></span></div>' +
     vozHTML(vz) + '<label class="l">Cantidad</label><input type="text" id="mk-cant" placeholder="p. ej. 3 · ≈200 g">' +
     '<label class="l">Estado</label><div class="seg" id="mk-est">' + ESTADOS.map(e => '<button data-e="' + e[0] + '">' + e[1] + '</button>').join('') + '</div>' +
-    '<label class="l">Nota</label><input type="text" id="mk-nota" placeholder="Nota corta"><div class="row"><button class="btn" id="mk-x">Cancelar</button><button class="btn p" id="mk-ok" style="flex:2">Guardar</button></div>', { dim: false });
+    '<label class="l">Nota</label><input type="text" id="mk-nota" placeholder="Nota corta"><div class="row"><button class="btn" id="mk-x">Cancelar</button><button class="btn p" id="mk-ok" style="flex:2">Guardar</button></div>', { dim: !!opts.pos });
   pickerWire(sh, m.esp); vozWire(sh, vz);
   vz.onTrans = (id, t) => { const n = $('#mk-nota', sh); if (n && !n.value.trim()) n.value = t.slice(0, 300); };
   setTimeout(() => map.panBy([0, Math.round(sh.offsetHeight / 2)], { animate: false }), 60);
-  S.tmp.on('dragend', () => { const p = S.tmp.getLatLng(); pos.lat = p.lat; pos.lon = p.lng; pos.adj = true; $('#mk-pos', sh).textContent = hhmm(Date.now()) + ' · ' + posTxt(); });
+  S.tmp.on('dragend', () => { const p = S.tmp.getLatLng(); pos.lat = p.lat; pos.lon = p.lng; pos.adj = true; $('#mk-pos', sh).textContent = horaTxt() + ' · ' + posTxt(); });
   const rezona = () => { $('#mk-zona', sh).innerHTML = zonaHTML(); };
   sh.addEventListener('click', async ev => {
     const t = ev.target.closest('button'); if (!t) return;
@@ -204,14 +206,14 @@ async function marcar(opts = {}) {
       t.disabled = true;
       try {
         const a = await activa(), q = $('#sp-q', sh).value.trim();
-        const h = { salidaId: a ? a.id : null, zonaId: m.zona, lat: pos.lat, lon: pos.lon, precisionM: pos.acc, ts: Date.now(), especieId: m.esp.id, especieTxt: m.esp.id ? '' : q,
+        const sid = opts.salida || (a ? a.id : null), h = { salidaId: sid, zonaId: m.zona, lat: pos.lat, lon: pos.lon, precisionM: pos.acc, ts: opts.ts || Date.now(), especieId: m.esp.id, especieTxt: m.esp.id ? '' : q,
           cantidad: $('#mk-cant', sh).value.trim(), estadoSeta: m.estado, sustrato: '', notas: $('#mk-nota', sh).value.trim(), fotos: m.fotos,
           identificacion: m.esp.id ? 'provisional' : 'sin_identificar', confirmadoPor: '', recogida: false, ajustadoAMano: !!(pos.adj || pos.manual), audios: vz.audios, transcripciones: vz.trans };
         if (S.rec) { S.rec.cancel(); S.rec = null; clearInterval(S.recT); }
         await db.add('hallazgos', h);
         { const zz = m.zona && zonas.find(z => z.id === m.zona); if (zz && zz.estado === 'por_visitar') await db.patch('zonas', zz.id, { estado: 'visitada', visitadaTs: Date.now() }); }
-        if (a && m.zona && !a.zonaIds.includes(m.zona)) await db.patch('salidas', a.id, { zonaIds: [...a.zonaIds, m.zona] });
-        closeSheet(); toast(a ? 'Hallazgo guardado en la salida' : 'Hallazgo guardado (sin salida en curso)'); syn.auto();
+        if (sid && m.zona) { const ss = await db.get('salidas', sid); if (ss && !(ss.zonaIds || []).includes(m.zona)) await db.patch('salidas', sid, { zonaIds: [...(ss.zonaIds || []), m.zona] }); }
+        closeSheet(); toast(sid ? 'Hallazgo guardado en la salida' : 'Hallazgo guardado (sin salida en curso)'); syn.auto();
       } catch (e) { t.disabled = false; toast('No se pudo guardar: ' + (e.message || e)); }
     }
   });
@@ -362,14 +364,16 @@ async function renderSalida(id) {
   const hs = hs0.filter(h => h.salidaId === id).sort((a, b) => a.ts - b.ts);
   const zn = zid => (zonas.find(z => z.id === zid) || {}).nombre || '—';
   const porZona = {}; hs.forEach(h => { if (h.zonaId) porZona[h.zonaId] = (porZona[h.zonaId] || 0) + 1; });
+  const zids = [...new Set([...(s.zonaIds || []), ...Object.keys(porZona)])].filter(zid => zonas.some(z => z.id === zid));
   const auto = mejorZonaId(hs), mejor = s.zonaMejorId || auto, pend = hs.filter(h => h.identificacion !== 'confirmada').length;
   const curso = s.estado === 'en_curso', graba = curso && s.grabar !== false, cos = s.fotosCosecha || [];
   const live = () => trk.activo() === id ? { ...s, track: trk.puntos() } : s;
   root.innerHTML = '<div class="pad"><a class="back" href="#salidas">‹ Salidas</a>' +
     '<input type="text" id="sd-tit" value="' + esc(s.titulo) + '" placeholder="' + esc(fecha(s.fecha)) + ' · título (opcional)"><div style="margin:6px 2px 0;color:var(--mut);font-size:13px">' + esc(fecha(s.fecha)) + (curso ? ' · <b style="color:var(--acc)">en curso</b>' : ' · terminada') + '</div>' +
-    '<div class="stats"><div><b>' + hs.length + '</b><span>hallazgos</span></div><div><b>' + Object.keys(porZona).length + '</b><span>zonas</span></div><div><b>' + pend + '</b><span>por identificar</span></div></div>' +
+    '<div class="stats"><div><b>' + hs.length + '</b><span>hallazgos</span></div><div><b>' + zids.length + '</b><span>zonas</span></div><div><b>' + pend + '</b><span>por identificar</span></div></div>' +
     '<div class="stats" id="sd-st2"><div><b id="sd-km">' + kmTxt(live()) + '</b><span>recorrido</span></div><div><b id="sd-dur">' + durTxt(s) + '</b><span>duración</span></div><div><b>' + cos.length + '</b><span>fotos recogidas</span></div></div>' +
     '<div class="smap" id="smap"></div>' +
+    '<div class="sec">Spots de la salida</div>' + (zids.length ? zids.map(zid => { const z = zonas.find(x => x.id === zid), esp = [...new Set(hs.filter(h => h.zonaId === zid).map(nombreHall))]; return '<div class="item spot-s" style="--c:#46b36b"><div class="t"><b>' + esc(z.nombre) + '</b><small>' + (esp.length ? esc(esp.join(', ')) : 'Sin especies anotadas') + '</small></div><button class="btn" data-sa="' + zid + '">＋ Especie</button></div>'; }).join('') : '<div class="empty" style="padding:6px 0;text-align:left">Aún sin spots. Marca hallazgos en un spot o añádelo aquí.</div>') + '<div class="row"><button class="btn" id="sd-addspot">＋ Añadir spot a la salida</button></div>' +
     (curso ? '<div class="rec ' + (graba ? 'on' : '') + '"><span class="rdot"></span><div class="t"><b>' + (graba ? 'Grabando el recorrido' : 'Recorrido en pausa') + '</b><small>Mantén la app abierta: si el móvil bloquea la pantalla puede dejar de grabar.</small></div><button class="btn" id="sd-pau">' + (graba ? 'Pausar' : 'Reanudar') + '</button></div>' +
       (trk.pantallaSoportada() ? '<div class="rec"><div class="t"><b>Pantalla encendida</b><small>Evita que se apague mientras andas. Gasta más batería.</small></div><button class="btn' + (trk.pantallaOn() ? ' p' : '') + '" id="sd-wake">' + (trk.pantallaOn() ? 'Activada' : 'Activar') + '</button></div>' : '') : '') +
     '<label class="l">Total recogido</label><input type="text" id="sd-tot" value="' + esc(s.totalTxt) + '" placeholder="p. ej. ≈2 kg">' +
@@ -396,6 +400,12 @@ async function renderSalida(id) {
     const im = ev.target.closest('img[data-blob]'); if (im && im.dataset.k) { verFoto(id, im.dataset.k, im.dataset.blob); return; }
     const t = ev.target.closest('button'); if (!t) return;
     if (t.dataset.h) abrirHallazgo(t.dataset.h);
+    else if (t.dataset.sa) { const z = zonas.find(x => x.id === t.dataset.sa); if (z) marcar({ zona: z.id, salida: id, pos: { lat: z.lat, lon: z.lon }, ts: curso ? Date.now() : (s.creada || Date.now()) }); }
+    else if (t.id === 'sd-addspot') {
+      const libres = zonas.filter(z => !zids.includes(z.id) && z.lat != null).sort((a, b) => a.nombre.localeCompare(b.nombre, 'es', { numeric: true }));
+      const sh = openSheet('<h2>Añadir spot a la salida</h2>' + (libres.length ? libres.map(z => '<button class="item" data-za="' + z.id + '"><div class="t"><b>' + esc(z.nombre) + '</b></div>' + spotTag(z) + '</button>').join('') : '<div class="empty">No hay más spots. Crea uno con ⚑ en el mapa.</div>') + '<div class="row"><button class="btn p" id="za-x">Cerrar</button></div>');
+      sh.addEventListener('click', async e2 => { const b = e2.target.closest('button'); if (!b) return; if (b.id === 'za-x') return closeSheet(); if (b.dataset.za) { const z = zonas.find(x => x.id === b.dataset.za); await db.patch('salidas', id, { zonaIds: [...(s.zonaIds || []), z.id] }); if (z.estado === 'por_visitar') await db.patch('zonas', z.id, { estado: 'visitada', visitadaTs: s.creada || Date.now() }); closeSheet(); syn.auto(); } });
+    }
     else if (t.id === 'sd-foto') pickFoto(fid => addFoto(id, 'fotos', fid));
     else if (t.id === 'sd-cos-add') pickFoto(fid => addFoto(id, 'fotosCosecha', fid));
     else if (t.id === 'sd-pau') { if (graba) { await trk.stop(); await db.patch('salidas', id, { grabar: false }); toast('Recorrido en pausa'); } else { await trk.start(id, true); await db.patch('salidas', id, { grabar: true }); toast('Grabando otra vez'); } }
