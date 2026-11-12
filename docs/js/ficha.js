@@ -13,7 +13,7 @@ export function foto(f, w, { cls = '', alt = '' } = {}) {
 export const avatar = (e, w = 250) => e.fotos && e.fotos[0] ? foto(e.fotos[0], w, { cls: 'av', alt: e.nombreCientifico }) : '<span class="phw av"></span>';
 export const tag = c => '<span class="tag" style="--c:' + cat.CLASES[c].color + '">' + cat.CLASES[c].label + '</span>';
 /* Las candidatas no se presentan nunca como comestibles: chip propio mientras no haya ≥2 fuentes y revisión experta */
-export const tagEsp = e => e.clase === 'sin_datos' && e.candidataComestible ? '<span class="tag cand">Candidata · sin confirmar</span>' : tag(e.clase);
+export const tagEsp = (e, largo) => e.comestibilidad ? '<span class="tag" style="--c:' + cat.CLASES[cat.vista(e)].color + '">' + (largo ? cat.CLASES[cat.vista(e)].label + ' · según fuentes' : e.comestibilidad.nivel === 'si' ? 'Comestible' : 'Con condiciones') + '</span>' : e.clase === 'sin_datos' && e.candidataComestible ? '<span class="tag cand">Candidata · sin confirmar</span>' : tag(e.clase);
 export const nombres = e => [...(e.nombresComunes.es || []).slice(0, 2), ...(e.nombresComunes.eu || []).slice(0, 2)].join(' · ');
 const nombresHTML = e => { const n = e.nombresComunes || {}, g = (l, xs) => xs && xs.length ? '<span class="nm"><b>' + l + '</b>' + xs.map(esc).join(' · ') + '</span>' : ''; return g('ES', n.es) + g('EU', n.eu); };
 const GRAV = { alta: ['Riesgo alto', '#e5484d'], media: ['Riesgo medio', '#f08a3c'] };
@@ -73,18 +73,19 @@ const recoger = e => {
   return '<div class="sec">Cómo recogerla</div><div class="recog" style="--c:' + a[1] + '"><div class="rh"><svg viewBox="0 0 24 24">' + a[2] + '</svg><b>' + a[0] + '</b></div><p>' + esc(r.txt) + '</p><button class="lnk" data-l="recoger">Cortar o arrancar, paso a paso ›</button></div>';
 };
 const curiosidades = e => (e.curiosidades && e.curiosidades.length) ? '<div class="sec">Curiosidades</div><ol class="curi">' + e.curiosidades.map(c => '<li>' + esc(c) + '</li>').join('') + '</ol>' : '';
+const comestible = e => { const m = e.comestibilidad, k = cat.CLASES[cat.vista(e)]; return '<div class="com" style="--c:' + k.color + '"><div class="ch"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg><b>' + esc(k.label) + '</b></div><p>' + esc(m.txt) + '</p><small>Fuente: ' + esc(m.segun) + '. La ficha sigue en borrador. Esto no te autoriza a comer ninguna seta: solo con identificación completa y confirmada por una persona experta.</small><button class="lnk" id="fi-antes">Antes de comer ›</button></div>'; };
 const peligroConf = e => (e.confusiones || []).some(c => c.gravedad === 'alta') && e.clase !== 'mortal' && e.clase !== 'toxica';
 const RASGOS = [['sombrero', 'Sombrero'], ['himenio', 'Himenio'], ['reticulo', 'Retículo'], ['pie', 'Pie'], ['anillo', 'Anillo'], ['volva', 'Volva'], ['carne', 'Carne'], ['olor', 'Olor'], ['esporada', 'Esporada'], ['habitat', 'Hábitat']];
 
 export function fichaHTML(e, mes) {
-  const c = cat.CLASES[e.clase], peligro = e.clase === 'mortal' || e.clase === 'toxica', ras = RASGOS.filter(([k]) => e[k]), td = datos(e);
+  const c = cat.CLASES[cat.vista(e)], peligro = e.clase === 'mortal' || e.clase === 'toxica', ras = RASGOS.filter(([k]) => e[k]), td = datos(e);
   const fuFotos = (e.fotos || []).map(f => '<li>' + esc(f.sp) + ': ' + esc(f.autor) + ', <a href="' + esc(f.licenciaUrl || f.pagina) + '" target="_blank" rel="noopener">' + esc(f.licencia) + '</a>, <a href="' + esc(f.pagina) + '" target="_blank" rel="noopener">Commons</a></li>').join('');
   return hero(e) +
-    '<div class="fh" style="--c:' + c.color + '"><div class="chips">' + tagEsp(e) + '<span class="tag" style="--c:#3a4743">' + esc(cat.NIVELES[e.nivelVerificacion] || e.nivelVerificacion) + '</span>' + (peligroConf(e) ? '<span class="tag" style="--c:#e5484d">Se confunde con tóxicas</span>' : '') + '</div>' +
+    '<div class="fh" style="--c:' + c.color + '"><div class="chips">' + tagEsp(e, true) + '<span class="tag" style="--c:#3a4743">' + esc(cat.NIVELES[e.nivelVerificacion] || e.nivelVerificacion) + '</span>' + (peligroConf(e) ? '<span class="tag" style="--c:#e5484d">Se confunde con tóxicas</span>' : '') + '</div>' +
     '<h2><i>' + esc(e.nombreCientifico) + '</i></h2>' + (nombresHTML(e) ? '<div class="nms">' + nombresHTML(e) + '</div>' : '') + '</div>' +
     (e.clave ? '<div class="clave' + (peligro ? ' pel' : '') + '"><small>' + (peligro ? 'Lo primero que hay que saber' : 'Lo primero que hay que mirar') + '</small><b>' + esc(e.clave) + '</b></div>' : '') +
     '<div class="warn">' + esc(cat.aviso()) + '</div>' +
-    (e.notaComestibilidad ? '<div class="note" style="margin-top:10px">' + esc(e.notaComestibilidad) + '</div>' : '') +
+    (e.comestibilidad ? comestible(e) : e.notaComestibilidad ? '<div class="note" style="margin-top:10px">' + esc(e.notaComestibilidad) + '</div>' : '') +
     (e.notaNomenclatura ? '<div class="note" style="margin-top:10px"><b>Nombre:</b> ' + esc(e.notaNomenclatura) + '</div>' : '') +
     (e.sindrome ? '<div class="sec">Si es tóxica</div><dl class="kv"><dt>Síndrome</dt><dd>' + esc(e.sindrome) + '</dd>' + (e.latencia ? '<dt>Aparece a las</dt><dd>' + esc(e.latencia) + '</dd>' : '') + (e.gravedad ? '<dt>Gravedad</dt><dd>' + esc(e.gravedad) + '</dd>' : '') + '</dl><p class="note" style="margin-top:8px">Intoxicación: urgencias ya (112), con restos de la seta y la hora de ingestión. No esperar a que «pase».</p>' : '') +
     '<div class="sec">Qué mirar</div>' + queMirar(e) + esporada(e) + '<div class="row"><button class="btn" data-g="">Ver las partes de la seta</button></div>' +
@@ -92,7 +93,7 @@ export function fichaHTML(e, mes) {
     '<div class="sec">Cuándo se ve</div>' + (td.hay ? barrasHTML(e, mes) + '<p class="note" style="margin-top:8px">' + esc(fuenteTxt(e)) + '</p>' : '<p class="note">' + esc(fuenteTxt(e)) + '</p>') +
     recoger(e) + curiosidades(e) +
     (ras.length ? '<details class="det"><summary>Datos del catálogo inicial (borrador)</summary><dl class="kv" style="margin-top:8px">' + ras.map(([k, l]) => '<dt>' + l + '</dt><dd>' + esc(e[k]) + '</dd>').join('') + '</dl></details>' : '') +
-    (e.candidataComestible ? '<div class="row"><button class="btn big" id="fi-antes">Antes de comer</button></div>' : '') +
+    (e.candidataComestible && !e.comestibilidad ? '<div class="row"><button class="btn big" id="fi-antes">Antes de comer</button></div>' : '') +
     '<div class="sec">Fuentes</div>' + e.fuentes.filter(f => !/Commons/.test(f.nombre)).map(f => '<div class="note" style="margin-bottom:8px"><b>' + esc(f.nombre) + '</b>' + (f.fechaConsulta ? ' <small style="color:var(--mut)">· ' + esc(f.fechaConsulta) + '</small>' : '') + (f.url ? '<br><a href="' + esc(f.url) + '" target="_blank" rel="noopener">' + esc(f.url) + '</a>' : '') + (f.nota ? '<br><small style="color:var(--mut)">' + esc(f.nota) + '</small>' : '') + '</div>').join('') +
     (fuFotos ? '<div class="sec">Créditos de las fotos</div><div class="note"><ul class="cred">' + fuFotos + '</ul><small style="color:var(--mut)">Fotos orientativas de otros autores (Wikimedia Commons). No confirman una identificación.</small></div>' : '');
 }

@@ -6,6 +6,7 @@ AQUI = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, AQUI); sys.path.insert(0, os.path.join(AQUI, 'datos'))
 import fotos_v3
 import h
+from com import COM
 for f in sorted(glob.glob(os.path.join(AQUI, 'datos', '[nx][0-9]*.py'))):
     importlib.import_module(os.path.basename(f)[:-3])
 
@@ -64,7 +65,7 @@ def nueva(i, k, F):
                'nota': 'Autoría y licencia en cada foto. Las fotos son orientativas y no confirman una identificación.'})
     cl = k['clase']
     if k.get('cand'):
-        nota = CAND + (' ' + k['nota'] if k.get('nota') else '')
+        nota = k.get('nota') or ''  # (la nota de comestibilidad se compone abajo desde COM)
     elif k.get('nota'): nota = k['nota']
     elif cl == 'toxica': nota = 'Tóxica según Wikipedia. ' + (k.get('sind') or '')
     elif cl == 'mortal': nota = 'Potencialmente mortal. ' + (k.get('sind') or '')
@@ -114,6 +115,15 @@ def enlazar(esps):
                 nom = c['nombre'].lower(); hits = sorted((nom.find(b), i) for b, i in bins.items() if b in nom and i != e['id'])
                 if hits: c['id'] = hits[0][1]
 
+def comestibilidad(esps):
+    """Marca lo que dicen las fuentes. No es una verificación: la ficha sigue en borrador y la clase interna no cambia."""
+    for e in esps:
+        if not e.get('candidataComestible'): e.pop('comestibilidad', None); continue
+        nivel, txt = COM[e['id']]
+        e['comestibilidad'] = {'nivel': nivel, 'txt': txt, 'segun': 'Wikipedia (inglés, español, euskera) y guías divulgativas: fuentes terciarias, sin revisión experta'}
+        e['notaComestibilidad'] = txt
+    assert {e['id'] for e in esps if e.get('candidataComestible')} == set(COM), 'COM no coincide con las candidatas'
+
 def reciprocas(esps):
     """Si A cita a B como confusión, B cita a A. El texto es la regla clave de A (ya sourced en su ficha); la gravedad es la misma."""
     por = {e['id']: e for e in esps}
@@ -137,6 +147,7 @@ def main():
     d['especies'] = previas + nuevas
     enlazar(d['especies'])
     reciprocas(d['especies'])
+    comestibilidad(d['especies'])
     d['version'] = 3; d['generado'] = HOY
     json.dump(d, open(RUTA, 'w'), ensure_ascii=False, indent=1)
     ids = [e['id'] for e in d['especies']]; assert len(ids) == len(set(ids))

@@ -3444,7 +3444,7 @@
    "clase": "sin_datos",
    "grupo": "boleto",
    "candidataComestible": true,
-   "notaComestibilidad": "Candidata a comestible según el documento de traspaso (§7). Sin ≥2 fuentes contrastadas ni revisión experta, así que NO se clasifica como comestible: se trata como no comestible hasta verificarla.",
+   "notaComestibilidad": "Según Wikipedia y guías divulgativas es comestible. El nombre «edulis» significa «comestible».",
    "himenio": "Poros blancos→amarillo oliváceo.",
    "reticulo": "Claro en el pie.",
    "carne": "No cambia al corte.",
@@ -3680,7 +3680,12 @@
     "En el folclore italiano se dice que los «porcini» brotan con la luna nueva; los estudios científicos han buscado qué factores determinan su aparición y apuntan a la lluvia en tiempo cálido.",
     "«edulis» significa «comestible» en latín.",
     "En 2023 fue declarada seta oficial del estado de Utah."
-   ]
+   ],
+   "comestibilidad": {
+    "nivel": "si",
+    "txt": "Según Wikipedia y guías divulgativas es comestible. El nombre «edulis» significa «comestible».",
+    "segun": "Wikipedia (inglés, español, euskera) y guías divulgativas: fuentes terciarias, sin revisión experta"
+   }
   },
   {
    "id": "cantharellus-cibarius",
@@ -3698,7 +3703,7 @@
    "clase": "sin_datos",
    "grupo": "pliegues",
    "candidataComestible": true,
-   "notaComestibilidad": "Candidata a comestible según el documento de traspaso (§7). Sin ≥2 fuentes contrastadas ni revisión experta, así que NO se clasifica como comestible: se trata como no comestible hasta verificarla.",
+   "notaComestibilidad": "Según Wikipedia es una seta muy consumida y apreciada.",
    "himenio": "Pliegues bajo el sombrero (no láminas verdaderas).",
    "carne": "Blanca, fibrosa.",
    "olor": "A albaricoque.",
@@ -3925,7 +3930,12 @@
     "Si está empapada se pudre antes: conviene recogerla en seco.",
     "La Wikipedia en euskera dice que el ADN la sitúa cerca de Hydnum repandum."
    ],
-   "esporada": "amarillenta"
+   "esporada": "amarillenta",
+   "comestibilidad": {
+    "nivel": "si",
+    "txt": "Según Wikipedia es una seta muy consumida y apreciada.",
+    "segun": "Wikipedia (inglés, español, euskera) y guías divulgativas: fuentes terciarias, sin revisión experta"
+   }
   },
   {
    "id": "craterellus-cornucopioides",
@@ -3942,7 +3952,7 @@
    "clase": "sin_datos",
    "grupo": "pliegues",
    "candidataComestible": true,
-   "notaComestibilidad": "Candidata a comestible según el documento de traspaso (§7). Sin ≥2 fuentes contrastadas ni revisión experta, así que NO se clasifica como comestible: se trata como no comestible hasta verificarla.",
+   "notaComestibilidad": "Según Wikipedia es comestible y de calidad, a pesar de su aspecto.",
    "himenio": "Sin láminas.",
    "nivelVerificacion": "borrador",
    "fuentes": [
@@ -4132,7 +4142,12 @@
     "Es difícil de encontrar por su tamaño pequeño y su color oscuro, que se confunde con la hojarasca del suelo del bosque (Wikipedia en español).",
     "La Wikipedia en euskera la considera segura de recoger porque es muy difícil confundirla con una seta venenosa, y se conserva bien seca."
    ],
-   "esporada": "crema"
+   "esporada": "crema",
+   "comestibilidad": {
+    "nivel": "si",
+    "txt": "Según Wikipedia es comestible y de calidad, a pesar de su aspecto.",
+    "segun": "Wikipedia (inglés, español, euskera) y guías divulgativas: fuentes terciarias, sin revisión experta"
+   }
   },
   {
    "id": "hydnum-repandum",
@@ -4151,7 +4166,7 @@
    "clase": "sin_datos",
    "grupo": "pinchos",
    "candidataComestible": true,
-   "notaComestibilidad": "Candidata a comestible según el documento de traspaso (§7). Sin ≥2 fuentes contrastadas ni revisión experta, así que NO se clasifica como comestible: se trata como no comestible hasta verificarla. El documento indica pocas confusiones peligrosas (verificar) y la propone como buena especie para iniciarse, con verificación.",
+   "notaComestibilidad": "Según Wikipedia y guías divulgativas es comestible.",
    "himenio": "Pinchos en lugar de láminas.",
    "nivelVerificacion": "borrador",
    "fuentes": [
@@ -4341,7 +4356,12 @@
     "Linneo la describió en 1753 y Fries la consolidó en 1821; ha pasado por varios géneros (Hypothele, Dentinum…).",
     "El ADN la sitúa muy cerca del rebozuelo, Cantharellus cibarius.",
     "En euskera también se le llama «negu ziza» («seta de invierno»)."
-   ]
+   ],
+   "comestibilidad": {
+    "nivel": "si",
+    "txt": "Según Wikipedia y guías divulgativas es comestible.",
+    "segun": "Wikipedia (inglés, español, euskera) y guías divulgativas: fuentes terciarias, sin revisión experta"
+   }
   },
   {
    "id": "lactarius-deliciosus",
@@ -4358,7 +4378,7 @@
    "clase": "sin_datos",
    "grupo": "laminar",
    "candidataComestible": true,
-   "notaComestibilidad": "Candidata a comestible según el documento de traspaso (§7). Sin ≥2 fuentes contrastadas ni revisión experta, así que NO se clasifica como comestible: se trata como no comestible hasta verificarla.",
+   "notaComestibilidad": "Según Wikipedia es comestible, aunque puede saber suave o amarga.",
    "carne": "Látex anaranjado/zanahoria que verdea la carne.",
    "habitat": "Bajo pino.",
    "confusiones": [
@@ -4564,7 +4584,12 @@
     "Un fresco de la ciudad romana de Herculano parece representarla y sería una de las primeras imágenes de un hongo en el arte.",
     "Su nombre en euskera, «esnegorri», significa «leche roja»."
    ],
-   "esporada": "crema"
+   "esporada": "crema",
+   "comestibilidad": {
+    "nivel": "si",
+    "txt": "Según Wikipedia es comestible, aunque puede saber suave o amarga.",
+    "segun": "Wikipedia (inglés, español, euskera) y guías divulgativas: fuentes terciarias, sin revisión experta"
+   }
   },
   {
    "id": "macrolepiota-procera",
@@ -4582,7 +4607,7 @@
    "clase": "sin_datos",
    "grupo": "laminar",
    "candidataComestible": true,
-   "notaComestibilidad": "Candidata a comestible según el documento de traspaso (§7). Sin ≥2 fuentes contrastadas ni revisión experta, así que NO se clasifica como comestible: se trata como no comestible hasta verificarla. Solo ejemplares grandes y solo sombreros (verificar).",
+   "notaComestibilidad": "Según Wikipedia es comestible y de calidad. El pie es muy fibroso y no se aprovecha: solo el sombrero.",
    "sombrero": "Grande (>15 cm).",
    "pie": "Con dibujo atigrado.",
    "anillo": "Doble y móvil.",
@@ -4793,7 +4818,12 @@
    "curiosidades": [
     "Scopoli la describió en 1772 como Agaricus procerus; Rolf Singer la pasó a Macrolepiota en 1948.",
     "En algunas zonas de Europa se llama «sombrero de serpiente» o «esponja de serpiente», por las escamas del pie."
-   ]
+   ],
+   "comestibilidad": {
+    "nivel": "si",
+    "txt": "Según Wikipedia es comestible y de calidad. El pie es muy fibroso y no se aprovecha: solo el sombrero.",
+    "segun": "Wikipedia (inglés, español, euskera) y guías divulgativas: fuentes terciarias, sin revisión experta"
+   }
   },
   {
    "id": "marasmius-oreades",
@@ -4812,7 +4842,7 @@
    "clase": "sin_datos",
    "grupo": "laminar",
    "candidataComestible": true,
-   "notaComestibilidad": "Candidata a comestible según el documento de traspaso (§7). Sin ≥2 fuentes contrastadas ni revisión experta, así que NO se clasifica como comestible: se trata como no comestible hasta verificarla.",
+   "notaComestibilidad": "Según Wikipedia es comestible y de calidad. Se conserva muy bien seca.",
    "pie": "Elástico y tenaz.",
    "himenio": "Láminas separadas.",
    "olor": "A almendra amarga.",
@@ -5008,7 +5038,12 @@
    "curiosidades": [
     "El micólogo David Arora la cita como una de las pocas «setitas pardas» que merece la pena aprender.",
     "En euskera se llama también «hankaluzea»."
-   ]
+   ],
+   "comestibilidad": {
+    "nivel": "si",
+    "txt": "Según Wikipedia es comestible y de calidad. Se conserva muy bien seca.",
+    "segun": "Wikipedia (inglés, español, euskera) y guías divulgativas: fuentes terciarias, sin revisión experta"
+   }
   },
   {
    "id": "calocybe-gambosa",
@@ -5027,7 +5062,7 @@
    "clase": "sin_datos",
    "grupo": "laminar",
    "candidataComestible": true,
-   "notaComestibilidad": "Candidata a comestible según el documento de traspaso (§7). Sin ≥2 fuentes contrastadas ni revisión experta, así que NO se clasifica como comestible: se trata como no comestible hasta verificarla.",
+   "notaComestibilidad": "Según Wikipedia se puede comer cocinada o en conserva. Se recoge mejor en tiempo seco.",
    "himenio": "Láminas blancas muy apretadas.",
    "olor": "A harina fresca.",
    "habitat": "En corros.",
@@ -5236,7 +5271,12 @@
     "Fries la describió en 1821 como Agaricus gambosus: «gambosa» viene del latín y significa «de pie hinchado».",
     "Se apreciaba mucho en la Italia medieval; Costanzo Felici la mencionaba en 1569.",
     "Se importa en cantidad comercial desde Rumanía, Hungría y Turquía."
-   ]
+   ],
+   "comestibilidad": {
+    "nivel": "si",
+    "txt": "Según Wikipedia se puede comer cocinada o en conserva. Se recoge mejor en tiempo seco.",
+    "segun": "Wikipedia (inglés, español, euskera) y guías divulgativas: fuentes terciarias, sin revisión experta"
+   }
   },
   {
    "id": "morchella",
@@ -5255,7 +5295,7 @@
    "clase": "sin_datos",
    "grupo": "ascomiceto",
    "candidataComestible": true,
-   "notaComestibilidad": "Candidata a comestible según el documento de traspaso (§7). Sin ≥2 fuentes contrastadas ni revisión experta, así que NO se clasifica como comestible: se trata como no comestible hasta verificarla. Verificar: el documento indica que no se come sin cocer a fondo.",
+   "notaComestibilidad": "Según Wikipedia es comestible y muy apreciada, pero cruda irrita el estómago: siempre bien cocinada.",
    "sombrero": "Con alveolos.",
    "pie": "Hueco.",
    "carne": "Hueca por dentro.",
@@ -5458,7 +5498,12 @@
     "Linneo la describió en 1753 como Phallus esculentus; Persoon le dio su nombre actual en 1801.",
     "Cruda irrita el estómago, por eso nunca se come cruda.",
     "La Wikipedia en euskera dice que es una de las setas más conocidas del mundo, pero en el País Vasco otras son más famosas."
-   ]
+   ],
+   "comestibilidad": {
+    "nivel": "cond",
+    "txt": "Según Wikipedia es comestible y muy apreciada, pero cruda irrita el estómago: siempre bien cocinada.",
+    "segun": "Wikipedia (inglés, español, euskera) y guías divulgativas: fuentes terciarias, sin revisión experta"
+   }
   },
   {
    "id": "boletus-aereus",
@@ -5479,7 +5524,7 @@
    "clase": "sin_datos",
    "grupo": "boleto",
    "candidataComestible": true,
-   "notaComestibilidad": "Candidata a comestible según Wikipedia y guías divulgativas (fuentes terciarias). Sin ≥2 fuentes contrastadas ni revisión experta, así que NO se clasifica como comestible: se trata como no comestible hasta verificarla.",
+   "notaComestibilidad": "Según Wikipedia es comestible y muy buscada; en España es de las silvestres que más se recogen para la mesa.",
    "confusiones": [
     {
      "id": "boletus-reticulatus",
@@ -5691,7 +5736,12 @@
     "En la zona italiana de Borgotaro (Parma) B. aereus, B. edulis, B. reticulatus y B. pinophilus se recolectan y exportan desde hace siglos bajo el nombre común «Fungo di Borgotaro».",
     "En el sur de Europa mucha gente la considera mejor que B. edulis en la cocina (opinión que recoge Wikipedia, no un dato medible). En España es una de las setas silvestres que más se recogen para la mesa y también es muy popular en Navarra, el País Vasco, Francia y Grecia.",
     "Unas poblaciones del norte de África se clasificaron como otra especie (B. mamorensis); los análisis genéticos demostraron que es la misma."
-   ]
+   ],
+   "comestibilidad": {
+    "nivel": "si",
+    "txt": "Según Wikipedia es comestible y muy buscada; en España es de las silvestres que más se recogen para la mesa.",
+    "segun": "Wikipedia (inglés, español, euskera) y guías divulgativas: fuentes terciarias, sin revisión experta"
+   }
   },
   {
    "id": "boletus-pinophilus",
@@ -5714,7 +5764,7 @@
    "clase": "sin_datos",
    "grupo": "boleto",
    "candidataComestible": true,
-   "notaComestibilidad": "Candidata a comestible según Wikipedia y guías divulgativas (fuentes terciarias). Sin ≥2 fuentes contrastadas ni revisión experta, así que NO se clasifica como comestible: se trata como no comestible hasta verificarla.",
+   "notaComestibilidad": "Según Wikipedia es comestible y se puede usar fresca, seca o en conserva.",
    "confusiones": [
     {
      "id": "boletus-edulis",
@@ -5927,7 +5977,12 @@
     "Es el más raro de los boletos parecidos al hongo en Europa, aunque vive en toda la zona templada.",
     "Se conserva fresco, seco o cocinado como otros boletos comestibles; en el centro de México se vende seco y puede ser caro."
    ],
-   "esporada": "pardo oliva"
+   "esporada": "pardo oliva",
+   "comestibilidad": {
+    "nivel": "si",
+    "txt": "Según Wikipedia es comestible y se puede usar fresca, seca o en conserva.",
+    "segun": "Wikipedia (inglés, español, euskera) y guías divulgativas: fuentes terciarias, sin revisión experta"
+   }
   },
   {
    "id": "boletus-reticulatus",
@@ -5948,7 +6003,7 @@
    "clase": "sin_datos",
    "grupo": "boleto",
    "candidataComestible": true,
-   "notaComestibilidad": "Candidata a comestible según Wikipedia y guías divulgativas (fuentes terciarias). Sin ≥2 fuentes contrastadas ni revisión experta, así que NO se clasifica como comestible: se trata como no comestible hasta verificarla.",
+   "notaComestibilidad": "Según Wikipedia es comestible y útil en cocina, como la mayoría de los boletos del grupo del hongo.",
    "confusiones": [
     {
      "id": "boletus-aereus",
@@ -6152,7 +6207,12 @@
     "La describió en 1774 el naturalista alemán Jacob Christian Schäffer. «reticulatus» alude al retículo del pie; algunos autores lo relacionan con la red de grietas del sombrero.",
     "Su carne es algo menos firme que la de otros boletos del grupo y a menudo la atacan las larvas de insectos.",
     "En Borgotaro (Italia) forma parte del «Fungo di Borgotaro», junto con edulis, aereus y pinophilus."
-   ]
+   ],
+   "comestibilidad": {
+    "nivel": "si",
+    "txt": "Según Wikipedia es comestible y útil en cocina, como la mayoría de los boletos del grupo del hongo.",
+    "segun": "Wikipedia (inglés, español, euskera) y guías divulgativas: fuentes terciarias, sin revisión experta"
+   }
   },
   {
    "id": "imleria-badia",
@@ -6173,7 +6233,7 @@
    "clase": "sin_datos",
    "grupo": "boleto",
    "candidataComestible": true,
-   "notaComestibilidad": "Candidata a comestible según Wikipedia y guías divulgativas (fuentes terciarias). Sin ≥2 fuentes contrastadas ni revisión experta, así que NO se clasifica como comestible: se trata como no comestible hasta verificarla.",
+   "notaComestibilidad": "Según Wikipedia es comestible; algunos autores la valoran mucho y otros la consideran inferior al hongo.",
    "confusiones": [
     {
      "id": "boletus-aereus",
@@ -6368,7 +6428,12 @@
     "Se consideró «el pariente pobre» del hongo (B. edulis), aunque autores como Carluccio lo valoran como comestible de calidad.",
     "La describió Elias Fries en 1818 como variedad de Boletus castaneus; en 1931 pasó a Xerocomus y hoy se coloca en Imleria.",
     "Que azulee no es señal de peligro en esta especie: el azul desaparece al cocinarla. Eso no vale para otros boletos que azulean."
-   ]
+   ],
+   "comestibilidad": {
+    "nivel": "si",
+    "txt": "Según Wikipedia es comestible; algunos autores la valoran mucho y otros la consideran inferior al hongo.",
+    "segun": "Wikipedia (inglés, español, euskera) y guías divulgativas: fuentes terciarias, sin revisión experta"
+   }
   },
   {
    "id": "suillus-luteus",
@@ -6389,7 +6454,7 @@
    "clase": "sin_datos",
    "grupo": "boleto",
    "candidataComestible": true,
-   "notaComestibilidad": "Candidata a comestible según Wikipedia y guías divulgativas (fuentes terciarias). Sin ≥2 fuentes contrastadas ni revisión experta, así que NO se clasifica como comestible: se trata como no comestible hasta verificarla.",
+   "notaComestibilidad": "Según Wikipedia es comestible, pero hay que quitarle la cutícula viscosa; y puede causar intolerancia, sobre todo poco hecha.",
    "confusiones": [
     {
      "id": null,
@@ -6568,7 +6633,12 @@
     "En Rusia, Ucrania y Polonia es muy apreciada: «maslyata», «maślaki» vienen de una palabra que significa «mantecoso».",
     "En Calabria (Italia) se valoró más que el hongo hasta la década de 1940, cuando el hongo se puso de moda.",
     "Linneo la describió ya en 1753, en «Species Plantarum»."
-   ]
+   ],
+   "comestibilidad": {
+    "nivel": "cond",
+    "txt": "Según Wikipedia es comestible, pero hay que quitarle la cutícula viscosa; y puede causar intolerancia, sobre todo poco hecha.",
+    "segun": "Wikipedia (inglés, español, euskera) y guías divulgativas: fuentes terciarias, sin revisión experta"
+   }
   },
   {
    "id": "leccinum-scabrum",
@@ -6590,7 +6660,7 @@
    "clase": "sin_datos",
    "grupo": "boleto",
    "candidataComestible": true,
-   "notaComestibilidad": "Candidata a comestible según Wikipedia y guías divulgativas (fuentes terciarias). Sin ≥2 fuentes contrastadas ni revisión experta, así que NO se clasifica como comestible: se trata como no comestible hasta verificarla.",
+   "notaComestibilidad": "Según Wikipedia es comestible solo si los ejemplares están firmes y se cocinan a fondo; algunas guías no la consideran de interés.",
    "confusiones": [
     {
      "id": null,
@@ -6768,7 +6838,12 @@
    "curiosidades": [
     "Se consume mucho en Finlandia y Rusia. Se puede cocinar en platos de setas o conservar en salmuera o vinagre, y secar para guardar (Wikipedia en euskera).",
     "El pie de escamas oscuras es su rasgo más fácil de recordar; «scabrum» significa rugoso, áspero."
-   ]
+   ],
+   "comestibilidad": {
+    "nivel": "cond",
+    "txt": "Según Wikipedia es comestible solo si los ejemplares están firmes y se cocinan a fondo; algunas guías no la consideran de interés.",
+    "segun": "Wikipedia (inglés, español, euskera) y guías divulgativas: fuentes terciarias, sin revisión experta"
+   }
   },
   {
    "id": "boletos-poros-rojos",
@@ -6790,7 +6865,7 @@
    "clase": "sin_datos",
    "grupo": "boleto",
    "candidataComestible": true,
-   "notaComestibilidad": "Candidata a comestible según Wikipedia y guías divulgativas (fuentes terciarias). Sin ≥2 fuentes contrastadas ni revisión experta, así que NO se clasifica como comestible: se trata como no comestible hasta verificarla. Se tratan como «no tocar» para principiantes. Según Wikipedia son comestibles bien cocinados pero tóxicos crudos o mal cocidos (gastroenteritis), y se parecen a otros boletos de poros rojos venenosos. Con alcohol son peligrosos (Wikipedia en euskera).",
+   "notaComestibilidad": "Según Wikipedia son comestibles bien cocinados, pero crudos o mal cocidos dan gastroenteritis, y se parecen a boletos de poros rojos venenosos; algunas guías recomiendan evitarlos. Con alcohol son peligrosos.",
    "sindrome": "Gastroenteritis (náuseas, vómitos, calambres abdominales y diarrea) si se comen crudos o poco cocinados. Se sospecha que S. luridus puede aumentar la sensibilidad al alcohol, como el Coprinopsis atramentaria.",
    "latencia": "30 min a 2 h (S. luridus, según Wikipedia)",
    "gravedad": "Recuperación completa esperable en 24–48 h si se reponen los líquidos (S. luridus)",
@@ -7030,7 +7105,12 @@
     "La Wikipedia en euskera dice que a algunos aficionados no les gusta recogerlos porque creen que todos los boletos de poros rojos son venenosos."
    ],
    "esporada": "pardo oliva (N. luridiformis)",
-   "notaNomenclatura": "Aquí van juntos los boletos «de poros rojos» que azulean al cortarlos: Neoboletus luridiformis (antes B. erythropus) y Suillellus luridus. La Wikipedia dice de ambos que se comen bien cocinados, pero crudos o poco hechos dan gastroenteritis y se parecen a otros boletos venenosos: se recomienda evitarlos a principiantes."
+   "notaNomenclatura": "Aquí van juntos los boletos «de poros rojos» que azulean al cortarlos: Neoboletus luridiformis (antes B. erythropus) y Suillellus luridus. La Wikipedia dice de ambos que se comen bien cocinados, pero crudos o poco hechos dan gastroenteritis y se parecen a otros boletos venenosos: se recomienda evitarlos a principiantes.",
+   "comestibilidad": {
+    "nivel": "cond",
+    "txt": "Según Wikipedia son comestibles bien cocinados, pero crudos o mal cocidos dan gastroenteritis, y se parecen a boletos de poros rojos venenosos; algunas guías recomiendan evitarlos. Con alcohol son peligrosos.",
+    "segun": "Wikipedia (inglés, español, euskera) y guías divulgativas: fuentes terciarias, sin revisión experta"
+   }
   },
   {
    "id": "amanita-caesarea",
@@ -7058,7 +7138,7 @@
    "clase": "sin_datos",
    "grupo": "laminar",
    "candidataComestible": true,
-   "notaComestibilidad": "Candidata a comestible según Wikipedia y guías divulgativas (fuentes terciarias). Sin ≥2 fuentes contrastadas ni revisión experta, así que NO se clasifica como comestible: se trata como no comestible hasta verificarla. Es una Amanita: se parece a especies tóxicas como la matamoscas. Wikipedia la da como comestible «con una identificación correcta». Aquí queda como candidata sin confirmar.",
+   "notaComestibilidad": "Según Wikipedia es comestible «con una identificación correcta»; se parece a especies tóxicas y a las Amanitas mortales.",
    "confusiones": [
     {
      "id": "amanita-pantherina-muscaria",
@@ -7261,7 +7341,12 @@
     "En euskera también se la llama «gorringo» («yema»): el sombrero que asoma de la volva recuerda a la yema de un huevo duro.",
     "En México se come asada con epazote. Un análisis encontró cadmio cuatro veces por encima de lo permitido para champiñón cultivado en la UE y plomo también por encima: los autores avisan de que comerla de forma crónica podría ser perjudicial."
    ],
-   "esporada": "blanca"
+   "esporada": "blanca",
+   "comestibilidad": {
+    "nivel": "cond",
+    "txt": "Según Wikipedia es comestible «con una identificación correcta»; se parece a especies tóxicas y a las Amanitas mortales.",
+    "segun": "Wikipedia (inglés, español, euskera) y guías divulgativas: fuentes terciarias, sin revisión experta"
+   }
   },
   {
    "id": "agaricus-campestris",
@@ -7290,7 +7375,7 @@
    "clase": "sin_datos",
    "grupo": "laminar",
    "candidataComestible": true,
-   "notaComestibilidad": "Candidata a comestible según Wikipedia y guías divulgativas (fuentes terciarias). Sin ≥2 fuentes contrastadas ni revisión experta, así que NO se clasifica como comestible: se trata como no comestible hasta verificarla. Es la «xixa» (champiñón silvestre). Se confunde con la Amanita virosa mortal y con el Agaricus xanthodermus tóxico. Wikipedia la da como comestible «con cuidado para distinguirla de las venenosas».",
+   "notaComestibilidad": "La «xixa». Según Wikipedia es comestible, pero se confunde con la Amanita virosa (mortal) y con el Agaricus xanthodermus (tóxico): hay que distinguirla con cuidado.",
    "confusiones": [
     {
      "id": "amanita-verna-virosa",
@@ -7504,7 +7589,12 @@
     "Es pariente cercana del champiñón de cultivo (A. bisporus).",
     "En euskera tiene muchísimos nombres locales; «xixa» es uno de ellos."
    ],
-   "esporada": "pardo oscuro"
+   "esporada": "pardo oscuro",
+   "comestibilidad": {
+    "nivel": "cond",
+    "txt": "La «xixa». Según Wikipedia es comestible, pero se confunde con la Amanita virosa (mortal) y con el Agaricus xanthodermus (tóxico): hay que distinguirla con cuidado.",
+    "segun": "Wikipedia (inglés, español, euskera) y guías divulgativas: fuentes terciarias, sin revisión experta"
+   }
   },
   {
    "id": "agaricus-xanthodermus",
@@ -7725,7 +7815,7 @@
    "clase": "sin_datos",
    "grupo": "laminar",
    "candidataComestible": true,
-   "notaComestibilidad": "Candidata a comestible según Wikipedia y guías divulgativas (fuentes terciarias). Sin ≥2 fuentes contrastadas ni revisión experta, así que NO se clasifica como comestible: se trata como no comestible hasta verificarla.",
+   "notaComestibilidad": "Según Wikipedia es muy buena comestible cuando es joven, pero se estropea enseguida y se parece a algunas venenosas.",
    "confusiones": [
     {
      "id": "coprinopsis-atramentaria",
@@ -7923,7 +8013,12 @@
     "Una pariente parecida (C. atramentaria) provoca síntomas con alcohol por la coprina; Wikipedia indica que esta especie no la tiene.",
     "La describió el naturalista danés Otto Friedrich Müller en 1780."
    ],
-   "esporada": "negro-pardo"
+   "esporada": "negro-pardo",
+   "comestibilidad": {
+    "nivel": "cond",
+    "txt": "Según Wikipedia es muy buena comestible cuando es joven, pero se estropea enseguida y se parece a algunas venenosas.",
+    "segun": "Wikipedia (inglés, español, euskera) y guías divulgativas: fuentes terciarias, sin revisión experta"
+   }
   },
   {
    "id": "lepista-nuda",
@@ -7943,7 +8038,7 @@
    "clase": "sin_datos",
    "grupo": "laminar",
    "candidataComestible": true,
-   "notaComestibilidad": "Candidata a comestible según Wikipedia y guías divulgativas (fuentes terciarias). Sin ≥2 fuentes contrastadas ni revisión experta, así que NO se clasifica como comestible: se trata como no comestible hasta verificarla. Wikipedia la da como buena comestible, pero se confunde con Cortinarius azulados o violáceos, muchos de ellos venenosos. La Wikipedia en euskera avisa de que puede sentar mal a algunos estómagos.",
+   "notaComestibilidad": "Según Wikipedia es comestible, pero se confunde con Cortinarius azulados o violáceos, muchos venenosos, y puede sentar mal a algunos estómagos.",
    "confusiones": [
     {
      "id": null,
@@ -8145,7 +8240,12 @@
     "Se cultiva en Gran Bretaña, Países Bajos y Francia, aunque se dice que las cultivadas saben menos que las silvestres."
    ],
    "esporada": "blanca a rosa pálido",
-   "notaNomenclatura": "El nombre científico varía según la fuente: Lepista nuda, Clitocybe nuda y Collybia nuda se refieren a la misma seta."
+   "notaNomenclatura": "El nombre científico varía según la fuente: Lepista nuda, Clitocybe nuda y Collybia nuda se refieren a la misma seta.",
+   "comestibilidad": {
+    "nivel": "cond",
+    "txt": "Según Wikipedia es comestible, pero se confunde con Cortinarius azulados o violáceos, muchos venenosos, y puede sentar mal a algunos estómagos.",
+    "segun": "Wikipedia (inglés, español, euskera) y guías divulgativas: fuentes terciarias, sin revisión experta"
+   }
   },
   {
    "id": "armillaria-mellea",
@@ -8164,7 +8264,7 @@
    "clase": "sin_datos",
    "grupo": "laminar",
    "candidataComestible": true,
-   "notaComestibilidad": "Candidata a comestible según Wikipedia y guías divulgativas (fuentes terciarias). Sin ≥2 fuentes contrastadas ni revisión experta, así que NO se clasifica como comestible: se trata como no comestible hasta verificarla. No es para principiantes: crece en madera y se confunde con la Galerina marginata (mortal). El catálogo inicial indica que Aranzadi no la recomienda. Wikipedia: comestible joven y muy cocinada; algunas matas dan problemas digestivos.",
+   "notaComestibilidad": "Según Wikipedia es comestible joven y muy cocinada, sin los pies duros; algunas personas son intolerantes. Crece en madera y se confunde con la Galerina marginata (mortal).",
    "confusiones": [
     {
      "id": "hypholoma-fasciculare",
@@ -8353,7 +8453,12 @@
     "Fue descrita por Martin Vahl en 1790 como Agaricus melleus.",
     "Produce compuestos citotóxicos llamados meleolidas."
    ],
-   "esporada": "blanca"
+   "esporada": "blanca",
+   "comestibilidad": {
+    "nivel": "cond",
+    "txt": "Según Wikipedia es comestible joven y muy cocinada, sin los pies duros; algunas personas son intolerantes. Crece en madera y se confunde con la Galerina marginata (mortal).",
+    "segun": "Wikipedia (inglés, español, euskera) y guías divulgativas: fuentes terciarias, sin revisión experta"
+   }
   },
   {
    "id": "pleurotus-ostreatus",
@@ -8375,7 +8480,7 @@
    "clase": "sin_datos",
    "grupo": "laminar",
    "candidataComestible": true,
-   "notaComestibilidad": "Candidata a comestible según Wikipedia y guías divulgativas (fuentes terciarias). Sin ≥2 fuentes contrastadas ni revisión experta, así que NO se clasifica como comestible: se trata como no comestible hasta verificarla.",
+   "notaComestibilidad": "Según Wikipedia es una seta comestible muy popular, y se cultiva en todo el mundo.",
    "confusiones": [
     {
      "id": "omphalotus-illudens",
@@ -8574,7 +8679,12 @@
     "Es una especie que descompone madera (podredumbre blanca) y devuelve minerales al ecosistema.",
     "En la cocina checa, polaca y eslovaca se usa en sopas y guisos como sustituto de la carne; es un manjar en Japón, Corea y China."
    ],
-   "esporada": "blanca a gris-lila"
+   "esporada": "blanca a gris-lila",
+   "comestibilidad": {
+    "nivel": "si",
+    "txt": "Según Wikipedia es una seta comestible muy popular, y se cultiva en todo el mundo.",
+    "segun": "Wikipedia (inglés, español, euskera) y guías divulgativas: fuentes terciarias, sin revisión experta"
+   }
   },
   {
    "id": "russula-cyanoxantha",
@@ -8593,7 +8703,7 @@
    "clase": "sin_datos",
    "grupo": "laminar",
    "candidataComestible": true,
-   "notaComestibilidad": "Candidata a comestible según Wikipedia y guías divulgativas (fuentes terciarias). Sin ≥2 fuentes contrastadas ni revisión experta, así que NO se clasifica como comestible: se trata como no comestible hasta verificarla.",
+   "notaComestibilidad": "Según Wikipedia es comestible y admite muchas preparaciones; su carne es menos dura que la de otras rúsulas.",
    "confusiones": [
     {
      "id": "amanita-phalloides",
@@ -8791,7 +8901,12 @@
     "«Carbonera» (charcoal burner en inglés) es el nombre común que da la Wikipedia en español.",
     "Wikipedia sugiere que quizá solo los ejemplares europeos son de verdad esta especie."
    ],
-   "esporada": "blanca"
+   "esporada": "blanca",
+   "comestibilidad": {
+    "nivel": "si",
+    "txt": "Según Wikipedia es comestible y admite muchas preparaciones; su carne es menos dura que la de otras rúsulas.",
+    "segun": "Wikipedia (inglés, español, euskera) y guías divulgativas: fuentes terciarias, sin revisión experta"
+   }
   },
   {
    "id": "craterellus-tubaeformis",
@@ -8808,7 +8923,7 @@
    "clase": "sin_datos",
    "grupo": "pliegues",
    "candidataComestible": true,
-   "notaComestibilidad": "Candidata a comestible según Wikipedia y guías divulgativas (fuentes terciarias). Sin ≥2 fuentes contrastadas ni revisión experta, así que NO se clasifica como comestible: se trata como no comestible hasta verificarla.",
+   "notaComestibilidad": "Según Wikipedia es comestible y de calidad, sobre todo frita o en sopas.",
    "confusiones": [
     {
      "id": "cantharellus-cibarius",
@@ -9002,7 +9117,12 @@
     "En el noroeste del Pacífico (Norteamérica) se encuentra de noviembre a enero."
    ],
    "esporada": "naranja-rosa claro",
-   "notaNomenclatura": "Antes se llamaba Cantharellus tubaeformis; los análisis genéticos la pasaron a Craterellus. En inglés: winter chanterelle, yellowfoot, funnel chanterelle."
+   "notaNomenclatura": "Antes se llamaba Cantharellus tubaeformis; los análisis genéticos la pasaron a Craterellus. En inglés: winter chanterelle, yellowfoot, funnel chanterelle.",
+   "comestibilidad": {
+    "nivel": "si",
+    "txt": "Según Wikipedia es comestible y de calidad, sobre todo frita o en sopas.",
+    "segun": "Wikipedia (inglés, español, euskera) y guías divulgativas: fuentes terciarias, sin revisión experta"
+   }
   },
   {
    "id": "lycoperdon-perlatum",
@@ -9026,7 +9146,7 @@
    "clase": "sin_datos",
    "grupo": "bola",
    "candidataComestible": true,
-   "notaComestibilidad": "Candidata a comestible según Wikipedia y guías divulgativas (fuentes terciarias). Sin ≥2 fuentes contrastadas ni revisión experta, así que NO se clasifica como comestible: se trata como no comestible hasta verificarla. Solo se come joven, con el interior completamente blanco. Hay que evitar confundirlo con Amanitas jóvenes (en huevo), que son venenosas.",
+   "notaComestibilidad": "Según Wikipedia es comestible solo joven, con el interior completamente blanco; hay que evitar confundirla con Amanitas jóvenes (en huevo), venenosas.",
    "confusiones": [
     {
      "id": "amanita-phalloides",
@@ -9209,7 +9329,12 @@
     "Las esporas salen con las gotas de lluvia: un estudio con una especie parecida (L. pyriforme) mostró que bastan gotas de 1 mm o más, incluso las que caen de los árboles.",
     "Ya en 1861 Elias Fries la recomendaba seca con sal, pimienta y aceite.",
     "Se vende en mercados de los estados mexicanos de Puebla y Tlaxcala."
-   ]
+   ],
+   "comestibilidad": {
+    "nivel": "cond",
+    "txt": "Según Wikipedia es comestible solo joven, con el interior completamente blanco; hay que evitar confundirla con Amanitas jóvenes (en huevo), venenosas.",
+    "segun": "Wikipedia (inglés, español, euskera) y guías divulgativas: fuentes terciarias, sin revisión experta"
+   }
   },
   {
    "id": "laetiporus-sulphureus",
@@ -9227,7 +9352,7 @@
    "clase": "sin_datos",
    "grupo": "poliporo",
    "candidataComestible": true,
-   "notaComestibilidad": "Candidata a comestible según Wikipedia y guías divulgativas (fuentes terciarias). Sin ≥2 fuentes contrastadas ni revisión experta, así que NO se clasifica como comestible: se trata como no comestible hasta verificarla. Wikipedia: comestible joven y cocinado, nunca crudo. En torno al 10 % de las personas tienen reacciones graves (vómitos, fiebre) y otras molestias digestivas.",
+   "notaComestibilidad": "Según Wikipedia es comestible joven y cocinada, nunca cruda; en torno al 10 % de las personas tiene reacciones (vómitos, fiebre) u otras molestias digestivas.",
    "sindrome": "Molestias digestivas; en torno al 10 % de las personas, reacciones graves con vómitos y fiebre.",
    "confusiones": [
     {
@@ -9416,7 +9541,12 @@
     "Algunas especies de ciervo la consumen.",
     "La describió Pierre Bulliard en 1789 como Boletus sulphureus."
    ],
-   "esporada": "blanca"
+   "esporada": "blanca",
+   "comestibilidad": {
+    "nivel": "cond",
+    "txt": "Según Wikipedia es comestible joven y cocinada, nunca cruda; en torno al 10 % de las personas tiene reacciones (vómitos, fiebre) u otras molestias digestivas.",
+    "segun": "Wikipedia (inglés, español, euskera) y guías divulgativas: fuentes terciarias, sin revisión experta"
+   }
   },
   {
    "id": "fistulina-hepatica",
@@ -9435,7 +9565,7 @@
    "clase": "sin_datos",
    "grupo": "poliporo",
    "candidataComestible": true,
-   "notaComestibilidad": "Candidata a comestible según Wikipedia y guías divulgativas (fuentes terciarias). Sin ≥2 fuentes contrastadas ni revisión experta, así que NO se clasifica como comestible: se trata como no comestible hasta verificarla.",
+   "notaComestibilidad": "Según Wikipedia es comestible cocinada; los ejemplares viejos pueden necesitar una preparación especial.",
    "confusiones": [
     {
      "id": null,
@@ -9622,7 +9752,12 @@
     "Al infectar un roble vivo lo tiñe de pardo rojizo, y esa madera «de roble pardo» se valora.",
     "La Wikipedia en euskera dice que es muy rica en vitamina C, con más que muchos cítricos."
    ],
-   "esporada": "rosa"
+   "esporada": "rosa",
+   "comestibilidad": {
+    "nivel": "cond",
+    "txt": "Según Wikipedia es comestible cocinada; los ejemplares viejos pueden necesitar una preparación especial.",
+    "segun": "Wikipedia (inglés, español, euskera) y guías divulgativas: fuentes terciarias, sin revisión experta"
+   }
   },
   {
    "id": "auricularia-auricula-judae",
@@ -9642,7 +9777,7 @@
    "clase": "sin_datos",
    "grupo": "gelatinosa",
    "candidataComestible": true,
-   "notaComestibilidad": "Candidata a comestible según Wikipedia y guías divulgativas (fuentes terciarias). Sin ≥2 fuentes contrastadas ni revisión experta, así que NO se clasifica como comestible: se trata como no comestible hasta verificarla. Wikipedia: comestible pero de poco interés culinario. En el este de Asia se usa una especie parecida (A. heimuer), que a menudo se ha identificado mal como esta.",
+   "notaComestibilidad": "Según Wikipedia es comestible, pero poco valorada en la cocina.",
    "confusiones": [
     {
      "id": null,
@@ -9814,7 +9949,12 @@
     "Un autor la comparó con «comer una goma de borrar con huesos».",
     "Se dice que en Polonia se consume con frecuencia.",
     "Linneo la describió en 1753 como Tremella auricula."
-   ]
+   ],
+   "comestibilidad": {
+    "nivel": "si",
+    "txt": "Según Wikipedia es comestible, pero poco valorada en la cocina.",
+    "segun": "Wikipedia (inglés, español, euskera) y guías divulgativas: fuentes terciarias, sin revisión experta"
+   }
   },
   {
    "id": "sparassis-crispa",
@@ -9836,7 +9976,7 @@
    "clase": "sin_datos",
    "grupo": "coral",
    "candidataComestible": true,
-   "notaComestibilidad": "Candidata a comestible según Wikipedia y guías divulgativas (fuentes terciarias). Sin ≥2 fuentes contrastadas ni revisión experta, así que NO se clasifica como comestible: se trata como no comestible hasta verificarla.",
+   "notaComestibilidad": "Según Wikipedia es comestible joven y fresca, pero es difícil de limpiar.",
    "confusiones": [
     {
      "id": null,
@@ -10013,7 +10153,12 @@
     "Un libro de cocina francés da cuatro recetas con esta seta y dice que hay que escaldarla 2–3 minutos y cocinarla despacio.",
     "En la Wikipedia en euskera se destaca que hay que limpiar a fondo todos los pliegues y que sirve para croquetas."
    ],
-   "esporada": "crema"
+   "esporada": "crema",
+   "comestibilidad": {
+    "nivel": "si",
+    "txt": "Según Wikipedia es comestible joven y fresca, pero es difícil de limpiar.",
+    "segun": "Wikipedia (inglés, español, euskera) y guías divulgativas: fuentes terciarias, sin revisión experta"
+   }
   },
   {
    "id": "amanita-rubescens",
@@ -10032,7 +10177,7 @@
    "clase": "sin_datos",
    "grupo": "laminar",
    "candidataComestible": true,
-   "notaComestibilidad": "Candidata a comestible según Wikipedia y guías divulgativas (fuentes terciarias). Sin ≥2 fuentes contrastadas ni revisión experta, así que NO se clasifica como comestible: se trata como no comestible hasta verificarla. Cruda es tóxica (proteína hemolítica) y solo se comería muy cocinada. Se confunde con la A. pantherina (tóxica) y con otras amanitas peligrosas: no es para principiantes.",
+   "notaComestibilidad": "Según Wikipedia es comestible solo cocinada; cruda es tóxica. Se confunde con la A. pantherina, tóxica.",
    "sindrome": "Cruda contiene una proteína hemolítica (destruye glóbulos rojos) que se destruye al cocinarla. David Pegler: en grandes cantidades cruda puede causar anemia grave si no se trata. Algunos libros la tratan como venenosa.",
    "confusiones": [
     {
@@ -10232,7 +10377,12 @@
     "En Sudáfrica llegó, al parecer, por accidente con árboles importados de Europa.",
     "Está tan extendida que se ve de junio a noviembre en el Reino Unido."
    ],
-   "esporada": "blanca"
+   "esporada": "blanca",
+   "comestibilidad": {
+    "nivel": "cond",
+    "txt": "Según Wikipedia es comestible solo cocinada; cruda es tóxica. Se confunde con la A. pantherina, tóxica.",
+    "segun": "Wikipedia (inglés, español, euskera) y guías divulgativas: fuentes terciarias, sin revisión experta"
+   }
   },
   {
    "id": "clitocybe-nebularis",
@@ -10252,7 +10402,7 @@
    "clase": "sin_datos",
    "grupo": "laminar",
    "candidataComestible": true,
-   "notaComestibilidad": "Candidata a comestible según Wikipedia y guías divulgativas (fuentes terciarias). Sin ≥2 fuentes contrastadas ni revisión experta, así que NO se clasifica como comestible: se trata como no comestible hasta verificarla. Wikipedia: comestible, pero incluso una pequeña ración da molestias digestivas a algunas personas. Se confunde con la Entoloma sinuatum tóxica.",
+   "notaComestibilidad": "Según Wikipedia es comestible, pero incluso una ración pequeña da molestias digestivas a algunas personas. Se confunde con la Entoloma sinuatum, tóxica.",
    "sindrome": "Molestias gastrointestinales en algunas personas, incluso con poca cantidad.",
    "confusiones": [
     {
@@ -10440,7 +10590,12 @@
     "Es el anfitrión de otra seta parásita, Volvariella surrecta, que crece sobre los ejemplares viejos.",
     "La describió August Batsch en 1789 como Agaricus nebularis."
    ],
-   "esporada": "amarillenta clara"
+   "esporada": "amarillenta clara",
+   "comestibilidad": {
+    "nivel": "cond",
+    "txt": "Según Wikipedia es comestible, pero incluso una ración pequeña da molestias digestivas a algunas personas. Se confunde con la Entoloma sinuatum, tóxica.",
+    "segun": "Wikipedia (inglés, español, euskera) y guías divulgativas: fuentes terciarias, sin revisión experta"
+   }
   },
   {
    "id": "hypholoma-fasciculare",

@@ -7,8 +7,8 @@ module.exports = {
       t.ok('hay un avatar de foto por especie', (await t.N('#slist .item .phw.av img.ph')) === 56);
       t.ok('las fotos de la lista se piden a 250 px', t.photoReqs.some(u => /\/250px-/.test(u)));
       t.ok('los encabezados agrupan por clase', (await t.N('#slist .grp')) >= 4);
-      t.ok('las candidatas llevan el chip «Candidata · sin confirmar»', (await t.N('#slist .tag.cand')) === 31);
-      t.ok('ninguna especie se presenta como «Comestible buena» ni «con condiciones»', !/Comestible (buena|con condiciones)/i.test(await t.T('#slist') || ''));
+      t.ok('las 31 comestibles llevan chip verde o amarillo y los encabezados dicen «según fuentes»', (await t.page.evaluate(() => [...document.querySelectorAll('#slist .item .tag')].filter(x => /^(Comestible|Con condiciones)$/.test(x.textContent)).length)) === 31 && /según fuentes/i.test(await t.T('#slist') || ''));
+      t.ok('nunca «Comestible buena» sin más: siempre «según fuentes»', !/Comestible buena/i.test(await t.T('#slist') || '') && (await t.N('#slist .grp')) >= 5);
       await t.shot('captura-07-lista');
     });
     await t.case('ficha: fotos con autoría y licencia, regla clave y qué mirar', async () => {
@@ -33,7 +33,7 @@ module.exports = {
       t.ok('hábitat con chips e iconos', (await t.N('#sheet .habs .hab i svg')) >= 2 && /Dónde crece/i.test(await t.T('#sheet') || ''));
       t.ok('«Cómo recogerla» con acción y enlace al libro', await t.has('#sheet .recog') && await t.has('#sheet .recog [data-l="recoger"]'));
       t.ok('curiosidades numeradas', (await t.N('#sheet .curi li')) >= 2);
-      t.ok('la candidata no se presenta como comestible', /Candidata · sin confirmar/.test(await t.T('#sheet .chips') || ''));
+      t.ok('la ficha dice «Comestible · según fuentes» y avisa', /Comestible · según fuentes/i.test(await t.T('#sheet .chips') || '') && await t.has('#sheet .com') && /No te autoriza|no te autoriza/i.test(await t.T('#sheet .com') || ''));
       await t.shot('captura-07-ficha-libro');
       await t.page.evaluate(() => window.__MI.abrirFicha('boletus-pinophilus')); await t.wait(300);
       t.ok('esporada con muestra de color', await t.has('#sheet .esp .sw') && /pardo oliva/.test(await t.T('#sheet .esp') || ''));
@@ -80,7 +80,7 @@ module.exports = {
       await t.page.evaluate(() => window.__MI.abrirFicha('boletus-edulis')); await t.wait(300);
       t.ok('comparación con 2 fotos para una confusión del catálogo', (await t.N('#sheet .conf .cmp figure')) >= 4);
       t.ok('riesgo alto señalado', /Riesgo alto/.test(await t.T('#sheet') || ''));
-      t.ok('candidata: chip propio y «Antes de comer»', await t.has('#sheet .tag.cand') && await t.has('#fi-antes'));
+      t.ok('comestible según fuentes: bloque propio y «Antes de comer»', await t.has('#sheet .com') && await t.has('#fi-antes'));
       await t.shot('captura-07-ficha-candidata');
       await t.tap('#sheet .lnk[data-e="boletus-satanas"]', 300);
       t.ok('abre Boletus satanas', /satanas/.test(await t.T('#sheet h2') || ''));

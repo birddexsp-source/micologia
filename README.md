@@ -55,4 +55,4 @@ Verificado en navegador (12-nov-2026): una tesela de Bizkaia responde 200 JPEG 2
 
 ## Catálogo
 
-56 fichas en **borrador** (25 del MVP: 16 peligrosas o pares de confusión y 9 candidatas, más 31 de la ampliación v3: 22 candidatas, 5 tóxicas, 1 mortal y 3 no comestibles; en total 31 candidatas, 14 tóxicas, 7 mortales y 4 no comestibles). Las candidatas están como `sin_datos` hasta tener ≥2 fuentes contrastadas y revisión experta; ninguna ficha pasa a `comestible_buena` sin eso (lo comprueba `tests/suites/00-estatico.js`).
+56 fichas en **borrador** (25 del MVP: 16 peligrosas o pares de confusión y 9 candidatas, más 31 de la ampliación v3: 22 candidatas, 5 tóxicas, 1 mortal y 3 no comestibles; en total 31 candidatas, 14 tóxicas, 7 mortales y 4 no comestibles). Las comestibles se muestran como «Comestible» o «Con condiciones» **según fuentes** (Wikipedia y guías divulgativas, campo `comestibilidad`, datos en `tools/datos/com.py`); internamente siguen como `sin_datos` + `candidataComestible` y en borrador hasta tener ≥2 fuentes contrastadas y revisión experta; ninguna ficha pasa a `comestible_buena` sin eso (lo comprueba `tests/suites/00-estatico.js`).

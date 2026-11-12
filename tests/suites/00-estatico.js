@@ -50,6 +50,10 @@ module.exports = {
         });
         if (e.candidataComestible) t.ok(e.id + ': candidata sin clasificar como comestible', e.clase === 'sin_datos');
       });
+      E.filter(x => x.candidataComestible).forEach(x => {
+        t.ok(x.id + ': comestibilidad atribuida a las fuentes, en borrador', !!x.comestibilidad && ['si', 'cond'].includes(x.comestibilidad.nivel) && /^Según|xixa|«xixa»/.test(x.comestibilidad.txt) && /sin revisión experta/.test(x.comestibilidad.segun) && x.nivelVerificacion === 'borrador');
+      });
+      E.filter(x => x.clase === 'mortal' || x.clase === 'toxica' || x.clase === 'no_comestible').forEach(x => t.ok(x.id + ': peligrosa/no comestible sin marca de comestible', !x.comestibilidad));
       t.ok('las 31 candidatas a comestible están como sin_datos', E.filter(e => e.candidataComestible).length === 31 && E.filter(e => e.candidataComestible).every(e => e.clase === 'sin_datos'));
       ['amanita-phalloides', 'amanita-verna-virosa', 'lepiota-brunneoincarnata', 'galerina-marginata', 'cortinarius-orellanus'].forEach(id => t.eq(id + ' es mortal', (E.find(e => e.id === id) || {}).clase, 'mortal'));
     });

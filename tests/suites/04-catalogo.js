@@ -22,7 +22,9 @@ module.exports = {
       await t.tap('#cl button[data-c="mortal"]'); t.eq('mortales', await t.N('#slist .item'), 7);
       await t.tap('#cl button[data-c="toxica"]'); t.eq('tóxicas', await t.N('#slist .item'), 14);
       await t.tap('#cl button[data-c="no_comestible"]'); t.eq('no comestibles', await t.N('#slist .item'), 4);
-      await t.tap('#cl button[data-c="sin_datos"]'); t.eq('sin datos (candidatas)', await t.N('#slist .item'), 31);
+      await t.tap('#cl button[data-c="ok_fuentes"]'); t.eq('comestibles según fuentes', await t.N('#slist .item'), 17);
+      await t.tap('#cl button[data-c="cond_fuentes"]'); t.eq('comestibles con condiciones', await t.N('#slist .item'), 14);
+      t.ok('ya no queda ninguna «sin datos»', !(await t.has('#cl button[data-c="sin_datos"]')));
       t.ok('no existe «comestible buena» en la app hasta verificar', !(await t.has('#cl button[data-c="comestible_buena"]')));
       await t.tap('#cl button[data-c=""]'); t.eq('todas', await t.N('#slist .item'), 56);
     });
@@ -42,7 +44,7 @@ module.exports = {
       await t.tap('#sheet .lnk[data-e="macrolepiota-procera"]', 300);
       t.ok('abre la ficha del parasol', /Macrolepiota procera/.test(await t.T('#sheet h2') || ''));
       t.ok('el parasol enlaza de vuelta a la Lepiota', await t.has('#sheet .lnk[data-e="lepiota-brunneoincarnata"]'));
-      t.ok('las candidatas salen como «Candidata · sin confirmar», nunca como comestibles', /Candidata · sin confirmar/.test(await t.T('#sheet') || '') && !/comestible buena/i.test(await t.T('#sheet') || ''));
+      t.ok('las comestibles salen «según fuentes», con aviso de que no está revisado por una persona experta', /según fuentes/i.test(await t.T('#sheet .chips') || '') && /sin revisión experta|borrador/i.test(await t.T('#sheet .com') || '') && !/comestible buena/i.test(await t.T('#sheet') || ''));
     });
     await t.case('«Antes de comer» solo en candidatas y con 6 comprobaciones', async () => {
       t.ok('botón presente', await t.visible('#fi-antes')); await t.tap('#fi-antes', 300);

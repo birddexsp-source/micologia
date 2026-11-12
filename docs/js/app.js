@@ -10,7 +10,7 @@ import * as tmp from './temporada.js';
 import * as fi from './ficha.js';
 import * as trk from './track.js';
 
-const APP_V = 'micologia-v4';   // = V de sw.js
+const APP_V = 'micologia-v5';   // = V de sw.js
 const S = { view: 'mapa', arg: '', map: null, pins: null, me: null, acc: null, tmp: null, mini: null, centered: false, filtro: { salida: '', especie: '' }, clase: '', q: '', syncErr: false, mes: new Date().getMonth() + 1 };
 const VIEWS = ['mapa', 'salidas', 'salida', 'setas', 'mes', 'ajustes'];
 const TITULOS = { mapa: 'Mapa', salidas: 'Salidas', salida: 'Salida', setas: 'Setas', mes: 'Este mes', ajustes: 'Ajustes' };
@@ -60,7 +60,7 @@ function pickerHTML(st) {
   const e = cat.byId(st.id);
   return '<label class="l">Especie</label><div class="chips"><button class="opt ' + (!st.id && !st.txt ? 'on' : '') + '" id="sp-no">No sé</button></div>' +
     '<input type="search" id="sp-q" placeholder="Buscar en el catálogo o escribir…" autocomplete="off" style="margin-top:8px" value="' + esc(e ? cat.nombre(e) : st.txt) + '"><div id="sp-sugs" class="sugs" hidden></div>' +
-    '<div id="sp-sel" style="margin-top:6px">' + (e ? tag(e.clase) : '') + '</div>';
+    '<div id="sp-sel" style="margin-top:6px">' + (e ? tag(cat.vista(e)) : '') + '</div>';
 }
 function pickerWire(root, st) {
   const q = $('#sp-q', root), sg = $('#sp-sugs', root), sel = $('#sp-sel', root), no = $('#sp-no', root);
@@ -68,9 +68,9 @@ function pickerWire(root, st) {
   q.oninput = () => {
     st.id = null; st.txt = q.value.trim(); sel.innerHTML = ''; mark();
     const r = st.txt ? cat.buscar(st.txt).slice(0, 5) : [];
-    sg.hidden = !r.length; sg.innerHTML = r.map(e => '<button data-id="' + e.id + '"><span class="dot" style="--c:' + cat.CLASES[e.clase].color + '"></span><span>' + esc(cat.nombre(e)) + '</span></button>').join('');
+    sg.hidden = !r.length; sg.innerHTML = r.map(e => '<button data-id="' + e.id + '"><span class="dot" style="--c:' + cat.CLASES[cat.vista(e)].color + '"></span><span>' + esc(cat.nombre(e)) + '</span></button>').join('');
   };
-  sg.onclick = ev => { const b = ev.target.closest('button'); if (!b) return; const e = cat.byId(b.dataset.id); st.id = e.id; st.txt = ''; q.value = cat.nombre(e); sel.innerHTML = tag(e.clase); sg.hidden = true; mark(); };
+  sg.onclick = ev => { const b = ev.target.closest('button'); if (!b) return; const e = cat.byId(b.dataset.id); st.id = e.id; st.txt = ''; q.value = cat.nombre(e); sel.innerHTML = tag(cat.vista(e)); sg.hidden = true; mark(); };
   no.onclick = () => { st.id = null; st.txt = ''; q.value = ''; sel.innerHTML = ''; sg.hidden = true; mark(); };
 }
 
@@ -334,7 +334,7 @@ function renderSetas() {
   if (!$('#q', root)) {
     root.innerHTML = '<div class="pad"><div class="learn"><button class="guide-card" id="gu-open">' + ICO_SETA + '<div><b>Partes de una seta</b><small>Esquema con nombres y colores</small></div></button><button class="guide-card book" id="li-open"><span class="ic">' + lib.CAPS[0].ico + '</span><div><b>El libro para empezar</b><small>Equipo, cortar o arrancar, mitos, intoxicación</small></div></button></div>' +
       '<div class="warn" style="margin-top:10px">' + esc(cat.aviso()) + '</div><input type="search" id="q" placeholder="Buscar seta…" autocomplete="off" style="margin-top:12px"><div class="chips" id="cl" style="margin:10px 0 0"></div><div id="slist"></div>' +
-      '<p class="note" style="margin-top:14px">Catálogo en borrador: ' + cat.todas().length + ' fichas sin revisar por una persona experta. Las comestibles candidatas figuran como «candidata · sin confirmar» hasta verificarlas con ≥2 fuentes y revisión experta. Fotos de Wikimedia Commons con su autoría y licencia en cada ficha.</p></div>';
+      '<p class="note" style="margin-top:14px">Catálogo en borrador: ' + cat.todas().length + ' fichas sin revisar por una persona experta. Las comestibles llevan «según fuentes» porque lo dicen Wikipedia y guías divulgativas, no una persona experta: siguen pendientes de revisión. Fotos de Wikimedia Commons con su autoría y licencia en cada ficha.</p></div>';
     $('#q', root).oninput = e => { S.q = e.target.value; listaSetas(); };
     root.onclick = e => {
       if (e.target.closest('#gu-open')) return abrirGuia('');
@@ -345,12 +345,12 @@ function renderSetas() {
   }
   listaSetas();
 }
-const itemEsp = (e, extra = '') => '<button class="item sp" data-e="' + e.id + '" style="--c:' + cat.CLASES[e.clase].color + '">' + fi.avatar(e) + '<div class="t"><b><i>' + esc(e.nombreCientifico.split(' (')[0]) + '</i></b><small>' + esc(fi.nombres(e) || e.grupo) + '</small>' + extra + '</div>' + fi.tagEsp(e) + '</button>';
+const itemEsp = (e, extra = '') => '<button class="item sp" data-e="' + e.id + '" style="--c:' + cat.CLASES[cat.vista(e)].color + '">' + fi.avatar(e) + '<div class="t"><b><i>' + esc(e.nombreCientifico.split(' (')[0]) + '</i></b><small>' + esc(fi.nombres(e) || e.grupo) + '</small>' + extra + '</div>' + fi.tagEsp(e) + '</button>';
 function listaSetas() {
   const root = $('#v-setas');
-  $('#cl', root).innerHTML = '<button class="opt ' + (!S.clase ? 'on' : '') + '" data-c="">Todas</button>' + Object.entries(cat.CLASES).filter(([k]) => cat.todas().some(e => e.clase === k)).map(([k, v]) => '<button class="opt ' + (S.clase === k ? 'on' : '') + '" data-c="' + k + '">' + v.label + '</button>').join('');
+  $('#cl', root).innerHTML = '<button class="opt ' + (!S.clase ? 'on' : '') + '" data-c="">Todas</button>' + Object.entries(cat.CLASES).filter(([k]) => cat.todas().some(e => cat.vista(e) === k)).map(([k, v]) => '<button class="opt ' + (S.clase === k ? 'on' : '') + '" data-c="' + k + '">' + v.label + '</button>').join('');
   const r = cat.buscar(S.q, { clase: S.clase }); let h = '', cur = '';
-  r.forEach(e => { if (e.clase !== cur) { cur = e.clase; const n = r.filter(x => x.clase === cur).length; h += '<div class="grp" style="--c:' + cat.CLASES[cur].color + '">' + (cur === 'sin_datos' ? 'Candidatas sin confirmar' : cat.CLASES[cur].label) + '<small>' + n + '</small></div>'; } h += itemEsp(e); });
+  r.forEach(e => { const v = cat.vista(e); if (v !== cur) { cur = v; const n = r.filter(x => cat.vista(x) === cur).length; h += '<div class="grp" style="--c:' + cat.CLASES[cur].color + '">' + (cur === 'sin_datos' ? 'Sin datos' : cur === 'ok_fuentes' ? 'Comestibles · según fuentes' : cur === 'cond_fuentes' ? 'Con condiciones · según fuentes' : cat.CLASES[cur].label) + '<small>' + n + '</small></div>'; } h += itemEsp(e); });
   $('#slist', root).innerHTML = r.length ? h : '<div class="empty">Nada con ese nombre.</div>';
 }
 function abrirFicha(id) {
