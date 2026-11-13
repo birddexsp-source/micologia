@@ -29,6 +29,18 @@ module.exports = {
       }, ids);
       t.eq('ninguna ficha rota', malas, []);
     });
+    await t.case('fichas visuales: dibujo con la parte resaltada, fotos señaladas y «así sí / así no»', async () => {
+      await t.page.evaluate(() => window.__MI.abrirFicha('amanita-phalloides')); await t.wait(500);
+      t.ok('la regla clave lleva dibujo con la volva resaltada', await t.has('#sheet .clave .esq-sp .hl') && await t.has('#sheet .clv-l'));
+      t.ok('cada punto de «qué mirar» con su dibujo o icono', await t.page.evaluate(() => [...document.querySelectorAll('#sheet .qm.dib li')].every(li => li.querySelector('.qd svg'))));
+      t.ok('foto real con puntos numerados y leyenda', (await t.N('#sheet .anot .ap')) === 3 && (await t.N('#sheet .anot .apl li')) === 3);
+      t.ok('los puntos caen dentro de la foto', await t.page.evaluate(() => [...document.querySelectorAll('#sheet .anot .ap')].every(p => { const f = p.parentElement.getBoundingClientRect(), r = p.getBoundingClientRect(), x = r.left + r.width / 2, y = r.top + r.height / 2; return x > f.left && x < f.right && y > f.top && y < f.bottom; })));
+      await t.page.evaluate(() => window.__MI.abrirFicha('russula-virescens')); await t.wait(500);
+      t.ok('«así sí / así no»: esta en verde y la cicuta en rojo', await t.has('#sheet .cmp figure.si') && await t.has('#sheet .cmp figure.no') && /Mortal/.test(await t.T('#sheet .cmp figure.no') || ''));
+      t.ok('el dibujo de la Russula no tiene ni anillo ni volva', await t.page.evaluate(() => { const svg = document.querySelector('#sheet .clave .esq-sp'); return !!svg && svg.querySelectorAll('g').length >= 4 && !/M70 196/.test(svg.innerHTML) && !/Q100 [0-9]+ 115 [0-9]+ L122/.test(svg.innerHTML); }));
+      const n = await t.page.evaluate(() => window.__MI.cat.todas().filter(e => (e.anotadas || []).length).length);
+      t.ok('al menos 25 especies con fotos señaladas', n >= 25, String(n));
+    });
     await t.case('colecciones: cada especie aparece una sola vez, en su capítulo y con su familia', async () => {
       await t.go('#setas'); await t.tap('[data-ord="col"]', 300);
       const r = await t.page.evaluate(() => ({ items: [...document.querySelectorAll('#slist .item[data-e]')].map(b => b.dataset.e), caps: [...document.querySelectorAll('#slist .colh')].map(h => h.id), fams: document.querySelectorAll('#slist .famh').length, idx: document.querySelectorAll('.colidx button').length }));

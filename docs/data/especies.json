@@ -259,7 +259,43 @@
     "La describió el botánico francés Sébastien Vaillant en 1727.",
     "En euskera también se llama «kuleto berde» (oronja verde) y «txapel biribil»."
    ],
-   "familia": "Amanitaceae"
+   "familia": "Amanitaceae",
+   "anotadas": [
+    {
+     "foto": {
+      "sp": "Amanita phalloides",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Amanita_phalloides_(29069664382).jpg/{w}px-Amanita_phalloides_(29069664382).jpg",
+      "autor": "Björn S...",
+      "licencia": "CC BY-SA 2.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+      "pagina": "https://commons.wikimedia.org/wiki/File:Amanita_phalloides_(29069664382).jpg",
+      "origen": "Wikimedia Commons"
+     },
+     "puntos": [
+      {
+       "parte": "sombrero",
+       "x": 45,
+       "y": 18,
+       "titulo": "Sombrero verde-oliva",
+       "texto": "Liso; más claro hacia el borde."
+      },
+      {
+       "parte": "pie",
+       "x": 48,
+       "y": 45,
+       "titulo": "Pie blanquecino con fibras verdosas",
+       "texto": ""
+      },
+      {
+       "parte": "volva",
+       "x": 45,
+       "y": 80,
+       "titulo": "Volva en saco",
+       "texto": "La bolsa de la base: solo se ve si sacas la seta entera."
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "amanita-verna-virosa",
@@ -530,7 +566,50 @@
     "Según la Wikipedia en euskera, A. verna, A. virosa, A. phalloides y la variedad blanca de la phalloides forman la «cuarteta» de las amanitas mortales.",
     "A. verna no se conoce en América del Norte."
    ],
-   "familia": "Amanitaceae"
+   "familia": "Amanitaceae",
+   "anotadas": [
+    {
+     "foto": {
+      "sp": "Amanita virosa",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Amanita_virosa_UL_01.jpg/{w}px-Amanita_virosa_UL_01.jpg",
+      "autor": "Cephas",
+      "licencia": "CC BY-SA 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "pagina": "https://commons.wikimedia.org/wiki/File:Amanita_virosa_UL_01.jpg",
+      "origen": "Wikimedia Commons"
+     },
+     "puntos": [
+      {
+       "parte": "sombrero",
+       "x": 49,
+       "y": 12,
+       "titulo": "Toda blanca",
+       "texto": "Sombrero, láminas y pie blancos."
+      },
+      {
+       "parte": "anillo",
+       "x": 50,
+       "y": 28,
+       "titulo": "Anillo colgante",
+       "texto": ""
+      },
+      {
+       "parte": "pie",
+       "x": 53,
+       "y": 58,
+       "titulo": "Pie blanco algo escamoso",
+       "texto": ""
+      },
+      {
+       "parte": "volva",
+       "x": 53,
+       "y": 91,
+       "titulo": "Volva en la base",
+       "texto": "Desentierra siempre el pie."
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "lepiota-brunneoincarnata",
@@ -740,7 +819,43 @@
     "Contiene dosis mortales de alfa-amanitina. Causó una muerte en España en 2002, un brote en Irán en 2018 y la muerte de cuatro jóvenes de una misma familia en Túnez en 2010.",
     "El análisis de su ADN muestra que está emparentada con otras Lepiota con amatoxinas, como L. subincarnata."
    ],
-   "familia": "Agaricaceae"
+   "familia": "Agaricaceae",
+   "anotadas": [
+    {
+     "foto": {
+      "sp": "Lepiota brunneoincarnata",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/Lepiota_brunneoincarnata_060823w.jpg/{w}px-Lepiota_brunneoincarnata_060823w.jpg",
+      "autor": "Strobilomyces",
+      "licencia": "CC BY-SA 3.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "pagina": "https://commons.wikimedia.org/wiki/File:Lepiota_brunneoincarnata_060823w.jpg",
+      "origen": "Wikimedia Commons"
+     },
+     "puntos": [
+      {
+       "parte": "sombrero",
+       "x": 21,
+       "y": 41,
+       "titulo": "Sombrero con escamas pardo-rosadas",
+       "texto": "Pequeña: menos de 5 cm."
+      },
+      {
+       "parte": "himenio",
+       "x": 88,
+       "y": 44,
+       "titulo": "Láminas blancas",
+       "texto": ""
+      },
+      {
+       "parte": "pie",
+       "x": 52,
+       "y": 51,
+       "titulo": "Pie con escamas y zona oscura",
+       "texto": ""
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "galerina-marginata",
@@ -952,7 +1067,50 @@
     "Antes se consideraba un conjunto de cinco especies; al comparar su ADN se vio que son una sola y muy variable.",
     "Las amatoxinas que contiene son las responsables de más del 90 % de las muertes por setas."
    ],
-   "familia": "Hymenogastraceae"
+   "familia": "Hymenogastraceae",
+   "anotadas": [
+    {
+     "foto": {
+      "sp": "Galerina marginata",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Galerina_marginata;_DSC_0662.jpg/{w}px-Galerina_marginata;_DSC_0662.jpg",
+      "autor": "EmillimeS",
+      "licencia": "CC BY-SA 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "pagina": "https://commons.wikimedia.org/wiki/File:Galerina_marginata;_DSC_0662.jpg",
+      "origen": "Wikimedia Commons"
+     },
+     "puntos": [
+      {
+       "parte": "sombrero",
+       "x": 75,
+       "y": 34,
+       "titulo": "Sombrero miel, liso",
+       "texto": ""
+      },
+      {
+       "parte": "himenio",
+       "x": 33,
+       "y": 52,
+       "titulo": "Láminas ocre-canela",
+       "texto": ""
+      },
+      {
+       "parte": "pie",
+       "x": 54,
+       "y": 73,
+       "titulo": "Pie fibroso, pardo abajo",
+       "texto": ""
+      },
+      {
+       "parte": "habitat",
+       "x": 73,
+       "y": 85,
+       "titulo": "Sobre madera muerta",
+       "texto": "Entre musgo, en tocones y troncos."
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "cortinarius-orellanus",
@@ -1167,7 +1325,43 @@
     "Su peligro se descubrió en 1957, después de que en 1952 enfermaran 102 personas tras comerla en Bydgoszcz (Polonia); 11 murieron.",
     "Fries la describió en 1838."
    ],
-   "familia": "Cortinariaceae"
+   "familia": "Cortinariaceae",
+   "anotadas": [
+    {
+     "foto": {
+      "sp": "Cortinarius orellanus",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/2013-10-16_Cortinarius_orellanus_1a.jpg/{w}px-2013-10-16_Cortinarius_orellanus_1a.jpg",
+      "autor": "Andreas Kunze",
+      "licencia": "CC BY-SA 3.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "pagina": "https://commons.wikimedia.org/wiki/File:2013-10-16_Cortinarius_orellanus_1a.jpg",
+      "origen": "Wikimedia Commons"
+     },
+     "puntos": [
+      {
+       "parte": "sombrero",
+       "x": 67,
+       "y": 41,
+       "titulo": "Sombrero leonado-rojizo, fibroso",
+       "texto": ""
+      },
+      {
+       "parte": "himenio",
+       "x": 43,
+       "y": 35,
+       "titulo": "Láminas color canela-óxido",
+       "texto": ""
+      },
+      {
+       "parte": "pie",
+       "x": 39,
+       "y": 72,
+       "titulo": "Pie más claro con fibras",
+       "texto": ""
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "gyromitra",
@@ -1377,7 +1571,29 @@
     "En Soria se recogía en grandes cantidades para exportarla seca a Francia e Italia; parece que hoy su venta está prohibida.",
     "Persoon la describió en 1800 como Helvella esculenta."
    ],
-   "familia": "Discinaceae"
+   "familia": "Discinaceae",
+   "anotadas": [
+    {
+     "foto": {
+      "sp": "Gyromitra esculenta",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Gyromitra_esculenta_(49572686531).jpg/{w}px-Gyromitra_esculenta_(49572686531).jpg",
+      "autor": "Lukas (Londres)",
+      "licencia": "CC BY-SA 2.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+      "pagina": "https://commons.wikimedia.org/wiki/File:Gyromitra_esculenta_(49572686531).jpg",
+      "origen": "Wikimedia Commons"
+     },
+     "puntos": [
+      {
+       "parte": "sombrero",
+       "x": 62,
+       "y": 51,
+       "titulo": "Sombrero como un cerebro",
+       "texto": "Lóbulos, no alveolos: no es una colmenilla."
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "entoloma-lividum-sinuatum",
@@ -1608,7 +1824,36 @@
     "Se le atribuye el 10 % de todas las intoxicaciones por setas en Europa. En Ginebra, en 1983, 70 personas necesitaron tratamiento hospitalario; en un hospital de Parma fue la causa de 33 de 145 casos en cinco años.",
     "La describió por primera vez Bulliard en 1788 como Agaricus lividus."
    ],
-   "familia": "Entolomataceae"
+   "familia": "Entolomataceae",
+   "anotadas": [
+    {
+     "foto": {
+      "sp": "Entoloma sinuatum",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Entoloma_sinuatum_573398401.jpg/{w}px-Entoloma_sinuatum_573398401.jpg",
+      "autor": "Matej Frančeškin",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://commons.wikimedia.org/wiki/File:Entoloma_sinuatum_573398401.jpg",
+      "origen": "Wikimedia Commons"
+     },
+     "puntos": [
+      {
+       "parte": "himenio",
+       "x": 35,
+       "y": 26,
+       "titulo": "Láminas que acaban rosadas",
+       "texto": "Esta es la pista: el perretxiko las tiene blancas."
+      },
+      {
+       "parte": "pie",
+       "x": 59,
+       "y": 53,
+       "titulo": "Pie blanco",
+       "texto": ""
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "omphalotus-illudens",
@@ -1843,7 +2088,36 @@
    "curiosidades": [
     "En inglés se llama «jack-o'-lantern» (linterna de calabaza)."
    ],
-   "familia": "Omphalotaceae"
+   "familia": "Omphalotaceae",
+   "anotadas": [
+    {
+     "foto": {
+      "sp": "Omphalotus olearius (Europa)",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Omphalotus_olearius_(DC.)_Singer_691736.jpg/{w}px-Omphalotus_olearius_(DC.)_Singer_691736.jpg",
+      "autor": "Glen van Niekerk (Mushroom Observer)",
+      "licencia": "CC BY-SA 3.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "pagina": "https://commons.wikimedia.org/wiki/File:Omphalotus_olearius_(DC.)_Singer_691736.jpg",
+      "origen": "Wikimedia Commons"
+     },
+     "puntos": [
+      {
+       "parte": "sombrero",
+       "x": 49,
+       "y": 42,
+       "titulo": "Racimo naranja intenso",
+       "texto": "Con láminas verdaderas."
+      },
+      {
+       "parte": "habitat",
+       "x": 80,
+       "y": 72,
+       "titulo": "Sobre madera",
+       "texto": "En tocones y troncos, en grupos."
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "tricholoma-pardinum",
@@ -2302,7 +2576,43 @@
     "Wikipedia dice que A. pantherina es más tóxica que A. muscaria.",
     "La seta roja con motas blancas aparece en cuentos, jardines y dibujos como casa o asiento de gnomos y hadas."
    ],
-   "familia": "Amanitaceae"
+   "familia": "Amanitaceae",
+   "anotadas": [
+    {
+     "foto": {
+      "sp": "Amanita pantherina",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Amanita_pantherina_(30087850061).jpg/{w}px-Amanita_pantherina_(30087850061).jpg",
+      "autor": "Dr. Hans-Günter Wagner",
+      "licencia": "CC BY-SA 2.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+      "pagina": "https://commons.wikimedia.org/wiki/File:Amanita_pantherina_(30087850061).jpg",
+      "origen": "Wikimedia Commons"
+     },
+     "puntos": [
+      {
+       "parte": "sombrero",
+       "x": 40,
+       "y": 29,
+       "titulo": "Verrugas blancas",
+       "texto": "Sobre el sombrero pardo: restos del velo."
+      },
+      {
+       "parte": "anillo",
+       "x": 42,
+       "y": 55,
+       "titulo": "Anillo",
+       "texto": ""
+      },
+      {
+       "parte": "volva",
+       "x": 43,
+       "y": 73,
+       "titulo": "Base bulbosa con rodetes",
+       "texto": "Es la volva de esta Amanita."
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "paxillus-involutus",
@@ -2703,7 +3013,36 @@
     "Lo describió Harald Othmar Lenz en 1831, que dijo haberse sentido mal por «emanaciones» mientras lo describía.",
     "Es moderadamente venenoso, sobre todo crudo. Según la Wikipedia en euskera, no está entre los más venenosos."
    ],
-   "familia": "Boletaceae"
+   "familia": "Boletaceae",
+   "anotadas": [
+    {
+     "foto": {
+      "sp": "Rubroboletus satanas",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Frankenwarte_10.08.2016_Satan's_Bolete_-_Rubroboletus_satanas_(29115033902).jpg/{w}px-Frankenwarte_10.08.2016_Satan's_Bolete_-_Rubroboletus_satanas_(29115033902).jpg",
+      "autor": "Björn S...",
+      "licencia": "CC BY-SA 2.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+      "pagina": "https://commons.wikimedia.org/wiki/File:Frankenwarte_10.08.2016_Satan's_Bolete_-_Rubroboletus_satanas_(29115033902).jpg",
+      "origen": "Wikimedia Commons"
+     },
+     "puntos": [
+      {
+       "parte": "sombrero",
+       "x": 35,
+       "y": 25,
+       "titulo": "Sombrero blanquecino",
+       "texto": ""
+      },
+      {
+       "parte": "pie",
+       "x": 57,
+       "y": 79,
+       "titulo": "Pie rojo y grueso",
+       "texto": "Con red: no se recoge."
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "coprinopsis-atramentaria",
@@ -3815,7 +4154,43 @@
     "txt": "Según Wikipedia y guías divulgativas es comestible. El nombre «edulis» significa «comestible».",
     "segun": "Wikipedia (inglés, español, euskera) y guías divulgativas: fuentes terciarias, sin revisión experta"
    },
-   "familia": "Boletaceae"
+   "familia": "Boletaceae",
+   "anotadas": [
+    {
+     "foto": {
+      "sp": "Boletus edulis",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/20141026_gewoon_eekhoorntjesbrood.jpeg/{w}px-20141026_gewoon_eekhoorntjesbrood.jpeg",
+      "autor": "Gouwenaar",
+      "licencia": "CC BY-SA 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "pagina": "https://commons.wikimedia.org/wiki/File:20141026_gewoon_eekhoorntjesbrood.jpeg",
+      "origen": "Wikimedia Commons"
+     },
+     "puntos": [
+      {
+       "parte": "sombrero",
+       "x": 51,
+       "y": 22,
+       "titulo": "Sombrero",
+       "texto": ""
+      },
+      {
+       "parte": "himenio",
+       "x": 51,
+       "y": 42,
+       "titulo": "Poros blancos → amarillo oliváceo",
+       "texto": "Nunca rojos."
+      },
+      {
+       "parte": "pie",
+       "x": 54,
+       "y": 65,
+       "titulo": "Pie grueso con red clara",
+       "texto": ""
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "cantharellus-cibarius",
@@ -4072,7 +4447,43 @@
     "txt": "Según Wikipedia es una seta muy consumida y apreciada.",
     "segun": "Wikipedia (inglés, español, euskera) y guías divulgativas: fuentes terciarias, sin revisión experta"
    },
-   "familia": "Cantharellaceae"
+   "familia": "Cantharellaceae",
+   "anotadas": [
+    {
+     "foto": {
+      "sp": "Cantharellus cibarius",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Cantharellus_cibarius_(50198791306).jpg/{w}px-Cantharellus_cibarius_(50198791306).jpg",
+      "autor": "Dr. Hans-Günter Wagner",
+      "licencia": "CC BY-SA 2.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+      "pagina": "https://commons.wikimedia.org/wiki/File:Cantharellus_cibarius_(50198791306).jpg",
+      "origen": "Wikimedia Commons"
+     },
+     "puntos": [
+      {
+       "parte": "sombrero",
+       "x": 29,
+       "y": 41,
+       "titulo": "Sombrero amarillo-yema",
+       "texto": ""
+      },
+      {
+       "parte": "himenio",
+       "x": 65,
+       "y": 36,
+       "titulo": "Pliegues, no láminas",
+       "texto": "Gruesos y bajos; bajan por el pie."
+      },
+      {
+       "parte": "pie",
+       "x": 67,
+       "y": 57,
+       "titulo": "Pie macizo",
+       "texto": ""
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "craterellus-cornucopioides",
@@ -4509,6 +4920,28 @@
      "comoDistinguir": "Hydnum repandum es más grande, carnosa y de color crema-anaranjado pálido; H. rufescens, más pequeña y rojiza.",
      "gravedad": "baja"
     }
+   ],
+   "anotadas": [
+    {
+     "foto": {
+      "sp": "Hydnum repandum",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Hedgehog_mushroom_(8525112768).jpg/{w}px-Hedgehog_mushroom_(8525112768).jpg",
+      "autor": "Quinn Dombrowski",
+      "licencia": "CC BY-SA 2.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+      "pagina": "https://commons.wikimedia.org/wiki/File:Hedgehog_mushroom_(8525112768).jpg",
+      "origen": "Wikimedia Commons"
+     },
+     "puntos": [
+      {
+       "parte": "himenio",
+       "x": 59,
+       "y": 45,
+       "titulo": "Pinchos en lugar de láminas",
+       "texto": ""
+      }
+     ]
+    }
    ]
   },
   {
@@ -4738,7 +5171,36 @@
     "txt": "Según Wikipedia es comestible, aunque puede saber suave o amarga.",
     "segun": "Wikipedia (inglés, español, euskera) y guías divulgativas: fuentes terciarias, sin revisión experta"
    },
-   "familia": "Russulaceae"
+   "familia": "Russulaceae",
+   "anotadas": [
+    {
+     "foto": {
+      "sp": "Lactarius deliciosus",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Lactarius_deliciosus_(32969568682).jpg/{w}px-Lactarius_deliciosus_(32969568682).jpg",
+      "autor": "Lukas (Londres)",
+      "licencia": "CC BY-SA 2.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+      "pagina": "https://commons.wikimedia.org/wiki/File:Lactarius_deliciosus_(32969568682).jpg",
+      "origen": "Wikimedia Commons"
+     },
+     "puntos": [
+      {
+       "parte": "himenio",
+       "x": 73,
+       "y": 12,
+       "titulo": "Láminas anaranjadas",
+       "texto": "Con manchas verdes al rozarlas."
+      },
+      {
+       "parte": "pie",
+       "x": 50,
+       "y": 53,
+       "titulo": "Pie con hoyitos naranjas",
+       "texto": ""
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "macrolepiota-procera",
@@ -4979,7 +5441,36 @@
     "txt": "Según Wikipedia es comestible y de calidad. El pie es muy fibroso y no se aprovecha: solo el sombrero.",
     "segun": "Wikipedia (inglés, español, euskera) y guías divulgativas: fuentes terciarias, sin revisión experta"
    },
-   "familia": "Agaricaceae"
+   "familia": "Agaricaceae",
+   "anotadas": [
+    {
+     "foto": {
+      "sp": "Macrolepiota procera",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Bedle_mezi_podzimn%C3%ADm_list%C3%ADm.jpg/{w}px-Bedle_mezi_podzimn%C3%ADm_list%C3%ADm.jpg",
+      "autor": "Rad.dekk",
+      "licencia": "CC BY-SA 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "pagina": "https://commons.wikimedia.org/wiki/File:Bedle_mezi_podzimn%C3%ADm_list%C3%ADm.jpg",
+      "origen": "Wikimedia Commons"
+     },
+     "puntos": [
+      {
+       "parte": "sombrero",
+       "x": 31,
+       "y": 44,
+       "titulo": "Sombrero con escamas",
+       "texto": ""
+      },
+      {
+       "parte": "pie",
+       "x": 28,
+       "y": 76,
+       "titulo": "Pie atigrado",
+       "texto": "Con dibujo de bandas pardas."
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "marasmius-oreades",
@@ -5440,7 +5931,50 @@
     "txt": "Según Wikipedia se puede comer cocinada o en conserva. Se recoge mejor en tiempo seco.",
     "segun": "Wikipedia (inglés, español, euskera) y guías divulgativas: fuentes terciarias, sin revisión experta"
    },
-   "familia": "Lyophyllaceae"
+   "familia": "Lyophyllaceae",
+   "anotadas": [
+    {
+     "foto": {
+      "sp": "Calocybe gambosa",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Calocybe_gambosa_(36064595975).jpg/{w}px-Calocybe_gambosa_(36064595975).jpg",
+      "autor": "Dr. Hans-Günter Wagner",
+      "licencia": "CC BY-SA 2.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+      "pagina": "https://commons.wikimedia.org/wiki/File:Calocybe_gambosa_(36064595975).jpg",
+      "origen": "Wikimedia Commons"
+     },
+     "puntos": [
+      {
+       "parte": "sombrero",
+       "x": 78,
+       "y": 49,
+       "titulo": "Sombrero blanco-crema carnoso",
+       "texto": ""
+      },
+      {
+       "parte": "himenio",
+       "x": 78,
+       "y": 62,
+       "titulo": "Láminas blancas muy apretadas",
+       "texto": ""
+      },
+      {
+       "parte": "pie",
+       "x": 77,
+       "y": 83,
+       "titulo": "Pie blanco robusto",
+       "texto": ""
+      },
+      {
+       "parte": "habitat",
+       "x": 27,
+       "y": 61,
+       "titulo": "En grupos o corros",
+       "texto": "En primavera."
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "morchella",
@@ -5674,7 +6208,36 @@
     "txt": "Según Wikipedia es comestible y muy apreciada, pero cruda irrita el estómago: siempre bien cocinada.",
     "segun": "Wikipedia (inglés, español, euskera) y guías divulgativas: fuentes terciarias, sin revisión experta"
    },
-   "familia": "Morchellaceae"
+   "familia": "Morchellaceae",
+   "anotadas": [
+    {
+     "foto": {
+      "sp": "Morchella esculenta",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/2026-04-04_Z5-3750E_Achim-Lammerts_Morchella-esculenta.jpg/{w}px-2026-04-04_Z5-3750E_Achim-Lammerts_Morchella-esculenta.jpg",
+      "autor": "Achim Lammerts (Syntaxys)",
+      "licencia": "CC BY-SA 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "pagina": "https://commons.wikimedia.org/wiki/File:2026-04-04_Z5-3750E_Achim-Lammerts_Morchella-esculenta.jpg",
+      "origen": "Wikimedia Commons"
+     },
+     "puntos": [
+      {
+       "parte": "sombrero",
+       "x": 66,
+       "y": 33,
+       "titulo": "Sombrero con alveolos",
+       "texto": "Como un panal; por dentro, hueca."
+      },
+      {
+       "parte": "pie",
+       "x": 71,
+       "y": 73,
+       "titulo": "Pie blanco hueco",
+       "texto": ""
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "boletus-aereus",
@@ -7537,7 +8100,43 @@
     "txt": "Según Wikipedia es comestible «con una identificación correcta»; se parece a especies tóxicas y a las Amanitas mortales.",
     "segun": "Wikipedia (inglés, español, euskera) y guías divulgativas: fuentes terciarias, sin revisión experta"
    },
-   "familia": "Amanitaceae"
+   "familia": "Amanitaceae",
+   "anotadas": [
+    {
+     "foto": {
+      "sp": "Amanita caesarea",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Amanita_caesarea.JPG/{w}px-Amanita_caesarea.JPG",
+      "autor": "Archenzo",
+      "licencia": "CC BY-SA 3.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "pagina": "https://commons.wikimedia.org/wiki/File:Amanita_caesarea.JPG",
+      "origen": "Wikimedia Commons"
+     },
+     "puntos": [
+      {
+       "parte": "sombrero",
+       "x": 49,
+       "y": 37,
+       "titulo": "Sombrero naranja",
+       "texto": ""
+      },
+      {
+       "parte": "pie",
+       "x": 41,
+       "y": 55,
+       "titulo": "Pie y láminas amarillos",
+       "texto": "Las tóxicas parecidas los tienen blancos."
+      },
+      {
+       "parte": "volva",
+       "x": 51,
+       "y": 69,
+       "titulo": "Volva blanca en saco",
+       "texto": "Grande y blanca."
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "agaricus-campestris",
@@ -7792,7 +8391,43 @@
     "txt": "La «xixa». Según Wikipedia es comestible, pero se confunde con la Amanita virosa (mortal) y con el Agaricus xanthodermus (tóxico): hay que distinguirla con cuidado.",
     "segun": "Wikipedia (inglés, español, euskera) y guías divulgativas: fuentes terciarias, sin revisión experta"
    },
-   "familia": "Agaricaceae"
+   "familia": "Agaricaceae",
+   "anotadas": [
+    {
+     "foto": {
+      "sp": "Agaricus campestris",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Agaricus_campestris_(48647010296).jpg/{w}px-Agaricus_campestris_(48647010296).jpg",
+      "autor": "Dr. Hans-Günter Wagner",
+      "licencia": "CC BY-SA 2.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+      "pagina": "https://commons.wikimedia.org/wiki/File:Agaricus_campestris_(48647010296).jpg",
+      "origen": "Wikimedia Commons"
+     },
+     "puntos": [
+      {
+       "parte": "sombrero",
+       "x": 30,
+       "y": 45,
+       "titulo": "Sombrero blanco",
+       "texto": ""
+      },
+      {
+       "parte": "himenio",
+       "x": 62,
+       "y": 53,
+       "titulo": "Láminas rosas → chocolate",
+       "texto": "Nunca blancas en el adulto."
+      },
+      {
+       "parte": "pie",
+       "x": 72,
+       "y": 77,
+       "titulo": "Pie blanco con anillo fino",
+       "texto": ""
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "agaricus-xanthodermus",
@@ -8002,7 +8637,43 @@
     "Pertenece a un grupo de champiñones (los «Xanthodermati») que amarillean y huelen a fenol.",
     "Por el olor a fenol que se nota al cocinarla, mucha gente la deja de comer a tiempo."
    ],
-   "familia": "Agaricaceae"
+   "familia": "Agaricaceae",
+   "anotadas": [
+    {
+     "foto": {
+      "sp": "Agaricus xanthodermus",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/Yellow-staining_Mushroom_-_Agaricus_xanthodermus_-_panoramio.jpg/{w}px-Yellow-staining_Mushroom_-_Agaricus_xanthodermus_-_panoramio.jpg",
+      "autor": "Björn S.",
+      "licencia": "CC BY-SA 3.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "pagina": "https://commons.wikimedia.org/wiki/File:Yellow-staining_Mushroom_-_Agaricus_xanthodermus_-_panoramio.jpg",
+      "origen": "Wikimedia Commons"
+     },
+     "puntos": [
+      {
+       "parte": "anillo",
+       "x": 30,
+       "y": 40,
+       "titulo": "Anillo amplio",
+       "texto": ""
+      },
+      {
+       "parte": "carne",
+       "x": 49,
+       "y": 58,
+       "titulo": "Carne blanca",
+       "texto": ""
+      },
+      {
+       "parte": "pie",
+       "x": 49,
+       "y": 87,
+       "titulo": "Base amarillo cromo al cortar",
+       "texto": "La pista para separarlo del champiñón."
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "coprinus-comatus",
@@ -9369,7 +10040,36 @@
     "txt": "Según Wikipedia es comestible y de calidad, sobre todo frita o en sopas.",
     "segun": "Wikipedia (inglés, español, euskera) y guías divulgativas: fuentes terciarias, sin revisión experta"
    },
-   "familia": "Cantharellaceae"
+   "familia": "Cantharellaceae",
+   "anotadas": [
+    {
+     "foto": {
+      "sp": "Craterellus tubaeformis",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Craterellus_tubaeformis_(37297104720).jpg/{w}px-Craterellus_tubaeformis_(37297104720).jpg",
+      "autor": "Björn S...",
+      "licencia": "CC BY-SA 2.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+      "pagina": "https://commons.wikimedia.org/wiki/File:Craterellus_tubaeformis_(37297104720).jpg",
+      "origen": "Wikimedia Commons"
+     },
+     "puntos": [
+      {
+       "parte": "himenio",
+       "x": 73,
+       "y": 37,
+       "titulo": "Pliegues, no láminas",
+       "texto": ""
+      },
+      {
+       "parte": "pie",
+       "x": 62,
+       "y": 81,
+       "titulo": "Pie amarillo y hueco",
+       "texto": ""
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "lycoperdon-perlatum",
@@ -11861,7 +12561,43 @@
     "Franz Xaver von Wulfen la describió en 1781 como Agaricus aurantiacus.",
     "Segrega mucho ácido oxálico, que ayuda a deshacer el humus del suelo del bosque."
    ],
-   "familia": "Hygrophoropsidaceae"
+   "familia": "Hygrophoropsidaceae",
+   "anotadas": [
+    {
+     "foto": {
+      "sp": "Hygrophoropsis aurantiaca",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/False_Chanterelle_Hygrophoropsis_aurantiaca.jpg/{w}px-False_Chanterelle_Hygrophoropsis_aurantiaca.jpg",
+      "autor": "Holger Krisp",
+      "licencia": "CC BY 3.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/3.0/",
+      "pagina": "https://commons.wikimedia.org/wiki/File:False_Chanterelle_Hygrophoropsis_aurantiaca.jpg",
+      "origen": "Wikimedia Commons"
+     },
+     "puntos": [
+      {
+       "parte": "himenio",
+       "x": 66,
+       "y": 47,
+       "titulo": "Láminas verdaderas, finas",
+       "texto": "Naranjas y bifurcadas; el rebozuelo tiene pliegues."
+      },
+      {
+       "parte": "sombrero",
+       "x": 28,
+       "y": 33,
+       "titulo": "Sombrero naranja, borde enrollado",
+       "texto": ""
+      },
+      {
+       "parte": "pie",
+       "x": 28,
+       "y": 65,
+       "titulo": "Pie fino",
+       "texto": ""
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "trametes-versicolor",
@@ -12441,7 +13177,43 @@
     "El color rojo es tan característico que da nombre a la especie: «erubescens» significa «que se pone rojo»."
    ],
    "notaNomenclatura": "Antes se llamaba Inocybe erubescens o I. patouillardii; hoy Inosperma erubescens.",
-   "familia": "Inocybaceae"
+   "familia": "Inocybaceae",
+   "anotadas": [
+    {
+     "foto": {
+      "sp": "Inocybe erubescens",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Inocybe_erubescens_MS4_(2).jpg/{w}px-Inocybe_erubescens_MS4_(2).jpg",
+      "autor": "Jerzy Opioła",
+      "licencia": "CC BY-SA 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "pagina": "https://commons.wikimedia.org/wiki/File:Inocybe_erubescens_MS4_(2).jpg",
+      "origen": "Wikimedia Commons"
+     },
+     "puntos": [
+      {
+       "parte": "himenio",
+       "x": 65,
+       "y": 40,
+       "titulo": "Láminas pardas",
+       "texto": ""
+      },
+      {
+       "parte": "sombrero",
+       "x": 16,
+       "y": 43,
+       "titulo": "Borde fibroso que se raja",
+       "texto": ""
+      },
+      {
+       "parte": "pie",
+       "x": 49,
+       "y": 79,
+       "titulo": "Pie blanco que enrojece",
+       "texto": ""
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "russula-virescens",
@@ -12611,7 +13383,36 @@
    "recoleccion": {
     "acc": "extraer",
     "txt": "La primera vez, sácala entera con la base del pie para estudiarla y tapa el hueco con tierra. Que la confirme una persona experta."
-   }
+   },
+   "anotadas": [
+    {
+     "foto": {
+      "sp": "Russula virescens",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Russula_virescens3.JPG/{w}px-Russula_virescens3.JPG",
+      "autor": "Paffka",
+      "licencia": "CC BY-SA 3.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "pagina": "https://commons.wikimedia.org/wiki/File:Russula_virescens3.JPG",
+      "origen": "Wikimedia Commons"
+     },
+     "puntos": [
+      {
+       "parte": "sombrero",
+       "x": 54,
+       "y": 54,
+       "titulo": "Sombrero cuarteado en placas verdes",
+       "texto": ""
+      },
+      {
+       "parte": "sombrero",
+       "x": 49,
+       "y": 34,
+       "titulo": "Centro hundido",
+       "texto": ""
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "amanita-citrina",
@@ -14807,7 +15608,50 @@
    "recoleccion": {
     "acc": "dejar",
     "txt": "No se recoge: es mortal. Fotografíala en su sitio y déjala."
-   }
+   },
+   "anotadas": [
+    {
+     "foto": {
+      "sp": "Cortinarius rubellus",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Cortinarius_rubellus_02.jpg/{w}px-Cortinarius_rubellus_02.jpg",
+      "autor": "Eric Steinert",
+      "licencia": "CC BY-SA 3.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "pagina": "https://commons.wikimedia.org/wiki/File:Cortinarius_rubellus_02.jpg",
+      "origen": "Wikimedia Commons"
+     },
+     "puntos": [
+      {
+       "parte": "sombrero",
+       "x": 54,
+       "y": 16,
+       "titulo": "Sombrero con mamelón",
+       "texto": ""
+      },
+      {
+       "parte": "himenio",
+       "x": 80,
+       "y": 48,
+       "titulo": "Láminas ocre-canela",
+       "texto": ""
+      },
+      {
+       "parte": "pie",
+       "x": 56,
+       "y": 50,
+       "titulo": "Restos amarillos en el pie",
+       "texto": ""
+      },
+      {
+       "parte": "carne",
+       "x": 23,
+       "y": 76,
+       "titulo": "Carne crema-amarillenta",
+       "texto": ""
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "coprinellus-micaceus",
@@ -16966,7 +17810,50 @@
     "madera",
     "frondosas"
    ],
-   "habitatTexto": "Siempre sobre madera, en tocones de frondosas (hayas, abedules), en racimos."
+   "habitatTexto": "Siempre sobre madera, en tocones de frondosas (hayas, abedules), en racimos.",
+   "anotadas": [
+    {
+     "foto": {
+      "sp": "Kuehneromyces mutabilis",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/2025-10-11_D500-920_Achim-Lammerts_Kuehneromyces-mutabilis.jpg/{w}px-2025-10-11_D500-920_Achim-Lammerts_Kuehneromyces-mutabilis.jpg",
+      "autor": "Achim Lammerts (Syntaxys)",
+      "licencia": "CC BY-SA 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "pagina": "https://commons.wikimedia.org/wiki/File:2025-10-11_D500-920_Achim-Lammerts_Kuehneromyces-mutabilis.jpg",
+      "origen": "Wikimedia Commons"
+     },
+     "puntos": [
+      {
+       "parte": "sombrero",
+       "x": 67,
+       "y": 38,
+       "titulo": "Sombrero de dos tonos al secarse",
+       "texto": "Seca desde el centro hacia fuera."
+      },
+      {
+       "parte": "anillo",
+       "x": 67,
+       "y": 55,
+       "titulo": "Anillo",
+       "texto": ""
+      },
+      {
+       "parte": "pie",
+       "x": 65,
+       "y": 63,
+       "titulo": "Pie escamoso bajo el anillo",
+       "texto": "No es fiable: la Galerina también puede tenerlo."
+      },
+      {
+       "parte": "habitat",
+       "x": 57,
+       "y": 87,
+       "titulo": "En racimos sobre madera",
+       "texto": ""
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "pholiota-squarrosa",
