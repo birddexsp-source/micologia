@@ -3,7 +3,7 @@ module.exports = {
   async run(t) {
     await t.go('#setas');
     await t.case('lista completa y aviso fijo', async () => {
-      t.eq('74 fichas', await t.N('#slist .item'), 74);
+      t.eq('98 fichas', await t.N('#slist .item'), 98);
       t.ok('aviso de seguridad siempre visible', /Ninguna seta se come por lo que diga la app/.test(await t.T('#v-setas .warn') || ''));
       t.ok('primero las más peligrosas', /Mortal/.test(await t.T('#slist .item') || ''));
       await t.shot('captura-04-setas');
@@ -11,22 +11,22 @@ module.exports = {
     await t.case('búsqueda por nombre común, científico y sin tildes', async () => {
       const q = async s => { await t.page.fill('#q', s); await t.wait(150); return t.N('#slist .item'); };
       t.eq('«cicuta»', await q('cicuta'), 1); t.ok('es Amanita phalloides', /phalloides/.test(await t.T('#slist .item') || ''));
-      t.eq('«rebozuelo»', await q('rebozuelo'), 1); t.ok('«ziza» (euskera) encuentra varias', (await q('ziza')) >= 10);
+      t.eq('«rebozuelo» (y el rebozuelo anaranjado)', await q('rebozuelo'), 2); t.ok('«ziza» (euskera) encuentra varias', (await q('ziza')) >= 10);
       t.eq('«niscalo» sin tilde (níscalo y falso níscalo)', await q('niscalo'), 2); t.eq('«níscalo» con tilde', await q('níscalo'), 2);
       t.eq('«xixa» (champiñón silvestre, euskera)', await q('xixa'), 1); t.ok('es Agaricus campestris', /campestris/.test(await t.T('#slist .item') || ''));
-      t.eq('«boletus» (también por sinónimo: B. chrysenteron)', await q('boletus'), 11); t.eq('«zzzz»', await q('zzzz'), 0);
+      t.eq('«boletus» (también por sinónimos)', await q('boletus'), 13); t.eq('«zzzz»', await q('zzzz'), 0);
       t.ok('mensaje de vacío', /Nada con ese nombre/.test(await t.T('#slist') || ''));
       await q('');
     });
     await t.case('filtro por clase (semáforo)', async () => {
       await t.tap('#cl button[data-c="mortal"]'); t.eq('mortales', await t.N('#slist .item'), 8);
-      await t.tap('#cl button[data-c="toxica"]'); t.eq('tóxicas', await t.N('#slist .item'), 17);
-      await t.tap('#cl button[data-c="no_comestible"]'); t.eq('no comestibles', await t.N('#slist .item'), 6);
-      await t.tap('#cl button[data-c="ok_fuentes"]'); t.eq('comestibles según fuentes', await t.N('#slist .item'), 19);
-      await t.tap('#cl button[data-c="cond_fuentes"]'); t.eq('comestibles con condiciones', await t.N('#slist .item'), 24);
+      await t.tap('#cl button[data-c="toxica"]'); t.eq('tóxicas', await t.N('#slist .item'), 24);
+      await t.tap('#cl button[data-c="no_comestible"]'); t.eq('no comestibles', await t.N('#slist .item'), 10);
+      await t.tap('#cl button[data-c="ok_fuentes"]'); t.eq('comestibles según fuentes', await t.N('#slist .item'), 23);
+      await t.tap('#cl button[data-c="cond_fuentes"]'); t.eq('comestibles con condiciones', await t.N('#slist .item'), 33);
       t.ok('ya no queda ninguna «sin datos»', !(await t.has('#cl button[data-c="sin_datos"]')));
       t.ok('no existe «comestible buena» en la app hasta verificar', !(await t.has('#cl button[data-c="comestible_buena"]')));
-      await t.tap('#cl button[data-c=""]'); t.eq('todas', await t.N('#slist .item'), 74);
+      await t.tap('#cl button[data-c=""]'); t.eq('todas', await t.N('#slist .item'), 98);
     });
     await t.case('ficha de una mortal: síndrome, latencia, confusiones, fuentes', async () => {
       await t.page.fill('#q', 'cicuta'); await t.wait(150); await t.tap('#slist .item', 300);

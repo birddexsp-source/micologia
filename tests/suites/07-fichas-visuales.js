@@ -4,10 +4,10 @@ module.exports = {
   async run(t) {
     await t.case('lista de setas: avatares con foto y grupos por clase', async () => {
       await t.go('#setas'); await t.wait(300);
-      t.ok('un avatar con foto por cada especie que tiene foto (58)', (await t.N('#slist .item .phw.av img.ph')) === 58 && (await t.N('#slist .item .phw.av')) === 74);
+      t.ok('todas las especies tienen avatar con foto (98)', (await t.N('#slist .item .phw.av img.ph')) === 98 && (await t.N('#slist .item .phw.av')) === 98);
       t.ok('las fotos de la lista se piden a 250 px', t.photoReqs.some(u => /\/250px-/.test(u)));
       t.ok('los encabezados agrupan por clase', (await t.N('#slist .grp')) >= 4);
-      t.ok('las 43 comestibles llevan chip verde o amarillo y los encabezados dicen «según fuentes»', (await t.page.evaluate(() => [...document.querySelectorAll('#slist .item .tag')].filter(x => /^(Comestible|Con condiciones)$/.test(x.textContent)).length)) === 43 && /según fuentes/i.test(await t.T('#slist') || ''));
+      t.ok('las 56 comestibles llevan chip verde o amarillo y los encabezados dicen «según fuentes»', (await t.page.evaluate(() => [...document.querySelectorAll('#slist .item .tag')].filter(x => /^(Comestible|Con condiciones)$/.test(x.textContent)).length)) === 56 && /según fuentes/i.test(await t.T('#slist') || ''));
       t.ok('nunca «Comestible buena» sin más: siempre «según fuentes»', !/Comestible buena/i.test(await t.T('#slist') || '') && (await t.N('#slist .grp')) >= 5);
       await t.shot('captura-07-lista');
     });
@@ -117,8 +117,8 @@ module.exports = {
       await t.page.evaluate(() => { document.querySelector('#sheet').hidden = true; }); await t.go('#ajustes'); t.photoReqs.length = 0;
       await t.tap('#a-fotos', 1500);
       for (let i = 0; i < 20 && !/Listo/.test(await t.T('#a-fst') || ''); i++) await t.wait(300);
-      t.ok('descarga 340 fotos (170 × 2 tamaños)', /Listo: 340 fotos/.test(await t.T('#a-fst') || ''), await t.T('#a-fst'));
-      t.eq('340 peticiones a Commons', t.photoReqs.length, 340);
+      t.ok('descarga 582 fotos (291 × 2 tamaños)', /Listo: 582 fotos/.test(await t.T('#a-fst') || ''), await t.T('#a-fst'));
+      t.eq('582 peticiones a Commons', t.photoReqs.length, 582);
     });
   }
 };

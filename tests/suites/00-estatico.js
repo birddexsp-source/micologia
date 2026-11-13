@@ -36,8 +36,8 @@ module.exports = {
       const j = JSON.parse(rd('data/especies.json')), E = j.especies;
       t.ok('hay aviso de seguridad', /no se come/i.test(j.aviso));
       t.eq('ids únicos', new Set(E.map(e => e.id)).size, E.length);
-      t.eq('número de fichas (25 del MVP + 31 de la ampliación + 18 de nov-2026)', E.length, 74);
-      const COLS = ['Amanitaceae', 'Agaricaceae', 'Tricholomataceae', 'Clitocybaceae', 'Lyophyllaceae', 'Hygrophoraceae', 'Hydnangiaceae', 'Marasmiaceae', 'Mycenaceae', 'Entolomataceae', 'Cortinariaceae', 'Inocybaceae', 'Hymenogastraceae', 'Strophariaceae', 'Psathyrellaceae', 'Paxillaceae', 'Russulaceae', 'Boletaceae', 'Suillaceae', 'Cantharellaceae', 'Hydnaceae', 'Physalacriaceae', 'Pleurotaceae', 'Polyporaceae', 'Laetiporaceae', 'Fistulinaceae', 'Auriculariaceae', 'Sparassidaceae', 'Omphalotaceae', 'Sclerodermataceae', 'Phallaceae', 'Morchellaceae', 'Discinaceae', 'Helvellaceae', 'Pyronemataceae', 'Hygrophoropsidaceae'];
+      t.eq('número de fichas (25 del MVP + 31 de la ampliación + 42 de nov-2026)', E.length, 98);
+      const COLS = ['Amanitaceae', 'Agaricaceae', 'Tricholomataceae', 'Clitocybaceae', 'Lyophyllaceae', 'Hygrophoraceae', 'Hydnangiaceae', 'Marasmiaceae', 'Mycenaceae', 'Entolomataceae', 'Cortinariaceae', 'Inocybaceae', 'Hymenogastraceae', 'Strophariaceae', 'Psathyrellaceae', 'Paxillaceae', 'Russulaceae', 'Boletaceae', 'Suillaceae', 'Cantharellaceae', 'Hydnaceae', 'Physalacriaceae', 'Pleurotaceae', 'Polyporaceae', 'Laetiporaceae', 'Fistulinaceae', 'Auriculariaceae', 'Sparassidaceae', 'Omphalotaceae', 'Sclerodermataceae', 'Phallaceae', 'Morchellaceae', 'Discinaceae', 'Helvellaceae', 'Pyronemataceae', 'Hygrophoropsidaceae', 'Gyroporaceae', 'Ganodermataceae', 'Tremellaceae', 'Gomphaceae', 'Clavulinaceae', 'Dacrymycetaceae'];
       t.ok('todas las fichas tienen familia y cae en una colección', E.every(e => e.familia && COLS.includes(e.familia)), E.filter(e => !COLS.includes(e.familia)).map(e => e.id).join(','));
       t.ok('cada confusión con id apunta a una ficha que existe', E.every(e => (e.confusiones || []).every(c => !c.id || E.some(x => x.id === c.id))));
       t.ok('las fichas nuevas citan su página de Wikipedia con fecha', E.filter(e => e.familia && e.fuentes.some(f => /Wikipedia \(inglés\): /.test(f.nombre))).every(e => e.fuentes.every(f => !/Wikipedia \(inglés\): /.test(f.nombre) || (/^https:\/\/en\.wikipedia\.org\/wiki\//.test(f.url) && f.fechaConsulta))));
@@ -59,7 +59,7 @@ module.exports = {
         t.ok(x.id + ': comestibilidad atribuida a las fuentes, en borrador', !!x.comestibilidad && ['si', 'cond'].includes(x.comestibilidad.nivel) && /^Según|xixa|«xixa»/.test(x.comestibilidad.txt) && /sin revisión experta/.test(x.comestibilidad.segun) && x.nivelVerificacion === 'borrador');
       });
       E.filter(x => x.clase === 'mortal' || x.clase === 'toxica' || x.clase === 'no_comestible').forEach(x => t.ok(x.id + ': peligrosa/no comestible sin marca de comestible', !x.comestibilidad));
-      t.ok('las 43 candidatas a comestible están como sin_datos', E.filter(e => e.candidataComestible).length === 43 && E.filter(e => e.candidataComestible).every(e => e.clase === 'sin_datos'));
+      t.ok('las 56 candidatas a comestible están como sin_datos', E.filter(e => e.candidataComestible).length === 56 && E.filter(e => e.candidataComestible).every(e => e.clase === 'sin_datos'));
       ['amanita-phalloides', 'amanita-verna-virosa', 'lepiota-brunneoincarnata', 'galerina-marginata', 'cortinarius-orellanus'].forEach(id => t.eq(id + ' es mortal', (E.find(e => e.id === id) || {}).clase, 'mortal'));
     });
     await t.case('catálogo v3: datos de libro (hábitat, cómo recoger, curiosidades, nombres) con fuente', async () => {
@@ -80,9 +80,10 @@ module.exports = {
       t.ok('la «xixa» (Agaricus campestris) está en el catálogo', E.some(e => e.id === 'agaricus-campestris' && e.nombresComunes.es.concat(e.nombresComunes.eu).length >= 1));
     });
     await t.case('catálogo v2: fotos con licencia y autoría, qué mirar y temporada con fuente', async () => {
-      const E = JSON.parse(rd('data/especies.json')).especies, LIC = ['CC BY 2.0', 'CC BY 2.5', 'CC BY 3.0', 'CC BY 4.0', 'CC BY-SA 2.0', 'CC BY-SA 3.0', 'CC BY-SA 4.0', 'CC BY-SA 2.0 DE', 'CC BY-SA 3.0 DE', 'CC0', 'Dominio público'];
+      const E = JSON.parse(rd('data/especies.json')).especies, LIC = ['CC BY 2.0', 'CC BY 2.5', 'CC BY 3.0', 'CC BY 4.0', 'CC BY-SA 2.0', 'CC BY-SA 3.0', 'CC BY-SA 4.0', 'CC BY-SA 2.0 DE', 'CC BY-SA 3.0 DE', 'CC0', 'Dominio público', 'GFDL 1.2'];
       const PARTES = ['sombrero', 'cutis', 'himenio', 'carne', 'pie', 'anillo', 'volva', 'micelio', 'olor', 'esporada', 'habitat', 'otro'];
       E.forEach(e => {
+        t.ok(e.id + ': al menos 1 foto', (e.fotos || []).length >= 1);
         if (!e.ampliacion) t.ok(e.id + ': ≥3 fotos o las que haya (mín. 3)', (e.fotos || []).length >= 3, String((e.fotos || []).length));
         (e.fotos || []).forEach((f, i) => {
           t.ok(e.id + ' foto ' + i + ': autor, licencia libre y página de origen', !!f.autor && LIC.includes(f.licencia) && /^https:\/\/commons\.wikimedia\.org\/wiki\/File:/.test(f.pagina), f.licencia);
@@ -91,7 +92,7 @@ module.exports = {
         });
         t.ok(e.id + ': «qué mirar» con ≥3 puntos y partes válidas', (e.queMirar || []).length >= 3 && e.queMirar.every(x => PARTES.includes(x.parte) && x.titulo && x.texto));
         t.ok(e.id + ': tiene regla clave', !!e.clave && e.clave.length > 20);
-        t.ok(e.id + ': cita Wikipedia con URL y fecha', e.fuentes.some(f => /^Wikipedia/.test(f.nombre) && /^https:\/\/en\.wikipedia\.org\/wiki\//.test(f.url || '') && /^\d{4}-\d\d-\d\d$/.test(f.fechaConsulta || '')));
+        t.ok(e.id + ': cita Wikipedia con URL y fecha', e.fuentes.some(f => /^Wikipedia/.test(f.nombre) && /^https:\/\/(en|es)\.wikipedia\.org\/wiki\//.test(f.url || '') && /^\d{4}-\d\d-\d\d$/.test(f.fechaConsulta || '')));
         const ins = (e.temporada || {}).inat || {};
         if (e.ampliacion) { const tx = ((e.temporada || {}).texto || {}).meses; t.ok(e.id + ': temporada (si hay) solo con meses válidos', !tx || tx.every(m => m >= 1 && m <= 12)); return; }
         t.ok(e.id + ': temporada con 12 meses y N coherente', Array.isArray(ins.mensual) && ins.mensual.length === 12 && ins.mensual.reduce((a, b) => a + b, 0) === ins.n, JSON.stringify(ins.mensual));

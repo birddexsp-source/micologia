@@ -33,7 +33,7 @@ module.exports = {
       await t.go('#setas'); await t.tap('[data-ord="col"]', 300);
       const r = await t.page.evaluate(() => ({ items: [...document.querySelectorAll('#slist .item[data-e]')].map(b => b.dataset.e), caps: [...document.querySelectorAll('#slist .colh')].map(h => h.id), fams: document.querySelectorAll('#slist .famh').length, idx: document.querySelectorAll('.colidx button').length }));
       t.eq('todas las especies, una vez', [...new Set(r.items)].length === r.items.length && r.items.length, ids.length);
-      t.ok('11 capítulos y su índice', r.caps.length === 11 && r.idx === 11, JSON.stringify(r.caps));
+      t.ok('12 capítulos y su índice', r.caps.length === 12 && r.idx === 12, JSON.stringify(r.caps));
       t.ok('primero las Amanitas, luego como un libro', r.caps[0] === 'col-amanitas' && r.caps.indexOf('col-boletos') > r.caps.indexOf('col-rusulas'));
       t.ok('subencabezados de familia dentro de los capítulos', r.fams >= 10);
       t.ok('ninguna especie en «Otras»', !r.caps.includes('col-otras'));

@@ -188,12 +188,12 @@ module.exports = {
       t.ok('varias lecciones disponibles', /^\d+\/(\d+)$/.test(L) && +L.split('/')[1] >= 5, L);
       const a = await t.T('#v-setas .lec-t'); await t.tap('#lec-next', 300);
       t.ok('«Otra» cambia la lección', (await t.T('#v-setas .lec-t')) !== a);
-      t.ok('colección: 3 especies encontradas (boleto, cicuta, níscalo)', /3\s*de 74/.test(await t.T('#v-setas .col') || ''), await t.T('#v-setas .col'));
+      t.ok('colección: 3 especies encontradas (boleto, cicuta, níscalo)', /3\s*de 98/.test(await t.T('#v-setas .col') || ''), await t.T('#v-setas .col'));
       await t.tap('#cl [data-mias]', 300);
       t.eq('«Las mías» deja solo las encontradas', await t.N('#slist .item'), 3);
       t.ok('marcadas con ✓', (await t.N('#slist .item.mia')) === 3 && /×3/.test(await t.T('#slist .item.mia[data-e="boletus-edulis"] .mia-b') || ''));
-      await t.tap('#cl [data-c=""]', 300); t.eq('Todas otra vez', await t.N('#slist .item'), 74);
-      t.ok('lecciones de confusión con la cicuta (la encontraste)', await t.page.evaluate(async () => { for (let i = 0; i < 60; i++) { if (/Ojo con la confusión/.test(document.querySelector('.lec-h small').textContent)) return true; document.querySelector('#lec-next').click(); await new Promise(r => setTimeout(r, 40)); } return false; }));
+      await t.tap('#cl [data-c=""]', 300); t.eq('Todas otra vez', await t.N('#slist .item'), 98);
+      t.ok('lecciones de confusión con la cicuta (la encontraste)', await t.page.evaluate(async () => { for (let i = 0; i < 400; i++) { if (/Ojo con la confusión/.test(document.querySelector('.lec-h small').textContent)) return true; document.querySelector('#lec-next').click(); await new Promise(r => setTimeout(r, 40)); } return false; }));
       await t.go('#mes'); await t.wait(400);
       t.ok('Este mes: resumen con nº de peligrosas', await t.has('#v-mes .mes-sum .pel'));
     });
