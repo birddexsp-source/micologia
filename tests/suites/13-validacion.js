@@ -107,6 +107,7 @@ module.exports = {
       t.ok('salida, spots y hallazgo en el repo', f.some(p => p.startsWith('data/salidas/')) && f.filter(p => p.startsWith('data/zonas/')).length === 2 && f.some(p => p.startsWith('data/hallazgos/')));
       t.ok('ninguna coordenada ni dato en el repo público (docs/)', true);
       await t.go('#mapa'); await t.go('#ajustes'); await t.wait(300);
+      t.ok('Ajustes ofrece instalar la app con instrucciones', /Instalar en el móvil/.test(await t.T('#v-ajustes') || '') && await t.has('#a-instn'));
       t.ok('Ajustes dice «Todo al día»', /Todo al día/.test(await t.T('.aj-st') || ''));
       /* otro móvil: base vacía, mismo repo → baja todo */
       const ctx2 = await t.context(), p2 = await t.newPage(ctx2); await t.fakeGitHub(p2, gh, REPO);

@@ -13,7 +13,7 @@ import * as trk from './track.js';
 import * as ia from './ia.js';
 import * as au from './audio.js';
 
-const APP_V = 'micologia-v21';   // = V de sw.js
+const APP_V = 'micologia-v22';   // = V de sw.js
 const S = { view: 'mapa', arg: '', map: null, pins: null, me: null, acc: null, tmp: null, mini: null, centered: false, filtro: { salida: '', especie: '' }, clase: '', q: '', syncErr: false, mes: new Date().getMonth() + 1 };
 const VIEWS = ['mapa', 'salidas', 'salida', 'setas', 'mes', 'ajustes'];
 const TITULOS = { mapa: 'Mapa', salidas: 'Salidas', salida: 'Salida', setas: 'Setas', mes: 'Este mes', ajustes: 'Ajustes' };
@@ -864,6 +864,7 @@ function ajustesResto(c, last, zonas) {
       '<div class="row"><button class="btn p" id="a-sync">' + (ok ? 'Sincronizar ahora' : 'Guardar y sincronizar') + '</button></div><div class="note" id="a-st" style="margin-top:10px">' + (last ? 'Última sincronización: ' + new Date(last).toLocaleString('es-ES') : 'Aún no has sincronizado.') + (pend ? '<br>Pendiente de subir: ' + pend : '') + '</div>') +
     sec('<span style="font-size:20px">✨</span>', 'Reconocer con IA', ia.getKey() ? '<span class="okc">✓ Clave guardada y sincronizada con tus dispositivos</span>' : 'Clave gratuita de aistudio.google.com/apikey',
       '<input type="password" id="a-gk" placeholder="' + (ia.getKey() ? '•••••• guardada' : 'AIza… o AQ.…') + '" autocomplete="off" autocapitalize="off" style="margin-top:8px"><div class="row"><button class="btn p" id="a-gks">Guardar</button>' + (ia.getKey() ? '<button class="btn d" id="a-gkd">Borrar</button>' : '') + '</div><div class="note" id="a-gst" style="margin-top:8px"></div>') +
+    instalarHTML(sec) +
     sec(I.foto, 'Fotos sin conexión', 'Las fichas con foto en el monte sin cobertura (≈' + nf + ' MB)',
       '<div class="row"><button class="btn" id="a-fotos">Descargar fotos</button></div><div class="note" id="a-fst" style="margin-top:10px">Comprobando…</div>') +
     sec(I.flag, 'Tus datos', plural(zonas.length, 'spot', 'spots'),
@@ -872,7 +873,23 @@ function ajustesResto(c, last, zonas) {
     '<div class="aj-about"><img src="icon.svg" alt="" width="44" height="44"><div><b>Micología</b><small>Versión ' + APP_V + '</small></div></div>' +
     '<p class="aj-legal">Las coordenadas de tus sitios solo viven en este móvil y en tu repositorio privado. La app nunca certifica que una seta sea comestible.<br>Mapa: imágenes PNOA/Sentinel © IGN España (CC BY 4.0 scne.es) · callejero © OpenStreetMap.</p>';
 }
+/* Instalar la app en la pantalla de inicio (PWA): botón directo si el navegador lo permite, y si no, los pasos. */
+let PROMPT = null;
+addEventListener('beforeinstallprompt', e => { e.preventDefault(); PROMPT = e; const b = $('#a-inst'); if (b) b.hidden = false; });
+addEventListener('appinstalled', () => { PROMPT = null; try { renderAjustes(); } catch (e) { } });
+const instalada = () => matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
+function instalarHTML(sec) {
+  if (instalada()) return sec('<span style="font-size:20px">📲</span>', 'App instalada', '<span class="okc">✓ Ya la tienes en tu pantalla de inicio</span>', '');
+  const ios = /iPhone|iPad|iPod/.test(navigator.userAgent);
+  return sec('<span style="font-size:20px">📲</span>', 'Instalar en el móvil', 'Icono en la pantalla de inicio, abre a pantalla completa y funciona con lo ya cargado',
+    '<div class="row"><button class="btn p" id="a-inst"' + (PROMPT ? '' : ' hidden') + '>Instalar app</button></div>' +
+    '<div class="note" id="a-instn" style="margin-top:8px">' + (ios
+      ? 'En iPhone, con Safari: pulsa <b>Compartir</b> (cuadrado con flecha) → <b>Añadir a pantalla de inicio</b>.'
+      : 'En Android, con Chrome: menú <b>⋮</b> → <b>Instalar aplicación</b> (o «Añadir a pantalla de inicio»).') +
+    '<br>Abre la app desde ese icono la primera vez con conexión para que guarde todo.</div>');
+}
 function ajustesWire(root, c) {
+  const bi = $('#a-inst', root); if (bi) bi.onclick = async () => { if (!PROMPT) return; PROMPT.prompt(); try { await PROMPT.userChoice; } catch (e) { } PROMPT = null; renderAjustes(); };
   $('#a-sync', root).onclick = async () => {
     const repo = $('#a-repo', root).value.trim().replace(/^https?:\/\/github\.com\//, '').replace(/\.git$/, ''), tok = $('#a-tok', root).value.trim() || c.token, st = $('#a-st', root);
     if (!/^[\w.-]+\/[\w.-]+$/.test(repo) || !tok) { st.textContent = 'Pon el repositorio como usuario/nombre y pega el token.'; return; }
