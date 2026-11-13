@@ -127,6 +127,7 @@ module.exports = {
       await p.waitForFunction(async () => { const k = await caches.keys(); return k.some(x => /^micologia-v\d+/.test(x)); }, null, { timeout: 10000 });
       const v = await p.evaluate(async () => { const k = (await caches.keys()).find(x => /^micologia-v/.test(x)), c = await caches.open(k); return [k, (await c.keys()).length]; });
       t.ok('caché de la app creada con todos sus archivos', v[1] >= 20, JSON.stringify(v));
+      t.ok('hay aviso de «nueva versión» en el código', await p.evaluate(async () => (await (await fetch('js/app.js')).text()).includes("controllerchange")));
       await ctx.setOffline(true);
       await p.reload(); await p.waitForSelector('body[data-ready="1"]', { timeout: 15000 });
       t.ok('sin red, la app arranca y enseña el catálogo', (await p.evaluate(() => document.querySelectorAll('#slist .item').length)) === await p.evaluate(() => window.__MI.cat.todas().length));

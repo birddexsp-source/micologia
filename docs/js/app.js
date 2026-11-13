@@ -13,7 +13,7 @@ import * as trk from './track.js';
 import * as ia from './ia.js';
 import * as au from './audio.js';
 
-const APP_V = 'micologia-v22';   // = V de sw.js
+const APP_V = 'micologia-v23';   // = V de sw.js
 const S = { view: 'mapa', arg: '', map: null, pins: null, me: null, acc: null, tmp: null, mini: null, centered: false, filtro: { salida: '', especie: '' }, clase: '', q: '', syncErr: false, mes: new Date().getMonth() + 1 };
 const VIEWS = ['mapa', 'salidas', 'salida', 'setas', 'mes', 'ajustes'];
 const TITULOS = { mapa: 'Mapa', salidas: 'Salidas', salida: 'Salida', setas: 'Setas', mes: 'Este mes', ajustes: 'Ajustes' };
@@ -956,7 +956,21 @@ async function boot() {
   $('#syncbtn').onclick = () => { const c = syn.cfg(); if (!c.repo || !c.token) { location.hash = '#ajustes'; toast('Configura el repositorio y el token'); } else correrSync(); };
   if (syn.cfg().repo) syn.auto(2500);
   ia.alinear();
-  if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) navigator.serviceWorker.register('sw.js').catch(() => { });
+  if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {
+    const hadCtl = !!navigator.serviceWorker.controller;
+    /* nueva versión: aviso con botón (no recarga sola para no cortar lo que estés haciendo) */
+    navigator.serviceWorker.addEventListener('controllerchange', () => {
+      if (!hadCtl || document.getElementById('upd')) return;
+      const b = document.createElement('button'); b.id = 'upd'; b.textContent = 'Nueva versión lista · toca para actualizar';
+      b.style.cssText = 'position:fixed;left:12px;right:12px;bottom:calc(env(safe-area-inset-bottom,0px) + 76px);z-index:99999;padding:14px;border:0;border-radius:14px;background:#d8b545;color:#0a0f0e;font:700 15px system-ui;box-shadow:0 6px 24px #0008';
+      b.onclick = () => location.reload(); document.body.appendChild(b);
+    });
+    navigator.serviceWorker.register('sw.js').then(reg => {
+      const buscar = () => { if (navigator.onLine) reg.update().catch(() => { }); };
+      document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') buscar(); });
+      buscar();
+    }).catch(() => { });
+  }
   window.__MI = { db, geo, syn, cat, trk, S, abrirHallazgo, abrirFicha, abrirLibro, abrirIA, ia, abrirSpot, verSpot, editarSpot, verHallazgo, leerGPX };
   document.body.dataset.ready = '1';
 }
