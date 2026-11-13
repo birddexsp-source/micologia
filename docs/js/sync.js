@@ -2,6 +2,7 @@
    En el repo:  data/<coleccion>/<id>.json = {u, del, d}   (gana el más reciente)   ·   blobs/<id> = fotos.
    El token lo escribe Jon en Ajustes y vive solo en el navegador. Nunca se escribe en logs ni en mensajes. */
 import { M, B, put, notify, init, now, dirtyCount } from './db.js';
+import { alinear } from './ia.js';
 
 const CFGK = 'mi.cfg';
 export const cfg = () => { try { return JSON.parse(localStorage.getItem(CFGK) || '{}'); } catch (e) { return {}; } };
@@ -89,7 +90,7 @@ export async function sync(prog = () => { }) {
   SYNCING = true; notify();
   try {
     for (let n = 0; ; n++) {
-      try { const r = await una(c, prog); meta('last', now()); return r; }
+      try { const r = await una(c, prog); meta('last', now()); await alinear(); if (dirtyCount()) setTimeout(() => auto(1500), 0); return r; }
       catch (e) { if (n < 1 && (e.status === 409 || e.status === 422)) continue; throw e; }
     }
   } finally { SYNCING = false; notify(); }

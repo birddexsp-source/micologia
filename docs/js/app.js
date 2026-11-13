@@ -13,7 +13,7 @@ import * as trk from './track.js';
 import * as ia from './ia.js';
 import * as au from './audio.js';
 
-const APP_V = 'micologia-v20';   // = V de sw.js
+const APP_V = 'micologia-v21';   // = V de sw.js
 const S = { view: 'mapa', arg: '', map: null, pins: null, me: null, acc: null, tmp: null, mini: null, centered: false, filtro: { salida: '', especie: '' }, clase: '', q: '', syncErr: false, mes: new Date().getMonth() + 1 };
 const VIEWS = ['mapa', 'salidas', 'salida', 'setas', 'mes', 'ajustes'];
 const TITULOS = { mapa: 'Mapa', salidas: 'Salidas', salida: 'Salida', setas: 'Setas', mes: 'Este mes', ajustes: 'Ajustes' };
@@ -759,7 +759,7 @@ function abrirIA() {
     const hay = fotos.some(Boolean), key = ia.getKey();
     let h = '<h2>Reconocer con IA</h2>';
     if (!key) {
-      h += '<p class="sub" style="font-family:inherit">Necesito una clave gratuita de Gemini. Se queda solo en este móvil.</p><ol class="note" style="margin:8px 0 0 18px;padding:0"><li>Entra en <b>aistudio.google.com/apikey</b></li><li>«Crear clave de API» (gratis, sin tarjeta)</li><li>Cópiala y pégala aquí</li></ol>' +
+      h += '<p class="sub" style="font-family:inherit">Necesito una clave gratuita de Gemini. Se guarda en tu repositorio privado y se copia sola a tus otros dispositivos.</p><ol class="note" style="margin:8px 0 0 18px;padding:0"><li>Entra en <b>aistudio.google.com/apikey</b></li><li>«Crear clave de API» (gratis, sin tarjeta)</li><li>Cópiala y pégala aquí</li></ol>' +
         '<input type="password" id="ia-k" placeholder="AIza…" autocomplete="off" autocapitalize="off" style="margin-top:10px"><div class="row"><button class="btn p" id="ia-ks">Guardar clave</button><button class="btn" id="gu-x">Cerrar</button></div>' + (err ? '<div class="warn" style="margin-top:10px">' + esc(err) + '</div>' : '');
       sh.innerHTML = h; return;
     }
@@ -862,7 +862,7 @@ function ajustesResto(c, last, zonas) {
       '<label class="l">Repositorio de datos</label><input type="text" id="a-repo" placeholder="usuario/micologia-datos" autocapitalize="off" autocomplete="off" value="' + esc(c.repo || '') + '">' +
       '<label class="l">Token de GitHub</label><input type="password" id="a-tok" placeholder="' + (c.token ? '•••••• guardado (déjalo vacío para conservarlo)' : 'github_pat_…') + '" autocomplete="off">' +
       '<div class="row"><button class="btn p" id="a-sync">' + (ok ? 'Sincronizar ahora' : 'Guardar y sincronizar') + '</button></div><div class="note" id="a-st" style="margin-top:10px">' + (last ? 'Última sincronización: ' + new Date(last).toLocaleString('es-ES') : 'Aún no has sincronizado.') + (pend ? '<br>Pendiente de subir: ' + pend : '') + '</div>') +
-    sec('<span style="font-size:20px">✨</span>', 'Reconocer con IA', ia.getKey() ? '<span class="okc">✓ Clave guardada en este móvil</span>' : 'Clave gratuita de aistudio.google.com/apikey',
+    sec('<span style="font-size:20px">✨</span>', 'Reconocer con IA', ia.getKey() ? '<span class="okc">✓ Clave guardada y sincronizada con tus dispositivos</span>' : 'Clave gratuita de aistudio.google.com/apikey',
       '<input type="password" id="a-gk" placeholder="' + (ia.getKey() ? '•••••• guardada' : 'AIza… o AQ.…') + '" autocomplete="off" autocapitalize="off" style="margin-top:8px"><div class="row"><button class="btn p" id="a-gks">Guardar</button>' + (ia.getKey() ? '<button class="btn d" id="a-gkd">Borrar</button>' : '') + '</div><div class="note" id="a-gst" style="margin-top:8px"></div>') +
     sec(I.foto, 'Fotos sin conexión', 'Las fichas con foto en el monte sin cobertura (≈' + nf + ' MB)',
       '<div class="row"><button class="btn" id="a-fotos">Descargar fotos</button></div><div class="note" id="a-fst" style="margin-top:10px">Comprobando…</div>') +
@@ -938,6 +938,7 @@ async function boot() {
   addEventListener('online', badge); addEventListener('offline', badge);
   $('#syncbtn').onclick = () => { const c = syn.cfg(); if (!c.repo || !c.token) { location.hash = '#ajustes'; toast('Configura el repositorio y el token'); } else correrSync(); };
   if (syn.cfg().repo) syn.auto(2500);
+  ia.alinear();
   if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) navigator.serviceWorker.register('sw.js').catch(() => { });
   window.__MI = { db, geo, syn, cat, trk, S, abrirHallazgo, abrirFicha, abrirLibro, abrirIA, ia, abrirSpot, verSpot, editarSpot, verHallazgo, leerGPX };
   document.body.dataset.ready = '1';

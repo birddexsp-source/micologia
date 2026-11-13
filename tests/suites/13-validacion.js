@@ -98,12 +98,15 @@ module.exports = {
       t.ok('y hay lección del día', await t.has('#v-setas .lec'));
     });
     await t.case('sincronización ida y vuelta con el repo privado (GitHub simulado)', async () => {
+      const KG = 'AIza' + 'k'.repeat(35);
+      await t.page.evaluate(k => localStorage.setItem('mi_gemini_key', k), KG);   // la clave ya estaba en este dispositivo
       await t.go('#ajustes'); await t.page.fill('#a-repo', REPO); await t.page.fill('#a-tok', TOKEN); await t.tap('#a-sync', 100);
       await t.page.waitForFunction(() => /Sincronizado|Todo al día/.test(document.querySelector('#a-st').textContent), null, { timeout: 10000 });
+      await t.page.waitForFunction(() => window.__MI.db.dirtyCount() === 0, null, { timeout: 15000 });
       const f = Object.keys(gh.files());
       t.ok('salida, spots y hallazgo en el repo', f.some(p => p.startsWith('data/salidas/')) && f.filter(p => p.startsWith('data/zonas/')).length === 2 && f.some(p => p.startsWith('data/hallazgos/')));
       t.ok('ninguna coordenada ni dato en el repo público (docs/)', true);
-      await t.go('#ajustes'); await t.wait(300);
+      await t.go('#mapa'); await t.go('#ajustes'); await t.wait(300);
       t.ok('Ajustes dice «Todo al día»', /Todo al día/.test(await t.T('.aj-st') || ''));
       /* otro móvil: base vacía, mismo repo → baja todo */
       const ctx2 = await t.context(), p2 = await t.newPage(ctx2); await t.fakeGitHub(p2, gh, REPO);
@@ -112,6 +115,8 @@ module.exports = {
       await p2.waitForFunction(() => /Sincronizado|Todo al día/.test(document.querySelector('#a-st').textContent), null, { timeout: 10000 });
       const n = await p2.evaluate(async () => [(await window.__MI.db.list('salidas')).length, (await window.__MI.db.list('zonas')).length, (await window.__MI.db.list('hallazgos')).length]);
       t.eq('el segundo móvil recibe salida, 2 spots y el hallazgo', n, [1, 2, 1]);
+      t.ok('la clave de Gemini viaja en el repo privado', Object.keys(gh.files()).includes('data/ajustes/gemini.json'));
+      t.eq('el segundo móvil recibe la MISMA clave de Gemini', await p2.evaluate(() => localStorage.getItem('mi_gemini_key')), KG);
       await ctx2.close();
     });
     await t.case('sin conexión: el service worker guarda la app y vuelve a abrir', async () => {

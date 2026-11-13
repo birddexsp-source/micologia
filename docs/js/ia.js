@@ -2,11 +2,24 @@
    Es una pista orientativa: nunca certifica especie ni comestibilidad, y se abstiene si las fotos no bastan. */
 import * as cat from './catalog.js';
 import { reducirFoto } from './util.js';
+import * as db from './db.js';
 
 export const MODELOS = ['gemini-2.5-flash', 'gemini-2.5-flash', 'gemini-3.1-flash-lite'];
 const KEY = 'mi_gemini_key';
 export const getKey = () => { try { return localStorage.getItem(KEY) || ''; } catch (e) { return ''; } };
-export const setKey = k => { try { k ? localStorage.setItem(KEY, k.trim()) : localStorage.removeItem(KEY); } catch (e) { } };
+const loc = k => { try { k ? localStorage.setItem(KEY, k.trim()) : localStorage.removeItem(KEY); } catch (e) { } };
+/* La clave se guarda en este dispositivo y también como un dato más de la sincronización (repo privado), para tener la misma en el móvil y en el PC. */
+export const setKey = k => { loc(k); db.init().then(() => k ? db.set('ajustes', 'gemini', { k: k.trim() }) : (db.M.has('ajustes/gemini') ? db.remove('ajustes', 'gemini') : null)).catch(() => { }); };
+/* Tras sincronizar: si otro dispositivo guardó o borró la clave, se copia aquí; si solo la tengo yo, se sube. Devuelve true si cambió algo local. */
+export async function alinear() {
+  try {
+    await db.init(); const r = db.M.get('ajustes/gemini'), mia = getKey();
+    if (r && !r.del && r.d && r.d.k) { if (r.d.k !== mia) { loc(r.d.k); return true; } return false; }
+    if (r && r.del) { if (mia) { loc(''); return true; } return false; }
+    if (mia) await db.set('ajustes', 'gemini', { k: mia });
+  } catch (e) { }
+  return false;
+}
 export const claveValida = k => /^(AIza[\w-]{30,}|AQ\.[\w.-]{30,})$/.test((k || '').trim());
 
 const SCHEMA = { type: 'OBJECT', properties: {
