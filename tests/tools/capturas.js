@@ -50,6 +50,8 @@ const ESCENAS = {
   'setas': async p => { await p.evaluate(() => { location.hash = '#setas'; }); await p.waitForTimeout(1000); },
   'ficha': async p => { await p.evaluate(() => { location.hash = '#setas'; }); await p.waitForTimeout(500); await p.evaluate(() => window.__MI.abrirFicha('boletus-edulis')); await p.waitForTimeout(1000); },
   'setas-abajo': async p => { await p.evaluate(() => { location.hash = '#setas'; }); await p.waitForTimeout(1000); await p.evaluate(() => { document.querySelector('#v-setas').scrollTop = 900; }); await p.waitForTimeout(600); },
+  'colecciones': async p => { await p.evaluate(() => { location.hash = '#setas'; }); await p.waitForTimeout(800); await p.click('[data-ord="col"]'); await p.waitForTimeout(400); await p.evaluate(() => { document.querySelector('#col-boletos').scrollIntoView(); }); await p.waitForTimeout(700); },
+  'ficha-nueva': async p => { await p.evaluate(() => { location.hash = '#setas'; }); await p.waitForTimeout(500); await p.evaluate(() => window.__MI.abrirFicha('russula-virescens')); await p.waitForTimeout(900); },
   'mes': async p => { await p.evaluate(() => { location.hash = '#mes'; }); await p.waitForTimeout(1000); },
   'ajustes': async p => { await p.evaluate(() => { location.hash = '#ajustes'; }); await p.waitForTimeout(800); }
 };

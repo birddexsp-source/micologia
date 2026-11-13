@@ -1,6 +1,6 @@
 {
- "version": 3,
- "generado": "2026-11-12",
+ "version": 4,
+ "generado": "2026-11-13",
  "nivelPorDefecto": "borrador",
  "aviso": "Ninguna seta se come por lo que diga la app, un libro o una foto. Antes de comer algo que no domines: identificación en mano, con todos los caracteres, confirmada por una persona experta o sociedad micológica. En caso de duda, no se come.",
  "especies": [
@@ -55,6 +55,24 @@
      "comoDistinguir": "La ficha de Lycoperdon perlatum avisa de esta confusión. Para reconocer esa especie: Bola o pera blanca cubierta de pinchitos cónicos y verrugas que se caen y dejan una red. Comestible solo joven y totalmente blanca por dentro; cuidado con los «huevos» de Amanita.",
      "gravedad": "alta",
      "inversa": true
+    },
+    {
+     "id": "russula-virescens",
+     "nombre": "Russula virescens",
+     "comoDistinguir": "La cicuta tiene anillo y volva en saco en la base (hay que desenterrarla). Russula virescens no tiene ni anillo ni volva y su sombrero se cuartea en placas.",
+     "gravedad": "alta"
+    },
+    {
+     "id": "amanita-citrina",
+     "nombre": "Amanita citrina",
+     "comoDistinguir": "Es la confusión más habitual según Wikipedia. Las dos tienen anillo y volva: ninguna Amanita de este tipo se recoge.",
+     "gravedad": "alta"
+    },
+    {
+     "id": "phallus-impudicus",
+     "nombre": "Phallus impudicus",
+     "comoDistinguir": "Un huevo de seta cerrado puede ser una Amanita mortal joven: córtalo de arriba abajo; si se ve una seta con láminas dentro, es Amanita.",
+     "gravedad": "alta"
     }
    ],
    "nivelVerificacion": "borrador",
@@ -240,7 +258,8 @@
     "Es la responsable de la mayoría de las muertes por setas en el mundo. Se calcula que 30 g, o media seta, bastan para matar a una persona.",
     "La describió el botánico francés Sébastien Vaillant en 1727.",
     "En euskera también se llama «kuleto berde» (oronja verde) y «txapel biribil»."
-   ]
+   ],
+   "familia": "Amanitaceae"
   },
   {
    "id": "amanita-verna-virosa",
@@ -498,7 +517,8 @@
     "«virosa» viene del latín y significa «tóxico» (como «virus»). Una sola seta de A. virosa basta para matar a un adulto.",
     "Según la Wikipedia en euskera, A. verna, A. virosa, A. phalloides y la variedad blanca de la phalloides forman la «cuarteta» de las amanitas mortales.",
     "A. verna no se conoce en América del Norte."
-   ]
+   ],
+   "familia": "Amanitaceae"
   },
   {
    "id": "lepiota-brunneoincarnata",
@@ -523,6 +543,12 @@
      "id": "macrolepiota-procera",
      "nombre": "Macrolepiota procera (parasol)",
      "comoDistinguir": "Parasol: grande (>15 cm), pie con dibujo atigrado y anillo doble móvil. Lepiota pequeñas: anillo fugaz y sombrero con escamas. Solo grandes, solo sombreros (verificar).",
+     "gravedad": "alta"
+    },
+    {
+     "id": "chlorophyllum-rhacodes",
+     "nombre": "Chlorophyllum rhacodes",
+     "comoDistinguir": "Las lepiotas mortales son pequeñas (menos de 10 cm): cualquier «parasol» pequeño, fuera.",
      "gravedad": "alta"
     }
    ],
@@ -701,7 +727,8 @@
    "curiosidades": [
     "Contiene dosis mortales de alfa-amanitina. Causó una muerte en España en 2002, un brote en Irán en 2018 y la muerte de cuatro jóvenes de una misma familia en Túnez en 2010.",
     "El análisis de su ADN muestra que está emparentada con otras Lepiota con amatoxinas, como L. subincarnata."
-   ]
+   ],
+   "familia": "Agaricaceae"
   },
   {
    "id": "galerina-marginata",
@@ -906,7 +933,8 @@
    "curiosidades": [
     "Antes se consideraba un conjunto de cinco especies; al comparar su ADN se vio que son una sola y muy variable.",
     "Las amatoxinas que contiene son las responsables de más del 90 % de las muertes por setas."
-   ]
+   ],
+   "familia": "Hymenogastraceae"
   },
   {
    "id": "cortinarius-orellanus",
@@ -1104,6 +1132,12 @@
      "comoDistinguir": "La ficha de Craterellus tubaeformis avisa de esta confusión. Para reconocer esa especie: Setita en trompeta de sombrero pardo-grisáceo con pliegues poco marcados, bifurcados y pálidos que bajan por un pie hueco amarillo. Sale tarde, en grupos grandes entre musgo y madera podrida.",
      "gravedad": "alta",
      "inversa": true
+    },
+    {
+     "id": "cortinarius-rubellus",
+     "nombre": "Cortinarius rubellus",
+     "comoDistinguir": "Pariente con la misma toxina.",
+     "gravedad": "alta"
     }
    ],
    "habitatTexto": "Bosques caducifolios bajo haya, carpe y roble, a menudo cerca de pinos. En Europa central y oriental (Polonia, Chequia, Eslovaquia); rara en Alemania y ocasional en el sur de Gran Bretaña.",
@@ -1114,7 +1148,8 @@
    "curiosidades": [
     "Su peligro se descubrió en 1957, después de que en 1952 enfermaran 102 personas tras comerla en Bydgoszcz (Polonia); 11 murieron.",
     "Fries la describió en 1838."
-   ]
+   ],
+   "familia": "Cortinariaceae"
   },
   {
    "id": "gyromitra",
@@ -1323,7 +1358,8 @@
     "Según la Wikipedia en euskera, es tóxica cruda y se dice que comestible bien cocida, pero eso se discute: ha causado la muerte, sobre todo a niños.",
     "En Soria se recogía en grandes cantidades para exportarla seca a Francia e Italia; parece que hoy su venta está prohibida.",
     "Persoon la describió en 1800 como Helvella esculenta."
-   ]
+   ],
+   "familia": "Discinaceae"
   },
   {
    "id": "entoloma-lividum-sinuatum",
@@ -1535,7 +1571,8 @@
    "curiosidades": [
     "Se le atribuye el 10 % de todas las intoxicaciones por setas en Europa. En Ginebra, en 1983, 70 personas necesitaron tratamiento hospitalario; en un hospital de Parma fue la causa de 33 de 145 casos en cinco años.",
     "La describió por primera vez Bulliard en 1788 como Agaricus lividus."
-   ]
+   ],
+   "familia": "Entolomataceae"
   },
   {
    "id": "omphalotus-illudens",
@@ -1763,7 +1800,8 @@
    },
    "curiosidades": [
     "En inglés se llama «jack-o'-lantern» (linterna de calabaza)."
-   ]
+   ],
+   "familia": "Omphalotaceae"
   },
   {
    "id": "tricholoma-pardinum",
@@ -1948,6 +1986,21 @@
     "En la primera mitad del siglo XX fue responsable de más del 20 % de las intoxicaciones por setas en Suiza.",
     "Según la Wikipedia en euskera, es muy venenosa pero no mortal, y donde es abundante es la que más intoxicaciones causa.",
     "Schäffer la dibujó en 1762 con el nombre Agaricus tigrinus."
+   ],
+   "familia": "Tricholomataceae",
+   "confusiones": [
+    {
+     "id": "tricholoma-portentosum",
+     "nombre": "Tricholoma portentosum",
+     "comoDistinguir": "T. pardinum tiene escamas grises marcadas que dan aspecto atigrado al sombrero.",
+     "gravedad": "alta"
+    },
+    {
+     "id": "tricholoma-terreum",
+     "nombre": "Tricholoma terreum",
+     "comoDistinguir": "Más grande, con escamas en el sombrero y olor harinoso. Una guía de los 70 aconsejaba a los novatos no coger ningún tricoloma gris.",
+     "gravedad": "alta"
+    }
    ]
   },
   {
@@ -2200,7 +2253,8 @@
     "El nombre de muscaria en muchos idiomas europeos (fly agaric, Fliegenpilz…) viene de usarla como insecticida: se espolvoreaba en leche para atraer y matar moscas.",
     "Wikipedia dice que A. pantherina es más tóxica que A. muscaria.",
     "La seta roja con motas blancas aparece en cuentos, jardines y dibujos como casa o asiento de gnomos y hadas."
-   ]
+   ],
+   "familia": "Amanitaceae"
   },
   {
    "id": "paxillus-involutus",
@@ -2388,7 +2442,9 @@
     "Se comió mucho en Europa central y oriental hasta la Segunda Guerra Mundial; en Polonia, encurtida o en salazón. Se creía comestible cocinada; hoy se considera tóxica mortal.",
     "Según la Wikipedia en euskera, algunas toxinas desaparecen con el calor y otras actúan por acumulación, por lo que comerla de vez en cuando no daba problemas graves: de ahí el error.",
     "Bulliard la describió en 1785 como Agaricus contiguus."
-   ]
+   ],
+   "familia": "Paxillaceae",
+   "confusiones": []
   },
   {
    "id": "boletus-satanas",
@@ -2598,7 +2654,8 @@
    "curiosidades": [
     "Lo describió Harald Othmar Lenz en 1831, que dijo haberse sentido mal por «emanaciones» mientras lo describía.",
     "Es moderadamente venenoso, sobre todo crudo. Según la Wikipedia en euskera, no está entre los más venenosos."
-   ]
+   ],
+   "familia": "Boletaceae"
   },
   {
    "id": "coprinopsis-atramentaria",
@@ -2808,8 +2865,15 @@
      "comoDistinguir": "La ficha de Coprinus comatus avisa de esta confusión. Para reconocer esa especie: Sombrero blanco alargado como un cilindro con escamas; las láminas pasan de blanco a rosa y se deshacen en tinta negra. Solo jóvenes, y en el día.",
      "gravedad": "media",
      "inversa": true
+    },
+    {
+     "id": "coprinellus-micaceus",
+     "nombre": "Coprinellus micaceus",
+     "comoDistinguir": "Más grande y gris, sin brillos; tiene coprina (sienta mal con alcohol).",
+     "gravedad": "media"
     }
-   ]
+   ],
+   "familia": "Psathyrellaceae"
   },
   {
    "id": "tricholoma-equestre",
@@ -2996,7 +3060,9 @@
     "Durante mucho tiempo fue una de las comestibles más apreciadas y se vendía en los mercados europeos. Se cuenta que los caballeros franceses medievales se la reservaban y dejaban el boleto bovino (Suillus bovinus) a los campesinos.",
     "Se llama Grünling en alemán, gąska zielonka en polaco, míscaro en portugués y canari en francés.",
     "Linneo la describió en 1753 como Agaricus equestris: «equestre» significa «de caballero»."
-   ]
+   ],
+   "familia": "Tricholomataceae",
+   "confusiones": []
   },
   {
    "id": "clitocybe-rivulosa",
@@ -3198,7 +3264,8 @@
    "curiosidades": [
     "Su toxina, la muscarina, provoca en 15–30 minutos mucha saliva, sudor y lágrimas.",
     "Persoon la describió en 1801 como Agaricus rivulosus."
-   ]
+   ],
+   "familia": "Clitocybaceae"
   },
   {
    "id": "tylopilus-felleus",
@@ -3428,7 +3495,8 @@
     "Es extremadamente amargo, aunque no tóxico en sí; la cocción aumenta el amargor.",
     "Bulliard lo describió en 1788 como «le bolet chicotin» (el boleto amargo).",
     "Aun así, se vende en mercados de México."
-   ]
+   ],
+   "familia": "Boletaceae"
   },
   {
    "id": "boletus-edulis",
@@ -3685,7 +3753,8 @@
     "nivel": "si",
     "txt": "Según Wikipedia y guías divulgativas es comestible. El nombre «edulis» significa «comestible».",
     "segun": "Wikipedia (inglés, español, euskera) y guías divulgativas: fuentes terciarias, sin revisión experta"
-   }
+   },
+   "familia": "Boletaceae"
   },
   {
    "id": "cantharellus-cibarius",
@@ -3733,6 +3802,12 @@
      "comoDistinguir": "La ficha de Craterellus tubaeformis avisa de esta confusión. Para reconocer esa especie: Setita en trompeta de sombrero pardo-grisáceo con pliegues poco marcados, bifurcados y pálidos que bajan por un pie hueco amarillo. Sale tarde, en grupos grandes entre musgo y madera podrida.",
      "gravedad": "baja",
      "inversa": true
+    },
+    {
+     "id": "cortinarius-rubellus",
+     "nombre": "Cortinarius rubellus",
+     "comoDistinguir": "Hubo intoxicaciones por confundirla con rebozuelos. El rebozuelo no tiene láminas sino pliegues bajos.",
+     "gravedad": "alta"
     }
    ],
    "nivelVerificacion": "borrador",
@@ -3935,7 +4010,8 @@
     "nivel": "si",
     "txt": "Según Wikipedia es una seta muy consumida y apreciada.",
     "segun": "Wikipedia (inglés, español, euskera) y guías divulgativas: fuentes terciarias, sin revisión experta"
-   }
+   },
+   "familia": "Cantharellaceae"
   },
   {
    "id": "craterellus-cornucopioides",
@@ -4147,7 +4223,9 @@
     "nivel": "si",
     "txt": "Según Wikipedia es comestible y de calidad, a pesar de su aspecto.",
     "segun": "Wikipedia (inglés, español, euskera) y guías divulgativas: fuentes terciarias, sin revisión experta"
-   }
+   },
+   "familia": "Cantharellaceae",
+   "confusiones": []
   },
   {
    "id": "hydnum-repandum",
@@ -4361,7 +4439,9 @@
     "nivel": "si",
     "txt": "Según Wikipedia y guías divulgativas es comestible.",
     "segun": "Wikipedia (inglés, español, euskera) y guías divulgativas: fuentes terciarias, sin revisión experta"
-   }
+   },
+   "familia": "Hydnaceae",
+   "confusiones": []
   },
   {
    "id": "lactarius-deliciosus",
@@ -4589,7 +4669,8 @@
     "nivel": "si",
     "txt": "Según Wikipedia es comestible, aunque puede saber suave o amarga.",
     "segun": "Wikipedia (inglés, español, euskera) y guías divulgativas: fuentes terciarias, sin revisión experta"
-   }
+   },
+   "familia": "Russulaceae"
   },
   {
    "id": "macrolepiota-procera",
@@ -4623,6 +4704,12 @@
      "nombre": "Chlorophyllum",
      "comoDistinguir": "Confusión citada en el documento de traspaso; carácter diferenciador por contrastar.",
      "gravedad": "media"
+    },
+    {
+     "id": "chlorophyllum-rhacodes",
+     "nombre": "Chlorophyllum rhacodes",
+     "comoDistinguir": "El parasol es más grande, sale en sitios abiertos y su pie tiene bandas pardas.",
+     "gravedad": "baja"
     }
    ],
    "nivelVerificacion": "borrador",
@@ -4823,7 +4910,8 @@
     "nivel": "si",
     "txt": "Según Wikipedia es comestible y de calidad. El pie es muy fibroso y no se aprovecha: solo el sombrero.",
     "segun": "Wikipedia (inglés, español, euskera) y guías divulgativas: fuentes terciarias, sin revisión experta"
-   }
+   },
+   "familia": "Agaricaceae"
   },
   {
    "id": "marasmius-oreades",
@@ -5043,7 +5131,8 @@
     "nivel": "si",
     "txt": "Según Wikipedia es comestible y de calidad. Se conserva muy bien seca.",
     "segun": "Wikipedia (inglés, español, euskera) y guías divulgativas: fuentes terciarias, sin revisión experta"
-   }
+   },
+   "familia": "Marasmiaceae"
   },
   {
    "id": "calocybe-gambosa",
@@ -5276,7 +5365,8 @@
     "nivel": "si",
     "txt": "Según Wikipedia se puede comer cocinada o en conserva. Se recoge mejor en tiempo seco.",
     "segun": "Wikipedia (inglés, español, euskera) y guías divulgativas: fuentes terciarias, sin revisión experta"
-   }
+   },
+   "familia": "Lyophyllaceae"
   },
   {
    "id": "morchella",
@@ -5305,6 +5395,12 @@
      "nombre": "Gyromitra esculenta (tóxica)",
      "comoDistinguir": "Colmenilla: sombrero con alveolos, hueca por dentro y pie hueco. Gyromitra: sombrero cerebriforme y carne con cámaras.",
      "gravedad": "alta"
+    },
+    {
+     "id": "phallus-impudicus",
+     "nombre": "Phallus impudicus",
+     "comoDistinguir": "Los ejemplares viejos, sin baba, recuerdan algo a una colmenilla. El falo sale de un huevo y tiene pie blanco esponjoso.",
+     "gravedad": "media"
     }
    ],
    "nivelVerificacion": "borrador",
@@ -5503,7 +5599,8 @@
     "nivel": "cond",
     "txt": "Según Wikipedia es comestible y muy apreciada, pero cruda irrita el estómago: siempre bien cocinada.",
     "segun": "Wikipedia (inglés, español, euskera) y guías divulgativas: fuentes terciarias, sin revisión experta"
-   }
+   },
+   "familia": "Morchellaceae"
   },
   {
    "id": "boletus-aereus",
@@ -5741,7 +5838,8 @@
     "nivel": "si",
     "txt": "Según Wikipedia es comestible y muy buscada; en España es de las silvestres que más se recogen para la mesa.",
     "segun": "Wikipedia (inglés, español, euskera) y guías divulgativas: fuentes terciarias, sin revisión experta"
-   }
+   },
+   "familia": "Boletaceae"
   },
   {
    "id": "boletus-pinophilus",
@@ -5982,7 +6080,8 @@
     "nivel": "si",
     "txt": "Según Wikipedia es comestible y se puede usar fresca, seca o en conserva.",
     "segun": "Wikipedia (inglés, español, euskera) y guías divulgativas: fuentes terciarias, sin revisión experta"
-   }
+   },
+   "familia": "Boletaceae"
   },
   {
    "id": "boletus-reticulatus",
@@ -6212,7 +6311,8 @@
     "nivel": "si",
     "txt": "Según Wikipedia es comestible y útil en cocina, como la mayoría de los boletos del grupo del hongo.",
     "segun": "Wikipedia (inglés, español, euskera) y guías divulgativas: fuentes terciarias, sin revisión experta"
-   }
+   },
+   "familia": "Boletaceae"
   },
   {
    "id": "imleria-badia",
@@ -6245,6 +6345,12 @@
      "id": null,
      "nombre": "Gyroporus castaneus",
      "comoDistinguir": "También comestible según la Wikipedia en español; tiene el pie cavernoso (hueco por dentro).",
+     "gravedad": "baja"
+    },
+    {
+     "id": "xerocomellus-chrysenteron",
+     "nombre": "Xerocomellus chrysenteron",
+     "comoDistinguir": "El sombrero se parece; según Wikipedia hay muchas formas intermedias entre especies parecidas y a veces hace falta microscopio.",
      "gravedad": "baja"
     }
    ],
@@ -6433,7 +6539,8 @@
     "nivel": "si",
     "txt": "Según Wikipedia es comestible; algunos autores la valoran mucho y otros la consideran inferior al hongo.",
     "segun": "Wikipedia (inglés, español, euskera) y guías divulgativas: fuentes terciarias, sin revisión experta"
-   }
+   },
+   "familia": "Boletaceae"
   },
   {
    "id": "suillus-luteus",
@@ -6466,6 +6573,12 @@
      "id": null,
      "nombre": "Otros Suillus",
      "comoDistinguir": "Varios boletos de pinar tienen el sombrero viscoso. Pocos Suillus tienen anillo: es una de las pistas de S. luteus.",
+     "gravedad": "baja"
+    },
+    {
+     "id": "suillus-granulatus",
+     "nombre": "Suillus granulatus",
+     "comoDistinguir": "S. luteus tiene un anillo claro y no suelta gotitas en los poros.",
      "gravedad": "baja"
     }
    ],
@@ -6638,7 +6751,8 @@
     "nivel": "cond",
     "txt": "Según Wikipedia es comestible, pero hay que quitarle la cutícula viscosa; y puede causar intolerancia, sobre todo poco hecha.",
     "segun": "Wikipedia (inglés, español, euskera) y guías divulgativas: fuentes terciarias, sin revisión experta"
-   }
+   },
+   "familia": "Suillaceae"
   },
   {
    "id": "leccinum-scabrum",
@@ -6843,7 +6957,8 @@
     "nivel": "cond",
     "txt": "Según Wikipedia es comestible solo si los ejemplares están firmes y se cocinan a fondo; algunas guías no la consideran de interés.",
     "segun": "Wikipedia (inglés, español, euskera) y guías divulgativas: fuentes terciarias, sin revisión experta"
-   }
+   },
+   "familia": "Boletaceae"
   },
   {
    "id": "boletos-poros-rojos",
@@ -7110,7 +7225,8 @@
     "nivel": "cond",
     "txt": "Según Wikipedia son comestibles bien cocinados, pero crudos o mal cocidos dan gastroenteritis, y se parecen a boletos de poros rojos venenosos; algunas guías recomiendan evitarlos. Con alcohol son peligrosos.",
     "segun": "Wikipedia (inglés, español, euskera) y guías divulgativas: fuentes terciarias, sin revisión experta"
-   }
+   },
+   "familia": "Boletaceae"
   },
   {
    "id": "amanita-caesarea",
@@ -7346,7 +7462,8 @@
     "nivel": "cond",
     "txt": "Según Wikipedia es comestible «con una identificación correcta»; se parece a especies tóxicas y a las Amanitas mortales.",
     "segun": "Wikipedia (inglés, español, euskera) y guías divulgativas: fuentes terciarias, sin revisión experta"
-   }
+   },
+   "familia": "Amanitaceae"
   },
   {
    "id": "agaricus-campestris",
@@ -7594,7 +7711,8 @@
     "nivel": "cond",
     "txt": "La «xixa». Según Wikipedia es comestible, pero se confunde con la Amanita virosa (mortal) y con el Agaricus xanthodermus (tóxico): hay que distinguirla con cuidado.",
     "segun": "Wikipedia (inglés, español, euskera) y guías divulgativas: fuentes terciarias, sin revisión experta"
-   }
+   },
+   "familia": "Agaricaceae"
   },
   {
    "id": "agaricus-xanthodermus",
@@ -7797,7 +7915,8 @@
     "En Italia está expresamente prohibida su venta.",
     "Pertenece a un grupo de champiñones (los «Xanthodermati») que amarillean y huelen a fenol.",
     "Por el olor a fenol que se nota al cocinarla, mucha gente la deja de comer a tiempo."
-   ]
+   ],
+   "familia": "Agaricaceae"
   },
   {
    "id": "coprinus-comatus",
@@ -8018,7 +8137,8 @@
     "nivel": "cond",
     "txt": "Según Wikipedia es muy buena comestible cuando es joven, pero se estropea enseguida y se parece a algunas venenosas.",
     "segun": "Wikipedia (inglés, español, euskera) y guías divulgativas: fuentes terciarias, sin revisión experta"
-   }
+   },
+   "familia": "Agaricaceae"
   },
   {
    "id": "lepista-nuda",
@@ -8051,6 +8171,12 @@
      "nombre": "Otras setas violáceas pequeñas",
      "comoDistinguir": "También se parece a Collybia brunneocephala, Clitocybe tarda, Laccaria amethysteo-occidentalis y Lepista subconnexa (Wikipedia).",
      "gravedad": "baja"
+    },
+    {
+     "id": "mycena-pura",
+     "nombre": "Mycena pura",
+     "comoDistinguir": "Wikipedia la cita como parecida. Lepista es más grande y carnosa.",
+     "gravedad": "media"
     }
    ],
    "nivelVerificacion": "borrador",
@@ -8245,7 +8371,8 @@
     "nivel": "cond",
     "txt": "Según Wikipedia es comestible, pero se confunde con Cortinarius azulados o violáceos, muchos venenosos, y puede sentar mal a algunos estómagos.",
     "segun": "Wikipedia (inglés, español, euskera) y guías divulgativas: fuentes terciarias, sin revisión experta"
-   }
+   },
+   "familia": "Tricholomataceae"
   },
   {
    "id": "armillaria-mellea",
@@ -8458,7 +8585,8 @@
     "nivel": "cond",
     "txt": "Según Wikipedia es comestible joven y muy cocinada, sin los pies duros; algunas personas son intolerantes. Crece en madera y se confunde con la Galerina marginata (mortal).",
     "segun": "Wikipedia (inglés, español, euskera) y guías divulgativas: fuentes terciarias, sin revisión experta"
-   }
+   },
+   "familia": "Physalacriaceae"
   },
   {
    "id": "pleurotus-ostreatus",
@@ -8684,7 +8812,8 @@
     "nivel": "si",
     "txt": "Según Wikipedia es una seta comestible muy popular, y se cultiva en todo el mundo.",
     "segun": "Wikipedia (inglés, español, euskera) y guías divulgativas: fuentes terciarias, sin revisión experta"
-   }
+   },
+   "familia": "Pleurotaceae"
   },
   {
    "id": "russula-cyanoxantha",
@@ -8906,7 +9035,8 @@
     "nivel": "si",
     "txt": "Según Wikipedia es comestible y admite muchas preparaciones; su carne es menos dura que la de otras rúsulas.",
     "segun": "Wikipedia (inglés, español, euskera) y guías divulgativas: fuentes terciarias, sin revisión experta"
-   }
+   },
+   "familia": "Russulaceae"
   },
   {
    "id": "craterellus-tubaeformis",
@@ -8942,6 +9072,18 @@
      "nombre": "Craterellus lutescens y C. odoratus",
      "comoDistinguir": "C. lutescens tiene el himenio arrugado sin láminas y vive solo en sitios muy húmedos. C. odoratus es amarillo vivo con el sombrero y el pie sin separación.",
      "gravedad": "baja"
+    },
+    {
+     "id": "craterellus-lutescens",
+     "nombre": "Craterellus lutescens",
+     "comoDistinguir": "C. tubaeformis tiene el envés gris; C. lutescens lo tiene naranja o blanco y es más vistoso.",
+     "gravedad": "baja"
+    },
+    {
+     "id": "cortinarius-rubellus",
+     "nombre": "Cortinarius rubellus",
+     "comoDistinguir": "La trompeta tiene forma de embudo y pliegues, no láminas.",
+     "gravedad": "alta"
     }
    ],
    "nivelVerificacion": "borrador",
@@ -9122,7 +9264,8 @@
     "nivel": "si",
     "txt": "Según Wikipedia es comestible y de calidad, sobre todo frita o en sopas.",
     "segun": "Wikipedia (inglés, español, euskera) y guías divulgativas: fuentes terciarias, sin revisión experta"
-   }
+   },
+   "familia": "Cantharellaceae"
   },
   {
    "id": "lycoperdon-perlatum",
@@ -9334,7 +9477,8 @@
     "nivel": "cond",
     "txt": "Según Wikipedia es comestible solo joven, con el interior completamente blanco; hay que evitar confundirla con Amanitas jóvenes (en huevo), venenosas.",
     "segun": "Wikipedia (inglés, español, euskera) y guías divulgativas: fuentes terciarias, sin revisión experta"
-   }
+   },
+   "familia": "Agaricaceae"
   },
   {
    "id": "laetiporus-sulphureus",
@@ -9546,7 +9690,8 @@
     "nivel": "cond",
     "txt": "Según Wikipedia es comestible joven y cocinada, nunca cruda; en torno al 10 % de las personas tiene reacciones (vómitos, fiebre) u otras molestias digestivas.",
     "segun": "Wikipedia (inglés, español, euskera) y guías divulgativas: fuentes terciarias, sin revisión experta"
-   }
+   },
+   "familia": "Laetiporaceae"
   },
   {
    "id": "fistulina-hepatica",
@@ -9757,7 +9902,8 @@
     "nivel": "cond",
     "txt": "Según Wikipedia es comestible cocinada; los ejemplares viejos pueden necesitar una preparación especial.",
     "segun": "Wikipedia (inglés, español, euskera) y guías divulgativas: fuentes terciarias, sin revisión experta"
-   }
+   },
+   "familia": "Fistulinaceae"
   },
   {
    "id": "auricularia-auricula-judae",
@@ -9954,7 +10100,8 @@
     "nivel": "si",
     "txt": "Según Wikipedia es comestible, pero poco valorada en la cocina.",
     "segun": "Wikipedia (inglés, español, euskera) y guías divulgativas: fuentes terciarias, sin revisión experta"
-   }
+   },
+   "familia": "Auriculariaceae"
   },
   {
    "id": "sparassis-crispa",
@@ -10158,7 +10305,8 @@
     "nivel": "si",
     "txt": "Según Wikipedia es comestible joven y fresca, pero es difícil de limpiar.",
     "segun": "Wikipedia (inglés, español, euskera) y guías divulgativas: fuentes terciarias, sin revisión experta"
-   }
+   },
+   "familia": "Sparassidaceae"
   },
   {
    "id": "amanita-rubescens",
@@ -10382,7 +10530,8 @@
     "nivel": "cond",
     "txt": "Según Wikipedia es comestible solo cocinada; cruda es tóxica. Se confunde con la A. pantherina, tóxica.",
     "segun": "Wikipedia (inglés, español, euskera) y guías divulgativas: fuentes terciarias, sin revisión experta"
-   }
+   },
+   "familia": "Amanitaceae"
   },
   {
    "id": "clitocybe-nebularis",
@@ -10595,7 +10744,8 @@
     "nivel": "cond",
     "txt": "Según Wikipedia es comestible, pero incluso una ración pequeña da molestias digestivas a algunas personas. Se confunde con la Entoloma sinuatum, tóxica.",
     "segun": "Wikipedia (inglés, español, euskera) y guías divulgativas: fuentes terciarias, sin revisión experta"
-   }
+   },
+   "familia": "Clitocybaceae"
   },
   {
    "id": "hypholoma-fasciculare",
@@ -10808,7 +10958,8 @@
     "«fasciculare» viene del latín fascicularis, «en haces»: por cómo crece en matas.",
     "Los fasciculoles que se le atribuyen la toxicidad inhiben la calmodulina; en extractos se ha visto efecto anticoagulante.",
     "En inglés se llama «sulphur tuft» (mata de azufre) o «clustered woodlover»."
-   ]
+   ],
+   "familia": "Strophariaceae"
   },
   {
    "id": "scleroderma-citrinum",
@@ -10994,7 +11145,8 @@
     "Puede estar parasitada por otro hongo, un boleto (Pseudoboletus parasiticus).",
     "Por su textura y aspecto se ha usado fraudulentamente en lugar de trufa.",
     "En inglés se llama «pigskin poison puffball» (bejín venenoso de piel de cerdo)."
-   ]
+   ],
+   "familia": "Sclerodermataceae"
   },
   {
    "id": "russula-emetica",
@@ -11188,7 +11340,8 @@
     "Se comió mucho en Europa del Este y en Rusia tras escaldarla y salarla o encurtirla. Aun así no se recomienda su consumo.",
     "En algunas zonas de Hungría y Eslovaquia se usa la cutícula del sombrero como especia en el gulash.",
     "Jacob Christian Schäffer la describió en 1774 como Agaricus emeticus."
-   ]
+   ],
+   "familia": "Russulaceae"
   },
   {
    "id": "lactarius-torminosus",
@@ -11386,7 +11539,8 @@
     "En Finlandia se recolecta para vender, tras escaldarla o ponerla en salmuera.",
     "Jacob Christian Schäffer la describió en 1774 como Agaricus.",
     "El compuesto al que se atribuye su toxicidad cruda es el velleral, de sabor picante."
-   ]
+   ],
+   "familia": "Russulaceae"
   },
   {
    "id": "hygrophoropsis-aurantiaca",
@@ -11602,7 +11756,8 @@
     "Hasta 1999 a veces se describía como comestible (aunque poco sabrosa). Fries ya la llamó «venenatus» en 1821.",
     "Franz Xaver von Wulfen la describió en 1781 como Agaricus aurantiacus.",
     "Segrega mucho ácido oxálico, que ayuda a deshacer el humus del suelo del bosque."
-   ]
+   ],
+   "familia": "Hygrophoropsidaceae"
   },
   {
    "id": "trametes-versicolor",
@@ -11796,7 +11951,8 @@
     "«versicolor» significa «de varios colores». Sus zonas concéntricas se parecen a las del plumaje de un pavo, de ahí su nombre inglés «turkey tail» (cola de pavo).",
     "En China se consume desde hace miles de años como té o polvo con el nombre «yunzhi» y se usa en medicina tradicional.",
     "Las orugas de una polilla (Nemaxera betulinella) y larvas de algunas moscas se la comen."
-   ]
+   ],
+   "familia": "Polyporaceae"
   },
   {
    "id": "fomes-fomentarius",
@@ -11989,7 +12145,8 @@
     "En medicina antigua se usó como hemostático (para cortar hemorragias) según la Wikipedia en euskera.",
     "Infecta a los árboles por la corteza dañada y reduce el valor de la madera.",
     "Linneo la describió en 1753 en «Species Plantarum»."
-   ]
+   ],
+   "familia": "Polyporaceae"
   },
   {
    "id": "inocybe-erubescens",
@@ -12173,7 +12330,1648 @@
     "En Israel se confunde con setas comestibles del género Tricholoma, como T. terreum.",
     "El color rojo es tan característico que da nombre a la especie: «erubescens» significa «que se pone rojo»."
    ],
-   "notaNomenclatura": "Antes se llamaba Inocybe erubescens o I. patouillardii; hoy Inosperma erubescens."
+   "notaNomenclatura": "Antes se llamaba Inocybe erubescens o I. patouillardii; hoy Inosperma erubescens.",
+   "familia": "Inocybaceae"
+  },
+  {
+   "id": "russula-virescens",
+   "nombreCientifico": "Russula virescens",
+   "sinonimos": [],
+   "nombresComunes": {
+    "es": [],
+    "eu": []
+   },
+   "clase": "sin_datos",
+   "grupo": "laminar",
+   "familia": "Russulaceae",
+   "nivelVerificacion": "borrador",
+   "fuentes": [
+    {
+     "nombre": "Wikipedia (inglés): Russula virescens",
+     "url": "https://en.wikipedia.org/wiki/Russula_virescens",
+     "fechaConsulta": "2026-11-13",
+     "campos": [
+      "clase",
+      "rasgos",
+      "confusiones",
+      "temporada",
+      "habitat"
+     ],
+     "nota": "Fuente terciaria. Sin revisión experta ni segunda fuente."
+    }
+   ],
+   "fotos": [],
+   "candidataComestible": true,
+   "comestibilidad": {
+    "nivel": "cond",
+    "txt": "Según Wikipedia es de las mejores de su género, pero hay que tener cuidado de no confundirla con la cicuta verde (Amanita phalloides), mortal.",
+    "segun": "Wikipedia (inglés): fuente terciaria, sin revisión experta"
+   },
+   "notaComestibilidad": "Según Wikipedia, comestible apreciada; la confusión peligrosa es la cicuta verde.",
+   "clave": "Sombrero verde que se cuartea en placas, SIN anillo ni volva y carne que se rompe como tiza. Si tiene anillo o bolsa en la base: es una Amanita.",
+   "queMirar": [
+    {
+     "parte": "sombrero",
+     "titulo": "Verde y agrietado",
+     "texto": "Hasta 15 cm. Verde pálido con parches más oscuros en forma de placas; el centro, más verde y a menudo hundido."
+    },
+    {
+     "parte": "himenio",
+     "titulo": "Láminas blancas o crema",
+     "texto": "Bastante apretadas, casi libres del pie."
+    },
+    {
+     "parte": "pie",
+     "titulo": "Pie blanco sin anillo",
+     "texto": "Cilíndrico, hasta 8 cm; puede pardear con la edad o al rozarlo."
+    },
+    {
+     "parte": "carne",
+     "titulo": "Carne quebradiza",
+     "texto": "Se rompe en trozos, sin fibras. Sabor suave."
+    },
+    {
+     "parte": "habitat",
+     "titulo": "Bajo frondosas",
+     "texto": "Robles, hayas y álamos temblones."
+    }
+   ],
+   "confusiones": [
+    {
+     "id": "amanita-phalloides",
+     "nombre": "Cicuta verde (Amanita phalloides)",
+     "comoDistinguir": "La cicuta tiene anillo y volva en saco en la base (hay que desenterrarla). Russula virescens no tiene ni anillo ni volva y su sombrero se cuartea en placas.",
+     "gravedad": "alta"
+    }
+   ],
+   "temporada": {
+    "texto": {
+     "meses": [
+      6,
+      7,
+      8,
+      9,
+      10
+     ],
+     "nota": "Sobre todo verano y principios de otoño en Europa.",
+     "fuente": "Wikipedia (inglés)"
+    }
+   },
+   "habitats": [
+    "frondosas",
+    "robledal",
+    "hayedo"
+   ],
+   "curiosidades": [
+    "El verde del sombrero se pierde al cocinarla."
+   ],
+   "ampliacion": "2026-11-13",
+   "habitatTexto": "En el suelo de bosques de frondosas y mixtos, asociada a robles, hayas y álamos temblones.",
+   "recoleccion": {
+    "acc": "extraer",
+    "txt": "La primera vez, sácala entera con la base del pie para estudiarla y tapa el hueco con tierra. Que la confirme una persona experta."
+   }
+  },
+  {
+   "id": "amanita-citrina",
+   "nombreCientifico": "Amanita citrina",
+   "sinonimos": [
+    "Amanita mappa"
+   ],
+   "nombresComunes": {
+    "es": [],
+    "eu": []
+   },
+   "clase": "toxica",
+   "grupo": "laminar",
+   "familia": "Amanitaceae",
+   "nivelVerificacion": "borrador",
+   "fuentes": [
+    {
+     "nombre": "Wikipedia (inglés): Amanita citrina",
+     "url": "https://en.wikipedia.org/wiki/Amanita_citrina",
+     "fechaConsulta": "2026-11-13",
+     "campos": [
+      "clase",
+      "rasgos",
+      "confusiones",
+      "temporada",
+      "habitat"
+     ],
+     "nota": "Fuente terciaria. Sin revisión experta ni segunda fuente."
+    }
+   ],
+   "fotos": [],
+   "notaComestibilidad": "Según Wikipedia no es comestible por su toxicidad. Se confunde sobre todo con la cicuta verde, mortal.",
+   "clave": "Amanita amarillo pálido con placas en el sombrero, anillo y volva grande; huele a patata cruda. No se recoge.",
+   "queMirar": [
+    {
+     "parte": "sombrero",
+     "titulo": "Amarillo pálido con placas",
+     "texto": "4–10 cm, amarillo pálido o blanco, con parches irregulares (restos del velo)."
+    },
+    {
+     "parte": "himenio",
+     "titulo": "Láminas blancas",
+     "texto": "Como en todas las Amanita."
+    },
+    {
+     "parte": "anillo",
+     "titulo": "Anillo blanco",
+     "texto": "Bien visible en el pie."
+    },
+    {
+     "parte": "volva",
+     "titulo": "Volva grande",
+     "texto": "En la base del pie: desentiérrala para verla."
+    },
+    {
+     "parte": "olor",
+     "titulo": "Olor a patata",
+     "texto": "Recuerda a la patata cruda o a la colza."
+    }
+   ],
+   "confusiones": [
+    {
+     "id": "amanita-phalloides",
+     "nombre": "Cicuta verde (Amanita phalloides)",
+     "comoDistinguir": "Es la confusión más habitual según Wikipedia. Las dos tienen anillo y volva: ninguna Amanita de este tipo se recoge.",
+     "gravedad": "alta"
+    }
+   ],
+   "temporada": {
+    "texto": {
+     "meses": [
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+     ],
+     "nota": "Verano y otoño.",
+     "fuente": "Wikipedia (inglés)"
+    }
+   },
+   "habitats": [
+    "frondosas",
+    "coniferas",
+    "bosque"
+   ],
+   "curiosidades": [
+    "Contiene bufotenina, una sustancia que también aparece en algunos sapos.",
+    "Huele a patata cruda: un buen truco para reconocerla."
+   ],
+   "ampliacion": "2026-11-13",
+   "habitatTexto": "Bosques de frondosas y de coníferas, en suelos silíceos (ácidos), en verano y otoño.",
+   "recoleccion": {
+    "acc": "dejar",
+    "txt": "No se recoge: es tóxica. Fotografíala en su sitio y déjala."
+   }
+  },
+  {
+   "id": "craterellus-lutescens",
+   "nombreCientifico": "Craterellus lutescens",
+   "sinonimos": [
+    "Cantharellus lutescens"
+   ],
+   "nombresComunes": {
+    "es": [],
+    "eu": []
+   },
+   "clase": "sin_datos",
+   "grupo": "pliegues",
+   "familia": "Cantharellaceae",
+   "nivelVerificacion": "borrador",
+   "fuentes": [
+    {
+     "nombre": "Wikipedia (inglés): Craterellus lutescens",
+     "url": "https://en.wikipedia.org/wiki/Craterellus_lutescens",
+     "fechaConsulta": "2026-11-13",
+     "campos": [
+      "clase",
+      "rasgos",
+      "confusiones",
+      "temporada",
+      "habitat"
+     ],
+     "nota": "Fuente terciaria. Sin revisión experta ni segunda fuente."
+    }
+   ],
+   "fotos": [],
+   "candidataComestible": true,
+   "comestibilidad": {
+    "nivel": "si",
+    "txt": "Según Wikipedia es comestible.",
+    "segun": "Wikipedia (inglés): fuente terciaria, sin revisión experta"
+   },
+   "notaComestibilidad": "Según Wikipedia es comestible.",
+   "clave": "Trompeta de sombrero pardo y pie amarillo-anaranjado, con el envés casi liso o con venas, en grandes grupos en zonas húmedas.",
+   "queMirar": [
+    {
+     "parte": "sombrero",
+     "titulo": "Pardo y lobulado",
+     "texto": "Irregular, de pardo a color tabaco."
+    },
+    {
+     "parte": "himenio",
+     "titulo": "Envés casi liso",
+     "texto": "Naranja o blanquecino, liso o con venas suaves: no tiene láminas."
+    },
+    {
+     "parte": "pie",
+     "titulo": "Pie amarillo-anaranjado",
+     "texto": "Más vivo que en la trompeta amarilla común."
+    },
+    {
+     "parte": "habitat",
+     "titulo": "En colonias, sitios húmedos",
+     "texto": "Bajo coníferas y en pinares cerca del mar, a menudo en zonas encharcadas."
+    }
+   ],
+   "confusiones": [
+    {
+     "id": "craterellus-tubaeformis",
+     "nombre": "Trompeta amarilla (Craterellus tubaeformis)",
+     "comoDistinguir": "C. tubaeformis tiene el envés gris; C. lutescens lo tiene naranja o blanco y es más vistoso.",
+     "gravedad": "baja"
+    }
+   ],
+   "habitats": [
+    "coniferas",
+    "pinar"
+   ],
+   "ampliacion": "2026-11-13",
+   "habitatTexto": "En colonias grandes bajo coníferas (abetos, pinos cerca del mar), a menudo en zonas húmedas o encharcadas.",
+   "recoleccion": {
+    "acc": "extraer",
+    "txt": "La primera vez, sácala entera con la base del pie para estudiarla y tapa el hueco con tierra. Que la confirme una persona experta."
+   },
+   "curiosidades": [
+    "Antes se llamaba Cantharellus lutescens o Cantharellus xanthopus."
+   ]
+  },
+  {
+   "id": "clitocybe-odora",
+   "nombreCientifico": "Clitocybe odora",
+   "sinonimos": [],
+   "nombresComunes": {
+    "es": [],
+    "eu": []
+   },
+   "clase": "sin_datos",
+   "grupo": "laminar",
+   "familia": "Clitocybaceae",
+   "nivelVerificacion": "borrador",
+   "fuentes": [
+    {
+     "nombre": "Wikipedia (inglés): Clitocybe odora",
+     "url": "https://en.wikipedia.org/wiki/Clitocybe_odora",
+     "fechaConsulta": "2026-11-13",
+     "campos": [
+      "clase",
+      "rasgos",
+      "confusiones",
+      "temporada",
+      "habitat"
+     ],
+     "nota": "Fuente terciaria. Sin revisión experta ni segunda fuente."
+    }
+   ],
+   "fotos": [],
+   "candidataComestible": true,
+   "comestibilidad": {
+    "nivel": "cond",
+    "txt": "Según Wikipedia es comestible, pero se parece a especies tóxicas y algunas guías desaconsejan comerla.",
+    "segun": "Wikipedia (inglés): fuente terciaria, sin revisión experta"
+   },
+   "notaComestibilidad": "Comestible según Wikipedia, con aviso: se parece a especies tóxicas.",
+   "clave": "Seta azul-verdosa que huele fuerte a anís. El color solo no basta: de joven se confunde con la estrofaria verde, tóxica.",
+   "queMirar": [
+    {
+     "parte": "olor",
+     "titulo": "Olor a anís",
+     "texto": "Fuerte olor y sabor a anís."
+    },
+    {
+     "parte": "sombrero",
+     "titulo": "Azul-verdoso",
+     "texto": "3–8 cm; de joven gris azulado, luego azul-verde y en forma de copa."
+    },
+    {
+     "parte": "himenio",
+     "titulo": "Láminas claras",
+     "texto": "Blanco crema o verde-azuladas, algo bajantes por el pie."
+    },
+    {
+     "parte": "pie",
+     "titulo": "Sin anillo",
+     "texto": "Blanco o del color del sombrero, hasta 6 cm."
+    },
+    {
+     "parte": "habitat",
+     "titulo": "Hojarasca",
+     "texto": "En bosques de frondosas y coníferas, en grupos pequeños."
+    }
+   ],
+   "confusiones": [
+    {
+     "id": null,
+     "nombre": "Estrofaria verde (Stropharia aeruginosa) y otras tóxicas",
+     "comoDistinguir": "Según Wikipedia, los ejemplares jóvenes se pueden confundir con ella. Coge solo ejemplares maduros, con el olor a anís claro, y mira todas las partes.",
+     "gravedad": "alta"
+    }
+   ],
+   "temporada": {
+    "texto": {
+     "meses": [
+      8,
+      9,
+      10,
+      11,
+      12
+     ],
+     "nota": "En Europa, de agosto a diciembre.",
+     "fuente": "Wikipedia (inglés)"
+    }
+   },
+   "habitats": [
+    "frondosas",
+    "coniferas",
+    "bosque"
+   ],
+   "curiosidades": [
+    "«odora» significa «perfumada» en latín. Existe una variedad blanca con el mismo olor.",
+    "El olor a anís viene del p-anisaldehído."
+   ],
+   "ampliacion": "2026-11-13",
+   "habitatTexto": "Bosques de frondosas y coníferas, en grupos pequeños junto a raíces de árboles y entre la hojarasca.",
+   "recoleccion": {
+    "acc": "extraer",
+    "txt": "La primera vez, sácala entera con la base del pie para estudiarla y tapa el hueco con tierra. Que la confirme una persona experta."
+   }
+  },
+  {
+   "id": "laccaria-amethystina",
+   "nombreCientifico": "Laccaria amethystina",
+   "sinonimos": [],
+   "nombresComunes": {
+    "es": [],
+    "eu": []
+   },
+   "clase": "sin_datos",
+   "grupo": "laminar",
+   "familia": "Hydnangiaceae",
+   "nivelVerificacion": "borrador",
+   "fuentes": [
+    {
+     "nombre": "Wikipedia (inglés): Laccaria amethystina",
+     "url": "https://en.wikipedia.org/wiki/Laccaria_amethystina",
+     "fechaConsulta": "2026-11-13",
+     "campos": [
+      "clase",
+      "rasgos",
+      "confusiones",
+      "temporada",
+      "habitat"
+     ],
+     "nota": "Fuente terciaria. Sin revisión experta ni segunda fuente."
+    }
+   ],
+   "fotos": [
+    {
+     "sp": "Laccaria amethystina",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bd/Laccaria_amethystina_LC0370.jpg/{w}px-Laccaria_amethystina_LC0370.jpg",
+     "autor": "Jörg Hempel",
+     "licencia": "CC BY-SA 3.0 DE",
+     "licenciaUrl": "https://creativecommons.org/licenses/by-sa/3.0/de/",
+     "pagina": "https://commons.wikimedia.org/wiki/File:Laccaria_amethystina_LC0370.jpg",
+     "origen": "Wikimedia Commons"
+    }
+   ],
+   "candidataComestible": true,
+   "comestibilidad": {
+    "nivel": "cond",
+    "txt": "Según Wikipedia es comestible pero no de calidad, y en suelos contaminados acumula arsénico.",
+    "segun": "Wikipedia (inglés): fuente terciaria, sin revisión experta"
+   },
+   "notaComestibilidad": "Comestible según Wikipedia; acumula arsénico en suelos contaminados.",
+   "clave": "Pequeña y toda violeta (sombrero, láminas separadas y pie fibroso). Al secarse pierde el color.",
+   "queMirar": [
+    {
+     "parte": "sombrero",
+     "titulo": "Violeta intenso",
+     "texto": "Hasta 6 cm; violeta oscuro en húmedo, palidece al secarse."
+    },
+    {
+     "parte": "himenio",
+     "titulo": "Láminas violetas y separadas",
+     "texto": "Del mismo color que el sombrero."
+    },
+    {
+     "parte": "pie",
+     "titulo": "Pie fibroso",
+     "texto": "Del color del sombrero, hueco y bastante duro, con pelillos blancos en la base."
+    },
+    {
+     "parte": "habitat",
+     "titulo": "Hayas y otros árboles",
+     "texto": "Bosques de frondosas y coníferas, a menudo bajo hayas."
+    }
+   ],
+   "confusiones": [
+    {
+     "id": "mycena-pura",
+     "nombre": "Micena pura (Mycena pura)",
+     "comoDistinguir": "Mycena pura también es lila pero huele a rábano y es tóxica (muscarina).",
+     "gravedad": "media"
+    }
+   ],
+   "temporada": {
+    "texto": {
+     "meses": [
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+     ],
+     "nota": "En Europa, de junio a diciembre.",
+     "fuente": "Wikipedia (inglés)"
+    }
+   },
+   "habitats": [
+    "hayedo",
+    "frondosas",
+    "coniferas"
+   ],
+   "curiosidades": [
+    "Es un «hongo del amoniaco»: sale en abundancia donde se ha echado amoniaco o materia rica en nitrógeno."
+   ],
+   "ampliacion": "2026-11-13",
+   "habitatTexto": "Bosques de frondosas y coníferas, sobre todo bajo hayas; abundante donde el suelo es rico en nitrógeno.",
+   "recoleccion": {
+    "acc": "extraer",
+    "txt": "La primera vez, sácala entera con la base del pie para estudiarla y tapa el hueco con tierra. Que la confirme una persona experta."
+   }
+  },
+  {
+   "id": "hygrophorus-marzuolus",
+   "nombreCientifico": "Hygrophorus marzuolus",
+   "sinonimos": [],
+   "nombresComunes": {
+    "es": [],
+    "eu": []
+   },
+   "clase": "sin_datos",
+   "grupo": "laminar",
+   "familia": "Hygrophoraceae",
+   "nivelVerificacion": "borrador",
+   "fuentes": [
+    {
+     "nombre": "Wikipedia (inglés): Hygrophorus marzuolus",
+     "url": "https://en.wikipedia.org/wiki/Hygrophorus_marzuolus",
+     "fechaConsulta": "2026-11-13",
+     "campos": [
+      "clase",
+      "rasgos",
+      "confusiones",
+      "temporada",
+      "habitat"
+     ],
+     "nota": "Fuente terciaria. Sin revisión experta ni segunda fuente."
+    }
+   ],
+   "fotos": [],
+   "candidataComestible": true,
+   "comestibilidad": {
+    "nivel": "si",
+    "txt": "Según Wikipedia se considera comestible en Europa y en algunas regiones es muy apreciada.",
+    "segun": "Wikipedia (inglés): fuente terciaria, sin revisión experta"
+   },
+   "notaComestibilidad": "Comestible apreciada en Europa según Wikipedia.",
+   "clave": "La «seta de marzo»: sale cuando se funde la nieve, bajo coníferas de montaña. Sombrero gris oscuro y láminas separadas que agrisan.",
+   "queMirar": [
+    {
+     "parte": "sombrero",
+     "titulo": "Gris a negruzco",
+     "texto": "2,5–11 cm, liso y algo viscoso; centro gris-pardo y borde más oscuro."
+    },
+    {
+     "parte": "himenio",
+     "titulo": "Láminas separadas",
+     "texto": "Anchas; blancas de joven y luego gris azuladas."
+    },
+    {
+     "parte": "pie",
+     "titulo": "Pie blanquecino",
+     "texto": "3–10 cm, grueso."
+    },
+    {
+     "parte": "habitat",
+     "titulo": "Con la nieve",
+     "texto": "En bosques de montaña bajo abetos, a menudo medio enterrada en el musgo."
+    }
+   ],
+   "habitats": [
+    "abetal",
+    "coniferas"
+   ],
+   "curiosidades": [
+    "Sale bajo la nieve que se está fundiendo: por eso se llama «de marzo»."
+   ],
+   "ampliacion": "2026-11-13",
+   "habitatTexto": "Bosques de montaña bajo abetos y otras coníferas, entre musgo y pinocha, cuando se funde la nieve.",
+   "recoleccion": {
+    "acc": "extraer",
+    "txt": "La primera vez, sácala entera con la base del pie para estudiarla y tapa el hueco con tierra. Que la confirme una persona experta."
+   },
+   "confusiones": []
+  },
+  {
+   "id": "tricholoma-portentosum",
+   "nombreCientifico": "Tricholoma portentosum",
+   "sinonimos": [],
+   "nombresComunes": {
+    "es": [],
+    "eu": []
+   },
+   "clase": "sin_datos",
+   "grupo": "laminar",
+   "familia": "Tricholomataceae",
+   "nivelVerificacion": "borrador",
+   "fuentes": [
+    {
+     "nombre": "Wikipedia (inglés): Tricholoma portentosum",
+     "url": "https://en.wikipedia.org/wiki/Tricholoma_portentosum",
+     "fechaConsulta": "2026-11-13",
+     "campos": [
+      "clase",
+      "rasgos",
+      "confusiones",
+      "temporada",
+      "habitat"
+     ],
+     "nota": "Fuente terciaria. Sin revisión experta ni segunda fuente."
+    }
+   ],
+   "fotos": [],
+   "candidataComestible": true,
+   "comestibilidad": {
+    "nivel": "cond",
+    "txt": "Según Wikipedia es muy apreciada, pero algunos lo desaconsejan porque se parece a especies peligrosas.",
+    "segun": "Wikipedia (inglés): fuente terciaria, sin revisión experta"
+   },
+   "notaComestibilidad": "Apreciada, con aviso de confusión con tricolomas tóxicos.",
+   "clave": "Tricoloma gris oscuro con fibras negruzcas radiales, láminas blancas y pie blanco con tono amarillo arriba. Huele a harina.",
+   "queMirar": [
+    {
+     "parte": "sombrero",
+     "titulo": "Gris con estrías oscuras",
+     "texto": "3–11 cm, con mamelón; viscoso en húmedo."
+    },
+    {
+     "parte": "himenio",
+     "titulo": "Láminas blancas",
+     "texto": "Apretadas."
+    },
+    {
+     "parte": "pie",
+     "titulo": "Pie blanco algo amarillo",
+     "texto": "Macizo, con un tono amarillo en la parte de arriba."
+    },
+    {
+     "parte": "olor",
+     "titulo": "Olor a harina",
+     "texto": "Olor y sabor harinosos."
+    },
+    {
+     "parte": "habitat",
+     "titulo": "Pinares",
+     "texto": "Sobre todo con pino silvestre; a veces robles o hayas en suelos arenosos."
+    }
+   ],
+   "confusiones": [
+    {
+     "id": "tricholoma-pardinum",
+     "nombre": "Tricholoma pardinum (tóxico)",
+     "comoDistinguir": "T. pardinum tiene escamas grises marcadas que dan aspecto atigrado al sombrero.",
+     "gravedad": "alta"
+    },
+    {
+     "id": null,
+     "nombre": "Tricholoma virgatum (no comestible)",
+     "comoDistinguir": "Sombrero gris plateado, huele a tierra húmeda y sabe amargo.",
+     "gravedad": "media"
+    }
+   ],
+   "temporada": {
+    "texto": {
+     "meses": [
+      11,
+      12
+     ],
+     "nota": "Finales de otoño.",
+     "fuente": "Wikipedia (inglés)"
+    }
+   },
+   "habitats": [
+    "pinar",
+    "coniferas"
+   ],
+   "curiosidades": [
+    "«portentosum» se refiere a su sabor: «maravilloso» en latín."
+   ],
+   "ampliacion": "2026-11-13",
+   "habitatTexto": "Pinares, sobre todo de pino silvestre; a veces con robles o hayas en suelos arenosos. A finales de otoño.",
+   "recoleccion": {
+    "acc": "extraer",
+    "txt": "La primera vez, sácala entera con la base del pie para estudiarla y tapa el hueco con tierra. Que la confirme una persona experta."
+   }
+  },
+  {
+   "id": "tricholoma-terreum",
+   "nombreCientifico": "Tricholoma terreum",
+   "sinonimos": [
+    "Tricholoma myomyces"
+   ],
+   "nombresComunes": {
+    "es": [],
+    "eu": []
+   },
+   "clase": "sin_datos",
+   "grupo": "laminar",
+   "familia": "Tricholomataceae",
+   "nivelVerificacion": "borrador",
+   "fuentes": [
+    {
+     "nombre": "Wikipedia (inglés): Tricholoma terreum",
+     "url": "https://en.wikipedia.org/wiki/Tricholoma_terreum",
+     "fechaConsulta": "2026-11-13",
+     "campos": [
+      "clase",
+      "rasgos",
+      "confusiones",
+      "temporada",
+      "habitat"
+     ],
+     "nota": "Fuente terciaria. Sin revisión experta ni segunda fuente."
+    }
+   ],
+   "fotos": [],
+   "candidataComestible": true,
+   "comestibilidad": {
+    "nivel": "cond",
+    "txt": "Según Wikipedia se considera comestible, pero tóxica en cantidades muy grandes; hubo un debate sobre rabdomiólisis y un estudio de 2024 la da por comestible.",
+    "segun": "Wikipedia (inglés): fuente terciaria, sin revisión experta"
+   },
+   "notaComestibilidad": "Comestible según Wikipedia; tóxica solo en cantidades muy altas (debate sobre rabdomiólisis).",
+   "clave": "Tricoloma pequeño de sombrero gris cubierto de escamitas finas, sin anillo, en grupos bajo pinos. Ojo: los tricolomas grises se confunden con T. pardinum, tóxico.",
+   "queMirar": [
+    {
+     "parte": "sombrero",
+     "titulo": "Gris con escamitas",
+     "texto": "4–7 cm, cónico a convexo, cubierto de escamas grises finas."
+    },
+    {
+     "parte": "himenio",
+     "titulo": "Láminas claras",
+     "texto": "Bastante juntas; esporada blanca."
+    },
+    {
+     "parte": "pie",
+     "titulo": "Pie blanco sin anillo",
+     "texto": "3–8 cm."
+    },
+    {
+     "parte": "carne",
+     "titulo": "Carne fina",
+     "texto": "Blanquecina y frágil, olor suave a harina."
+    },
+    {
+     "parte": "habitat",
+     "titulo": "Bajo pinos",
+     "texto": "En grupos densos bajo pinos y abetos; también en parques."
+    }
+   ],
+   "confusiones": [
+    {
+     "id": "tricholoma-pardinum",
+     "nombre": "Tricholoma pardinum (tóxico)",
+     "comoDistinguir": "Más grande, con escamas en el sombrero y olor harinoso. Una guía de los 70 aconsejaba a los novatos no coger ningún tricoloma gris.",
+     "gravedad": "alta"
+    }
+   ],
+   "temporada": {
+    "texto": {
+     "meses": [
+      9,
+      10,
+      11,
+      12
+     ],
+     "nota": "En Europa, de septiembre a diciembre.",
+     "fuente": "Wikipedia (inglés)"
+    }
+   },
+   "habitats": [
+    "pinar",
+    "coniferas",
+    "parque"
+   ],
+   "ampliacion": "2026-11-13",
+   "habitatTexto": "En grupos densos bajo pinos y abetos; también en parques junto a estos árboles y en corros.",
+   "recoleccion": {
+    "acc": "extraer",
+    "txt": "La primera vez, sácala entera con la base del pie para estudiarla y tapa el hueco con tierra. Que la confirme una persona experta."
+   },
+   "curiosidades": [
+    "Todavía se vende en mercados de Francia."
+   ]
+  },
+  {
+   "id": "xerocomellus-chrysenteron",
+   "nombreCientifico": "Xerocomellus chrysenteron",
+   "sinonimos": [
+    "Boletus chrysenteron",
+    "Xerocomus chrysenteron"
+   ],
+   "nombresComunes": {
+    "es": [],
+    "eu": []
+   },
+   "clase": "sin_datos",
+   "grupo": "boleto",
+   "familia": "Boletaceae",
+   "nivelVerificacion": "borrador",
+   "fuentes": [
+    {
+     "nombre": "Wikipedia (inglés): Xerocomellus chrysenteron",
+     "url": "https://en.wikipedia.org/wiki/Xerocomellus_chrysenteron",
+     "fechaConsulta": "2026-11-13",
+     "campos": [
+      "clase",
+      "rasgos",
+      "confusiones",
+      "temporada",
+      "habitat"
+     ],
+     "nota": "Fuente terciaria. Sin revisión experta ni segunda fuente."
+    }
+   ],
+   "fotos": [],
+   "candidataComestible": true,
+   "comestibilidad": {
+    "nivel": "cond",
+    "txt": "Según Wikipedia es comestible pero no de calidad (sosa y blanda); los poros se estropean enseguida.",
+    "segun": "Wikipedia (inglés): fuente terciaria, sin revisión experta"
+   },
+   "notaComestibilidad": "Comestible pero poco apreciada según Wikipedia.",
+   "clave": "Boleto pequeño de sombrero pardo que se agrieta enseñando carne rojiza, poros amarillos grandes y pie amarillo con rojo abajo. Azulea.",
+   "queMirar": [
+    {
+     "parte": "sombrero",
+     "titulo": "Pardo y agrietado",
+     "texto": "4–10 cm; las grietas dejan ver carne rojiza."
+    },
+    {
+     "parte": "himenio",
+     "titulo": "Poros amarillos grandes",
+     "texto": "Angulosos."
+    },
+    {
+     "parte": "pie",
+     "titulo": "Pie amarillo y rojo",
+     "texto": "Amarillo arriba y con fibrillas rojo coral en la parte baja, sin anillo."
+    },
+    {
+     "parte": "carne",
+     "titulo": "Azulea",
+     "texto": "Al cortar o rozar se pone azul."
+    },
+    {
+     "parte": "habitat",
+     "titulo": "Frondosas",
+     "texto": "Solo o en grupos pequeños, a menudo bajo hayas."
+    }
+   ],
+   "confusiones": [
+    {
+     "id": "imleria-badia",
+     "nombre": "Boleto bayo (Imleria badia)",
+     "comoDistinguir": "El sombrero se parece; según Wikipedia hay muchas formas intermedias entre especies parecidas y a veces hace falta microscopio.",
+     "gravedad": "baja"
+    }
+   ],
+   "temporada": {
+    "texto": {
+     "meses": [
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      1
+     ],
+     "nota": "De principios de verano a mediados de invierno.",
+     "fuente": "Wikipedia (inglés)"
+    }
+   },
+   "habitats": [
+    "frondosas",
+    "hayedo",
+    "mixto"
+   ],
+   "ampliacion": "2026-11-13",
+   "habitatTexto": "Solo o en grupos pequeños en bosques de frondosas y mixtos, a menudo bajo hayas, en suelos que drenan bien.",
+   "recoleccion": {
+    "acc": "extraer",
+    "txt": "La primera vez, sácala entera con la base del pie para estudiarla y tapa el hueco con tierra. Que la confirme una persona experta."
+   },
+   "curiosidades": [
+    "«chrysenteron» viene del griego: algo así como «tripas de oro»."
+   ]
+  },
+  {
+   "id": "suillus-granulatus",
+   "nombreCientifico": "Suillus granulatus",
+   "sinonimos": [],
+   "nombresComunes": {
+    "es": [],
+    "eu": []
+   },
+   "clase": "sin_datos",
+   "grupo": "boleto",
+   "familia": "Suillaceae",
+   "nivelVerificacion": "borrador",
+   "fuentes": [
+    {
+     "nombre": "Wikipedia (inglés): Suillus granulatus",
+     "url": "https://en.wikipedia.org/wiki/Suillus_granulatus",
+     "fechaConsulta": "2026-11-13",
+     "campos": [
+      "clase",
+      "rasgos",
+      "confusiones",
+      "temporada",
+      "habitat"
+     ],
+     "nota": "Fuente terciaria. Sin revisión experta ni segunda fuente."
+    }
+   ],
+   "fotos": [],
+   "candidataComestible": true,
+   "comestibilidad": {
+    "nivel": "cond",
+    "txt": "Según Wikipedia es comestible pero hay que quitar la piel viscosa (y mejor los tubos); a algunas personas les sienta mal y puede irritar la piel al tocarla.",
+    "segun": "Wikipedia (inglés): fuente terciaria, sin revisión experta"
+   },
+   "notaComestibilidad": "Comestible quitando la cutícula; puede sentar mal según Wikipedia.",
+   "clave": "Boleto de pinar con sombrero viscoso pardo-anaranjado, SIN anillo y poros que lloran gotitas lechosas de joven.",
+   "queMirar": [
+    {
+     "parte": "sombrero",
+     "titulo": "Viscoso",
+     "texto": "4–12 cm, pardo-anaranjado; brillante en seco."
+    },
+    {
+     "parte": "himenio",
+     "titulo": "Poros que lloran",
+     "texto": "Pequeños, amarillo pálido, con gotitas lechosas de joven."
+    },
+    {
+     "parte": "pie",
+     "titulo": "Granulitos arriba, sin anillo",
+     "texto": "Amarillo pálido con granitos pardos en la parte alta."
+    }
+   ],
+   "confusiones": [
+    {
+     "id": "suillus-luteus",
+     "nombre": "Babosa (Suillus luteus)",
+     "comoDistinguir": "S. luteus tiene un anillo claro y no suelta gotitas en los poros.",
+     "gravedad": "baja"
+    }
+   ],
+   "habitats": [
+    "pinar"
+   ],
+   "curiosidades": [
+    "Es el Suillus de pinar más extendido en climas cálidos.",
+    "Sus poros lloran gotitas lechosas cuando es joven."
+   ],
+   "ampliacion": "2026-11-13",
+   "habitatTexto": "Siempre con pinos, con los que forma micorrizas, en suelos calizos y ácidos.",
+   "recoleccion": {
+    "acc": "extraer",
+    "txt": "La primera vez, sácala entera con la base del pie para estudiarla y tapa el hueco con tierra. Que la confirme una persona experta."
+   }
+  },
+  {
+   "id": "mycena-pura",
+   "nombreCientifico": "Mycena pura",
+   "sinonimos": [],
+   "nombresComunes": {
+    "es": [],
+    "eu": []
+   },
+   "clase": "toxica",
+   "grupo": "laminar",
+   "familia": "Mycenaceae",
+   "nivelVerificacion": "borrador",
+   "fuentes": [
+    {
+     "nombre": "Wikipedia (inglés): Mycena pura",
+     "url": "https://en.wikipedia.org/wiki/Mycena_pura",
+     "fechaConsulta": "2026-11-13",
+     "campos": [
+      "clase",
+      "rasgos",
+      "confusiones",
+      "temporada",
+      "habitat"
+     ],
+     "nota": "Fuente terciaria. Sin revisión experta ni segunda fuente."
+    }
+   ],
+   "fotos": [],
+   "notaComestibilidad": "Según Wikipedia contiene muscarina y no debe comerse.",
+   "clave": "Seta pequeña lila o violeta con olor a rábano. Contiene muscarina.",
+   "queMirar": [
+    {
+     "parte": "olor",
+     "titulo": "Olor a rábano",
+     "texto": "Muy característico."
+    },
+    {
+     "parte": "sombrero",
+     "titulo": "Lila a violeta",
+     "texto": "2–6 cm; cambia de color con la edad."
+    },
+    {
+     "parte": "himenio",
+     "titulo": "Láminas pálidas o rosadas",
+     "texto": "Con venas entre ellas al envejecer."
+    },
+    {
+     "parte": "pie",
+     "titulo": "Pie hueco sin anillo",
+     "texto": "Del color del sombrero, fino."
+    }
+   ],
+   "confusiones": [
+    {
+     "id": "laccaria-amethystina",
+     "nombre": "Laccaria amethystina",
+     "comoDistinguir": "Laccaria es violeta intenso, sin olor a rábano y con láminas del mismo violeta.",
+     "gravedad": "media"
+    },
+    {
+     "id": "lepista-nuda",
+     "nombre": "Pie azul (Lepista nuda)",
+     "comoDistinguir": "Wikipedia la cita como parecida. Lepista es más grande y carnosa.",
+     "gravedad": "media"
+    }
+   ],
+   "habitats": [
+    "coniferas",
+    "frondosas",
+    "bosque"
+   ],
+   "ampliacion": "2026-11-13",
+   "habitatTexto": "Sobre la hojarasca en descomposición, bajo coníferas y a veces frondosas.",
+   "recoleccion": {
+    "acc": "dejar",
+    "txt": "No se recoge: es tóxica. Fotografíala en su sitio y déjala."
+   },
+   "curiosidades": [
+    "Huele a rábano: es una de las pocas setas que se reconocen por la nariz."
+   ]
+  },
+  {
+   "id": "clathrus-ruber",
+   "nombreCientifico": "Clathrus ruber",
+   "sinonimos": [],
+   "nombresComunes": {
+    "es": [],
+    "eu": []
+   },
+   "clase": "no_comestible",
+   "grupo": "faloide",
+   "familia": "Phallaceae",
+   "nivelVerificacion": "borrador",
+   "fuentes": [
+    {
+     "nombre": "Wikipedia (inglés): Clathrus ruber",
+     "url": "https://en.wikipedia.org/wiki/Clathrus_ruber",
+     "fechaConsulta": "2026-11-13",
+     "campos": [
+      "clase",
+      "rasgos",
+      "confusiones",
+      "temporada",
+      "habitat"
+     ],
+     "nota": "Fuente terciaria. Sin revisión experta ni segunda fuente."
+    }
+   ],
+   "fotos": [],
+   "notaComestibilidad": "Según Wikipedia no hay datos oficiales de que se coma, y su olor a carne podrida echa para atrás a cualquiera.",
+   "clave": "Jaula roja que sale de un «huevo» blanco y huele a carne podrida. Imposible de confundir.",
+   "queMirar": [
+    {
+     "parte": "volva",
+     "titulo": "Huevo blanco",
+     "texto": "Primero es un huevo blanquecino unido al suelo."
+    },
+    {
+     "parte": "sombrero",
+     "titulo": "Red de brazos rojos",
+     "texto": "Rosa, naranja o rojo, con forma de jaula."
+    },
+    {
+     "parte": "olor",
+     "titulo": "Olor a carroña",
+     "texto": "Una masa verde oliva pegajosa dentro de la jaula atrae a las moscas."
+    }
+   ],
+   "habitats": [
+    "parque",
+    "huerto",
+    "bosque"
+   ],
+   "curiosidades": [
+    "Conrad Gesner la dibujó en 1560 creyendo que era un animal marino.",
+    "La Sociedad Micológica Alemana la eligió «seta del año» en 2011."
+   ],
+   "ampliacion": "2026-11-13",
+   "habitatTexto": "Sobre restos de madera en descomposición: hojarasca, jardines, praderas y acolchados de astillas.",
+   "recoleccion": {
+    "acc": "dejar",
+    "txt": "No se recoge: no se considera comestible. Fotografíala en su sitio y déjala."
+   },
+   "confusiones": []
+  },
+  {
+   "id": "phallus-impudicus",
+   "nombreCientifico": "Phallus impudicus",
+   "sinonimos": [],
+   "nombresComunes": {
+    "es": [],
+    "eu": []
+   },
+   "clase": "no_comestible",
+   "grupo": "faloide",
+   "familia": "Phallaceae",
+   "nivelVerificacion": "borrador",
+   "fuentes": [
+    {
+     "nombre": "Wikipedia (inglés): Phallus impudicus",
+     "url": "https://en.wikipedia.org/wiki/Phallus_impudicus",
+     "fechaConsulta": "2026-11-13",
+     "campos": [
+      "clase",
+      "rasgos",
+      "confusiones",
+      "temporada",
+      "habitat"
+     ],
+     "nota": "Fuente terciaria. Sin revisión experta ni segunda fuente."
+    }
+   ],
+   "fotos": [],
+   "notaComestibilidad": "Wikipedia dice que el huevo se puede comer, pero un huevo de seta se confunde con el de una Amanita mortal: en esta app no se recoge.",
+   "clave": "Pie blanco esponjoso con una cabeza cubierta de baba verde que huele a carroña. Sale de un huevo.",
+   "queMirar": [
+    {
+     "parte": "volva",
+     "titulo": "Huevo",
+     "texto": "Blanquecino o rosado, 4–6 cm, con una gelatina dentro."
+    },
+    {
+     "parte": "pie",
+     "titulo": "Pie blanco esponjoso",
+     "texto": "10–30 cm."
+    },
+    {
+     "parte": "sombrero",
+     "titulo": "Cabeza con baba verde",
+     "texto": "Cónica; la baba pardo-verdosa desaparece y deja una superficie alveolada."
+    },
+    {
+     "parte": "olor",
+     "titulo": "Olor a carroña",
+     "texto": "Atrae moscas que dispersan las esporas."
+    }
+   ],
+   "confusiones": [
+    {
+     "id": "morchella",
+     "nombre": "Colmenilla (Morchella)",
+     "comoDistinguir": "Los ejemplares viejos, sin baba, recuerdan algo a una colmenilla. El falo sale de un huevo y tiene pie blanco esponjoso.",
+     "gravedad": "media"
+    },
+    {
+     "id": "amanita-phalloides",
+     "nombre": "Huevo de Amanita",
+     "comoDistinguir": "Un huevo de seta cerrado puede ser una Amanita mortal joven: córtalo de arriba abajo; si se ve una seta con láminas dentro, es Amanita.",
+     "gravedad": "alta"
+    }
+   ],
+   "temporada": {
+    "texto": {
+     "meses": [
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+     ],
+     "nota": "De verano a finales de otoño.",
+     "fuente": "Wikipedia (inglés)"
+    }
+   },
+   "habitats": [
+    "madera",
+    "frondosas",
+    "parque"
+   ],
+   "curiosidades": [
+    "Crece 10–15 cm por hora.",
+    "Puede empujar con tanta fuerza que atraviesa el asfalto."
+   ],
+   "ampliacion": "2026-11-13",
+   "habitatTexto": "Sobre restos de madera en bosques de frondosas sobre todo; también en pinares, parques y jardines.",
+   "recoleccion": {
+    "acc": "dejar",
+    "txt": "No se recoge: no se considera comestible. Fotografíala en su sitio y déjala."
+   }
+  },
+  {
+   "id": "chlorophyllum-rhacodes",
+   "nombreCientifico": "Chlorophyllum rhacodes",
+   "sinonimos": [
+    "Macrolepiota rhacodes",
+    "Lepiota rhacodes"
+   ],
+   "nombresComunes": {
+    "es": [],
+    "eu": []
+   },
+   "clase": "sin_datos",
+   "grupo": "laminar",
+   "familia": "Agaricaceae",
+   "nivelVerificacion": "borrador",
+   "fuentes": [
+    {
+     "nombre": "Wikipedia (inglés): Shaggy parasol",
+     "url": "https://en.wikipedia.org/wiki/Shaggy_parasol",
+     "fechaConsulta": "2026-11-13",
+     "campos": [
+      "clase",
+      "rasgos",
+      "confusiones",
+      "temporada",
+      "habitat"
+     ],
+     "nota": "Fuente terciaria. Sin revisión experta ni segunda fuente."
+    }
+   ],
+   "fotos": [
+    {
+     "sp": "Chlorophyllum rhacodes",
+     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Chlorophyllum_rhacodes_LC0093.jpg/{w}px-Chlorophyllum_rhacodes_LC0093.jpg",
+     "autor": "Jörg Hempel",
+     "licencia": "CC BY-SA 2.0 DE",
+     "licenciaUrl": "https://creativecommons.org/licenses/by-sa/2.0/de/",
+     "pagina": "https://commons.wikimedia.org/wiki/File:Chlorophyllum_rhacodes_LC0093.jpg",
+     "origen": "Wikimedia Commons"
+    }
+   ],
+   "candidataComestible": true,
+   "comestibilidad": {
+    "nivel": "cond",
+    "txt": "Según Wikipedia se alaba como comestible, pero puede dar problemas digestivos y alergias; una especie hermana (C. brunneum) se considera tóxica en algunos países. No para principiantes.",
+    "segun": "Wikipedia (inglés): fuente terciaria, sin revisión experta"
+   },
+   "notaComestibilidad": "Comestible con avisos; no recomendada a principiantes (Wikipedia).",
+   "clave": "Parasol con escamas gruesas y pie LISO (sin dibujo atigrado) cuya carne se pone rojiza al cortarla.",
+   "queMirar": [
+    {
+     "parte": "sombrero",
+     "titulo": "Escamas gruesas",
+     "texto": "6–20 cm, blanco con escamas pardas gruesas."
+    },
+    {
+     "parte": "himenio",
+     "titulo": "Láminas blancas",
+     "texto": "Esporada blanca."
+    },
+    {
+     "parte": "pie",
+     "titulo": "Pie liso con bulbo",
+     "texto": "De un solo color, sin dibujo atigrado; base abultada."
+    },
+    {
+     "parte": "carne",
+     "titulo": "Enrojece al cortar",
+     "texto": "Se vuelve rojiza o granate."
+    },
+    {
+     "parte": "habitat",
+     "titulo": "A la sombra",
+     "texto": "Prefiere sitios sombreados; no le gustan los prados abiertos."
+    }
+   ],
+   "confusiones": [
+    {
+     "id": "macrolepiota-procera",
+     "nombre": "Parasol (Macrolepiota procera)",
+     "comoDistinguir": "El parasol es más grande, sale en sitios abiertos y su pie tiene bandas pardas.",
+     "gravedad": "baja"
+    },
+    {
+     "id": "lepiota-brunneoincarnata",
+     "nombre": "Lepiotas pequeñas",
+     "comoDistinguir": "Las lepiotas mortales son pequeñas (menos de 10 cm): cualquier «parasol» pequeño, fuera.",
+     "gravedad": "alta"
+    }
+   ],
+   "habitats": [
+    "bosque",
+    "frondosas",
+    "coniferas"
+   ],
+   "ampliacion": "2026-11-13",
+   "habitatTexto": "Sitios sombreados de bosque; no le gustan los prados y campos abiertos.",
+   "recoleccion": {
+    "acc": "extraer",
+    "txt": "La primera vez, sácala entera con la base del pie para estudiarla y tapa el hueco con tierra. Que la confirme una persona experta."
+   },
+   "curiosidades": [
+    "Antes se llamaba Macrolepiota rhacodes; los estudios de ADN la cambiaron de género."
+   ]
+  },
+  {
+   "id": "cortinarius-rubellus",
+   "nombreCientifico": "Cortinarius rubellus",
+   "sinonimos": [
+    "Cortinarius speciosissimus",
+    "Cortinarius orellanoides"
+   ],
+   "nombresComunes": {
+    "es": [],
+    "eu": []
+   },
+   "clase": "mortal",
+   "grupo": "laminar",
+   "familia": "Cortinariaceae",
+   "nivelVerificacion": "borrador",
+   "fuentes": [
+    {
+     "nombre": "Wikipedia (inglés): Cortinarius rubellus",
+     "url": "https://en.wikipedia.org/wiki/Cortinarius_rubellus",
+     "fechaConsulta": "2026-11-13",
+     "campos": [
+      "clase",
+      "rasgos",
+      "confusiones",
+      "temporada",
+      "habitat"
+     ],
+     "nota": "Fuente terciaria. Sin revisión experta ni segunda fuente."
+    }
+   ],
+   "fotos": [],
+   "notaComestibilidad": "Según Wikipedia contiene orellanina: fallo de riñón a menudo irreversible; ha habido trasplantes.",
+   "clave": "Cortinario pardo-anaranjado con mamelón, láminas ocre-canela y restos amarillos en el pie. Se ha confundido con rebozuelos: mortal.",
+   "queMirar": [
+    {
+     "parte": "sombrero",
+     "titulo": "Pardo leonado con mamelón",
+     "texto": "2,5–8 cm, cubierto de escamitas fibrosas."
+    },
+    {
+     "parte": "himenio",
+     "titulo": "Láminas ocre-canela",
+     "texto": "Se oscurecen al madurar las esporas."
+    },
+    {
+     "parte": "pie",
+     "titulo": "Restos amarillos",
+     "texto": "5–11 cm, base abultada, con restos amarillos de la cortina."
+    },
+    {
+     "parte": "olor",
+     "titulo": "Olor a rábano",
+     "texto": "Ligero."
+    },
+    {
+     "parte": "habitat",
+     "titulo": "Coníferas húmedas",
+     "texto": "En musgo bajo pinos y abetos; también bajo helechos y hayas."
+    }
+   ],
+   "confusiones": [
+    {
+     "id": "cantharellus-cibarius",
+     "nombre": "Rebozuelo (Cantharellus cibarius)",
+     "comoDistinguir": "Hubo intoxicaciones por confundirla con rebozuelos. El rebozuelo no tiene láminas sino pliegues bajos.",
+     "gravedad": "alta"
+    },
+    {
+     "id": "craterellus-tubaeformis",
+     "nombre": "Trompeta amarilla (Craterellus tubaeformis)",
+     "comoDistinguir": "La trompeta tiene forma de embudo y pliegues, no láminas.",
+     "gravedad": "alta"
+    },
+    {
+     "id": "cortinarius-orellanus",
+     "nombre": "Cortinarius orellanus",
+     "comoDistinguir": "Pariente con la misma toxina.",
+     "gravedad": "alta"
+    }
+   ],
+   "habitats": [
+    "coniferas",
+    "pinar"
+   ],
+   "curiosidades": [
+    "El peligro se descubrió en Finlandia en 1972.",
+    "Contiene orellanina, la misma toxina que Cortinarius orellanus."
+   ],
+   "ampliacion": "2026-11-13",
+   "habitatTexto": "Zonas húmedas de bosques de coníferas o mixtos, en musgo entre arándanos bajo pinos y abetos; también bajo helechos y hayas.",
+   "recoleccion": {
+    "acc": "dejar",
+    "txt": "No se recoge: es mortal. Fotografíala en su sitio y déjala."
+   }
+  },
+  {
+   "id": "coprinellus-micaceus",
+   "nombreCientifico": "Coprinellus micaceus",
+   "sinonimos": [
+    "Coprinus micaceus"
+   ],
+   "nombresComunes": {
+    "es": [],
+    "eu": []
+   },
+   "clase": "sin_datos",
+   "grupo": "laminar",
+   "familia": "Psathyrellaceae",
+   "nivelVerificacion": "borrador",
+   "fuentes": [
+    {
+     "nombre": "Wikipedia (inglés): Coprinellus micaceus",
+     "url": "https://en.wikipedia.org/wiki/Coprinellus_micaceus",
+     "fechaConsulta": "2026-11-13",
+     "campos": [
+      "clase",
+      "rasgos",
+      "confusiones",
+      "temporada",
+      "habitat"
+     ],
+     "nota": "Fuente terciaria. Sin revisión experta ni segunda fuente."
+    }
+   ],
+   "fotos": [],
+   "candidataComestible": true,
+   "comestibilidad": {
+    "nivel": "cond",
+    "txt": "Según Wikipedia es comestible, muy delicada: se deshace en tinta en pocas horas y hay que cocinarla enseguida. No contiene coprina.",
+    "segun": "Wikipedia (inglés): fuente terciaria, sin revisión experta"
+   },
+   "notaComestibilidad": "Comestible delicada según Wikipedia; se deshace en tinta enseguida.",
+   "clave": "Coprino pequeño en racimos sobre madera, con el sombrero pardo-miel salpicado de brillos como mica. Las láminas acaban en tinta negra.",
+   "queMirar": [
+    {
+     "parte": "sombrero",
+     "titulo": "Brillos de mica",
+     "texto": "Pardo-amarillento; de joven con granitos blancos brillantes que la lluvia quita."
+    },
+    {
+     "parte": "himenio",
+     "titulo": "Láminas que se hacen tinta",
+     "texto": "Blancas, luego negras, y se deshacen."
+    },
+    {
+     "parte": "pie",
+     "titulo": "Pie blanco hueco",
+     "texto": "3–10 cm, fino."
+    },
+    {
+     "parte": "habitat",
+     "titulo": "Racimos en tocones",
+     "texto": "Sobre madera muerta de frondosas o raíces enterradas."
+    }
+   ],
+   "confusiones": [
+    {
+     "id": "coprinopsis-atramentaria",
+     "nombre": "Coprino entintado (Coprinopsis atramentaria)",
+     "comoDistinguir": "Más grande y gris, sin brillos; tiene coprina (sienta mal con alcohol).",
+     "gravedad": "media"
+    }
+   ],
+   "temporada": {
+    "texto": {
+     "meses": [
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+     ],
+     "nota": "En Europa, de mayo a diciembre; sobre todo primavera y otoño.",
+     "fuente": "Wikipedia (inglés)"
+    }
+   },
+   "habitats": [
+    "madera",
+    "frondosas",
+    "parque"
+   ],
+   "curiosidades": [
+    "Clusius la dibujó en 1601, en la que quizá es la primera monografía de hongos de la historia."
+   ],
+   "ampliacion": "2026-11-13",
+   "habitatTexto": "En racimos sobre tocones y raíces enterradas de frondosas en descomposición; también en suelo removido.",
+   "recoleccion": {
+    "acc": "extraer",
+    "txt": "La primera vez, sácala entera con la base del pie para estudiarla y tapa el hueco con tierra. Que la confirme una persona experta."
+   }
+  },
+  {
+   "id": "aleuria-aurantia",
+   "nombreCientifico": "Aleuria aurantia",
+   "sinonimos": [],
+   "nombresComunes": {
+    "es": [],
+    "eu": []
+   },
+   "clase": "sin_datos",
+   "grupo": "ascomiceto",
+   "familia": "Pyronemataceae",
+   "nivelVerificacion": "borrador",
+   "fuentes": [
+    {
+     "nombre": "Wikipedia (inglés): Aleuria aurantia",
+     "url": "https://en.wikipedia.org/wiki/Aleuria_aurantia",
+     "fechaConsulta": "2026-11-13",
+     "campos": [
+      "clase",
+      "rasgos",
+      "confusiones",
+      "temporada",
+      "habitat"
+     ],
+     "nota": "Fuente terciaria. Sin revisión experta ni segunda fuente."
+    }
+   ],
+   "fotos": [],
+   "candidataComestible": true,
+   "comestibilidad": {
+    "nivel": "cond",
+    "txt": "Según Wikipedia se suele considerar comestible, pero es difícil de recoger entera y no es de calidad.",
+    "segun": "Wikipedia (inglés): fuente terciaria, sin revisión experta"
+   },
+   "notaComestibilidad": "Comestible sin interés según Wikipedia.",
+   "clave": "Copa naranja intenso, por fuera algo afelpada, sobre tierra desnuda o removida. Parece una piel de naranja tirada.",
+   "queMirar": [
+    {
+     "parte": "sombrero",
+     "titulo": "Copa naranja",
+     "texto": "1–10 cm, naranja brillante; frágil."
+    },
+    {
+     "parte": "habitat",
+     "titulo": "Tierra desnuda",
+     "texto": "Arcilla o suelo removido: bordes de pistas y caminos."
+    },
+    {
+     "parte": "cutis",
+     "titulo": "Exterior afelpado",
+     "texto": "Por fuera, algo pelosa; a menudo deformada por crecer apretada."
+    },
+    {
+     "parte": "esporada",
+     "titulo": "Esporada blanca",
+     "texto": "Al tocarla suelta las esporas en una nubecilla."
+    }
+   ],
+   "confusiones": [
+    {
+     "id": null,
+     "nombre": "Otidea y Caloscypha",
+     "comoDistinguir": "En Europa se puede confundir con ellas, que son tóxicas o de comestibilidad desconocida.",
+     "gravedad": "media"
+    }
+   ],
+   "habitats": [
+    "cuneta",
+    "claro"
+   ],
+   "curiosidades": [
+    "Si la tocas, suelta las esporas en una nubecilla visible."
+   ],
+   "ampliacion": "2026-11-13",
+   "habitatTexto": "Sobre arcilla desnuda o tierra removida.",
+   "recoleccion": {
+    "acc": "extraer",
+    "txt": "La primera vez, sácala entera con la base del pie para estudiarla y tapa el hueco con tierra. Que la confirme una persona experta."
+   }
+  },
+  {
+   "id": "helvella-crispa",
+   "nombreCientifico": "Helvella crispa",
+   "sinonimos": [],
+   "nombresComunes": {
+    "es": [],
+    "eu": []
+   },
+   "clase": "toxica",
+   "grupo": "ascomiceto",
+   "familia": "Helvellaceae",
+   "nivelVerificacion": "borrador",
+   "fuentes": [
+    {
+     "nombre": "Wikipedia (inglés): Helvella crispa",
+     "url": "https://en.wikipedia.org/wiki/Helvella_crispa",
+     "fechaConsulta": "2026-11-13",
+     "campos": [
+      "clase",
+      "rasgos",
+      "confusiones",
+      "temporada",
+      "habitat"
+     ],
+     "nota": "Fuente terciaria. Sin revisión experta ni segunda fuente."
+    }
+   ],
+   "fotos": [],
+   "notaComestibilidad": "Según Wikipedia cruda da problemas digestivos, se sospecha que contiene monometilhidracina y se ha relacionado con ELA tras años de consumo.",
+   "clave": "Bonete blanco en forma de silla de montar, con el pie lleno de costillas. No se come.",
+   "queMirar": [
+    {
+     "parte": "sombrero",
+     "titulo": "Silla de montar blanca",
+     "texto": "Lobulada, blanquecina; por debajo afelpada."
+    },
+    {
+     "parte": "pie",
+     "titulo": "Pie con costillas",
+     "texto": "3–10 cm, blanco o rosado, muy acanalado."
+    },
+    {
+     "parte": "habitat",
+     "titulo": "Bordes de caminos",
+     "texto": "En hierba y bosques húmedos de frondosas (hayas), setos y caminos."
+    }
+   ],
+   "confusiones": [
+    {
+     "id": null,
+     "nombre": "Helvella lacunosa",
+     "comoDistinguir": "Tiene formas blancas; H. crispa se distingue por la cara inferior afelpada y el borde enrollado de joven.",
+     "gravedad": "baja"
+    }
+   ],
+   "temporada": {
+    "texto": {
+     "meses": [
+      8,
+      9,
+      10,
+      11
+     ],
+     "nota": "De finales de verano a finales de otoño.",
+     "fuente": "Wikipedia (inglés)"
+    }
+   },
+   "habitats": [
+    "hayedo",
+    "frondosas",
+    "cuneta"
+   ],
+   "ampliacion": "2026-11-13",
+   "habitatTexto": "En hierba y bosques húmedos de frondosas (hayas), bordes de caminos, setos y taludes.",
+   "recoleccion": {
+    "acc": "dejar",
+    "txt": "No se recoge: es tóxica. Fotografíala en su sitio y déjala."
+   },
+   "curiosidades": [
+    "Algunas guías la daban como comestible hasta 2006."
+   ]
   }
  ]
 }

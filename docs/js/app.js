@@ -13,7 +13,7 @@ import * as trk from './track.js';
 import * as ia from './ia.js';
 import * as au from './audio.js';
 
-const APP_V = 'micologia-v17';   // = V de sw.js
+const APP_V = 'micologia-v18';   // = V de sw.js
 const S = { view: 'mapa', arg: '', map: null, pins: null, me: null, acc: null, tmp: null, mini: null, centered: false, filtro: { salida: '', especie: '' }, clase: '', q: '', syncErr: false, mes: new Date().getMonth() + 1 };
 const VIEWS = ['mapa', 'salidas', 'salida', 'setas', 'mes', 'ajustes'];
 const TITULOS = { mapa: 'Mapa', salidas: 'Salidas', salida: 'Salida', setas: 'Setas', mes: 'Este mes', ajustes: 'Ajustes' };
@@ -688,7 +688,7 @@ function renderSetas() {
   if (!$('#q', root)) {
     root.innerHTML = '<div class="pad"><div id="lec-w"></div><div id="col-w"></div>' +
       '<div class="learn2"><button class="lc" id="gu-open" style="--c:#e0a458">' + ICO_SETA + '<b>Partes de una seta</b><small>Esquema con nombres</small></button><button class="lc" id="li-open" style="--c:#7ccf8e"><span class="ic">' + lib.CAPS[0].ico + '</span><b>El libro</b><small>Para empezar</small></button><button class="lc" id="ia-open" style="--c:#b48cff"><span class="ic">✨</span><b>Reconocer con IA</b><small>Con 1–3 fotos</small></button></div>' +
-      '<div class="sbar"><input type="search" id="q" placeholder="Buscar seta por nombre (es, eu, latín)…" autocomplete="off"><div class="chips" id="cl"></div></div>' +
+      '<div class="sbar"><input type="search" id="q" placeholder="Buscar seta por nombre (es, eu, latín)…" autocomplete="off"><div class="seg ord" id="ord">' + [['peligro', 'Por peligro'], ['col', 'Colecciones'], ['az', 'A–Z']].map(([k, t]) => '<button data-ord="' + k + '">' + t + '</button>').join('') + '</div><div class="chips" id="cl"></div></div>' +
       '<div class="warn sm2">' + esc(cat.aviso()) + '</div><div id="slist"></div>' +
       '<p class="note" style="margin-top:14px">Catálogo en borrador: ' + cat.todas().length + ' fichas sin revisar por una persona experta. Las comestibles llevan «según fuentes» porque lo dicen Wikipedia y guías divulgativas, no una persona experta: siguen pendientes de revisión. Fotos de Wikimedia Commons con su autoría y licencia en cada ficha.</p></div>';
     $('#q', root).oninput = e => { S.q = e.target.value; listaSetas(); };
@@ -697,6 +697,8 @@ function renderSetas() {
       if (e.target.closest('#li-open')) return abrirLibro('');
       if (e.target.closest('#ia-open')) return abrirIA();
       if (e.target.closest('#lec-next')) { S.lecOff = (S.lecOff || 0) + 1; return pintarAprender(); }
+      const o = e.target.closest('[data-ord]'); if (o) { S.orden = o.dataset.ord; return listaSetas(); }
+      const j = e.target.closest('[data-ir]'); if (j) { const h = $('#col-' + j.dataset.ir, root); if (h) h.scrollIntoView({ block: 'start' }); return; }
       const c = e.target.closest('#cl button'); if (c) { if (c.dataset.mias !== undefined) S.mias = !S.mias; else { S.clase = c.dataset.c; if (!S.clase) S.mias = false; } return listaSetas(); }
       const b = e.target.closest('[data-e]'); if (b) abrirFicha(b.dataset.e);
     };
@@ -709,6 +711,24 @@ function listaSetas() {
   const root = $('#v-setas');
   $('#cl', root).innerHTML = '<button class="opt ' + (!S.clase && !S.mias ? 'on' : '') + '" data-c="">Todas</button>' + (S.enc && S.enc.size ? '<button class="opt ' + (S.mias ? 'on' : '') + '" data-mias="">✓ Las mías</button>' : '') + Object.entries(cat.CLASES).filter(([k]) => cat.todas().some(e => cat.vista(e) === k)).map(([k, v]) => '<button class="opt ' + (S.clase === k ? 'on' : '') + '" data-c="' + k + '">' + v.label + '</button>').join('');
   const r = cat.buscar(S.q, { clase: S.clase }).filter(e => !S.mias || (S.enc && S.enc.has(e.id))); let h = '', cur = '';
+  const ord = S.orden || 'peligro';
+  $$('#ord button', root).forEach(b => b.classList.toggle('on', b.dataset.ord === ord));
+  if (ord === 'col') {
+    /* como un libro: capítulo (colección) → familia → especies */
+    const cols = [...cat.COLECCIONES, { id: 'otras', titulo: 'Otras', color: '#7b8683', fam: [], intro: '' }].map(c => ({ c, l: r.filter(e => cat.coleccion(e).id === c.id) })).filter(x => x.l.length);
+    h = '<div class="colidx">' + cols.map(x => '<button data-ir="' + x.c.id + '" style="--c:' + x.c.color + '">' + esc(x.c.titulo.split(':')[0]) + ' <em>' + x.l.length + '</em></button>').join('') + '</div>';
+    cols.forEach(({ c, l }) => {
+      const mias = S.enc ? l.filter(e => S.enc.has(e.id)).length : 0, pel = l.filter(e => e.clase === 'mortal' || e.clase === 'toxica').length;
+      h += '<div class="colh" id="col-' + c.id + '" style="--c:' + c.color + '"><b>' + esc(c.titulo) + '</b>' + (c.intro ? '<p>' + esc(c.intro) + '</p>' : '') + '<small>' + plural(l.length, 'especie', 'especies') + (pel ? ' · ' + pel + ' peligrosas' : '') + (mias ? ' · ✓ ' + mias + ' tuyas' : '') + '</small></div>';
+      const fams = [...new Set(l.map(e => e.familia || '—'))];
+      fams.forEach(f => { const lf = l.filter(e => (e.familia || '—') === f).sort((a, b) => corto(a).localeCompare(corto(b), 'es')); if (fams.length > 1) h += '<div class="famh">' + esc(f) + '<small>' + lf.length + '</small></div>'; h += lf.map(e => itemEsp(e)).join(''); });
+    });
+    $('#slist', root).innerHTML = r.length ? h : '<div class="empty">Nada con ese nombre.</div>'; return;
+  }
+  if (ord === 'az') {
+    r.sort((a, b) => corto(a).localeCompare(corto(b), 'es')).forEach(e => { const l = corto(e)[0].toUpperCase(); if (l !== cur) { cur = l; h += '<div class="grp" style="--c:#7b8683">' + l + '</div>'; } h += itemEsp(e); });
+    $('#slist', root).innerHTML = r.length ? h : '<div class="empty">Nada con ese nombre.</div>'; return;
+  }
   r.forEach(e => { const v = cat.vista(e); if (v !== cur) { cur = v; const n = r.filter(x => cat.vista(x) === cur).length; h += '<div class="grp" style="--c:' + cat.CLASES[cur].color + '">' + (cur === 'sin_datos' ? 'Sin datos' : cur === 'ok_fuentes' ? 'Comestibles · según fuentes' : cur === 'cond_fuentes' ? 'Con condiciones · según fuentes' : cat.CLASES[cur].label) + '<small>' + n + '</small></div>'; } h += itemEsp(e); });
   $('#slist', root).innerHTML = r.length ? h : '<div class="empty">Nada con ese nombre.</div>';
 }
@@ -826,13 +846,19 @@ async function renderAjustes() {
   const root = $('#v-ajustes'), c = syn.cfg(), zonas = (await db.list('zonas')).sort((a, b) => a.nombre.localeCompare(b.nombre));
   if (root.contains(document.activeElement) && /INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)) return;
   const last = syn.lastSync();
-  const pend = db.dirtyCount(), ok = !!(c.repo && c.token);
+  root.innerHTML = '<div class="pad">' + estadoSyncHTML() + ajustesResto(c, last, zonas) + '</div>';
+  ajustesWire(root, c);
+}
+function estadoSyncHTML() {
+  const c = syn.cfg(), last = syn.lastSync(), pend = db.dirtyCount(), ok = !!(c.repo && c.token);
   const est = !ok ? ['off', 'Sin configurar', 'Tus datos solo están en este móvil.'] : pend ? ['pend', plural(pend, 'cambio por subir', 'cambios por subir'), last ? 'Última vez: ' + new Date(last).toLocaleString('es-ES', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }) : 'Aún sin sincronizar'] : ['ok', 'Todo al día', last ? 'Última vez: ' + new Date(last).toLocaleString('es-ES', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }) : ''];
+  return '<div class="aj-st ' + est[0] + '"><span class="aj-d"></span><div><b>' + est[1] + '</b><small>' + est[2] + '</small></div></div>';
+}
+function ajustesResto(c, last, zonas) {
+  const pend = db.dirtyCount(), ok = !!(c.repo && c.token);
   const sec = (ic, t, sub, body) => '<section class="aj"><div class="aj-h"><span class="aj-i">' + ic + '</span><div><h3>' + t + '</h3>' + (sub ? '<small>' + sub + '</small>' : '') + '</div></div>' + body + '</section>';
   const nf = Math.round(cat.todas().reduce((n, e) => n + (e.fotos || []).length, 0) * 0.2 / 5) * 5;
-  root.innerHTML = '<div class="pad">' +
-    '<div class="aj-st ' + est[0] + '"><span class="aj-d"></span><div><b>' + est[1] + '</b><small>' + est[2] + '</small></div></div>' +
-    sec(ICON_SYNC, 'Sincronización', 'Copia en tu repositorio privado de GitHub',
+  return sec(ICON_SYNC, 'Sincronización', 'Copia en tu repositorio privado de GitHub',
       '<label class="l">Repositorio de datos</label><input type="text" id="a-repo" placeholder="usuario/micologia-datos" autocapitalize="off" autocomplete="off" value="' + esc(c.repo || '') + '">' +
       '<label class="l">Token de GitHub</label><input type="password" id="a-tok" placeholder="' + (c.token ? '•••••• guardado (déjalo vacío para conservarlo)' : 'github_pat_…') + '" autocomplete="off">' +
       '<div class="row"><button class="btn p" id="a-sync">' + (ok ? 'Sincronizar ahora' : 'Guardar y sincronizar') + '</button></div><div class="note" id="a-st" style="margin-top:10px">' + (last ? 'Última sincronización: ' + new Date(last).toLocaleString('es-ES') : 'Aún no has sincronizado.') + (pend ? '<br>Pendiente de subir: ' + pend : '') + '</div>') +
@@ -844,11 +870,14 @@ async function renderAjustes() {
       '<div class="row"><button class="btn" id="a-exp">Exportar copia (JSON)</button></div>' +
       (zonas.length ? '<details class="det"><summary>Renombrar o borrar spots</summary>' + zonas.map(z => '<div class="row" style="margin-top:8px"><input type="text" data-z="' + z.id + '" value="' + esc(z.nombre) + '" style="flex:1"><button class="btn d" data-zd="' + z.id + '" style="flex:none">Borrar</button></div>').join('') + '</details>' : '')) +
     '<div class="aj-about"><img src="icon.svg" alt="" width="44" height="44"><div><b>Micología</b><small>Versión ' + APP_V + '</small></div></div>' +
-    '<p class="aj-legal">Las coordenadas de tus sitios solo viven en este móvil y en tu repositorio privado. La app nunca certifica que una seta sea comestible.<br>Mapa: imágenes PNOA/Sentinel © IGN España (CC BY 4.0 scne.es) · callejero © OpenStreetMap.</p></div>';
+    '<p class="aj-legal">Las coordenadas de tus sitios solo viven en este móvil y en tu repositorio privado. La app nunca certifica que una seta sea comestible.<br>Mapa: imágenes PNOA/Sentinel © IGN España (CC BY 4.0 scne.es) · callejero © OpenStreetMap.</p>';
+}
+function ajustesWire(root, c) {
   $('#a-sync', root).onclick = async () => {
     const repo = $('#a-repo', root).value.trim().replace(/^https?:\/\/github\.com\//, '').replace(/\.git$/, ''), tok = $('#a-tok', root).value.trim() || c.token, st = $('#a-st', root);
     if (!/^[\w.-]+\/[\w.-]+$/.test(repo) || !tok) { st.textContent = 'Pon el repositorio como usuario/nombre y pega el token.'; return; }
     syn.setCfg({ ...c, repo, token: tok }); await correrSync(m => { st.textContent = m; });
+    const e = $('.aj-st', root); if (e) e.outerHTML = estadoSyncHTML();
   };
   $('#a-gks', root).onclick = () => { const k = $('#a-gk', root).value, st = $('#a-gst', root); if (!ia.claveValida(k)) { st.textContent = 'La clave de AI Studio empieza por AIza… o AQ. y es larga.'; return; } ia.setKey(k); toast('Clave guardada'); renderAjustes(); };
   const gd = $('#a-gkd', root); if (gd) gd.onclick = () => { ia.setKey(''); toast('Clave borrada'); renderAjustes(); };

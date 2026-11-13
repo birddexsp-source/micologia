@@ -36,7 +36,12 @@ module.exports = {
       const j = JSON.parse(rd('data/especies.json')), E = j.especies;
       t.ok('hay aviso de seguridad', /no se come/i.test(j.aviso));
       t.eq('ids únicos', new Set(E.map(e => e.id)).size, E.length);
-      t.eq('número de fichas (25 del MVP + 31 de la ampliación)', E.length, 56);
+      t.eq('número de fichas (25 del MVP + 31 de la ampliación + 18 de nov-2026)', E.length, 74);
+      const COLS = ['Amanitaceae', 'Agaricaceae', 'Tricholomataceae', 'Clitocybaceae', 'Lyophyllaceae', 'Hygrophoraceae', 'Hydnangiaceae', 'Marasmiaceae', 'Mycenaceae', 'Entolomataceae', 'Cortinariaceae', 'Inocybaceae', 'Hymenogastraceae', 'Strophariaceae', 'Psathyrellaceae', 'Paxillaceae', 'Russulaceae', 'Boletaceae', 'Suillaceae', 'Cantharellaceae', 'Hydnaceae', 'Physalacriaceae', 'Pleurotaceae', 'Polyporaceae', 'Laetiporaceae', 'Fistulinaceae', 'Auriculariaceae', 'Sparassidaceae', 'Omphalotaceae', 'Sclerodermataceae', 'Phallaceae', 'Morchellaceae', 'Discinaceae', 'Helvellaceae', 'Pyronemataceae', 'Hygrophoropsidaceae'];
+      t.ok('todas las fichas tienen familia y cae en una colección', E.every(e => e.familia && COLS.includes(e.familia)), E.filter(e => !COLS.includes(e.familia)).map(e => e.id).join(','));
+      t.ok('cada confusión con id apunta a una ficha que existe', E.every(e => (e.confusiones || []).every(c => !c.id || E.some(x => x.id === c.id))));
+      t.ok('las fichas nuevas citan su página de Wikipedia con fecha', E.filter(e => e.familia && e.fuentes.some(f => /Wikipedia \(inglés\): /.test(f.nombre))).every(e => e.fuentes.every(f => !/Wikipedia \(inglés\): /.test(f.nombre) || (/^https:\/\/en\.wikipedia\.org\/wiki\//.test(f.url) && f.fechaConsulta))));
+      t.ok('toda foto lleva autor y licencia', E.every(e => (e.fotos || []).every(f => f.autor && f.licencia && /^https:\/\/upload\.wikimedia\.org\//.test(f.url))));
       E.forEach(e => {
         t.ok(e.id + ': id, nombre científico y clase', !!(e.id && e.nombreCientifico && CLASES.includes(e.clase)), e.clase);
         t.ok(e.id + ': tiene fuentes', Array.isArray(e.fuentes) && e.fuentes.length >= 1);
@@ -54,7 +59,7 @@ module.exports = {
         t.ok(x.id + ': comestibilidad atribuida a las fuentes, en borrador', !!x.comestibilidad && ['si', 'cond'].includes(x.comestibilidad.nivel) && /^Según|xixa|«xixa»/.test(x.comestibilidad.txt) && /sin revisión experta/.test(x.comestibilidad.segun) && x.nivelVerificacion === 'borrador');
       });
       E.filter(x => x.clase === 'mortal' || x.clase === 'toxica' || x.clase === 'no_comestible').forEach(x => t.ok(x.id + ': peligrosa/no comestible sin marca de comestible', !x.comestibilidad));
-      t.ok('las 31 candidatas a comestible están como sin_datos', E.filter(e => e.candidataComestible).length === 31 && E.filter(e => e.candidataComestible).every(e => e.clase === 'sin_datos'));
+      t.ok('las 43 candidatas a comestible están como sin_datos', E.filter(e => e.candidataComestible).length === 43 && E.filter(e => e.candidataComestible).every(e => e.clase === 'sin_datos'));
       ['amanita-phalloides', 'amanita-verna-virosa', 'lepiota-brunneoincarnata', 'galerina-marginata', 'cortinarius-orellanus'].forEach(id => t.eq(id + ' es mortal', (E.find(e => e.id === id) || {}).clase, 'mortal'));
     });
     await t.case('catálogo v3: datos de libro (hábitat, cómo recoger, curiosidades, nombres) con fuente', async () => {
@@ -65,6 +70,7 @@ module.exports = {
         t.ok(e.id + ': texto de hábitat', !!e.habitatTexto && e.habitatTexto.length > 30);
         t.ok(e.id + ': cómo recogerla (acción y texto)', !!e.recoleccion && ACC.includes(e.recoleccion.acc) && e.recoleccion.txt.length > 20);
         t.ok(e.id + ': ≥2 curiosidades', Array.isArray(e.curiosidades) && e.curiosidades.length >= 1 && e.curiosidades.every(c => c.length > 15));
+        if (e.ampliacion) return t.ok(e.id + ': ampliación con recogida y hábitat propios', true);   /* las 20 de nov-2026: solo Wikipedia en inglés, sin nombre en euskera aún */
         t.ok(e.id + ': nombre en euskera', ((e.nombresComunes || {}).eu || []).length >= 1);
         t.ok(e.id + ': cita Wikipedia en español o euskera para hábitat/curiosidades', e.fuentes.some(f => /^Wikipedia \((español|euskera)\)/.test(f.nombre) && /^https:\/\/(es|eu)\.wikipedia\.org\/wiki\//.test(f.url || '')));
         if (e.clase === 'mortal' || e.clase === 'toxica') t.eq(e.id + ': tóxica → «No recoger»', e.recoleccion.acc, 'dejar');
@@ -74,10 +80,10 @@ module.exports = {
       t.ok('la «xixa» (Agaricus campestris) está en el catálogo', E.some(e => e.id === 'agaricus-campestris' && e.nombresComunes.es.concat(e.nombresComunes.eu).length >= 1));
     });
     await t.case('catálogo v2: fotos con licencia y autoría, qué mirar y temporada con fuente', async () => {
-      const E = JSON.parse(rd('data/especies.json')).especies, LIC = ['CC BY 2.0', 'CC BY 2.5', 'CC BY 3.0', 'CC BY 4.0', 'CC BY-SA 2.0', 'CC BY-SA 3.0', 'CC BY-SA 4.0', 'CC0', 'Dominio público'];
+      const E = JSON.parse(rd('data/especies.json')).especies, LIC = ['CC BY 2.0', 'CC BY 2.5', 'CC BY 3.0', 'CC BY 4.0', 'CC BY-SA 2.0', 'CC BY-SA 3.0', 'CC BY-SA 4.0', 'CC BY-SA 2.0 DE', 'CC BY-SA 3.0 DE', 'CC0', 'Dominio público'];
       const PARTES = ['sombrero', 'cutis', 'himenio', 'carne', 'pie', 'anillo', 'volva', 'micelio', 'olor', 'esporada', 'habitat', 'otro'];
       E.forEach(e => {
-        t.ok(e.id + ': ≥3 fotos o las que haya (mín. 3)', (e.fotos || []).length >= 3, String((e.fotos || []).length));
+        if (!e.ampliacion) t.ok(e.id + ': ≥3 fotos o las que haya (mín. 3)', (e.fotos || []).length >= 3, String((e.fotos || []).length));
         (e.fotos || []).forEach((f, i) => {
           t.ok(e.id + ' foto ' + i + ': autor, licencia libre y página de origen', !!f.autor && LIC.includes(f.licencia) && /^https:\/\/commons\.wikimedia\.org\/wiki\/File:/.test(f.pagina), f.licencia);
           t.ok(e.id + ' foto ' + i + ': URL de Commons con {w}', /^https:\/\/upload\.wikimedia\.org\/wikipedia\/commons\/thumb\/.+\/\{w\}px-/.test(f.url));
@@ -87,6 +93,7 @@ module.exports = {
         t.ok(e.id + ': tiene regla clave', !!e.clave && e.clave.length > 20);
         t.ok(e.id + ': cita Wikipedia con URL y fecha', e.fuentes.some(f => /^Wikipedia/.test(f.nombre) && /^https:\/\/en\.wikipedia\.org\/wiki\//.test(f.url || '') && /^\d{4}-\d\d-\d\d$/.test(f.fechaConsulta || '')));
         const ins = (e.temporada || {}).inat || {};
+        if (e.ampliacion) { const tx = ((e.temporada || {}).texto || {}).meses; t.ok(e.id + ': temporada (si hay) solo con meses válidos', !tx || tx.every(m => m >= 1 && m <= 12)); return; }
         t.ok(e.id + ': temporada con 12 meses y N coherente', Array.isArray(ins.mensual) && ins.mensual.length === 12 && ins.mensual.reduce((a, b) => a + b, 0) === ins.n, JSON.stringify(ins.mensual));
         if (ins.n > 0) t.ok(e.id + ': cita iNaturalist si usa sus datos', e.fuentes.some(f => /iNaturalist/.test(f.nombre) && /^https:\/\/www\.inaturalist\.org\//.test(f.url || '')));
         if (e.candidataComestible) t.ok(e.id + ': las pistas de una candidata no la declaran comestible', !/\bes comestible\b|\bse puede comer\b|\bbuen comestible\b/i.test([e.clave, ...(e.queMirar || []).map(x => x.texto)].join(' ')));

@@ -1,0 +1,12 @@
+{
+  "name": "micologia",
+  "private": true,
+  "description": "Cuaderno de micología (PWA estática en docs/). npm test = validación completa de la app.",
+  "scripts": {
+    "test": "node tests/run.js",
+    "test:validacion": "node tests/run.js validacion",
+    "test:lista": "node tests/run.js --list",
+    "capturas": "node tests/tools/capturas.js"
+  },
+  "devDependencies": { "playwright": "^1.40.0" }
+}
