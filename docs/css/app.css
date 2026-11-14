@@ -724,3 +724,19 @@ a.item{text-decoration:none;color:inherit}
 .pl-sp-c{position:absolute;right:10px;top:50%;transform:translateY(-50%);color:var(--mut);font-size:20px}
 .pl-ident{margin:2px 0 6px}
 .pl-sp .t .pl-sp-k b,.pl-sp .t .pl-sp-h b{display:inline;font-size:inherit;line-height:inherit}
+
+/* ===== v29: guía de hábitats para principiantes ===== */
+button.hab{cursor:pointer;color:var(--ink);font-family:inherit}.hab em{font-style:normal;color:var(--mut);margin-left:2px}
+.hb-donde{margin:4px 0 8px;font-size:14.5px;line-height:1.4}.hb-tip{margin:6px 0 0;font-size:12px;color:var(--mut)}
+.hb-h{display:flex;align-items:center;gap:10px;font-size:20px;margin:4px 0 8px}.hb-i{display:flex;width:30px;height:30px;color:#a3c46a;flex:none}.hb-i svg{width:30px;height:30px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.hb-q{margin:0 0 6px;font-size:14.5px;line-height:1.5}.hb-s{margin:-4px 0 8px;font-size:12.5px;color:var(--mut)}
+.hb-l{margin:0;padding-left:20px;font-size:14px;line-height:1.5;display:flex;flex-direction:column;gap:5px}
+.hb-ojo{margin-top:10px;border-left:3px solid #e0a458}
+.hb-ls{display:flex;flex-direction:column;gap:8px;margin-top:8px}
+.hb-sp{display:flex;align-items:center;gap:10px;width:100%;text-align:left;background:var(--s2);border:1px solid var(--line);border-radius:12px;padding:8px;color:var(--ink);cursor:pointer}
+.hb-sp .phw.av{width:56px;height:56px;border-radius:8px;flex:none}.hb-sp .t{flex:1;min-width:0}.hb-sp .t b{display:block;font-size:14px}.hb-sp .t small{color:var(--mut);font-size:12px}
+.hb-ar{display:flex;flex-direction:column;gap:8px}.hb-ar div{background:var(--s2);border:1px solid var(--line);border-radius:12px;padding:9px 12px;font-size:13.5px;line-height:1.4}.hb-ar b{display:block}.hb-ar span{color:var(--mut)}
+.hb-gr{display:flex;flex-direction:column;gap:8px;align-items:flex-start;margin-bottom:6px}.hb-gr .hab{width:100%}
+.pl-donde{display:block;width:100%;text-align:left;background:var(--s2);border:1px solid var(--line);border-left:4px solid #a3c46a;border-radius:14px;padding:11px 14px;margin-bottom:14px;color:var(--ink);cursor:pointer}
+.pl-donde b{display:block;font-size:14.5px}.pl-donde span{display:block;font-size:12.5px;color:var(--mut);margin-top:2px}
+.pl-sp-hs{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0 2px}.pl-hab{font-size:11.5px;font-weight:600;border:1px solid var(--line);background:var(--s3);border-radius:99px;padding:3px 9px;color:#a3c46a}

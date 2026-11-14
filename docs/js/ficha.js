@@ -4,6 +4,7 @@ import { esc } from './util.js';
 import { parte } from './guia.js';
 import { esquemaEsp, partesDe, rasgos } from './esquema.js';
 import { barrasHTML, fuenteTxt, datos, mesNombre } from './temporada.js';
+import { H, GRUPOS, ARBOL, CONSEJOS, dondeSimple, GREMIO, gremioNom } from './habitat.js';
 
 export const fotoURL = (f, w) => f.url.replace('{w}', w);
 export const credito = f => f.autor + ' · ' + f.licencia + ' · ' + f.origen;
@@ -63,10 +64,38 @@ const HAB = {
   prado: ['Prados', 'prado'], claro: ['Claros', 'prado'], parque: ['Parques y jardines', 'prado'], brezal: ['Brezal', 'prado'], huerto: ['Huertos', 'prado'], cuneta: ['Caminos y cunetas', 'camino'], madera: ['Sobre madera', 'madera'], quemado: ['Zonas quemadas', 'fuego']
 };
 const habitat = e => {
-  const hs = (e.habitats || []).filter(h => HAB[h]); if (!hs.length && !e.habitatTexto) return '';
-  return '<div class="sec">Dónde crece</div>' + (hs.length ? '<div class="habs">' + hs.map(h => '<span class="hab"><i>' + ICO[HAB[h][1]] + '</i>' + HAB[h][0] + '</span>').join('') + '</div>' : '') +
-    (e.habitatTexto ? '<p class="note" style="margin-top:8px">' + esc(e.habitatTexto) + '</p>' : '');
+  const hs = (e.habitats || []).filter(h => H[h] && HAB[h]); if (!hs.length && !e.habitatTexto) return '';
+  const donde = dondeSimple(e);
+  return '<div class="sec">Dónde crece</div>' + (donde ? '<p class="hb-donde"><b>Mira ' + esc(donde) + '.</b></p>' : '') +
+    (hs.length ? '<div class="habs">' + hs.map(h => '<button class="hab" data-h="' + h + '"><i>' + ICO[HAB[h][1]] + '</i>' + esc(H[h].nombre) + '<em>›</em></button>').join('') + '</div><p class="hb-tip">Toca un sitio para saber cómo reconocerlo y dónde mirar.</p>' : '') +
+    (e.habitatTexto ? '<details class="det"><summary>Más detalle</summary><p class="note" style="margin-top:8px">' + esc(e.habitatTexto) + '</p></details>' : '');
 };
+/* ---------- hoja de un hábitat: qué es, cómo se reconoce, dónde mirar y qué setas hay ---------- */
+const lista = xs => '<ul class="hb-l">' + xs.map(x => '<li>' + esc(x) + '</li>').join('') + '</ul>';
+const espHab = (id, e) => (e.habitats || []).includes(id);
+const filaEsp = e => { const c = nombres(e).split(' · ')[0] || e.nombreCientifico, cien = e.nombreCientifico.split(' (')[0]; return '<button class="hb-sp" data-e="' + e.id + '">' + avatar(e, 250) + '<div class="t"><b>' + esc(c[0].toUpperCase() + c.slice(1)) + '</b><small><i>' + esc(cien) + '</i></small></div>' + tagEsp(e) + '</button>'; };
+export function habitatHTML(id, { volver = '' } = {}) {
+  const h = H[id]; if (!h) return '';
+  const todas = cat.todas().filter(e => espHab(id, e)), pel = todas.filter(PELIG), otras = todas.filter(e => !PELIG(e));
+  const vis = otras.slice(0, 10), mas = otras.slice(10);
+  return '<h2 class="hb-h"><i class="hb-i">' + ICO[h.icono] + '</i>' + esc(h.nombre) + '</h2><p class="hb-q">' + esc(h.que) + '</p>' +
+    '<div class="sec">Cómo lo reconoces</div>' + lista(h.reconoce) + '<div class="sec">Dónde mirar</div>' + lista(h.mirar) +
+    (h.bizkaia ? '<div class="sec">Por aquí</div><p class="note">' + esc(h.bizkaia) + ' <small>(Orientativo.)</small></p>' : '') +
+    (h.ojo ? '<div class="note hb-ojo">⚠ ' + esc(h.ojo) + '</div>' : '') +
+    '<div class="sec">Setas que salen aquí (' + otras.length + ')</div>' + (otras.length ? '<div class="hb-ls">' + vis.map(filaEsp).join('') + '</div>' + (mas.length ? '<details class="det"><summary>Ver las ' + mas.length + ' restantes</summary><div class="hb-ls">' + mas.map(filaEsp).join('') + '</div></details>' : '') : '<p class="note">Ninguna de la colección está marcada en este sitio.</p>') +
+    (pel.length ? '<div class="sec" style="color:#e0a458">⚠ Tóxicas y mortales que también salen aquí (' + pel.length + ')</div><div class="hb-ls">' + pel.map(filaEsp).join('') + '</div>' : '') +
+    '<p class="note">Que una seta salga en un sitio no significa que se pueda comer. Identifica siempre con su ficha y, si dudas, no la cojas.</p>' +
+    '<div class="row">' + (volver ? '<button class="btn" id="hb-b">‹ Volver</button>' : '') + '<button class="btn p" id="hb-x">Cerrar</button></div>';
+}
+/* ---------- «¿Dónde busco?»: guía general de principiante ---------- */
+export function dondeBuscarHTML() {
+  return '<h2 class="hb-h">¿Dónde busco setas?</h2><p class="hb-q">Casi todas las setas viven pegadas a algo concreto: un tipo de árbol, la hierba o la madera. Si sabes qué tienes delante, sabes qué setas puedes encontrar.</p>' +
+    '<div class="sec">Reconocer el árbol en 10 segundos</div><div class="hb-ar">' + ARBOL.map(a => '<div><b>' + esc(a[0]) + '</b><span>' + esc(a[1]) + '</span></div>').join('') + '</div>' +
+    GRUPOS.map(g => '<div class="sec">' + esc(g.t) + '</div><p class="hb-s">' + esc(g.s) + '</p><div class="hb-gr">' + Object.keys(H).filter(k => H[k].grupo === g.id).map(k => '<button class="hab" data-h="' + k + '"><i>' + ICO[H[k].icono] + '</i>' + esc(H[k].nombre) + '<em>›</em></button>').join('') + '</div>').join('') +
+    '<div class="sec">Consejos para salir</div>' + lista(CONSEJOS) +
+    '<div class="row"><button class="btn p" id="hb-x">Cerrar</button></div>';
+}
+export { H, GRUPOS, GREMIO, gremioNom, dondeSimple };
 /* Color del polvo de esporas, para pintar la muestra. Si no se reconoce, no se pinta. */
 const ESPC = [['negro', '#26212a'], ['oliva', '#6f6a3a'], ['oscuro', '#4a3226'], ['chocolate', '#4a3226'], ['blanc', '#f4f1ea'], ['crema', '#efe2c0'], ['amarill', '#e6cf7a'], ['naranja', '#e8a15a'], ['rosa', '#e6b8b0'], ['lila', '#bfb0d0'], ['pardo', '#7a5a3c']];
 export const colorEsp = t => { const n = (t || '').toLowerCase(); const m = ESPC.find(([k]) => n.includes(k)); return m ? m[1] : null; };
@@ -126,7 +155,7 @@ export { mesNombre };
 function cuandoSale(e) {
   const f = e.fructificacion; if (!f) return '';
   const est = f.base === 'estudio', li = f.texto.map(t => { const i = t.indexOf(': '); return i < 0 ? '<li>' + esc(t) + '</li>' : '<li><b>' + esc(t.slice(0, i)) + '</b> ' + esc(t.slice(i + 2)) + '</li>'; }).join('');
-  return '<div class="sec">Cuándo sale (el tiempo)</div><div class="cs"><div class="cs-tag ' + (est ? 'est' : 'hip') + '">' + (est ? 'Con estudio' : 'Orientativo') + ' · ' + esc(f.gremioNombre) + '</div><ul class="cs-l">' + li + '</ul>' +
+  return '<div class="sec">Cuándo sale (el tiempo)</div><div class="cs"><div class="cs-tag ' + (est ? 'est' : 'hip') + '">' + (est ? 'Con estudio' : 'Orientativo') + ' · ' + esc(gremioNom(f.gremio, f.gremioNombre)) + '</div>' + (GREMIO[f.gremio] ? '<p class="note">' + esc(GREMIO[f.gremio].d) + '</p>' : '') + '<ul class="cs-l">' + li + '</ul>' +
     (f.nota ? '<p class="note">' + esc(f.nota) + '</p>' : '') +
     (est ? '' : '<p class="note">Son los valores de partida del modelo para este tipo de seta, no umbrales medidos para esta especie. Se irán ajustando con tus salidas.</p>') +
     (f.perenne ? '' : '<div class="row"><a class="btn p" href="#plan/' + esc(e.id) + '">¿Qué día salir a por esta?</a></div>') +

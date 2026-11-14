@@ -5,6 +5,7 @@ import * as cat from './catalog.js';
 import * as cl from './clima.js';
 import * as md from './modelo.js';
 import * as fi from './ficha.js';
+import { gremioNom, GREMIO } from './habitat.js';
 import { esc, $, $$, hoy, toast } from './util.js';
 
 const BERMEO = { id: 'bermeo', nombre: 'Bermeo (centro)', lat: 43.42, lon: -2.7264 };
@@ -20,7 +21,7 @@ const fechaLarga = f => { const d = cl.aFecha(f); return DIAS[d.getDay()] + ' ' 
 export const calActual = () => { const c = lee(CAL, null); return c && c.n >= MIN_CAL ? c : null; };
 
 /* ---------- objetivos y lugares ---------- */
-export function gremios() { const m = new Map(); especies().forEach(e => m.set(e.fructificacion.gremio, e.fructificacion.gremioNombre)); return [...m].map(([id, nombre]) => ({ id, nombre })); }
+export function gremios() { const m = new Map(); especies().forEach(e => m.set(e.fructificacion.gremio, e.fructificacion.gremioNombre)); return [...m].map(([id, nombre]) => ({ id, nombre: gremioNom(id, nombre) })); }
 export function funcionObjetivo(obj, dias, cal) {
   const esp = especies();
   if (obj === 'general') return f => { const g = md.puntuarGeneral(esp, dias, f, cal); return { score: g.score, general: g }; };
@@ -64,7 +65,7 @@ export async function renderPlan(root, arg) {
   if (arg && cat.byId(arg) && P.obj !== arg) { P.obj = arg; P.sel = null; guarda(LS, { obj: P.obj, zona: P.zona }); }
   CACHE_L = await lugares(); if (!CACHE_L.some(l => l.id === P.zona)) P.zona = 'bermeo';
   const lug = CACHE_L.find(l => l.id === P.zona);
-  root.innerHTML = '<div class="pad pl"><div class="pl-sel" id="pl-sel"></div><div id="pl-res"><div class="pl-carg">Buscando el tiempo…</div></div><div id="pl-acc"></div></div>';
+  root.innerHTML = '<div class="pad pl"><button class="pl-donde" id="pl-donde"><b>¿No sabes dónde mirar?</b><span>Guía sencilla: cómo reconocer cada tipo de sitio y dónde buscar ›</span></button><div class="pl-sel" id="pl-sel"></div><div id="pl-res"><div class="pl-carg">Buscando el tiempo…</div></div><div id="pl-acc"></div></div>';
   pintarSelectores(root);
   root.onchange = e => {
     if (e.target.id === 'pl-obj') { P.obj = e.target.value; P.sel = null; } else if (e.target.id === 'pl-lug') { P.zona = e.target.value; P.sel = null; } else return;
@@ -74,6 +75,8 @@ export async function renderPlan(root, arg) {
     const b = e.target.closest('[data-pf]'); if (b) { P.sel = b.dataset.pf; pintarResultado(root); return; }
     if (e.target.closest('#pl-ref')) { cargarTiempo(root, true); return; }
     if (e.target.closest('#pl-acc-b')) { aciertosUI(root, true); return; }
+    const hb = e.target.closest('[data-hab]'); if (hb && window.__MI) { window.__MI.abrirHabitat(hb.dataset.hab); return; }
+    if (e.target.closest('#pl-donde')) { window.__MI && window.__MI.abrirDondeBuscar(); return; }
     const f = e.target.closest('[data-pe]'); if (f && window.__MI) window.__MI.abrirFicha(f.dataset.pe);
   };
   await cargarTiempo(root, false, lug);
@@ -123,9 +126,9 @@ function detalleDia(d, titulo, E) {
   let cuerpo = '';
   if (d.r.general) {
     const g = d.r.general, top = g.mejor;
-    cuerpo += top ? '<p class="pl-q">Lo mejor ese día: <b>' + esc(top.nombre) + '</b> (' + top.score + ').</p>' : '';
+    cuerpo += top ? '<p class="pl-q">Lo mejor ese día: <b>' + esc(gremioNom(top.gremio, top.nombre)) + '</b> (' + top.score + ').' + (GREMIO[top.gremio] ? ' <small>' + esc(GREMIO[top.gremio].d) + '</small>' : '') + '</p>' : '';
     const e0 = top && top.mejores[0]; if (e0) { const r0 = md.puntuar(e0, E.dias, d.f, calActual()); cuerpo += '<div class="pl-why-h">Por qué (' + esc(nombre(e0)) + '):</div>' + porque(r0); }
-    cuerpo += '<details class="det"><summary>Todos los tipos de seta ese día</summary>' + g.gremios.map(x => '<div class="pl-g"><span>' + esc(x.nombre) + '</span><i style="--w:' + x.score + '%;--c:' + md.COL(x.score) + '"></i><b>' + x.score + '</b></div>').join('') + '</details>';
+    cuerpo += '<details class="det"><summary>Todos los tipos de seta ese día</summary>' + g.gremios.map(x => '<div class="pl-g"><span>' + esc(gremioNom(x.gremio, x.nombre)) + '</span><i style="--w:' + x.score + '%;--c:' + md.COL(x.score) + '"></i><b>' + x.score + '</b></div>').join('') + '</details>';
   } else cuerpo += porque(d.r);
   const dd = E.dias[d.f], clima = dd ? ' · ' + (dd.p != null ? dd.p + ' mm' : '') + (dd.tmin != null ? ' · ' + Math.round(dd.tmin) + '/' + Math.round(dd.tmax) + ' °C' : '') : '';
   return '<div class="pl-det"><div class="pl-dh"><b>' + tipo + ': ' + fechaLarga(d.f) + '</b><span style="color:' + md.COL(d.score) + '">' + d.score + ' · ' + md.ETIQ(d.score) + '</span></div><div class="pl-dc">' + clima.replace(/^ · /, '') + '</div>' + cuerpo +
@@ -144,13 +147,14 @@ export function especiesDelDia(obj, dias, f, cal) {
   return lista.map(e => ({ e, r: md.puntuar(e, dias, f, cal) })).filter(x => x.r).sort((a, b) => b.r.score - a.r.score);
 }
 function tarjetaEsp(x, f) {
-  const e = x.e, c = nombre(e), cien = e.nombreCientifico.split(' (')[0], gr = e.fructificacion.gremioNombre, col = md.COL(x.r.score);
-  const hab = e.habitatTexto || (e.habitats && e.habitats.length ? e.habitats.join(', ') : '');
+  const e = x.e, c = nombre(e), cien = e.nombreCientifico.split(' (')[0], gr = gremioNom(e.fructificacion.gremio, e.fructificacion.gremioNombre), col = md.COL(x.r.score);
+  const hab = fi.dondeSimple(e), chips = (e.habitats || []).filter(h => fi.H[h]).slice(0, 3);
   return '<button class="pl-sp' + (PELIGRO(e) ? ' pel' : '') + '" data-pe="' + e.id + '">' + fi.avatar(e, 250) +
     '<div class="t"><b>' + esc(c) + '</b>' + (c !== cien ? '<small><i>' + esc(cien) + '</i></small>' : '') +
     '<div class="pl-sp-m">' + fi.tagEsp(e) + '<span class="pl-sp-s" style="color:' + col + '">' + x.r.score + ' · ' + md.ETIQ(x.r.score) + '</span></div>' +
     (e.clave ? '<p class="pl-sp-k"><b>Cómo reconocerla:</b> ' + esc(corta(e.clave, 150)) + '</p>' : '') +
-    (hab ? '<p class="pl-sp-h"><b>Dónde:</b> ' + esc(corta(hab, 90)) + '</p>' : '') +
+    (hab ? '<p class="pl-sp-h"><b>Dónde mirar:</b> ' + esc(hab) + '</p>' : '') +
+    (chips.length ? '<span class="pl-sp-hs">' + chips.map(h => '<span class="pl-hab" data-hab="' + h + '">' + esc(fi.H[h].nombre) + ' ›</span>').join('') + '</span>' : '') +
     '<small class="pl-sp-g">' + esc(gr) + '</small></div>' + '<span class="pl-sp-c">›</span></button>';
 }
 function listaDia(d) {

@@ -15,7 +15,7 @@ import * as au from './audio.js';
 import * as off from './offline.js';
 import { renderPlan } from './plan.js';
 
-const APP_V = 'micologia-v28';   // = V de sw.js
+const APP_V = 'micologia-v29';   // = V de sw.js
 const S = { view: 'mapa', arg: '', map: null, pins: null, me: null, acc: null, tmp: null, mini: null, centered: false, filtro: { salida: '', especie: '' }, clase: '', q: '', syncErr: false, mes: new Date().getMonth() + 1 };
 const VIEWS = ['mapa', 'salidas', 'salida', 'setas', 'mes', 'plan', 'ajustes'];
 const TITULOS = { mapa: 'Mapa', salidas: 'Salidas', salida: 'Salida', setas: 'Setas', mes: 'Este mes', plan: 'Plan de salida', ajustes: 'Ajustes' };
@@ -740,7 +740,16 @@ function abrirFicha(id) {
   const e = cat.byId(id); if (!e) return;
   const sh = openSheet(fi.fichaHTML(e, S.mes)), hero = $('#hero', sh), dots = $$('#dots i', sh);
   if (hero && dots.length) hero.onscroll = () => { const i = Math.round(hero.scrollLeft / Math.max(1, hero.clientWidth)); dots.forEach((d, k) => d.classList.toggle('on', k === i)); };
-  sh.addEventListener('click', ev => { const b = ev.target.closest('button'); if (!b) return; if (b.dataset.e) abrirFicha(b.dataset.e); else if (b.dataset.g !== undefined) abrirGuia(b.dataset.g, id); else if (b.dataset.l !== undefined) abrirLibro(b.dataset.l, id); else if (b.id === 'fi-antes') abrirAntesDeComer(); });
+  sh.addEventListener('click', ev => { const b = ev.target.closest('button'); if (!b) return; if (b.dataset.e) abrirFicha(b.dataset.e); else if (b.dataset.h) abrirHabitat(b.dataset.h, id); else if (b.dataset.g !== undefined) abrirGuia(b.dataset.g, id); else if (b.dataset.l !== undefined) abrirLibro(b.dataset.l, id); else if (b.id === 'fi-antes') abrirAntesDeComer(); });
+}
+/* Guía de hábitats: desde una ficha (volverA = id de la seta) o desde «¿Dónde busco?» (volverA = 'donde') */
+function abrirHabitat(id, volverA) {
+  const sh = openSheet(fi.habitatHTML(id, { volver: volverA }));
+  sh.addEventListener('click', ev => { const b = ev.target.closest('button'); if (!b) return; if (b.id === 'hb-x') closeSheet(); else if (b.id === 'hb-b') { if (volverA === 'donde') abrirDondeBuscar(); else abrirFicha(volverA); } else if (b.dataset.e) abrirFicha(b.dataset.e); });
+}
+function abrirDondeBuscar() {
+  const sh = openSheet(fi.dondeBuscarHTML());
+  sh.addEventListener('click', ev => { const b = ev.target.closest('button'); if (!b) return; if (b.id === 'hb-x') closeSheet(); else if (b.dataset.h) abrirHabitat(b.dataset.h, 'donde'); });
 }
 function abrirGuia(sel, volverA) {
   const sh = openSheet(guiaHTML(sel) .replace('<button class="btn p" id="gu-x">Cerrar</button>', (volverA ? '<button class="btn" id="gu-b">‹ Volver a la ficha</button>' : '') + '<button class="btn p" id="gu-x">Cerrar</button>'));
@@ -1035,7 +1044,7 @@ async function boot() {
       buscar();
     }).catch(() => { });
   }
-  window.__MI = { db, geo, syn, cat, trk, S, abrirHallazgo, abrirFicha, abrirLibro, abrirIA, ia, abrirSpot, verSpot, editarSpot, verHallazgo, leerGPX };
+  window.__MI = { abrirHabitat, abrirDondeBuscar, db, geo, syn, cat, trk, S, abrirHallazgo, abrirFicha, abrirLibro, abrirIA, ia, abrirSpot, verSpot, editarSpot, verHallazgo, leerGPX };
   document.body.dataset.ready = '1';
 }
 boot().catch(e => { console.error(e); document.body.insertAdjacentHTML('beforeend', '<div class="warn" style="position:fixed;top:60px;left:12px;right:12px;z-index:9999">No se pudo arrancar la app: ' + esc(e.message || e) + '</div>'); });
