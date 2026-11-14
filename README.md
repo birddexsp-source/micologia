@@ -73,3 +73,6 @@ La clave (gratis, aistudio.google.com/apikey) **no está en el repo**: se pega e
 
 ## Validación
 `npm test` (en la raíz) ejecuta todas las pruebas: catálogo y seguridad, mapa, salidas, marcar, sincronización, IA simulada, pantallas a 360 px y la suite **Validación completa** (todas las fichas, colecciones, los 12 meses, un día de campo de principio a fin, sincronización ida y vuelta entre dos móviles y arranque sin conexión con el service worker). Si termina con «0 fallos», la app funciona.
+
+## Mapa sin conexión
+Ajustes → «Mapa sin conexión» descarga la foto aérea (PNOA, IGN) de tus spots o del centro del mapa (radio 2/5/10 km, zoom 9–17/18) a la caché `mapa-offline-v1`, que el service worker consulta primero y nunca recorta. El callejero OSM no se descarga en bloque (política de uso de OSM): solo se guarda lo que llegas a ver. Pruebas: `tests/suites/14-mapa-offline.js`.

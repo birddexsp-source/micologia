@@ -1,6 +1,7 @@
 /* Mapa Leaflet: satélite IGN (PNOA) por defecto, callejero OSM conmutable. Marcadores de spots y hallazgos. */
 import { esc } from './util.js';
 export const PNOA = 'https://www.ign.es/wmts/pnoa-ma?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=OI.OrthoimageCoverage&STYLE=default&TILEMATRIXSET=GoogleMapsCompatible&TILEMATRIX={z}&TILEROW={y}&TILECOL={x}&FORMAT=image/jpeg';
+const VACIA = 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==';   // sin red y sin tesela: hueco limpio, no el icono de imagen rota
 export const OSM = 'https://tile.openstreetmap.org/{z}/{x}/{y}.png';
 export const IDENT = { sin_identificar: { label: 'Sin identificar', color: '#9aa5a1' }, provisional: { label: 'Provisional', color: '#e0a458' }, confirmada: { label: 'Confirmada por experto', color: '#4cc3d9' } };
 export const getBase = () => { try { return localStorage.getItem('mi.base') === 'calle' ? 'calle' : 'sat'; } catch (e) { return 'sat'; } };
@@ -10,8 +11,8 @@ export function createMap(el, { center = [43.26, -2.93], zoom = 10, base = getBa
   const map = L.map(el, { zoomControl: false, attributionControl: true, maxZoom: 20, tap: true }).setView(center, zoom);
   map.attributionControl.setPrefix(false);
   /* ign.es responde con Access-Control-Allow-Origin:* (verificado con una tesela de Bizkaia): crossOrigin permite que el SW guarde las teselas vistas para usarlas sin cobertura */
-  const sat = L.tileLayer(PNOA, { maxNativeZoom: 19, maxZoom: 20, crossOrigin: true, attribution: 'Imágenes PNOA/Sentinel © IGN España · CC BY 4.0 scne.es' });
-  const calle = L.tileLayer(OSM, { maxNativeZoom: 19, maxZoom: 20, attribution: '© OpenStreetMap' });
+  const sat = L.tileLayer(PNOA, { maxNativeZoom: 19, maxZoom: 20, crossOrigin: true, errorTileUrl: VACIA, attribution: 'Imágenes PNOA/Sentinel © IGN España · CC BY 4.0 scne.es' });
+  const calle = L.tileLayer(OSM, { maxNativeZoom: 19, maxZoom: 20, crossOrigin: true, errorTileUrl: VACIA, attribution: '© OpenStreetMap' });
   const layers = { sat, calle }; let cur = base;
   layers[cur].addTo(map);
   map.setBase = b => { if (b === cur) return cur; map.removeLayer(layers[cur]); cur = b; layers[cur].addTo(map); saveBase(cur); map.getContainer().dataset.base = cur; return cur; };

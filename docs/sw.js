@@ -1,9 +1,9 @@
 /* Service worker: la app funciona sin red. Sube V en cada publicación (si no, el móvil no recarga). */
-const V = 'micologia-v23';
-const SHELL = ['./', 'index.html', 'css/app.css', 'js/app.js', 'js/db.js', 'js/sync.js', 'js/geo.js', 'js/map.js', 'js/catalog.js', 'js/util.js', 'js/guia.js', 'js/ficha.js', 'js/temporada.js', 'js/track.js', 'js/libro.js', 'js/ia.js', 'js/audio.js', 'js/iconos.js', 'js/esquema.js',
+const V = 'micologia-v24';
+const SHELL = ['./', 'index.html', 'css/app.css', 'js/app.js', 'js/db.js', 'js/sync.js', 'js/geo.js', 'js/map.js', 'js/catalog.js', 'js/util.js', 'js/guia.js', 'js/ficha.js', 'js/temporada.js', 'js/track.js', 'js/libro.js', 'js/ia.js', 'js/offline.js', 'js/audio.js', 'js/iconos.js', 'js/esquema.js',
   'vendor/leaflet/leaflet.js', 'vendor/leaflet/leaflet.css', 'data/especies.json', 'manifest.webmanifest', 'icon.svg', 'icon-192.png', 'icon-512.png'];
 const TILE_HOSTS = /(^|\.)ign\.es$|^tile\.openstreetmap\.org$/;
-const TILES = 'tiles-v1', MAX_TILES = 1500;
+const TILES = 'tiles-v1', MAX_TILES = 1500, OFFLINE = 'mapa-offline-v1';   // OFFLINE: zonas descargadas a propósito; nunca se recorta
 const FOTO_HOST = /^upload\.wikimedia\.org$/, FOTOS = 'fotos-v1';
 
 /* cache:'reload' salta la caché HTTP de GitHub Pages (10 min): si no, al instalar se podrían guardar archivos viejos mezclados con los nuevos */
@@ -22,6 +22,7 @@ self.addEventListener('fetch', e => {
   if (TILE_HOSTS.test(u.hostname)) {
     /* teselas: red primero; solo se guardan respuestas legibles (con CORS). Sin red, las que haya. */
     e.respondWith((async () => {
+      const dl = await (await caches.open(OFFLINE)).match(r); if (dl) return dl;   // zona descargada: sin red y más rápido
       const c = await caches.open(TILES);
       try { const res = await fetch(r); if (res && res.ok && res.type !== 'opaque') { c.put(r, res.clone()).then(() => recortar(c)).catch(() => { }); } return res; }
       catch (err) { return (await c.match(r)) || Response.error(); }

@@ -669,3 +669,6 @@ a.item{text-decoration:none;color:inherit}
 .apl b{color:var(--ink)}.apl span{color:#cfd9d5}
 .anot figcaption{font-size:11px;color:var(--mut);padding:0 12px 10px}
 @media (prefers-reduced-motion:reduce){.ap{animation:none}}
+/* v24 · mapa sin conexión (Ajustes) */
+#off-z,#off-k,#off-d{margin-bottom:4px}
+.seg button:disabled{opacity:.4;cursor:default}
