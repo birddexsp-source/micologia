@@ -740,3 +740,39 @@ button.hab{cursor:pointer;color:var(--ink);font-family:inherit}.hab em{font-styl
 .pl-donde{display:block;width:100%;text-align:left;background:var(--s2);border:1px solid var(--line);border-left:4px solid #a3c46a;border-radius:14px;padding:11px 14px;margin-bottom:14px;color:var(--ink);cursor:pointer}
 .pl-donde b{display:block;font-size:14.5px}.pl-donde span{display:block;font-size:12.5px;color:var(--mut);margin-top:2px}
 .pl-sp-hs{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0 2px}.pl-hab{font-size:11.5px;font-weight:600;border:1px solid var(--line);background:var(--s3);border-radius:99px;padding:3px 9px;color:#a3c46a}
+
+/* ===== v30: ficha con pestañas y tarjetas unificadas ===== */
+.rsm{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0}
+.rs{display:flex;flex-direction:column;align-items:flex-start;gap:2px;text-align:left;background:var(--s2);border:1px solid var(--line);border-radius:14px;padding:9px 10px;color:var(--ink);cursor:pointer;min-width:0;font-family:inherit}
+.rs i{display:flex;width:20px;height:20px;color:var(--c,#a3c46a);margin-bottom:2px}.rs svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.rs small{font:650 10px var(--mono);text-transform:uppercase;letter-spacing:.07em;color:var(--mut)}
+.rs b{font-size:13px;line-height:1.25;overflow-wrap:anywhere}
+.ftabs{position:sticky;top:-16px;z-index:5;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin:0 -16px 12px;padding:10px 16px 8px;background:linear-gradient(#121a17 82%,rgba(18,26,23,0));overscroll-behavior-x:contain}
+.ftabs::-webkit-scrollbar{display:none}
+.ft{flex:none;border:1px solid var(--line);background:var(--s2);color:var(--mut);border-radius:999px;padding:8px 14px;font:650 13px var(--sans,inherit);cursor:pointer;white-space:nowrap;display:inline-flex;align-items:center;gap:6px}
+.ft.on{background:var(--acc);border-color:var(--acc);color:var(--acc-ink)}
+.ft em{font-style:normal;font:800 11px var(--mono);background:#ffffff22;border-radius:99px;padding:1px 7px}.ft.on em{background:#00000022}
+.ft.grave:not(.on) em{background:#e5484d;color:#fff}
+.fp{animation:fpin .18s ease-out}@keyframes fpin{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+.fp-intro{margin:0 0 12px;font-size:13.5px;color:var(--mut);line-height:1.45}
+.fc{background:var(--s2);border:1px solid var(--line);border-radius:16px;padding:14px;margin:0 0 12px}
+.fc-h{display:flex;align-items:center;gap:10px;margin:0 0 11px}
+.fc-h i{flex:none;display:grid;place-items:center;width:28px;height:28px;border-radius:9px;background:var(--s3);color:#a3c46a}
+.fc-h svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.fc-h h3{margin:0;font-size:15px;font-weight:700}.fc-h small{margin-left:auto;color:var(--mut);font-size:12px}
+.fc-p{margin:10px 0 0;font-size:13.5px;line-height:1.5;color:#cfd9d5}.fc-p:first-child{margin-top:0}.fc-hip{color:var(--mut);font-size:12.5px}
+.fc-sub{display:block;margin-top:10px;color:var(--mut);font-size:12px;line-height:1.4}
+.fc-src{font-size:13px;line-height:1.4;margin-bottom:10px;overflow-wrap:anywhere}.fc-src:last-child{margin-bottom:0}.fc-src a,.fc-src small{display:block;font-size:12px}.fc-src small{color:var(--mut)}
+.fc .row{margin-top:12px}
+/* lo que ya existía, plano dentro de la tarjeta para no tener cajas dentro de cajas */
+.fc .cs,.fc .com,.fc .recog,.fc .esp{background:none;border:0;padding:0;margin:0}
+.fc .com,.fc .recog{border-left:0}
+.fc .com .ch,.fc .recog .rh{font-size:15px}
+.fc .esp{margin-top:12px;padding-top:12px;border-top:1px solid var(--line)}
+.fc .qm li:first-child{padding-top:0}.fc .qm li:last-child{padding-bottom:0}
+.fc .det{margin:0;background:none}
+.fc .curi li{background:var(--s3);border:0}
+.fc .anot{border:0;background:none;margin:0 0 14px}.fc .anot:last-child{margin-bottom:0}.fc .anw .phw.big{border-radius:12px}.fc .apl{padding:10px 0 0}.fc .anot figcaption{padding:0}
+.fc.conf .cmp figure{background-clip:padding-box}
+.fc.tox{border-color:#5a2327;background:#1f1214}.fc.tox .fc-h i{color:#ff9b9b;background:#3a1a1d}
+.fc .cs-l{margin-top:10px}

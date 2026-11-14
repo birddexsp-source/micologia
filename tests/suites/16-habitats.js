@@ -23,6 +23,7 @@ module.exports = {
     });
     await t.case('ficha: «Mira bajo…» y chips tocables que abren la guía del sitio y vuelven', async () => {
       await t.page.evaluate(() => window.__MI.abrirFicha('boletus-aereus')); await t.wait(400);
+      await t.page.click('#sheet .ft[data-ft="hab"]'); await t.wait(250);
       const d = await t.T('#sheet .hb-donde');
       t.ok('frase en palabras sencillas sobre dónde mirar', /^Mira /.test(d || '') && /bajo|en /.test(d), d);
       t.ok('los chips son botones con el nombre sencillo', (await t.N('#sheet .habs button.hab')) >= 2 && /Toca un sitio/.test(await t.T('#sheet') || ''));
@@ -34,10 +35,10 @@ module.exports = {
       t.ok('las tóxicas y mortales van aparte y nunca en la lista principal', await t.page.evaluate(() => { const s = document.querySelector('#sheet'); const principal = s.querySelector('.hb-ls'); return !principal || ![...principal.querySelectorAll('.tag')].some(x => /Mortal|Tóxica/.test(x.textContent)); }));
       t.ok('avisa de que salir en un sitio no significa que sea comestible', /no significa que se pueda comer/.test(g));
       await t.page.click('#hb-b'); await t.wait(300);
-      t.ok('«Volver» regresa a la ficha de la seta', /Dónde crece/i.test(await t.T('#sheet') || '') && /Cuándo sale/i.test(await t.T('#sheet')));
+      t.ok('«Volver» regresa a la ficha de la seta, en la misma pestaña (Hábitat)', /Dónde mirar/i.test(await t.T('#sheet') || '') && await t.page.evaluate(() => document.querySelector('#sheet .ft.on').dataset.ft) === 'hab');
       await t.page.evaluate(() => window.__MI.abrirHabitat('pinar')); await t.wait(300);
       await t.page.click('#sheet .hb-sp'); await t.wait(400);
-      t.ok('tocar una seta de la lista abre su ficha', await t.has('#sheet .hero') || /Cuándo sale/i.test(await t.T('#sheet') || ''));
+      t.ok('tocar una seta de la lista abre su ficha', await t.has('#sheet .hero') && await t.has('#ftabs'));
     });
     await t.case('Plan: botón «¿Dónde busco?», guía general y chips de hábitat en cada tarjeta', async () => {
       await t.page.route(/open-meteo\.com/, r => r.abort());

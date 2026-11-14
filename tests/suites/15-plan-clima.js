@@ -17,12 +17,12 @@ module.exports = {
       t.eq('solo 3 son perennes de madera', r.perenne.sort(), ['fomes-fomentarius', 'ganoderma-applanatum', 'trametes-versicolor']);
       t.eq('solo Boletus edulis cita un estudio con umbrales; el resto es hipótesis marcada «baja»', [r.estudio, r.hipSinAviso], [['boletus-edulis'], []]);
       t.eq('parámetros coherentes y fuentes con enlace en todas', r.malos, []);
-      await t.page.evaluate(() => window.__MI.abrirFicha('boletus-edulis')); await t.wait(500);
-      t.ok('la ficha de Boletus edulis muestra «Con estudio», 13 °C y la fuente', await t.has('#sheet .cs-tag.est') && /13/.test(await t.T('#sheet .cs') || '') && /bioRxiv/.test(await t.page.evaluate(() => document.querySelector('#sheet .cs details').textContent)));
-      t.ok('y el botón para planificar esa seta', await t.has('#sheet .cs a[href="#plan/boletus-edulis"]'));
-      await t.page.evaluate(() => window.__MI.abrirFicha('lactarius-deliciosus')); await t.wait(500);
+      await t.page.evaluate(() => (window.__MI.abrirFicha('boletus-edulis'), window.__MI.fichaTab('todo'))); await t.wait(500);
+      t.ok('la ficha de Boletus edulis muestra «Con estudio», 13 °C y la fuente', await t.has('#sheet .cs-tag.est') && /13/.test(await t.T('#sheet .cs') || '') && /bioRxiv/.test(await t.page.evaluate(() => document.querySelector('#sheet [data-fp="mas"]').textContent)));
+      t.ok('y el botón para planificar esa seta', await t.has('#sheet a[href="#plan/boletus-edulis"]'));
+      await t.page.evaluate(() => (window.__MI.abrirFicha('lactarius-deliciosus'), window.__MI.fichaTab('todo'))); await t.wait(500);
       t.ok('una especie sin estudio dice «Orientativo» y que son valores de partida', await t.has('#sheet .cs-tag.hip') && /valores de partida/.test(await t.T('#sheet .cs') || ''));
-      await t.page.evaluate(() => window.__MI.abrirFicha('trametes-versicolor')); await t.wait(400);
+      await t.page.evaluate(() => (window.__MI.abrirFicha('trametes-versicolor'), window.__MI.fichaTab('todo'))); await t.wait(400);
       t.ok('la perenne explica que se ve casi todo el año y no ofrece planificar', /casi todo el año/.test(await t.T('#sheet .cs') || '') && !(await t.has('#sheet .cs a[href^="#plan"]')));
     });
     /* ---------- clima ---------- */
@@ -153,7 +153,7 @@ module.exports = {
       const nom = await t.page.evaluate(() => document.querySelector('.pl-sp b').textContent);
       await t.page.evaluate(() => document.querySelector('.pl-sp').click()); await t.page.waitForSelector('#sheet:not([hidden]) .hero, #sheet:not([hidden]) .sec', { timeout: 4000 }); await t.wait(200);
       t.ok('al tocar una especie se abre su ficha encima del Plan', /plan/.test(await t.page.evaluate(() => location.hash)) && (await t.T('#sheet') || '').toLowerCase().includes(nom.toLowerCase().slice(0, 6)), nom);
-      t.ok('la ficha trae fotos y «Cuándo sale»', await t.page.evaluate(() => !!document.querySelector('#sheet img.ph') && /Cuándo sale/i.test(document.querySelector('#sheet').textContent)));
+      t.ok('la ficha trae fotos y «Cuándo sale»', await t.page.evaluate(() => !!document.querySelector('#sheet img.ph') && /El tiempo que necesita/i.test(document.querySelector('#sheet').textContent)));
       await t.page.evaluate(() => document.querySelector('#sheet .grab').click()).catch(() => { }); await t.page.evaluate(() => { const s = document.querySelector('#sheet'); s.hidden = true; s.innerHTML = ''; }); await t.wait(150);
       /* con una especie concreta no se repite la lista */
       await t.page.selectOption('#pl-obj', 'boletus-edulis'); await t.wait(500);

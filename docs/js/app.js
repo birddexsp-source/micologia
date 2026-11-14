@@ -15,7 +15,7 @@ import * as au from './audio.js';
 import * as off from './offline.js';
 import { renderPlan } from './plan.js';
 
-const APP_V = 'micologia-v29';   // = V de sw.js
+const APP_V = 'micologia-v30';   // = V de sw.js
 const S = { view: 'mapa', arg: '', map: null, pins: null, me: null, acc: null, tmp: null, mini: null, centered: false, filtro: { salida: '', especie: '' }, clase: '', q: '', syncErr: false, mes: new Date().getMonth() + 1 };
 const VIEWS = ['mapa', 'salidas', 'salida', 'setas', 'mes', 'plan', 'ajustes'];
 const TITULOS = { mapa: 'Mapa', salidas: 'Salidas', salida: 'Salida', setas: 'Setas', mes: 'Este mes', plan: 'Plan de salida', ajustes: 'Ajustes' };
@@ -37,7 +37,7 @@ function gestosHoja(sh) {
   sh.addEventListener('touchmove', e => { if (y0 == null) return; dy = e.touches[0].clientY - y0; sh.style.transform = dy > 0 ? 'translateY(' + dy + 'px)' : ''; }, { passive: true });
   sh.addEventListener('touchend', () => { if (y0 == null) return; y0 = null; sh.style.transition = 'transform .2s'; if (dy > 90) closeSheet(); else sh.style.transform = ''; });
 }
-function closeSheet() {
+function closeSheet() { S.ftBack = null;
   const s = $('#sheet'); s.hidden = true; s.innerHTML = ''; s.onclick = null;
   if (S.rec) { S.rec.cancel(); S.rec = null; clearInterval(S.recT); }
   if (S.tmp) { S.tmp.remove(); S.tmp = null; }
@@ -736,11 +736,22 @@ function listaSetas() {
   r.forEach(e => { const v = cat.vista(e); if (v !== cur) { cur = v; const n = r.filter(x => cat.vista(x) === cur).length; h += '<div class="grp" style="--c:' + cat.CLASES[cur].color + '">' + (cur === 'sin_datos' ? 'Sin datos' : cur === 'ok_fuentes' ? 'Comestibles · según fuentes' : cur === 'cond_fuentes' ? 'Con condiciones · según fuentes' : cat.CLASES[cur].label) + '<small>' + n + '</small></div>'; } h += itemEsp(e); });
   $('#slist', root).innerHTML = r.length ? h : '<div class="empty">Nada con ese nombre.</div>';
 }
+/* Pestañas de la ficha: 'todo' las muestra todas (lo usan las pruebas). Al volver de la guía o del libro se reabre en la misma pestaña. */
+function fichaTab(sh, k, { ir = false } = {}) {
+  const tabs = $$('.ft', sh), pan = $$('.fp', sh); if (!tabs.length) return;
+  tabs.forEach(t => { const on = t.dataset.ft === k; t.classList.toggle('on', on); t.setAttribute('aria-selected', on ? 'true' : 'false'); });
+  pan.forEach(p => { p.hidden = k !== 'todo' && p.dataset.fp !== k; });
+  const bar = $('#ftabs', sh), on = $('.ft.on', sh); if (on && bar) bar.scrollTo({ left: on.offsetLeft - 12, behavior: 'smooth' });
+  if (ir && bar) { const d = bar.getBoundingClientRect().top - sh.getBoundingClientRect().top; if (d > 4) sh.scrollTo({ top: sh.scrollTop + d - 4, behavior: 'smooth' }); }
+  S.ftab = { id: sh.dataset.fid, tab: k };
+}
 function abrirFicha(id) {
   const e = cat.byId(id); if (!e) return;
-  const sh = openSheet(fi.fichaHTML(e, S.mes)), hero = $('#hero', sh), dots = $$('#dots i', sh);
+  const sh = openSheet(fi.fichaHTML(e, S.mes)), hero = $('#hero', sh), dots = $$('#dots i', sh); sh.dataset.fid = id;
   if (hero && dots.length) hero.onscroll = () => { const i = Math.round(hero.scrollLeft / Math.max(1, hero.clientWidth)); dots.forEach((d, k) => d.classList.toggle('on', k === i)); };
-  sh.addEventListener('click', ev => { const b = ev.target.closest('button'); if (!b) return; if (b.dataset.e) abrirFicha(b.dataset.e); else if (b.dataset.h) abrirHabitat(b.dataset.h, id); else if (b.dataset.g !== undefined) abrirGuia(b.dataset.g, id); else if (b.dataset.l !== undefined) abrirLibro(b.dataset.l, id); else if (b.id === 'fi-antes') abrirAntesDeComer(); });
+  if (S.ftBack && S.ftBack.id === id) { fichaTab(sh, S.ftBack.tab); } S.ftBack = null;
+  const sal = () => { S.ftBack = { id, tab: (S.ftab && S.ftab.id === id && S.ftab.tab) || 'ident' }; };
+  sh.addEventListener('click', ev => { const b = ev.target.closest('button'); if (!b) return; if (b.dataset.ft) fichaTab(sh, b.dataset.ft, { ir: b.classList.contains('rs') }); else if (b.dataset.e) abrirFicha(b.dataset.e); else if (b.dataset.h) { sal(); abrirHabitat(b.dataset.h, id); } else if (b.dataset.g !== undefined) { sal(); abrirGuia(b.dataset.g, id); } else if (b.dataset.l !== undefined) { sal(); abrirLibro(b.dataset.l, id); } else if (b.id === 'fi-antes') abrirAntesDeComer(); });
 }
 /* Guía de hábitats: desde una ficha (volverA = id de la seta) o desde «¿Dónde busco?» (volverA = 'donde') */
 function abrirHabitat(id, volverA) {
@@ -1044,7 +1055,7 @@ async function boot() {
       buscar();
     }).catch(() => { });
   }
-  window.__MI = { abrirHabitat, abrirDondeBuscar, db, geo, syn, cat, trk, S, abrirHallazgo, abrirFicha, abrirLibro, abrirIA, ia, abrirSpot, verSpot, editarSpot, verHallazgo, leerGPX };
+  window.__MI = { fichaTab: k => fichaTab($('#sheet .sh'), k), abrirHabitat, abrirDondeBuscar, db, geo, syn, cat, trk, S, abrirHallazgo, abrirFicha, abrirLibro, abrirIA, ia, abrirSpot, verSpot, editarSpot, verHallazgo, leerGPX };
   document.body.dataset.ready = '1';
 }
 boot().catch(e => { console.error(e); document.body.insertAdjacentHTML('beforeend', '<div class="warn" style="position:fixed;top:60px;left:12px;right:12px;z-index:9999">No se pudo arrancar la app: ' + esc(e.message || e) + '</div>'); });

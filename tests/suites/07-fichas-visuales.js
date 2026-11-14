@@ -12,7 +12,7 @@ module.exports = {
       await t.shot('captura-07-lista');
     });
     await t.case('ficha: fotos con autoría y licencia, regla clave y qué mirar', async () => {
-      await t.page.evaluate(() => window.__MI.abrirFicha('amanita-phalloides')); await t.wait(400);
+      await t.page.evaluate(() => (window.__MI.abrirFicha('amanita-phalloides'), window.__MI.fichaTab('todo'))); await t.wait(400);
       t.eq('3 fotos en el carrusel', await t.N('#sheet .hero figure'), 3);
       t.eq('3 puntos indicadores', await t.N('#sheet #dots i'), 3);
       t.ok('las fotos grandes se piden a 960 px', t.photoReqs.some(u => /\/960px-/.test(u)));
@@ -28,18 +28,18 @@ module.exports = {
       t.eq('el punto activo sigue al carrusel', await t.page.evaluate(() => [...document.querySelectorAll('#dots i')].findIndex(i => i.classList.contains('on'))), 2);
     });
     await t.case('ficha tipo libro: hábitat con iconos, esporada, cómo recogerla y curiosidades', async () => {
-      await t.page.evaluate(() => window.__MI.abrirFicha('boletus-aereus')); await t.wait(400);
+      await t.page.evaluate(() => (window.__MI.abrirFicha('boletus-aereus'), window.__MI.fichaTab('todo'))); await t.wait(400);
       t.ok('nombres en castellano y euskera', (await t.N('#sheet .nms .nm')) === 2 && /onddobeltz/i.test(await t.T('#sheet .nms') || ''));
-      t.ok('hábitat con chips e iconos', (await t.N('#sheet .habs .hab i svg')) >= 2 && /Dónde crece/i.test(await t.T('#sheet') || ''));
+      t.ok('hábitat con chips e iconos', (await t.N('#sheet .habs .hab i svg')) >= 2 && /Dónde mirar/i.test(await t.T('#sheet') || ''));
       t.ok('«Cómo recogerla» con acción y enlace al libro', await t.has('#sheet .recog') && await t.has('#sheet .recog [data-l="recoger"]'));
       t.ok('curiosidades numeradas', (await t.N('#sheet .curi li')) >= 2);
-      t.ok('la ficha dice «Comestible · según fuentes» y avisa', /Comestible · según fuentes/i.test(await t.T('#sheet .chips') || '') && await t.has('#sheet .com') && /No te autoriza|no te autoriza/i.test(await t.T('#sheet .com') || ''));
+      t.ok('la ficha dice «Comestible · según fuentes» y avisa', /Comestible · según fuentes/i.test(await t.T('#sheet .chips') || '') && await t.has('#sheet .com') && /Fuente:/.test(await t.T('#sheet .com') || '') && /Ninguna seta se come por lo que diga la app/.test(await t.T('#sheet .warn') || ''));
       await t.shot('captura-07-ficha-libro');
-      await t.page.evaluate(() => window.__MI.abrirFicha('boletus-pinophilus')); await t.wait(300);
+      await t.page.evaluate(() => (window.__MI.abrirFicha('boletus-pinophilus'), window.__MI.fichaTab('todo'))); await t.wait(300);
       t.ok('esporada con muestra de color', await t.has('#sheet .esp .sw') && /pardo oliva/.test(await t.T('#sheet .esp') || ''));
-      await t.page.evaluate(() => window.__MI.abrirFicha('amanita-phalloides')); await t.wait(300);
+      await t.page.evaluate(() => (window.__MI.abrirFicha('amanita-phalloides'), window.__MI.fichaTab('todo'))); await t.wait(300);
       t.ok('una mortal dice «No recoger»', /No recoger/.test(await t.T('#sheet .recog') || ''));
-      await t.page.evaluate(() => window.__MI.abrirFicha('cantharellus-cibarius')); await t.wait(300);
+      await t.page.evaluate(() => (window.__MI.abrirFicha('cantharellus-cibarius'), window.__MI.fichaTab('todo'))); await t.wait(300);
       t.ok('el rebozuelo avisa de que se confunde con tóxicas', /Se confunde con tóxicas/.test(await t.T('#sheet .chips') || ''));
     });
     await t.case('el libro: índice, 7 capítulos con fuentes y navegación', async () => {
@@ -56,14 +56,14 @@ module.exports = {
       await t.page.evaluate(() => window.__MI.abrirLibro('intox')); await t.wait(200);
       t.ok('intoxicación: 112 y urgencias', /112/.test(await t.T('#sheet') || '') && /urgencias/i.test(await t.T('#sheet') || ''));
       await t.shot('captura-07-libro-intox');
-      await t.page.evaluate(() => window.__MI.abrirFicha('boletus-aereus')); await t.wait(300);
+      await t.page.evaluate(() => (window.__MI.abrirFicha('boletus-aereus'), window.__MI.fichaTab('todo'))); await t.wait(300);
       await t.tap('#sheet .recog [data-l="recoger"]', 300);
       t.ok('desde la ficha: abre el capítulo y permite volver', /cómo recoger/i.test(await t.T('#sheet .lib-h') || '') && await t.has('#li-b'));
       await t.tap('#li-b', 300);
       t.ok('vuelve a la ficha', /Boletus aereus/.test(await t.T('#sheet h2') || ''));
     });
     await t.case('guía: se abre desde «qué mirar», resalta la parte y vuelve a la ficha', async () => {
-      await t.page.evaluate(() => window.__MI.abrirFicha('amanita-phalloides')); await t.wait(300);
+      await t.page.evaluate(() => (window.__MI.abrirFicha('amanita-phalloides'), window.__MI.fichaTab('todo'))); await t.wait(300);
       await t.tap('#sheet .qm .pt[data-g="volva"]', 400);
       t.ok('abre la guía', /Partes de una seta/.test(await t.T('#sheet h2') || ''));
       t.eq('8 partes en la leyenda con número', await t.N('#sheet .leg .lg .mk:not(.sm)'), 8);
@@ -77,7 +77,7 @@ module.exports = {
       t.ok('vuelve a la ficha de la cicuta', /Amanita phalloides/.test(await t.T('#sheet h2') || ''));
     });
     await t.case('confusiones: foto contra foto y enlace a la otra ficha', async () => {
-      await t.page.evaluate(() => window.__MI.abrirFicha('boletus-edulis')); await t.wait(300);
+      await t.page.evaluate(() => (window.__MI.abrirFicha('boletus-edulis'), window.__MI.fichaTab('todo'))); await t.wait(300);
       t.ok('comparación con 2 fotos para una confusión del catálogo', (await t.N('#sheet .conf .cmp figure')) >= 4);
       t.ok('riesgo alto señalado', /Riesgo alto/.test(await t.T('#sheet') || ''));
       t.ok('comestible según fuentes: bloque propio y «Antes de comer»', await t.has('#sheet .com') && await t.has('#fi-antes'));
@@ -106,11 +106,11 @@ module.exports = {
       t.ok('febrero: pocas setas, todas de madera y sin peligrosas', await t.has('#v-mes .item[data-e="pleurotus-ostreatus"]') && !(await t.has('#v-mes .dang')));
     });
     await t.case('ficha: barras de temporada con fuente y mes actual marcado', async () => {
-      await t.page.evaluate(() => { window.__MI.S.mes = 10; window.__MI.abrirFicha('lactarius-deliciosus'); }); await t.wait(300);
+      await t.page.evaluate(() => { window.__MI.S.mes = 10; (window.__MI.abrirFicha('lactarius-deliciosus'), window.__MI.fichaTab('todo')); }); await t.wait(300);
       t.eq('12 barras', await t.N('#sheet .bars .b'), 12);
       t.eq('el mes actual está marcado', await t.N('#sheet .bars .b.cur'), 1);
       t.ok('la fuente se explica con N y zona', /N=44/.test(await t.T('#sheet') || '') && /costa cantábrica/.test(await t.T('#sheet') || ''));
-      await t.page.evaluate(() => window.__MI.abrirFicha('lepiota-brunneoincarnata')); await t.wait(300);
+      await t.page.evaluate(() => (window.__MI.abrirFicha('lepiota-brunneoincarnata'), window.__MI.fichaTab('todo'))); await t.wait(300);
       t.ok('una especie sin datos suficientes lo dice en vez de inventar', /Sin datos suficientes/i.test(await t.T('#sheet') || '') && !(await t.has('#sheet .bars')));
     });
     await t.case('ajustes: descargar fotos para usar sin cobertura', async () => {

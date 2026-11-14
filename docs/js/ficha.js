@@ -3,7 +3,7 @@ import * as cat from './catalog.js';
 import { esc } from './util.js';
 import { parte } from './guia.js';
 import { esquemaEsp, partesDe, rasgos } from './esquema.js';
-import { barrasHTML, fuenteTxt, datos, mesNombre } from './temporada.js';
+import { barrasHTML, fuenteTxt, datos, mesNombre, MESES } from './temporada.js';
 import { H, GRUPOS, ARBOL, CONSEJOS, dondeSimple, GREMIO, gremioNom } from './habitat.js';
 
 export const fotoURL = (f, w) => f.url.replace('{w}', w);
@@ -39,9 +39,9 @@ const ICOP = {
 const PELIG = o => o && (o.clase === 'mortal' || o.clase === 'toxica');
 function confusiones(e) {
   const cs = e.confusiones || []; if (!cs.length) return '';
-  return '<div class="sec">Se confunde con</div>' + cs.map(c => {
+  return cs.map(c => {
     const o = c.id ? cat.byId(c.id) : null, g = GRAV[c.gravedad];
-    return '<div class="conf">' +
+    return '<div class="conf fc">' +
       (o ? '<div class="cmp"><figure class="' + (PELIG(e) ? 'no' : 'si') + '">' + (e.fotos && e.fotos[0] ? foto(e.fotos[0], 250, { alt: e.nombreCientifico }) : '<span class="phw"></span>') + '<figcaption><b>' + (PELIG(e) ? '✗ Esta es ' + (e.clase === 'mortal' ? 'mortal' : 'tóxica') : '✓ Esta') + '</b>' + esc(e.nombreCientifico.split(' (')[0].split(' / ')[0]) + '</figcaption></figure><span class="vs">vs</span><figure class="' + (PELIG(o) ? 'no' : 'si') + '">' + (o.fotos && o.fotos[0] ? foto(o.fotos[0], 250, { alt: o.nombreCientifico }) : '<span class="phw"></span>') + '<figcaption><b>' + (PELIG(o) ? '✗ ' + (o.clase === 'mortal' ? 'Mortal' : 'Tóxica') : 'Parecida') + '</b>' + esc(o.nombreCientifico.split(' (')[0].split(' / ')[0]) + '</figcaption></figure></div>' : '') +
       '<div class="ch"><b>' + esc(c.nombre) + '</b>' + (g ? '<span class="tag" style="--c:' + g[1] + '">' + g[0] + '</span>' : '') + '</div>' +
       '<p>' + esc(c.comoDistinguir) + '</p>' + (o ? '<button class="lnk" data-e="' + o.id + '">Ver ficha de ' + esc(o.nombreCientifico.split(' (')[0].split(' / ')[0]) + ' ›</button>' : '<small class="mut">Sin ficha en el catálogo todavía.</small>') + '</div>';
@@ -64,11 +64,10 @@ const HAB = {
   prado: ['Prados', 'prado'], claro: ['Claros', 'prado'], parque: ['Parques y jardines', 'prado'], brezal: ['Brezal', 'prado'], huerto: ['Huertos', 'prado'], cuneta: ['Caminos y cunetas', 'camino'], madera: ['Sobre madera', 'madera'], quemado: ['Zonas quemadas', 'fuego']
 };
 const habitat = e => {
-  const hs = (e.habitats || []).filter(h => H[h] && HAB[h]); if (!hs.length && !e.habitatTexto) return '';
-  const donde = dondeSimple(e);
-  return '<div class="sec">Dónde crece</div>' + (donde ? '<p class="hb-donde"><b>Mira ' + esc(donde) + '.</b></p>' : '') +
-    (hs.length ? '<div class="habs">' + hs.map(h => '<button class="hab" data-h="' + h + '"><i>' + ICO[HAB[h][1]] + '</i>' + esc(H[h].nombre) + '<em>›</em></button>').join('') + '</div><p class="hb-tip">Toca un sitio para saber cómo reconocerlo y dónde mirar.</p>' : '') +
-    (e.habitatTexto ? '<details class="det"><summary>Más detalle</summary><p class="note" style="margin-top:8px">' + esc(e.habitatTexto) + '</p></details>' : '');
+  const hs = (e.habitats || []).filter(h => H[h] && HAB[h]), donde = dondeSimple(e); if (!hs.length && !e.habitatTexto) return '';
+  return card('hab', 'Dónde mirar', (donde ? '<p class="hb-donde"><b>Mira ' + esc(donde) + '.</b></p>' : '') +
+    (hs.length ? '<div class="habs">' + hs.map(h => '<button class="hab" data-h="' + h + '"><i>' + ICO[HAB[h][1]] + '</i>' + esc(H[h].nombre) + '<em>›</em></button>').join('') + '</div><p class="hb-tip">Toca un sitio para saber cómo reconocerlo y dónde mirar.</p>' : '')) +
+    (e.habitatTexto ? card('info', 'Detalle del hábitat', '<p class="fc-p">' + esc(e.habitatTexto) + '</p>') : '');
 };
 /* ---------- hoja de un hábitat: qué es, cómo se reconoce, dónde mirar y qué setas hay ---------- */
 const lista = xs => '<ul class="hb-l">' + xs.map(x => '<li>' + esc(x) + '</li>').join('') + '</ul>';
@@ -108,10 +107,10 @@ const RECO = { cortar: ['Cortar con navaja', '#7ccf8e', '<path d="M4 20L20 4M14 
 const recoger = e => {
   const r = e.recoleccion; if (!r) return '';
   const a = RECO[r.acc] || RECO.dejar;
-  return '<div class="sec">Cómo recogerla</div><div class="recog" style="--c:' + a[1] + '"><div class="rh"><svg viewBox="0 0 24 24">' + a[2] + '</svg><b>' + a[0] + '</b></div><p>' + esc(r.txt) + '</p><button class="lnk" data-l="recoger">Cortar o arrancar, paso a paso ›</button></div>';
+  return '<div class="recog" style="--c:' + a[1] + '"><div class="rh"><svg viewBox="0 0 24 24">' + a[2] + '</svg><b>' + a[0] + '</b></div><p>' + esc(r.txt) + '</p><button class="lnk" data-l="recoger">Cortar o arrancar, paso a paso ›</button></div>';
 };
-const curiosidades = e => (e.curiosidades && e.curiosidades.length) ? '<div class="sec">Curiosidades</div><ol class="curi">' + e.curiosidades.map(c => '<li>' + esc(c) + '</li>').join('') + '</ol>' : '';
-const comestible = e => { const m = e.comestibilidad, k = cat.CLASES[cat.vista(e)]; return '<div class="com" style="--c:' + k.color + '"><div class="ch"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg><b>' + esc(k.label) + '</b></div><p>' + esc(m.txt) + '</p><small>Fuente: ' + esc(m.segun) + '. La ficha sigue en borrador. Esto no te autoriza a comer ninguna seta: solo con identificación completa y confirmada por una persona experta.</small><button class="lnk" id="fi-antes">Antes de comer ›</button></div>'; };
+const curiosidades = e => (e.curiosidades && e.curiosidades.length) ? '<ol class="curi">' + e.curiosidades.map(c => '<li>' + esc(c) + '</li>').join('') + '</ol>' : '';
+const comestible = e => { const m = e.comestibilidad, k = cat.CLASES[cat.vista(e)]; return '<div class="com" style="--c:' + k.color + '"><div class="ch"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg><b>' + esc(k.label) + '</b></div><p>' + esc(m.txt) + '</p><small>Fuente: ' + esc(m.segun) + '. La ficha sigue en borrador.</small><button class="lnk" id="fi-antes">Antes de comer ›</button></div>'; };
 const peligroConf = e => (e.confusiones || []).some(c => c.gravedad === 'alta') && e.clase !== 'mortal' && e.clase !== 'toxica';
 const RASGOS = [['sombrero', 'Sombrero'], ['himenio', 'Himenio'], ['reticulo', 'Retículo'], ['pie', 'Pie'], ['anillo', 'Anillo'], ['volva', 'Volva'], ['carne', 'Carne'], ['olor', 'Olor'], ['esporada', 'Esporada'], ['habitat', 'Hábitat']];
 
@@ -123,31 +122,68 @@ function leyenda(e) {
 /* Fotos reales con los rasgos señalados (puntos numerados sobre la foto) */
 function anotadas(e) {
   const A = e.anotadas || []; if (!A.length) return '';
-  return '<div class="sec">En la foto: dónde mirar</div>' + A.map(a => '<figure class="anot"><span class="anw">' + foto(a.foto, 960, { cls: 'big', alt: e.nombreCientifico }) +
+  return A.map(a => '<figure class="anot"><span class="anw">' + foto(a.foto, 960, { cls: 'big', alt: e.nombreCientifico }) +
     a.puntos.map((p, i) => '<b class="ap" style="left:' + p.x + '%;top:' + p.y + '%;--c:' + parte(p.parte).color + '">' + (i + 1) + '</b>').join('') + '</span>' +
     '<ol class="apl">' + a.puntos.map((p, i) => '<li style="--c:' + parte(p.parte).color + '"><i>' + (i + 1) + '</i><span><b>' + esc(p.titulo) + '</b>' + (p.texto ? ' ' + esc(p.texto) : '') + '</span></li>').join('') + '</ol>' +
     '<figcaption>' + esc(a.foto.sp) + ' · ' + esc(a.foto.autor) + ' · ' + esc(a.foto.licencia) + '</figcaption></figure>').join('');
 }
-export function fichaHTML(e, mes) {
-  const c = cat.CLASES[cat.vista(e)], peligro = e.clase === 'mortal' || e.clase === 'toxica', ras = RASGOS.filter(([k]) => e[k]), td = datos(e);
+/* ---------- estructura: cabecera fija, resumen rápido y pestañas; dentro, tarjetas con el mismo formato ---------- */
+const sv = d => '<svg viewBox="0 0 24 24">' + d + '</svg>';
+const FI = {
+  lista: sv('<path d="M9 6h12M9 12h12M9 18h12M4 6h.5M4 12h.5M4 18h.5"/>'), foto: sv('<path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.500"/>'),
+  hab: sv('<path d="M12 21V11M12 11c0-5 3-7 8-7 0 5-2 8-8 7zM12 15c0-4-2-6-7-6 0 4 2 7 7 6z"/>'), info: sv('<circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8v.5"/>'),
+  cal: sv('<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>'), nube: sv('<path d="M7 18a4 4 0 0 1 0-8 5 5 0 0 1 9.500-1A4.500 4.500 0 0 1 17 18z"/><path d="M9 21v-2M13 21v-2"/>'),
+  ok: sv('<path d="M5 13l4 4L19 7"/>'), corta: sv(RECO.cortar[2]), aviso: sv('<path d="M12 3l10 18H2z"/><path d="M12 10v5M12 18v.5"/>'),
+  estrella: sv('<path d="M12 3l2.800 5.800 6.200.9-4.500 4.400 1 6.200L12 17.400 6.500 20.300l1-6.200L3 9.700l6.200-.9z"/>'), libro: sv('<path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2zM4 19a2 2 0 0 1 2-2h13"/>'),
+  nombre: sv('<path d="M3 12V4h8l10 10-8 8z"/><circle cx="7.500" cy="8.500" r="1"/>'), pares: sv('<circle cx="8" cy="12" r="5"/><circle cx="16" cy="12" r="5"/>'), dato: sv('<path d="M4 6h16M4 12h16M4 18h10"/>')
+};
+const card = (ic, t, body, o = {}) => body ? '<section class="fc' + (o.cls ? ' ' + o.cls : '') + '"><header class="fc-h"><i>' + FI[ic] + '</i><h3>' + t + '</h3>' + (o.sub ? '<small>' + o.sub + '</small>' : '') + '</header>' + body + '</section>' : '';
+/* meses de pleno: «Sep–Nov» */
+function rangoMeses(e) {
+  const niv = datos(e).niv, mx = Math.max(...niv.map(x => x.nivel)); if (!mx) return '';
+  const on = niv.map(x => x.nivel === mx), runs = []; on.forEach((v, i) => { if (v) { const l = runs[runs.length - 1]; if (l && l[1] === i - 1) l[1] = i; else runs.push([i, i]); } });
+  const ab = m => cap3(MESES[m]); return runs.slice(0, 2).map(([a, b]) => a === b ? ab(a) : ab(a) + '–' + ab(b)).join(' y ');
+}
+const cap3 = x => x[0].toUpperCase() + x.slice(1, 3);
+function resumen(e) {
+  const hs = (e.habitats || []).filter(h => H[h]), gen = new Set(['frondosas', 'coniferas', 'bosque', 'mixto']), pri = hs.find(h => !gen.has(h)) || hs[0];
+  const c = cat.CLASES[cat.vista(e)], mes = rangoMeses(e);
+  const t = (ft, ic, l, v, st) => '<button class="rs" data-ft="' + ft + '"' + (st ? ' style="--c:' + st + '"' : '') + '><i>' + FI[ic] + '</i><small>' + l + '</small><b>' + esc(v) + '</b></button>';
+  return '<div class="rsm">' + t('hab', 'hab', 'Dónde', pri ? H[pri].nombre.replace(/ \(.*\)$/, '') + (hs.length > 1 ? ' +' + (hs.length - 1) : '') : 'Sin datos') + t('cuando', 'cal', 'Cuándo', mes || 'Sin datos') + t('comer', 'ok', 'Comer', c.label, c.color) + '</div>';
+}
+export const PESTANAS = [['ident', 'Identificar'], ['conf', 'Confusiones'], ['hab', 'Hábitat'], ['cuando', 'Cuándo'], ['comer', 'Recoger y comer'], ['mas', 'Más']];
+function paneles(e, mes) {
+  const td = datos(e), ras = RASGOS.filter(([k]) => e[k]), peligro = e.clase === 'mortal' || e.clase === 'toxica';
   const fuFotos = (e.fotos || []).map(f => '<li>' + esc(f.sp) + ': ' + esc(f.autor) + ', <a href="' + esc(f.licenciaUrl || f.pagina) + '" target="_blank" rel="noopener">' + esc(f.licencia) + '</a>, <a href="' + esc(f.pagina) + '" target="_blank" rel="noopener">Commons</a></li>').join('');
+  const fu = e.fuentes.filter(f => !/Commons/.test(f.nombre)).map(f => '<div class="fc-src"><b>' + esc(f.nombre) + '</b>' + (f.fechaConsulta ? ' <small>· ' + esc(f.fechaConsulta) + '</small>' : '') + (f.url ? '<a href="' + esc(f.url) + '" target="_blank" rel="noopener">' + esc(f.url) + '</a>' : '') + (f.nota ? '<small>' + esc(f.nota) + '</small>' : '') + '</div>').join('');
+  const fr = e.fructificacion, frFu = fr && fr.fuentes && fr.fuentes.length ? fr.fuentes.map(x => '<div class="fc-src"><a href="' + esc(x.url) + '" target="_blank" rel="noopener">' + esc(x.t) + '</a></div>').join('') : '';
+  const comer = (e.comestibilidad ? card('ok', 'Comestibilidad', comestible(e)) : e.notaComestibilidad ? card('ok', 'Comestibilidad', '<p class="fc-p">' + esc(e.notaComestibilidad) + '</p>') : '') +
+    (e.candidataComestible && !e.comestibilidad ? card('aviso', 'Antes de comer', '<p class="fc-p">Esta seta es candidata a comestible, pero no está confirmada.</p><div class="row"><button class="btn big" id="fi-antes">Antes de comer</button></div>') : '') +
+    (e.sindrome ? card('aviso', 'Si es tóxica', '<dl class="kv"><dt>Síndrome</dt><dd>' + esc(e.sindrome) + '</dd>' + (e.latencia ? '<dt>Aparece a las</dt><dd>' + esc(e.latencia) + '</dd>' : '') + (e.gravedad ? '<dt>Gravedad</dt><dd>' + esc(e.gravedad) + '</dd>' : '') + '</dl><p class="fc-p">Intoxicación: urgencias ya (112), con restos de la seta y la hora de ingestión. No esperar a que «pase».</p>', { cls: 'tox' }) : '') +
+    card('corta', 'Cómo recogerla', recoger(e));
+  const P = {
+    ident: card('lista', 'Qué mirar', queMirar(e) + esporada(e) + '<div class="row"><button class="btn" data-g="">Ver las partes de la seta</button></div>') + card('foto', 'En la foto: dónde mirar', anotadas(e)),
+    conf: (e.confusiones || []).length ? '<p class="fp-intro">Estas setas se parecen a esta. Compara las diferencias antes de decidir nada.</p>' + confusiones(e) : '',
+    hab: habitat(e),
+    cuando: card('cal', 'Meses del año', td.hay ? barrasHTML(e, mes) + '<p class="fc-p">' + esc(fuenteTxt(e)) + '</p>' : '<p class="fc-p">' + esc(fuenteTxt(e)) + '</p>') + cuandoSale(e),
+    comer: comer,
+    mas: card('estrella', 'Curiosidades', curiosidades(e)) + card('nombre', 'Sobre el nombre', e.notaNomenclatura ? '<p class="fc-p">' + esc(e.notaNomenclatura) + '</p>' : '') +
+      card('dato', 'Datos del catálogo inicial', ras.length ? '<details class="det"><summary>Ver el borrador (' + ras.length + ' datos)</summary><dl class="kv" style="margin-top:8px">' + ras.map(([k, l]) => '<dt>' + l + '</dt><dd>' + esc(e[k]) + '</dd>').join('') + '</dl></details>' : '') +
+      card('libro', 'Fuentes', fu + (frFu ? '<small class="fc-sub">Para el tiempo que necesita:</small>' + frFu : '')) +
+      card('foto', 'Créditos de las fotos', fuFotos ? '<ul class="cred">' + fuFotos + '</ul><small class="fc-sub">Fotos orientativas de otros autores (Wikimedia Commons). No confirman una identificación.</small>' : '')
+  };
+  return { P, peligro };
+}
+export function fichaHTML(e, mes) {
+  const c = cat.CLASES[cat.vista(e)], { P, peligro } = paneles(e, mes), nConf = (e.confusiones || []).length, grave = (e.confusiones || []).some(x => x.gravedad === 'alta');
+  const tabs = PESTANAS.filter(([k]) => P[k]);
   return hero(e) +
     '<div class="fh" style="--c:' + c.color + '"><div class="chips">' + tagEsp(e, true) + '<span class="tag" style="--c:#3a4743">' + esc(cat.NIVELES[e.nivelVerificacion] || e.nivelVerificacion) + '</span>' + (peligroConf(e) ? '<span class="tag" style="--c:#e5484d">Se confunde con tóxicas</span>' : '') + '</div>' +
     '<h2><i>' + esc(e.nombreCientifico) + '</i></h2>' + (nombresHTML(e) ? '<div class="nms">' + nombresHTML(e) + '</div>' : '') + (e.familia ? '<div class="famc"><span>Familia <b>' + esc(e.familia) + '</b></span><span style="--c:' + cat.coleccion(e).color + '">' + esc(cat.coleccion(e).titulo) + '</span></div>' : '') + '</div>' +
     (e.clave ? '<div class="clave' + (peligro ? ' pel' : '') + '"><small>' + (peligro ? 'Lo primero que hay que saber' : 'Lo primero que hay que mirar') + '</small><div class="clv"><b>' + esc(e.clave) + '</b>' + (rasgos(e) ? '<span class="clv-d">' + esquemaEsp(e, partesDe(e.clave), { talla: 112 }) + '</span>' : '') + '</div>' + leyenda(e) + '</div>' : '') +
-    anotadas(e) +
-    '<div class="warn">' + esc(cat.aviso()) + '</div>' +
-    (e.comestibilidad ? comestible(e) : e.notaComestibilidad ? '<div class="note" style="margin-top:10px">' + esc(e.notaComestibilidad) + '</div>' : '') +
-    (e.notaNomenclatura ? '<div class="note" style="margin-top:10px"><b>Nombre:</b> ' + esc(e.notaNomenclatura) + '</div>' : '') +
-    (e.sindrome ? '<div class="sec">Si es tóxica</div><dl class="kv"><dt>Síndrome</dt><dd>' + esc(e.sindrome) + '</dd>' + (e.latencia ? '<dt>Aparece a las</dt><dd>' + esc(e.latencia) + '</dd>' : '') + (e.gravedad ? '<dt>Gravedad</dt><dd>' + esc(e.gravedad) + '</dd>' : '') + '</dl><p class="note" style="margin-top:8px">Intoxicación: urgencias ya (112), con restos de la seta y la hora de ingestión. No esperar a que «pase».</p>' : '') +
-    '<div class="sec">Qué mirar</div>' + queMirar(e) + esporada(e) + '<div class="row"><button class="btn" data-g="">Ver las partes de la seta</button></div>' +
-    confusiones(e) + habitat(e) +
-    '<div class="sec">Cuándo se ve</div>' + (td.hay ? barrasHTML(e, mes) + '<p class="note" style="margin-top:8px">' + esc(fuenteTxt(e)) + '</p>' : '<p class="note">' + esc(fuenteTxt(e)) + '</p>') +
-    cuandoSale(e) + recoger(e) + curiosidades(e) +
-    (ras.length ? '<details class="det"><summary>Datos del catálogo inicial (borrador)</summary><dl class="kv" style="margin-top:8px">' + ras.map(([k, l]) => '<dt>' + l + '</dt><dd>' + esc(e[k]) + '</dd>').join('') + '</dl></details>' : '') +
-    (e.candidataComestible && !e.comestibilidad ? '<div class="row"><button class="btn big" id="fi-antes">Antes de comer</button></div>' : '') +
-    '<div class="sec">Fuentes</div>' + e.fuentes.filter(f => !/Commons/.test(f.nombre)).map(f => '<div class="note" style="margin-bottom:8px"><b>' + esc(f.nombre) + '</b>' + (f.fechaConsulta ? ' <small style="color:var(--mut)">· ' + esc(f.fechaConsulta) + '</small>' : '') + (f.url ? '<br><a href="' + esc(f.url) + '" target="_blank" rel="noopener">' + esc(f.url) + '</a>' : '') + (f.nota ? '<br><small style="color:var(--mut)">' + esc(f.nota) + '</small>' : '') + '</div>').join('') +
-    (fuFotos ? '<div class="sec">Créditos de las fotos</div><div class="note"><ul class="cred">' + fuFotos + '</ul><small style="color:var(--mut)">Fotos orientativas de otros autores (Wikimedia Commons). No confirman una identificación.</small></div>' : '');
+    '<div class="warn">' + esc(cat.aviso()) + '</div>' + resumen(e) +
+    '<nav class="ftabs" id="ftabs" role="tablist">' + tabs.map(([k, n], i) => '<button role="tab" class="ft' + (i ? '' : ' on') + (k === 'conf' && grave ? ' grave' : '') + '" data-ft="' + k + '" aria-selected="' + (i ? 'false' : 'true') + '">' + n + (k === 'conf' ? '<em>' + nConf + '</em>' : '') + '</button>').join('') + '</nav>' +
+    tabs.map(([k], i) => '<div class="fp" role="tabpanel" data-fp="' + k + '"' + (i ? ' hidden' : '') + '>' + P[k] + '</div>').join('');
 }
 export { mesNombre };
 
@@ -155,9 +191,8 @@ export { mesNombre };
 function cuandoSale(e) {
   const f = e.fructificacion; if (!f) return '';
   const est = f.base === 'estudio', li = f.texto.map(t => { const i = t.indexOf(': '); return i < 0 ? '<li>' + esc(t) + '</li>' : '<li><b>' + esc(t.slice(0, i)) + '</b> ' + esc(t.slice(i + 2)) + '</li>'; }).join('');
-  return '<div class="sec">Cuándo sale (el tiempo)</div><div class="cs"><div class="cs-tag ' + (est ? 'est' : 'hip') + '">' + (est ? 'Con estudio' : 'Orientativo') + ' · ' + esc(gremioNom(f.gremio, f.gremioNombre)) + '</div>' + (GREMIO[f.gremio] ? '<p class="note">' + esc(GREMIO[f.gremio].d) + '</p>' : '') + '<ul class="cs-l">' + li + '</ul>' +
-    (f.nota ? '<p class="note">' + esc(f.nota) + '</p>' : '') +
-    (est ? '' : '<p class="note">Son los valores de partida del modelo para este tipo de seta, no umbrales medidos para esta especie. Se irán ajustando con tus salidas.</p>') +
-    (f.perenne ? '' : '<div class="row"><a class="btn p" href="#plan/' + esc(e.id) + '">¿Qué día salir a por esta?</a></div>') +
-    (f.fuentes && f.fuentes.length ? '<details class="det"><summary>Fuentes</summary>' + f.fuentes.map(x => '<div class="note" style="margin-top:6px"><a href="' + esc(x.url) + '" target="_blank" rel="noopener">' + esc(x.t) + '</a></div>').join('') + '</details>' : '') + '</div>';
+  return card('nube', 'El tiempo que necesita', '<div class="cs"><div class="cs-tag ' + (est ? 'est' : 'hip') + '">' + (est ? 'Con estudio' : 'Orientativo') + ' · ' + esc(gremioNom(f.gremio, f.gremioNombre)) + '</div>' + (GREMIO[f.gremio] ? '<p class="fc-p">' + esc(GREMIO[f.gremio].d) + '</p>' : '') + '<ul class="cs-l">' + li + '</ul>' +
+    (f.nota ? '<p class="fc-p">' + esc(f.nota) + '</p>' : '') +
+    (est ? '' : '<p class="fc-p fc-hip">Son los valores de partida del modelo para este tipo de seta, no umbrales medidos para esta especie. Se irán ajustando con tus salidas.</p>') + '</div>' +
+    (f.perenne ? '' : '<div class="row"><a class="btn p" href="#plan/' + esc(e.id) + '">¿Qué día salir a por esta?</a></div>'));
 }

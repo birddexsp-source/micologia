@@ -29,7 +29,7 @@ module.exports = {
       await t.tap('#cl button[data-c=""]'); t.eq('todas', await t.N('#slist .item'), 98);
     });
     await t.case('ficha de una mortal: síndrome, latencia, confusiones, fuentes', async () => {
-      await t.page.fill('#q', 'cicuta'); await t.wait(150); await t.tap('#slist .item', 300);
+      await t.page.fill('#q', 'cicuta'); await t.wait(150); await t.tap('#slist .item', 300); await t.page.evaluate(() => window.__MI.fichaTab('todo'));
       const s = await t.T('#sheet');
       t.ok('clase Mortal', /Mortal/.test(s)); t.ok('nivel borrador visible', /Borrador/.test(s));
       t.ok('aviso en la ficha', /Ninguna seta se come/.test(s)); t.ok('síndrome faloidiano y latencia', /Faloidiano/.test(s) && /6–24 h/.test(s));
@@ -41,7 +41,7 @@ module.exports = {
     });
     await t.case('confusiones enlazadas entre fichas (recíprocas)', async () => {
       await t.page.fill('#q', 'Lepiota'); await t.wait(150); await t.tap('#slist .item', 300);
-      await t.tap('#sheet .lnk[data-e="macrolepiota-procera"]', 300);
+      await t.page.evaluate(() => window.__MI.fichaTab('todo')); await t.tap('#sheet .lnk[data-e="macrolepiota-procera"]', 300); await t.page.evaluate(() => window.__MI.fichaTab('todo'));
       t.ok('abre la ficha del parasol', /Macrolepiota procera/.test(await t.T('#sheet h2') || ''));
       t.ok('el parasol enlaza de vuelta a la Lepiota', await t.has('#sheet .lnk[data-e="lepiota-brunneoincarnata"]'));
       t.ok('las comestibles salen «según fuentes», con aviso de que no está revisado por una persona experta', /según fuentes/i.test(await t.T('#sheet .chips') || '') && /sin revisión experta|borrador/i.test(await t.T('#sheet .com') || '') && !/comestible buena/i.test(await t.T('#sheet') || ''));
