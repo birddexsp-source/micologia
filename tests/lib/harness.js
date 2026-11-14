@@ -76,6 +76,8 @@ class T {
     page.on('console', m => { if (m.type() === 'error' && !/tile|404|Failed to load resource|net::ERR/.test(m.text())) this.errs.push('console: ' + m.text()); });
     /* teselas simuladas (ign.es está bloqueado en este entorno y no queremos red real en pruebas) */
     await page.route(/ign\.es|tile\.openstreetmap\.org/, r => { this.tileReqs.push(r.request().url()); r.fulfill({ status: 200, contentType: 'image/png', body: PNG1, headers: { 'access-control-allow-origin': '*' } }); });
+    /* el tiempo (Open-Meteo): nunca red real en pruebas; sin simulador propio la petición falla, como sin cobertura */
+    await page.route(/open-meteo\.com/, r => r.abort());
     /* fotos del catálogo (Wikimedia Commons): también simuladas */
     await page.route(/upload\.wikimedia\.org/, r => { this.photoReqs.push(r.request().url()); r.fulfill({ status: 200, contentType: 'image/png', body: PNG1, headers: { 'access-control-allow-origin': '*' } }); });
     return page;

@@ -13,11 +13,12 @@ import * as trk from './track.js';
 import * as ia from './ia.js';
 import * as au from './audio.js';
 import * as off from './offline.js';
+import { renderPlan } from './plan.js';
 
-const APP_V = 'micologia-v26';   // = V de sw.js
+const APP_V = 'micologia-v27';   // = V de sw.js
 const S = { view: 'mapa', arg: '', map: null, pins: null, me: null, acc: null, tmp: null, mini: null, centered: false, filtro: { salida: '', especie: '' }, clase: '', q: '', syncErr: false, mes: new Date().getMonth() + 1 };
-const VIEWS = ['mapa', 'salidas', 'salida', 'setas', 'mes', 'ajustes'];
-const TITULOS = { mapa: 'Mapa', salidas: 'Salidas', salida: 'Salida', setas: 'Setas', mes: 'Este mes', ajustes: 'Ajustes' };
+const VIEWS = ['mapa', 'salidas', 'salida', 'setas', 'mes', 'plan', 'ajustes'];
+const TITULOS = { mapa: 'Mapa', salidas: 'Salidas', salida: 'Salida', setas: 'Setas', mes: 'Este mes', plan: 'Plan de salida', ajustes: 'Ajustes' };
 const ICON_SYNC = '<svg viewBox="0 0 24 24"><path d="M7 18a4 4 0 0 1-.6-7.96A5.5 5.5 0 0 1 17 9.5a4.2 4.2 0 0 1 .5 8.5"/><path d="M12 12v8m0-8l-3 3m3-3l3 3"/></svg>';
 const ESTADOS = [['joven', 'Joven'], ['madura', 'Madura'], ['pasada', 'Pasada']];
 
@@ -1005,7 +1006,7 @@ function route() {
 async function renderView() {
   const a = document.activeElement;
   if (a && /INPUT|TEXTAREA|SELECT/.test(a.tagName) && a.closest('.view') && S.view !== 'ajustes') return;
-  if (S.view === 'salidas') await renderSalidas(); else if (S.view === 'salida') await renderSalida(S.arg); else if (S.view === 'setas') renderSetas(); else if (S.view === 'mes') renderMes(); else if (S.view === 'ajustes') await renderAjustes();
+  if (S.view === 'salidas') await renderSalidas(); else if (S.view === 'salida') await renderSalida(S.arg); else if (S.view === 'setas') renderSetas(); else if (S.view === 'mes') renderMes(); else if (S.view === 'plan') await renderPlan($('#v-plan'), S.arg); else if (S.view === 'ajustes') await renderAjustes();
 }
 async function boot() {
   await db.init(); await cat.load();
@@ -1014,7 +1015,7 @@ async function boot() {
   { const a = await activa(); if (a && a.grabar !== false) await trk.start(a.id); }
   addEventListener('hashchange', route);
   document.addEventListener('error', e => { if (e.target.tagName === 'IMG' && e.target.classList.contains('ph')) e.target.classList.add('x'); }, true);
-  db.onChange(() => { badge(); refreshPins(); chipSalida(); if (S.view !== 'setas' && S.view !== 'mes' && !trk.guardando()) renderView(); });
+  db.onChange(() => { badge(); refreshPins(); chipSalida(); if (S.view !== 'setas' && S.view !== 'mes' && S.view !== 'plan' && !trk.guardando()) renderView(); });
   addEventListener('online', badge); addEventListener('offline', badge);
   $('#syncbtn').onclick = () => { const c = syn.cfg(); if (!c.repo || !c.token) { location.hash = '#ajustes'; toast('Configura el repositorio y el token'); } else correrSync(); };
   if (syn.cfg().repo) syn.auto(2500);

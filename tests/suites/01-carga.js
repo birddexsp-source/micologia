@@ -1,8 +1,8 @@
 module.exports = {
   name: 'Carga: arranque, pestañas y mapa satélite',
   async run(t) {
-    await t.case('arranca con 5 pestañas y el mapa', async () => {
-      t.eq('5 pestañas', await t.N('.nav a'), 5);
+    await t.case('arranca con 6 pestañas y el mapa', async () => {
+      t.eq('6 pestañas', await t.N('.nav a'), 6);
       t.ok('mapa Leaflet montado', await t.has('#map.leaflet-container'));
       t.ok('botón «Marcar aquí» visible', await t.visible('#fab'));
       t.eq('título', await t.T('#ttl'), 'Mapa');

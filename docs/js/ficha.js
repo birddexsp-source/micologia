@@ -114,10 +114,21 @@ export function fichaHTML(e, mes) {
     '<div class="sec">Qué mirar</div>' + queMirar(e) + esporada(e) + '<div class="row"><button class="btn" data-g="">Ver las partes de la seta</button></div>' +
     confusiones(e) + habitat(e) +
     '<div class="sec">Cuándo se ve</div>' + (td.hay ? barrasHTML(e, mes) + '<p class="note" style="margin-top:8px">' + esc(fuenteTxt(e)) + '</p>' : '<p class="note">' + esc(fuenteTxt(e)) + '</p>') +
-    recoger(e) + curiosidades(e) +
+    cuandoSale(e) + recoger(e) + curiosidades(e) +
     (ras.length ? '<details class="det"><summary>Datos del catálogo inicial (borrador)</summary><dl class="kv" style="margin-top:8px">' + ras.map(([k, l]) => '<dt>' + l + '</dt><dd>' + esc(e[k]) + '</dd>').join('') + '</dl></details>' : '') +
     (e.candidataComestible && !e.comestibilidad ? '<div class="row"><button class="btn big" id="fi-antes">Antes de comer</button></div>' : '') +
     '<div class="sec">Fuentes</div>' + e.fuentes.filter(f => !/Commons/.test(f.nombre)).map(f => '<div class="note" style="margin-bottom:8px"><b>' + esc(f.nombre) + '</b>' + (f.fechaConsulta ? ' <small style="color:var(--mut)">· ' + esc(f.fechaConsulta) + '</small>' : '') + (f.url ? '<br><a href="' + esc(f.url) + '" target="_blank" rel="noopener">' + esc(f.url) + '</a>' : '') + (f.nota ? '<br><small style="color:var(--mut)">' + esc(f.nota) + '</small>' : '') + '</div>').join('') +
     (fuFotos ? '<div class="sec">Créditos de las fotos</div><div class="note"><ul class="cred">' + fuFotos + '</ul><small style="color:var(--mut)">Fotos orientativas de otros autores (Wikimedia Commons). No confirman una identificación.</small></div>' : '');
 }
 export { mesNombre };
+
+/* Cuándo sale: condiciones de tiempo (lluvia, temperatura, helada) según el gremio de la especie. Lo medido va separado de las hipótesis. */
+function cuandoSale(e) {
+  const f = e.fructificacion; if (!f) return '';
+  const est = f.base === 'estudio', li = f.texto.map(t => { const i = t.indexOf(': '); return i < 0 ? '<li>' + esc(t) + '</li>' : '<li><b>' + esc(t.slice(0, i)) + '</b> ' + esc(t.slice(i + 2)) + '</li>'; }).join('');
+  return '<div class="sec">Cuándo sale (el tiempo)</div><div class="cs"><div class="cs-tag ' + (est ? 'est' : 'hip') + '">' + (est ? 'Con estudio' : 'Orientativo') + ' · ' + esc(f.gremioNombre) + '</div><ul class="cs-l">' + li + '</ul>' +
+    (f.nota ? '<p class="note">' + esc(f.nota) + '</p>' : '') +
+    (est ? '' : '<p class="note">Son los valores de partida del modelo para este tipo de seta, no umbrales medidos para esta especie. Se irán ajustando con tus salidas.</p>') +
+    (f.perenne ? '' : '<div class="row"><a class="btn p" href="#plan/' + esc(e.id) + '">¿Qué día salir a por esta?</a></div>') +
+    (f.fuentes && f.fuentes.length ? '<details class="det"><summary>Fuentes</summary>' + f.fuentes.map(x => '<div class="note" style="margin-top:6px"><a href="' + esc(x.url) + '" target="_blank" rel="noopener">' + esc(x.t) + '</a></div>').join('') + '</details>' : '') + '</div>';
+}

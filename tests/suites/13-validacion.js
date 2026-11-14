@@ -11,7 +11,7 @@ module.exports = {
     const sinDesborde = () => t.page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1 && [...document.querySelectorAll('.view:not([hidden]), #sheet .sh')].every(v => v.scrollWidth <= v.clientWidth + 1));
 
     await t.case('todas las pestañas se pintan, sin errores ni desbordes', async () => {
-      for (const [h, sel] of [['#mapa', '#map .leaflet-tile'], ['#salidas', '#s-new'], ['#setas', '#slist .item'], ['#mes', '.mes-sum'], ['#ajustes', '.aj-st']]) {
+      for (const [h, sel] of [['#mapa', '#map .leaflet-tile'], ['#salidas', '#s-new'], ['#setas', '#slist .item'], ['#mes', '.mes-sum'], ['#plan', '#pl-sel'], ['#ajustes', '.aj-st']]) {
         await t.go(h); await t.wait(300);
         t.ok(h + ': contenido', await t.has(sel)); t.ok(h + ': sin desborde', await sinDesborde());
       }
@@ -135,7 +135,7 @@ module.exports = {
     });
     await t.case('360×640: pantallas clave sin desborde', async () => {
       await t.page.setViewportSize({ width: 360, height: 640 });
-      for (const h of ['#mapa', '#salidas', '#salida/' + sid, '#setas', '#mes', '#ajustes']) { await t.go(h); await t.wait(250); t.ok(h + ' a 360 px', await sinDesborde()); }
+      for (const h of ['#mapa', '#salidas', '#salida/' + sid, '#setas', '#mes', '#plan', '#ajustes']) { await t.go(h); await t.wait(250); t.ok(h + ' a 360 px', await sinDesborde()); }
       await t.go('#setas'); await t.tap('[data-ord="col"]', 300); t.ok('colecciones a 360 px', await sinDesborde());
       await t.tap('[data-ord="peligro"]', 200);
     });
