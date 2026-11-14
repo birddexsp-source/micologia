@@ -672,3 +672,10 @@ a.item{text-decoration:none;color:inherit}
 /* v24 · mapa sin conexión (Ajustes) */
 #off-z,#off-k,#off-d{margin-bottom:4px}
 .seg button:disabled{opacity:.4;cursor:default}
+/* v25 · lista de zonas para descargar */
+.offl{display:flex;flex-direction:column;gap:8px;margin-bottom:6px}
+.offi{display:flex;align-items:center;gap:12px;padding:12px;border:1px solid var(--line);border-radius:14px;background:var(--s2);cursor:pointer}
+.offi input{width:22px;height:22px;accent-color:var(--acc);flex:none}
+.offi span{flex:1;min-width:0}.offi b{display:block;font-size:15px}.offi small{display:block;color:var(--mut);font-size:12.5px;margin-top:2px}
+.offi em{font-style:normal;color:var(--acc);font-weight:700;font-size:12.5px;flex:none}
+.offi.ok{border-color:var(--acc)}

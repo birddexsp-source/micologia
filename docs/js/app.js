@@ -14,7 +14,7 @@ import * as ia from './ia.js';
 import * as au from './audio.js';
 import * as off from './offline.js';
 
-const APP_V = 'micologia-v24';   // = V de sw.js
+const APP_V = 'micologia-v25';   // = V de sw.js
 const S = { view: 'mapa', arg: '', map: null, pins: null, me: null, acc: null, tmp: null, mini: null, centered: false, filtro: { salida: '', especie: '' }, clase: '', q: '', syncErr: false, mes: new Date().getMonth() + 1 };
 const VIEWS = ['mapa', 'salidas', 'salida', 'setas', 'mes', 'ajustes'];
 const TITULOS = { mapa: 'Mapa', salidas: 'Salidas', salida: 'Salida', setas: 'Setas', mes: 'Este mes', ajustes: 'Ajustes' };
@@ -172,7 +172,7 @@ function abrirCapas() {
   const sh = openSheet('<h2>Tipo de mapa</h2><div class="capas">' + [['sat', 'Satélite', 'Foto aérea del IGN: se ven los bosques y los claros'], ['calle', 'Mapa', 'Pistas, caminos y pueblos (OpenStreetMap)']].map(([k, t, d]) =>
     '<button class="capa ' + k + (b === k ? ' on' : '') + '" data-base="' + k + '"><span class="pv"></span><b>' + t + '</b><small>' + d + '</small></button>').join('') + '</div><button class="btn" id="capa-off" style="width:100%;margin-top:12px">Guardar este mapa sin conexión…</button>');
   sh.onclick = e => {
-    if (e.target.closest('#capa-off')) { S.lastCenter = S.map.getCenter(); OFF.zona = 'centro'; closeSheet(); location.hash = '#ajustes'; return; }
+    if (e.target.closest('#capa-off')) { S.lastCenter = S.map.getCenter(); (OFF.sel = OFF.sel || new Set(off.PRESETS.map(p => p.clave))).add('centro'); closeSheet(); location.hash = '#ajustes'; return; }
     const x = e.target.closest('[data-base]'); if (!x) return; S.map.setBase(x.dataset.base); closeSheet(); };
 }
 const corto = e => { const n = e.nombresComunes && e.nombresComunes.es && e.nombresComunes.es[0]; return n ? n[0].toUpperCase() + n.slice(1) : e.nombreCientifico.split(' (')[0]; };
@@ -893,54 +893,60 @@ function instalarHTML(sec) {
     '<br>Abre la app desde ese icono la primera vez con conexión para que guarde todo.</div>');
 }
 /* ---------- mapa sin conexión ---------- */
-const OFF = { zona: null, km: 5, det: 'normal', ctl: null, msg: '' };
-function offCajas(zonas) {
-  if (OFF.zona === 'spots') return zonas.map(z => off.cajaAlrededor(z.lat, z.lon, Math.min(OFF.km, 3)));
+const OFF = { sel: null, km: 5, det: 'normal', ctl: null, msg: '' };
+/* grupos descargables: las zonas predefinidas + tus spots + el centro del mapa */
+function offGrupos(zonas) {
+  const g = off.PRESETS.map(p => ({ clave: p.clave, nombre: p.nombre, desc: p.desc, cajas: off.cajasPreset(p) }));
+  if (zonas.length) g.push({ clave: 'spots', nombre: 'Mis spots', desc: plural(zonas.length, 'spot', 'spots') + ' (3 km alrededor de cada uno)', cajas: zonas.map(z => off.cajaAlrededor(z.lat, z.lon, 3)) });
   const c = S.lastCenter || (S.map && S.map.getCenter()) || { lat: 43.26, lng: -2.93 };
-  return [off.cajaAlrededor(c.lat, c.lng, OFF.km)];
+  g.push({ clave: 'centro', nombre: 'Centro del mapa', desc: 'Lo que estás mirando ahora en el mapa', cajas: [off.cajaAlrededor(c.lat, c.lng, OFF.km)], extra: true });
+  return g;
 }
 function offHTML() {
-  return '<div class="note" style="margin:0 0 8px">Se guarda la foto aérea (IGN) de las zonas que elijas. Sin cobertura el mapa, tus spots y tus hallazgos funcionan igual; al volver la red se sincroniza solo.</div>' +
-    '<label class="l">Qué zona</label><div class="seg" id="off-z"><button data-oz="spots">Mis spots</button><button data-oz="centro">Centro del mapa</button></div>' +
-    '<label class="l">Alrededor</label><div class="seg" id="off-k">' + [2, 5, 10].map(k => '<button data-ok="' + k + '">' + k + ' km</button>').join('') + '</div>' +
-    '<label class="l">Detalle</label><div class="seg" id="off-d"><button data-od="normal">Normal</button><button data-od="alto">Alto (más peso)</button></div>' +
+  return '<div class="note" style="margin:0 0 8px">Marca las zonas donde andas y descárgalas con wifi. Se guarda la foto aérea (IGN): sin cobertura el mapa, tus spots y tus hallazgos funcionan igual y, al volver la red, se sincroniza solo.</div><div id="off-lista" class="offl"></div>' +
+    '<div id="off-km" hidden><label class="l">Radio del «centro del mapa»</label><div class="seg" id="off-k">' + [2, 5, 10].map(k => '<button data-ok="' + k + '">' + k + ' km</button>').join('') + '</div></div>' +
+    '<label class="l">Detalle</label><div class="seg" id="off-d"><button data-od="normal">Normal (se ve el bosque)</button><button data-od="alto">Alto (4× más peso)</button></div>' +
     '<div class="note" id="off-n" style="margin-top:10px"></div>' +
-    '<div class="row"><button class="btn p" id="off-go">Descargar mapa</button><button class="btn d" id="off-stop" hidden>Parar</button></div>' +
+    '<div class="row"><button class="btn p" id="off-go">Descargar lo marcado</button><button class="btn d" id="off-stop" hidden>Parar</button></div>' +
     '<div class="note" id="off-st" style="margin-top:8px"></div><div class="note" id="off-tot" style="margin-top:4px">Comprobando…</div><div class="row"><button class="btn d" id="off-del" hidden>Borrar mapas guardados</button></div>';
 }
 async function offWire(root, zonas) {
-  if (!OFF.zona) OFF.zona = zonas.length ? 'spots' : 'centro';
-  if (OFF.zona === 'spots' && !zonas.length) OFF.zona = 'centro';
-  const st = $('#off-st', root), n = $('#off-n', root), go = $('#off-go', root), stop = $('#off-stop', root), del = $('#off-del', root);
+  if (!OFF.sel) OFF.sel = new Set(off.PRESETS.map(p => p.clave));
+  const st = $('#off-st', root), n = $('#off-n', root), go = $('#off-go', root), stop = $('#off-stop', root), del = $('#off-del', root), tot = $('#off-tot', root), lista = $('#off-lista', root);
   const mb = b => b >= 1048576 ? (b / 1048576).toFixed(1) + ' MB' : Math.round(b / 1024) + ' KB';
+  const zmax = () => off.ZMAX[OFF.det];
   const pintar = () => {
-    $$('#off-z button', root).forEach(b => { b.classList.toggle('on', b.dataset.oz === OFF.zona); if (b.dataset.oz === 'spots') b.disabled = !zonas.length; });
+    const gs = offGrupos(zonas);
+    lista.innerHTML = gs.map(g => {
+      const t = off.teselas(g.cajas, zmax()).length, ok = off.guardada(g.clave, zmax());
+      return '<label class="offi' + (ok ? ' ok' : '') + '"><input type="checkbox" data-og="' + g.clave + '"' + (OFF.sel.has(g.clave) ? ' checked' : '') + '><span><b>' + esc(g.nombre) + '</b><small>' + esc(g.desc) + ' · ≈ ' + off.estimarMB(t) + ' MB</small></span><em>' + (ok ? '✓ guardada' : '') + '</em></label>';
+    }).join('');
+    $('#off-km', root).hidden = !OFF.sel.has('centro');
     $$('#off-k button', root).forEach(b => b.classList.toggle('on', +b.dataset.ok === OFF.km));
     $$('#off-d button', root).forEach(b => b.classList.toggle('on', b.dataset.od === OFF.det));
-    const lista = off.teselas(offCajas(zonas), off.ZMAX[OFF.det]), grande = off.demasiadas(lista.length);
-    n.textContent = (OFF.zona === 'spots' ? plural(zonas.length, 'spot', 'spots') + ' (máx. 3 km alrededor de cada uno)' : 'Alrededor del centro del mapa') + ' · ≈ ' + lista.length.toLocaleString('es-ES') + ' teselas · ≈ ' + off.estimarMB(lista.length) + ' MB' + (grande ? ' — demasiado grande: reduce el radio o el detalle.' : '');
-    go.disabled = grande || !!OFF.ctl;
+    const marc = gs.filter(g => OFF.sel.has(g.clave)), t = off.teselas(marc.flatMap(g => g.cajas), zmax()).length, grande = off.demasiadas(t);
+    n.textContent = marc.length ? plural(marc.length, 'zona marcada', 'zonas marcadas') + ' · ≈ ' + t.toLocaleString('es-ES') + ' teselas · ≈ ' + off.estimarMB(t) + ' MB en total' + (grande ? ' — demasiado grande: desmarca alguna o baja el detalle.' : '') : 'Marca al menos una zona.';
+    go.disabled = !marc.length || grande || !!OFF.ctl;
   };
-  const tot = $('#off-tot', root);
-  const estado = async () => { const e = await off.estado(); if (!e.ok) { tot.textContent = 'Este navegador no permite guardar mapas sin conexión.'; go.disabled = true; return; } tot.textContent = e.n ? 'Guardadas ' + e.n.toLocaleString('es-ES') + ' teselas en ' + plural(e.zonas.length, 'zona', 'zonas') + '.' : 'Aún no has guardado ningún mapa.'; del.hidden = !e.n; };
-  $('#off-z', root).closest('section').addEventListener('click', e => {
-    const z = e.target.closest('[data-oz]'), k = e.target.closest('[data-ok]'), d = e.target.closest('[data-od]');
-    if (z && !z.disabled) { OFF.zona = z.dataset.oz; pintar(); } else if (k) { OFF.km = +k.dataset.ok; pintar(); } else if (d) { OFF.det = d.dataset.od; pintar(); }
-  });
+  const estado = async () => { const e = await off.estado(); if (!e.ok) { tot.textContent = 'Este navegador no permite guardar mapas sin conexión.'; go.disabled = true; return; } tot.textContent = e.n ? 'En el móvil: ' + e.n.toLocaleString('es-ES') + ' teselas guardadas.' : 'Aún no has guardado ningún mapa.'; del.hidden = !e.n; };
+  const sec = lista.closest('section');
+  sec.addEventListener('change', e => { const c = e.target.closest('[data-og]'); if (!c) return; c.checked ? OFF.sel.add(c.dataset.og) : OFF.sel.delete(c.dataset.og); pintar(); });
+  sec.addEventListener('click', e => { const k = e.target.closest('[data-ok]'), d = e.target.closest('[data-od]'); if (k) { OFF.km = +k.dataset.ok; pintar(); } else if (d) { OFF.det = d.dataset.od; pintar(); } });
   /* la pantalla se repinta sola (p. ej. al terminar una sincronización): el texto va siempre al elemento actual y se guarda en OFF.msg */
   const dice = m => { OFF.msg = m; const e = $('#off-st'); if (e) e.textContent = m; };
   go.onclick = async () => {
     if (!navigator.onLine) { dice('Necesitas conexión para descargar el mapa.'); return; }
+    const grupos = offGrupos(zonas).filter(g => OFF.sel.has(g.clave)); if (!grupos.length) return;
     const ctl = OFF.ctl = {}; go.disabled = true; stop.hidden = false; del.hidden = true;
     try {
-      const r = await off.descargar({ cajas: offCajas(zonas), zmax: off.ZMAX[OFF.det], nombre: OFF.zona === 'spots' ? 'Spot' : 'Zona' }, p => { dice('Descargando mapa… ' + Math.round(p.hechas / p.total * 100) + '% · ' + mb(p.bytes) + (p.fallos ? ' · ' + p.fallos + ' fallos' : '')); }, ctl);
+      const r = await off.descargar({ grupos, zmax: zmax() }, p => { dice('Descargando mapa… ' + Math.round(p.hechas / p.total * 100) + '% · ' + mb(p.bytes) + (p.fallos ? ' · ' + p.fallos + ' fallos' : '')); }, ctl);
       dice(r.cancelada ? 'Descarga parada (lo ya bajado queda guardado).' : r.fallos ? 'Descargado con ' + r.fallos + ' teselas que fallaron: vuelve a pulsar Descargar para completarlas.' : '✓ Mapa guardado (' + r.total.toLocaleString('es-ES') + ' teselas' + (r.bytes ? ' · ' + mb(r.bytes) + ' nuevos' : ' · ya estaban') + ').');
       toast(r.fallos || r.cancelada ? 'Mapa incompleto' : 'Mapa guardado para usar sin conexión');
-    } catch (err) { dice(err.message === 'demasiadas' ? 'Demasiado grande: reduce el radio o el detalle.' : 'No se ha podido descargar: ' + (err.message || err)); }
+    } catch (err) { dice(err.message === 'demasiadas' ? 'Demasiado grande: desmarca alguna zona o baja el detalle.' : 'No se ha podido descargar: ' + (err.message || err)); }
     OFF.ctl = null; if ($('#off-stop')) { $('#off-stop').hidden = true; } if ($('#off-go')) pintar(); estado();
   };
   stop.onclick = () => { if (OFF.ctl) OFF.ctl.cancel = true; };
-  del.onclick = async () => { if (del.dataset.sure) { await off.borrarTodo(); del.dataset.sure = ''; del.textContent = 'Borrar mapas guardados'; estado(); toast('Mapas borrados'); } else { del.dataset.sure = 1; del.textContent = 'Pulsa otra vez para borrar'; } };
+  del.onclick = async () => { if (del.dataset.sure) { await off.borrarTodo(); del.dataset.sure = ''; del.textContent = 'Borrar mapas guardados'; pintar(); estado(); toast('Mapas borrados'); } else { del.dataset.sure = 1; del.textContent = 'Pulsa otra vez para borrar'; } };
   st.textContent = OFF.msg || ''; stop.hidden = !OFF.ctl;
   pintar(); estado();
 }
