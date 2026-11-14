@@ -711,3 +711,16 @@ a.item{text-decoration:none;color:inherit}
 .pl-g{display:grid;grid-template-columns:1fr 90px 28px;gap:8px;align-items:center;font-size:13px;margin-top:6px}.pl-g i{display:block;height:8px;border-radius:4px;background:linear-gradient(90deg,var(--c) var(--w),var(--s3) var(--w))}.pl-g b{text-align:right;font-family:var(--mono)}
 .pl-cal{margin-top:6px}.pl-t{width:100%;border-collapse:collapse;font-size:13.5px;margin:8px 0}.pl-t th{text-align:left;font:600 11.5px var(--mono);color:var(--mut);padding:4px 0}.pl-t td{padding:6px 0;border-top:1px solid var(--line)}.pl-t td:nth-child(n+2){text-align:right}
 #pl-acc{margin-top:8px}
+
+/* ===== v28: lista visual de especies en el Plan ===== */
+.pl-lh{font:700 12px var(--mono);color:var(--mut);margin:14px 0 8px;text-transform:uppercase;letter-spacing:.04em}.pl-lh-pel{color:#e0a458}
+.pl-sp{display:flex;gap:12px;align-items:flex-start;width:100%;text-align:left;background:var(--s1);border:1px solid var(--line);border-left:4px solid var(--ok);border-radius:14px;padding:10px;margin-bottom:10px;color:var(--ink);cursor:pointer;position:relative}
+.pl-sp.pel{border-left-color:var(--bad)}
+.pl-sp .phw.av{width:84px;height:84px;border-radius:10px;flex:none}
+.pl-sp .t{flex:1;min-width:0;padding-right:14px}.pl-sp .t b{display:block;font-size:15px;line-height:1.25}.pl-sp .t small{display:block;color:var(--mut);font-size:12px}
+.pl-sp-m{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:5px 0 4px}.pl-sp-s{font:700 12px var(--mono)}
+.pl-sp-k,.pl-sp-h{margin:3px 0 0;font-size:12.5px;line-height:1.35;color:var(--ink)}.pl-sp-k b,.pl-sp-h b{color:var(--mut);font-weight:600}
+.pl-sp-g{margin-top:4px!important;font-size:11px!important}
+.pl-sp-c{position:absolute;right:10px;top:50%;transform:translateY(-50%);color:var(--mut);font-size:20px}
+.pl-ident{margin:2px 0 6px}
+.pl-sp .t .pl-sp-k b,.pl-sp .t .pl-sp-h b{display:inline;font-size:inherit;line-height:inherit}

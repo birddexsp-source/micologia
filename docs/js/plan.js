@@ -4,6 +4,7 @@ import * as db from './db.js';
 import * as cat from './catalog.js';
 import * as cl from './clima.js';
 import * as md from './modelo.js';
+import * as fi from './ficha.js';
 import { esc, $, $$, hoy, toast } from './util.js';
 
 const BERMEO = { id: 'bermeo', nombre: 'Bermeo (centro)', lat: 43.42, lon: -2.7264 };
@@ -73,7 +74,7 @@ export async function renderPlan(root, arg) {
     const b = e.target.closest('[data-pf]'); if (b) { P.sel = b.dataset.pf; pintarResultado(root); return; }
     if (e.target.closest('#pl-ref')) { cargarTiempo(root, true); return; }
     if (e.target.closest('#pl-acc-b')) { aciertosUI(root, true); return; }
-    const f = e.target.closest('[data-pe]'); if (f) { location.hash = '#setas'; setTimeout(() => window.__MI && window.__MI.abrirFicha(f.dataset.pe), 80); }
+    const f = e.target.closest('[data-pe]'); if (f && window.__MI) window.__MI.abrirFicha(f.dataset.pe);
   };
   await cargarTiempo(root, false, lug);
   aciertosUI(root, false);
@@ -113,7 +114,7 @@ function pintarResultado(root) {
       const sc = x.score == null ? 0 : x.score;
       return '<button data-pf="' + x.f + '" class="pl-b' + (x.d < 0 ? ' pas' : '') + (x.d === 0 ? ' hoy' : '') + (x.f === sel ? ' on' : '') + '" style="--h:' + Math.max(4, sc / mx * 100) + '%;--c:' + md.COL(sc) + '"><span class="pl-v">' + (x.score == null ? '' : sc) + '</span><u></u><span class="pl-p">' + (x.p == null ? '' : x.p >= 1 ? Math.round(x.p) : '·') + '</span><span class="pl-d">' + DIA1[cl.aFecha(x.f).getDay()] + '<small>' + cl.aFecha(x.f).getDate() + '</small></span></button>';
     }).join('') + '</div><div class="pl-leg"><span>◀ ya pasado (tiempo real)</span><span>previsión ▶</span></div><div class="pl-leg2">Número bajo cada barra: lluvia del día en mm. Pasado y presente: datos medidos. A más de 5 días, la previsión es menos fiable.</div>' +
-    detalleDia(dia, titulo, E) + (cal ? '<div class="note pl-cal">Modelo ajustado con tus ' + cal.n + ' visitas.</div>' : '');
+    detalleDia(dia, titulo, E) + (dia && dia.score != null ? '<div class="pl-lista">' + listaDia(dia) + '</div>' : '') + (cal ? '<div class="note pl-cal">Modelo ajustado con tus ' + cal.n + ' visitas.</div>' : '');
 }
 const etiquetaLim = r => { const m = { lluvia: 'lluvia acumulada', temp: 'temperatura', helada: 'helada', seco: 'suelo seco', temporada: 'época del año' }; const x = r && (r.limitante || (r.general && r.general.mejor && null)); return m[x] || 'varios factores'; };
 function detalleDia(d, titulo, E) {
@@ -122,7 +123,7 @@ function detalleDia(d, titulo, E) {
   let cuerpo = '';
   if (d.r.general) {
     const g = d.r.general, top = g.mejor;
-    cuerpo += top ? '<p class="pl-q">Lo mejor ese día: <b>' + esc(top.nombre) + '</b> (' + top.score + '). Prueba con: ' + top.mejores.map(e => '<button class="pl-chip" data-pe="' + e.id + '">' + esc(nombre(e)) + '</button>').join(' ') + '</p>' : '';
+    cuerpo += top ? '<p class="pl-q">Lo mejor ese día: <b>' + esc(top.nombre) + '</b> (' + top.score + ').</p>' : '';
     const e0 = top && top.mejores[0]; if (e0) { const r0 = md.puntuar(e0, E.dias, d.f, calActual()); cuerpo += '<div class="pl-why-h">Por qué (' + esc(nombre(e0)) + '):</div>' + porque(r0); }
     cuerpo += '<details class="det"><summary>Todos los tipos de seta ese día</summary>' + g.gremios.map(x => '<div class="pl-g"><span>' + esc(x.nombre) + '</span><i style="--w:' + x.score + '%;--c:' + md.COL(x.score) + '"></i><b>' + x.score + '</b></div>').join('') + '</details>';
   } else cuerpo += porque(d.r);
@@ -131,6 +132,38 @@ function detalleDia(d, titulo, E) {
     (d.r.x && d.r.x.c.pHoy >= 10 ? '<p class="note">Ese día se prevén ' + Math.round(d.r.x.c.pHoy) + ' mm: sales mojado, aunque al monte no le viene mal.</p>' : '') + '</div>';
 }
 const porque = r => !r || !r.explicacion ? '' : '<ul class="pl-why">' + r.explicacion.map(x => '<li class="' + (x.v >= 0.85 ? 'ok' : x.v >= 0.5 ? 'mid' : 'no') + '"><i></i>' + esc(x.t) + '</li>').join('') + '</ul>';
+
+/* ---------- lista visual de especies de un día ---------- */
+const PELIGRO = e => e.clase === 'mortal' || e.clase === 'toxica';
+const corta = (t, n) => { t = String(t || '').replace(/\s+/g, ' ').trim(); return t.length > n ? t.slice(0, n - 1).replace(/[ ,.;:]+\S*$/, '') + '…' : t; };
+/* especies del objetivo con su puntuación ese día, de mayor a menor */
+export function especiesDelDia(obj, dias, f, cal) {
+  let lista = especies();
+  if (obj.startsWith('g:')) lista = lista.filter(e => e.fructificacion.gremio === obj.slice(2));
+  else if (obj !== 'general') lista = lista.filter(e => e.id === obj);
+  return lista.map(e => ({ e, r: md.puntuar(e, dias, f, cal) })).filter(x => x.r).sort((a, b) => b.r.score - a.r.score);
+}
+function tarjetaEsp(x, f) {
+  const e = x.e, c = nombre(e), cien = e.nombreCientifico.split(' (')[0], gr = e.fructificacion.gremioNombre, col = md.COL(x.r.score);
+  const hab = e.habitatTexto || (e.habitats && e.habitats.length ? e.habitats.join(', ') : '');
+  return '<button class="pl-sp' + (PELIGRO(e) ? ' pel' : '') + '" data-pe="' + e.id + '">' + fi.avatar(e, 250) +
+    '<div class="t"><b>' + esc(c) + '</b>' + (c !== cien ? '<small><i>' + esc(cien) + '</i></small>' : '') +
+    '<div class="pl-sp-m">' + fi.tagEsp(e) + '<span class="pl-sp-s" style="color:' + col + '">' + x.r.score + ' · ' + md.ETIQ(x.r.score) + '</span></div>' +
+    (e.clave ? '<p class="pl-sp-k"><b>Cómo reconocerla:</b> ' + esc(corta(e.clave, 150)) + '</p>' : '') +
+    (hab ? '<p class="pl-sp-h"><b>Dónde:</b> ' + esc(corta(hab, 90)) + '</p>' : '') +
+    '<small class="pl-sp-g">' + esc(gr) + '</small></div>' + '<span class="pl-sp-c">›</span></button>';
+}
+function listaDia(d) {
+  const lista = especiesDelDia(P.obj, ESTADO.dias, d.f, calActual());
+  const buenas = lista.filter(x => !PELIGRO(x.e) && x.r.score >= 30).slice(0, 8), pel = lista.filter(x => PELIGRO(x.e) && x.r.score >= 30).slice(0, 5);
+  const unica = !P.obj.startsWith('g:') && P.obj !== 'general';
+  if (unica) return '';                                                              // con una sola especie ya se ve en el resumen del día
+  let h = '<div class="pl-lh">Setas para buscar ' + (d.d === 0 ? 'hoy' : d.d < 0 ? 'ese día' : 'ese día') + '</div>';
+  h += buenas.length ? buenas.map(x => tarjetaEsp(x, d.f)).join('') : '<p class="note">Ninguna seta tiene buen momento ese día.</p>';
+  if (buenas.length) h += '<p class="note pl-ident">Toca una para ver su ficha con fotos y cómo reconocerla. Que salga no significa que sea comestible: identifica siempre con la ficha y, si dudas, no la cojas.</p>';
+  if (pel.length) h += '<div class="pl-lh pl-lh-pel">⚠ Tóxicas y mortales que también salen</div>' + pel.map(x => tarjetaEsp(x, d.f)).join('');
+  return h;
+}
 
 /* ---------- aciertos ---------- */
 async function aciertosUI(root, calcular) {

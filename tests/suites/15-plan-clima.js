@@ -143,7 +143,22 @@ module.exports = {
       t.ok('si va a llover 4 días seguidos, la puntuación sube a lo largo de la previsión y el mejor día no es hoy', sc[sc.length - 1] > sc[0] && Math.max(...sc) > sc[0], sc.join(','));
       /* ir a la ficha desde «General» */
       await t.page.selectOption('#pl-obj', 'general'); await t.wait(500);
-      t.ok('en «general» propone tipos y especies concretas para probar', await t.has('.pl-chip') && /Lo mejor ese día/.test(await t.T('.pl-q') || ''));
+      t.ok('en «general» dice qué tipo va mejor ese día', /Lo mejor ese día/.test(await t.T('.pl-q') || ''));
+      const L = await t.page.evaluate(() => { const c = [...document.querySelectorAll('.pl-sp')]; const k = c[0]; return { n: c.length, foto: !!(k && k.querySelector('img.ph')), nombre: k && k.querySelector('b').textContent, tag: !!(k && k.querySelector('.tag')), clave: k && /Cómo reconocerla/.test(k.textContent), punt: k && /\d+ · /.test(k.textContent), peligrosEnBuenas: [...document.querySelectorAll('.pl-sp:not(.pel)')].filter(x => /Mortal|Tóxica/.test(x.querySelector('.tag').textContent)).length, aviso: /no significa que sea comestible/.test(document.querySelector('.pl-lista').textContent) }; });
+      t.ok('lista de especies del día: varias tarjetas con foto, nombre, etiqueta, puntuación y «cómo reconocerla»', L.n >= 3 && L.foto && L.nombre && L.tag && L.clave && L.punt, JSON.stringify(L));
+      t.eq('ninguna tóxica ni mortal en la lista «para buscar»', L.peligrosEnBuenas, 0);
+      t.ok('avisa de que salir no es comestible y hay que identificar con la ficha', L.aviso);
+      t.ok('las tóxicas/mortales van aparte con aviso (si salen ese día)', await t.page.evaluate(() => { const h = document.querySelector('.pl-lh-pel'); const pel = document.querySelectorAll('.pl-sp.pel'); return h ? pel.length > 0 && [...pel].every(x => /Mortal|Tóxica/.test(x.querySelector('.tag').textContent)) : pel.length === 0; }));
+      /* tocar una tarjeta abre su ficha sin salir del Plan */
+      const nom = await t.page.evaluate(() => document.querySelector('.pl-sp b').textContent);
+      await t.page.evaluate(() => document.querySelector('.pl-sp').click()); await t.page.waitForSelector('#sheet:not([hidden]) .hero, #sheet:not([hidden]) .sec', { timeout: 4000 }); await t.wait(200);
+      t.ok('al tocar una especie se abre su ficha encima del Plan', /plan/.test(await t.page.evaluate(() => location.hash)) && (await t.T('#sheet') || '').toLowerCase().includes(nom.toLowerCase().slice(0, 6)), nom);
+      t.ok('la ficha trae fotos y «Cuándo sale»', await t.page.evaluate(() => !!document.querySelector('#sheet img.ph') && /Cuándo sale/i.test(document.querySelector('#sheet').textContent)));
+      await t.page.evaluate(() => document.querySelector('#sheet .grab').click()).catch(() => { }); await t.page.evaluate(() => { const s = document.querySelector('#sheet'); s.hidden = true; s.innerHTML = ''; }); await t.wait(150);
+      /* con una especie concreta no se repite la lista */
+      await t.page.selectOption('#pl-obj', 'boletus-edulis'); await t.wait(500);
+      t.eq('con una sola especie no hay lista de tarjetas', await t.N('.pl-sp'), 0);
+      await t.page.selectOption('#pl-obj', 'general'); await t.wait(500);
       /* recuerda lo elegido */
       await t.go('#mapa'); await t.go('#plan'); await t.wait(700);
       t.eq('recuerda el objetivo al volver', await t.page.evaluate(() => document.querySelector('#pl-obj').value), 'general');
@@ -199,7 +214,7 @@ module.exports = {
       await t.page.evaluate(() => localStorage.removeItem('mi.clima.43.4,-2.7')); await E(`await c.cargar(43.4237, -2.7311, { forzar: true });`);
       t.ok('la petición lleva coordenadas a 0,1° y ningún nombre de spot ni dato personal', urls.length === 1 && !/Boletus|P=|nombre|token|email/i.test(urls[0]) && /latitude=43\.4&longitude=-2\.7&/.test(urls[0]), urls[0]);
       await t.page.unroute(/open-meteo\.com/);
-      t.ok('la pantalla del Plan nunca dice «comestible» ni «se puede comer»', !/comestible|se puede comer|seguro comer/i.test(await t.page.evaluate(() => { location.hash = '#plan'; return new Promise(r => setTimeout(() => r(document.querySelector('#v-plan').innerText), 800)); })));
+      t.ok('el texto propio del Plan nunca dice «comestible» ni «se puede comer» (salvo lo que cita del catálogo: etiqueta, «cómo reconocerla» y el aviso que lo niega)', !/comestible|se puede comer|seguro comer/i.test(await t.page.evaluate(() => { location.hash = '#plan'; return new Promise(r => setTimeout(() => { const c = document.querySelector('#v-plan').cloneNode(true); c.querySelectorAll('.tag,.pl-ident,.pl-sp-k,.pl-sp-h').forEach(x => x.remove()); r(c.textContent); }, 800)); })));
     });
   }
 };
