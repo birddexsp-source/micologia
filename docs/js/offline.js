@@ -32,25 +32,17 @@ export const estimarMB = n => Math.round(n * KB_TESELA / 1024);
 export const demasiadas = n => n > MAX_TESELAS;
 export { MAX_TESELAS };
 
-/* ---------- zonas predefinidas (Bermeo y la costa de Urdaibai) ---------- */
-/* Coordenadas aproximadas (Wikipedia, verplayas.com, mapas): sobra margen, no hace falta precisión de metros. */
+/* ---------- zonas predefinidas (Bermeo y los pueblos de alrededor) ---------- */
+/* Coordenadas de Wikipedia (pueblos y Sollube); sobra margen, no hace falta precisión de metros.
+   `caja` = [sur, oeste, norte, este] a mano; `centro` + `km` = cuadrado alrededor de un punto. */
 export const PRESETS = [
-  { clave: 'costa', nombre: 'Costa: Armintza → Laida y Laga', desc: 'Toda la franja de costa, 1,5 km a cada lado', km: 1.5,
-    ruta: [[43.4114, -2.9022], [43.4306, -2.8061], [43.4528, -2.7544], [43.4200, -2.7264], [43.4075, -2.6985], [43.4003, -2.6850], [43.4093, -2.6574]] },
-  { clave: 'bermeo', nombre: 'Bermeo', desc: 'El pueblo y sus alrededores (3 km)', km: 3, centro: [43.4200, -2.7264] },
-  { clave: 'bakio', nombre: 'Bakio', desc: 'Pueblo y playa (3 km)', km: 3, centro: [43.4306, -2.8061] },
-  { clave: 'mundaka', nombre: 'Mundaka', desc: 'Pueblo y ría (3 km)', km: 3, centro: [43.4075, -2.6985] }
+  { clave: 'bermeo', nombre: 'Bermeo completo', desc: 'Municipio entero: pueblo, costa y montes hasta Sollube', caja: [43.35, -2.79, 43.47, -2.68] },
+  { clave: 'mundaka', nombre: 'Mundaka', desc: 'Pueblo y ría (3 km)', km: 3, centro: [43.4072, -2.6983] },
+  { clave: 'sukarrieta', nombre: 'Sukarrieta', desc: 'Pueblo y alrededores (3 km)', km: 3, centro: [43.3944, -2.6972] },
+  { clave: 'busturia', nombre: 'Busturia', desc: 'Pueblo y alrededores (3 km)', km: 3, centro: [43.383, -2.697] },
+  { clave: 'bakio', nombre: 'Bakio', desc: 'Pueblo y playa (3 km)', km: 3, centro: [43.4306, -2.8061] }
 ];
-/* cuadrados de lado 2·km repartidos a lo largo de una ruta (su unión forma la franja) */
-export function cajasRuta(ruta, km) {
-  const out = [], paso = km;   // km de separación entre centros
-  for (let i = 0; i < ruta.length - 1; i++) {
-    const [a, b] = [ruta[i], ruta[i + 1]], dy = (b[0] - a[0]) * 111.32, dx = (b[1] - a[1]) * 111.32 * Math.cos(a[0] * Math.PI / 180), n = Math.max(1, Math.ceil(Math.hypot(dx, dy) / paso));
-    for (let k = 0; k <= n; k++) out.push(cajaAlrededor(a[0] + (b[0] - a[0]) * k / n, a[1] + (b[1] - a[1]) * k / n, km));
-  }
-  return out;
-}
-export const cajasPreset = p => p.ruta ? cajasRuta(p.ruta, p.km) : [cajaAlrededor(p.centro[0], p.centro[1], p.km)];
+export const cajasPreset = p => [p.caja || cajaAlrededor(p.centro[0], p.centro[1], p.km)];
 
 /* ---------- lo que hay guardado ---------- */
 const leer = () => { try { return JSON.parse(localStorage.getItem(KEY) || '[]'); } catch (e) { return []; } };

@@ -4,7 +4,7 @@ const { FakeGH, PNG1 } = require('../lib/harness');
 const REPO = 'usuario/micologia-datos', TOKEN = 'token-sintetico-de-prueba-123';
 const Z = { lat: 43.1012, lon: -2.8031 };   // spot sintético
 const OFFMOD = "const m = await import('./js/offline.js');";
-const marcar = (pg, ...ks) => pg.evaluate(async ks => { for (const k of ['costa', 'bermeo', 'bakio', 'mundaka', 'spots', 'centro']) { const i = document.querySelector('#off-lista [data-og="' + k + '"]'); if (i && i.checked !== ks.includes(k)) i.click(); } }, ks);
+const marcar = (pg, ...ks) => pg.evaluate(async ks => { for (const k of ['bermeo', 'mundaka', 'sukarrieta', 'busturia', 'bakio', 'spots', 'centro']) { const i = document.querySelector('#off-lista [data-og="' + k + '"]'); if (i && i.checked !== ks.includes(k)) i.click(); } }, ks);
 module.exports = {
   name: 'Mapa sin conexión (descarga, uso sin red y sincronización al volver)',
   launch: { viewport: { width: 390, height: 844 } },
@@ -33,37 +33,33 @@ module.exports = {
       }, [Z.lat, Z.lon]);
       t.ok('todas las teselas visibles coinciden con las descargables', dentro[0] > 0 && dentro[0] === dentro[1], JSON.stringify(dentro));
     });
-    await t.case('zonas predefinidas: costa Armintza→Laida/Laga, Bermeo, Bakio y Mundaka', async () => {
+    await t.case('zonas predefinidas: Bermeo completo y los pueblos de alrededor', async () => {
       const r = await E(`
         const P = Object.fromEntries(m.PRESETS.map(p => [p.clave, p])), dentro = (cs, [la, lo]) => cs.some(c => la >= c[0] && lo >= c[1] && la <= c[2] && lo <= c[3]);
-        const costa = m.cajasPreset(P.costa), pts = [];
-        P.costa.ruta.forEach((a, i, r) => { if (i < r.length - 1) for (let k = 0; k <= 10; k++) pts.push([a[0] + (r[i + 1][0] - a[0]) * k / 10, a[1] + (r[i + 1][1] - a[1]) * k / 10]); });
-        const sinCubrir = pts.filter(p => !dentro(costa, p)).length;
-        const n = k => m.teselas(m.cajasPreset(P[k]), 17).length, todas = m.teselas(m.PRESETS.flatMap(p => m.cajasPreset(p)), 17).length;
-        return { claves: m.PRESETS.map(p => p.clave), sinCubrir, puntos: pts.length, costa: n('costa'), bermeo: n('bermeo'), bakio: n('bakio'), mundaka: n('mundaka'), todas, limite: m.MAX_TESELAS,
-          mundakaEnCosta: dentro(costa, P.mundaka.centro), bermeoEnCosta: dentro(costa, P.bermeo.centro), bakioEnBakio: dentro(m.cajasPreset(P.bakio), P.bakio.centro),
-          extremos: [P.costa.ruta[0], P.costa.ruta[P.costa.ruta.length - 1]], suma: n('costa') + n('bermeo') + n('bakio') + n('mundaka') };`);
-      t.eq('las cuatro zonas', r.claves, ['costa', 'bermeo', 'bakio', 'mundaka']);
-      t.eq('la franja de costa no deja huecos a lo largo de toda la ruta', r.sinCubrir, 0, r.puntos + ' puntos');
-      t.ok('empieza en Armintza (≈ -2,90) y acaba en Laga (≈ -2,66)', Math.abs(r.extremos[0][1] + 2.90) < 0.02 && Math.abs(r.extremos[1][1] + 2.657) < 0.02, JSON.stringify(r.extremos));
-      t.ok('la costa son miles de teselas pero cabe en el límite', r.costa > 1200 && r.costa < 6000 && r.costa < r.limite, String(r.costa));
-      t.ok('cada pueblo es una zona pequeña (menos de 1.200 teselas a zoom 17)', r.bermeo > 200 && r.bermeo < 1200 && r.bakio < 1200 && r.mundaka < 1200, JSON.stringify([r.bermeo, r.bakio, r.mundaka]));
-      t.ok('Bermeo y Mundaka caen dentro de la franja de costa; las zonas se solapan y no se descargan dos veces', r.mundakaEnCosta && r.bermeoEnCosta && r.todas < r.suma, r.todas + ' < ' + r.suma);
-      t.ok('las cuatro juntas caben en una sola descarga', r.todas < r.limite, String(r.todas));
+        const berm = m.cajasPreset(P.bermeo), n = k => m.teselas(m.cajasPreset(P[k]), 17).length, todas = m.teselas(m.PRESETS.flatMap(p => m.cajasPreset(p)), 17).length;
+        return { claves: m.PRESETS.map(p => p.clave), puerto: dentro(berm, [43.4200, -2.7264]), matxitxako: dentro(berm, [43.4528, -2.7544]), sollube: dentro(berm, [43.3719, -2.7625]),
+          bermeo: n('bermeo'), mundaka: n('mundaka'), sukarrieta: n('sukarrieta'), busturia: n('busturia'), bakio: n('bakio'), todas, limite: m.MAX_TESELAS,
+          mundakaEnPre: dentro(m.cajasPreset(P.mundaka), [43.4072, -2.6983]), suma: m.PRESETS.reduce((a, p) => a + n(p.clave), 0) };`);
+      t.eq('las zonas', r.claves, ['bermeo', 'mundaka', 'sukarrieta', 'busturia', 'bakio']);
+      t.ok('«Bermeo completo» incluye el puerto, el faro de Matxitxako y el monte Sollube', r.puerto && r.matxitxako && r.sollube);
+      t.ok('Bermeo completo son unas 2.000–5.000 teselas a zoom 17', r.bermeo > 2000 && r.bermeo < 5000, String(r.bermeo));
+      t.ok('cada pueblo es una zona pequeña (menos de 1.200 teselas)', r.mundaka > 200 && r.mundaka < 1200 && r.sukarrieta < 1200 && r.busturia < 1200 && r.bakio < 1200, JSON.stringify([r.mundaka, r.sukarrieta, r.busturia, r.bakio]));
+      t.ok('cada pueblo contiene su propio centro', r.mundakaEnPre);
+      t.ok('las zonas se solapan y no se descargan dos veces; todas caben en una sola descarga', r.todas < r.suma && r.todas < r.limite, r.todas + ' < ' + r.suma);
     });
     await t.case('Ajustes: lista de zonas marcadas, estimación y detalle', async () => {
       await t.go('#ajustes'); await t.wait(500);
       t.ok('aparece «Mapa sin conexión»', /Mapa sin conexión/.test(await t.T('#v-ajustes') || '') && await t.has('#off-go'));
-      t.eq('lista: 4 zonas predefinidas + centro del mapa (sin spots aún)', await t.page.evaluate(() => [...document.querySelectorAll('#off-lista [data-og]')].map(i => i.dataset.og)), ['costa', 'bermeo', 'bakio', 'mundaka', 'centro']);
-      t.eq('vienen marcadas las 4 zonas de la costa, no el centro', await t.page.evaluate(() => [...document.querySelectorAll('#off-lista [data-og]:checked')].map(i => i.dataset.og)), ['costa', 'bermeo', 'bakio', 'mundaka']);
+      t.eq('lista: 5 zonas predefinidas + centro del mapa (sin spots aún)', await t.page.evaluate(() => [...document.querySelectorAll('#off-lista [data-og]')].map(i => i.dataset.og)), ['bermeo', 'mundaka', 'sukarrieta', 'busturia', 'bakio', 'centro']);
+      t.eq('vienen marcadas las 5 zonas, no el centro', await t.page.evaluate(() => [...document.querySelectorAll('#off-lista [data-og]:checked')].map(i => i.dataset.og)), ['bermeo', 'mundaka', 'sukarrieta', 'busturia', 'bakio']);
       t.ok('cada zona dice su peso en MB', await t.page.evaluate(() => [...document.querySelectorAll('#off-lista .offi small')].every(s => /≈ \d+ MB/.test(s.textContent))));
       const num = s => +((s.match(/≈ ([\d.]+) teselas/) || [])[1] || '0').replace(/\./g, '');
-      const todo = num(await t.T('#off-n')); t.ok('total de las 4 marcadas', todo > 2000 && /4 zonas marcadas/.test(await t.T('#off-n')), await t.T('#off-n'));
-      await t.page.evaluate(() => document.querySelector('[data-og="costa"]').click()); await t.wait(100);
-      t.ok('desmarcar la costa baja el total', num(await t.T('#off-n')) < todo && /3 zonas marcadas/.test(await t.T('#off-n')));
+      const todo = num(await t.T('#off-n')); t.ok('total de las 5 marcadas', todo > 2500 && /5 zonas marcadas/.test(await t.T('#off-n')), await t.T('#off-n'));
+      await t.page.evaluate(() => document.querySelector('[data-og="bermeo"]').click()); await t.wait(100);
+      t.ok('desmarcar Bermeo baja el total', num(await t.T('#off-n')) < todo && /4 zonas marcadas/.test(await t.T('#off-n')));
       await t.tap('[data-od="alto"]', 150); t.ok('más detalle → bastante más teselas', num(await t.T('#off-n')) > todo * 0.5);
       await t.tap('[data-od="normal"]', 100);
-      for (const k of ['bermeo', 'bakio', 'mundaka']) await t.page.evaluate(k => document.querySelector('[data-og="' + k + '"]').click(), k);
+      for (const k of ['mundaka', 'sukarrieta', 'busturia', 'bakio']) await t.page.evaluate(k => document.querySelector('[data-og="' + k + '"]').click(), k);
       t.eq('sin nada marcado no deja descargar', [await t.T('#off-n'), await t.page.evaluate(() => document.querySelector('#off-go').disabled)], ['Marca al menos una zona.', true]);
       t.eq('sin nada descargado lo dice', await t.T('#off-tot'), 'Aún no has guardado ningún mapa.');
       t.ok('no hay botón de borrar todavía', !(await t.visible('#off-del')));
@@ -109,8 +105,8 @@ module.exports = {
       /* una zona predefinida pequeña, con su ✓ */
       await solo('mundaka'); await t.tap('#off-go', 100);
       await t.page.waitForFunction(() => /✓ Mapa guardado/.test(document.querySelector('#off-st').textContent), null, { timeout: 60000 });
-      t.ok('Mundaka queda guardada (✓) y la costa no', await E(`return m.guardada('mundaka') && !m.guardada('costa');`) && /guardada/.test(await t.T('[data-og="mundaka"] ~ em') || '') && !/guardada/.test(await t.T('[data-og="costa"] ~ em') || ''));
-      t.eq('Mundaka (el pueblo) está cubierta', await E(`return m.cubierta(43.4075, -2.6985);`), true);
+      t.ok('Mundaka queda guardada (✓) y Bermeo no', await E(`return m.guardada('mundaka') && !m.guardada('bermeo');`) && /guardada/.test(await t.T('[data-og="mundaka"] ~ em') || '') && !/guardada/.test(await t.T('[data-og="bermeo"] ~ em') || ''));
+      t.eq('Mundaka (el pueblo) está cubierta', await E(`return m.cubierta(43.4072, -2.6983);`), true);
       /* borrar */
       await t.tap('#off-del', 100); await t.tap('#off-del', 300);
       t.eq('borrar vacía la caché y los ✓', await E(`const c = await caches.open(m.CACHE); return [(await c.keys()).length, m.zonas().length, m.guardada('mundaka')];`), [0, 0, false]);
