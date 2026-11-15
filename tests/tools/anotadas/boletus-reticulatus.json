@@ -1,0 +1,67 @@
+[
+ {
+  "_cand": "1.1",
+  "titulo": "Pie con redecilla por todo el pie",
+  "foto": {
+   "sp": "Boletus reticulatus",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/396458704/{s}.jpeg",
+   "autor": "Mykola Borysenko",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/223729528",
+   "origen": "iNaturalist",
+   "ar": 0.75
+  },
+  "puntos": [
+   {
+    "x": 40,
+    "y": 18,
+    "parte": "sombrero",
+    "titulo": "Sombrero pardo claro",
+    "texto": "Aterciopelado; con el seco se cuartea en red.",
+    "d": "arriba"
+   },
+   {
+    "x": 55,
+    "y": 55,
+    "parte": "pie",
+    "titulo": "Red blanca muy marcada",
+    "texto": "Redecilla clara que cubre casi todo el pie.",
+    "d": "der"
+   }
+  ],
+  "ojo": "Como todos los boletos: poros rojos o carne que se pone azul = no es este."
+ },
+ {
+  "_cand": "2.3",
+  "titulo": "Poros blancos de joven",
+  "foto": {
+   "sp": "Boletus reticulatus",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/403678863/{s}.jpeg",
+   "autor": "Anatoliy Ananin",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/227543739",
+   "origen": "iNaturalist",
+   "ar": 0.7529
+  },
+  "puntos": [
+   {
+    "x": 72,
+    "y": 45,
+    "parte": "himenio",
+    "titulo": "Poros blancos",
+    "texto": "Blancos y luego amarillo-oliva; nunca rojos.",
+    "d": "der"
+   },
+   {
+    "x": 25,
+    "y": 55,
+    "parte": "pie",
+    "titulo": "Redecilla",
+    "texto": "Se ve la red sobre el pie.",
+    "d": "izq"
+   }
+  ]
+ }
+]

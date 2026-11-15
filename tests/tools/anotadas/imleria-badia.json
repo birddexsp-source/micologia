@@ -1,0 +1,67 @@
+[
+ {
+  "_cand": "4.1",
+  "titulo": "Castaño, bajo pinos",
+  "foto": {
+   "sp": "Imleria badia",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/27196946/{s}.jpg",
+   "autor": "Valentin",
+   "licencia": "CC BY-SA 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/17820444",
+   "origen": "iNaturalist",
+   "ar": 1.3333
+  },
+  "puntos": [
+   {
+    "x": 50,
+    "y": 42,
+    "parte": "sombrero",
+    "titulo": "Sombrero castaño",
+    "texto": "Pardo chocolate, algo pegajoso con humedad.",
+    "d": "arriba"
+   },
+   {
+    "x": 58,
+    "y": 70,
+    "parte": "pie",
+    "titulo": "Pie más claro, sin red",
+    "texto": "Con estrías finas, no con redecilla.",
+    "d": "der"
+   }
+  ],
+  "ojo": "Sus poros se ponen azules al tocarlos y aun así es comestible: el azulear no basta para descartar ni para aceptar un boleto. Fíjate en el conjunto: sombrero castaño, pie sin red y poros amarillos (no rojos)."
+ },
+ {
+  "_cand": "5.0",
+  "titulo": "Por debajo: poros amarillos",
+  "foto": {
+   "sp": "Imleria badia",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/172594946/{s}.jpeg",
+   "autor": "AdventureLisa",
+   "licencia": "CC0",
+   "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+   "pagina": "https://www.inaturalist.org/observations/103160161",
+   "origen": "iNaturalist",
+   "ar": 1.7871
+  },
+  "puntos": [
+   {
+    "x": 40,
+    "y": 35,
+    "parte": "himenio",
+    "titulo": "Poros amarillo-oliva",
+    "texto": "Al presionarlos se manchan de azul-gris.",
+    "d": "izq"
+   },
+   {
+    "x": 46,
+    "y": 78,
+    "parte": "pie",
+    "titulo": "Pie fibroso",
+    "texto": "Del color del sombrero pero más pálido.",
+    "d": "der"
+   }
+  ]
+ }
+]

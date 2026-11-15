@@ -1,0 +1,75 @@
+[
+ {
+  "_cand": "0.1",
+  "titulo": "Babosos, con anillo",
+  "foto": {
+   "sp": "Suillus luteus",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/12435227/{s}.jpeg",
+   "autor": "Tim Sage",
+   "licencia": "CC BY-SA 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/9187824",
+   "origen": "iNaturalist",
+   "ar": 0.75
+  },
+  "puntos": [
+   {
+    "x": 60,
+    "y": 8,
+    "parte": "sombrero",
+    "titulo": "Sombrero baboso y brillante",
+    "texto": "Pardo chocolate, pegajoso como gelatina.",
+    "d": "arriba-der"
+   },
+   {
+    "x": 57,
+    "y": 48,
+    "parte": "anillo",
+    "titulo": "Anillo violáceo",
+    "texto": "Membranoso; blanquecino por arriba y pardo-violeta por debajo.",
+    "d": "der"
+   },
+   {
+    "x": 30,
+    "y": 30,
+    "parte": "himenio",
+    "titulo": "Poros amarillos",
+    "texto": "Muy pequeños, amarillos.",
+    "d": "arriba-izq"
+   }
+  ],
+  "ojo": "Pélale la piel babosa antes de cocinarla: a mucha gente le sienta mal. No tiene parecidos peligrosos con anillo, pero mira que los poros no sean rojos."
+ },
+ {
+  "_cand": "6.4",
+  "titulo": "Por debajo: poros amarillos y anillo",
+  "foto": {
+   "sp": "Suillus luteus",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/235844843/{s}.jpg",
+   "autor": "Sam Allon",
+   "licencia": "CC0",
+   "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+   "pagina": "https://www.inaturalist.org/observations/138031037",
+   "origen": "iNaturalist",
+   "ar": 1.3333
+  },
+  "puntos": [
+   {
+    "x": 58,
+    "y": 30,
+    "parte": "himenio",
+    "titulo": "Poros diminutos",
+    "texto": "Amarillos, luego oliva.",
+    "d": "der"
+   },
+   {
+    "x": 33,
+    "y": 40,
+    "parte": "anillo",
+    "titulo": "Restos del anillo",
+    "texto": "Se queda pegado al pie, oscuro.",
+    "d": "abajo"
+   }
+  ]
+ }
+]

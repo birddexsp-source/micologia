@@ -9178,7 +9178,71 @@
      }
     ]
    },
-   "anotadas": []
+   "anotadas": [
+    {
+     "titulo": "Sombrero muy oscuro",
+     "foto": {
+      "sp": "Boletus aereus",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/352821629/{s}.jpg",
+      "autor": "Kristian Bosak",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/200022297",
+      "origen": "iNaturalist",
+      "ar": 0.75
+     },
+     "puntos": [
+      {
+       "x": 50,
+       "y": 30,
+       "parte": "sombrero",
+       "titulo": "Pardo casi negro",
+       "texto": "Oscuro, mate, como de terciopelo.",
+       "d": "arriba"
+      },
+      {
+       "x": 37,
+       "y": 55,
+       "parte": "pie",
+       "titulo": "Pie pardo claro",
+       "texto": "Grueso, de barril o maza, más claro que el sombrero.",
+       "d": "izq"
+      }
+     ],
+     "ojo": "Como todos los boletos: si los poros son rojos o naranjas, o la carne se pone azul al cortar, no es este."
+    },
+    {
+     "titulo": "Poros blancos y pie con redecilla",
+     "foto": {
+      "sp": "Boletus aereus",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/352822063/{s}.jpg",
+      "autor": "Kristian Bosak",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/200022297",
+      "origen": "iNaturalist",
+      "ar": 1.3333
+     },
+     "puntos": [
+      {
+       "x": 30,
+       "y": 40,
+       "parte": "himenio",
+       "titulo": "Poros blanquecinos",
+       "texto": "Blancos de joven, luego amarillo-verdosos. Nunca rojos.",
+       "d": "izq"
+      },
+      {
+       "x": 65,
+       "y": 60,
+       "parte": "pie",
+       "titulo": "Redecilla parda",
+       "texto": "Red fina pardo-rojiza sobre fondo claro.",
+       "d": "der"
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "boletus-pinophilus",
@@ -9461,7 +9525,79 @@
      }
     ]
    },
-   "anotadas": []
+   "anotadas": [
+    {
+     "titulo": "Sombrero rojizo y pie con red gruesa",
+     "foto": {
+      "sp": "Boletus pinophilus",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/5774685/{s}.jpeg",
+      "autor": "Alan Rockefeller",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/4750416",
+      "origen": "iNaturalist",
+      "ar": 0.9756
+     },
+     "puntos": [
+      {
+       "x": 45,
+       "y": 18,
+       "parte": "sombrero",
+       "titulo": "Pardo-rojizo",
+       "texto": "Granate, castaño o rojo ladrillo; mate.",
+       "d": "arriba"
+      },
+      {
+       "x": 48,
+       "y": 55,
+       "parte": "pie",
+       "titulo": "Red gruesa",
+       "texto": "Redecilla marcada, rojiza, sobre todo arriba.",
+       "d": "der"
+      },
+      {
+       "x": 70,
+       "y": 35,
+       "parte": "himenio",
+       "titulo": "Poros amarillo-oliva",
+       "texto": "Bajo el sombrero, la capa de tubos.",
+       "d": "der"
+      }
+     ],
+     "ojo": "Su color rojizo engaña, pero los poros son blancos o amarillo-oliva, nunca rojos, y la carne no se pone azul."
+    },
+    {
+     "titulo": "Por debajo: tubos amarillo-oliva",
+     "foto": {
+      "sp": "Boletus pinophilus",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/5774686/{s}.jpeg",
+      "autor": "Alan Rockefeller",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/4750416",
+      "origen": "iNaturalist",
+      "ar": 1.4993
+     },
+     "puntos": [
+      {
+       "x": 75,
+       "y": 40,
+       "parte": "himenio",
+       "titulo": "Poros oliva",
+       "texto": "Pequeños; no azulean al tocarlos.",
+       "d": "der"
+      },
+      {
+       "x": 60,
+       "y": 63,
+       "parte": "pie",
+       "titulo": "Pie con red",
+       "texto": "Rojizo con redecilla.",
+       "d": "abajo"
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "boletus-reticulatus",
@@ -9733,7 +9869,71 @@
      }
     ]
    },
-   "anotadas": []
+   "anotadas": [
+    {
+     "titulo": "Pie con redecilla por todo el pie",
+     "foto": {
+      "sp": "Boletus reticulatus",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/396458704/{s}.jpeg",
+      "autor": "Mykola Borysenko",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/223729528",
+      "origen": "iNaturalist",
+      "ar": 0.75
+     },
+     "puntos": [
+      {
+       "x": 40,
+       "y": 18,
+       "parte": "sombrero",
+       "titulo": "Sombrero pardo claro",
+       "texto": "Aterciopelado; con el seco se cuartea en red.",
+       "d": "arriba"
+      },
+      {
+       "x": 55,
+       "y": 55,
+       "parte": "pie",
+       "titulo": "Red blanca muy marcada",
+       "texto": "Redecilla clara que cubre casi todo el pie.",
+       "d": "der"
+      }
+     ],
+     "ojo": "Como todos los boletos: poros rojos o carne que se pone azul = no es este."
+    },
+    {
+     "titulo": "Poros blancos de joven",
+     "foto": {
+      "sp": "Boletus reticulatus",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/403678863/{s}.jpeg",
+      "autor": "Anatoliy Ananin",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/227543739",
+      "origen": "iNaturalist",
+      "ar": 0.7529
+     },
+     "puntos": [
+      {
+       "x": 72,
+       "y": 45,
+       "parte": "himenio",
+       "titulo": "Poros blancos",
+       "texto": "Blancos y luego amarillo-oliva; nunca rojos.",
+       "d": "der"
+      },
+      {
+       "x": 25,
+       "y": 55,
+       "parte": "pie",
+       "titulo": "Redecilla",
+       "texto": "Se ve la red sobre el pie.",
+       "d": "izq"
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "imleria-badia",
@@ -10002,7 +10202,71 @@
      }
     ]
    },
-   "anotadas": []
+   "anotadas": [
+    {
+     "titulo": "Castaño, bajo pinos",
+     "foto": {
+      "sp": "Imleria badia",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/27196946/{s}.jpg",
+      "autor": "Valentin",
+      "licencia": "CC BY-SA 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/17820444",
+      "origen": "iNaturalist",
+      "ar": 1.3333
+     },
+     "puntos": [
+      {
+       "x": 50,
+       "y": 42,
+       "parte": "sombrero",
+       "titulo": "Sombrero castaño",
+       "texto": "Pardo chocolate, algo pegajoso con humedad.",
+       "d": "arriba"
+      },
+      {
+       "x": 58,
+       "y": 70,
+       "parte": "pie",
+       "titulo": "Pie más claro, sin red",
+       "texto": "Con estrías finas, no con redecilla.",
+       "d": "der"
+      }
+     ],
+     "ojo": "Sus poros se ponen azules al tocarlos y aun así es comestible: el azulear no basta para descartar ni para aceptar un boleto. Fíjate en el conjunto: sombrero castaño, pie sin red y poros amarillos (no rojos)."
+    },
+    {
+     "titulo": "Por debajo: poros amarillos",
+     "foto": {
+      "sp": "Imleria badia",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/172594946/{s}.jpeg",
+      "autor": "AdventureLisa",
+      "licencia": "CC0",
+      "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "pagina": "https://www.inaturalist.org/observations/103160161",
+      "origen": "iNaturalist",
+      "ar": 1.7871
+     },
+     "puntos": [
+      {
+       "x": 40,
+       "y": 35,
+       "parte": "himenio",
+       "titulo": "Poros amarillo-oliva",
+       "texto": "Al presionarlos se manchan de azul-gris.",
+       "d": "izq"
+      },
+      {
+       "x": 46,
+       "y": 78,
+       "parte": "pie",
+       "titulo": "Pie fibroso",
+       "texto": "Del color del sombrero pero más pálido.",
+       "d": "der"
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "suillus-luteus",
@@ -10255,7 +10519,79 @@
      }
     ]
    },
-   "anotadas": []
+   "anotadas": [
+    {
+     "titulo": "Babosos, con anillo",
+     "foto": {
+      "sp": "Suillus luteus",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/12435227/{s}.jpeg",
+      "autor": "Tim Sage",
+      "licencia": "CC BY-SA 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/9187824",
+      "origen": "iNaturalist",
+      "ar": 0.75
+     },
+     "puntos": [
+      {
+       "x": 60,
+       "y": 8,
+       "parte": "sombrero",
+       "titulo": "Sombrero baboso y brillante",
+       "texto": "Pardo chocolate, pegajoso como gelatina.",
+       "d": "arriba-der"
+      },
+      {
+       "x": 57,
+       "y": 48,
+       "parte": "anillo",
+       "titulo": "Anillo violáceo",
+       "texto": "Membranoso; blanquecino por arriba y pardo-violeta por debajo.",
+       "d": "der"
+      },
+      {
+       "x": 30,
+       "y": 30,
+       "parte": "himenio",
+       "titulo": "Poros amarillos",
+       "texto": "Muy pequeños, amarillos.",
+       "d": "arriba-izq"
+      }
+     ],
+     "ojo": "Pélale la piel babosa antes de cocinarla: a mucha gente le sienta mal. No tiene parecidos peligrosos con anillo, pero mira que los poros no sean rojos."
+    },
+    {
+     "titulo": "Por debajo: poros amarillos y anillo",
+     "foto": {
+      "sp": "Suillus luteus",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/235844843/{s}.jpg",
+      "autor": "Sam Allon",
+      "licencia": "CC0",
+      "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "pagina": "https://www.inaturalist.org/observations/138031037",
+      "origen": "iNaturalist",
+      "ar": 1.3333
+     },
+     "puntos": [
+      {
+       "x": 58,
+       "y": 30,
+       "parte": "himenio",
+       "titulo": "Poros diminutos",
+       "texto": "Amarillos, luego oliva.",
+       "d": "der"
+      },
+      {
+       "x": 33,
+       "y": 40,
+       "parte": "anillo",
+       "titulo": "Restos del anillo",
+       "texto": "Se queda pegado al pie, oscuro.",
+       "d": "abajo"
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "leccinum-scabrum",
@@ -10502,7 +10838,71 @@
      }
     ]
    },
-   "anotadas": []
+   "anotadas": [
+    {
+     "titulo": "Pie fino con escamitas negras",
+     "foto": {
+      "sp": "Leccinum scabrum",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/142662226/{s}.jpeg",
+      "autor": "Yehor Yatsiuk",
+      "licencia": "CC0",
+      "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "pagina": "https://www.inaturalist.org/observations/86584736",
+      "origen": "iNaturalist",
+      "ar": 0.751
+     },
+     "puntos": [
+      {
+       "x": 50,
+       "y": 25,
+       "parte": "sombrero",
+       "titulo": "Sombrero pardo claro",
+       "texto": "Liso, gris-pardo.",
+       "d": "arriba"
+      },
+      {
+       "x": 50,
+       "y": 55,
+       "parte": "pie",
+       "titulo": "Escamitas oscuras",
+       "texto": "Pie alto y fino, cubierto de puntitos negros como pimienta.",
+       "d": "der"
+      }
+     ],
+     "ojo": "Sale casi siempre junto a abedules. Se pone blanda y esponjosa muy pronto: coge solo los jóvenes y firmes."
+    },
+    {
+     "titulo": "El pie de cerca",
+     "foto": {
+      "sp": "Leccinum scabrum",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/142662290/{s}.jpeg",
+      "autor": "Yehor Yatsiuk",
+      "licencia": "CC0",
+      "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "pagina": "https://www.inaturalist.org/observations/86584736",
+      "origen": "iNaturalist",
+      "ar": 0.751
+     },
+     "puntos": [
+      {
+       "x": 60,
+       "y": 55,
+       "parte": "pie",
+       "titulo": "Escamas oscuras",
+       "texto": "Puntitos oscuros sobre fondo blanquecino.",
+       "d": "der"
+      },
+      {
+       "x": 45,
+       "y": 30,
+       "parte": "himenio",
+       "titulo": "Poros blanquecinos",
+       "texto": "Blancos que se vuelven grises.",
+       "d": "arriba-izq"
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "boletos-poros-rojos",

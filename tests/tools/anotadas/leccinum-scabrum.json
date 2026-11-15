@@ -1,0 +1,67 @@
+[
+ {
+  "_cand": "1.0",
+  "titulo": "Pie fino con escamitas negras",
+  "foto": {
+   "sp": "Leccinum scabrum",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/142662226/{s}.jpeg",
+   "autor": "Yehor Yatsiuk",
+   "licencia": "CC0",
+   "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+   "pagina": "https://www.inaturalist.org/observations/86584736",
+   "origen": "iNaturalist",
+   "ar": 0.751
+  },
+  "puntos": [
+   {
+    "x": 50,
+    "y": 25,
+    "parte": "sombrero",
+    "titulo": "Sombrero pardo claro",
+    "texto": "Liso, gris-pardo.",
+    "d": "arriba"
+   },
+   {
+    "x": 50,
+    "y": 55,
+    "parte": "pie",
+    "titulo": "Escamitas oscuras",
+    "texto": "Pie alto y fino, cubierto de puntitos negros como pimienta.",
+    "d": "der"
+   }
+  ],
+  "ojo": "Sale casi siempre junto a abedules. Se pone blanda y esponjosa muy pronto: coge solo los jóvenes y firmes."
+ },
+ {
+  "_cand": "1.1",
+  "titulo": "El pie de cerca",
+  "foto": {
+   "sp": "Leccinum scabrum",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/142662290/{s}.jpeg",
+   "autor": "Yehor Yatsiuk",
+   "licencia": "CC0",
+   "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+   "pagina": "https://www.inaturalist.org/observations/86584736",
+   "origen": "iNaturalist",
+   "ar": 0.751
+  },
+  "puntos": [
+   {
+    "x": 60,
+    "y": 55,
+    "parte": "pie",
+    "titulo": "Escamas oscuras",
+    "texto": "Puntitos oscuros sobre fondo blanquecino.",
+    "d": "der"
+   },
+   {
+    "x": 45,
+    "y": 30,
+    "parte": "himenio",
+    "titulo": "Poros blanquecinos",
+    "texto": "Blancos que se vuelven grises.",
+    "d": "arriba-izq"
+   }
+  ]
+ }
+]

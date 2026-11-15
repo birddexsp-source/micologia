@@ -1,0 +1,75 @@
+[
+ {
+  "_cand": "0.2",
+  "titulo": "Sombrero rojizo y pie con red gruesa",
+  "foto": {
+   "sp": "Boletus pinophilus",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/5774685/{s}.jpeg",
+   "autor": "Alan Rockefeller",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/4750416",
+   "origen": "iNaturalist",
+   "ar": 0.9756
+  },
+  "puntos": [
+   {
+    "x": 45,
+    "y": 18,
+    "parte": "sombrero",
+    "titulo": "Pardo-rojizo",
+    "texto": "Granate, castaño o rojo ladrillo; mate.",
+    "d": "arriba"
+   },
+   {
+    "x": 48,
+    "y": 55,
+    "parte": "pie",
+    "titulo": "Red gruesa",
+    "texto": "Redecilla marcada, rojiza, sobre todo arriba.",
+    "d": "der"
+   },
+   {
+    "x": 70,
+    "y": 35,
+    "parte": "himenio",
+    "titulo": "Poros amarillo-oliva",
+    "texto": "Bajo el sombrero, la capa de tubos.",
+    "d": "der"
+   }
+  ],
+  "ojo": "Su color rojizo engaña, pero los poros son blancos o amarillo-oliva, nunca rojos, y la carne no se pone azul."
+ },
+ {
+  "_cand": "0.3",
+  "titulo": "Por debajo: tubos amarillo-oliva",
+  "foto": {
+   "sp": "Boletus pinophilus",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/5774686/{s}.jpeg",
+   "autor": "Alan Rockefeller",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/4750416",
+   "origen": "iNaturalist",
+   "ar": 1.4993
+  },
+  "puntos": [
+   {
+    "x": 75,
+    "y": 40,
+    "parte": "himenio",
+    "titulo": "Poros oliva",
+    "texto": "Pequeños; no azulean al tocarlos.",
+    "d": "der"
+   },
+   {
+    "x": 60,
+    "y": 63,
+    "parte": "pie",
+    "titulo": "Pie con red",
+    "texto": "Rojizo con redecilla.",
+    "d": "abajo"
+   }
+  ]
+ }
+]
