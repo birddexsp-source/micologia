@@ -429,6 +429,16 @@
       "url": "https://es.ara.cat/comer/temps-mes-haurem-d-esperar-perque-surtin-bolets_1_5866896.html"
      }
     ]
+   },
+   "rareza": "poco",
+   "rarezaNota": "Se ve con regularidad si vas a su sitio y en su época.",
+   "rarezaDatos": {
+    "cantabrico": 73,
+    "bizkaia": 3,
+    "espana": 469,
+    "europa": 6730,
+    "fuente": "iNaturalist",
+    "consulta": "2026-11-15"
    }
   },
   {
@@ -878,6 +888,16 @@
       "url": "https://es.ara.cat/comer/temps-mes-haurem-d-esperar-perque-surtin-bolets_1_5866896.html"
      }
     ]
+   },
+   "rareza": "legendario",
+   "rarezaNota": "Casi no hay citas en la costa cantábrica.",
+   "rarezaDatos": {
+    "cantabrico": 3,
+    "bizkaia": 0,
+    "espana": 21,
+    "europa": 966,
+    "fuente": "iNaturalist",
+    "consulta": "2026-11-15"
    }
   },
   {
@@ -1235,6 +1255,16 @@
       "url": "https://es.ara.cat/comer/temps-mes-haurem-d-esperar-perque-surtin-bolets_1_5866896.html"
      }
     ]
+   },
+   "rareza": "raro",
+   "rarezaNota": "Pequeña, en parques, jardines y bordes; se ve poco, pero está.",
+   "rarezaDatos": {
+    "cantabrico": 4,
+    "bizkaia": 1,
+    "espana": 98,
+    "europa": 109,
+    "fuente": "iNaturalist",
+    "consulta": "2026-11-15"
    }
   },
   {
@@ -1601,6 +1631,16 @@
       "url": "https://es.ara.cat/comer/temps-mes-haurem-d-esperar-perque-surtin-bolets_1_5866896.html"
      }
     ]
+   },
+   "rareza": "poco",
+   "rarezaNota": "Pequeña y frecuente en madera podrida; pasa desapercibida, y por eso es peligrosa.",
+   "rarezaDatos": {
+    "cantabrico": 26,
+    "bizkaia": 1,
+    "espana": 197,
+    "europa": 1528,
+    "fuente": "iNaturalist",
+    "consulta": "2026-11-15"
    }
   },
   {
@@ -1929,6 +1969,16 @@
       "url": "https://es.ara.cat/comer/temps-mes-haurem-d-esperar-perque-surtin-bolets_1_5866896.html"
      }
     ]
+   },
+   "rareza": "legendario",
+   "rarezaNota": "Casi no hay citas en la costa cantábrica.",
+   "rarezaDatos": {
+    "cantabrico": 2,
+    "bizkaia": 0,
+    "espana": 13,
+    "europa": 55,
+    "fuente": "iNaturalist",
+    "consulta": "2026-11-15"
    }
   },
   {
@@ -2229,6 +2279,16 @@
       "url": "https://es.ara.cat/comer/temps-mes-haurem-d-esperar-perque-surtin-bolets_1_5866896.html"
      }
     ]
+   },
+   "rareza": "legendario",
+   "rarezaNota": "De pinares de montaña en primavera; prácticamente ausente cerca de la costa.",
+   "rarezaDatos": {
+    "cantabrico": 5,
+    "bizkaia": 0,
+    "espana": 172,
+    "europa": 3066,
+    "fuente": "iNaturalist",
+    "consulta": "2026-11-15"
    }
   },
   {
@@ -2600,6 +2660,16 @@
       "url": "https://es.ara.cat/comer/temps-mes-haurem-d-esperar-perque-surtin-bolets_1_5866896.html"
      }
     ]
+   },
+   "rareza": "raro",
+   "rarezaNota": "Hay pocas citas en la costa cantábrica: hace falta el sitio y el momento justos.",
+   "rarezaDatos": {
+    "cantabrico": 22,
+    "bizkaia": 0,
+    "espana": 78,
+    "europa": 312,
+    "fuente": "iNaturalist",
+    "consulta": "2026-11-15"
    }
   },
   {
@@ -2967,6 +3037,16 @@
       "url": "https://es.ara.cat/comer/temps-mes-haurem-d-esperar-perque-surtin-bolets_1_5866896.html"
      }
     ]
+   },
+   "rareza": "raro",
+   "rarezaNota": "Hay pocas citas en la costa cantábrica: hace falta el sitio y el momento justos.",
+   "rarezaDatos": {
+    "cantabrico": 21,
+    "bizkaia": 0,
+    "espana": 490,
+    "europa": 1900,
+    "fuente": "iNaturalist",
+    "consulta": "2026-11-15"
    }
   },
   {
@@ -3272,7 +3352,17 @@
       }
      ]
     }
-   ]
+   ],
+   "rareza": "legendario",
+   "rarezaNota": "De hayedos y abetales sobre caliza en montaña.",
+   "rarezaDatos": {
+    "cantabrico": 0,
+    "bizkaia": 0,
+    "espana": 17,
+    "europa": 86,
+    "fuente": "iNaturalist",
+    "consulta": "2026-11-15"
+   }
   },
   {
    "id": "amanita-pantherina-muscaria",
@@ -3678,6 +3768,16 @@
       "url": "https://es.ara.cat/comer/temps-mes-haurem-d-esperar-perque-surtin-bolets_1_5866896.html"
      }
     ]
+   },
+   "rareza": "comun",
+   "rarezaNota": "La matamoscas es de las setas más vistas de Bizkaia bajo pinos y abedules; la pantera, bajo robles y pinos.",
+   "rarezaDatos": {
+    "cantabrico": 311,
+    "bizkaia": 21,
+    "espana": 3152,
+    "europa": 76775,
+    "fuente": "iNaturalist",
+    "consulta": "2026-11-15"
    }
   },
   {
@@ -3981,7 +4081,17 @@
       }
      ]
     }
-   ]
+   ],
+   "rareza": "poco",
+   "rarezaNota": "Se ve con regularidad si vas a su sitio y en su época.",
+   "rarezaDatos": {
+    "cantabrico": 39,
+    "bizkaia": 5,
+    "espana": 282,
+    "europa": 5135,
+    "fuente": "iNaturalist",
+    "consulta": "2026-11-15"
+   }
   },
   {
    "id": "boletus-satanas",
@@ -4340,6 +4450,16 @@
       "url": "https://link.springer.com/article/10.1186/s40663-019-0211-1"
      }
     ]
+   },
+   "rareza": "raro",
+   "rarezaNota": "Hay pocas citas en la costa cantábrica: hace falta el sitio y el momento justos.",
+   "rarezaDatos": {
+    "cantabrico": 22,
+    "bizkaia": 0,
+    "espana": 87,
+    "europa": 757,
+    "fuente": "iNaturalist",
+    "consulta": "2026-11-15"
    }
   },
   {
@@ -4655,7 +4775,17 @@
       }
      ]
     }
-   ]
+   ],
+   "rareza": "poco",
+   "rarezaNota": "Frecuente en jardines, huertas y junto a tocones enterrados.",
+   "rarezaDatos": {
+    "cantabrico": 28,
+    "bizkaia": 2,
+    "espana": 175,
+    "europa": 2794,
+    "fuente": "iNaturalist",
+    "consulta": "2026-11-15"
+   }
   },
   {
    "id": "tricholoma-equestre",
@@ -4948,7 +5078,17 @@
       }
      ]
     }
-   ]
+   ],
+   "rareza": "legendario",
+   "rarezaNota": "De pinares sobre arena; muy escasa aquí.",
+   "rarezaDatos": {
+    "cantabrico": 4,
+    "bizkaia": 0,
+    "espana": 145,
+    "europa": 675,
+    "fuente": "iNaturalist",
+    "consulta": "2026-11-15"
+   }
   },
   {
    "id": "clitocybe-rivulosa",
@@ -5246,7 +5386,17 @@
       }
      ]
     }
-   ]
+   ],
+   "rareza": "poco",
+   "rarezaNota": "Pequeña y blanca, en céspedes y prados: más frecuente de lo que parece y fácil de pasar por alto.",
+   "rarezaDatos": {
+    "cantabrico": 9,
+    "bizkaia": 0,
+    "espana": 116,
+    "europa": 271,
+    "fuente": "iNaturalist",
+    "consulta": "2026-11-15"
+   }
   },
   {
    "id": "tylopilus-felleus",
@@ -5582,7 +5732,17 @@
       }
      ]
     }
-   ]
+   ],
+   "rareza": "legendario",
+   "rarezaNota": "De bosques de coníferas sobre suelo muy ácido; muy escaso aquí.",
+   "rarezaDatos": {
+    "cantabrico": 3,
+    "bizkaia": 0,
+    "espana": 30,
+    "europa": 2911,
+    "fuente": "iNaturalist",
+    "consulta": "2026-11-15"
+   }
   },
   {
    "id": "boletus-edulis",
@@ -5996,6 +6156,16 @@
       "url": "https://link.springer.com/article/10.1186/s40663-019-0211-1"
      }
     ]
+   },
+   "rareza": "comun",
+   "rarezaNota": "Cuenta todo el grupo de boletos (edulis, aereus, pinophilus…): en otoño bueno salen en casi todos los robledales, hayedos y pinares.",
+   "rarezaDatos": {
+    "cantabrico": 171,
+    "bizkaia": 15,
+    "espana": 1061,
+    "europa": 23464,
+    "fuente": "iNaturalist",
+    "consulta": "2026-11-15"
    }
   },
   {
@@ -6400,6 +6570,16 @@
       "url": "https://es.ara.cat/comer/temps-mes-haurem-d-esperar-perque-surtin-bolets_1_5866896.html"
      }
     ]
+   },
+   "rareza": "poco",
+   "rarezaNota": "Se ve con regularidad si vas a su sitio y en su época.",
+   "rarezaDatos": {
+    "cantabrico": 80,
+    "bizkaia": 4,
+    "espana": 312,
+    "europa": 11169,
+    "fuente": "iNaturalist",
+    "consulta": "2026-11-15"
    }
   },
   {
@@ -6715,7 +6895,17 @@
       }
      ]
     }
-   ]
+   ],
+   "rareza": "poco",
+   "rarezaNota": "Se ve con regularidad si vas a su sitio y en su época.",
+   "rarezaDatos": {
+    "cantabrico": 63,
+    "bizkaia": 0,
+    "espana": 221,
+    "europa": 3341,
+    "fuente": "iNaturalist",
+    "consulta": "2026-11-15"
+   }
   },
   {
    "id": "hydnum-repandum",
@@ -7051,6 +7241,16 @@
       "url": "https://es.ara.cat/comer/temps-mes-haurem-d-esperar-perque-surtin-bolets_1_5866896.html"
      }
     ]
+   },
+   "rareza": "poco",
+   "rarezaNota": "Se ve con regularidad si vas a su sitio y en su época.",
+   "rarezaDatos": {
+    "cantabrico": 60,
+    "bizkaia": 0,
+    "espana": 285,
+    "europa": 2323,
+    "fuente": "iNaturalist",
+    "consulta": "2026-11-15"
    }
   },
   {
@@ -7447,6 +7647,16 @@
       "url": "https://es.ara.cat/comer/temps-mes-haurem-d-esperar-perque-surtin-bolets_1_5866896.html"
      }
     ]
+   },
+   "rareza": "poco",
+   "rarezaNota": "Se ve con regularidad si vas a su sitio y en su época.",
+   "rarezaDatos": {
+    "cantabrico": 45,
+    "bizkaia": 10,
+    "espana": 1077,
+    "europa": 3838,
+    "fuente": "iNaturalist",
+    "consulta": "2026-11-15"
    }
   },
   {
@@ -7851,6 +8061,16 @@
       "url": "https://es.ara.cat/comer/temps-mes-haurem-d-esperar-perque-surtin-bolets_1_5866896.html"
      }
     ]
+   },
+   "rareza": "comun",
+   "rarezaNota": "Mucha gente la encuentra en la costa cantábrica: es de las que más se ven.",
+   "rarezaDatos": {
+    "cantabrico": 248,
+    "bizkaia": 22,
+    "espana": 2214,
+    "europa": 20667,
+    "fuente": "iNaturalist",
+    "consulta": "2026-11-15"
    }
   },
   {
@@ -8169,7 +8389,17 @@
       }
      ]
     }
-   ]
+   ],
+   "rareza": "comun",
+   "rarezaNota": "Sale en casi cualquier prado o campa con hierba corta, en corros.",
+   "rarezaDatos": {
+    "cantabrico": 87,
+    "bizkaia": 15,
+    "espana": 890,
+    "europa": 6295,
+    "fuente": "iNaturalist",
+    "consulta": "2026-11-15"
+   }
   },
   {
    "id": "calocybe-gambosa",
@@ -8551,6 +8781,16 @@
       "url": "https://es.ara.cat/comer/temps-mes-haurem-d-esperar-perque-surtin-bolets_1_5866896.html"
      }
     ]
+   },
+   "rareza": "raro",
+   "rarezaNota": "Hay pocas citas en la costa cantábrica: hace falta el sitio y el momento justos.",
+   "rarezaDatos": {
+    "cantabrico": 20,
+    "bizkaia": 1,
+    "espana": 148,
+    "europa": 2302,
+    "fuente": "iNaturalist",
+    "consulta": "2026-11-15"
    }
   },
   {
@@ -8913,6 +9153,16 @@
       "url": "https://es.ara.cat/comer/temps-mes-haurem-d-esperar-perque-surtin-bolets_1_5866896.html"
      }
     ]
+   },
+   "rareza": "raro",
+   "rarezaNota": "Solo unas semanas de primavera y en sitios muy concretos (choperas, quemados, bordes de río).",
+   "rarezaDatos": {
+    "cantabrico": 45,
+    "bizkaia": 4,
+    "espana": 907,
+    "europa": 5655,
+    "fuente": "iNaturalist",
+    "consulta": "2026-11-15"
    }
   },
   {
@@ -9257,7 +9507,17 @@
       }
      ]
     }
-   ]
+   ],
+   "rareza": "poco",
+   "rarezaNota": "Se ve con regularidad si vas a su sitio y en su época.",
+   "rarezaDatos": {
+    "cantabrico": 51,
+    "bizkaia": 3,
+    "espana": 282,
+    "europa": 1269,
+    "fuente": "iNaturalist",
+    "consulta": "2026-11-15"
+   }
   },
   {
    "id": "boletus-pinophilus",
@@ -9620,7 +9880,17 @@
       }
      ]
     }
-   ]
+   ],
+   "rareza": "raro",
+   "rarezaNota": "Hay pocas citas en la costa cantábrica: hace falta el sitio y el momento justos.",
+   "rarezaDatos": {
+    "cantabrico": 19,
+    "bizkaia": 0,
+    "espana": 169,
+    "europa": 1753,
+    "fuente": "iNaturalist",
+    "consulta": "2026-11-15"
+   }
   },
   {
    "id": "boletus-reticulatus",
@@ -9956,7 +10226,17 @@
       }
      ]
     }
-   ]
+   ],
+   "rareza": "poco",
+   "rarezaNota": "Se ve con regularidad si vas a su sitio y en su época.",
+   "rarezaDatos": {
+    "cantabrico": 80,
+    "bizkaia": 2,
+    "espana": 436,
+    "europa": 5338,
+    "fuente": "iNaturalist",
+    "consulta": "2026-11-15"
+   }
   },
   {
    "id": "imleria-badia",
@@ -10289,7 +10569,17 @@
       }
      ]
     }
-   ]
+   ],
+   "rareza": "poco",
+   "rarezaNota": "Se ve con regularidad si vas a su sitio y en su época.",
+   "rarezaDatos": {
+    "cantabrico": 34,
+    "bizkaia": 3,
+    "espana": 297,
+    "europa": 12804,
+    "fuente": "iNaturalist",
+    "consulta": "2026-11-15"
+   }
   },
   {
    "id": "suillus-luteus",
@@ -10614,7 +10904,17 @@
       }
      ]
     }
-   ]
+   ],
+   "rareza": "poco",
+   "rarezaNota": "Se ve con regularidad si vas a su sitio y en su época.",
+   "rarezaDatos": {
+    "cantabrico": 31,
+    "bizkaia": 4,
+    "espana": 412,
+    "europa": 3966,
+    "fuente": "iNaturalist",
+    "consulta": "2026-11-15"
+   }
   },
   {
    "id": "leccinum-scabrum",
@@ -10925,7 +11225,17 @@
       }
      ]
     }
-   ]
+   ],
+   "rareza": "poco",
+   "rarezaNota": "Se ve con regularidad si vas a su sitio y en su época.",
+   "rarezaDatos": {
+    "cantabrico": 39,
+    "bizkaia": 4,
+    "espana": 234,
+    "europa": 6197,
+    "fuente": "iNaturalist",
+    "consulta": "2026-11-15"
+   }
   },
   {
    "id": "boletos-poros-rojos",
@@ -11298,7 +11608,17 @@
       }
      ]
     }
-   ]
+   ],
+   "rareza": "comun",
+   "rarezaNota": "Mucha gente la encuentra en la costa cantábrica: es de las que más se ven.",
+   "rarezaDatos": {
+    "cantabrico": 212,
+    "bizkaia": 18,
+    "espana": 801,
+    "europa": 10117,
+    "fuente": "iNaturalist",
+    "consulta": "2026-11-15"
+   }
   },
   {
    "id": "amanita-caesarea",
@@ -11674,6 +11994,16 @@
       "url": "https://link.springer.com/article/10.1186/s40663-019-0211-1"
      }
     ]
+   },
+   "rareza": "raro",
+   "rarezaNota": "Necesita robledales y castañares cálidos y veranos calurosos; escasa en Bizkaia.",
+   "rarezaDatos": {
+    "cantabrico": 31,
+    "bizkaia": 2,
+    "espana": 258,
+    "europa": 1270,
+    "fuente": "iNaturalist",
+    "consulta": "2026-11-15"
    }
   },
   {
@@ -12060,6 +12390,16 @@
       "url": "https://es.ara.cat/comer/temps-mes-haurem-d-esperar-perque-surtin-bolets_1_5866896.html"
      }
     ]
+   },
+   "rareza": "poco",
+   "rarezaNota": "Se ve con regularidad si vas a su sitio y en su época.",
+   "rarezaDatos": {
+    "cantabrico": 59,
+    "bizkaia": 10,
+    "espana": 656,
+    "europa": 1422,
+    "fuente": "iNaturalist",
+    "consulta": "2026-11-15"
    }
   },
   {
@@ -12409,6 +12749,16 @@
       "url": "https://es.ara.cat/comer/temps-mes-haurem-d-esperar-perque-surtin-bolets_1_5866896.html"
      }
     ]
+   },
+   "rareza": "poco",
+   "rarezaNota": "En Bizkaia se ve bastante en parques, jardines y bordes de camino.",
+   "rarezaDatos": {
+    "cantabrico": 27,
+    "bizkaia": 11,
+    "espana": 232,
+    "europa": 1446,
+    "fuente": "iNaturalist",
+    "consulta": "2026-11-15"
    }
   },
   {
@@ -12728,7 +13078,17 @@
       }
      ]
     }
-   ]
+   ],
+   "rareza": "comun",
+   "rarezaNota": "Mucha gente la encuentra en la costa cantábrica: es de las que más se ven.",
+   "rarezaDatos": {
+    "cantabrico": 162,
+    "bizkaia": 17,
+    "espana": 1211,
+    "europa": 37864,
+    "fuente": "iNaturalist",
+    "consulta": "2026-11-15"
+   }
   },
   {
    "id": "lepista-nuda",
@@ -13063,7 +13423,17 @@
       }
      ]
     }
-   ]
+   ],
+   "rareza": "poco",
+   "rarezaNota": "Se ve con regularidad si vas a su sitio y en su época.",
+   "rarezaDatos": {
+    "cantabrico": 45,
+    "bizkaia": 4,
+    "espana": 782,
+    "europa": 4614,
+    "fuente": "iNaturalist",
+    "consulta": "2026-11-15"
+   }
   },
   {
    "id": "armillaria-mellea",
@@ -13394,7 +13764,17 @@
       }
      ]
     }
-   ]
+   ],
+   "rareza": "comun",
+   "rarezaNota": "Mucha gente la encuentra en la costa cantábrica: es de las que más se ven.",
+   "rarezaDatos": {
+    "cantabrico": 199,
+    "bizkaia": 11,
+    "espana": 803,
+    "europa": 4677,
+    "fuente": "iNaturalist",
+    "consulta": "2026-11-15"
+   }
   },
   {
    "id": "pleurotus-ostreatus",
@@ -13718,7 +14098,17 @@
       }
      ]
     }
-   ]
+   ],
+   "rareza": "poco",
+   "rarezaNota": "Se ve con regularidad si vas a su sitio y en su época.",
+   "rarezaDatos": {
+    "cantabrico": 59,
+    "bizkaia": 1,
+    "espana": 421,
+    "europa": 7438,
+    "fuente": "iNaturalist",
+    "consulta": "2026-11-15"
+   }
   },
   {
    "id": "russula-cyanoxantha",
@@ -14044,7 +14434,17 @@
       }
      ]
     }
-   ]
+   ],
+   "rareza": "comun",
+   "rarezaNota": "Una de las rúsulas más abundantes bajo robles, castaños y hayas.",
+   "rarezaDatos": {
+    "cantabrico": 67,
+    "bizkaia": 3,
+    "espana": 329,
+    "europa": 1497,
+    "fuente": "iNaturalist",
+    "consulta": "2026-11-15"
+   }
   },
   {
    "id": "craterellus-tubaeformis",
@@ -14409,6 +14809,16 @@
       "url": "https://es.ara.cat/comer/temps-mes-haurem-d-esperar-perque-surtin-bolets_1_5866896.html"
      }
     ]
+   },
+   "rareza": "raro",
+   "rarezaNota": "Hay pocas citas en la costa cantábrica: hace falta el sitio y el momento justos.",
+   "rarezaDatos": {
+    "cantabrico": 25,
+    "bizkaia": 0,
+    "espana": 178,
+    "europa": 4282,
+    "fuente": "iNaturalist",
+    "consulta": "2026-11-15"
    }
   },
   {
@@ -14719,7 +15129,17 @@
       }
      ]
     }
-   ]
+   ],
+   "rareza": "comun",
+   "rarezaNota": "Muy abundante en bordes de camino y bosques; casi nadie la fotografía.",
+   "rarezaDatos": {
+    "cantabrico": 66,
+    "bizkaia": 13,
+    "espana": 1046,
+    "europa": 13031,
+    "fuente": "iNaturalist",
+    "consulta": "2026-11-15"
+   }
   },
   {
    "id": "laetiporus-sulphureus",
@@ -15029,7 +15449,17 @@
       }
      ]
     }
-   ]
+   ],
+   "rareza": "comun",
+   "rarezaNota": "Mucha gente la encuentra en la costa cantábrica: es de las que más se ven.",
+   "rarezaDatos": {
+    "cantabrico": 232,
+    "bizkaia": 11,
+    "espana": 927,
+    "europa": 34727,
+    "fuente": "iNaturalist",
+    "consulta": "2026-11-15"
+   }
   },
   {
    "id": "fistulina-hepatica",
@@ -15338,7 +15768,17 @@
       }
      ]
     }
-   ]
+   ],
+   "rareza": "poco",
+   "rarezaNota": "Necesita robles o castaños viejos; donde los hay, repite cada año.",
+   "rarezaDatos": {
+    "cantabrico": 92,
+    "bizkaia": 7,
+    "espana": 421,
+    "europa": 10221,
+    "fuente": "iNaturalist",
+    "consulta": "2026-11-15"
+   }
   },
   {
    "id": "auricularia-auricula-judae",
@@ -15610,7 +16050,17 @@
      ],
      "ojo": "Es elástica como goma con humedad; si una «oreja» es dura, leñosa o tiene láminas, es otra cosa."
     }
-   ]
+   ],
+   "rareza": "comun",
+   "rarezaNota": "En saúcos muertos casi todo el año; muy frecuente en Bizkaia aunque se registra poco.",
+   "rarezaDatos": {
+    "cantabrico": 35,
+    "bizkaia": 1,
+    "espana": 567,
+    "europa": 24761,
+    "fuente": "iNaturalist",
+    "consulta": "2026-11-15"
+   }
   },
   {
    "id": "sparassis-crispa",
@@ -15912,7 +16362,17 @@
       }
      ]
     }
-   ]
+   ],
+   "rareza": "raro",
+   "rarezaNota": "Hay pocas citas en la costa cantábrica: hace falta el sitio y el momento justos.",
+   "rarezaDatos": {
+    "cantabrico": 22,
+    "bizkaia": 3,
+    "espana": 324,
+    "europa": 5987,
+    "fuente": "iNaturalist",
+    "consulta": "2026-11-15"
+   }
   },
   {
    "id": "amanita-rubescens",
@@ -16250,7 +16710,17 @@
       }
      ]
     }
-   ]
+   ],
+   "rareza": "comun",
+   "rarezaNota": "Mucha gente la encuentra en la costa cantábrica: es de las que más se ven.",
+   "rarezaDatos": {
+    "cantabrico": 262,
+    "bizkaia": 24,
+    "espana": 1381,
+    "europa": 26376,
+    "fuente": "iNaturalist",
+    "consulta": "2026-11-15"
+   }
   },
   {
    "id": "clitocybe-nebularis",
@@ -16557,7 +17027,17 @@
       }
      ]
     }
-   ]
+   ],
+   "rareza": "comun",
+   "rarezaNota": "Mucha gente la encuentra en la costa cantábrica: es de las que más se ven.",
+   "rarezaDatos": {
+    "cantabrico": 118,
+    "bizkaia": 7,
+    "espana": 578,
+    "europa": 15471,
+    "fuente": "iNaturalist",
+    "consulta": "2026-11-15"
+   }
   },
   {
    "id": "hypholoma-fasciculare",
@@ -16868,7 +17348,17 @@
       }
      ]
     }
-   ]
+   ],
+   "rareza": "comun",
+   "rarezaNota": "Mucha gente la encuentra en la costa cantábrica: es de las que más se ven.",
+   "rarezaDatos": {
+    "cantabrico": 232,
+    "bizkaia": 16,
+    "espana": 1432,
+    "europa": 20197,
+    "fuente": "iNaturalist",
+    "consulta": "2026-11-15"
+   }
   },
   {
    "id": "scleroderma-citrinum",
@@ -17152,7 +17642,17 @@
       }
      ]
     }
-   ]
+   ],
+   "rareza": "comun",
+   "rarezaNota": "Mucha gente la encuentra en la costa cantábrica: es de las que más se ven.",
+   "rarezaDatos": {
+    "cantabrico": 171,
+    "bizkaia": 19,
+    "espana": 657,
+    "europa": 6798,
+    "fuente": "iNaturalist",
+    "consulta": "2026-11-15"
+   }
   },
   {
    "id": "russula-emetica",
@@ -17460,7 +17960,17 @@
       }
      ]
     }
-   ]
+   ],
+   "rareza": "raro",
+   "rarezaNota": "La auténtica sale en pinares con musgo húmedo; otras rúsulas rojas parecidas sí son comunes.",
+   "rarezaDatos": {
+    "cantabrico": 2,
+    "bizkaia": 0,
+    "espana": 18,
+    "europa": 179,
+    "fuente": "iNaturalist",
+    "consulta": "2026-11-15"
+   }
   },
   {
    "id": "lactarius-torminosus",
@@ -17764,7 +18274,17 @@
       }
      ]
     }
-   ]
+   ],
+   "rareza": "raro",
+   "rarezaNota": "Solo sale con abedules.",
+   "rarezaDatos": {
+    "cantabrico": 5,
+    "bizkaia": 0,
+    "espana": 85,
+    "europa": 2255,
+    "fuente": "iNaturalist",
+    "consulta": "2026-11-15"
+   }
   },
   {
    "id": "hygrophoropsis-aurantiaca",
@@ -18116,6 +18636,16 @@
       "url": "https://es.ara.cat/comer/temps-mes-haurem-d-esperar-perque-surtin-bolets_1_5866896.html"
      }
     ]
+   },
+   "rareza": "comun",
+   "rarezaNota": "Muy abundante en los pinares de Bizkaia.",
+   "rarezaDatos": {
+    "cantabrico": 35,
+    "bizkaia": 1,
+    "espana": 569,
+    "europa": 6720,
+    "fuente": "iNaturalist",
+    "consulta": "2026-11-15"
    }
   },
   {
@@ -18379,7 +18909,17 @@
       }
      ]
     }
-   ]
+   ],
+   "rareza": "comun",
+   "rarezaNota": "Mucha gente la encuentra en la costa cantábrica: es de las que más se ven.",
+   "rarezaDatos": {
+    "cantabrico": 327,
+    "bizkaia": 17,
+    "espana": 1303,
+    "europa": 28193,
+    "fuente": "iNaturalist",
+    "consulta": "2026-11-15"
+   }
   },
   {
    "id": "fomes-fomentarius",
@@ -18649,7 +19189,17 @@
       }
      ]
     }
-   ]
+   ],
+   "rareza": "poco",
+   "rarezaNota": "Abunda en los hayedos de montaña (Gorbeia, Urkiola…), pero casi no en la costa.",
+   "rarezaDatos": {
+    "cantabrico": 263,
+    "bizkaia": 0,
+    "espana": 540,
+    "europa": 28779,
+    "fuente": "iNaturalist",
+    "consulta": "2026-11-15"
+   }
   },
   {
    "id": "inocybe-erubescens",
@@ -18987,6 +19537,16 @@
       "url": "https://es.ara.cat/comer/temps-mes-haurem-d-esperar-perque-surtin-bolets_1_5866896.html"
      }
     ]
+   },
+   "rareza": "legendario",
+   "rarezaNota": "Casi no hay citas en la costa cantábrica.",
+   "rarezaDatos": {
+    "cantabrico": 1,
+    "bizkaia": 1,
+    "espana": 6,
+    "europa": 94,
+    "fuente": "iNaturalist",
+    "consulta": "2026-11-15"
    }
   },
   {
@@ -19289,6 +19849,16 @@
       "url": "https://link.springer.com/article/10.1186/s40663-019-0211-1"
      }
     ]
+   },
+   "rareza": "poco",
+   "rarezaNota": "Se ve con regularidad si vas a su sitio y en su época.",
+   "rarezaDatos": {
+    "cantabrico": 47,
+    "bizkaia": 4,
+    "espana": 183,
+    "europa": 1697,
+    "fuente": "iNaturalist",
+    "consulta": "2026-11-15"
    }
   },
   {
@@ -19581,7 +20151,17 @@
       }
      ]
     }
-   ]
+   ],
+   "rareza": "comun",
+   "rarezaNota": "Muy frecuente bajo pinos, robles y hayas; se fotografía poco.",
+   "rarezaDatos": {
+    "cantabrico": 88,
+    "bizkaia": 5,
+    "espana": 646,
+    "europa": 14311,
+    "fuente": "iNaturalist",
+    "consulta": "2026-11-15"
+   }
   },
   {
    "id": "craterellus-lutescens",
@@ -19837,7 +20417,17 @@
       }
      ]
     }
-   ]
+   ],
+   "rareza": "poco",
+   "rarezaNota": "Se ve con regularidad si vas a su sitio y en su época.",
+   "rarezaDatos": {
+    "cantabrico": 30,
+    "bizkaia": 0,
+    "espana": 218,
+    "europa": 871,
+    "fuente": "iNaturalist",
+    "consulta": "2026-11-15"
+   }
   },
   {
    "id": "clitocybe-odora",
@@ -20066,7 +20656,17 @@
      ],
      "ojo": "El color no basta: la estrofaria verde (Stropharia aeruginosa) también es azul-verdosa, pero tiene anillo y láminas que se oscurecen. Huele siempre: esta huele fuerte a anís."
     }
-   ]
+   ],
+   "rareza": "poco",
+   "rarezaNota": "Frecuente en la hojarasca; se nota antes por el olor a anís que por la vista.",
+   "rarezaDatos": {
+    "cantabrico": 19,
+    "bizkaia": 4,
+    "espana": 198,
+    "europa": 2021,
+    "fuente": "iNaturalist",
+    "consulta": "2026-11-15"
+   }
   },
   {
    "id": "laccaria-amethystina",
@@ -20329,7 +20929,17 @@
       }
      ]
     }
-   ]
+   ],
+   "rareza": "comun",
+   "rarezaNota": "Pequeña y abundantísima en la hojarasca de hayas y robles; se registra poco.",
+   "rarezaDatos": {
+    "cantabrico": 82,
+    "bizkaia": 4,
+    "espana": 440,
+    "europa": 14356,
+    "fuente": "iNaturalist",
+    "consulta": "2026-11-15"
+   }
   },
   {
    "id": "hygrophorus-marzuolus",
@@ -20581,7 +21191,17 @@
       }
      ]
     }
-   ]
+   ],
+   "rareza": "legendario",
+   "rarezaNota": "De montaña, a finales de invierno, a veces junto a la nieve que se derrite; en la costa no sale.",
+   "rarezaDatos": {
+    "cantabrico": 11,
+    "bizkaia": 0,
+    "espana": 125,
+    "europa": 253,
+    "fuente": "iNaturalist",
+    "consulta": "2026-11-15"
+   }
   },
   {
    "id": "tricholoma-portentosum",
@@ -20851,7 +21471,17 @@
       }
      ]
     }
-   ]
+   ],
+   "rareza": "raro",
+   "rarezaNota": "Hay pocas citas en la costa cantábrica: hace falta el sitio y el momento justos.",
+   "rarezaDatos": {
+    "cantabrico": 9,
+    "bizkaia": 0,
+    "espana": 80,
+    "europa": 421,
+    "fuente": "iNaturalist",
+    "consulta": "2026-11-15"
+   }
   },
   {
    "id": "tricholoma-terreum",
@@ -21130,7 +21760,17 @@
       }
      ]
     }
-   ]
+   ],
+   "rareza": "poco",
+   "rarezaNota": "Se ve con regularidad si vas a su sitio y en su época.",
+   "rarezaDatos": {
+    "cantabrico": 34,
+    "bizkaia": 1,
+    "espana": 549,
+    "europa": 1531,
+    "fuente": "iNaturalist",
+    "consulta": "2026-11-15"
+   }
   },
   {
    "id": "xerocomellus-chrysenteron",
@@ -21405,7 +22045,17 @@
       }
      ]
     }
-   ]
+   ],
+   "rareza": "comun",
+   "rarezaNota": "Boleto pequeño muy abundante en bosques; se registra poco.",
+   "rarezaDatos": {
+    "cantabrico": 37,
+    "bizkaia": 0,
+    "espana": 193,
+    "europa": 2302,
+    "fuente": "iNaturalist",
+    "consulta": "2026-11-15"
+   }
   },
   {
    "id": "suillus-granulatus",
@@ -21638,7 +22288,17 @@
       }
      ]
     }
-   ]
+   ],
+   "rareza": "poco",
+   "rarezaNota": "Se ve con regularidad si vas a su sitio y en su época.",
+   "rarezaDatos": {
+    "cantabrico": 48,
+    "bizkaia": 10,
+    "espana": 519,
+    "europa": 2734,
+    "fuente": "iNaturalist",
+    "consulta": "2026-11-15"
+   }
   },
   {
    "id": "mycena-pura",
@@ -21880,7 +22540,17 @@
       }
      ]
     }
-   ]
+   ],
+   "rareza": "comun",
+   "rarezaNota": "Muy abundante en la hojarasca todo el otoño; es pequeña y casi nadie la anota.",
+   "rarezaDatos": {
+    "cantabrico": 27,
+    "bizkaia": 1,
+    "espana": 264,
+    "europa": 1869,
+    "fuente": "iNaturalist",
+    "consulta": "2026-11-15"
+   }
   },
   {
    "id": "clathrus-ruber",
@@ -22106,7 +22776,17 @@
      ],
      "ojo": "Un huevo blanco en el suelo también puede ser una Amanita joven (mortal). Córtalo de arriba abajo: si dentro ves una Amanita en miniatura (sombrero, láminas, pie), no lo toques."
     }
-   ]
+   ],
+   "rareza": "comun",
+   "rarezaNota": "Mucha gente la encuentra en la costa cantábrica: es de las que más se ven.",
+   "rarezaDatos": {
+    "cantabrico": 164,
+    "bizkaia": 46,
+    "espana": 1192,
+    "europa": 6407,
+    "fuente": "iNaturalist",
+    "consulta": "2026-11-15"
+   }
   },
   {
    "id": "phallus-impudicus",
@@ -22378,7 +23058,17 @@
      ],
      "ojo": "Cortar el huevo es lo que lo distingue de una Amanita joven: aquí ves capa gelatinosa y núcleo verde-negro, no una seta en miniatura con láminas."
     }
-   ]
+   ],
+   "rareza": "poco",
+   "rarezaNota": "Se ve con regularidad si vas a su sitio y en su época.",
+   "rarezaDatos": {
+    "cantabrico": 60,
+    "bizkaia": 0,
+    "espana": 527,
+    "europa": 12590,
+    "fuente": "iNaturalist",
+    "consulta": "2026-11-15"
+   }
   },
   {
    "id": "chlorophyllum-rhacodes",
@@ -22658,7 +23348,17 @@
       }
      ]
     }
-   ]
+   ],
+   "rareza": "raro",
+   "rarezaNota": "En jardines y bordes con compost; se confunde con la galamperna y se registra poco.",
+   "rarezaDatos": {
+    "cantabrico": 7,
+    "bizkaia": 0,
+    "espana": 141,
+    "europa": 1731,
+    "fuente": "iNaturalist",
+    "consulta": "2026-11-15"
+   }
   },
   {
    "id": "cortinarius-rubellus",
@@ -22904,6 +23604,16 @@
       "url": "https://es.ara.cat/comer/temps-mes-haurem-d-esperar-perque-surtin-bolets_1_5866896.html"
      }
     ]
+   },
+   "rareza": "legendario",
+   "rarezaNota": "De bosques de coníferas del norte de Europa; prácticamente ausente aquí.",
+   "rarezaDatos": {
+    "cantabrico": 0,
+    "bizkaia": 0,
+    "espana": 2,
+    "europa": 403,
+    "fuente": "iNaturalist",
+    "consulta": "2026-11-15"
    }
   },
   {
@@ -23178,7 +23888,17 @@
       }
      ]
     }
-   ]
+   ],
+   "rareza": "comun",
+   "rarezaNota": "Mucha gente la encuentra en la costa cantábrica: es de las que más se ven.",
+   "rarezaDatos": {
+    "cantabrico": 100,
+    "bizkaia": 11,
+    "espana": 523,
+    "europa": 5278,
+    "fuente": "iNaturalist",
+    "consulta": "2026-11-15"
+   }
   },
   {
    "id": "aleuria-aurantia",
@@ -23431,7 +24151,17 @@
       }
      ]
     }
-   ]
+   ],
+   "rareza": "poco",
+   "rarezaNota": "Se ve con regularidad si vas a su sitio y en su época.",
+   "rarezaDatos": {
+    "cantabrico": 34,
+    "bizkaia": 4,
+    "espana": 228,
+    "europa": 4907,
+    "fuente": "iNaturalist",
+    "consulta": "2026-11-15"
+   }
   },
   {
    "id": "helvella-crispa",
@@ -23692,7 +24422,17 @@
       }
      ]
     }
-   ]
+   ],
+   "rareza": "poco",
+   "rarezaNota": "Se ve con regularidad si vas a su sitio y en su época.",
+   "rarezaDatos": {
+    "cantabrico": 80,
+    "bizkaia": 10,
+    "espana": 327,
+    "europa": 8291,
+    "fuente": "iNaturalist",
+    "consulta": "2026-11-15"
+   }
   },
   {
    "id": "hydnum-rufescens",
@@ -23937,7 +24677,17 @@
       }
      ]
     }
-   ]
+   ],
+   "rareza": "raro",
+   "rarezaNota": "Hay pocas citas en la costa cantábrica: hace falta el sitio y el momento justos.",
+   "rarezaDatos": {
+    "cantabrico": 24,
+    "bizkaia": 0,
+    "espana": 67,
+    "europa": 632,
+    "fuente": "iNaturalist",
+    "consulta": "2026-11-15"
+   }
   },
   {
    "id": "infundibulicybe-gibba",
@@ -24195,7 +24945,17 @@
       }
      ]
     }
-   ]
+   ],
+   "rareza": "poco",
+   "rarezaNota": "Frecuente en la hojarasca; se registra poco.",
+   "rarezaDatos": {
+    "cantabrico": 28,
+    "bizkaia": 0,
+    "espana": 336,
+    "europa": 1613,
+    "fuente": "iNaturalist",
+    "consulta": "2026-11-15"
+   }
   },
   {
    "id": "infundibulicybe-geotropa",
@@ -24470,7 +25230,17 @@
       }
      ]
     }
-   ]
+   ],
+   "rareza": "raro",
+   "rarezaNota": "Hay pocas citas en la costa cantábrica: hace falta el sitio y el momento justos.",
+   "rarezaDatos": {
+    "cantabrico": 18,
+    "bizkaia": 1,
+    "espana": 133,
+    "europa": 2942,
+    "fuente": "iNaturalist",
+    "consulta": "2026-11-15"
+   }
   },
   {
    "id": "lyophyllum-decastes",
@@ -24714,7 +25484,17 @@
       }
      ]
     }
-   ]
+   ],
+   "rareza": "raro",
+   "rarezaNota": "Hay pocas citas en la costa cantábrica: hace falta el sitio y el momento justos.",
+   "rarezaDatos": {
+    "cantabrico": 14,
+    "bizkaia": 1,
+    "espana": 137,
+    "europa": 858,
+    "fuente": "iNaturalist",
+    "consulta": "2026-11-15"
+   }
   },
   {
    "id": "agaricus-arvensis",
@@ -25002,7 +25782,17 @@
       }
      ]
     }
-   ]
+   ],
+   "rareza": "raro",
+   "rarezaNota": "Hay pocas citas en la costa cantábrica: hace falta el sitio y el momento justos.",
+   "rarezaDatos": {
+    "cantabrico": 17,
+    "bizkaia": 1,
+    "espana": 138,
+    "europa": 369,
+    "fuente": "iNaturalist",
+    "consulta": "2026-11-15"
+   }
   },
   {
    "id": "amanita-gemmata",
@@ -25271,7 +26061,17 @@
       }
      ]
     }
-   ]
+   ],
+   "rareza": "poco",
+   "rarezaNota": "Se ve con regularidad si vas a su sitio y en su época.",
+   "rarezaDatos": {
+    "cantabrico": 78,
+    "bizkaia": 11,
+    "espana": 442,
+    "europa": 2224,
+    "fuente": "iNaturalist",
+    "consulta": "2026-11-15"
+   }
   },
   {
    "id": "hygrocybe-coccinea",
@@ -25518,7 +26318,17 @@
       }
      ]
     }
-   ]
+   ],
+   "rareza": "raro",
+   "rarezaNota": "Hay pocas citas en la costa cantábrica: hace falta el sitio y el momento justos.",
+   "rarezaDatos": {
+    "cantabrico": 15,
+    "bizkaia": 2,
+    "espana": 64,
+    "europa": 2879,
+    "fuente": "iNaturalist",
+    "consulta": "2026-11-15"
+   }
   },
   {
    "id": "cuphophyllus-pratensis",
@@ -25768,7 +26578,17 @@
       }
      ]
     }
-   ]
+   ],
+   "rareza": "raro",
+   "rarezaNota": "Hay pocas citas en la costa cantábrica: hace falta el sitio y el momento justos.",
+   "rarezaDatos": {
+    "cantabrico": 19,
+    "bizkaia": 3,
+    "espana": 53,
+    "europa": 3710,
+    "fuente": "iNaturalist",
+    "consulta": "2026-11-15"
+   }
   },
   {
    "id": "lactarius-piperatus",
@@ -26021,7 +26841,17 @@
       }
      ]
     }
-   ]
+   ],
+   "rareza": "raro",
+   "rarezaNota": "Hay pocas citas en la costa cantábrica: hace falta el sitio y el momento justos.",
+   "rarezaDatos": {
+    "cantabrico": 12,
+    "bizkaia": 0,
+    "espana": 68,
+    "europa": 406,
+    "fuente": "iNaturalist",
+    "consulta": "2026-11-15"
+   }
   },
   {
    "id": "stropharia-aeruginosa",
@@ -26286,7 +27116,17 @@
       }
      ]
     }
-   ]
+   ],
+   "rareza": "poco",
+   "rarezaNota": "Frecuente en hierba y hojarasca de bosques húmedos.",
+   "rarezaDatos": {
+    "cantabrico": 24,
+    "bizkaia": 0,
+    "espana": 223,
+    "europa": 2646,
+    "fuente": "iNaturalist",
+    "consulta": "2026-11-15"
+   }
   },
   {
    "id": "kuehneromyces-mutabilis",
@@ -26586,6 +27426,16 @@
       "url": "https://es.ara.cat/comer/temps-mes-haurem-d-esperar-perque-surtin-bolets_1_5866896.html"
      }
     ]
+   },
+   "rareza": "raro",
+   "rarezaNota": "Muy común en el centro de Europa en tocones; aquí es escasa.",
+   "rarezaDatos": {
+    "cantabrico": 6,
+    "bizkaia": 0,
+    "espana": 31,
+    "europa": 7616,
+    "fuente": "iNaturalist",
+    "consulta": "2026-11-15"
    }
   },
   {
@@ -26827,7 +27677,17 @@
       }
      ]
     }
-   ]
+   ],
+   "rareza": "raro",
+   "rarezaNota": "Al pie de árboles vivos, sobre todo hayas y manzanos; escasa aquí.",
+   "rarezaDatos": {
+    "cantabrico": 7,
+    "bizkaia": 0,
+    "espana": 47,
+    "europa": 4398,
+    "fuente": "iNaturalist",
+    "consulta": "2026-11-15"
+   }
   },
   {
    "id": "gymnopilus-junonius",
@@ -27083,7 +27943,17 @@
       }
      ]
     }
-   ]
+   ],
+   "rareza": "poco",
+   "rarezaNota": "Se ve con regularidad si vas a su sitio y en su época.",
+   "rarezaDatos": {
+    "cantabrico": 56,
+    "bizkaia": 16,
+    "espana": 695,
+    "europa": 2044,
+    "fuente": "iNaturalist",
+    "consulta": "2026-11-15"
+   }
   },
   {
    "id": "ganoderma-applanatum",
@@ -27287,7 +28157,17 @@
       }
      ]
     }
-   ]
+   ],
+   "rareza": "poco",
+   "rarezaNota": "Se ve con regularidad si vas a su sitio y en su época.",
+   "rarezaDatos": {
+    "cantabrico": 57,
+    "bizkaia": 6,
+    "espana": 177,
+    "europa": 6523,
+    "fuente": "iNaturalist",
+    "consulta": "2026-11-15"
+   }
   },
   {
    "id": "calocera-viscosa",
@@ -27525,7 +28405,17 @@
       }
      ]
     }
-   ]
+   ],
+   "rareza": "comun",
+   "rarezaNota": "Sale en casi todos los tocones de pino en otoño, y en Bizkaia hay pino por todas partes.",
+   "rarezaDatos": {
+    "cantabrico": 46,
+    "bizkaia": 2,
+    "espana": 272,
+    "europa": 18583,
+    "fuente": "iNaturalist",
+    "consulta": "2026-11-15"
+   }
   },
   {
    "id": "tremella-mesenterica",
@@ -27745,7 +28635,17 @@
       }
      ]
     }
-   ]
+   ],
+   "rareza": "comun",
+   "rarezaNota": "Mucha gente la encuentra en la costa cantábrica: es de las que más se ven.",
+   "rarezaDatos": {
+    "cantabrico": 115,
+    "bizkaia": 15,
+    "espana": 689,
+    "europa": 13100,
+    "fuente": "iNaturalist",
+    "consulta": "2026-11-15"
+   }
   },
   {
    "id": "xerocomus-subtomentosus",
@@ -28017,7 +28917,17 @@
       }
      ]
     }
-   ]
+   ],
+   "rareza": "poco",
+   "rarezaNota": "Frecuente; se confunde con otros boletos pequeños y se registra poco.",
+   "rarezaDatos": {
+    "cantabrico": 20,
+    "bizkaia": 1,
+    "espana": 228,
+    "europa": 1212,
+    "fuente": "iNaturalist",
+    "consulta": "2026-11-15"
+   }
   },
   {
    "id": "chalciporus-piperatus",
@@ -28259,7 +29169,17 @@
       }
      ]
     }
-   ]
+   ],
+   "rareza": "raro",
+   "rarezaNota": "Pequeño, bajo pinos y abedules; pasa desapercibido.",
+   "rarezaDatos": {
+    "cantabrico": 4,
+    "bizkaia": 0,
+    "espana": 66,
+    "europa": 1407,
+    "fuente": "iNaturalist",
+    "consulta": "2026-11-15"
+   }
   },
   {
    "id": "gyroporus-castaneus",
@@ -28505,7 +29425,17 @@
       }
      ]
     }
-   ]
+   ],
+   "rareza": "raro",
+   "rarezaNota": "Bajo robles y castaños en suelo ácido; escaso.",
+   "rarezaDatos": {
+    "cantabrico": 7,
+    "bizkaia": 0,
+    "espana": 75,
+    "europa": 821,
+    "fuente": "iNaturalist",
+    "consulta": "2026-11-15"
+   }
   },
   {
    "id": "ramaria-formosa",
@@ -28766,7 +29696,17 @@
       }
      ]
     }
-   ]
+   ],
+   "rareza": "legendario",
+   "rarezaNota": "Casi no hay citas en la costa cantábrica.",
+   "rarezaDatos": {
+    "cantabrico": 3,
+    "bizkaia": 0,
+    "espana": 9,
+    "europa": 12,
+    "fuente": "iNaturalist",
+    "consulta": "2026-11-15"
+   }
   },
   {
    "id": "clavulina-cristata",
@@ -28988,7 +29928,17 @@
       }
      ]
     }
-   ]
+   ],
+   "rareza": "comun",
+   "rarezaNota": "Pequeña y muy abundante en el suelo de casi cualquier bosque; se registra poco.",
+   "rarezaDatos": {
+    "cantabrico": 38,
+    "bizkaia": 11,
+    "espana": 161,
+    "europa": 1402,
+    "fuente": "iNaturalist",
+    "consulta": "2026-11-15"
+   }
   },
   {
    "id": "leucoagaricus-leucothites",
@@ -29235,7 +30185,17 @@
       }
      ]
     }
-   ]
+   ],
+   "rareza": "poco",
+   "rarezaNota": "Se ve con regularidad si vas a su sitio y en su época.",
+   "rarezaDatos": {
+    "cantabrico": 33,
+    "bizkaia": 9,
+    "espana": 329,
+    "europa": 1810,
+    "fuente": "iNaturalist",
+    "consulta": "2026-11-15"
+   }
   },
   {
    "id": "tricholoma-sulphureum",
@@ -29495,7 +30455,17 @@
       }
      ]
     }
-   ]
+   ],
+   "rareza": "raro",
+   "rarezaNota": "Hay pocas citas en la costa cantábrica: hace falta el sitio y el momento justos.",
+   "rarezaDatos": {
+    "cantabrico": 24,
+    "bizkaia": 3,
+    "espana": 155,
+    "europa": 2136,
+    "fuente": "iNaturalist",
+    "consulta": "2026-11-15"
+   }
   },
   {
    "id": "entoloma-clypeatum",
@@ -29751,7 +30721,17 @@
       }
      ]
     }
-   ]
+   ],
+   "rareza": "raro",
+   "rarezaNota": "Solo en primavera, bajo frutales, rosales y espinos; casi nadie la registra.",
+   "rarezaDatos": {
+    "cantabrico": 3,
+    "bizkaia": 0,
+    "espana": 35,
+    "europa": 115,
+    "fuente": "iNaturalist",
+    "consulta": "2026-11-15"
+   }
   }
  ]
 }

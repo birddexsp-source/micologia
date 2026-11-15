@@ -151,7 +151,7 @@ function tarjetaEsp(x, f) {
   const hab = fi.dondeSimple(e), chips = (e.habitats || []).filter(h => fi.H[h]).slice(0, 3);
   return '<button class="pl-sp' + (PELIGRO(e) ? ' pel' : '') + '" data-pe="' + e.id + '">' + fi.avatar(e, 250) +
     '<div class="t"><b>' + esc(c) + '</b>' + (c !== cien ? '<small><i>' + esc(cien) + '</i></small>' : '') +
-    '<div class="pl-sp-m">' + fi.tagEsp(e) + '<span class="pl-sp-s" style="color:' + col + '">' + x.r.score + ' · ' + md.ETIQ(x.r.score) + '</span></div>' +
+    '<div class="pl-sp-m">' + fi.tagEsp(e) + fi.rarezaTag(e) + '<span class="pl-sp-s" style="color:' + col + '">' + x.r.score + ' · ' + md.ETIQ(x.r.score) + '</span></div>' +
     (e.clave ? '<p class="pl-sp-k"><b>Cómo reconocerla:</b> ' + esc(corta(e.clave, 150)) + '</p>' : '') +
     (hab ? '<p class="pl-sp-h"><b>Dónde mirar:</b> ' + esc(hab) + '</p>' : '') +
     (chips.length ? '<span class="pl-sp-hs">' + chips.map(h => '<span class="pl-hab" data-hab="' + h + '">' + esc(fi.H[h].nombre) + ' ›</span>').join('') + '</span>' : '') +

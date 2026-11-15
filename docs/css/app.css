@@ -931,3 +931,44 @@ button.ap{border:0;padding:0;background:none;font:inherit;cursor:pointer}
 .vz .a-ojo b{display:block;color:#ffb3b3;font-size:11px;letter-spacing:.06em;text-transform:uppercase;margin:0 0 2px}
 @media (prefers-reduced-motion:reduce){.vz .ap.on .ap-p,.vz .apl li.on{animation:none}}
 .vz-car{transition:height .25s ease}
+/* ---------- v38 · rareza (común · poco común · rara · legendaria) ---------- */
+.rz-p{display:inline-flex;gap:2.5px;align-items:center;flex:none}
+.rz-p u{width:6px;height:6px;transform:rotate(45deg);border-radius:1.5px;border:1px solid var(--c);opacity:.45;box-sizing:border-box}
+.rz-p u.on{background:var(--c);opacity:1}
+.rz{display:inline-flex;align-items:center;gap:6px;padding:3px 9px 3px 8px;border-radius:999px;border:1px solid color-mix(in srgb,var(--c) 45%,transparent);background:color-mix(in srgb,var(--c) 12%,transparent);color:var(--c);font:700 11.5px/1.4 inherit;white-space:nowrap;vertical-align:middle}
+button.rz{cursor:pointer}
+.rz-legendario{background:linear-gradient(100deg,rgba(242,179,61,.22),rgba(255,214,120,.08) 60%,rgba(242,179,61,.22));box-shadow:0 0 12px rgba(242,179,61,.18)}
+.item .t small .rz{padding:0;border:0;background:none;box-shadow:none;margin-right:6px;vertical-align:1px}
+.pl-sp-m .rz{font-size:11px;padding:2px 8px}
+/* cabeceras de nivel en la lista */
+.rzh{grid-column:1/-1;scroll-margin-top:130px;display:flex;align-items:center;gap:12px;margin-top:14px;padding:12px 14px;border-radius:18px;border:1px solid color-mix(in srgb,var(--c) 32%,var(--line));background:linear-gradient(135deg,color-mix(in srgb,var(--c) 16%,#121a17),#121a17 70%)}
+.rzh>.rz-p{gap:4px}.rzh>.rz-p u{width:9px;height:9px}
+.rzh>div{flex:1;min-width:0}.rzh b{display:flex;align-items:center;gap:8px;color:var(--c);font-size:16px}
+.rzh b em{font-style:normal;font-size:11px;font-weight:700;color:var(--ink);background:var(--s3);border-radius:999px;padding:1px 8px}
+.rzh p{margin:2px 0 0;color:var(--mut);font-size:12.5px;line-height:1.4}
+.rzh-m{flex:none;font:700 12px inherit;color:#7ce0a0;background:rgba(124,224,160,.1);border-radius:999px;padding:3px 9px}
+.rzh.rz-legendario{box-shadow:0 0 18px rgba(242,179,61,.12)}
+/* ruta por rareza en «Tu colección» */
+.rzr-w{margin:12px 0 0;display:grid;gap:6px}
+.rzr-t{color:var(--mut);font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.rzr{display:grid;grid-template-columns:auto 86px 1fr auto;align-items:center;gap:10px;width:100%;padding:6px 2px;border:0;background:none;color:var(--ink);font:600 13px inherit;text-align:left;cursor:pointer}
+.rzr span{color:var(--c)}
+.rzr-b{height:7px;border-radius:99px;background:var(--s3);overflow:hidden}.rzr-b u{display:block;height:100%;min-width:3px;border-radius:99px;background:var(--c)}
+.rzr em{font-style:normal;color:var(--mut);font-size:12px;font-variant-numeric:tabular-nums;min-width:40px;text-align:right}
+.rz-sig{display:flex;align-items:center;gap:12px;width:100%;margin:10px 0 0;padding:8px 10px 8px 8px;border-radius:14px;border:1px solid color-mix(in srgb,var(--c) 35%,var(--line));background:color-mix(in srgb,var(--c) 7%,var(--s2));color:var(--ink);text-align:left;cursor:pointer}
+.rz-sig .phw.av{width:52px;height:52px;flex:none;border-radius:10px;margin:0}
+.rz-sig>span{flex:1;min-width:0;display:flex;flex-direction:column;align-items:flex-start;gap:3px}
+.rz-sig small{color:var(--mut);font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase}
+.rz-sig b{font-size:15px}.rz-sig .rz{font-size:11px;padding:1px 8px}
+.rz-sig svg{width:18px;height:18px;flex:none;fill:none;stroke:var(--mut);stroke-width:2}
+/* tarjeta en la ficha */
+.rzc{padding:12px 14px;border-radius:14px;border:1px solid color-mix(in srgb,var(--c) 40%,var(--line));background:linear-gradient(135deg,color-mix(in srgb,var(--c) 18%,var(--s1)),var(--s1) 75%)}
+.rzc.rz-legendario{box-shadow:0 0 22px rgba(242,179,61,.18)}
+.rzc-h{display:flex;align-items:center;gap:10px}.rzc-h .rz-p{gap:5px}.rzc-h .rz-p u{width:11px;height:11px}
+.rzc-h b{color:var(--c);font-size:19px}
+.rzc p{margin:6px 0 0;color:#cfd9d5;font-size:13.5px;line-height:1.45}
+.rz-esc{list-style:none;display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin:10px 0 2px;padding:0}
+.rz-esc li{display:flex;flex-direction:column;align-items:center;gap:5px;padding:7px 2px;border-radius:10px;color:var(--mut);font-size:11px;font-weight:600;opacity:.55;text-align:center}
+.rz-esc li.on{opacity:1;color:var(--c);background:color-mix(in srgb,var(--c) 12%,transparent);outline:1px solid color-mix(in srgb,var(--c) 40%,transparent)}
+.rz-dat{margin:8px 0 0;color:var(--mut);font-size:11.5px;line-height:1.5}.rz-dat b{color:var(--ink)}
+.rzh{scroll-margin-top:215px}.rzr{grid-template-columns:auto 98px 1fr auto}.rzr span{white-space:nowrap}

@@ -14,6 +14,17 @@ export function foto(f, w, { cls = '', alt = '' } = {}) {
   return '<span class="phw ' + cls + '"><img class="ph" src="' + esc(fotoURL(f, w)) + '" alt="' + esc(alt || f.sp) + '" loading="lazy" decoding="async" crossorigin="anonymous"></span>';
 }
 export const avatar = (e, w = 250) => e.fotos && e.fotos[0] ? foto(e.fotos[0], w, { cls: 'av', alt: e.nombreCientifico }) : '<span class="phw av"></span>';
+/* rareza: 4 rombos, rellenos hasta su nivel */
+export const pips = r => '<i class="rz-p">' + [1, 2, 3, 4].map(k => '<u' + (k <= r.n ? ' class="on"' : '') + '></u>').join('') + '</i>';
+export const rarezaTag = (e, o = {}) => { const r = cat.rareza(e); if (!r) return ''; const t = o.boton ? 'button' : 'span';
+  return '<' + t + ' class="rz rz-' + e.rareza + '"' + (o.boton ? ' data-ft="hab"' : '') + ' style="--c:' + r.color + '" title="Rareza: ' + r.label + '">' + pips(r) + (o.mini ? '' : r.label) + '</' + t + '>'; };
+function rarezaCard(e) {
+  const r = cat.rareza(e); if (!r) return ''; const d = e.rarezaDatos || {};
+  return card('estrella', 'Lo fácil que es encontrarla', '<div class="rzc rz-' + e.rareza + '" style="--c:' + r.color + '"><div class="rzc-h">' + pips(r) + '<b>' + r.label + '</b></div><p>' + esc(r.txt) + '</p></div>' +
+    '<ol class="rz-esc">' + cat.ORDEN_RAREZA.map(k => { const x = cat.RAREZAS[k]; return '<li class="' + (k === e.rareza ? 'on' : '') + '" style="--c:' + x.color + '">' + pips(x) + '<span>' + x.label + '</span></li>'; }).join('') + '</ol>' +
+    (e.rarezaNota ? '<p class="fc-p">' + esc(e.rarezaNota) + '</p>' : '') +
+    (d.fuente ? '<p class="rz-dat">Observaciones en ' + esc(d.fuente) + ': <b>' + d.cantabrico + '</b> en la costa cantábrica · <b>' + d.bizkaia + '</b> en Bizkaia · ' + d.espana + ' en España (consulta ' + esc(d.consulta) + '). Es una guía: un buen año o un buen sitio lo cambian todo.</p>' : ''));
+}
 export const tag = c => '<span class="tag" style="--c:' + cat.CLASES[c].color + '">' + cat.CLASES[c].label + '</span>';
 /* Las candidatas no se presentan nunca como comestibles: chip propio mientras no haya ≥2 fuentes y revisión experta */
 export const tagEsp = (e, largo) => e.comestibilidad ? '<span class="tag" style="--c:' + cat.CLASES[cat.vista(e)].color + '">' + (largo ? cat.CLASES[cat.vista(e)].label + ' · según fuentes' : e.comestibilidad.nivel === 'si' ? 'Comestible' : 'Con condiciones') + '</span>' : e.clase === 'sin_datos' && e.candidataComestible ? '<span class="tag cand">Candidata · sin confirmar</span>' : tag(e.clase);
@@ -205,7 +216,7 @@ function paneles(e, mes) {
   const P = {
     ident: card('foto', 'Fíjate en esto', anotadas(e), { cls: 'fc-vz', sub: (e.anotadas || []).length > 1 ? (e.anotadas.length + ' fotos · desliza') : '' }) + card('lista', 'Qué mirar', queMirar(e) + esporada(e) + '<div class="row"><button class="btn" data-g="">Ver las partes de la seta</button></div>'),
     conf: (e.confusiones || []).length ? '<p class="fp-intro">Estas setas se parecen a esta. Compara las diferencias antes de decidir nada.</p>' + confusiones(e) : '',
-    hab: habitat(e),
+    hab: rarezaCard(e) + habitat(e),
     cuando: card('cal', 'Meses del año', td.hay ? barrasHTML(e, mes) + '<p class="fc-p">' + esc(fuenteTxt(e)) + '</p>' : '<p class="fc-p">' + esc(fuenteTxt(e)) + '</p>') + cuandoSale(e),
     comer: comer,
     mas: card('estrella', 'Curiosidades', curiosidades(e)) + card('nombre', 'Sobre el nombre', e.notaNomenclatura ? '<p class="fc-p">' + esc(e.notaNomenclatura) + '</p>' : '') +
@@ -219,7 +230,7 @@ export function fichaHTML(e, mes) {
   const c = cat.CLASES[cat.vista(e)], { P, peligro } = paneles(e, mes), nConf = (e.confusiones || []).length, grave = (e.confusiones || []).some(x => x.gravedad === 'alta');
   const tabs = PESTANAS.filter(([k]) => P[k]);
   return hero(e) +
-    '<div class="fh" style="--c:' + c.color + '"><div class="chips">' + tagEsp(e, true) + '<span class="tag" style="--c:#3a4743">' + esc(cat.NIVELES[e.nivelVerificacion] || e.nivelVerificacion) + '</span>' + (peligroConf(e) ? '<span class="tag" style="--c:#e5484d">Se confunde con tóxicas</span>' : '') + '</div>' +
+    '<div class="fh" style="--c:' + c.color + '"><div class="chips">' + tagEsp(e, true) + rarezaTag(e, { boton: true }) + '<span class="tag" style="--c:#3a4743">' + esc(cat.NIVELES[e.nivelVerificacion] || e.nivelVerificacion) + '</span>' + (peligroConf(e) ? '<span class="tag" style="--c:#e5484d">Se confunde con tóxicas</span>' : '') + '</div>' +
     '<h2><i>' + esc(e.nombreCientifico) + '</i></h2>' + (nombresHTML(e) ? '<div class="nms">' + nombresHTML(e) + '</div>' : '') + (e.familia ? '<div class="famc"><span>Familia <b>' + esc(e.familia) + '</b></span><span style="--c:' + cat.coleccion(e).color + '">' + esc(cat.coleccion(e).titulo) + '</span></div>' : '') + '</div>' +
     (e.clave ? '<div class="clave' + (peligro ? ' pel' : '') + '"><small>' + (peligro ? 'Lo primero que hay que saber' : 'Lo primero que hay que mirar') + '</small><div class="clv"><b>' + esc(e.clave) + '</b>' + (rasgos(e) ? '<span class="clv-d">' + esquemaEsp(e, partesDe(e.clave), { talla: 112 }) + '</span>' : '') + '</div>' + leyenda(e) + '</div>' : '') +
     '<div class="warn">' + esc(cat.aviso()) + '</div>' + resumen(e) +

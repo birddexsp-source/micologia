@@ -1,0 +1,884 @@
+{
+"amanita-phalloides": {
+"nc": "Amanita phalloides",
+"tx": "52135",
+"n": 71,
+"biz": 3,
+"cant": 73,
+"esp": 469,
+"eu": 6730
+},
+"amanita-verna-virosa": {
+"nc": "Amanita verna / Amanita virosa",
+"tx": "58684,58685",
+"n": 3,
+"biz": 0,
+"cant": 3,
+"esp": 21,
+"eu": 966
+},
+"lepiota-brunneoincarnata": {
+"nc": "Lepiota brunneoincarnata / Lepiota josserandii",
+"tx": "515954",
+"n": 3,
+"biz": 1,
+"cant": 4,
+"esp": 98,
+"eu": 109
+},
+"galerina-marginata": {
+"nc": "Galerina marginata",
+"tx": "154735",
+"n": 15,
+"biz": 1,
+"cant": 26,
+"esp": 197,
+"eu": 1528
+},
+"cortinarius-orellanus": {
+"nc": "Cortinarius orellanus / Cortinarius speciosissimus",
+"tx": "337849",
+"n": 2,
+"biz": 0,
+"cant": 2,
+"esp": 13,
+"eu": 55
+},
+"gyromitra": {
+"nc": "Gyromitra esculenta (y otras Gyromitra)",
+"tx": "85118",
+"n": 5,
+"biz": 0,
+"cant": 5,
+"esp": 172,
+"eu": 3066
+},
+"entoloma-lividum-sinuatum": {
+"nc": "Entoloma lividum / Entoloma sinuatum",
+"tx": "510199",
+"n": 17,
+"biz": 0,
+"cant": 22,
+"esp": 78,
+"eu": 312
+},
+"omphalotus-illudens": {
+"nc": "Omphalotus illudens",
+"tx": "64021,126831",
+"n": 17,
+"biz": 0,
+"cant": 21,
+"esp": 490,
+"eu": 1900
+},
+"tricholoma-pardinum": {
+"nc": "Tricholoma pardinum",
+"tx": "335206",
+"n": 0,
+"biz": 0,
+"cant": 0,
+"esp": 17,
+"eu": 86
+},
+"amanita-pantherina-muscaria": {
+"nc": "Amanita pantherina / Amanita muscaria",
+"tx": "48418,48715",
+"n": 311,
+"biz": 21,
+"cant": 311,
+"esp": 3152,
+"eu": 76775
+},
+"paxillus-involutus": {
+"nc": "Paxillus involutus",
+"tx": "55941",
+"n": 18,
+"biz": 5,
+"cant": 39,
+"esp": 282,
+"eu": 5135
+},
+"boletus-satanas": {
+"nc": "Boletus satanas / Rubroboletus",
+"tx": "544554",
+"n": 20,
+"biz": 0,
+"cant": 22,
+"esp": 87,
+"eu": 757
+},
+"coprinopsis-atramentaria": {
+"nc": "Coprinopsis atramentaria",
+"tx": "48521",
+"n": 8,
+"biz": 2,
+"cant": 28,
+"esp": 175,
+"eu": 2794
+},
+"tricholoma-equestre": {
+"nc": "Tricholoma equestre",
+"tx": "118215",
+"n": 4,
+"biz": 0,
+"cant": 4,
+"esp": 145,
+"eu": 675
+},
+"clitocybe-rivulosa": {
+"nc": "Clitocybe rivulosa / Clitocybe dealbata",
+"tx": "1525557,1525535",
+"n": 0,
+"biz": 0,
+"cant": 9,
+"esp": 116,
+"eu": 271
+},
+"tylopilus-felleus": {
+"nc": "Tylopilus felleus",
+"tx": "63489",
+"n": 2,
+"biz": 0,
+"cant": 3,
+"esp": 30,
+"eu": 2911
+},
+"boletus-edulis": {
+"nc": "Boletus edulis (grupo: edulis, aereus, aestivalis, pinophilus)",
+"tx": "48701,333772,335942",
+"n": 168,
+"biz": 15,
+"cant": 171,
+"esp": 1061,
+"eu": 23464
+},
+"cantharellus-cibarius": {
+"nc": "Cantharellus cibarius",
+"tx": "47347",
+"n": 75,
+"biz": 4,
+"cant": 80,
+"esp": 312,
+"eu": 11169
+},
+"craterellus-cornucopioides": {
+"nc": "Craterellus cornucopioides",
+"tx": "48607",
+"n": 62,
+"biz": 0,
+"cant": 63,
+"esp": 221,
+"eu": 3341
+},
+"hydnum-repandum": {
+"nc": "Hydnum repandum",
+"tx": "48641",
+"n": 43,
+"biz": 0,
+"cant": 60,
+"esp": 285,
+"eu": 2323
+},
+"lactarius-deliciosus": {
+"nc": "Lactarius deliciosus (y afines: agrupa varias especies)",
+"tx": "155197,332501",
+"n": 44,
+"biz": 10,
+"cant": 45,
+"esp": 1077,
+"eu": 3838
+},
+"macrolepiota-procera": {
+"nc": "Macrolepiota procera",
+"tx": "63401",
+"n": 142,
+"biz": 22,
+"cant": 248,
+"esp": 2214,
+"eu": 20667
+},
+"marasmius-oreades": {
+"nc": "Marasmius oreades",
+"tx": "118240",
+"n": 44,
+"biz": 15,
+"cant": 87,
+"esp": 890,
+"eu": 6295
+},
+"calocybe-gambosa": {
+"nc": "Calocybe gambosa",
+"tx": "450829",
+"n": 18,
+"biz": 1,
+"cant": 20,
+"esp": 148,
+"eu": 2302
+},
+"morchella": {
+"nc": "Morchella",
+"tx": "56830",
+"n": 23,
+"biz": 4,
+"cant": 45,
+"esp": 907,
+"eu": 5655
+},
+"boletus-aereus": {
+"nc": "Boletus aereus",
+"tx": "333772",
+"n": 49,
+"biz": 3,
+"cant": 51,
+"esp": 282,
+"eu": 1269
+},
+"boletus-pinophilus": {
+"nc": "Boletus pinophilus",
+"tx": "335942",
+"n": 19,
+"biz": 0,
+"cant": 19,
+"esp": 169,
+"eu": 1753
+},
+"boletus-reticulatus": {
+"nc": "Boletus reticulatus",
+"tx": "350216",
+"n": 80,
+"biz": 2,
+"cant": 80,
+"esp": 436,
+"eu": 5338
+},
+"imleria-badia": {
+"nc": "Imleria badia",
+"tx": "510854",
+"n": 31,
+"biz": 3,
+"cant": 34,
+"esp": 297,
+"eu": 12804
+},
+"suillus-luteus": {
+"nc": "Suillus luteus",
+"tx": "53488",
+"n": 22,
+"biz": 4,
+"cant": 31,
+"esp": 412,
+"eu": 3966
+},
+"leccinum-scabrum": {
+"nc": "Leccinum scabrum",
+"tx": "63232",
+"n": 17,
+"biz": 4,
+"cant": 39,
+"esp": 234,
+"eu": 6197
+},
+"boletos-poros-rojos": {
+"nc": "Neoboletus luridiformis / Suillellus luridus (boletos de poros rojos)",
+"tx": "553907,824777",
+"n": 122,
+"biz": 18,
+"cant": 212,
+"esp": 801,
+"eu": 10117
+},
+"amanita-caesarea": {
+"nc": "Amanita caesarea",
+"tx": "204588",
+"n": 31,
+"biz": 2,
+"cant": 31,
+"esp": 258,
+"eu": 1270
+},
+"agaricus-campestris": {
+"nc": "Agaricus campestris",
+"tx": "143563",
+"n": 16,
+"biz": 10,
+"cant": 59,
+"esp": 656,
+"eu": 1422
+},
+"agaricus-xanthodermus": {
+"nc": "Agaricus xanthodermus",
+"tx": "118394",
+"n": 15,
+"biz": 11,
+"cant": 27,
+"esp": 232,
+"eu": 1446
+},
+"coprinus-comatus": {
+"nc": "Coprinus comatus",
+"tx": "47392",
+"n": 153,
+"biz": 17,
+"cant": 162,
+"esp": 1211,
+"eu": 37864
+},
+"lepista-nuda": {
+"nc": "Lepista nuda",
+"tx": "1525548",
+"n": 26,
+"biz": 4,
+"cant": 45,
+"esp": 782,
+"eu": 4614
+},
+"armillaria-mellea": {
+"nc": "Armillaria mellea",
+"tx": "55950",
+"n": 104,
+"biz": 11,
+"cant": 199,
+"esp": 803,
+"eu": 4677
+},
+"pleurotus-ostreatus": {
+"nc": "Pleurotus ostreatus",
+"tx": "48494",
+"n": 42,
+"biz": 1,
+"cant": 59,
+"esp": 421,
+"eu": 7438
+},
+"russula-cyanoxantha": {
+"nc": "Russula cyanoxantha",
+"tx": "194437",
+"n": 30,
+"biz": 3,
+"cant": 67,
+"esp": 329,
+"eu": 1497
+},
+"craterellus-tubaeformis": {
+"nc": "Craterellus tubaeformis",
+"tx": "350511",
+"n": 25,
+"biz": 0,
+"cant": 25,
+"esp": 178,
+"eu": 4282
+},
+"lycoperdon-perlatum": {
+"nc": "Lycoperdon perlatum",
+"tx": "48443",
+"n": 35,
+"biz": 13,
+"cant": 66,
+"esp": 1046,
+"eu": 13031
+},
+"laetiporus-sulphureus": {
+"nc": "Laetiporus sulphureus",
+"tx": "53713",
+"n": 220,
+"biz": 11,
+"cant": 232,
+"esp": 927,
+"eu": 34727
+},
+"fistulina-hepatica": {
+"nc": "Fistulina hepatica",
+"tx": "123897",
+"n": 89,
+"biz": 7,
+"cant": 92,
+"esp": 421,
+"eu": 10221
+},
+"auricularia-auricula-judae": {
+"nc": "Auricularia auricula-judae",
+"tx": "50813",
+"n": 33,
+"biz": 1,
+"cant": 35,
+"esp": 567,
+"eu": 24761
+},
+"sparassis-crispa": {
+"nc": "Sparassis crispa",
+"tx": "63014",
+"n": 17,
+"biz": 3,
+"cant": 22,
+"esp": 324,
+"eu": 5987
+},
+"amanita-rubescens": {
+"nc": "Amanita rubescens",
+"tx": "67661",
+"n": 249,
+"biz": 24,
+"cant": 262,
+"esp": 1381,
+"eu": 26376
+},
+"clitocybe-nebularis": {
+"nc": "Clitocybe nebularis",
+"tx": "63255",
+"n": 97,
+"biz": 7,
+"cant": 118,
+"esp": 578,
+"eu": 15471
+},
+"hypholoma-fasciculare": {
+"nc": "Hypholoma fasciculare",
+"tx": "48767",
+"n": 164,
+"biz": 16,
+"cant": 232,
+"esp": 1432,
+"eu": 20197
+},
+"scleroderma-citrinum": {
+"nc": "Scleroderma citrinum",
+"tx": "55927",
+"n": 104,
+"biz": 19,
+"cant": 171,
+"esp": 657,
+"eu": 6798
+},
+"russula-emetica": {
+"nc": "Russula emetica",
+"tx": "49449",
+"n": 0,
+"biz": 0,
+"cant": 2,
+"esp": 18,
+"eu": 179
+},
+"lactarius-torminosus": {
+"nc": "Lactarius torminosus",
+"tx": "351313",
+"n": 5,
+"biz": 0,
+"cant": 5,
+"esp": 85,
+"eu": 2255
+},
+"hygrophoropsis-aurantiaca": {
+"nc": "Hygrophoropsis aurantiaca",
+"tx": "63538",
+"n": 21,
+"biz": 1,
+"cant": 35,
+"esp": 569,
+"eu": 6720
+},
+"trametes-versicolor": {
+"nc": "Trametes versicolor",
+"tx": "54134",
+"n": 257,
+"biz": 17,
+"cant": 327,
+"esp": 1303,
+"eu": 28193
+},
+"fomes-fomentarius": {
+"nc": "Fomes fomentarius",
+"tx": "127510",
+"n": 97,
+"biz": 0,
+"cant": 263,
+"esp": 540,
+"eu": 28779
+},
+"inocybe-erubescens": {
+"nc": "Inosperma erubescens",
+"tx": "1112491",
+"n": 0,
+"biz": 1,
+"cant": 1,
+"esp": 6,
+"eu": 94
+},
+"russula-virescens": {
+"nc": "Russula virescens",
+"tx": "1640754",
+"n": 37,
+"biz": 4,
+"cant": 47,
+"esp": 183,
+"eu": 1697
+},
+"amanita-citrina": {
+"nc": "Amanita citrina",
+"tx": "63271",
+"n": 79,
+"biz": 5,
+"cant": 88,
+"esp": 646,
+"eu": 14311
+},
+"craterellus-lutescens": {
+"nc": "Craterellus lutescens",
+"tx": "514218",
+"n": 27,
+"biz": 0,
+"cant": 30,
+"esp": 218,
+"eu": 871
+},
+"clitocybe-odora": {
+"nc": "Clitocybe odora",
+"tx": "1525546",
+"n": 11,
+"biz": 4,
+"cant": 19,
+"esp": 198,
+"eu": 2021
+},
+"laccaria-amethystina": {
+"nc": "Laccaria amethystina",
+"tx": "55899",
+"n": 79,
+"biz": 4,
+"cant": 82,
+"esp": 440,
+"eu": 14356
+},
+"hygrophorus-marzuolus": {
+"nc": "Hygrophorus marzuolus",
+"tx": "497251",
+"n": 10,
+"biz": 0,
+"cant": 11,
+"esp": 125,
+"eu": 253
+},
+"tricholoma-portentosum": {
+"nc": "Tricholoma portentosum",
+"tx": "194460",
+"n": 7,
+"biz": 0,
+"cant": 9,
+"esp": 80,
+"eu": 421
+},
+"tricholoma-terreum": {
+"nc": "Tricholoma terreum",
+"tx": "341797",
+"n": 11,
+"biz": 1,
+"cant": 34,
+"esp": 549,
+"eu": 1531
+},
+"xerocomellus-chrysenteron": {
+"nc": "Xerocomellus chrysenteron",
+"tx": "438013",
+"n": 9,
+"biz": 0,
+"cant": 37,
+"esp": 193,
+"eu": 2302
+},
+"suillus-granulatus": {
+"nc": "Suillus granulatus",
+"tx": "179065",
+"n": 24,
+"biz": 10,
+"cant": 48,
+"esp": 519,
+"eu": 2734
+},
+"mycena-pura": {
+"nc": "Mycena pura",
+"tx": "63473",
+"n": 20,
+"biz": 1,
+"cant": 27,
+"esp": 264,
+"eu": 1869
+},
+"clathrus-ruber": {
+"nc": "Clathrus ruber",
+"tx": "56534",
+"n": 163,
+"biz": 46,
+"cant": 164,
+"esp": 1192,
+"eu": 6407
+},
+"phallus-impudicus": {
+"nc": "Phallus impudicus",
+"tx": "54594",
+"n": 58,
+"biz": 0,
+"cant": 60,
+"esp": 527,
+"eu": 12590
+},
+"chlorophyllum-rhacodes": {
+"nc": "Chlorophyllum rhacodes",
+"tx": "56535",
+"n": 2,
+"biz": 0,
+"cant": 7,
+"esp": 141,
+"eu": 1731
+},
+"cortinarius-rubellus": {
+"nc": "Cortinarius rubellus",
+"tx": "500053",
+"n": null,
+"biz": 0,
+"cant": 0,
+"esp": 2,
+"eu": 403
+},
+"coprinellus-micaceus": {
+"nc": "Coprinellus micaceus",
+"tx": "56318",
+"n": 35,
+"biz": 11,
+"cant": 100,
+"esp": 523,
+"eu": 5278
+},
+"aleuria-aurantia": {
+"nc": "Aleuria aurantia",
+"tx": "48716",
+"n": 31,
+"biz": 4,
+"cant": 34,
+"esp": 228,
+"eu": 4907
+},
+"helvella-crispa": {
+"nc": "Helvella crispa",
+"tx": "49208",
+"n": 77,
+"biz": 10,
+"cant": 80,
+"esp": 327,
+"eu": 8291
+},
+"hydnum-rufescens": {
+"nc": "Hydnum rufescens",
+"tx": "340866",
+"n": 10,
+"biz": 0,
+"cant": 24,
+"esp": 67,
+"eu": 632
+},
+"infundibulicybe-gibba": {
+"nc": "Infundibulicybe gibba",
+"tx": "921916",
+"n": 15,
+"biz": 0,
+"cant": 28,
+"esp": 336,
+"eu": 1613
+},
+"infundibulicybe-geotropa": {
+"nc": "Infundibulicybe geotropa",
+"tx": "451026",
+"n": 9,
+"biz": 1,
+"cant": 18,
+"esp": 133,
+"eu": 2942
+},
+"lyophyllum-decastes": {
+"nc": "Lyophyllum decastes",
+"tx": "1366754",
+"n": 3,
+"biz": 1,
+"cant": 14,
+"esp": 137,
+"eu": 858
+},
+"agaricus-arvensis": {
+"nc": "Agaricus arvensis",
+"tx": "58699",
+"n": 1,
+"biz": 1,
+"cant": 17,
+"esp": 138,
+"eu": 369
+},
+"amanita-gemmata": {
+"nc": "Amanita gemmata",
+"tx": "350046",
+"n": 224,
+"biz": 11,
+"cant": 78,
+"esp": 442,
+"eu": 2224
+},
+"hygrocybe-coccinea": {
+"nc": "Hygrocybe coccinea",
+"tx": "55245",
+"n": 12,
+"biz": 2,
+"cant": 15,
+"esp": 64,
+"eu": 2879
+},
+"cuphophyllus-pratensis": {
+"nc": "Cuphophyllus pratensis",
+"tx": "361641",
+"n": 19,
+"biz": 3,
+"cant": 19,
+"esp": 53,
+"eu": 3710
+},
+"lactarius-piperatus": {
+"nc": "Lactarius piperatus",
+"tx": "351321",
+"n": 10,
+"biz": 0,
+"cant": 12,
+"esp": 68,
+"eu": 406
+},
+"stropharia-aeruginosa": {
+"nc": "Stropharia aeruginosa",
+"tx": "55583",
+"n": 13,
+"biz": 0,
+"cant": 24,
+"esp": 223,
+"eu": 2646
+},
+"kuehneromyces-mutabilis": {
+"nc": "Kuehneromyces mutabilis",
+"tx": "153033",
+"n": 4,
+"biz": 0,
+"cant": 6,
+"esp": 31,
+"eu": 7616
+},
+"pholiota-squarrosa": {
+"nc": "Pholiota squarrosa",
+"tx": "153445",
+"n": 2,
+"biz": 0,
+"cant": 7,
+"esp": 47,
+"eu": 4398
+},
+"gymnopilus-junonius": {
+"nc": "Gymnopilus junonius",
+"tx": "1155105",
+"n": 28,
+"biz": 16,
+"cant": 56,
+"esp": 695,
+"eu": 2044
+},
+"ganoderma-applanatum": {
+"nc": "Ganoderma applanatum",
+"tx": "48473",
+"n": 5,
+"biz": 6,
+"cant": 57,
+"esp": 177,
+"eu": 6523
+},
+"calocera-viscosa": {
+"nc": "Calocera viscosa",
+"tx": "63405",
+"n": 44,
+"biz": 2,
+"cant": 46,
+"esp": 272,
+"eu": 18583
+},
+"tremella-mesenterica": {
+"nc": "Tremella mesenterica",
+"tx": "48529",
+"n": 59,
+"biz": 15,
+"cant": 115,
+"esp": 689,
+"eu": 13100
+},
+"xerocomus-subtomentosus": {
+"nc": "Xerocomus subtomentosus",
+"tx": "485374",
+"n": 6,
+"biz": 1,
+"cant": 20,
+"esp": 228,
+"eu": 1212
+},
+"chalciporus-piperatus": {
+"nc": "Chalciporus piperatus",
+"tx": "147354",
+"n": 3,
+"biz": 0,
+"cant": 4,
+"esp": 66,
+"eu": 1407
+},
+"gyroporus-castaneus": {
+"nc": "Gyroporus castaneus",
+"tx": "125688",
+"n": 5,
+"biz": 0,
+"cant": 7,
+"esp": 75,
+"eu": 821
+},
+"ramaria-formosa": {
+"nc": "Ramaria formosa",
+"tx": "48770",
+"n": 2,
+"biz": 0,
+"cant": 3,
+"esp": 9,
+"eu": 12
+},
+"clavulina-cristata": {
+"nc": "Clavulina cristata",
+"tx": "63260",
+"n": 11,
+"biz": 11,
+"cant": 38,
+"esp": 161,
+"eu": 1402
+},
+"leucoagaricus-leucothites": {
+"nc": "Leucoagaricus leucothites",
+"tx": "1558279",
+"n": 5,
+"biz": 9,
+"cant": 33,
+"esp": 329,
+"eu": 1810
+},
+"tricholoma-sulphureum": {
+"nc": "Tricholoma sulphureum",
+"tx": "408299",
+"n": 20,
+"biz": 3,
+"cant": 24,
+"esp": 155,
+"eu": 2136
+},
+"entoloma-clypeatum": {
+"nc": "Entoloma clypeatum",
+"tx": "344650",
+"n": null,
+"biz": 0,
+"cant": 3,
+"esp": 35,
+"eu": 115
+}
+}

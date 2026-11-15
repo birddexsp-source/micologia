@@ -1,0 +1,163 @@
+{
+ "_": "Correcciones a mano sobre el corte por número de observaciones. iNaturalist recoge lo que la gente fotografía: lo vistoso sale de más y lo pequeño o pardo, de menos. Cada corrección lleva su motivo.",
+ "boletus-edulis": [
+  "comun",
+  "Cuenta todo el grupo de boletos (edulis, aereus, pinophilus…): en otoño bueno salen en casi todos los robledales, hayedos y pinares."
+ ],
+ "amanita-pantherina-muscaria": [
+  "comun",
+  "La matamoscas es de las setas más vistas de Bizkaia bajo pinos y abedules; la pantera, bajo robles y pinos."
+ ],
+ "amanita-citrina": [
+  "comun",
+  "Muy frecuente bajo pinos, robles y hayas; se fotografía poco."
+ ],
+ "marasmius-oreades": [
+  "comun",
+  "Sale en casi cualquier prado o campa con hierba corta, en corros."
+ ],
+ "laccaria-amethystina": [
+  "comun",
+  "Pequeña y abundantísima en la hojarasca de hayas y robles; se registra poco."
+ ],
+ "lycoperdon-perlatum": [
+  "comun",
+  "Muy abundante en bordes de camino y bosques; casi nadie la fotografía."
+ ],
+ "russula-cyanoxantha": [
+  "comun",
+  "Una de las rúsulas más abundantes bajo robles, castaños y hayas."
+ ],
+ "xerocomellus-chrysenteron": [
+  "comun",
+  "Boleto pequeño muy abundante en bosques; se registra poco."
+ ],
+ "mycena-pura": [
+  "comun",
+  "Muy abundante en la hojarasca todo el otoño; es pequeña y casi nadie la anota."
+ ],
+ "calocera-viscosa": [
+  "comun",
+  "Sale en casi todos los tocones de pino en otoño, y en Bizkaia hay pino por todas partes."
+ ],
+ "auricularia-auricula-judae": [
+  "comun",
+  "En saúcos muertos casi todo el año; muy frecuente en Bizkaia aunque se registra poco."
+ ],
+ "hygrophoropsis-aurantiaca": [
+  "comun",
+  "Muy abundante en los pinares de Bizkaia."
+ ],
+ "clavulina-cristata": [
+  "comun",
+  "Pequeña y muy abundante en el suelo de casi cualquier bosque; se registra poco."
+ ],
+ "fistulina-hepatica": [
+  "poco",
+  "Necesita robles o castaños viejos; donde los hay, repite cada año."
+ ],
+ "fomes-fomentarius": [
+  "poco",
+  "Abunda en los hayedos de montaña (Gorbeia, Urkiola…), pero casi no en la costa."
+ ],
+ "infundibulicybe-gibba": [
+  "poco",
+  "Frecuente en la hojarasca; se registra poco."
+ ],
+ "galerina-marginata": [
+  "poco",
+  "Pequeña y frecuente en madera podrida; pasa desapercibida, y por eso es peligrosa."
+ ],
+ "coprinopsis-atramentaria": [
+  "poco",
+  "Frecuente en jardines, huertas y junto a tocones enterrados."
+ ],
+ "xerocomus-subtomentosus": [
+  "poco",
+  "Frecuente; se confunde con otros boletos pequeños y se registra poco."
+ ],
+ "clitocybe-odora": [
+  "poco",
+  "Frecuente en la hojarasca; se nota antes por el olor a anís que por la vista."
+ ],
+ "stropharia-aeruginosa": [
+  "poco",
+  "Frecuente en hierba y hojarasca de bosques húmedos."
+ ],
+ "morchella": [
+  "raro",
+  "Solo unas semanas de primavera y en sitios muy concretos (choperas, quemados, bordes de río)."
+ ],
+ "amanita-caesarea": [
+  "raro",
+  "Necesita robledales y castañares cálidos y veranos calurosos; escasa en Bizkaia."
+ ],
+ "chlorophyllum-rhacodes": [
+  "raro",
+  "En jardines y bordes con compost; se confunde con la galamperna y se registra poco."
+ ],
+ "kuehneromyces-mutabilis": [
+  "raro",
+  "Muy común en el centro de Europa en tocones; aquí es escasa."
+ ],
+ "pholiota-squarrosa": [
+  "raro",
+  "Al pie de árboles vivos, sobre todo hayas y manzanos; escasa aquí."
+ ],
+ "gyroporus-castaneus": [
+  "raro",
+  "Bajo robles y castaños en suelo ácido; escaso."
+ ],
+ "lactarius-torminosus": [
+  "raro",
+  "Solo sale con abedules."
+ ],
+ "lepiota-brunneoincarnata": [
+  "raro",
+  "Pequeña, en parques, jardines y bordes; se ve poco, pero está."
+ ],
+ "chalciporus-piperatus": [
+  "raro",
+  "Pequeño, bajo pinos y abedules; pasa desapercibido."
+ ],
+ "entoloma-clypeatum": [
+  "raro",
+  "Solo en primavera, bajo frutales, rosales y espinos; casi nadie la registra."
+ ],
+ "russula-emetica": [
+  "raro",
+  "La auténtica sale en pinares con musgo húmedo; otras rúsulas rojas parecidas sí son comunes."
+ ],
+ "hygrophorus-marzuolus": [
+  "legendario",
+  "De montaña, a finales de invierno, a veces junto a la nieve que se derrite; en la costa no sale."
+ ],
+ "gyromitra": [
+  "legendario",
+  "De pinares de montaña en primavera; prácticamente ausente cerca de la costa."
+ ],
+ "tricholoma-equestre": [
+  "legendario",
+  "De pinares sobre arena; muy escasa aquí."
+ ],
+ "tylopilus-felleus": [
+  "legendario",
+  "De bosques de coníferas sobre suelo muy ácido; muy escaso aquí."
+ ],
+ "tricholoma-pardinum": [
+  "legendario",
+  "De hayedos y abetales sobre caliza en montaña."
+ ],
+ "cortinarius-rubellus": [
+  "legendario",
+  "De bosques de coníferas del norte de Europa; prácticamente ausente aquí."
+ ],
+ "agaricus-xanthodermus": [
+  "poco",
+  "En Bizkaia se ve bastante en parques, jardines y bordes de camino."
+ ],
+ "clitocybe-rivulosa": [
+  "poco",
+  "Pequeña y blanca, en céspedes y prados: más frecuente de lo que parece y fácil de pasar por alto."
+ ]
+}

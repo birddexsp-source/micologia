@@ -10,6 +10,17 @@ export const CLASES = {
   ok_fuentes: { label: 'Comestible', color: '#46b36b', orden: 4.5 },
   sin_datos: { label: 'Sin datos', color: '#7b8683', orden: 5 }
 };
+/* Rareza: lo fácil que es encontrársela en Bizkaia (tests/tools/rareza). Para aprender de menos a más. */
+export const RAREZAS = {
+  comun: { label: 'Común', color: '#c3cdc9', n: 1, txt: 'La verás casi en cada salida de su temporada. Empieza por estas.' },
+  poco: { label: 'Poco común', color: '#5fd07a', n: 2, txt: 'Sale con regularidad si vas a su sitio y en su época.' },
+  raro: { label: 'Rara', color: '#5aa9ff', n: 3, txt: 'Hace falta el sitio y el momento justos. Alguna vez al año.' },
+  legendario: { label: 'Legendaria', color: '#f2b33d', n: 4, txt: 'Casi no se ve por aquí. Si la encuentras, es para recordarlo.' }
+};
+export const ORDEN_RAREZA = ['comun', 'poco', 'raro', 'legendario'];
+export const rareza = e => (e && RAREZAS[e.rareza]) || null;
+/* dentro de cada nivel, de la más vista a la menos */
+export const porRareza = l => l.slice().sort((a, b) => ORDEN_RAREZA.indexOf(a.rareza) - ORDEN_RAREZA.indexOf(b.rareza) || ((b.rarezaDatos || {}).cantabrico || 0) - ((a.rarezaDatos || {}).cantabrico || 0));
 /* Lo que se muestra: si las fuentes dicen que es comestible, se marca así (sigue en borrador, sin revisión experta) */
 export const vista = e => e.comestibilidad ? (e.comestibilidad.nivel === 'si' ? 'ok_fuentes' : 'cond_fuentes') : e.clase;
 export const NIVELES = { borrador: 'Borrador · sin contrastar', contrastada: 'Contrastada (≥2 fuentes)', revisada: 'Revisada por experto' };

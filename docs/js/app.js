@@ -16,7 +16,7 @@ import * as off from './offline.js';
 import { renderPlan } from './plan.js';
 import * as lug from './lugar.js';
 
-const APP_V = 'micologia-v37';   // = V de sw.js
+const APP_V = 'micologia-v38';   // = V de sw.js
 const S = { view: 'mapa', arg: '', map: null, pins: null, me: null, acc: null, tmp: null, mini: null, centered: false, filtro: { salida: '', especie: '' }, clase: '', q: '', syncErr: false, mes: new Date().getMonth() + 1 };
 const VIEWS = ['mapa', 'salidas', 'salida', 'setas', 'mes', 'plan', 'ajustes'];
 const TITULOS = { mapa: 'Mapa', salidas: 'Salidas', salida: 'Salida', setas: 'Setas', mes: 'Este mes', plan: 'Plan de salida', ajustes: 'Ajustes' };
@@ -708,15 +708,26 @@ async function pintarAprender() {
   const root = $('#v-setas'), enc = await encontradas(); S.enc = enc;
   const L = lecciones(enc), tot = cat.todas().length;
   $('#lec-w', root).innerHTML = leccionHTML(L);
-  $('#col-w', root).innerHTML = '<div class="col"><div class="col-h"><b>Tu colección</b><span><em>' + enc.size + '</em> de ' + tot + ' especies</span></div><div class="col-bar"><u style="width:' + Math.max(2, Math.round(enc.size / tot * 100)) + '%"></u></div>' +
+  $('#col-w', root).innerHTML = '<div class="col"><div class="col-h"><b>Tu colección</b><span><em>' + enc.size + '</em> de ' + tot + ' especies</span></div><div class="col-bar"><u style="width:' + Math.max(2, Math.round(enc.size / tot * 100)) + '%"></u></div>' + rutaRareza(enc) +
     (enc.size ? '<div class="col-row">' + [...enc.keys()].slice(0, 12).map(id => { const e = cat.byId(id); return '<button class="cmini" data-e="' + id + '">' + mini(e) + '</button>'; }).join('') + '</div>' : '<p class="mut sm">Cada especie que marques en el monte se añade aquí.</p>') + '</div>';
   if (S.view === 'setas') listaSetas();
+}
+/* Ruta por rareza: cuántas llevas de cada nivel y la siguiente a buscar (la común más vista que te falta y que sale este mes) */
+function rutaRareza(enc) {
+  const T = cat.todas(), mes = new Date().getMonth();
+  const filas = cat.ORDEN_RAREZA.map(k => { const l = T.filter(e => e.rareza === k), n = l.filter(e => enc.has(e.id)).length, x = cat.RAREZAS[k];
+    return '<button class="rzr" data-rz="' + k + '" style="--c:' + x.color + '">' + fi.pips(x) + '<span>' + x.label + '</span><i class="rzr-b"><u style="width:' + (l.length ? Math.round(n / l.length * 100) : 0) + '%"></u></i><em>' + n + '/' + l.length + '</em></button>'; }).join('');
+  const sale = e => { const m = (((e.temporada || {}).inat || {}).mensual) || []; const mx = Math.max(0, ...m); return mx ? m[mes] / mx >= 0.25 : true; };
+  const falta = cat.porRareza(T.filter(e => !enc.has(e.id))), sig = falta.find(e => sale(e)) || falta[0];
+  const r = sig && cat.rareza(sig);
+  return '<div class="rzr-w"><small class="rzr-t">Ruta por rareza · de lo fácil a lo difícil</small>' + filas + '</div>' +
+    (sig ? '<button class="rz-sig" data-e="' + sig.id + '" style="--c:' + r.color + '">' + fi.avatar(sig) + '<span><small>Siguiente a buscar' + (sale(sig) ? ' · sale ahora' : '') + '</small><b>' + esc(corto(sig)) + '</b>' + fi.rarezaTag(sig) + '</span>' + I.chev + '</button>' : '<p class="mut sm">¡Las tienes todas!</p>');
 }
 function renderSetas() {
   const root = $('#v-setas');
   if (!$('#q', root)) {
     root.innerHTML = '<div class="pad">' +
-      '<div class="sbar"><input type="search" id="q" placeholder="Buscar seta por nombre (es, eu, latín)…" autocomplete="off"><div class="seg ord" id="ord">' + [['peligro', 'Por peligro'], ['col', 'Colecciones'], ['az', 'A–Z']].map(([k, t]) => '<button data-ord="' + k + '">' + t + '</button>').join('') + '</div><div class="chips" id="cl"></div></div>' +
+      '<div class="sbar"><input type="search" id="q" placeholder="Buscar seta por nombre (es, eu, latín)…" autocomplete="off"><div class="seg ord" id="ord">' + [['rareza', 'Por rareza'], ['peligro', 'Por peligro'], ['col', 'Colecciones'], ['az', 'A–Z']].map(([k, t]) => '<button data-ord="' + k + '">' + t + '</button>').join('') + '</div><div class="chips" id="cl"></div></div>' +
       '<div id="intro-w">' +
       '<div class="learn2"><button class="lc" id="gu-open" style="--c:#e0a458">' + ICO_SETA + '<b>Partes de una seta</b><small>Esquema con nombres</small></button><button class="lc" id="li-open" style="--c:#7ccf8e"><span class="ic">' + lib.CAPS[0].ico + '</span><b>El libro</b><small>Para empezar</small></button><button class="lc" id="ia-open" style="--c:#b48cff"><span class="ic">✨</span><b>Reconocer con IA</b><small>Con 1–3 fotos</small></button></div>' +
       '<div id="lec-w"></div><div id="col-w"></div></div>' +
@@ -729,6 +740,7 @@ function renderSetas() {
       if (e.target.closest('#ia-open')) return abrirIA();
       if (e.target.closest('#lec-next')) { S.lecOff = (S.lecOff || 0) + 1; return pintarAprender(); }
       const o = e.target.closest('[data-ord]'); if (o) { S.orden = o.dataset.ord; return listaSetas(); }
+      const z = e.target.closest('[data-rz]'); if (z) { S.orden = 'rareza'; S.q = ''; $('#q', root).value = ''; root.classList.remove('busca'); listaSetas(); const hh = $('#rz-' + z.dataset.rz, root); if (hh) hh.scrollIntoView({ block: 'start' }); return; }
       const j = e.target.closest('[data-ir]'); if (j) { const h = $('#col-' + j.dataset.ir, root); if (h) h.scrollIntoView({ block: 'start' }); return; }
       const c = e.target.closest('#cl button'); if (c) { if (c.dataset.mias !== undefined) S.mias = !S.mias; else { S.clase = c.dataset.c; if (!S.clase) S.mias = false; } return listaSetas(); }
       const b = e.target.closest('[data-e]'); if (b) abrirFicha(b.dataset.e);
@@ -737,12 +749,12 @@ function renderSetas() {
   listaSetas(); pintarAprender();
 }
 const itemEsp = (e, extra = '') => { const m = S.enc && S.enc.get(e.id), cien = e.nombreCientifico.split(' (')[0], c = corto(e);
-  return '<button class="item sp' + (m ? ' mia' : '') + '" data-e="' + e.id + '" style="--c:' + cat.CLASES[cat.vista(e)].color + '">' + fi.avatar(e) + (m ? '<span class="mia-b">✓' + (m.n > 1 ? ' ×' + m.n : '') + '</span>' : '') + '<div class="t"><b>' + esc(c) + '</b><small><i>' + esc(cien) + '</i>' + (c === cien ? ' · ' + esc(fi.nombres(e) || e.grupo) : '') + '</small>' + extra + '</div>' + fi.tagEsp(e) + '</button>'; };
+  return '<button class="item sp' + (m ? ' mia' : '') + '" data-e="' + e.id + '" style="--c:' + cat.CLASES[cat.vista(e)].color + '">' + fi.avatar(e) + (m ? '<span class="mia-b">✓' + (m.n > 1 ? ' ×' + m.n : '') + '</span>' : '') + '<div class="t"><b>' + esc(c) + '</b><small>' + fi.rarezaTag(e, { mini: true }) + '<i>' + esc(cien) + '</i>' + (c === cien ? ' · ' + esc(fi.nombres(e) || e.grupo) : '') + '</small>' + extra + '</div>' + fi.tagEsp(e) + '</button>'; };
 function listaSetas() {
   const root = $('#v-setas');
   $('#cl', root).innerHTML = '<button class="opt ' + (!S.clase && !S.mias ? 'on' : '') + '" data-c="">Todas</button>' + (S.enc && S.enc.size ? '<button class="opt ' + (S.mias ? 'on' : '') + '" data-mias="">✓ Las mías</button>' : '') + Object.entries(cat.CLASES).filter(([k]) => cat.todas().some(e => cat.vista(e) === k)).map(([k, v]) => '<button class="opt ' + (S.clase === k ? 'on' : '') + '" data-c="' + k + '">' + v.label + '</button>').join('');
   const r = cat.buscar(S.q, { clase: S.clase }).filter(e => !S.mias || (S.enc && S.enc.has(e.id))); let h = '', cur = '';
-  const ord = S.orden || 'peligro';
+  const ord = S.orden || 'rareza';
   $$('#ord button', root).forEach(b => b.classList.toggle('on', b.dataset.ord === ord));
   if (ord === 'col') {
     /* como un libro: capítulo (colección) → familia → especies */
@@ -753,6 +765,15 @@ function listaSetas() {
       h += '<div class="colh" id="col-' + c.id + '" style="--c:' + c.color + '"><b>' + esc(c.titulo) + '</b>' + (c.intro ? '<p>' + esc(c.intro) + '</p>' : '') + '<small>' + plural(l.length, 'especie', 'especies') + (pel ? ' · ' + pel + ' peligrosas' : '') + (mias ? ' · ✓ ' + mias + ' tuyas' : '') + '</small></div>';
       const fams = [...new Set(l.map(e => e.familia || '—'))];
       fams.forEach(f => { const lf = l.filter(e => (e.familia || '—') === f).sort((a, b) => corto(a).localeCompare(corto(b), 'es')); if (fams.length > 1) h += '<div class="famh">' + esc(f) + '<small>' + lf.length + '</small></div>'; h += lf.map(e => itemEsp(e)).join(''); });
+    });
+    $('#slist', root).innerHTML = r.length ? h : '<div class="empty">Nada con ese nombre.</div>'; return;
+  }
+  if (ord === 'rareza') {
+    /* de lo más fácil de encontrar a lo más difícil: para aprender primero las comunes */
+    cat.ORDEN_RAREZA.forEach(k => {
+      const l = cat.porRareza(r.filter(e => e.rareza === k)); if (!l.length) return; const x = cat.RAREZAS[k], mias = S.enc ? l.filter(e => S.enc.has(e.id)).length : 0;
+      h += '<div class="rzh rz-' + k + '" id="rz-' + k + '" style="--c:' + x.color + '">' + fi.pips(x) + '<div><b>' + x.label + '<em>' + l.length + '</em></b><p>' + esc(x.txt) + '</p></div>' + (mias ? '<span class="rzh-m">✓ ' + mias + '/' + l.length + '</span>' : '') + '</div>';
+      h += l.map(e => itemEsp(e)).join('');
     });
     $('#slist', root).innerHTML = r.length ? h : '<div class="empty">Nada con ese nombre.</div>'; return;
   }
@@ -783,7 +804,7 @@ function abrirFicha(id) {
   if (hero && dots.length) hero.onscroll = () => { const i = Math.round(hero.scrollLeft / Math.max(1, hero.clientWidth)); dots.forEach((d, k) => d.classList.toggle('on', k === i)); };
   if (S.ftBack && S.ftBack.id === id) { fichaTab(sh, S.ftBack.tab); } S.ftBack = null;
   const sal = () => { S.ftBack = { id, tab: (S.ftab && S.ftab.id === id && S.ftab.tab) || 'ident' }; };
-  sh.addEventListener('click', ev => { const b = ev.target.closest('button'); if (!b) return; if (b.dataset.ft) fichaTab(sh, b.dataset.ft, { ir: b.classList.contains('rs') }); else if (b.dataset.e) abrirFicha(b.dataset.e); else if (b.dataset.h) { sal(); abrirHabitat(b.dataset.h, id); } else if (b.dataset.g !== undefined) { sal(); abrirGuia(b.dataset.g, id); } else if (b.dataset.l !== undefined) { sal(); abrirLibro(b.dataset.l, id); } else if (b.id === 'fi-antes') abrirAntesDeComer(); });
+  sh.addEventListener('click', ev => { const b = ev.target.closest('button'); if (!b) return; if (b.dataset.ft) fichaTab(sh, b.dataset.ft, { ir: b.classList.contains('rs') || b.classList.contains('rz') }); else if (b.dataset.e) abrirFicha(b.dataset.e); else if (b.dataset.h) { sal(); abrirHabitat(b.dataset.h, id); } else if (b.dataset.g !== undefined) { sal(); abrirGuia(b.dataset.g, id); } else if (b.dataset.l !== undefined) { sal(); abrirLibro(b.dataset.l, id); } else if (b.id === 'fi-antes') abrirAntesDeComer(); });
 }
 /* Guía de hábitats: desde una ficha (volverA = id de la seta) o desde «¿Dónde busco?» (volverA = 'donde') */
 function abrirHabitat(id, volverA) {

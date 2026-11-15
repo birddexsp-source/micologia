@@ -101,6 +101,19 @@ module.exports = {
         if (e.candidataComestible) t.ok(e.id + ': las pistas de una candidata no la declaran comestible', !/\bes comestible\b|\bse puede comer\b|\bbuen comestible\b/i.test([e.clave, ...(e.queMirar || []).map(x => x.texto)].join(' ')));
       });
     });
+    await t.case('rareza: todas clasificadas, con motivo y datos de iNaturalist', async () => {
+      const cat = JSON.parse(rd('data/especies.json'));
+      const R = ['comun', 'poco', 'raro', 'legendario'], n = {};
+      cat.especies.forEach(e => {
+        t.ok(e.id + ': rareza válida', R.includes(e.rareza), String(e.rareza)); n[e.rareza] = (n[e.rareza] || 0) + 1;
+        t.ok(e.id + ': motivo de la rareza', typeof e.rarezaNota === 'string' && e.rarezaNota.length > 20);
+        const d = e.rarezaDatos || {}; t.ok(e.id + ': datos (cantábrico ≥ Bizkaia, España ≥ cantábrico)', d.fuente === 'iNaturalist' && d.cantabrico >= d.bizkaia && d.espana >= d.bizkaia && /^\d{4}-\d\d-\d\d$/.test(d.consulta || ''));
+      });
+      t.ok('hay de los cuatro niveles y las comunes no son la mayoría', R.every(k => n[k] >= 5) && n.comun < cat.especies.length / 2, JSON.stringify(n));
+      t.ok('legendarias: pocas', n.legendario <= 15);
+      const aj = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'tools', 'rareza', 'ajustes.json'), 'utf8'));
+      t.ok('cada corrección a mano existe, tiene nivel válido y motivo', Object.entries(aj).filter(([k]) => k !== '_').every(([k, [r, m]]) => cat.especies.some(e => e.id === k && e.rareza === r && e.rarezaNota === m) && m.length > 20));
+    });
     await t.case('fotos con flechas: datos completos y puntos dentro de la foto', async () => {
       const cat = JSON.parse(rd('data/especies.json')), PARTES = ['sombrero', 'cutis', 'himenio', 'carne', 'pie', 'anillo', 'volva', 'micelio', 'olor', 'esporada', 'habitat', 'otro'], DIR = ['der', 'abajo-der', 'abajo', 'abajo-izq', 'izq', 'arriba-izq', 'arriba', 'arriba-der'];
       const con = cat.especies.filter(e => (e.anotadas || []).length);

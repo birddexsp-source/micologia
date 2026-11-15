@@ -5,6 +5,7 @@ module.exports = {
     await t.case('lista completa y aviso fijo', async () => {
       t.eq('98 fichas', await t.N('#slist .item'), 98);
       t.ok('aviso de seguridad siempre visible', /Ninguna seta se come por lo que diga la app/.test(await t.T('#v-setas .warn') || ''));
+      await t.tap('[data-ord="peligro"]', 200);
       t.ok('primero las más peligrosas', /Mortal/.test(await t.T('#slist .item') || ''));
       await t.shot('captura-04-setas');
     });
@@ -40,7 +41,7 @@ module.exports = {
       await t.page.evaluate(() => document.querySelector('#sheet').click()); await t.wait(200);
     });
     await t.case('confusiones enlazadas entre fichas (recíprocas)', async () => {
-      await t.page.fill('#q', 'Lepiota'); await t.wait(150); await t.tap('#slist .item', 300);
+      await t.page.fill('#q', 'Lepiota'); await t.wait(150); await t.tap('#slist .item[data-e="lepiota-brunneoincarnata"]', 300);
       await t.page.evaluate(() => window.__MI.fichaTab('todo')); await t.tap('#sheet .lnk[data-e="macrolepiota-procera"]', 300); await t.page.evaluate(() => window.__MI.fichaTab('todo'));
       t.ok('abre la ficha del parasol', /Macrolepiota procera/.test(await t.T('#sheet h2') || ''));
       t.ok('el parasol enlaza de vuelta a la Lepiota', await t.has('#sheet .lnk[data-e="lepiota-brunneoincarnata"]'));
