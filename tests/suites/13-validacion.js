@@ -94,7 +94,7 @@ module.exports = {
       t.ok('el resumen del spot se abre', await t.has('#sheet .sv-h'));
       await t.tap('#sv-x', 300);
       await t.go('#setas'); await t.wait(400);
-      t.ok('la especie entra en «Tu colección»', /1\s*de \d+/.test(await t.T('#v-setas .col') || ''));
+      t.ok('la especie entra en «Tu colección»', (await t.T('#v-setas .cx-num')) === '1');
       t.ok('y hay lección del día', await t.has('#v-setas .lec'));
     });
     await t.case('sincronización ida y vuelta con el repo privado (GitHub simulado)', async () => {

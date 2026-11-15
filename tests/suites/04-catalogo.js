@@ -11,10 +11,10 @@ module.exports = {
     });
     await t.case('búsqueda por nombre común, científico y sin tildes', async () => {
       const q = async s => { await t.page.fill('#q', s); await t.wait(150); return t.N('#slist .item'); };
-      t.eq('«cicuta»', await q('cicuta'), 1); t.ok('es Amanita phalloides', /phalloides/.test(await t.T('#slist .item') || ''));
+      t.eq('«cicuta»', await q('cicuta'), 1); t.ok('es Amanita phalloides', await t.has('#slist .item[data-e="amanita-phalloides"]'));
       t.eq('«rebozuelo» (y el rebozuelo anaranjado)', await q('rebozuelo'), 2); t.ok('«ziza» (euskera) encuentra varias', (await q('ziza')) >= 10);
       t.eq('«niscalo» sin tilde (níscalo y falso níscalo)', await q('niscalo'), 2); t.eq('«níscalo» con tilde', await q('níscalo'), 2);
-      t.eq('«xixa» (champiñón silvestre, euskera)', await q('xixa'), 1); t.ok('es Agaricus campestris', /campestris/.test(await t.T('#slist .item') || ''));
+      t.eq('«xixa» (champiñón silvestre, euskera)', await q('xixa'), 1); t.ok('es Agaricus campestris', await t.has('#slist .item[data-e="agaricus-campestris"]'));
       t.eq('«boletus» (también por sinónimos)', await q('boletus'), 13); t.eq('«zzzz»', await q('zzzz'), 0);
       t.ok('mensaje de vacío', /Nada con ese nombre/.test(await t.T('#slist') || ''));
       await q('');

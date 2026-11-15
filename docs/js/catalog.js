@@ -20,7 +20,10 @@ export const RAREZAS = {
 export const ORDEN_RAREZA = ['comun', 'poco', 'raro', 'legendario'];
 export const rareza = e => (e && RAREZAS[e.rareza]) || null;
 /* dentro de cada nivel, de la más vista a la menos */
-export const porRareza = l => l.slice().sort((a, b) => ORDEN_RAREZA.indexOf(a.rareza) - ORDEN_RAREZA.indexOf(b.rareza) || ((b.rarezaDatos || {}).cantabrico || 0) - ((a.rarezaDatos || {}).cantabrico || 0));
+export const porRareza = l => l.slice().sort((a, b) => ORDEN_RAREZA.indexOf(a.rareza) - ORDEN_RAREZA.indexOf(b.rareza) || ((b.rarezaDatos || {}).cantabrico || 0) - ((a.rarezaDatos || {}).cantabrico || 0) || a.id.localeCompare(b.id));
+/* número de cromo: 001 = la más fácil de encontrar */
+let NUM = null;
+export const numero = e => { if (!NUM) { NUM = new Map(); porRareza(todas()).forEach((x, i) => NUM.set(x.id, i + 1)); } return NUM.get(e.id) || 0; };
 /* Lo que se muestra: si las fuentes dicen que es comestible, se marca así (sigue en borrador, sin revisión experta) */
 export const vista = e => e.comestibilidad ? (e.comestibilidad.nivel === 'si' ? 'ok_fuentes' : 'cond_fuentes') : e.clase;
 export const NIVELES = { borrador: 'Borrador · sin contrastar', contrastada: 'Contrastada (≥2 fuentes)', revisada: 'Revisada por experto' };

@@ -16,7 +16,7 @@ import * as off from './offline.js';
 import { renderPlan } from './plan.js';
 import * as lug from './lugar.js';
 
-const APP_V = 'micologia-v38';   // = V de sw.js
+const APP_V = 'micologia-v39';   // = V de sw.js
 const S = { view: 'mapa', arg: '', map: null, pins: null, me: null, acc: null, tmp: null, mini: null, centered: false, filtro: { salida: '', especie: '' }, clase: '', q: '', syncErr: false, mes: new Date().getMonth() + 1 };
 const VIEWS = ['mapa', 'salidas', 'salida', 'setas', 'mes', 'plan', 'ajustes'];
 const TITULOS = { mapa: 'Mapa', salidas: 'Salidas', salida: 'Salida', setas: 'Setas', mes: 'Este mes', plan: 'Plan de salida', ajustes: 'Ajustes' };
@@ -706,22 +706,30 @@ function leccionHTML(L) {
 }
 async function pintarAprender() {
   const root = $('#v-setas'), enc = await encontradas(); S.enc = enc;
-  const L = lecciones(enc), tot = cat.todas().length;
-  $('#lec-w', root).innerHTML = leccionHTML(L);
-  $('#col-w', root).innerHTML = '<div class="col"><div class="col-h"><b>Tu colección</b><span><em>' + enc.size + '</em> de ' + tot + ' especies</span></div><div class="col-bar"><u style="width:' + Math.max(2, Math.round(enc.size / tot * 100)) + '%"></u></div>' + rutaRareza(enc) +
-    (enc.size ? '<div class="col-row">' + [...enc.keys()].slice(0, 12).map(id => { const e = cat.byId(id); return '<button class="cmini" data-e="' + id + '">' + mini(e) + '</button>'; }).join('') + '</div>' : '<p class="mut sm">Cada especie que marques en el monte se añade aquí.</p>') + '</div>';
+  $('#lec-w', root).innerHTML = leccionHTML(lecciones(enc));
+  $('#col-w', root).innerHTML = colCabecera(enc) + enTemporada(enc);
   if (S.view === 'setas') listaSetas();
 }
-/* Ruta por rareza: cuántas llevas de cada nivel y la siguiente a buscar (la común más vista que te falta y que sale este mes) */
-function rutaRareza(enc) {
-  const T = cat.todas(), mes = new Date().getMonth();
-  const filas = cat.ORDEN_RAREZA.map(k => { const l = T.filter(e => e.rareza === k), n = l.filter(e => enc.has(e.id)).length, x = cat.RAREZAS[k];
-    return '<button class="rzr" data-rz="' + k + '" style="--c:' + x.color + '">' + fi.pips(x) + '<span>' + x.label + '</span><i class="rzr-b"><u style="width:' + (l.length ? Math.round(n / l.length * 100) : 0) + '%"></u></i><em>' + n + '/' + l.length + '</em></button>'; }).join('');
-  const sale = e => { const m = (((e.temporada || {}).inat || {}).mensual) || []; const mx = Math.max(0, ...m); return mx ? m[mes] / mx >= 0.25 : true; };
-  const falta = cat.porRareza(T.filter(e => !enc.has(e.id))), sig = falta.find(e => sale(e)) || falta[0];
-  const r = sig && cat.rareza(sig);
-  return '<div class="rzr-w"><small class="rzr-t">Ruta por rareza · de lo fácil a lo difícil</small>' + filas + '</div>' +
-    (sig ? '<button class="rz-sig" data-e="' + sig.id + '" style="--c:' + r.color + '">' + fi.avatar(sig) + '<span><small>Siguiente a buscar' + (sale(sig) ? ' · sale ahora' : '') + '</small><b>' + esc(corto(sig)) + '</b>' + fi.rarezaTag(sig) + '</span>' + I.chev + '</button>' : '<p class="mut sm">¡Las tienes todas!</p>');
+/* ---------- Colección al estilo AveDex: contador, barra por rareza y «En temporada» ---------- */
+const mensual = e => (((e.temporada || {}).inat || {}).mensual) || [];
+/* sale en el mes m si ese mes tiene al menos un cuarto de las citas de su mejor mes (sin datos: no se sabe, no cuenta) */
+const saleEn = (e, m) => { const v = mensual(e), mx = Math.max(0, ...v); return mx > 0 && v[m] / mx >= 0.25; };
+function colCabecera(enc) {
+  const T = cat.todas(), tot = T.length;
+  const niv = cat.ORDEN_RAREZA.map(k => { const l = T.filter(e => e.rareza === k); return { k, x: cat.RAREZAS[k], t: l.length, n: l.filter(e => enc.has(e.id)).length }; });
+  return '<div class="cx-h"><div class="cx-top"><b class="cx-num">' + enc.size + '</b><span class="cx-lbl">encontradas<small>de ' + tot + ' setas</small></span>' +
+    (enc.size ? '<span class="cx-last">' + [...enc.keys()].slice(0, 4).map(id => '<button class="cmini" data-e="' + id + '">' + mini(cat.byId(id)) + '</button>').join('') + '</span>' : '') + '</div>' +
+    '<div class="cx-bar">' + niv.map(v => '<i style="--c:' + v.x.color + ';flex:' + v.t + '"><u style="width:' + (v.t ? v.n / v.t * 100 : 0) + '%"></u></i>').join('') + '</div>' +
+    '<div class="cx-leg">' + niv.map(v => '<button class="cx-lv" data-rz="' + v.k + '" style="--c:' + v.x.color + '">' + fi.pips(v.x) + '<span>' + v.x.label + '</span><em><b>' + v.n + '</b>/' + v.t + '</em></button>').join('') + '</div></div>';
+}
+function enTemporada(enc) {
+  const mes = new Date().getMonth(), falta = cat.porRareza(cat.todas().filter(e => !enc.has(e.id)));
+  const ahora = falta.filter(e => saleEn(e, mes)); if (!falta.length) return '<div class="cx-tmp fin"><b>¡Las tienes todas!</b></div>';
+  const hist = MES_C.map((l, m) => falta.filter(e => saleEn(e, m)).length), mx = Math.max(1, ...hist);
+  return '<button class="cx-tmp" id="cx-tmp"><span class="cx-tmp-k"><i class="cx-live"></i>En temporada · ' + MES_L[mes] + '<em>Ver ' + I.chev + '</em></span>' +
+    '<span class="cx-tmp-m"><span><b class="cx-tmp-n">' + ahora.length + '</b><small>setas que te faltan salen ahora en la costa cantábrica</small></span>' +
+    '<span class="cx-histo">' + hist.map((n, m) => '<i class="' + (m === mes ? 'on' : '') + '"><u style="height:' + Math.max(8, Math.round(n / mx * 100)) + '%"></u><b>' + MES_C[m] + '</b></i>').join('') + '</span></span>' +
+    (ahora.length ? '<span class="cx-avs">' + ahora.slice(0, 6).map(e => '<span class="cx-av" style="--c:' + cat.rareza(e).color + '">' + mini(e) + '</span>').join('') + (ahora.length > 6 ? '<span class="cx-av mas">+' + (ahora.length - 6) + '</span>' : '') + '</span>' : '') + '</button>';
 }
 function renderSetas() {
   const root = $('#v-setas');
@@ -730,7 +738,7 @@ function renderSetas() {
       '<div class="sbar"><input type="search" id="q" placeholder="Buscar seta por nombre (es, eu, latín)…" autocomplete="off"><div class="seg ord" id="ord">' + [['rareza', 'Por rareza'], ['peligro', 'Por peligro'], ['col', 'Colecciones'], ['az', 'A–Z']].map(([k, t]) => '<button data-ord="' + k + '">' + t + '</button>').join('') + '</div><div class="chips" id="cl"></div></div>' +
       '<div id="intro-w">' +
       '<div class="learn2"><button class="lc" id="gu-open" style="--c:#e0a458">' + ICO_SETA + '<b>Partes de una seta</b><small>Esquema con nombres</small></button><button class="lc" id="li-open" style="--c:#7ccf8e"><span class="ic">' + lib.CAPS[0].ico + '</span><b>El libro</b><small>Para empezar</small></button><button class="lc" id="ia-open" style="--c:#b48cff"><span class="ic">✨</span><b>Reconocer con IA</b><small>Con 1–3 fotos</small></button></div>' +
-      '<div id="lec-w"></div><div id="col-w"></div></div>' +
+      '<div id="col-w"></div><div id="lec-w"></div></div>' +
       '<div class="warn sm2">' + esc(cat.aviso()) + '</div><div id="slist"></div>' +
       '<p class="note" style="margin-top:14px">Catálogo en borrador: ' + cat.todas().length + ' fichas sin revisar por una persona experta. Las comestibles llevan «según fuentes» porque lo dicen Wikipedia y guías divulgativas, no una persona experta: siguen pendientes de revisión. Fotos de Wikimedia Commons con su autoría y licencia en cada ficha.</p></div>';
     $('#q', root).oninput = e => { S.q = e.target.value; root.classList.toggle('busca', !!S.q.trim()); listaSetas(); };
@@ -740,6 +748,8 @@ function renderSetas() {
       if (e.target.closest('#ia-open')) return abrirIA();
       if (e.target.closest('#lec-next')) { S.lecOff = (S.lecOff || 0) + 1; return pintarAprender(); }
       const o = e.target.closest('[data-ord]'); if (o) { S.orden = o.dataset.ord; return listaSetas(); }
+      if (e.target.closest('#cx-tmp')) { S.ahora = true; S.orden = 'rareza'; listaSetas(); const l = $('#slist', root); if (l) l.scrollIntoView({ block: 'start' }); return; }
+      if (e.target.closest('#cx-quita')) { S.ahora = false; return listaSetas(); }
       const z = e.target.closest('[data-rz]'); if (z) { S.orden = 'rareza'; S.q = ''; $('#q', root).value = ''; root.classList.remove('busca'); listaSetas(); const hh = $('#rz-' + z.dataset.rz, root); if (hh) hh.scrollIntoView({ block: 'start' }); return; }
       const j = e.target.closest('[data-ir]'); if (j) { const h = $('#col-' + j.dataset.ir, root); if (h) h.scrollIntoView({ block: 'start' }); return; }
       const c = e.target.closest('#cl button'); if (c) { if (c.dataset.mias !== undefined) S.mias = !S.mias; else { S.clase = c.dataset.c; if (!S.clase) S.mias = false; } return listaSetas(); }
@@ -748,12 +758,16 @@ function renderSetas() {
   }
   listaSetas(); pintarAprender();
 }
-const itemEsp = (e, extra = '') => { const m = S.enc && S.enc.get(e.id), cien = e.nombreCientifico.split(' (')[0], c = corto(e);
-  return '<button class="item sp' + (m ? ' mia' : '') + '" data-e="' + e.id + '" style="--c:' + cat.CLASES[cat.vista(e)].color + '">' + fi.avatar(e) + (m ? '<span class="mia-b">✓' + (m.n > 1 ? ' ×' + m.n : '') + '</span>' : '') + '<div class="t"><b>' + esc(c) + '</b><small>' + fi.rarezaTag(e, { mini: true }) + '<i>' + esc(cien) + '</i>' + (c === cien ? ' · ' + esc(fi.nombres(e) || e.grupo) : '') + '</small>' + extra + '</div>' + fi.tagEsp(e) + '</button>'; };
+const itemEsp = (e, extra = '') => { const m = S.enc && S.enc.get(e.id), cien = e.nombreCientifico.split(' (')[0], c = corto(e), r = cat.rareza(e);
+  return '<button class="item sp' + (m ? ' mia' : '') + '" data-e="' + e.id + '" style="--c:' + cat.CLASES[cat.vista(e)].color + (r ? ';--rc:' + r.color : '') + '" aria-label="' + esc(c) + (r ? ', ' + r.label : '') + (m ? ', encontrada' : '') + '">' + fi.avatar(e) +
+    '<i class="cr-n">' + String(cat.numero(e)).padStart(3, '0') + '</i>' + (m ? '<span class="mia-b">✓' + (m.n > 1 ? ' ×' + m.n : '') + '</span>' : '') +
+    '<div class="t"><b>' + esc(c) + '</b><small>' + fi.rarezaTag(e, { mini: true }) + '<i>' + esc(cien) + '</i>' + (c === cien ? ' · ' + esc(fi.nombres(e) || e.grupo) : '') + '</small>' + extra + '</div>' + fi.tagEsp(e) + '<i class="cr-rz"></i></button>'; };
 function listaSetas() {
   const root = $('#v-setas');
   $('#cl', root).innerHTML = '<button class="opt ' + (!S.clase && !S.mias ? 'on' : '') + '" data-c="">Todas</button>' + (S.enc && S.enc.size ? '<button class="opt ' + (S.mias ? 'on' : '') + '" data-mias="">✓ Las mías</button>' : '') + Object.entries(cat.CLASES).filter(([k]) => cat.todas().some(e => cat.vista(e) === k)).map(([k, v]) => '<button class="opt ' + (S.clase === k ? 'on' : '') + '" data-c="' + k + '">' + v.label + '</button>').join('');
-  const r = cat.buscar(S.q, { clase: S.clase }).filter(e => !S.mias || (S.enc && S.enc.has(e.id))); let h = '', cur = '';
+  const mes = new Date().getMonth();
+  const r = cat.buscar(S.q, { clase: S.clase }).filter(e => (!S.mias || (S.enc && S.enc.has(e.id))) && (!S.ahora || (saleEn(e, mes) && !(S.enc && S.enc.has(e.id))))); let h = '', cur = '';
+  if (S.ahora) h += '<div class="cx-filtro"><span><i class="cx-live"></i>Te faltan y salen ahora · ' + r.length + '</span><button id="cx-quita" aria-label="Quitar filtro">Quitar ✕</button></div>';
   const ord = S.orden || 'rareza';
   $$('#ord button', root).forEach(b => b.classList.toggle('on', b.dataset.ord === ord));
   if (ord === 'col') {
@@ -772,7 +786,9 @@ function listaSetas() {
     /* de lo más fácil de encontrar a lo más difícil: para aprender primero las comunes */
     cat.ORDEN_RAREZA.forEach(k => {
       const l = cat.porRareza(r.filter(e => e.rareza === k)); if (!l.length) return; const x = cat.RAREZAS[k], mias = S.enc ? l.filter(e => S.enc.has(e.id)).length : 0;
-      h += '<div class="rzh rz-' + k + '" id="rz-' + k + '" style="--c:' + x.color + '">' + fi.pips(x) + '<div><b>' + x.label + '<em>' + l.length + '</em></b><p>' + esc(x.txt) + '</p></div>' + (mias ? '<span class="rzh-m">✓ ' + mias + '/' + l.length + '</span>' : '') + '</div>';
+      const tt = cat.todas().filter(e => e.rareza === k), tn = S.enc ? tt.filter(e => S.enc.has(e.id)).length : 0;
+      h += '<div class="rzh rz-' + k + '" id="rz-' + k + '" style="--c:' + x.color + '"><span class="rzh-i">' + fi.pips(x) + '</span><div class="rzh-t"><b>' + x.label + '<em>' + l.length + (l.length !== tt.length ? ' de ' + tt.length : '') + '</em></b>' +
+        '<small><b>' + tn + '/' + tt.length + '</b> encontradas' + (tt.length - tn ? ' · <span class="faltan">faltan ' + (tt.length - tn) + '</span>' : ' · ¡completo!') + '</small><i class="rzh-bar"><u style="width:' + (tt.length ? tn / tt.length * 100 : 0) + '%"></u></i><p>' + esc(x.txt) + '</p></div></div>';
       h += l.map(e => itemEsp(e)).join('');
     });
     $('#slist', root).innerHTML = r.length ? h : '<div class="empty">Nada con ese nombre.</div>'; return;

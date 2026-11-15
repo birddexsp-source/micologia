@@ -188,7 +188,7 @@ module.exports = {
       t.ok('varias lecciones disponibles', /^\d+\/(\d+)$/.test(L) && +L.split('/')[1] >= 5, L);
       const a = await t.T('#v-setas .lec-t'); await t.tap('#lec-next', 300);
       t.ok('«Otra» cambia la lección', (await t.T('#v-setas .lec-t')) !== a);
-      t.ok('colección: 3 especies encontradas (boleto, cicuta, níscalo)', /3\s*de 98/.test(await t.T('#v-setas .col') || ''), await t.T('#v-setas .col'));
+      t.ok('colección: 3 especies encontradas (boleto, cicuta, níscalo)', (await t.T('#v-setas .cx-num')) === '3' && /de 98 setas/.test(await t.T('#v-setas .cx-h') || ''), await t.T('#v-setas .cx-h'));
       await t.tap('#cl [data-mias]', 300);
       t.eq('«Las mías» deja solo las encontradas', await t.N('#slist .item'), 3);
       t.ok('marcadas con ✓', (await t.N('#slist .item.mia')) === 3 && /×3/.test(await t.T('#slist .item.mia[data-e="boletus-edulis"] .mia-b') || ''));
