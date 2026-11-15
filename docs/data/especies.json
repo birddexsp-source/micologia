@@ -21480,7 +21480,63 @@
      }
     ]
    },
-   "anotadas": []
+   "anotadas": [
+    {
+     "titulo": "Sin anillo y con granitos en el pie",
+     "foto": {
+      "sp": "Suillus granulatus",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/133127359/{s}.jpeg",
+      "autor": "agujaceratops",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/81180176",
+      "origen": "iNaturalist",
+      "ar": 0.75
+     },
+     "puntos": [
+      {
+       "x": 30,
+       "y": 40,
+       "parte": "himenio",
+       "titulo": "Poros amarillos",
+       "texto": "Pequeños; de joven sueltan gotitas lechosas.",
+       "d": "izq"
+      },
+      {
+       "x": 55,
+       "y": 65,
+       "parte": "pie",
+       "titulo": "Granitos en el pie",
+       "texto": "Puntitos pardos en la parte alta; sin anillo.",
+       "d": "der"
+      }
+     ],
+     "ojo": "Pela la piel babosa antes de cocinarlo. Se distingue del Suillus luteus por no tener anillo."
+    },
+    {
+     "titulo": "Los poros de cerca",
+     "foto": {
+      "sp": "Suillus granulatus",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/309624872/{s}.jpeg",
+      "autor": "jollero",
+      "licencia": "CC BY-SA 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/177980422",
+      "origen": "iNaturalist",
+      "ar": 1.0
+     },
+     "puntos": [
+      {
+       "x": 60,
+       "y": 75,
+       "parte": "himenio",
+       "titulo": "Poros angulosos",
+       "texto": "Amarillo pálido, finos.",
+       "d": "abajo"
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "mycena-pura",
@@ -21666,7 +21722,63 @@
      }
     ]
    },
-   "anotadas": []
+   "anotadas": [
+    {
+     "titulo": "Láminas pálidas con venas",
+     "foto": {
+      "sp": "Mycena pura",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/333595043/{s}.jpeg",
+      "autor": "victor laborde",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/190315076",
+      "origen": "iNaturalist",
+      "ar": 0.75
+     },
+     "puntos": [
+      {
+       "x": 70,
+       "y": 30,
+       "parte": "himenio",
+       "titulo": "Láminas pálidas",
+       "texto": "Blanco-lila; con la edad aparecen venitas entre ellas.",
+       "d": "der"
+      },
+      {
+       "x": 45,
+       "y": 70,
+       "parte": "pie",
+       "titulo": "Pie fino y hueco",
+       "texto": "Del color del sombrero, sin anillo.",
+       "d": "der"
+      }
+     ],
+     "ojo": "Contiene muscarina: no se come. Huele a rábano. Hay otras Mycena parecidas, pequeñas y frágiles; ninguna merece la pena."
+    },
+    {
+     "titulo": "Sombrero lila-rosado",
+     "foto": {
+      "sp": "Mycena pura",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/167767553/{s}.jpg",
+      "autor": "Michel Langeveld",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/100514176",
+      "origen": "iNaturalist",
+      "ar": 0.75
+     },
+     "puntos": [
+      {
+       "x": 55,
+       "y": 40,
+       "parte": "sombrero",
+       "titulo": "Centro más oscuro",
+       "texto": "Lila, rosa o violeta; el borde con rayitas.",
+       "d": "arriba"
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "clathrus-ruber",
@@ -21835,7 +21947,64 @@
      }
     ]
    },
-   "anotadas": []
+   "anotadas": [
+    {
+     "titulo": "Jaula roja con agujeros",
+     "foto": {
+      "sp": "Clathrus ruber",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/368831448/{s}.jpg",
+      "autor": "Matej Frančeškin",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/208457063",
+      "origen": "iNaturalist",
+      "ar": 1.0
+     },
+     "puntos": [
+      {
+       "x": 50,
+       "y": 22,
+       "parte": "sombrero",
+       "titulo": "Red de brazos",
+       "texto": "Jaula esponjosa roja o anaranjada, hueca por dentro.",
+       "d": "arriba"
+      },
+      {
+       "x": 40,
+       "y": 50,
+       "parte": "himenio",
+       "titulo": "Masa verde-oscura",
+       "texto": "Por dentro, pasta pegajosa olivácea que huele mal. Sale de un «huevo» blanco que queda enterrado en la base.",
+       "d": "izq"
+      }
+     ],
+     "ojo": "No se come. Huele a carne podrida para atraer moscas. Inconfundible: no hay ninguna seta peligrosa que se le parezca."
+    },
+    {
+     "titulo": "De joven: un huevo blanco",
+     "foto": {
+      "sp": "Clathrus ruber",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/603302964/{s}.jpg",
+      "autor": "zebedeugalinha",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/332434027",
+      "origen": "iNaturalist",
+      "ar": 1.3333
+     },
+     "puntos": [
+      {
+       "x": 55,
+       "y": 45,
+       "parte": "volva",
+       "titulo": "Huevo blanco",
+       "texto": "Blando, con surcos que dibujan la red de la jaula.",
+       "d": "arriba-der"
+      }
+     ],
+     "ojo": "Un huevo blanco en el suelo también puede ser una Amanita joven (mortal). Córtalo de arriba abajo: si dentro ves una Amanita en miniatura (sombrero, láminas, pie), no lo toques."
+    }
+   ]
   },
   {
    "id": "phallus-impudicus",
@@ -22034,7 +22203,80 @@
      }
     ]
    },
-   "anotadas": []
+   "anotadas": [
+    {
+     "titulo": "Adulto: pie blanco y cabeza oscura",
+     "foto": {
+      "sp": "Phallus impudicus",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/324089229/{s}.jpeg",
+      "autor": "Katie Harrison",
+      "licencia": "CC0",
+      "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "pagina": "https://www.inaturalist.org/observations/185555956",
+      "origen": "iNaturalist",
+      "ar": 0.4512
+     },
+     "puntos": [
+      {
+       "x": 45,
+       "y": 37,
+       "parte": "sombrero",
+       "titulo": "Cabeza con red",
+       "texto": "Alveolada, cubierta de pasta verde-oscura que se comen las moscas.",
+       "d": "der"
+      },
+      {
+       "x": 60,
+       "y": 60,
+       "parte": "pie",
+       "titulo": "Pie blanco esponjoso",
+       "texto": "Hueco, muy frágil, como poliestireno. En la base queda el huevo roto, como una bolsa.",
+       "d": "der"
+      }
+     ],
+     "ojo": "No se come de adulto. Se huele desde lejos (olor fuerte a podrido) antes de verlo."
+    },
+    {
+     "titulo": "El huevo por dentro",
+     "foto": {
+      "sp": "Phallus impudicus",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/219060537/{s}.jpeg",
+      "autor": "Анна Кириченко",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/128938611",
+      "origen": "iNaturalist",
+      "ar": 0.75
+     },
+     "puntos": [
+      {
+       "x": 80,
+       "y": 55,
+       "parte": "volva",
+       "titulo": "Capa de gelatina",
+       "texto": "Transparente-amarillenta, típica del huevo de Phallus.",
+       "d": "der"
+      },
+      {
+       "x": 30,
+       "y": 45,
+       "parte": "carne",
+       "titulo": "Pasta verde-oscura",
+       "texto": "Futura cabeza; en una Amanita no aparece.",
+       "d": "izq"
+      },
+      {
+       "x": 50,
+       "y": 45,
+       "parte": "pie",
+       "titulo": "Pie futuro blanco",
+       "texto": "Bloque blanco en el centro.",
+       "d": "arriba"
+      }
+     ],
+     "ojo": "Cortar el huevo es lo que lo distingue de una Amanita joven: aquí ves capa gelatinosa y núcleo verde-negro, no una seta en miniatura con láminas."
+    }
+   ]
   },
   {
    "id": "chlorophyllum-rhacodes",

@@ -1,0 +1,60 @@
+[
+ {
+  "_cand": "5.2",
+  "titulo": "Jaula roja con agujeros",
+  "foto": {
+   "sp": "Clathrus ruber",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/368831448/{s}.jpg",
+   "autor": "Matej Frančeškin",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/208457063",
+   "origen": "iNaturalist",
+   "ar": 1.0
+  },
+  "puntos": [
+   {
+    "x": 50,
+    "y": 22,
+    "parte": "sombrero",
+    "titulo": "Red de brazos",
+    "texto": "Jaula esponjosa roja o anaranjada, hueca por dentro.",
+    "d": "arriba"
+   },
+   {
+    "x": 40,
+    "y": 50,
+    "parte": "himenio",
+    "titulo": "Masa verde-oscura",
+    "texto": "Por dentro, pasta pegajosa olivácea que huele mal. Sale de un «huevo» blanco que queda enterrado en la base.",
+    "d": "izq"
+   }
+  ],
+  "ojo": "No se come. Huele a carne podrida para atraer moscas. Inconfundible: no hay ninguna seta peligrosa que se le parezca."
+ },
+ {
+  "_cand": "1.0",
+  "titulo": "De joven: un huevo blanco",
+  "foto": {
+   "sp": "Clathrus ruber",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/603302964/{s}.jpg",
+   "autor": "zebedeugalinha",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/332434027",
+   "origen": "iNaturalist",
+   "ar": 1.3333
+  },
+  "puntos": [
+   {
+    "x": 55,
+    "y": 45,
+    "parte": "volva",
+    "titulo": "Huevo blanco",
+    "texto": "Blando, con surcos que dibujan la red de la jaula.",
+    "d": "arriba-der"
+   }
+  ],
+  "ojo": "Un huevo blanco en el suelo también puede ser una Amanita joven (mortal). Córtalo de arriba abajo: si dentro ves una Amanita en miniatura (sombrero, láminas, pie), no lo toques."
+ }
+]

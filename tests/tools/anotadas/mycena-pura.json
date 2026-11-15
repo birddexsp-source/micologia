@@ -1,0 +1,59 @@
+[
+ {
+  "_cand": "3.2",
+  "titulo": "Láminas pálidas con venas",
+  "foto": {
+   "sp": "Mycena pura",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/333595043/{s}.jpeg",
+   "autor": "victor laborde",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/190315076",
+   "origen": "iNaturalist",
+   "ar": 0.75
+  },
+  "puntos": [
+   {
+    "x": 70,
+    "y": 30,
+    "parte": "himenio",
+    "titulo": "Láminas pálidas",
+    "texto": "Blanco-lila; con la edad aparecen venitas entre ellas.",
+    "d": "der"
+   },
+   {
+    "x": 45,
+    "y": 70,
+    "parte": "pie",
+    "titulo": "Pie fino y hueco",
+    "texto": "Del color del sombrero, sin anillo.",
+    "d": "der"
+   }
+  ],
+  "ojo": "Contiene muscarina: no se come. Huele a rábano. Hay otras Mycena parecidas, pequeñas y frágiles; ninguna merece la pena."
+ },
+ {
+  "_cand": "2.1",
+  "titulo": "Sombrero lila-rosado",
+  "foto": {
+   "sp": "Mycena pura",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/167767553/{s}.jpg",
+   "autor": "Michel Langeveld",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/100514176",
+   "origen": "iNaturalist",
+   "ar": 0.75
+  },
+  "puntos": [
+   {
+    "x": 55,
+    "y": 40,
+    "parte": "sombrero",
+    "titulo": "Centro más oscuro",
+    "texto": "Lila, rosa o violeta; el borde con rayitas.",
+    "d": "arriba"
+   }
+  ]
+ }
+]

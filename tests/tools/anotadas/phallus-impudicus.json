@@ -1,0 +1,76 @@
+[
+ {
+  "_cand": "5.0",
+  "titulo": "Adulto: pie blanco y cabeza oscura",
+  "foto": {
+   "sp": "Phallus impudicus",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/324089229/{s}.jpeg",
+   "autor": "Katie Harrison",
+   "licencia": "CC0",
+   "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+   "pagina": "https://www.inaturalist.org/observations/185555956",
+   "origen": "iNaturalist",
+   "ar": 0.4512
+  },
+  "puntos": [
+   {
+    "x": 45,
+    "y": 37,
+    "parte": "sombrero",
+    "titulo": "Cabeza con red",
+    "texto": "Alveolada, cubierta de pasta verde-oscura que se comen las moscas.",
+    "d": "der"
+   },
+   {
+    "x": 60,
+    "y": 60,
+    "parte": "pie",
+    "titulo": "Pie blanco esponjoso",
+    "texto": "Hueco, muy frágil, como poliestireno. En la base queda el huevo roto, como una bolsa.",
+    "d": "der"
+   }
+  ],
+  "ojo": "No se come de adulto. Se huele desde lejos (olor fuerte a podrido) antes de verlo."
+ },
+ {
+  "_cand": "2.3",
+  "titulo": "El huevo por dentro",
+  "foto": {
+   "sp": "Phallus impudicus",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/219060537/{s}.jpeg",
+   "autor": "Анна Кириченко",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/128938611",
+   "origen": "iNaturalist",
+   "ar": 0.75
+  },
+  "puntos": [
+   {
+    "x": 80,
+    "y": 55,
+    "parte": "volva",
+    "titulo": "Capa de gelatina",
+    "texto": "Transparente-amarillenta, típica del huevo de Phallus.",
+    "d": "der"
+   },
+   {
+    "x": 30,
+    "y": 45,
+    "parte": "carne",
+    "titulo": "Pasta verde-oscura",
+    "texto": "Futura cabeza; en una Amanita no aparece.",
+    "d": "izq"
+   },
+   {
+    "x": 50,
+    "y": 45,
+    "parte": "pie",
+    "titulo": "Pie futuro blanco",
+    "texto": "Bloque blanco en el centro.",
+    "d": "arriba"
+   }
+  ],
+  "ojo": "Cortar el huevo es lo que lo distingue de una Amanita joven: aquí ves capa gelatinosa y núcleo verde-negro, no una seta en miniatura con láminas."
+ }
+]
