@@ -1,0 +1,67 @@
+[
+ {
+  "_cand": "4.1",
+  "titulo": "Borde enrollado y peludo",
+  "foto": {
+   "sp": "Lactarius torminosus",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/237442206/{s}.jpeg",
+   "autor": "Lorenz Wenner",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/138885437",
+   "origen": "iNaturalist",
+   "ar": 0.75
+  },
+  "puntos": [
+   {
+    "x": 34,
+    "y": 50,
+    "parte": "sombrero",
+    "titulo": "Borde con pelos",
+    "texto": "Lanoso, como barbas, y enrollado hacia dentro.",
+    "d": "izq"
+   },
+   {
+    "x": 60,
+    "y": 40,
+    "parte": "sombrero",
+    "titulo": "Rosa-salmón",
+    "texto": "Con círculos algo más oscuros.",
+    "d": "der"
+   }
+  ],
+  "ojo": "Es el falso níscalo. Rompe una lámina: si la leche es BLANCA y pica muchísimo, no es un níscalo (el níscalo la suelta naranja). Causa gastroenteritis."
+ },
+ {
+  "_cand": "4.0",
+  "titulo": "Por debajo: láminas rosadas",
+  "foto": {
+   "sp": "Lactarius torminosus",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/237442166/{s}.jpeg",
+   "autor": "Lorenz Wenner",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/138885437",
+   "origen": "iNaturalist",
+   "ar": 0.75
+  },
+  "puntos": [
+   {
+    "x": 70,
+    "y": 52,
+    "parte": "himenio",
+    "titulo": "Láminas crema-rosadas",
+    "texto": "Al romperlas sueltan leche blanca muy picante.",
+    "d": "der"
+   },
+   {
+    "x": 55,
+    "y": 40,
+    "parte": "pie",
+    "titulo": "Pie rosado y hueco",
+    "texto": "Corto, del color del sombrero, sin anillo.",
+    "d": "der"
+   }
+  ]
+ }
+]

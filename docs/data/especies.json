@@ -15538,7 +15538,48 @@
      }
     ]
    },
-   "anotadas": []
+   "anotadas": [
+    {
+     "titulo": "Oreja gelatinosa",
+     "foto": {
+      "sp": "Auricularia auricula-judae",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/172065169/{s}.jpg",
+      "autor": "Wendy Herniman",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/102876974",
+      "origen": "iNaturalist",
+      "ar": 0.75
+     },
+     "puntos": [
+      {
+       "x": 45,
+       "y": 22,
+       "parte": "cutis",
+       "titulo": "Cara de arriba aterciopelada",
+       "texto": "Pardo-rojiza con pelitos finísimos.",
+       "d": "arriba"
+      },
+      {
+       "x": 40,
+       "y": 70,
+       "parte": "himenio",
+       "titulo": "Cara interior lisa",
+       "texto": "Más brillante, con pliegues como venas. Sin láminas.",
+       "d": "izq"
+      },
+      {
+       "x": 80,
+       "y": 60,
+       "parte": "cutis",
+       "titulo": "Borde con pelusa",
+       "texto": "Borde fino y algo peludo.",
+       "d": "der"
+      }
+     ],
+     "ojo": "Es elástica como goma con humedad; si una «oreja» es dura, leñosa o tiene láminas, es otra cosa."
+    }
+   ]
   },
   {
    "id": "sparassis-crispa",
@@ -15784,7 +15825,63 @@
      }
     ]
    },
-   "anotadas": []
+   "anotadas": [
+    {
+     "titulo": "Una «coliflor» al pie de un pino",
+     "foto": {
+      "sp": "Sparassis crispa",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/244944860/{s}.jpg",
+      "autor": "John Kenrick Gibson",
+      "licencia": "CC0",
+      "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "pagina": "https://www.inaturalist.org/observations/142831501",
+      "origen": "iNaturalist",
+      "ar": 1.3333
+     },
+     "puntos": [
+      {
+       "x": 50,
+       "y": 35,
+       "parte": "sombrero",
+       "titulo": "Masa en forma de coliflor",
+       "texto": "Bola de lóbulos ondulados, blanco-crema.",
+       "d": "arriba-izq"
+      },
+      {
+       "x": 90,
+       "y": 12,
+       "parte": "habitat",
+       "titulo": "Junto a la base de un pino",
+       "texto": "Sale pegada a las raíces de coníferas.",
+       "d": "der"
+      }
+     ],
+     "ojo": "No tiene parecidos peligrosos, pero solo se aprovecha joven, blanca y firme. Lávala bien: guarda tierra y agujas entre los pliegues."
+    },
+    {
+     "titulo": "De cerca: lóbulos como lasaña",
+     "foto": {
+      "sp": "Sparassis crispa",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/72940571/{s}.jpeg",
+      "autor": "Sarka Masova",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/45990484",
+      "origen": "iNaturalist",
+      "ar": 1.3333
+     },
+     "puntos": [
+      {
+       "x": 50,
+       "y": 45,
+       "parte": "sombrero",
+       "titulo": "Lóbulos planos y rizados",
+       "texto": "Finos, ondulados, sin láminas ni poros.",
+       "d": "der"
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "amanita-rubescens",
@@ -16373,7 +16470,63 @@
      }
     ]
    },
-   "anotadas": []
+   "anotadas": [
+    {
+     "titulo": "Grande y gris entre la hojarasca",
+     "foto": {
+      "sp": "Clitocybe nebularis",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/333789638/{s}.jpeg",
+      "autor": "Alexandr Stanislavschi",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/190412637",
+      "origen": "iNaturalist",
+      "ar": 1.3333
+     },
+     "puntos": [
+      {
+       "x": 50,
+       "y": 38,
+       "parte": "sombrero",
+       "titulo": "Gris con un velo blanquecino",
+       "texto": "Gris pálido, como enharinado.",
+       "d": "arriba"
+      },
+      {
+       "x": 48,
+       "y": 60,
+       "parte": "pie",
+       "titulo": "Pie grueso",
+       "texto": "Blanquecino, ensanchado en la base.",
+       "d": "izq"
+      }
+     ],
+     "ojo": "A muchas personas les sienta mal aunque esté cocinada, y se confunde con la Entoloma sinuatum, muy tóxica (láminas que se vuelven rosas). No es para empezar."
+    },
+    {
+     "titulo": "Por debajo: láminas crema y apretadas",
+     "foto": {
+      "sp": "Clitocybe nebularis",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/28636536/{s}.jpg",
+      "autor": "Possums' End",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/18703063",
+      "origen": "iNaturalist",
+      "ar": 0.75
+     },
+     "puntos": [
+      {
+       "x": 55,
+       "y": 45,
+       "parte": "himenio",
+       "titulo": "Láminas crema",
+       "texto": "Apretadas, bajan un poco por el pie. Nunca rosas.",
+       "d": "der"
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "hypholoma-fasciculare",
@@ -16912,7 +17065,63 @@
      }
     ]
    },
-   "anotadas": []
+   "anotadas": [
+    {
+     "titulo": "Bola dura con escamas",
+     "foto": {
+      "sp": "Scleroderma citrinum",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/441732674/{s}.jpeg",
+      "autor": "Kieran Roy Powell",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/247339590",
+      "origen": "iNaturalist",
+      "ar": 1.3333
+     },
+     "puntos": [
+      {
+       "x": 45,
+       "y": 50,
+       "parte": "cutis",
+       "titulo": "Piel gruesa con escamas",
+       "texto": "Amarillo-ocre, cuarteada en escamas oscuras.",
+       "d": "izq"
+      }
+     ],
+     "ojo": "Tóxica. Se confunde con el bejín (Lycoperdon) y con trufas. El bejín es blando y blanco por dentro; esta es dura, de piel gruesa y por dentro se vuelve negra-morada muy pronto."
+    },
+    {
+     "titulo": "Cortada: interior oscuro",
+     "foto": {
+      "sp": "Scleroderma citrinum",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/96685472/{s}.jpg",
+      "autor": "Adam Kranz",
+      "licencia": "CC0",
+      "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "pagina": "https://www.inaturalist.org/observations/60466972",
+      "origen": "iNaturalist",
+      "ar": 0.75
+     },
+     "puntos": [
+      {
+       "x": 55,
+       "y": 55,
+       "parte": "carne",
+       "titulo": "Interior negro-morado",
+       "texto": "Oscuro y granuloso enseguida, nunca blanco y blando.",
+       "d": "der"
+      },
+      {
+       "x": 11,
+       "y": 62,
+       "parte": "cutis",
+       "titulo": "Corteza blanca gruesa",
+       "texto": "Una capa blanquecina y dura alrededor.",
+       "d": "izq"
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "russula-emetica",
@@ -17148,7 +17357,71 @@
      }
     ]
    },
-   "anotadas": []
+   "anotadas": [
+    {
+     "titulo": "Sombrero rojo y pie blanco",
+     "foto": {
+      "sp": "Russula emetica",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/735740898/{s}.jpg",
+      "autor": "Eli Talhouk",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/400890865",
+      "origen": "iNaturalist",
+      "ar": 0.75
+     },
+     "puntos": [
+      {
+       "x": 45,
+       "y": 25,
+       "parte": "sombrero",
+       "titulo": "Rojo cereza, brillante",
+       "texto": "Piel pegajosa que se pela casi hasta el centro.",
+       "d": "arriba"
+      },
+      {
+       "x": 52,
+       "y": 60,
+       "parte": "pie",
+       "titulo": "Pie blanco puro",
+       "texto": "Liso, sin anillo ni volva; se rompe como tiza.",
+       "d": "der"
+      }
+     ],
+     "ojo": "Muy picante y causa vómitos. Hay varias rúsulas rojas, y no merece la pena: no recojas ninguna rúsula roja."
+    },
+    {
+     "titulo": "Láminas blancas y quebradizas",
+     "foto": {
+      "sp": "Russula emetica",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/735740893/{s}.jpg",
+      "autor": "Eli Talhouk",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/400890865",
+      "origen": "iNaturalist",
+      "ar": 0.75
+     },
+     "puntos": [
+      {
+       "x": 45,
+       "y": 18,
+       "parte": "himenio",
+       "titulo": "Láminas blancas",
+       "texto": "Apretadas; se rompen al pasar el dedo.",
+       "d": "arriba"
+      },
+      {
+       "x": 14,
+       "y": 50,
+       "parte": "carne",
+       "titulo": "Bajo la piel, carne rojiza",
+       "texto": "Justo bajo la piel roja, la carne se tiñe de rosa.",
+       "d": "izq"
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "lactarius-torminosus",
@@ -17388,7 +17661,71 @@
      }
     ]
    },
-   "anotadas": []
+   "anotadas": [
+    {
+     "titulo": "Borde enrollado y peludo",
+     "foto": {
+      "sp": "Lactarius torminosus",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/237442206/{s}.jpeg",
+      "autor": "Lorenz Wenner",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/138885437",
+      "origen": "iNaturalist",
+      "ar": 0.75
+     },
+     "puntos": [
+      {
+       "x": 34,
+       "y": 50,
+       "parte": "sombrero",
+       "titulo": "Borde con pelos",
+       "texto": "Lanoso, como barbas, y enrollado hacia dentro.",
+       "d": "izq"
+      },
+      {
+       "x": 60,
+       "y": 40,
+       "parte": "sombrero",
+       "titulo": "Rosa-salmón",
+       "texto": "Con círculos algo más oscuros.",
+       "d": "der"
+      }
+     ],
+     "ojo": "Es el falso níscalo. Rompe una lámina: si la leche es BLANCA y pica muchísimo, no es un níscalo (el níscalo la suelta naranja). Causa gastroenteritis."
+    },
+    {
+     "titulo": "Por debajo: láminas rosadas",
+     "foto": {
+      "sp": "Lactarius torminosus",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/237442166/{s}.jpeg",
+      "autor": "Lorenz Wenner",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/138885437",
+      "origen": "iNaturalist",
+      "ar": 0.75
+     },
+     "puntos": [
+      {
+       "x": 70,
+       "y": 52,
+       "parte": "himenio",
+       "titulo": "Láminas crema-rosadas",
+       "texto": "Al romperlas sueltan leche blanca muy picante.",
+       "d": "der"
+      },
+      {
+       "x": 55,
+       "y": 40,
+       "parte": "pie",
+       "titulo": "Pie rosado y hueco",
+       "texto": "Corto, del color del sombrero, sin anillo.",
+       "d": "der"
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "hygrophoropsis-aurantiaca",

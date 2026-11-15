@@ -1,0 +1,67 @@
+[
+ {
+  "_cand": "1.0",
+  "titulo": "Sombrero rojo y pie blanco",
+  "foto": {
+   "sp": "Russula emetica",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/735740898/{s}.jpg",
+   "autor": "Eli Talhouk",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/400890865",
+   "origen": "iNaturalist",
+   "ar": 0.75
+  },
+  "puntos": [
+   {
+    "x": 45,
+    "y": 25,
+    "parte": "sombrero",
+    "titulo": "Rojo cereza, brillante",
+    "texto": "Piel pegajosa que se pela casi hasta el centro.",
+    "d": "arriba"
+   },
+   {
+    "x": 52,
+    "y": 60,
+    "parte": "pie",
+    "titulo": "Pie blanco puro",
+    "texto": "Liso, sin anillo ni volva; se rompe como tiza.",
+    "d": "der"
+   }
+  ],
+  "ojo": "Muy picante y causa vómitos. Hay varias rúsulas rojas, y no merece la pena: no recojas ninguna rúsula roja."
+ },
+ {
+  "_cand": "1.2",
+  "titulo": "Láminas blancas y quebradizas",
+  "foto": {
+   "sp": "Russula emetica",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/735740893/{s}.jpg",
+   "autor": "Eli Talhouk",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/400890865",
+   "origen": "iNaturalist",
+   "ar": 0.75
+  },
+  "puntos": [
+   {
+    "x": 45,
+    "y": 18,
+    "parte": "himenio",
+    "titulo": "Láminas blancas",
+    "texto": "Apretadas; se rompen al pasar el dedo.",
+    "d": "arriba"
+   },
+   {
+    "x": 14,
+    "y": 50,
+    "parte": "carne",
+    "titulo": "Bajo la piel, carne rojiza",
+    "texto": "Justo bajo la piel roja, la carne se tiñe de rosa.",
+    "d": "izq"
+   }
+  ]
+ }
+]

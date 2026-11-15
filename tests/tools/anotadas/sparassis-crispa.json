@@ -1,0 +1,59 @@
+[
+ {
+  "_cand": "1.1",
+  "titulo": "Una «coliflor» al pie de un pino",
+  "foto": {
+   "sp": "Sparassis crispa",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/244944860/{s}.jpg",
+   "autor": "John Kenrick Gibson",
+   "licencia": "CC0",
+   "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+   "pagina": "https://www.inaturalist.org/observations/142831501",
+   "origen": "iNaturalist",
+   "ar": 1.3333
+  },
+  "puntos": [
+   {
+    "x": 50,
+    "y": 35,
+    "parte": "sombrero",
+    "titulo": "Masa en forma de coliflor",
+    "texto": "Bola de lóbulos ondulados, blanco-crema.",
+    "d": "arriba-izq"
+   },
+   {
+    "x": 90,
+    "y": 12,
+    "parte": "habitat",
+    "titulo": "Junto a la base de un pino",
+    "texto": "Sale pegada a las raíces de coníferas.",
+    "d": "der"
+   }
+  ],
+  "ojo": "No tiene parecidos peligrosos, pero solo se aprovecha joven, blanca y firme. Lávala bien: guarda tierra y agujas entre los pliegues."
+ },
+ {
+  "_cand": "6.0",
+  "titulo": "De cerca: lóbulos como lasaña",
+  "foto": {
+   "sp": "Sparassis crispa",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/72940571/{s}.jpeg",
+   "autor": "Sarka Masova",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/45990484",
+   "origen": "iNaturalist",
+   "ar": 1.3333
+  },
+  "puntos": [
+   {
+    "x": 50,
+    "y": 45,
+    "parte": "sombrero",
+    "titulo": "Lóbulos planos y rizados",
+    "texto": "Finos, ondulados, sin láminas ni poros.",
+    "d": "der"
+   }
+  ]
+ }
+]

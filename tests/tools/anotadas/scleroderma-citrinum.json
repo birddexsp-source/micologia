@@ -1,0 +1,59 @@
+[
+ {
+  "_cand": "2.0",
+  "titulo": "Bola dura con escamas",
+  "foto": {
+   "sp": "Scleroderma citrinum",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/441732674/{s}.jpeg",
+   "autor": "Kieran Roy Powell",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/247339590",
+   "origen": "iNaturalist",
+   "ar": 1.3333
+  },
+  "puntos": [
+   {
+    "x": 45,
+    "y": 50,
+    "parte": "cutis",
+    "titulo": "Piel gruesa con escamas",
+    "texto": "Amarillo-ocre, cuarteada en escamas oscuras.",
+    "d": "izq"
+   }
+  ],
+  "ojo": "Tóxica. Se confunde con el bejín (Lycoperdon) y con trufas. El bejín es blando y blanco por dentro; esta es dura, de piel gruesa y por dentro se vuelve negra-morada muy pronto."
+ },
+ {
+  "_cand": "1.2",
+  "titulo": "Cortada: interior oscuro",
+  "foto": {
+   "sp": "Scleroderma citrinum",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/96685472/{s}.jpg",
+   "autor": "Adam Kranz",
+   "licencia": "CC0",
+   "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+   "pagina": "https://www.inaturalist.org/observations/60466972",
+   "origen": "iNaturalist",
+   "ar": 0.75
+  },
+  "puntos": [
+   {
+    "x": 55,
+    "y": 55,
+    "parte": "carne",
+    "titulo": "Interior negro-morado",
+    "texto": "Oscuro y granuloso enseguida, nunca blanco y blando.",
+    "d": "der"
+   },
+   {
+    "x": 11,
+    "y": 62,
+    "parte": "cutis",
+    "titulo": "Corteza blanca gruesa",
+    "texto": "Una capa blanquecina y dura alrededor.",
+    "d": "izq"
+   }
+  ]
+ }
+]

@@ -1,0 +1,43 @@
+[
+ {
+  "_cand": "4.3",
+  "titulo": "Oreja gelatinosa",
+  "foto": {
+   "sp": "Auricularia auricula-judae",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/172065169/{s}.jpg",
+   "autor": "Wendy Herniman",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/102876974",
+   "origen": "iNaturalist",
+   "ar": 0.75
+  },
+  "puntos": [
+   {
+    "x": 45,
+    "y": 22,
+    "parte": "cutis",
+    "titulo": "Cara de arriba aterciopelada",
+    "texto": "Pardo-rojiza con pelitos finísimos.",
+    "d": "arriba"
+   },
+   {
+    "x": 40,
+    "y": 70,
+    "parte": "himenio",
+    "titulo": "Cara interior lisa",
+    "texto": "Más brillante, con pliegues como venas. Sin láminas.",
+    "d": "izq"
+   },
+   {
+    "x": 80,
+    "y": 60,
+    "parte": "cutis",
+    "titulo": "Borde con pelusa",
+    "texto": "Borde fino y algo peludo.",
+    "d": "der"
+   }
+  ],
+  "ojo": "Es elástica como goma con humedad; si una «oreja» es dura, leñosa o tiene láminas, es otra cosa."
+ }
+]

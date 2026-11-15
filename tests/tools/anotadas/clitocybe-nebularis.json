@@ -1,0 +1,59 @@
+[
+ {
+  "_cand": "0.2",
+  "titulo": "Grande y gris entre la hojarasca",
+  "foto": {
+   "sp": "Clitocybe nebularis",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/333789638/{s}.jpeg",
+   "autor": "Alexandr Stanislavschi",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/190412637",
+   "origen": "iNaturalist",
+   "ar": 1.3333
+  },
+  "puntos": [
+   {
+    "x": 50,
+    "y": 38,
+    "parte": "sombrero",
+    "titulo": "Gris con un velo blanquecino",
+    "texto": "Gris pálido, como enharinado.",
+    "d": "arriba"
+   },
+   {
+    "x": 48,
+    "y": 60,
+    "parte": "pie",
+    "titulo": "Pie grueso",
+    "texto": "Blanquecino, ensanchado en la base.",
+    "d": "izq"
+   }
+  ],
+  "ojo": "A muchas personas les sienta mal aunque esté cocinada, y se confunde con la Entoloma sinuatum, muy tóxica (láminas que se vuelven rosas). No es para empezar."
+ },
+ {
+  "_cand": "3.2",
+  "titulo": "Por debajo: láminas crema y apretadas",
+  "foto": {
+   "sp": "Clitocybe nebularis",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/28636536/{s}.jpg",
+   "autor": "Possums' End",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/18703063",
+   "origen": "iNaturalist",
+   "ar": 0.75
+  },
+  "puntos": [
+   {
+    "x": 55,
+    "y": 45,
+    "parte": "himenio",
+    "titulo": "Láminas crema",
+    "texto": "Apretadas, bajan un poco por el pie. Nunca rosas.",
+    "d": "der"
+   }
+  ]
+ }
+]
