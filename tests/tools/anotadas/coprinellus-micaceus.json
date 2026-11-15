@@ -1,0 +1,75 @@
+[
+ {
+  "_cand": "1.1",
+  "titulo": "Granitos que brillan como mica",
+  "foto": {
+   "sp": "Coprinellus micaceus",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/591137164/{s}.jpg",
+   "autor": "Gilles San Martin",
+   "licencia": "CC BY-SA 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/326398604",
+   "origen": "iNaturalist",
+   "ar": 0.7031
+  },
+  "puntos": [
+   {
+    "x": 45,
+    "y": 18,
+    "parte": "sombrero",
+    "titulo": "Granitos brillantes",
+    "texto": "Restos blancos como purpurina; la lluvia los quita.",
+    "d": "arriba-der"
+   },
+   {
+    "x": 20,
+    "y": 33,
+    "parte": "sombrero",
+    "titulo": "Estrías hasta el centro",
+    "texto": "Sombrero acampanado y rayado, pardo-miel.",
+    "d": "izq"
+   },
+   {
+    "x": 60,
+    "y": 70,
+    "parte": "pie",
+    "titulo": "Pie blanco y hueco",
+    "texto": "Fino, liso, sin anillo, se rompe fácil.",
+    "d": "der"
+   }
+  ],
+  "ojo": "Es pequeño y se deshace en horas: no merece la pena. Hay muchos coprinos parecidos; tampoco confundir con Psathyrella o Hypholoma en racimo."
+ },
+ {
+  "_cand": "2.0",
+  "titulo": "En racimo junto a madera",
+  "foto": {
+   "sp": "Coprinellus micaceus",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/548307777/{s}.jpg",
+   "autor": "gadzina",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/304167890",
+   "origen": "iNaturalist",
+   "ar": 0.75
+  },
+  "puntos": [
+   {
+    "x": 30,
+    "y": 15,
+    "parte": "habitat",
+    "titulo": "Tocón o raíces",
+    "texto": "Sale en grupos grandes al pie de árboles o tocones de frondosas.",
+    "d": "arriba"
+   },
+   {
+    "x": 62,
+    "y": 55,
+    "parte": "himenio",
+    "titulo": "Bordes que ennegrecen",
+    "texto": "Con la edad las láminas pasan de blancas a negras y se hacen tinta.",
+    "d": "der"
+   }
+  ]
+ }
+]

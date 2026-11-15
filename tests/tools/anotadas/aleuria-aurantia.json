@@ -1,0 +1,67 @@
+[
+ {
+  "_cand": "0.0",
+  "titulo": "Copa naranja, por fuera pálida",
+  "foto": {
+   "sp": "Aleuria aurantia",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/588583837/{s}.jpg",
+   "autor": "Gilles San Martin",
+   "licencia": "CC BY-SA 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/325115648",
+   "origen": "iNaturalist",
+   "ar": 1.3333
+  },
+  "puntos": [
+   {
+    "x": 60,
+    "y": 40,
+    "parte": "himenio",
+    "titulo": "Dentro, naranja liso",
+    "texto": "Naranja intenso y brillante: aquí se forman las esporas.",
+    "d": "arriba-der"
+   },
+   {
+    "x": 45,
+    "y": 75,
+    "parte": "cutis",
+    "titulo": "Fuera, pálida y granulosa",
+    "texto": "Más clara, como escarchada.",
+    "d": "abajo"
+   },
+   {
+    "x": 12,
+    "y": 90,
+    "parte": "habitat",
+    "titulo": "Tierra desnuda",
+    "texto": "Sin pie: apoyada directamente sobre el suelo.",
+    "d": "izq"
+   }
+  ],
+  "ojo": "Inconfundible por el color y la forma. No confundir con copas rojas con pelos en el borde (Scutellinia), que son diminutas."
+ },
+ {
+  "_cand": "4.1",
+  "titulo": "Copas onduladas y apretadas",
+  "foto": {
+   "sp": "Aleuria aurantia",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/608242693/{s}.jpg",
+   "autor": "Ellyne Geurts",
+   "licencia": "CC0",
+   "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+   "pagina": "https://www.inaturalist.org/observations/334883017",
+   "origen": "iNaturalist",
+   "ar": 1.3333
+  },
+  "puntos": [
+   {
+    "x": 45,
+    "y": 45,
+    "parte": "sombrero",
+    "titulo": "Bordes ondulados",
+    "texto": "Al crecer juntas se deforman y se retuercen.",
+    "d": "arriba"
+   }
+  ]
+ }
+]

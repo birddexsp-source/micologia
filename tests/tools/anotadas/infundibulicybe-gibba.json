@@ -1,0 +1,75 @@
+[
+ {
+  "_cand": "2.0",
+  "titulo": "Láminas que bajan por el pie",
+  "foto": {
+   "sp": "Infundibulicybe gibba",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/439541041/{s}.jpeg",
+   "autor": "pmgaspar",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/246235452",
+   "origen": "iNaturalist",
+   "ar": 0.8281
+  },
+  "puntos": [
+   {
+    "x": 30,
+    "y": 22,
+    "parte": "himenio",
+    "titulo": "Láminas blancas apretadas",
+    "texto": "Finas, muy juntas, de color crema.",
+    "d": "arriba-izq"
+   },
+   {
+    "x": 52,
+    "y": 42,
+    "parte": "himenio",
+    "titulo": "Bajan mucho por el pie",
+    "texto": "Se prolongan por el pie: forma de embudo.",
+    "d": "der"
+   },
+   {
+    "x": 52,
+    "y": 65,
+    "parte": "pie",
+    "titulo": "Pie liso sin anillo",
+    "texto": "Del color del sombrero o más pálido.",
+    "d": "der"
+   }
+  ],
+  "ojo": "Cuidado con las Clitocybe blancas pequeñas (C. rivulosa, C. dealbata), muy tóxicas: son blancas-grisáceas y crecen en prados. Esta es beige-canela y de bosque. Ante la duda, no."
+ },
+ {
+  "_cand": "6.2",
+  "titulo": "Sombrero en embudo",
+  "foto": {
+   "sp": "Infundibulicybe gibba",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/86324422/{s}.jpeg",
+   "autor": "evgeniq_benihanov",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/54255991",
+   "origen": "iNaturalist",
+   "ar": 0.75
+  },
+  "puntos": [
+   {
+    "x": 62,
+    "y": 68,
+    "parte": "sombrero",
+    "titulo": "Embudo beige-canela",
+    "texto": "Mate, con un pequeño bulto en el centro del hoyo.",
+    "d": "arriba-der"
+   },
+   {
+    "x": 20,
+    "y": 75,
+    "parte": "sombrero",
+    "titulo": "Borde fino y ondulado",
+    "texto": "Muy delgado, a veces rayado.",
+    "d": "izq"
+   }
+  ]
+ }
+]

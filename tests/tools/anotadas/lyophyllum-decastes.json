@@ -1,0 +1,75 @@
+[
+ {
+  "_cand": "6.0",
+  "titulo": "Racimo con pies unidos",
+  "foto": {
+   "sp": "Lyophyllum decastes",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/169980145/{s}.jpeg",
+   "autor": "Stuart Fraser",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/101757911",
+   "origen": "iNaturalist",
+   "ar": 0.75
+  },
+  "puntos": [
+   {
+    "x": 30,
+    "y": 32,
+    "parte": "sombrero",
+    "titulo": "Sombrero liso pardo",
+    "texto": "Gris-pardo, liso y algo graso; color muy variable.",
+    "d": "arriba-izq"
+   },
+   {
+    "x": 72,
+    "y": 62,
+    "parte": "pie",
+    "titulo": "Pies soldados abajo",
+    "texto": "Varios pies blancos que salen del mismo punto.",
+    "d": "der"
+   },
+   {
+    "x": 78,
+    "y": 82,
+    "parte": "himenio",
+    "titulo": "Láminas blancas",
+    "texto": "Blancas o crema, no se ponen verdes ni negras.",
+    "d": "abajo-der"
+   }
+  ],
+  "ojo": "En racimo también salen especies tóxicas: Hypholoma fasciculare (láminas verdosas, amargo), Entoloma y algunos Clitocybe. Esta tiene láminas blancas y pies pegados en la base. Sólo con ayuda de un experto."
+ },
+ {
+  "_cand": "0.3",
+  "titulo": "Láminas blancas apretadas",
+  "foto": {
+   "sp": "Lyophyllum decastes",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/329979038/{s}.jpeg",
+   "autor": "Erwin Sieben",
+   "licencia": "CC0",
+   "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+   "pagina": "https://www.inaturalist.org/observations/188519411",
+   "origen": "iNaturalist",
+   "ar": 1.4993
+  },
+  "puntos": [
+   {
+    "x": 60,
+    "y": 40,
+    "parte": "himenio",
+    "titulo": "Láminas blancas",
+    "texto": "Juntas, unidas al pie; esporada blanca.",
+    "d": "arriba-der"
+   },
+   {
+    "x": 45,
+    "y": 78,
+    "parte": "pie",
+    "titulo": "Pie blanquecino",
+    "texto": "Firme, fibroso, sin anillo.",
+    "d": "abajo"
+   }
+  ]
+ }
+]

@@ -1,0 +1,83 @@
+[
+ {
+  "_cand": "0.0",
+  "titulo": "Joven: láminas rosa pálido",
+  "foto": {
+   "sp": "Agaricus arvensis",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/308549981/{s}.jpeg",
+   "autor": "Morten Heegaard",
+   "licencia": "CC0",
+   "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+   "pagina": "https://www.inaturalist.org/observations/177322413",
+   "origen": "iNaturalist",
+   "ar": 1.3333
+  },
+  "puntos": [
+   {
+    "x": 58,
+    "y": 62,
+    "parte": "himenio",
+    "titulo": "Láminas gris-rosado",
+    "texto": "Nunca blancas puras en el adulto: rosa pálido y luego chocolate.",
+    "d": "arriba"
+   },
+   {
+    "x": 48,
+    "y": 58,
+    "parte": "anillo",
+    "titulo": "Anillo grande colgante",
+    "texto": "Membranoso, blanco, doble.",
+    "d": "abajo-izq"
+   },
+   {
+    "x": 20,
+    "y": 38,
+    "parte": "pie",
+    "titulo": "Base sin volva",
+    "texto": "Ni bolsa ni bulbo con borde: sólo tierra.",
+    "d": "izq"
+   },
+   {
+    "x": 72,
+    "y": 66,
+    "parte": "sombrero",
+    "titulo": "Blanco que amarillea",
+    "texto": "Al rozarlo se pone algo amarillo, sin ser chillón.",
+    "d": "der"
+   }
+  ],
+  "ojo": "El peligro es la Amanita blanca mortal (A. verna, A. phalloides blanca): láminas SIEMPRE blancas y volva en la base. Y el champiñón amarilleante (A. xanthodermus): huele a tinta y la base del pie se pone amarillo intenso al cortarla."
+ },
+ {
+  "_cand": "6.1",
+  "titulo": "Adulto: láminas chocolate",
+  "foto": {
+   "sp": "Agaricus arvensis",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/11737446/{s}.jpg",
+   "autor": "Paul Cook",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/8744203",
+   "origen": "iNaturalist",
+   "ar": 0.9121
+  },
+  "puntos": [
+   {
+    "x": 40,
+    "y": 40,
+    "parte": "himenio",
+    "titulo": "Láminas chocolate",
+    "texto": "Marrón oscuro con la edad: esporada marrón.",
+    "d": "arriba-izq"
+   },
+   {
+    "x": 60,
+    "y": 50,
+    "parte": "anillo",
+    "titulo": "Anillo en rueda dentada",
+    "texto": "Por debajo, con dibujo como un engranaje.",
+    "d": "der"
+   }
+  ]
+ }
+]

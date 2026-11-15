@@ -1,0 +1,67 @@
+[
+ {
+  "_cand": "0.0",
+  "titulo": "Sombrero naranja-rojizo",
+  "foto": {
+   "sp": "Hydnum rufescens",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/578043502/{s}.jpg",
+   "autor": "Matej Frančeškin",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/319755376",
+   "origen": "iNaturalist",
+   "ar": 1.0
+  },
+  "puntos": [
+   {
+    "x": 45,
+    "y": 28,
+    "parte": "sombrero",
+    "titulo": "Naranja-rojizo",
+    "texto": "Más pequeño y rojizo que la lengua de gato (Hydnum repandum).",
+    "d": "arriba"
+   },
+   {
+    "x": 50,
+    "y": 70,
+    "parte": "pie",
+    "titulo": "Pie pálido",
+    "texto": "Blanquecino, se mancha de naranja al tocarlo.",
+    "d": "der"
+   }
+  ],
+  "ojo": "Comestible de joven como la lengua de gato. Las setas con pinchos bajo el sombrero no tienen gemelas mortales, pero comprueba siempre que sean pinchos y no láminas."
+ },
+ {
+  "_cand": "0.2",
+  "titulo": "Debajo: pinchos, no láminas",
+  "foto": {
+   "sp": "Hydnum rufescens",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/578043606/{s}.jpg",
+   "autor": "Matej Frančeškin",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/319755376",
+   "origen": "iNaturalist",
+   "ar": 1.0
+  },
+  "puntos": [
+   {
+    "x": 35,
+    "y": 55,
+    "parte": "himenio",
+    "titulo": "Pinchos",
+    "texto": "Agujas cortas y blandas que cuelgan, como en la lengua del gato.",
+    "d": "izq"
+   },
+   {
+    "x": 60,
+    "y": 40,
+    "parte": "himenio",
+    "titulo": "Del color del sombrero",
+    "texto": "Pinchos naranja pálido, quebradizos; en la lengua de gato son crema.",
+    "d": "arriba-der"
+   }
+  ]
+ }
+]

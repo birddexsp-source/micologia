@@ -1,0 +1,75 @@
+[
+ {
+  "_cand": "1.0",
+  "titulo": "Pie alto y ancho abajo",
+  "foto": {
+   "sp": "Infundibulicybe geotropa",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/169347453/{s}.jpeg",
+   "autor": "bogsuckers",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/101403147",
+   "origen": "iNaturalist",
+   "ar": 1.0
+  },
+  "puntos": [
+   {
+    "x": 30,
+    "y": 15,
+    "parte": "himenio",
+    "titulo": "Láminas decurrentes",
+    "texto": "Crema, apretadas, bajan por el pie.",
+    "d": "arriba-izq"
+   },
+   {
+    "x": 40,
+    "y": 45,
+    "parte": "pie",
+    "titulo": "Pie largo y fibroso",
+    "texto": "Más largo que el ancho del sombrero; se engrosa hacia abajo.",
+    "d": "der"
+   },
+   {
+    "x": 45,
+    "y": 85,
+    "parte": "pie",
+    "titulo": "Base con micelio",
+    "texto": "Algodonosa, con restos de hojas pegados.",
+    "d": "der"
+   }
+  ],
+  "ojo": "Hay Clitocybe tóxicas parecidas pero más pequeñas y blancas. Tampoco confundir con Leucopaxillus (amargos). Fíjate en el tamaño grande, el bulto central y el pie largo y engrosado."
+ },
+ {
+  "_cand": "6.4",
+  "titulo": "Grande, crema, en corros",
+  "foto": {
+   "sp": "Infundibulicybe geotropa",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/350158408/{s}.jpg",
+   "autor": "Manuela Fiorini",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/198642128",
+   "origen": "iNaturalist",
+   "ar": 0.75
+  },
+  "puntos": [
+   {
+    "x": 60,
+    "y": 28,
+    "parte": "sombrero",
+    "titulo": "Bulto en el centro",
+    "texto": "Crema-anaranjado, con mamelón incluso cuando hace embudo.",
+    "d": "arriba"
+   },
+   {
+    "x": 63,
+    "y": 55,
+    "parte": "pie",
+    "titulo": "Pie robusto",
+    "texto": "Mucho más grueso que en la gibba.",
+    "d": "der"
+   }
+  ]
+ }
+]

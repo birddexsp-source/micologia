@@ -23004,7 +23004,79 @@
      }
     ]
    },
-   "anotadas": []
+   "anotadas": [
+    {
+     "titulo": "Granitos que brillan como mica",
+     "foto": {
+      "sp": "Coprinellus micaceus",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/591137164/{s}.jpg",
+      "autor": "Gilles San Martin",
+      "licencia": "CC BY-SA 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/326398604",
+      "origen": "iNaturalist",
+      "ar": 0.7031
+     },
+     "puntos": [
+      {
+       "x": 45,
+       "y": 18,
+       "parte": "sombrero",
+       "titulo": "Granitos brillantes",
+       "texto": "Restos blancos como purpurina; la lluvia los quita.",
+       "d": "arriba-der"
+      },
+      {
+       "x": 20,
+       "y": 33,
+       "parte": "sombrero",
+       "titulo": "Estrías hasta el centro",
+       "texto": "Sombrero acampanado y rayado, pardo-miel.",
+       "d": "izq"
+      },
+      {
+       "x": 60,
+       "y": 70,
+       "parte": "pie",
+       "titulo": "Pie blanco y hueco",
+       "texto": "Fino, liso, sin anillo, se rompe fácil.",
+       "d": "der"
+      }
+     ],
+     "ojo": "Es pequeño y se deshace en horas: no merece la pena. Hay muchos coprinos parecidos; tampoco confundir con Psathyrella o Hypholoma en racimo."
+    },
+    {
+     "titulo": "En racimo junto a madera",
+     "foto": {
+      "sp": "Coprinellus micaceus",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/548307777/{s}.jpg",
+      "autor": "gadzina",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/304167890",
+      "origen": "iNaturalist",
+      "ar": 0.75
+     },
+     "puntos": [
+      {
+       "x": 30,
+       "y": 15,
+       "parte": "habitat",
+       "titulo": "Tocón o raíces",
+       "texto": "Sale en grupos grandes al pie de árboles o tocones de frondosas.",
+       "d": "arriba"
+      },
+      {
+       "x": 62,
+       "y": 55,
+       "parte": "himenio",
+       "titulo": "Bordes que ennegrecen",
+       "texto": "Con la edad las láminas pasan de blancas a negras y se hacen tinta.",
+       "d": "der"
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "aleuria-aurantia",
@@ -23193,7 +23265,71 @@
      }
     ]
    },
-   "anotadas": []
+   "anotadas": [
+    {
+     "titulo": "Copa naranja, por fuera pálida",
+     "foto": {
+      "sp": "Aleuria aurantia",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/588583837/{s}.jpg",
+      "autor": "Gilles San Martin",
+      "licencia": "CC BY-SA 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/325115648",
+      "origen": "iNaturalist",
+      "ar": 1.3333
+     },
+     "puntos": [
+      {
+       "x": 60,
+       "y": 40,
+       "parte": "himenio",
+       "titulo": "Dentro, naranja liso",
+       "texto": "Naranja intenso y brillante: aquí se forman las esporas.",
+       "d": "arriba-der"
+      },
+      {
+       "x": 45,
+       "y": 75,
+       "parte": "cutis",
+       "titulo": "Fuera, pálida y granulosa",
+       "texto": "Más clara, como escarchada.",
+       "d": "abajo"
+      },
+      {
+       "x": 12,
+       "y": 90,
+       "parte": "habitat",
+       "titulo": "Tierra desnuda",
+       "texto": "Sin pie: apoyada directamente sobre el suelo.",
+       "d": "izq"
+      }
+     ],
+     "ojo": "Inconfundible por el color y la forma. No confundir con copas rojas con pelos en el borde (Scutellinia), que son diminutas."
+    },
+    {
+     "titulo": "Copas onduladas y apretadas",
+     "foto": {
+      "sp": "Aleuria aurantia",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/608242693/{s}.jpg",
+      "autor": "Ellyne Geurts",
+      "licencia": "CC0",
+      "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "pagina": "https://www.inaturalist.org/observations/334883017",
+      "origen": "iNaturalist",
+      "ar": 1.3333
+     },
+     "puntos": [
+      {
+       "x": 45,
+       "y": 45,
+       "parte": "sombrero",
+       "titulo": "Bordes ondulados",
+       "texto": "Al crecer juntas se deforman y se retuercen.",
+       "d": "arriba"
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "helvella-crispa",
@@ -23382,7 +23518,79 @@
      }
     ]
    },
-   "anotadas": []
+   "anotadas": [
+    {
+     "titulo": "Silla de montar blanca",
+     "foto": {
+      "sp": "Helvella crispa",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/452852768/{s}.jpeg",
+      "autor": "Julia Ariadna",
+      "licencia": "CC0",
+      "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "pagina": "https://www.inaturalist.org/observations/252950544",
+      "origen": "iNaturalist",
+      "ar": 0.75
+     },
+     "puntos": [
+      {
+       "x": 40,
+       "y": 33,
+       "parte": "sombrero",
+       "titulo": "Sombrero en lóbulos",
+       "texto": "Blanco-crema, doblado como una silla de montar, sin celdas.",
+       "d": "arriba-izq"
+      },
+      {
+       "x": 45,
+       "y": 65,
+       "parte": "pie",
+       "titulo": "Pie con costillas",
+       "texto": "Profundos surcos y huecos a lo largo, como columnas.",
+       "d": "izq"
+      },
+      {
+       "x": 85,
+       "y": 75,
+       "parte": "habitat",
+       "titulo": "Hojarasca",
+       "texto": "En bosques húmedos de frondosas y bordes de caminos.",
+       "d": "der"
+      }
+     ],
+     "ojo": "No se come: cruda es tóxica y de las Helvella no se fía nadie. Las colmenillas (Morchella) tienen el sombrero con celdas como un panal, no lóbulos lisos."
+    },
+    {
+     "titulo": "El pie por dentro y por fuera",
+     "foto": {
+      "sp": "Helvella crispa",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/331609151/{s}.jpg",
+      "autor": "Erwin Sieben",
+      "licencia": "CC0",
+      "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "pagina": "https://www.inaturalist.org/observations/189319145",
+      "origen": "iNaturalist",
+      "ar": 0.75
+     },
+     "puntos": [
+      {
+       "x": 48,
+       "y": 65,
+       "parte": "pie",
+       "titulo": "Costillas y cámaras",
+       "texto": "Acanalado y hueco por dentro: frágil.",
+       "d": "der"
+      },
+      {
+       "x": 55,
+       "y": 35,
+       "parte": "sombrero",
+       "titulo": "Lóbulos finos",
+       "texto": "Delgados, de borde libre.",
+       "d": "arriba"
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "hydnum-rufescens",
@@ -23563,7 +23771,71 @@
      }
     ]
    },
-   "anotadas": []
+   "anotadas": [
+    {
+     "titulo": "Sombrero naranja-rojizo",
+     "foto": {
+      "sp": "Hydnum rufescens",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/578043502/{s}.jpg",
+      "autor": "Matej Frančeškin",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/319755376",
+      "origen": "iNaturalist",
+      "ar": 1.0
+     },
+     "puntos": [
+      {
+       "x": 45,
+       "y": 28,
+       "parte": "sombrero",
+       "titulo": "Naranja-rojizo",
+       "texto": "Más pequeño y rojizo que la lengua de gato (Hydnum repandum).",
+       "d": "arriba"
+      },
+      {
+       "x": 50,
+       "y": 70,
+       "parte": "pie",
+       "titulo": "Pie pálido",
+       "texto": "Blanquecino, se mancha de naranja al tocarlo.",
+       "d": "der"
+      }
+     ],
+     "ojo": "Comestible de joven como la lengua de gato. Las setas con pinchos bajo el sombrero no tienen gemelas mortales, pero comprueba siempre que sean pinchos y no láminas."
+    },
+    {
+     "titulo": "Debajo: pinchos, no láminas",
+     "foto": {
+      "sp": "Hydnum rufescens",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/578043606/{s}.jpg",
+      "autor": "Matej Frančeškin",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/319755376",
+      "origen": "iNaturalist",
+      "ar": 1.0
+     },
+     "puntos": [
+      {
+       "x": 35,
+       "y": 55,
+       "parte": "himenio",
+       "titulo": "Pinchos",
+       "texto": "Agujas cortas y blandas que cuelgan, como en la lengua del gato.",
+       "d": "izq"
+      },
+      {
+       "x": 60,
+       "y": 40,
+       "parte": "himenio",
+       "titulo": "Del color del sombrero",
+       "texto": "Pinchos naranja pálido, quebradizos; en la lengua de gato son crema.",
+       "d": "arriba-der"
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "infundibulicybe-gibba",
@@ -23749,7 +24021,79 @@
      }
     ]
    },
-   "anotadas": []
+   "anotadas": [
+    {
+     "titulo": "Láminas que bajan por el pie",
+     "foto": {
+      "sp": "Infundibulicybe gibba",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/439541041/{s}.jpeg",
+      "autor": "pmgaspar",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/246235452",
+      "origen": "iNaturalist",
+      "ar": 0.8281
+     },
+     "puntos": [
+      {
+       "x": 30,
+       "y": 22,
+       "parte": "himenio",
+       "titulo": "Láminas blancas apretadas",
+       "texto": "Finas, muy juntas, de color crema.",
+       "d": "arriba-izq"
+      },
+      {
+       "x": 52,
+       "y": 42,
+       "parte": "himenio",
+       "titulo": "Bajan mucho por el pie",
+       "texto": "Se prolongan por el pie: forma de embudo.",
+       "d": "der"
+      },
+      {
+       "x": 52,
+       "y": 65,
+       "parte": "pie",
+       "titulo": "Pie liso sin anillo",
+       "texto": "Del color del sombrero o más pálido.",
+       "d": "der"
+      }
+     ],
+     "ojo": "Cuidado con las Clitocybe blancas pequeñas (C. rivulosa, C. dealbata), muy tóxicas: son blancas-grisáceas y crecen en prados. Esta es beige-canela y de bosque. Ante la duda, no."
+    },
+    {
+     "titulo": "Sombrero en embudo",
+     "foto": {
+      "sp": "Infundibulicybe gibba",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/86324422/{s}.jpeg",
+      "autor": "evgeniq_benihanov",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/54255991",
+      "origen": "iNaturalist",
+      "ar": 0.75
+     },
+     "puntos": [
+      {
+       "x": 62,
+       "y": 68,
+       "parte": "sombrero",
+       "titulo": "Embudo beige-canela",
+       "texto": "Mate, con un pequeño bulto en el centro del hoyo.",
+       "d": "arriba-der"
+      },
+      {
+       "x": 20,
+       "y": 75,
+       "parte": "sombrero",
+       "titulo": "Borde fino y ondulado",
+       "texto": "Muy delgado, a veces rayado.",
+       "d": "izq"
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "infundibulicybe-geotropa",
@@ -23952,7 +24296,79 @@
      }
     ]
    },
-   "anotadas": []
+   "anotadas": [
+    {
+     "titulo": "Pie alto y ancho abajo",
+     "foto": {
+      "sp": "Infundibulicybe geotropa",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/169347453/{s}.jpeg",
+      "autor": "bogsuckers",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/101403147",
+      "origen": "iNaturalist",
+      "ar": 1.0
+     },
+     "puntos": [
+      {
+       "x": 30,
+       "y": 15,
+       "parte": "himenio",
+       "titulo": "Láminas decurrentes",
+       "texto": "Crema, apretadas, bajan por el pie.",
+       "d": "arriba-izq"
+      },
+      {
+       "x": 40,
+       "y": 45,
+       "parte": "pie",
+       "titulo": "Pie largo y fibroso",
+       "texto": "Más largo que el ancho del sombrero; se engrosa hacia abajo.",
+       "d": "der"
+      },
+      {
+       "x": 45,
+       "y": 85,
+       "parte": "pie",
+       "titulo": "Base con micelio",
+       "texto": "Algodonosa, con restos de hojas pegados.",
+       "d": "der"
+      }
+     ],
+     "ojo": "Hay Clitocybe tóxicas parecidas pero más pequeñas y blancas. Tampoco confundir con Leucopaxillus (amargos). Fíjate en el tamaño grande, el bulto central y el pie largo y engrosado."
+    },
+    {
+     "titulo": "Grande, crema, en corros",
+     "foto": {
+      "sp": "Infundibulicybe geotropa",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/350158408/{s}.jpg",
+      "autor": "Manuela Fiorini",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/198642128",
+      "origen": "iNaturalist",
+      "ar": 0.75
+     },
+     "puntos": [
+      {
+       "x": 60,
+       "y": 28,
+       "parte": "sombrero",
+       "titulo": "Bulto en el centro",
+       "texto": "Crema-anaranjado, con mamelón incluso cuando hace embudo.",
+       "d": "arriba"
+      },
+      {
+       "x": 63,
+       "y": 55,
+       "parte": "pie",
+       "titulo": "Pie robusto",
+       "texto": "Mucho más grueso que en la gibba.",
+       "d": "der"
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "lyophyllum-decastes",
@@ -24124,7 +24540,79 @@
      }
     ]
    },
-   "anotadas": []
+   "anotadas": [
+    {
+     "titulo": "Racimo con pies unidos",
+     "foto": {
+      "sp": "Lyophyllum decastes",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/169980145/{s}.jpeg",
+      "autor": "Stuart Fraser",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/101757911",
+      "origen": "iNaturalist",
+      "ar": 0.75
+     },
+     "puntos": [
+      {
+       "x": 30,
+       "y": 32,
+       "parte": "sombrero",
+       "titulo": "Sombrero liso pardo",
+       "texto": "Gris-pardo, liso y algo graso; color muy variable.",
+       "d": "arriba-izq"
+      },
+      {
+       "x": 72,
+       "y": 62,
+       "parte": "pie",
+       "titulo": "Pies soldados abajo",
+       "texto": "Varios pies blancos que salen del mismo punto.",
+       "d": "der"
+      },
+      {
+       "x": 78,
+       "y": 82,
+       "parte": "himenio",
+       "titulo": "Láminas blancas",
+       "texto": "Blancas o crema, no se ponen verdes ni negras.",
+       "d": "abajo-der"
+      }
+     ],
+     "ojo": "En racimo también salen especies tóxicas: Hypholoma fasciculare (láminas verdosas, amargo), Entoloma y algunos Clitocybe. Esta tiene láminas blancas y pies pegados en la base. Sólo con ayuda de un experto."
+    },
+    {
+     "titulo": "Láminas blancas apretadas",
+     "foto": {
+      "sp": "Lyophyllum decastes",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/329979038/{s}.jpeg",
+      "autor": "Erwin Sieben",
+      "licencia": "CC0",
+      "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "pagina": "https://www.inaturalist.org/observations/188519411",
+      "origen": "iNaturalist",
+      "ar": 1.4993
+     },
+     "puntos": [
+      {
+       "x": 60,
+       "y": 40,
+       "parte": "himenio",
+       "titulo": "Láminas blancas",
+       "texto": "Juntas, unidas al pie; esporada blanca.",
+       "d": "arriba-der"
+      },
+      {
+       "x": 45,
+       "y": 78,
+       "parte": "pie",
+       "titulo": "Pie blanquecino",
+       "texto": "Firme, fibroso, sin anillo.",
+       "d": "abajo"
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "agaricus-arvensis",
@@ -24332,7 +24820,87 @@
      }
     ]
    },
-   "anotadas": []
+   "anotadas": [
+    {
+     "titulo": "Joven: láminas rosa pálido",
+     "foto": {
+      "sp": "Agaricus arvensis",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/308549981/{s}.jpeg",
+      "autor": "Morten Heegaard",
+      "licencia": "CC0",
+      "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "pagina": "https://www.inaturalist.org/observations/177322413",
+      "origen": "iNaturalist",
+      "ar": 1.3333
+     },
+     "puntos": [
+      {
+       "x": 58,
+       "y": 62,
+       "parte": "himenio",
+       "titulo": "Láminas gris-rosado",
+       "texto": "Nunca blancas puras en el adulto: rosa pálido y luego chocolate.",
+       "d": "arriba"
+      },
+      {
+       "x": 48,
+       "y": 58,
+       "parte": "anillo",
+       "titulo": "Anillo grande colgante",
+       "texto": "Membranoso, blanco, doble.",
+       "d": "abajo-izq"
+      },
+      {
+       "x": 20,
+       "y": 38,
+       "parte": "pie",
+       "titulo": "Base sin volva",
+       "texto": "Ni bolsa ni bulbo con borde: sólo tierra.",
+       "d": "izq"
+      },
+      {
+       "x": 72,
+       "y": 66,
+       "parte": "sombrero",
+       "titulo": "Blanco que amarillea",
+       "texto": "Al rozarlo se pone algo amarillo, sin ser chillón.",
+       "d": "der"
+      }
+     ],
+     "ojo": "El peligro es la Amanita blanca mortal (A. verna, A. phalloides blanca): láminas SIEMPRE blancas y volva en la base. Y el champiñón amarilleante (A. xanthodermus): huele a tinta y la base del pie se pone amarillo intenso al cortarla."
+    },
+    {
+     "titulo": "Adulto: láminas chocolate",
+     "foto": {
+      "sp": "Agaricus arvensis",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/11737446/{s}.jpg",
+      "autor": "Paul Cook",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/8744203",
+      "origen": "iNaturalist",
+      "ar": 0.9121
+     },
+     "puntos": [
+      {
+       "x": 40,
+       "y": 40,
+       "parte": "himenio",
+       "titulo": "Láminas chocolate",
+       "texto": "Marrón oscuro con la edad: esporada marrón.",
+       "d": "arriba-izq"
+      },
+      {
+       "x": 60,
+       "y": 50,
+       "parte": "anillo",
+       "titulo": "Anillo en rueda dentada",
+       "texto": "Por debajo, con dibujo como un engranaje.",
+       "d": "der"
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "amanita-gemmata",
