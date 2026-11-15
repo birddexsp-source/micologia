@@ -26,6 +26,25 @@ module.exports = {
       await ir('mas'); t.ok('Más: curiosidades, fuentes y créditos', await dentro('mas', '.curi') && /Fuentes/.test(await t.T('#sheet .fp[data-fp="mas"]') || '') && /Créditos/.test(await t.T('#sheet .fp[data-fp="mas"]') || ''));
       t.eq('la pestaña activa es «Más»', await t.page.evaluate(() => document.querySelector('#sheet .ft.on').dataset.ft), 'mas');
     });
+    await t.case('fotos con flechas: visor de una foto cada vez, tocar un número y cambiar de foto', async () => {
+      await abrir('amanita-phalloides');
+      const q = f => t.page.evaluate(f);
+      t.ok('el visor va lo primero en «Identificar»', await q(() => document.querySelector('#sheet .fp[data-fp="ident"] .fc').classList.contains('fc-vz')));
+      const n = await q(() => ({ fotos: document.querySelectorAll('#sheet .vz-s').length, tabs: document.querySelectorAll('#sheet .vz-t').length, on: [...document.querySelectorAll('#sheet .vz-s')].map(f => f.querySelectorAll('.apl li.on').length), cr: document.querySelectorAll('#sheet .vz-cr').length, ojo: document.querySelectorAll('#sheet .vz .a-ojo').length }));
+      t.ok('una pestaña por foto y una explicación visible por foto', n.fotos >= 2 && n.tabs === n.fotos && n.on.every(x => x === 1), JSON.stringify(n));
+      t.ok('autor y licencia sobre cada foto; aviso de peligro una sola vez', n.cr === n.fotos && n.ojo === 1);
+      const txt = () => q(() => document.querySelector('#sheet .vz-s[data-k="0"] .apl li.on b').textContent);
+      const t1 = await txt();
+      await t.page.click('#sheet .vz-s[data-k="0"] .ap[data-vp="1"] .ap-n'); await t.wait(200);
+      const t2 = await txt();
+      t.ok('tocar el número 2 enseña su explicación y lo resalta', t2 !== t1 && await q(() => document.querySelector('#sheet .vz-s[data-k="0"] .ap[data-vp="1"]').classList.contains('on')));
+      await t.page.click('#sheet .vz-s[data-k="0"] [data-vn="-1"]'); await t.wait(200);
+      t.eq('‹ vuelve al anterior', await txt(), t1);
+      await t.page.click('#sheet .vz-t[data-vs="1"]'); await t.wait(900);
+      const r = await q(() => { const c = document.querySelector('#sheet .vz-car'); return { i: Math.round(c.scrollLeft / c.clientWidth), on: document.querySelector('#sheet .vz-t.on').dataset.vs }; });
+      t.ok('la pestaña de la foto 2 lleva a la foto 2', r.i === 1 && r.on === '1', JSON.stringify(r));
+      t.ok('la ficha sigue abierta (el visor no dispara otros botones)', await t.has('#sheet .fh h2'));
+    });
     await t.case('tocar un dato del resumen salta a su pestaña', async () => {
       await abrir('boletus-edulis');
       await t.page.click('#sheet .rs[data-ft="hab"]'); await t.wait(300);

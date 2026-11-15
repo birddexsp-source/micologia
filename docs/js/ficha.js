@@ -132,13 +132,40 @@ function angulo(p) {
   if (fx || fy) a = Math.round(Math.atan2(fy ? -dy : dy, fx ? -dx : dx) * 180 / Math.PI);
   return a;
 }
+const ETQ = { himenio: 'Láminas o poros', cutis: 'Piel', habitat: 'Dónde sale', otro: 'Detalle', esporada: 'Esporas' };
+const etq = k => ETQ[k] || parte(k).nombre;
 function anotadas(e) {
   const A = e.anotadas || []; if (!A.length) return '';
-  return A.map(a => '<figure class="anot">' + (a.titulo ? '<b class="a-t">' + esc(a.titulo) + '</b>' : '') + '<span class="anw"' + (a.foto.ar ? ' style="--ar:' + a.foto.ar + '"' : '') + '>' + foto(a.foto, 960, { cls: 'big', alt: e.nombreCientifico + (a.titulo ? ': ' + a.titulo : '') }) +
-    a.puntos.map((p, i) => '<span class="ap" style="left:' + p.x + '%;top:' + p.y + '%;--c:' + parte(p.parte).color + ';--a:' + angulo(p) + 'deg"><i class="ap-l"></i><i class="ap-p"></i><b class="ap-n">' + (i + 1) + '</b></span>').join('') + '</span>' +
-    '<ol class="apl">' + a.puntos.map((p, i) => '<li style="--c:' + parte(p.parte).color + '"><i>' + (i + 1) + '</i><span><b>' + esc(p.titulo) + '</b>' + (p.texto ? ' ' + esc(p.texto) : '') + '</span></li>').join('') + '</ol>' +
-    (a.ojo ? '<p class="a-ojo">⚠ ' + esc(a.ojo) + '</p>' : '') +
-    '<figcaption>' + esc(a.foto.sp) + ' · ' + esc(a.foto.autor) + ' · ' + esc(a.foto.licencia) + '</figcaption></figure>').join('');
+  const ojo = A.map(a => a.ojo).filter(Boolean);
+  return '<div class="vz" data-vz>' +
+    (A.length > 1 ? '<div class="vz-tabs" role="tablist">' + A.map((a, k) => '<button class="vz-t' + (k ? '' : ' on') + '" data-vs="' + k + '"><i>' + (k + 1) + '</i>' + esc(a.titulo || 'Foto ' + (k + 1)) + '</button>').join('') + '</div>' : '') +
+    '<div class="vz-car">' + A.map((a, k) => '<figure class="anot vz-s" data-k="' + k + '">' +
+      '<span class="anw"' + (a.foto.ar ? ' style="--ar:' + a.foto.ar + '"' : '') + '>' + foto(a.foto, 960, { cls: 'big', alt: e.nombreCientifico + (a.titulo ? ': ' + a.titulo : '') }) +
+      a.puntos.map((p, i) => '<button class="ap' + (i ? '' : ' on') + '" data-vp="' + i + '" aria-label="' + esc(p.titulo) + '" style="left:' + p.x + '%;top:' + p.y + '%;--c:' + parte(p.parte).color + ';--a:' + angulo(p) + 'deg"><i class="ap-l"></i><i class="ap-p"></i><b class="ap-n">' + (i + 1) + '</b></button>').join('') +
+      '<small class="vz-cr">' + esc(a.foto.autor) + ' · ' + esc(a.foto.licencia) + '</small>' + (A.length > 1 ? '<small class="vz-k">' + (k + 1) + '/' + A.length + '</small>' : '') + '</span>' +
+      '<ol class="apl">' + a.puntos.map((p, i) => '<li class="' + (i ? '' : 'on') + '" style="--c:' + parte(p.parte).color + '"><i>' + (i + 1) + '</i><span><small>' + esc(parte(p.parte).nombre) + '</small><b>' + esc(p.titulo) + '</b>' + (p.texto ? esc(p.texto) : '') + '</span></li>').join('') +
+      '</ol>' + (a.puntos.length > 1 ? '<div class="vz-nav"><button data-vn="-1" aria-label="Punto anterior">‹</button><span>' + a.puntos.map((p, i) => '<i class="' + (i ? '' : 'on') + '" style="--c:' + parte(p.parte).color + '"></i>').join('') + '</span><button data-vn="1" aria-label="Punto siguiente">›</button></div>' : '') +
+      '<figcaption>' + esc(a.foto.sp) + ' · ' + esc(a.foto.autor) + ' · ' + esc(a.foto.licencia) + '</figcaption></figure>').join('') + '</div>' +
+    (ojo.length ? '<div class="a-ojo"><i>' + FI_AVISO + '</i><span><b>Con cuidado</b>' + ojo.map(esc).join(' ') + '</span></div>' : '') + '</div>';
+}
+/* visor: tocar un número, pasar puntos con ‹ ›, cambiar de foto deslizando o con las pestañas */
+export function activarVisor(root) {
+  root.querySelectorAll('[data-vz]').forEach(vz => {
+    const car = vz.querySelector('.vz-car'), tabs = [...vz.querySelectorAll('.vz-t')];
+    const figs = [...vz.querySelectorAll('.vz-s')]; let act = 0;
+    const alto = () => { if (figs.length > 1 && figs[act]) car.style.height = figs[act].offsetHeight + 'px'; };
+    const marca = k => { act = k; alto(); tabs.forEach((t, j) => { t.classList.toggle('on', j === k); if (j === k && t.parentElement.scrollWidth > t.parentElement.clientWidth) t.parentElement.scrollTo({ left: t.offsetLeft - 14, behavior: 'smooth' }); }); };
+    vz.querySelectorAll('img').forEach(i => i.addEventListener('load', alto)); requestAnimationFrame(alto);
+    const punto = (fig, i) => { const n = fig.querySelectorAll('.apl li').length; i = (i + n) % n;
+      fig.querySelectorAll('.ap').forEach((x, j) => x.classList.toggle('on', j === i)); fig.querySelectorAll('.apl li').forEach((x, j) => x.classList.toggle('on', j === i));
+      fig.querySelectorAll('.vz-nav i').forEach((x, j) => x.classList.toggle('on', j === i)); fig.dataset.p = i; alto(); };
+    let tm; car.addEventListener('scroll', () => { clearTimeout(tm); tm = setTimeout(() => marca(Math.round(car.scrollLeft / Math.max(1, car.clientWidth))), 60); }, { passive: true });
+    vz.addEventListener('click', ev => { const b = ev.target.closest('button'); if (!b || !vz.contains(b)) return; ev.stopPropagation();
+      const fig = b.closest('.vz-s');
+      if (b.dataset.vs) { const k = +b.dataset.vs; car.scrollTo({ left: k * car.clientWidth, behavior: 'smooth' }); marca(k); }
+      else if (b.dataset.vp) punto(fig, +b.dataset.vp);
+      else if (b.dataset.vn) punto(fig, (+fig.dataset.p || 0) + +b.dataset.vn); });
+  });
 }
 /* ---------- estructura: cabecera fija, resumen rápido y pestañas; dentro, tarjetas con el mismo formato ---------- */
 const sv = d => '<svg viewBox="0 0 24 24">' + d + '</svg>';
@@ -150,6 +177,7 @@ const FI = {
   estrella: sv('<path d="M12 3l2.800 5.800 6.200.9-4.500 4.400 1 6.200L12 17.400 6.500 20.300l1-6.200L3 9.700l6.200-.9z"/>'), libro: sv('<path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2zM4 19a2 2 0 0 1 2-2h13"/>'),
   nombre: sv('<path d="M3 12V4h8l10 10-8 8z"/><circle cx="7.500" cy="8.500" r="1"/>'), pares: sv('<circle cx="8" cy="12" r="5"/><circle cx="16" cy="12" r="5"/>'), dato: sv('<path d="M4 6h16M4 12h16M4 18h10"/>')
 };
+const FI_AVISO = '<svg viewBox="0 0 24 24"><path d="M12 3l10 18H2z"/><path d="M12 10v5M12 18v.5"/></svg>';
 const card = (ic, t, body, o = {}) => body ? '<section class="fc' + (o.cls ? ' ' + o.cls : '') + '"><header class="fc-h"><i>' + FI[ic] + '</i><h3>' + t + '</h3>' + (o.sub ? '<small>' + o.sub + '</small>' : '') + '</header>' + body + '</section>' : '';
 /* meses de pleno: «Sep–Nov» */
 function rangoMeses(e) {
@@ -175,7 +203,7 @@ function paneles(e, mes) {
     (e.sindrome ? card('aviso', 'Si es tóxica', '<dl class="kv"><dt>Síndrome</dt><dd>' + esc(e.sindrome) + '</dd>' + (e.latencia ? '<dt>Aparece a las</dt><dd>' + esc(e.latencia) + '</dd>' : '') + (e.gravedad ? '<dt>Gravedad</dt><dd>' + esc(e.gravedad) + '</dd>' : '') + '</dl><p class="fc-p">Intoxicación: urgencias ya (112), con restos de la seta y la hora de ingestión. No esperar a que «pase».</p>', { cls: 'tox' }) : '') +
     card('corta', 'Cómo recogerla', recoger(e));
   const P = {
-    ident: card('lista', 'Qué mirar', queMirar(e) + esporada(e) + '<div class="row"><button class="btn" data-g="">Ver las partes de la seta</button></div>') + card('foto', 'En la foto: dónde mirar', anotadas(e)),
+    ident: card('foto', 'Fíjate en esto', anotadas(e), { cls: 'fc-vz', sub: (e.anotadas || []).length > 1 ? (e.anotadas.length + ' fotos · desliza') : '' }) + card('lista', 'Qué mirar', queMirar(e) + esporada(e) + '<div class="row"><button class="btn" data-g="">Ver las partes de la seta</button></div>'),
     conf: (e.confusiones || []).length ? '<p class="fp-intro">Estas setas se parecen a esta. Compara las diferencias antes de decidir nada.</p>' + confusiones(e) : '',
     hab: habitat(e),
     cuando: card('cal', 'Meses del año', td.hay ? barrasHTML(e, mes) + '<p class="fc-p">' + esc(fuenteTxt(e)) + '</p>' : '<p class="fc-p">' + esc(fuenteTxt(e)) + '</p>') + cuandoSale(e),

@@ -16,7 +16,7 @@ import * as off from './offline.js';
 import { renderPlan } from './plan.js';
 import * as lug from './lugar.js';
 
-const APP_V = 'micologia-v36';   // = V de sw.js
+const APP_V = 'micologia-v37';   // = V de sw.js
 const S = { view: 'mapa', arg: '', map: null, pins: null, me: null, acc: null, tmp: null, mini: null, centered: false, filtro: { salida: '', especie: '' }, clase: '', q: '', syncErr: false, mes: new Date().getMonth() + 1 };
 const VIEWS = ['mapa', 'salidas', 'salida', 'setas', 'mes', 'plan', 'ajustes'];
 const TITULOS = { mapa: 'Mapa', salidas: 'Salidas', salida: 'Salida', setas: 'Setas', mes: 'Este mes', plan: 'Plan de salida', ajustes: 'Ajustes' };
@@ -779,7 +779,7 @@ function leyendaMapa() {
 }
 function abrirFicha(id) {
   const e = cat.byId(id); if (!e) return;
-  const sh = openSheet(fi.fichaHTML(e, S.mes)), hero = $('#hero', sh), dots = $$('#dots i', sh); sh.dataset.fid = id;
+  const sh = openSheet(fi.fichaHTML(e, S.mes)), hero = $('#hero', sh), dots = $$('#dots i', sh); sh.dataset.fid = id; fi.activarVisor(sh);
   if (hero && dots.length) hero.onscroll = () => { const i = Math.round(hero.scrollLeft / Math.max(1, hero.clientWidth)); dots.forEach((d, k) => d.classList.toggle('on', k === i)); };
   if (S.ftBack && S.ftBack.id === id) { fichaTab(sh, S.ftBack.tab); } S.ftBack = null;
   const sal = () => { S.ftBack = { id, tab: (S.ftab && S.ftab.id === id && S.ftab.tab) || 'ident' }; };
