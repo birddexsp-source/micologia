@@ -76,3 +76,9 @@ La clave (gratis, aistudio.google.com/apikey) **no está en el repo**: se pega e
 
 ## Mapa sin conexión
 Ajustes → «Mapa sin conexión»: lista de zonas para marcar y descargar de una vez (Bermeo completo con sus montes, Mundaka, Sukarrieta, Busturia y Bakio, más «Mis spots» y «Centro del mapa»), con peso estimado de cada una y ✓ en las ya guardadas. Baja la foto aérea (PNOA, IGN) a la caché `mapa-offline-v1`, que el service worker consulta primero y nunca recorta. Las zonas predefinidas están en `docs/js/offline.js` (`PRESETS`, coordenadas aproximadas). El callejero OSM no se descarga en bloque (política de uso de OSM). Pruebas: `tests/suites/14-mapa-offline.js`.
+
+## Nombre automático del sitio
+
+Al crear un spot o marcar un hallazgo, la app pone el nombre del lugar («Demiku, Bermeo», «Peña de Oro, Bermeo») sin conexión.
+Datos: Nomenclátor Geográfico Básico de España © IGN (CC BY 4.0), el mismo callejero de AveDex recortado a Bizkaia y alrededores
+(`docs/data/topo.json`, se regenera con `python3 tests/tools/toponimos.py /ruta/a/avedex`). Fuera de esa zona se escribe el nombre a mano.

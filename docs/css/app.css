@@ -884,3 +884,4 @@ input[type=text]:not(.tit),input[type=password],input[type=search],select,textar
 .mes-sum .pel{background:none;border-color:var(--line)}
 .mes-mias{border-radius:var(--r2)}
 .ord-b{display:flex;gap:6px}.ord-b .btn{min-width:42px;font-size:16px}
+.st-sug{margin-top:8px;font-size:13px;color:#a3c46a}

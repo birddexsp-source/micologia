@@ -14,8 +14,9 @@ import * as ia from './ia.js';
 import * as au from './audio.js';
 import * as off from './offline.js';
 import { renderPlan } from './plan.js';
+import * as lug from './lugar.js';
 
-const APP_V = 'micologia-v32';   // = V de sw.js
+const APP_V = 'micologia-v33';   // = V de sw.js
 const S = { view: 'mapa', arg: '', map: null, pins: null, me: null, acc: null, tmp: null, mini: null, centered: false, filtro: { salida: '', especie: '' }, clase: '', q: '', syncErr: false, mes: new Date().getMonth() + 1 };
 const VIEWS = ['mapa', 'salidas', 'salida', 'setas', 'mes', 'plan', 'ajustes'];
 const TITULOS = { mapa: 'Mapa', salidas: 'Salidas', salida: 'Salida', setas: 'Setas', mes: 'Este mes', plan: 'Plan de salida', ajustes: 'Ajustes' };
@@ -247,11 +248,12 @@ async function marcar(opts = {}) {
     return [...c].slice(0, 7); };
   const gridHTML = () => '<button class="gt no' + (!m.esp.id && !m.esp.txt ? ' on' : '') + '" data-g=""><span class="pf"><span class="ph0">?</span></span><b>No sé</b><small>lo miro luego</small></button>' +
     sugs().map(([id, why]) => { const e = cat.byId(id); return '<button class="gt' + (m.esp.id === id ? ' on' : '') + '" data-g="' + id + '" style="--c:' + colorEsp(e) + '"><span class="pf">' + fotoEsp(e) + '</span><b>' + esc(corto(e)) + '</b><small>' + why + '</small></button>'; }).join('');
-  const posTxt = () => pos.lat.toFixed(5) + ', ' + pos.lon.toFixed(5) + (pos.manual || pos.adj ? ' · ajustado a mano' : pos.acc != null ? ' · ±' + pos.acc + ' m' : '');
+  const lugTxt = () => { const r = lug.nombrar(pos.lat, pos.lon); return r ? r.etiqueta : pos.lat.toFixed(5) + ', ' + pos.lon.toFixed(5); };
+  const posTxt = () => lugTxt() + (pos.manual || pos.adj ? ' · ajustado a mano' : pos.acc != null ? ' · ±' + pos.acc + ' m' : '');
   const zonasOrd = () => zonas.slice().sort((a, b) => (act && act.zonaIds.includes(b.id)) - (act && act.zonaIds.includes(a.id)) || a.nombre.localeCompare(b.nombre));
   const zonaHTML = () => '<label class="l">Spot</label><div class="chips" id="mk-zonas">' +
     zonasOrd().map(z => '<button class="opt ' + (m.zona === z.id ? 'on' : '') + '" data-z="' + z.id + '">' + esc(z.nombre) + '</button>').join('') +
-    '<button class="opt" id="mk-nz">+ Spot nuevo</button></div>' + (m.nueva ? '<div class="row" style="margin-top:8px"><input type="text" id="mk-znom" placeholder="Nombre del spot" style="flex:1"><button class="btn p" id="mk-zok" style="flex:none">Crear</button></div>' : '');
+    '<button class="opt" id="mk-nz">+ Spot nuevo</button></div>' + (m.nueva ? '<div class="row" style="margin-top:8px"><input type="text" id="mk-znom" placeholder="Nombre del spot" value="' + esc(lug.nombreSpot(pos.lat, pos.lon, zonas.map(z => z.nombre))) + '" style="flex:1"><button class="btn p" id="mk-zok" style="flex:none">Crear</button></div>' : '');
   const sh = openSheet('<h2>Nuevo hallazgo</h2><p class="sub" id="mk-pos">' + horaTxt() + ' · ' + posTxt() + '</p>' +
     '<div class="mtiles"><button class="mtile" id="mk-foto">' + I.foto + '<b>Foto</b></button><button class="mtile" id="au-rec"' + (au.soportado() ? '' : ' disabled') + '>' + I.mic + '<b>Nota de voz</b></button></div>' +
     '<div id="mk-th" class="thumbs"></div><div id="au-list"></div>' +
@@ -274,7 +276,7 @@ async function marcar(opts = {}) {
     else if (t.closest('#sp-sugs')) regrid();
     else if (t.dataset.cq) { $('#mk-cant', sh).value = t.dataset.cq; $$('.cantq button', sh).forEach(b => b.classList.toggle('on', b === t)); }
     else if (t.dataset.z) { m.zona = m.zona === t.dataset.z ? null : t.dataset.z; rezona(); }
-    else if (t.id === 'mk-nz') { m.nueva = true; rezona(); $('#mk-znom', sh).focus(); }
+    else if (t.id === 'mk-nz') { m.nueva = true; rezona(); const zi = $('#mk-znom', sh); zi.focus(); zi.select(); }
     else if (t.id === 'mk-zok') {
       const n = $('#mk-znom', sh).value.trim(); if (!n) return;
       const id = await db.add('zonas', { nombre: n, lat: pos.lat, lon: pos.lon, notas: '', estado: 'visitada', visitadaTs: Date.now() });
@@ -289,7 +291,7 @@ async function marcar(opts = {}) {
         const a = await activa(), q = $('#sp-q', sh).value.trim();
         const sid = opts.salida || (a ? a.id : null), h = { salidaId: sid, zonaId: m.zona, lat: pos.lat, lon: pos.lon, precisionM: pos.acc, ts: opts.ts || Date.now(), especieId: m.esp.id, especieTxt: m.esp.id ? '' : q,
           cantidad: $('#mk-cant', sh).value.trim(), estadoSeta: m.estado, sustrato: '', notas: $('#mk-nota', sh).value.trim(), fotos: m.fotos,
-          identificacion: m.esp.id ? 'provisional' : 'sin_identificar', confirmadoPor: '', recogida: false, ajustadoAMano: !!(pos.adj || pos.manual), audios: vz.audios, transcripciones: vz.trans };
+          identificacion: m.esp.id ? 'provisional' : 'sin_identificar', confirmadoPor: '', recogida: false, lugar: (lug.nombrar(pos.lat, pos.lon) || {}).etiqueta || '', ajustadoAMano: !!(pos.adj || pos.manual), audios: vz.audios, transcripciones: vz.trans };
         if (S.rec) { S.rec.cancel(); S.rec = null; clearInterval(S.recT); }
         await db.add('hallazgos', h);
         { const zz = m.zona && zonas.find(z => z.id === m.zona); if (zz && zz.estado === 'por_visitar') await db.patch('zonas', zz.id, { estado: 'visitada', visitadaTs: Date.now() }); }
@@ -310,23 +312,32 @@ async function editarSpot(id, o = {}) {
   await irAlMapa();
   closeSheet();
   let z = id ? await db.get('zonas', id) : null; const nuevo = !z;
-  if (nuevo) { const f = geo.fix(), c = S.map.getCenter(); z = { nombre: o.salida ? 'Spot ' + ((await db.list('zonas')).length + 1) : '', estado: 'visitada', lat: f ? f.lat : c.lat, lon: f ? f.lon : c.lng, notas: '' }; }
+  const todasZ = await db.list('zonas'), otrosNom = todasZ.filter(x => x.id !== id).map(x => x.nombre);
+  if (nuevo) { const f = geo.fix(), c = S.map.getCenter(), la = f ? f.lat : c.lat, lo = f ? f.lon : c.lng; z = { nombre: lug.nombreSpot(la, lo, otrosNom) || (o.salida ? 'Spot ' + (todasZ.length + 1) : ''), estado: 'visitada', lat: la, lon: lo, notas: '' }; }
+  let auto = nuevo;                                   /* mientras no lo toques, el nombre sigue al punto */
   const pos = { lat: z.lat, lon: z.lon }, fotos = [...(z.fotos || [])], vz = nuevoVoz(z); let estado = z.estado || 'visitada';
   S.map.setView([pos.lat, pos.lon], Math.max(S.map.getZoom(), 16));
   S.tmp = dragPin()(pos.lat, pos.lon).addTo(S.map);
   const sh = openSheet('<h2>' + (nuevo ? 'Nuevo spot' : 'Editar spot') + '</h2><p class="sub" id="st-pos"></p>' +
-    '<input type="text" id="st-nom" placeholder="Nombre del sitio (p. ej. Hayedo de Otzarreta)" value="' + esc(z.nombre) + '">' +
+    '<input type="text" id="st-nom" placeholder="Nombre del sitio (p. ej. Hayedo de Otzarreta)" value="' + esc(z.nombre) + '"><button class="opt st-sug" id="st-sug" hidden></button>' +
     '<label class="l">Estado</label><div class="seg" id="st-est">' + SPOT_EST.map(e => '<button data-s="' + e[0] + '" class="' + (estado === e[0] ? 'on' : '') + '">' + e[1] + '</button>').join('') + '</div>' +
     '<div class="row"><button class="btn" id="st-aqui">Usar mi posición</button>' + (nuevo ? '' : '<a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=' + z.lat + ',' + z.lon + '">Cómo llegar</a>') + '</div>' +
     '<label class="l">Nota</label><textarea id="st-nota" placeholder="Cómo se llega, qué árboles hay, qué esperas encontrar…">' + esc(z.notas) + '</textarea>' + vozHTML(vz) +
     '<label class="l">Fotos</label><div class="thumbs" id="st-th">' + fotos.map(f => '<img data-blob="' + f + '">').join('') + '</div><div class="row"><button class="btn" id="st-foto">Añadir foto</button></div>' +
     '<div class="row">' + (nuevo ? '' : '<button class="btn d" id="st-del">Borrar</button>') + '<button class="btn" id="st-x">Cancelar</button><button class="btn p" id="st-ok" style="flex:2">Guardar</button></div>', { dim: false });
-  const posTxt = () => { $('#st-pos', sh).textContent = pos.lat.toFixed(5) + ', ' + pos.lon.toFixed(5) + (nuevo ? ' · arrastra el punto a su sitio' : ''); };
+  const posTxt = () => {
+    const r = lug.nombrar(pos.lat, pos.lon), sug = lug.nombreSpot(pos.lat, pos.lon, otrosNom), inp = $('#st-nom', sh);
+    if (auto && sug) inp.value = sug;
+    $('#st-pos', sh).textContent = (r ? '📍 ' + r.etiqueta + ' · ' : '') + pos.lat.toFixed(5) + ', ' + pos.lon.toFixed(5) + (nuevo ? ' · arrastra el punto a su sitio' : '');
+    const b = $('#st-sug', sh); if (b) { b.hidden = !sug || auto || inp.value.trim() === sug; b.dataset.n = sug; b.textContent = '📍 Usar «' + sug + '»'; }
+  };
+  $('#st-nom', sh).addEventListener('input', () => { auto = false; posTxt(); });
   posTxt(); vozWire(sh, vz); hydrate($('#st-th', sh));
   encuadrar(pos.lat, pos.lon, sh);
   if (S.tmp) S.tmp.on('dragend', () => { const p = S.tmp.getLatLng(); pos.lat = p.lat; pos.lon = p.lng; posTxt(); });
   sh.addEventListener('click', async ev => {
     const t = ev.target.closest('button'); if (!t) return;
+    if (t.id === 'st-sug') { $('#st-nom', sh).value = t.dataset.n; auto = !!nuevo; posTxt(); return; }
     if (t.dataset.s) { estado = t.dataset.s; $$('#st-est button', sh).forEach(b => b.classList.toggle('on', b.dataset.s === estado)); }
     else if (t.id === 'st-aqui') { const f = geo.fix(); if (!f) return toast('Aún sin GPS'); pos.lat = f.lat; pos.lon = f.lon; S.tmp.setLatLng([f.lat, f.lon]); S.map.setView([f.lat, f.lon], 17); posTxt(); }
     else if (t.id === 'st-foto') pickFoto(fid => { fotos.push(fid); const im = document.createElement('img'); im.dataset.blob = fid; $('#st-th', sh).appendChild(im); hydrate($('#st-th', sh)); }, { galeria: true });
@@ -921,9 +932,9 @@ function ajustesResto(c, last, zonas) {
       '<div class="row"><button class="btn" id="a-fotos">Descargar fotos</button></div><div class="note" id="a-fst" style="margin-top:10px">Comprobando…</div>') +
     sec(I.flag, 'Tus datos', plural(zonas.length, 'spot', 'spots'),
       '<div class="row"><button class="btn" id="a-exp">Exportar copia (JSON)</button></div>' +
-      (zonas.length ? '<details class="det"><summary>Renombrar o borrar spots</summary>' + zonas.map(z => '<div class="row" style="margin-top:8px"><input type="text" data-z="' + z.id + '" value="' + esc(z.nombre) + '" style="flex:1"><button class="btn d" data-zd="' + z.id + '" style="flex:none">Borrar</button></div>').join('') + '</details>' : '')) +
+      (zonas.length ? '<details class="det"><summary>Renombrar o borrar spots</summary>' + (zonas.some(z => lug.nombrar(z.lat, z.lon)) ? '<div class="row"><button class="btn" id="a-lugar">📍 Poner a todos el nombre de su lugar</button></div>' : '') + zonas.map(z => '<div class="row" style="margin-top:8px"><input type="text" data-z="' + z.id + '" value="' + esc(z.nombre) + '" style="flex:1"><button class="btn d" data-zd="' + z.id + '" style="flex:none">Borrar</button></div>').join('') + '</details>' : '')) +
     '<div class="aj-about"><img src="icon.svg" alt="" width="44" height="44"><div><b>Micología</b><small>Versión ' + APP_V + '</small></div></div>' +
-    '<p class="aj-legal">Las coordenadas de tus sitios solo viven en este móvil y en tu repositorio privado. La app nunca certifica que una seta sea comestible.<br>Mapa: imágenes PNOA/Sentinel © IGN España (CC BY 4.0 scne.es) · callejero © OpenStreetMap.</p>';
+    '<p class="aj-legal">' + lug.FUENTE + '.<br>Las coordenadas de tus sitios solo viven en este móvil y en tu repositorio privado. La app nunca certifica que una seta sea comestible.<br>Mapa: imágenes PNOA/Sentinel © IGN España (CC BY 4.0 scne.es) · callejero © OpenStreetMap.</p>';
 }
 /* Instalar la app en la pantalla de inicio (PWA): botón directo si el navegador lo permite, y si no, los pasos. */
 let PROMPT = null;
@@ -1011,6 +1022,14 @@ function ajustesWire(root, c) {
   $('#a-gks', root).onclick = () => { const k = $('#a-gk', root).value, st = $('#a-gst', root); if (!ia.claveValida(k)) { st.textContent = 'La clave de AI Studio empieza por AIza… o AQ. y es larga.'; return; } ia.setKey(k); toast('Clave guardada'); renderAjustes(); };
   const gd = $('#a-gkd', root); if (gd) gd.onclick = () => { ia.setKey(''); toast('Clave borrada'); renderAjustes(); };
   $('#a-exp', root).onclick = async () => { const a = document.createElement('a'); a.href = URL.createObjectURL(await db.exportAll()); a.download = 'micologia-copia-' + hoy() + '.json'; document.body.appendChild(a); a.click(); a.remove(); };
+  const bl = $('#a-lugar', root); if (bl) bl.onclick = async () => {
+    const zs = ajustesWire.zonas || [], usados = [], cambios = [];
+    for (const z of zs) { const n = lug.nombreSpot(z.lat, z.lon, usados); if (n) { usados.push(n); if (n !== z.nombre) cambios.push([z, n]); } else usados.push(z.nombre); }
+    if (!cambios.length) return toast('Ya tienen el nombre de su lugar');
+    if (!bl.dataset.sure) { bl.dataset.sure = 1; bl.textContent = 'Pulsa otra vez: ' + cambios.map(([z, n]) => z.nombre + ' → ' + n).join(' · '); return; }
+    for (const [z, n] of cambios) await db.patch('zonas', z.id, { nombre: n });
+    toast(plural(cambios.length, 'spot renombrado', 'spots renombrados')); syn.auto();
+  };
   root.onchange = e => { const z = e.target.dataset.z; if (z && e.target.value.trim()) db.patch('zonas', z, { nombre: e.target.value.trim() }); };
   fotosEstado($('#a-fst', root));
   $('#a-fotos', root).onclick = async ev => { const st = $('#a-fst', root); ev.target.disabled = true; const r = await descargarFotos(m => { st.textContent = m; }); ev.target.disabled = false; st.textContent = r.fail ? 'Listo con ' + r.fail + ' fallos de ' + r.total + '. Vuelve a pulsar para reintentar.' : 'Listo: ' + r.ok + ' fotos guardadas.'; };
@@ -1057,7 +1076,7 @@ async function renderView() {
   if (S.view === 'salidas') await renderSalidas(); else if (S.view === 'salida') await renderSalida(S.arg); else if (S.view === 'setas') renderSetas(); else if (S.view === 'mes') renderMes(); else if (S.view === 'plan') await renderPlan($('#v-plan'), S.arg); else if (S.view === 'ajustes') await renderAjustes();
 }
 async function boot() {
-  await db.init(); await cat.load();
+  await db.init(); await cat.load(); lug.cargar();
   initMap(); badge(); route(); chipSalida();
   /* si había una salida en curso (la app se cerró o se recargó), sigue grabando el recorrido */
   { const a = await activa(); if (a && a.grabar !== false) await trk.start(a.id); }

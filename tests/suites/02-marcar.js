@@ -6,7 +6,7 @@ module.exports = {
     await t.case('2 toques: Marcar aquí → Guardar (sin especie)', async () => {
       await t.fixGPS(); await t.tap('#fab', 400);
       t.ok('se abre la hoja y el pin arrastrable', await t.visible('#sheet .sh') && await t.page.evaluate(() => !!window.__MI.S.tmp));
-      t.ok('muestra coordenadas y precisión', /43\.10000, -2\.80000 · ±8 m/.test(await t.T('#mk-pos') || ''), await t.T('#mk-pos'));
+      t.ok('muestra el nombre del sitio (topónimo) y la precisión', /^\d\d:\d\d · [A-ZÁÉÍÓÚÑ][^·]+, [^·]+ · ±8 m$/.test(await t.T('#mk-pos') || ''), await t.T('#mk-pos'));
       await t.shot('captura-02-marcar');
       await t.tap('#mk-ok', 400);
       const hs = await t.docs('hallazgos'); t.eq('1 hallazgo', hs.length, 1);

@@ -27,7 +27,8 @@ module.exports = {
     await t.case('nuevo spot «Quiero ir»: sale en el mapa y en la lista', async () => {
       await t.go('#mapa'); await t.tap('#spotbtn', 400);
       t.ok('hoja de nuevo spot', /Nuevo spot/.test(await t.T('#sheet') || ''));
-      await t.tap('#st-ok', 200); t.ok('exige nombre', /nombre al spot/i.test(await t.T('#toast') || ''));
+      t.ok('el nombre viene puesto con el sitio donde está', /, /.test(await t.page.inputValue('#st-nom')), await t.page.inputValue('#st-nom'));
+      await t.page.fill('#st-nom', ''); await t.tap('#st-ok', 200); t.ok('exige nombre', /nombre al spot/i.test(await t.T('#toast') || ''));
       await t.page.fill('#st-nom', 'Hayedo de prueba'); await t.tap('#st-est button[data-s="por_visitar"]');
       await t.page.fill('#st-nota', 'Se llega por la pista'); await t.tap('#st-ok', 500);
       const z = (await t.docs('zonas')); t.eq('1 spot', z.length, 1); spotId = z[0].id;

@@ -155,10 +155,10 @@ module.exports = {
       await t.go('#salidas'); await t.tap('#s-new', 600);
       const sid = (await t.docs('salidas')).find(x => x.estado === 'en_curso').id;
       await t.tap('#sd-sp', 700);
-      t.ok('nombre ya puesto (se puede cambiar)', /^Spot \d+$/.test(await t.page.inputValue('#st-nom')));
+      const nom0 = await t.page.inputValue('#st-nom'); t.ok('nombre ya puesto con el sitio (se puede cambiar)', /, /.test(nom0), nom0);
       await t.tap('#st-ok', 700);
       const sv = (await t.docs('salidas')).find(x => x.id === sid), z = (await t.docs('zonas')).find(x => x.id === sv.zonaIds[0]);
-      t.ok('spot añadido a la salida en curso', !!z && /^Spot/.test(z.nombre));
+      t.ok('spot añadido a la salida en curso', !!z && z.nombre === nom0);
       t.ok('vuelve a la salida', await t.page.evaluate(id => location.hash === '#salida/' + id, sid));
       t.eq('sale en la línea de tiempo', await t.N('#v-salida .tl'), 1);
     });
