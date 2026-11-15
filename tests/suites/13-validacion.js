@@ -33,7 +33,7 @@ module.exports = {
       await t.page.evaluate(() => (window.__MI.abrirFicha('amanita-phalloides'), window.__MI.fichaTab('todo'))); await t.wait(500);
       t.ok('la regla clave lleva dibujo con la volva resaltada', await t.has('#sheet .clave .esq-sp .hl') && await t.has('#sheet .clv-l'));
       t.ok('cada punto de «qué mirar» con su dibujo o icono', await t.page.evaluate(() => [...document.querySelectorAll('#sheet .qm.dib li')].every(li => li.querySelector('.qd svg'))));
-      t.ok('foto real con puntos numerados y leyenda', (await t.N('#sheet .anot .ap')) === 3 && (await t.N('#sheet .anot .apl li')) === 3);
+      t.ok('fotos reales con flechas numeradas y su leyenda', (await t.N('#sheet .anot')) >= 2 && (await t.N('#sheet .anot .ap')) === (await t.N('#sheet .anot .apl li')) && (await t.N('#sheet .anot .ap')) >= 6);
       t.ok('los puntos caen dentro de la foto', await t.page.evaluate(() => [...document.querySelectorAll('#sheet .anot .ap')].every(p => { const f = p.parentElement.getBoundingClientRect(), r = p.getBoundingClientRect(), x = r.left + r.width / 2, y = r.top + r.height / 2; return x > f.left && x < f.right && y > f.top && y < f.bottom; })));
       await t.page.evaluate(() => (window.__MI.abrirFicha('russula-virescens'), window.__MI.fichaTab('todo'))); await t.wait(500);
       t.ok('«así sí / así no»: esta en verde y la cicuta en rojo', await t.has('#sheet .cmp figure.si') && await t.has('#sheet .cmp figure.no') && /Mortal/.test(await t.T('#sheet .cmp figure.no') || ''));

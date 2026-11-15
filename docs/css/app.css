@@ -895,3 +895,4 @@ input[type=text]:not(.tit),input[type=password],input[type=search],select,textar
 .a-t{display:block;font-size:14px;padding:0 0 8px}
 .fc .anot .a-t{padding-top:0}
 .a-ojo{margin:8px 0 0;padding:9px 12px;border-radius:12px;background:#2a1214;border:1px solid #5a2327;color:#ffc9c9;font-size:13px;line-height:1.4}
+.anw[style*="--ar"] .phw.big{aspect-ratio:var(--ar)}.anw[style*="--ar"] .phw.big .ph{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}

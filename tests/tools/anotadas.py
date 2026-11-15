@@ -3,10 +3,12 @@ Cada archivo lo preparo mirando la foto con una rejilla; x, y son % del ancho y 
 import json, os, glob
 R = os.path.join(os.path.dirname(__file__), '..', '..'); P = os.path.join(R, 'docs', 'data', 'especies.json')
 D = json.load(open(P)); por = {e['id']: e for e in D['especies']}; n = 0
-for e in D['especies']: e['anotadas'] = []
-for f in sorted(glob.glob(os.path.join(os.path.dirname(__file__), 'anotadas', '*.json'))):
+PREV = json.load(open(os.path.join(os.path.dirname(__file__), 'anotadas', '_previas.json')))   # las que ya había (una foto por ficha)
+for e in D['especies']: e['anotadas'] = list(PREV.get(e['id'], []))
+for f in sorted(glob.glob(os.path.join(os.path.dirname(__file__), 'anotadas', '[!_]*.json'))):
     sid = os.path.basename(f)[:-5]; assert sid in por, 'ficha desconocida: ' + sid
     A = json.load(open(f))
-    por[sid]['anotadas'] = [{k: v for k, v in a.items() if not k.startswith('_')} for a in A]; n += 1
+    nuevas = [{k: v for k, v in a.items() if not k.startswith('_')} for a in A]; urls = {a['foto']['url'] for a in nuevas}
+    por[sid]['anotadas'] = nuevas + [a for a in por[sid]['anotadas'] if a['foto']['url'] not in urls]; n += 1      # las nuevas primero; las previas detrás si son otra foto
 json.dump(D, open(P, 'w'), ensure_ascii=False, indent=1)
-print(n, 'fichas con fotos anotadas')
+print(n, 'fichas con fotos nuevas ·', sum(1 for e in D['especies'] if e['anotadas']), 'fichas con fotos anotadas ·', sum(len(e['anotadas']) for e in D['especies']), 'fotos')
