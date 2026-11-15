@@ -1,98 +1,82 @@
 [
  {
-  "_cand": "1.2",
+  "_cand": "4.0",
   "titulo": "En grupitos sobre madera podrida",
   "foto": {
    "sp": "Galerina marginata",
-   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/456769231/{s}.jpg",
-   "autor": "Alan Rockefeller",
-   "licencia": "CC BY 4.0",
-   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
-   "pagina": "https://www.inaturalist.org/observations/254940148",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/599921899/{s}.jpg",
+   "autor": "Gilles San Martin",
+   "licencia": "CC BY-SA 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/330789976",
    "origen": "iNaturalist",
-   "ar": 0.667
+   "ar": 0.749
   },
   "puntos": [
    {
-    "x": 31,
-    "y": 25,
+    "x": 35,
+    "y": 15,
     "parte": "sombrero",
     "titulo": "Sombrero pardo-anaranjado",
-    "texto": "Pequeño (1–6 cm), liso, algo brillante con humedad y más claro al secarse.",
-    "d": "izq"
+    "texto": "Pequeño (1–6 cm), liso, más claro al secarse (zonas pálidas).",
+    "d": "arriba"
    },
    {
-    "x": 63,
-    "y": 19,
-    "parte": "himenio",
-    "titulo": "Láminas ocre",
-    "texto": "Primero amarillentas y luego pardo-óxido por las esporas.",
-    "d": "der"
-   },
-   {
-    "x": 63,
-    "y": 26,
-    "parte": "anillo",
-    "titulo": "Anillo fino",
-    "texto": "Una banda fina en lo alto del pie; a menudo se mancha de marrón por las esporas.",
-    "d": "der"
-   },
-   {
-    "x": 45,
-    "y": 58,
-    "parte": "pie",
-    "titulo": "Pie con fibrillas blanquecinas",
-    "texto": "Bajo el anillo, el pie lleva fibras plateadas sobre fondo pardo.",
-    "d": "izq"
-   },
-   {
-    "x": 46,
-    "y": 81,
+    "x": 20,
+    "y": 85,
     "parte": "habitat",
     "titulo": "Sobre madera",
-    "texto": "Sale de troncos o restos de madera, a veces enterrados, y parece que sale del suelo.",
-    "d": "abajo"
+    "texto": "Sale de troncos o madera enterrada; parece que sale del suelo.",
+    "d": "izq"
+   },
+   {
+    "x": 68,
+    "y": 88,
+    "parte": "pie",
+    "titulo": "Pie con fibrillas",
+    "texto": "Fibras plateadas sobre fondo pardo por debajo del anillo.",
+    "d": "der"
    }
   ],
-  "ojo": "Seta parda pequeña en grupos sobre madera = no se recoge. Se confunde con la «mata envainada» y con la armilaria, que algunos comen: el riesgo no compensa."
+  "ojo": "Seta parda pequeña en grupos sobre madera = no se recoge. Se confunde con la «mata envainada» (Kuehneromyces) y con la armilaria, que algunos comen: el riesgo no compensa."
  },
  {
-  "_cand": "7.4",
-  "titulo": "De cerca: anillo y láminas",
+  "_cand": "4.1",
+  "titulo": "De cerca: láminas y pie",
   "foto": {
    "sp": "Galerina marginata",
-   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/442669742/{s}.jpeg",
-   "autor": "Nathan Cobbett",
-   "licencia": "CC0",
-   "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
-   "pagina": "https://www.inaturalist.org/observations/247811413",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/599921906/{s}.jpg",
+   "autor": "Gilles San Martin",
+   "licencia": "CC BY-SA 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/330789976",
    "origen": "iNaturalist",
-   "ar": 0.75
+   "ar": 1.3635
   },
   "puntos": [
    {
-    "x": 41,
-    "y": 40,
-    "parte": "anillo",
-    "titulo": "Resto del anillo",
-    "texto": "Membrana fina, aquí oscurecida por las esporas marrones.",
-    "d": "izq"
-   },
-   {
-    "x": 72,
-    "y": 42,
+    "x": 30,
+    "y": 35,
     "parte": "himenio",
     "titulo": "Láminas ocre-ferruginosas",
     "texto": "Esporada marrón-óxido. La armilaria la tiene blanca: es una forma de separarlas.",
-    "d": "der"
+    "d": "izq"
    },
    {
-    "x": 37,
-    "y": 72,
+    "x": 63,
+    "y": 65,
     "parte": "pie",
     "titulo": "Fibrillas del pie",
     "texto": "Fibras blanquecinas sobre el pie, por debajo del anillo.",
     "d": "der"
+   },
+   {
+    "x": 65,
+    "y": 47,
+    "parte": "anillo",
+    "titulo": "Zona del anillo",
+    "texto": "Anillo fino que se pierde; queda una marca oscura.",
+    "d": "arriba-der"
    }
   ]
  }
