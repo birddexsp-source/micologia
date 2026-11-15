@@ -1,0 +1,75 @@
+[
+ {
+  "_cand": "4.2",
+  "titulo": "Amarillo donde se roza y en la base del pie",
+  "foto": {
+   "sp": "Agaricus xanthodermus",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/29713848/{s}.jpeg",
+   "autor": "Cindy Trubovitz",
+   "licencia": "CC BY-SA 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/19325942",
+   "origen": "iNaturalist",
+   "ar": 0.75
+  },
+  "puntos": [
+   {
+    "x": 45,
+    "y": 23,
+    "parte": "sombrero",
+    "titulo": "Manchas amarillas",
+    "texto": "El sombrero blanco amarillea al rozarlo.",
+    "d": "arriba"
+   },
+   {
+    "x": 62,
+    "y": 77,
+    "parte": "carne",
+    "titulo": "Base que amarillea",
+    "texto": "La base del pie se pone amarilla intensa al cortarla o rasparla.",
+    "d": "der"
+   },
+   {
+    "x": 52,
+    "y": 42,
+    "parte": "anillo",
+    "titulo": "Anillo grande",
+    "texto": "Falda ancha en el pie.",
+    "d": "der"
+   },
+   {
+    "x": 72,
+    "y": 32,
+    "parte": "himenio",
+    "titulo": "Láminas rosadas → pardas",
+    "texto": "Como en los demás champiñones: nunca blancas.",
+    "d": "arriba-der"
+   }
+  ],
+  "ojo": "Rasca el sombrero o corta la base del pie: si se pone amarillo vivo al momento y huele a tinta o fenol, no es un champiñón comestible."
+ },
+ {
+  "_cand": "1.4",
+  "titulo": "Raspado: amarillo al instante",
+  "foto": {
+   "sp": "Agaricus xanthodermus",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/533951240/{s}.jpg",
+   "autor": "Johan Adler",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/296534076",
+   "origen": "iNaturalist",
+   "ar": 1.3333
+  },
+  "puntos": [
+   {
+    "x": 44,
+    "y": 55,
+    "parte": "sombrero",
+    "titulo": "Amarillo vivo",
+    "texto": "Donde se ha rozado, mancha amarilla que luego se vuelve parda.",
+    "d": "abajo-izq"
+   }
+  ]
+ }
+]

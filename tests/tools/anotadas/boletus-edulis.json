@@ -1,0 +1,83 @@
+[
+ {
+  "_cand": "2.1",
+  "titulo": "Entero: sombrero pardo y pie panzudo con redecilla",
+  "foto": {
+   "sp": "Boletus edulis grandedulis",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/233282091/{s}.jpg",
+   "autor": "Alan Rockefeller",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/136662465",
+   "origen": "iNaturalist",
+   "ar": 1.3421
+  },
+  "puntos": [
+   {
+    "x": 55,
+    "y": 25,
+    "parte": "sombrero",
+    "titulo": "Sombrero pardo, como pan tostado",
+    "texto": "Liso o algo arrugado; con humedad, algo pegajoso.",
+    "d": "arriba"
+   },
+   {
+    "x": 37,
+    "y": 50,
+    "parte": "sombrero",
+    "titulo": "Borde más claro",
+    "texto": "A menudo con un ribete blanquecino.",
+    "d": "izq"
+   },
+   {
+    "x": 55,
+    "y": 68,
+    "parte": "pie",
+    "titulo": "Redecilla blanca",
+    "texto": "Red fina y clara, sobre todo en la parte alta del pie.",
+    "d": "der"
+   }
+  ],
+  "ojo": "Antes de comer cualquier boleto, córtalo: si la carne se pone azul o los poros son rojos o naranjas, no es este."
+ },
+ {
+  "_cand": "4.1",
+  "titulo": "Cortados: poros y carne que no cambia de color",
+  "foto": {
+   "sp": "Boletus edulis",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/1325774/{s}.jpg",
+   "autor": "Jerry Cooper",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/1057225",
+   "origen": "iNaturalist",
+   "ar": 1.4927
+  },
+  "puntos": [
+   {
+    "x": 16,
+    "y": 45,
+    "parte": "himenio",
+    "titulo": "Poros amarillo-oliva",
+    "texto": "Blancos de joven y luego amarillo-verdosos. Nunca rojos ni rosas.",
+    "d": "arriba"
+   },
+   {
+    "x": 80,
+    "y": 66,
+    "parte": "carne",
+    "titulo": "Carne blanca",
+    "texto": "Cortada sigue blanca: no se pone azul.",
+    "d": "der"
+   },
+   {
+    "x": 28,
+    "y": 75,
+    "parte": "pie",
+    "titulo": "Pie grueso",
+    "texto": "Blanquecino, con su redecilla.",
+    "d": "abajo"
+   }
+  ]
+ }
+]

@@ -1,0 +1,67 @@
+[
+ {
+  "_cand": "3.0",
+  "titulo": "Por debajo: pliegues, no láminas",
+  "foto": {
+   "sp": "Cantharellus cibarius",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/430849322/{s}.jpeg",
+   "autor": "Piermario Maculan",
+   "licencia": "CC0",
+   "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+   "pagina": "https://www.inaturalist.org/observations/241726630",
+   "origen": "iNaturalist",
+   "ar": 0.7529
+  },
+  "puntos": [
+   {
+    "x": 52,
+    "y": 50,
+    "parte": "himenio",
+    "titulo": "Pliegues romos",
+    "texto": "Arrugas gruesas y ramificadas que bajan por el pie. No se separan como láminas.",
+    "d": "der"
+   },
+   {
+    "x": 52,
+    "y": 82,
+    "parte": "pie",
+    "titulo": "Pie macizo",
+    "texto": "Del mismo color, sin anillo; se estrecha hacia la base.",
+    "d": "der"
+   },
+   {
+    "x": 30,
+    "y": 40,
+    "parte": "sombrero",
+    "titulo": "Borde ondulado",
+    "texto": "Amarillo-yema, en forma de embudo y con el borde ondulado.",
+    "d": "arriba-izq"
+   }
+  ],
+  "ojo": "Si debajo ves láminas finas y afiladas (como hojas de papel) o sale en racimos sobre madera, no es un rebozuelo."
+ },
+ {
+  "_cand": "6.4",
+  "titulo": "Cortado por la mitad",
+  "foto": {
+   "sp": "Cantharellus roseocanus",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/48923586/{s}.jpg",
+   "autor": "Andrew W. Wilson",
+   "licencia": "CC0",
+   "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+   "pagina": "https://www.inaturalist.org/observations/31262001",
+   "origen": "iNaturalist",
+   "ar": 0.75
+  },
+  "puntos": [
+   {
+    "x": 30,
+    "y": 55,
+    "parte": "carne",
+    "titulo": "Carne blanca y maciza",
+    "texto": "Firme, blanca o amarillenta; huele a albaricoque.",
+    "d": "izq"
+   }
+  ]
+ }
+]

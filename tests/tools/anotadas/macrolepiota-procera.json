@@ -1,0 +1,107 @@
+[
+ {
+  "_cand": "0.0",
+  "titulo": "Desde abajo: anillo doble que se desliza",
+  "foto": {
+   "sp": "Macrolepiota procera",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/11157407/{s}.jpg",
+   "autor": "Kostas Zontanos",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/8388707",
+   "origen": "iNaturalist",
+   "ar": 1.3333
+  },
+  "puntos": [
+   {
+    "x": 35,
+    "y": 33,
+    "parte": "himenio",
+    "titulo": "Láminas libres",
+    "texto": "Blanquecinas, luego crema; apretadas y sin tocar el pie.",
+    "d": "arriba-izq"
+   },
+   {
+    "x": 52,
+    "y": 70,
+    "parte": "anillo",
+    "titulo": "Anillo doble móvil",
+    "texto": "Grueso, como una arandela: se puede subir y bajar por el pie.",
+    "d": "der"
+   },
+   {
+    "x": 50,
+    "y": 56,
+    "parte": "pie",
+    "titulo": "Pie largo y fino",
+    "texto": "Mucho más largo que el ancho del sombrero; se separa fácil del sombrero.",
+    "d": "der"
+   }
+  ],
+  "ojo": "Solo las grandes: si el sombrero mide menos de 10 cm y tiene escamas, puede ser una lepiota mortal. Y si al cortarla la carne se vuelve rojiza o las láminas verdosas, es otra especie."
+ },
+ {
+  "_cand": "1.0",
+  "titulo": "De joven: palillo de tambor",
+  "foto": {
+   "sp": "Macrolepiota procera",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/163436429/{s}.jpeg",
+   "autor": "Jonathan Hughes",
+   "licencia": "CC0",
+   "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+   "pagina": "https://www.inaturalist.org/observations/98191067",
+   "origen": "iNaturalist",
+   "ar": 0.75
+  },
+  "puntos": [
+   {
+    "x": 50,
+    "y": 30,
+    "parte": "sombrero",
+    "titulo": "Mamelón oscuro",
+    "texto": "Centro pardo y liso; el resto se rompe en escamas pardas.",
+    "d": "arriba"
+   },
+   {
+    "x": 43,
+    "y": 70,
+    "parte": "pie",
+    "titulo": "Pie atigrado",
+    "texto": "Con dibujo de bandas pardas.",
+    "d": "izq"
+   }
+  ]
+ },
+ {
+  "_cand": "5.5",
+  "titulo": "El pie de cerca: piel de serpiente",
+  "foto": {
+   "sp": "Macrolepiota procera",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/237136287/{s}.jpeg",
+   "autor": "CorentinD",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/138717689",
+   "origen": "iNaturalist",
+   "ar": 0.75
+  },
+  "puntos": [
+   {
+    "x": 55,
+    "y": 40,
+    "parte": "pie",
+    "titulo": "Bandas pardas",
+    "texto": "Escamitas en bandas, como piel de serpiente, sobre fondo claro.",
+    "d": "der"
+   },
+   {
+    "x": 43,
+    "y": 45,
+    "parte": "carne",
+    "titulo": "Fibroso por dentro",
+    "texto": "El pie es duro y fibroso; no se come.",
+    "d": "izq"
+   }
+  ]
+ }
+]

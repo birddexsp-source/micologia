@@ -1,0 +1,43 @@
+[
+ {
+  "_cand": "3.2",
+  "titulo": "Por debajo: láminas canela y pie con bandas amarillas",
+  "foto": {
+   "sp": "Cortinarius rubellus",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/432118804/{s}.jpeg",
+   "autor": "Virn Stothers",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/242385025",
+   "origen": "iNaturalist",
+   "ar": 0.5957
+  },
+  "puntos": [
+   {
+    "x": 62,
+    "y": 33,
+    "parte": "himenio",
+    "titulo": "Láminas ocre-canela",
+    "texto": "Gruesas y separadas; se vuelven color óxido al madurar.",
+    "d": "der"
+   },
+   {
+    "x": 32,
+    "y": 72,
+    "parte": "pie",
+    "titulo": "Bandas amarillas",
+    "texto": "Restos de la cortina en forma de bandas o zonas amarillas sobre el pie.",
+    "d": "izq"
+   },
+   {
+    "x": 48,
+    "y": 47,
+    "parte": "pie",
+    "titulo": "Pie del mismo tono",
+    "texto": "Largo, pardo-anaranjado, a menudo engrosado hacia la base.",
+    "d": "abajo-der"
+   }
+  ],
+  "ojo": "Mortal para el riñón y los síntomas tardan días. Si una seta naranja-parda tiene láminas finas y color óxido, no es un rebozuelo."
+ }
+]

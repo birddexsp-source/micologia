@@ -1,0 +1,75 @@
+[
+ {
+  "_cand": "1.2",
+  "titulo": "Blanca que se mancha de rojo",
+  "foto": {
+   "sp": "Inosperma erubescens",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/676615640/{s}.jpg",
+   "autor": "Sara Scorey",
+   "licencia": "CC0",
+   "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+   "pagina": "https://www.inaturalist.org/observations/370374285",
+   "origen": "iNaturalist",
+   "ar": 0.75
+  },
+  "puntos": [
+   {
+    "x": 20,
+    "y": 38,
+    "parte": "sombrero",
+    "titulo": "Manchas rojas",
+    "texto": "El sombrero blanquecino se mancha de rojo-anaranjado al rozarse o envejecer.",
+    "d": "izq"
+   },
+   {
+    "x": 27,
+    "y": 55,
+    "parte": "himenio",
+    "titulo": "Láminas claras",
+    "texto": "Blanquecinas y luego rosadas o pardas.",
+    "d": "der"
+   },
+   {
+    "x": 47,
+    "y": 50,
+    "parte": "pie",
+    "titulo": "Pie blanco sin anillo",
+    "texto": "Liso, se mancha de rojo al tocarlo.",
+    "d": "abajo"
+   }
+  ],
+  "ojo": "Sale en primavera, como el perretxiko (seta de San Jorge). Si una seta blanquecina se mancha de rojo al tocarla o con la edad, no se coge: contiene muscarina y puede ser mortal."
+ },
+ {
+  "_cand": "2.2",
+  "titulo": "Por debajo: se enrojece al tocar",
+  "foto": {
+   "sp": "Inosperma erubescens",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/79821844/{s}.jpeg",
+   "autor": "Peeter Talvistu",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/50267582",
+   "origen": "iNaturalist",
+   "ar": 0.5
+  },
+  "puntos": [
+   {
+    "x": 52,
+    "y": 52,
+    "parte": "himenio",
+    "titulo": "Mancha roja",
+    "texto": "Donde se ha tocado, se pone rojo.",
+    "d": "izq"
+   },
+   {
+    "x": 57,
+    "y": 75,
+    "parte": "himenio",
+    "titulo": "Láminas rosa-pardo",
+    "texto": "Apretadas; con la edad, rosa-pardo con manchas rojas.",
+    "d": "der"
+   }
+  ]
+ }
+]

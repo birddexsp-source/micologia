@@ -1,0 +1,83 @@
+[
+ {
+  "_cand": "3.2",
+  "titulo": "Sombrero pálido y pie rojo y panzudo",
+  "foto": {
+   "sp": "Rubroboletus satanas",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/335498753/{s}.jpeg",
+   "autor": "Алена Ручка",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/191268109",
+   "origen": "iNaturalist",
+   "ar": 0.6943
+  },
+  "puntos": [
+   {
+    "x": 45,
+    "y": 33,
+    "parte": "sombrero",
+    "titulo": "Sombrero blanquecino",
+    "texto": "Grande (hasta 30 cm), blanco-grisáceo, como de cuero.",
+    "d": "arriba"
+   },
+   {
+    "x": 62,
+    "y": 50,
+    "parte": "himenio",
+    "titulo": "Poros",
+    "texto": "Amarillos de muy joven y luego naranja-rojos.",
+    "d": "der"
+   },
+   {
+    "x": 52,
+    "y": 66,
+    "parte": "pie",
+    "titulo": "Pie rojo y abombado",
+    "texto": "Grueso, rojo en el centro, con una redecilla fina.",
+    "d": "der"
+   }
+  ],
+  "ojo": "Un boleto con poros rojos o naranjas y carne que se pone azul no se come. Causa vómitos fuertes."
+ },
+ {
+  "_cand": "0.4",
+  "titulo": "Cortado: la carne se pone azul",
+  "foto": {
+   "sp": "Rubroboletus satanas",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/414982268/{s}.jpeg",
+   "autor": "Fyodor Pudovikov",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/233503727",
+   "origen": "iNaturalist",
+   "ar": 0.7988
+  },
+  "puntos": [
+   {
+    "x": 62,
+    "y": 52,
+    "parte": "carne",
+    "titulo": "Azulea al cortar",
+    "texto": "La carne blanca se vuelve azul en segundos.",
+    "d": "der"
+   },
+   {
+    "x": 18,
+    "y": 24,
+    "parte": "himenio",
+    "titulo": "Capa de tubos amarilla",
+    "texto": "Bajo el sombrero, tubos amarillo-verdosos.",
+    "d": "abajo"
+   },
+   {
+    "x": 25,
+    "y": 58,
+    "parte": "pie",
+    "titulo": "Corteza roja",
+    "texto": "El pie es rojo por fuera.",
+    "d": "izq"
+   }
+  ]
+ }
+]

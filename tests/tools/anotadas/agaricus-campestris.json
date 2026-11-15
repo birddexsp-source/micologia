@@ -1,0 +1,67 @@
+[
+ {
+  "_cand": "1.5",
+  "titulo": "Por debajo: láminas rosas a chocolate",
+  "foto": {
+   "sp": "Agaricus campestris",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/117321373/{s}.jpeg",
+   "autor": "Thomas Mesaglio",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/72002631",
+   "origen": "iNaturalist",
+   "ar": 1.3333
+  },
+  "puntos": [
+   {
+    "x": 30,
+    "y": 30,
+    "parte": "himenio",
+    "titulo": "Láminas rosa-pardo",
+    "texto": "Rosa vivo de jovencito, luego pardo-chocolate. Nunca blancas.",
+    "d": "izq"
+   },
+   {
+    "x": 48,
+    "y": 62,
+    "parte": "pie",
+    "titulo": "Pie blanco",
+    "texto": "Corto y sin volva: la base acaba limpia.",
+    "d": "der"
+   },
+   {
+    "x": 58,
+    "y": 82,
+    "parte": "pie",
+    "titulo": "Base sin saco",
+    "texto": "Termina sin bulbo ni saco membranoso.",
+    "d": "der"
+   }
+  ],
+  "ojo": "Ninguna seta blanca con láminas BLANCAS es un champiñón: puede ser una Amanita mortal. Y saca siempre el pie entero: si hay volva (saco en la base), fuera."
+ },
+ {
+  "_cand": "5.4",
+  "titulo": "Joven: láminas rosas",
+  "foto": {
+   "sp": "Agaricus campestris",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/229358419/{s}.jpeg",
+   "autor": "Carminda Santos",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/134546760",
+   "origen": "iNaturalist",
+   "ar": 0.75
+  },
+  "puntos": [
+   {
+    "x": 55,
+    "y": 85,
+    "parte": "himenio",
+    "titulo": "Láminas libres",
+    "texto": "Rosas y apretadas, no tocan el pie.",
+    "d": "abajo"
+   }
+  ]
+ }
+]

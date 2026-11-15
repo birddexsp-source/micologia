@@ -1,0 +1,83 @@
+[
+ {
+  "_cand": "0.2",
+  "titulo": "Desde abajo: láminas, anillo y pie",
+  "foto": {
+   "sp": "Amanita citrina",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/441208327/{s}.jpeg",
+   "autor": "Yves Bas",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/247076134",
+   "origen": "iNaturalist",
+   "ar": 1.3333
+  },
+  "puntos": [
+   {
+    "x": 60,
+    "y": 30,
+    "parte": "himenio",
+    "titulo": "Láminas blanquecinas",
+    "texto": "Libres y apretadas, con tono crema-amarillento.",
+    "d": "der"
+   },
+   {
+    "x": 55,
+    "y": 52,
+    "parte": "anillo",
+    "titulo": "Anillo amarillento",
+    "texto": "Falda membranosa, del color del sombrero.",
+    "d": "der"
+   },
+   {
+    "x": 45,
+    "y": 82,
+    "parte": "pie",
+    "titulo": "Pie largo y claro",
+    "texto": "Blanco-amarillento, liso.",
+    "d": "izq"
+   }
+  ],
+  "ojo": "No es de las más peligrosas, pero se confunde fácilmente con la oronja verde (cicuta verde) y con la blanca. Ante cualquier Amanita amarillenta o blanca, no la cojas."
+ },
+ {
+  "_cand": "2.2",
+  "titulo": "Forma blanca: el bulbo con reborde",
+  "foto": {
+   "sp": "Amanita citrina (forma blanca)",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/234418893/{s}.jpeg",
+   "autor": "Jens Ullenius",
+   "licencia": "CC0",
+   "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+   "pagina": "https://www.inaturalist.org/observations/137274330",
+   "origen": "iNaturalist",
+   "ar": 0.75
+  },
+  "puntos": [
+   {
+    "x": 45,
+    "y": 30,
+    "parte": "anillo",
+    "titulo": "Anillo",
+    "texto": "Falda que cuelga en lo alto del pie.",
+    "d": "der"
+   },
+   {
+    "x": 47,
+    "y": 88,
+    "parte": "volva",
+    "titulo": "Bulbo grande con reborde",
+    "texto": "Base en forma de bola, con el borde de la volva marcado como un cuello. Desentiérrala para verlo.",
+    "d": "der"
+   },
+   {
+    "x": 50,
+    "y": 12,
+    "parte": "sombrero",
+    "titulo": "Sombrero con placas",
+    "texto": "Blanco o amarillo pálido, con placas planas del velo. Huele a patata cruda.",
+    "d": "arriba-der"
+   }
+  ]
+ }
+]

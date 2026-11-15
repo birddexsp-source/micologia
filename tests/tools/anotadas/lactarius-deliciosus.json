@@ -1,0 +1,75 @@
+[
+ {
+  "_cand": "0.0",
+  "titulo": "Naranja que se mancha de verde",
+  "foto": {
+   "sp": "Lactarius deliciosus piceus",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/453385752/{s}.jpeg",
+   "autor": "Alan Rockefeller",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/253233776",
+   "origen": "iNaturalist",
+   "ar": 1.3333
+  },
+  "puntos": [
+   {
+    "x": 58,
+    "y": 28,
+    "parte": "sombrero",
+    "titulo": "Manchas verdes",
+    "texto": "Con la edad o al tocarlo, el sombrero y las láminas se manchan de verde.",
+    "d": "arriba-der"
+   },
+   {
+    "x": 77,
+    "y": 40,
+    "parte": "himenio",
+    "titulo": "Láminas naranjas",
+    "texto": "Apretadas, bajan un poco por el pie.",
+    "d": "der"
+   },
+   {
+    "x": 68,
+    "y": 62,
+    "parte": "pie",
+    "titulo": "Pie corto y hueco",
+    "texto": "Naranja, a veces con hoyitos; por dentro está hueco.",
+    "d": "der"
+   }
+  ],
+  "ojo": "Rompe una lámina: debe salir leche (látex) naranja-zanahoria. Si es blanca, o vira a otro color, no es un níscalo."
+ },
+ {
+  "_cand": "1.1",
+  "titulo": "Roto: la leche naranja",
+  "foto": {
+   "sp": "Lactarius deliciosus",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/345496841/{s}.jpg",
+   "autor": "Nathan Aaron",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/196267112",
+   "origen": "iNaturalist",
+   "ar": 0.75
+  },
+  "puntos": [
+   {
+    "x": 40,
+    "y": 40,
+    "parte": "carne",
+    "titulo": "Leche naranja",
+    "texto": "Al romperlo sale látex naranja-zanahoria que con el tiempo verdea.",
+    "d": "arriba-izq"
+   },
+   {
+    "x": 70,
+    "y": 50,
+    "parte": "sombrero",
+    "titulo": "Círculos concéntricos",
+    "texto": "Anillos más oscuros sobre el sombrero, a menudo poco marcados.",
+    "d": "der"
+   }
+  ]
+ }
+]

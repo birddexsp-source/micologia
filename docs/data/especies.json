@@ -4211,6 +4211,85 @@
    "familia": "Boletaceae",
    "anotadas": [
     {
+     "titulo": "Sombrero pálido y pie rojo y panzudo",
+     "foto": {
+      "sp": "Rubroboletus satanas",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/335498753/{s}.jpeg",
+      "autor": "Алена Ручка",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/191268109",
+      "origen": "iNaturalist",
+      "ar": 0.6943
+     },
+     "puntos": [
+      {
+       "x": 45,
+       "y": 33,
+       "parte": "sombrero",
+       "titulo": "Sombrero blanquecino",
+       "texto": "Grande (hasta 30 cm), blanco-grisáceo, como de cuero.",
+       "d": "arriba"
+      },
+      {
+       "x": 62,
+       "y": 50,
+       "parte": "himenio",
+       "titulo": "Poros",
+       "texto": "Amarillos de muy joven y luego naranja-rojos.",
+       "d": "der"
+      },
+      {
+       "x": 52,
+       "y": 66,
+       "parte": "pie",
+       "titulo": "Pie rojo y abombado",
+       "texto": "Grueso, rojo en el centro, con una redecilla fina.",
+       "d": "der"
+      }
+     ],
+     "ojo": "Un boleto con poros rojos o naranjas y carne que se pone azul no se come. Causa vómitos fuertes."
+    },
+    {
+     "titulo": "Cortado: la carne se pone azul",
+     "foto": {
+      "sp": "Rubroboletus satanas",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/414982268/{s}.jpeg",
+      "autor": "Fyodor Pudovikov",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/233503727",
+      "origen": "iNaturalist",
+      "ar": 0.7988
+     },
+     "puntos": [
+      {
+       "x": 62,
+       "y": 52,
+       "parte": "carne",
+       "titulo": "Azulea al cortar",
+       "texto": "La carne blanca se vuelve azul en segundos.",
+       "d": "der"
+      },
+      {
+       "x": 18,
+       "y": 24,
+       "parte": "himenio",
+       "titulo": "Capa de tubos amarilla",
+       "texto": "Bajo el sombrero, tubos amarillo-verdosos.",
+       "d": "abajo"
+      },
+      {
+       "x": 25,
+       "y": 58,
+       "parte": "pie",
+       "titulo": "Corteza roja",
+       "texto": "El pie es rojo por fuera.",
+       "d": "izq"
+      }
+     ]
+    },
+    {
      "foto": {
       "sp": "Rubroboletus satanas",
       "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Frankenwarte_10.08.2016_Satan's_Bolete_-_Rubroboletus_satanas_(29115033902).jpg/{w}px-Frankenwarte_10.08.2016_Satan's_Bolete_-_Rubroboletus_satanas_(29115033902).jpg",
@@ -5540,6 +5619,85 @@
    "familia": "Boletaceae",
    "anotadas": [
     {
+     "titulo": "Entero: sombrero pardo y pie panzudo con redecilla",
+     "foto": {
+      "sp": "Boletus edulis grandedulis",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/233282091/{s}.jpg",
+      "autor": "Alan Rockefeller",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/136662465",
+      "origen": "iNaturalist",
+      "ar": 1.3421
+     },
+     "puntos": [
+      {
+       "x": 55,
+       "y": 25,
+       "parte": "sombrero",
+       "titulo": "Sombrero pardo, como pan tostado",
+       "texto": "Liso o algo arrugado; con humedad, algo pegajoso.",
+       "d": "arriba"
+      },
+      {
+       "x": 37,
+       "y": 50,
+       "parte": "sombrero",
+       "titulo": "Borde más claro",
+       "texto": "A menudo con un ribete blanquecino.",
+       "d": "izq"
+      },
+      {
+       "x": 55,
+       "y": 68,
+       "parte": "pie",
+       "titulo": "Redecilla blanca",
+       "texto": "Red fina y clara, sobre todo en la parte alta del pie.",
+       "d": "der"
+      }
+     ],
+     "ojo": "Antes de comer cualquier boleto, córtalo: si la carne se pone azul o los poros son rojos o naranjas, no es este."
+    },
+    {
+     "titulo": "Cortados: poros y carne que no cambia de color",
+     "foto": {
+      "sp": "Boletus edulis",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/1325774/{s}.jpg",
+      "autor": "Jerry Cooper",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/1057225",
+      "origen": "iNaturalist",
+      "ar": 1.4927
+     },
+     "puntos": [
+      {
+       "x": 16,
+       "y": 45,
+       "parte": "himenio",
+       "titulo": "Poros amarillo-oliva",
+       "texto": "Blancos de joven y luego amarillo-verdosos. Nunca rojos ni rosas.",
+       "d": "arriba"
+      },
+      {
+       "x": 80,
+       "y": 66,
+       "parte": "carne",
+       "titulo": "Carne blanca",
+       "texto": "Cortada sigue blanca: no se pone azul.",
+       "d": "der"
+      },
+      {
+       "x": 28,
+       "y": 75,
+       "parte": "pie",
+       "titulo": "Pie grueso",
+       "texto": "Blanquecino, con su redecilla.",
+       "d": "abajo"
+      }
+     ]
+    },
+    {
      "foto": {
       "sp": "Boletus edulis",
       "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/20141026_gewoon_eekhoorntjesbrood.jpeg/{w}px-20141026_gewoon_eekhoorntjesbrood.jpeg",
@@ -5873,6 +6031,69 @@
    },
    "familia": "Cantharellaceae",
    "anotadas": [
+    {
+     "titulo": "Por debajo: pliegues, no láminas",
+     "foto": {
+      "sp": "Cantharellus cibarius",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/430849322/{s}.jpeg",
+      "autor": "Piermario Maculan",
+      "licencia": "CC0",
+      "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "pagina": "https://www.inaturalist.org/observations/241726630",
+      "origen": "iNaturalist",
+      "ar": 0.7529
+     },
+     "puntos": [
+      {
+       "x": 52,
+       "y": 50,
+       "parte": "himenio",
+       "titulo": "Pliegues romos",
+       "texto": "Arrugas gruesas y ramificadas que bajan por el pie. No se separan como láminas.",
+       "d": "der"
+      },
+      {
+       "x": 52,
+       "y": 82,
+       "parte": "pie",
+       "titulo": "Pie macizo",
+       "texto": "Del mismo color, sin anillo; se estrecha hacia la base.",
+       "d": "der"
+      },
+      {
+       "x": 30,
+       "y": 40,
+       "parte": "sombrero",
+       "titulo": "Borde ondulado",
+       "texto": "Amarillo-yema, en forma de embudo y con el borde ondulado.",
+       "d": "arriba-izq"
+      }
+     ],
+     "ojo": "Si debajo ves láminas finas y afiladas (como hojas de papel) o sale en racimos sobre madera, no es un rebozuelo."
+    },
+    {
+     "titulo": "Cortado por la mitad",
+     "foto": {
+      "sp": "Cantharellus roseocanus",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/48923586/{s}.jpg",
+      "autor": "Andrew W. Wilson",
+      "licencia": "CC0",
+      "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "pagina": "https://www.inaturalist.org/observations/31262001",
+      "origen": "iNaturalist",
+      "ar": 0.75
+     },
+     "puntos": [
+      {
+       "x": 30,
+       "y": 55,
+       "parte": "carne",
+       "titulo": "Carne blanca y maciza",
+       "texto": "Firme, blanca o amarillenta; huele a albaricoque.",
+       "d": "izq"
+      }
+     ]
+    },
     {
      "foto": {
       "sp": "Cantharellus cibarius",
@@ -6711,6 +6932,77 @@
    "familia": "Russulaceae",
    "anotadas": [
     {
+     "titulo": "Naranja que se mancha de verde",
+     "foto": {
+      "sp": "Lactarius deliciosus piceus",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/453385752/{s}.jpeg",
+      "autor": "Alan Rockefeller",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/253233776",
+      "origen": "iNaturalist",
+      "ar": 1.3333
+     },
+     "puntos": [
+      {
+       "x": 58,
+       "y": 28,
+       "parte": "sombrero",
+       "titulo": "Manchas verdes",
+       "texto": "Con la edad o al tocarlo, el sombrero y las láminas se manchan de verde.",
+       "d": "arriba-der"
+      },
+      {
+       "x": 77,
+       "y": 40,
+       "parte": "himenio",
+       "titulo": "Láminas naranjas",
+       "texto": "Apretadas, bajan un poco por el pie.",
+       "d": "der"
+      },
+      {
+       "x": 68,
+       "y": 62,
+       "parte": "pie",
+       "titulo": "Pie corto y hueco",
+       "texto": "Naranja, a veces con hoyitos; por dentro está hueco.",
+       "d": "der"
+      }
+     ],
+     "ojo": "Rompe una lámina: debe salir leche (látex) naranja-zanahoria. Si es blanca, o vira a otro color, no es un níscalo."
+    },
+    {
+     "titulo": "Roto: la leche naranja",
+     "foto": {
+      "sp": "Lactarius deliciosus",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/345496841/{s}.jpg",
+      "autor": "Nathan Aaron",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/196267112",
+      "origen": "iNaturalist",
+      "ar": 0.75
+     },
+     "puntos": [
+      {
+       "x": 40,
+       "y": 40,
+       "parte": "carne",
+       "titulo": "Leche naranja",
+       "texto": "Al romperlo sale látex naranja-zanahoria que con el tiempo verdea.",
+       "d": "arriba-izq"
+      },
+      {
+       "x": 70,
+       "y": 50,
+       "parte": "sombrero",
+       "titulo": "Círculos concéntricos",
+       "texto": "Anillos más oscuros sobre el sombrero, a menudo poco marcados.",
+       "d": "der"
+      }
+     ]
+    },
+    {
      "foto": {
       "sp": "Lactarius deliciosus",
       "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Lactarius_deliciosus_(32969568682).jpg/{w}px-Lactarius_deliciosus_(32969568682).jpg",
@@ -7016,6 +7308,108 @@
    },
    "familia": "Agaricaceae",
    "anotadas": [
+    {
+     "titulo": "Desde abajo: anillo doble que se desliza",
+     "foto": {
+      "sp": "Macrolepiota procera",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/11157407/{s}.jpg",
+      "autor": "Kostas Zontanos",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/8388707",
+      "origen": "iNaturalist",
+      "ar": 1.3333
+     },
+     "puntos": [
+      {
+       "x": 35,
+       "y": 33,
+       "parte": "himenio",
+       "titulo": "Láminas libres",
+       "texto": "Blanquecinas, luego crema; apretadas y sin tocar el pie.",
+       "d": "arriba-izq"
+      },
+      {
+       "x": 52,
+       "y": 70,
+       "parte": "anillo",
+       "titulo": "Anillo doble móvil",
+       "texto": "Grueso, como una arandela: se puede subir y bajar por el pie.",
+       "d": "der"
+      },
+      {
+       "x": 50,
+       "y": 56,
+       "parte": "pie",
+       "titulo": "Pie largo y fino",
+       "texto": "Mucho más largo que el ancho del sombrero; se separa fácil del sombrero.",
+       "d": "der"
+      }
+     ],
+     "ojo": "Solo las grandes: si el sombrero mide menos de 10 cm y tiene escamas, puede ser una lepiota mortal. Y si al cortarla la carne se vuelve rojiza o las láminas verdosas, es otra especie."
+    },
+    {
+     "titulo": "De joven: palillo de tambor",
+     "foto": {
+      "sp": "Macrolepiota procera",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/163436429/{s}.jpeg",
+      "autor": "Jonathan Hughes",
+      "licencia": "CC0",
+      "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "pagina": "https://www.inaturalist.org/observations/98191067",
+      "origen": "iNaturalist",
+      "ar": 0.75
+     },
+     "puntos": [
+      {
+       "x": 50,
+       "y": 30,
+       "parte": "sombrero",
+       "titulo": "Mamelón oscuro",
+       "texto": "Centro pardo y liso; el resto se rompe en escamas pardas.",
+       "d": "arriba"
+      },
+      {
+       "x": 43,
+       "y": 70,
+       "parte": "pie",
+       "titulo": "Pie atigrado",
+       "texto": "Con dibujo de bandas pardas.",
+       "d": "izq"
+      }
+     ]
+    },
+    {
+     "titulo": "El pie de cerca: piel de serpiente",
+     "foto": {
+      "sp": "Macrolepiota procera",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/237136287/{s}.jpeg",
+      "autor": "CorentinD",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/138717689",
+      "origen": "iNaturalist",
+      "ar": 0.75
+     },
+     "puntos": [
+      {
+       "x": 55,
+       "y": 40,
+       "parte": "pie",
+       "titulo": "Bandas pardas",
+       "texto": "Escamitas en bandas, como piel de serpiente, sobre fondo claro.",
+       "d": "der"
+      },
+      {
+       "x": 43,
+       "y": 45,
+       "parte": "carne",
+       "titulo": "Fibroso por dentro",
+       "texto": "El pie es duro y fibroso; no se come.",
+       "d": "izq"
+      }
+     ]
+    },
     {
      "foto": {
       "sp": "Macrolepiota procera",
@@ -10431,6 +10825,69 @@
    "familia": "Agaricaceae",
    "anotadas": [
     {
+     "titulo": "Por debajo: láminas rosas a chocolate",
+     "foto": {
+      "sp": "Agaricus campestris",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/117321373/{s}.jpeg",
+      "autor": "Thomas Mesaglio",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/72002631",
+      "origen": "iNaturalist",
+      "ar": 1.3333
+     },
+     "puntos": [
+      {
+       "x": 30,
+       "y": 30,
+       "parte": "himenio",
+       "titulo": "Láminas rosa-pardo",
+       "texto": "Rosa vivo de jovencito, luego pardo-chocolate. Nunca blancas.",
+       "d": "izq"
+      },
+      {
+       "x": 48,
+       "y": 62,
+       "parte": "pie",
+       "titulo": "Pie blanco",
+       "texto": "Corto y sin volva: la base acaba limpia.",
+       "d": "der"
+      },
+      {
+       "x": 58,
+       "y": 82,
+       "parte": "pie",
+       "titulo": "Base sin saco",
+       "texto": "Termina sin bulbo ni saco membranoso.",
+       "d": "der"
+      }
+     ],
+     "ojo": "Ninguna seta blanca con láminas BLANCAS es un champiñón: puede ser una Amanita mortal. Y saca siempre el pie entero: si hay volva (saco en la base), fuera."
+    },
+    {
+     "titulo": "Joven: láminas rosas",
+     "foto": {
+      "sp": "Agaricus campestris",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/229358419/{s}.jpeg",
+      "autor": "Carminda Santos",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/134546760",
+      "origen": "iNaturalist",
+      "ar": 0.75
+     },
+     "puntos": [
+      {
+       "x": 55,
+       "y": 85,
+       "parte": "himenio",
+       "titulo": "Láminas libres",
+       "texto": "Rosas y apretadas, no tocan el pie.",
+       "d": "abajo"
+      }
+     ]
+    },
+    {
      "foto": {
       "sp": "Agaricus campestris",
       "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Agaricus_campestris_(48647010296).jpg/{w}px-Agaricus_campestris_(48647010296).jpg",
@@ -10708,6 +11165,77 @@
    ],
    "familia": "Agaricaceae",
    "anotadas": [
+    {
+     "titulo": "Amarillo donde se roza y en la base del pie",
+     "foto": {
+      "sp": "Agaricus xanthodermus",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/29713848/{s}.jpeg",
+      "autor": "Cindy Trubovitz",
+      "licencia": "CC BY-SA 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/19325942",
+      "origen": "iNaturalist",
+      "ar": 0.75
+     },
+     "puntos": [
+      {
+       "x": 45,
+       "y": 23,
+       "parte": "sombrero",
+       "titulo": "Manchas amarillas",
+       "texto": "El sombrero blanco amarillea al rozarlo.",
+       "d": "arriba"
+      },
+      {
+       "x": 62,
+       "y": 77,
+       "parte": "carne",
+       "titulo": "Base que amarillea",
+       "texto": "La base del pie se pone amarilla intensa al cortarla o rasparla.",
+       "d": "der"
+      },
+      {
+       "x": 52,
+       "y": 42,
+       "parte": "anillo",
+       "titulo": "Anillo grande",
+       "texto": "Falda ancha en el pie.",
+       "d": "der"
+      },
+      {
+       "x": 72,
+       "y": 32,
+       "parte": "himenio",
+       "titulo": "Láminas rosadas → pardas",
+       "texto": "Como en los demás champiñones: nunca blancas.",
+       "d": "arriba-der"
+      }
+     ],
+     "ojo": "Rasca el sombrero o corta la base del pie: si se pone amarillo vivo al momento y huele a tinta o fenol, no es un champiñón comestible."
+    },
+    {
+     "titulo": "Raspado: amarillo al instante",
+     "foto": {
+      "sp": "Agaricus xanthodermus",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/533951240/{s}.jpg",
+      "autor": "Johan Adler",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/296534076",
+      "origen": "iNaturalist",
+      "ar": 1.3333
+     },
+     "puntos": [
+      {
+       "x": 44,
+       "y": 55,
+       "parte": "sombrero",
+       "titulo": "Amarillo vivo",
+       "texto": "Donde se ha rozado, mancha amarilla que luego se vuelve parda.",
+       "d": "abajo-izq"
+      }
+     ]
+    },
     {
      "foto": {
       "sp": "Agaricus xanthodermus",
@@ -15961,6 +16489,77 @@
    "familia": "Inocybaceae",
    "anotadas": [
     {
+     "titulo": "Blanca que se mancha de rojo",
+     "foto": {
+      "sp": "Inosperma erubescens",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/676615640/{s}.jpg",
+      "autor": "Sara Scorey",
+      "licencia": "CC0",
+      "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "pagina": "https://www.inaturalist.org/observations/370374285",
+      "origen": "iNaturalist",
+      "ar": 0.75
+     },
+     "puntos": [
+      {
+       "x": 20,
+       "y": 38,
+       "parte": "sombrero",
+       "titulo": "Manchas rojas",
+       "texto": "El sombrero blanquecino se mancha de rojo-anaranjado al rozarse o envejecer.",
+       "d": "izq"
+      },
+      {
+       "x": 27,
+       "y": 55,
+       "parte": "himenio",
+       "titulo": "Láminas claras",
+       "texto": "Blanquecinas y luego rosadas o pardas.",
+       "d": "der"
+      },
+      {
+       "x": 47,
+       "y": 50,
+       "parte": "pie",
+       "titulo": "Pie blanco sin anillo",
+       "texto": "Liso, se mancha de rojo al tocarlo.",
+       "d": "abajo"
+      }
+     ],
+     "ojo": "Sale en primavera, como el perretxiko (seta de San Jorge). Si una seta blanquecina se mancha de rojo al tocarla o con la edad, no se coge: contiene muscarina y puede ser mortal."
+    },
+    {
+     "titulo": "Por debajo: se enrojece al tocar",
+     "foto": {
+      "sp": "Inosperma erubescens",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/79821844/{s}.jpeg",
+      "autor": "Peeter Talvistu",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/50267582",
+      "origen": "iNaturalist",
+      "ar": 0.5
+     },
+     "puntos": [
+      {
+       "x": 52,
+       "y": 52,
+       "parte": "himenio",
+       "titulo": "Mancha roja",
+       "texto": "Donde se ha tocado, se pone rojo.",
+       "d": "izq"
+      },
+      {
+       "x": 57,
+       "y": 75,
+       "parte": "himenio",
+       "titulo": "Láminas rosa-pardo",
+       "texto": "Apretadas; con la edad, rosa-pardo con manchas rojas.",
+       "d": "der"
+      }
+     ]
+    },
+    {
      "foto": {
       "sp": "Inocybe erubescens",
       "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Inocybe_erubescens_MS4_(2).jpg/{w}px-Inocybe_erubescens_MS4_(2).jpg",
@@ -16485,7 +17084,87 @@
      }
     ]
    },
-   "anotadas": []
+   "anotadas": [
+    {
+     "titulo": "Desde abajo: láminas, anillo y pie",
+     "foto": {
+      "sp": "Amanita citrina",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/441208327/{s}.jpeg",
+      "autor": "Yves Bas",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/247076134",
+      "origen": "iNaturalist",
+      "ar": 1.3333
+     },
+     "puntos": [
+      {
+       "x": 60,
+       "y": 30,
+       "parte": "himenio",
+       "titulo": "Láminas blanquecinas",
+       "texto": "Libres y apretadas, con tono crema-amarillento.",
+       "d": "der"
+      },
+      {
+       "x": 55,
+       "y": 52,
+       "parte": "anillo",
+       "titulo": "Anillo amarillento",
+       "texto": "Falda membranosa, del color del sombrero.",
+       "d": "der"
+      },
+      {
+       "x": 45,
+       "y": 82,
+       "parte": "pie",
+       "titulo": "Pie largo y claro",
+       "texto": "Blanco-amarillento, liso.",
+       "d": "izq"
+      }
+     ],
+     "ojo": "No es de las más peligrosas, pero se confunde fácilmente con la oronja verde (cicuta verde) y con la blanca. Ante cualquier Amanita amarillenta o blanca, no la cojas."
+    },
+    {
+     "titulo": "Forma blanca: el bulbo con reborde",
+     "foto": {
+      "sp": "Amanita citrina (forma blanca)",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/234418893/{s}.jpeg",
+      "autor": "Jens Ullenius",
+      "licencia": "CC0",
+      "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "pagina": "https://www.inaturalist.org/observations/137274330",
+      "origen": "iNaturalist",
+      "ar": 0.75
+     },
+     "puntos": [
+      {
+       "x": 45,
+       "y": 30,
+       "parte": "anillo",
+       "titulo": "Anillo",
+       "texto": "Falda que cuelga en lo alto del pie.",
+       "d": "der"
+      },
+      {
+       "x": 47,
+       "y": 88,
+       "parte": "volva",
+       "titulo": "Bulbo grande con reborde",
+       "texto": "Base en forma de bola, con el borde de la volva marcado como un cuello. Desentiérrala para verlo.",
+       "d": "der"
+      },
+      {
+       "x": 50,
+       "y": 12,
+       "parte": "sombrero",
+       "titulo": "Sombrero con placas",
+       "texto": "Blanco o amarillo pálido, con placas planas del velo. Huele a patata cruda.",
+       "d": "arriba-der"
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "craterellus-lutescens",
@@ -18948,6 +19627,46 @@
     "txt": "No se recoge: es mortal. Fotografíala en su sitio y déjala."
    },
    "anotadas": [
+    {
+     "titulo": "Por debajo: láminas canela y pie con bandas amarillas",
+     "foto": {
+      "sp": "Cortinarius rubellus",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/432118804/{s}.jpeg",
+      "autor": "Virn Stothers",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/242385025",
+      "origen": "iNaturalist",
+      "ar": 0.5957
+     },
+     "puntos": [
+      {
+       "x": 62,
+       "y": 33,
+       "parte": "himenio",
+       "titulo": "Láminas ocre-canela",
+       "texto": "Gruesas y separadas; se vuelven color óxido al madurar.",
+       "d": "der"
+      },
+      {
+       "x": 32,
+       "y": 72,
+       "parte": "pie",
+       "titulo": "Bandas amarillas",
+       "texto": "Restos de la cortina en forma de bandas o zonas amarillas sobre el pie.",
+       "d": "izq"
+      },
+      {
+       "x": 48,
+       "y": 47,
+       "parte": "pie",
+       "titulo": "Pie del mismo tono",
+       "texto": "Largo, pardo-anaranjado, a menudo engrosado hacia la base.",
+       "d": "abajo-der"
+      }
+     ],
+     "ojo": "Mortal para el riñón y los síntomas tardan días. Si una seta naranja-parda tiene láminas finas y color óxido, no es un rebozuelo."
+    },
     {
      "foto": {
       "sp": "Cortinarius rubellus",
