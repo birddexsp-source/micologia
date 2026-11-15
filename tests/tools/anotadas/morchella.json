@@ -1,0 +1,67 @@
+[
+ {
+  "_cand": "5.0",
+  "titulo": "Cabeza en panal, con huecos",
+  "foto": {
+   "sp": "Morchella esculenta",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/247193447/{s}.jpg",
+   "autor": "Jamie O'Neill",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/144069801",
+   "origen": "iNaturalist",
+   "ar": 1.3333
+  },
+  "puntos": [
+   {
+    "x": 50,
+    "y": 45,
+    "parte": "sombrero",
+    "titulo": "Alveolos",
+    "texto": "Huecos separados por costillas, como un panal.",
+    "d": "der"
+   },
+   {
+    "x": 42,
+    "y": 18,
+    "parte": "sombrero",
+    "titulo": "Costillas",
+    "texto": "Crestas algo más claras o más oscuras que el fondo.",
+    "d": "arriba-izq"
+   }
+  ],
+  "ojo": "Cruda es tóxica: siempre bien cocinada. Y córtala de arriba abajo: debe estar hueca por completo. Si ves pliegues tipo cerebro o algodón dentro, es Gyromitra (falsa colmenilla), que puede ser mortal."
+ },
+ {
+  "_cand": "5.4",
+  "titulo": "Unión de la cabeza con el pie",
+  "foto": {
+   "sp": "Morchella esculenta",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/247193463/{s}.jpg",
+   "autor": "Jamie O'Neill",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/144069801",
+   "origen": "iNaturalist",
+   "ar": 1.3333
+  },
+  "puntos": [
+   {
+    "x": 60,
+    "y": 70,
+    "parte": "pie",
+    "titulo": "Pie blanco",
+    "texto": "Blanquecino, granuloso y hueco.",
+    "d": "der"
+   },
+   {
+    "x": 25,
+    "y": 60,
+    "parte": "sombrero",
+    "titulo": "Cabeza unida al pie",
+    "texto": "La cabeza se une al pie por la parte de abajo, sin falda suelta.",
+    "d": "izq"
+   }
+  ]
+ }
+]

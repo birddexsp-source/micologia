@@ -4607,7 +4607,71 @@
      }
     ]
    },
-   "anotadas": []
+   "anotadas": [
+    {
+     "titulo": "Sombrero gris acampanado que se deshace",
+     "foto": {
+      "sp": "Coprinopsis atramentaria",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/751297752/{s}.jpg",
+      "autor": "Vincent B.",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/408688207",
+      "origen": "iNaturalist",
+      "ar": 0.75
+     },
+     "puntos": [
+      {
+       "x": 30,
+       "y": 40,
+       "parte": "sombrero",
+       "titulo": "Gris con surcos",
+       "texto": "Acampanado, gris-pardo, con estrías de arriba abajo.",
+       "d": "izq"
+      },
+      {
+       "x": 75,
+       "y": 76,
+       "parte": "sombrero",
+       "titulo": "Borde que se rasga",
+       "texto": "El borde se raja y se va deshaciendo en tinta negra.",
+       "d": "abajo"
+      }
+     ],
+     "ojo": "Nunca la comas si has bebido alcohol o vas a beber en los días siguientes: da una reacción fuerte (sofocos, palpitaciones, vómitos). Mejor ni tocarla."
+    },
+    {
+     "titulo": "Por debajo: láminas que se vuelven tinta",
+     "foto": {
+      "sp": "Coprinopsis atramentaria",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/301994360/{s}.jpg",
+      "autor": "Peter Chen 2.0",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/173870260",
+      "origen": "iNaturalist",
+      "ar": 1.3333
+     },
+     "puntos": [
+      {
+       "x": 72,
+       "y": 55,
+       "parte": "himenio",
+       "titulo": "Láminas negras",
+       "texto": "Muy apretadas; pasan de blanco a gris y negro y se licúan.",
+       "d": "der"
+      },
+      {
+       "x": 45,
+       "y": 35,
+       "parte": "pie",
+       "titulo": "Pie blanco hueco",
+       "texto": "Liso, sin anillo (a veces con una marca baja).",
+       "d": "arriba"
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "tricholoma-equestre",
@@ -4844,7 +4908,63 @@
      }
     ]
    },
-   "anotadas": []
+   "anotadas": [
+    {
+     "titulo": "Amarilla con el centro pardo",
+     "foto": {
+      "sp": "Tricholoma equestre",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/320790488/{s}.jpeg",
+      "autor": "Veeti Varjo",
+      "licencia": "CC0",
+      "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "pagina": "https://www.inaturalist.org/observations/183837798",
+      "origen": "iNaturalist",
+      "ar": 1.7778
+     },
+     "puntos": [
+      {
+       "x": 45,
+       "y": 25,
+       "parte": "sombrero",
+       "titulo": "Centro con escamitas pardas",
+       "texto": "Amarillo verdoso, con el centro más pardo y escamoso; piel pegajosa.",
+       "d": "arriba"
+      },
+      {
+       "x": 58,
+       "y": 76,
+       "parte": "pie",
+       "titulo": "Pie amarillo",
+       "texto": "Amarillo, macizo, sin anillo.",
+       "d": "der"
+      }
+     ],
+     "ojo": "Se vendía y se comía como «seta de los caballeros», pero comida en cantidad o varios días seguidos ha causado intoxicaciones graves que dañan los músculos. Hoy se considera tóxica."
+    },
+    {
+     "titulo": "Por debajo: láminas amarillo azufre",
+     "foto": {
+      "sp": "Tricholoma equestre",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/320790506/{s}.jpeg",
+      "autor": "Veeti Varjo",
+      "licencia": "CC0",
+      "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "pagina": "https://www.inaturalist.org/observations/183837798",
+      "origen": "iNaturalist",
+      "ar": 1.7778
+     },
+     "puntos": [
+      {
+       "x": 72,
+       "y": 62,
+       "parte": "himenio",
+       "titulo": "Láminas amarillas",
+       "texto": "Amarillo vivo, con muesca junto al pie.",
+       "d": "der"
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "clitocybe-rivulosa",
@@ -5086,7 +5206,71 @@
      }
     ]
    },
-   "anotadas": []
+   "anotadas": [
+    {
+     "titulo": "Láminas que bajan por el pie",
+     "foto": {
+      "sp": "Clitocybe sp. 'rivulosa-PNW07'",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/592098354/{s}.jpg",
+      "autor": "Alex Reitan",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/326879276",
+      "origen": "iNaturalist",
+      "ar": 0.75
+     },
+     "puntos": [
+      {
+       "x": 35,
+       "y": 40,
+       "parte": "himenio",
+       "titulo": "Láminas apretadas y decurrentes",
+       "texto": "Blanquecinas, juntas, y bajan por el pie.",
+       "d": "arriba-der"
+      },
+      {
+       "x": 75,
+       "y": 58,
+       "parte": "sombrero",
+       "titulo": "Sombrero blanquecino",
+       "texto": "Pequeño, aplanado o en embudo, con tonos crema o rosados.",
+       "d": "der"
+      }
+     ],
+     "ojo": "Sale en los mismos prados y corros que la senderuela (Marasmius oreades) y es tóxica (muscarina). La senderuela tiene láminas SEPARADAS que no bajan por el pie y un pie duro y flexible."
+    },
+    {
+     "titulo": "En grupo, entre la hierba",
+     "foto": {
+      "sp": "Clitocybe sp. 'rivulosa-PNW07'",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/593007839/{s}.jpg",
+      "autor": "Leanne Stacy Reitan",
+      "licencia": "CC0",
+      "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "pagina": "https://www.inaturalist.org/observations/327334583",
+      "origen": "iNaturalist",
+      "ar": 0.665
+     },
+     "puntos": [
+      {
+       "x": 75,
+       "y": 25,
+       "parte": "sombrero",
+       "titulo": "Blanco harinoso",
+       "texto": "Superficie blanca como enharinada.",
+       "d": "der"
+      },
+      {
+       "x": 50,
+       "y": 70,
+       "parte": "pie",
+       "titulo": "Pie corto blanco",
+       "texto": "Fino, sin anillo.",
+       "d": "izq"
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "tylopilus-felleus",
@@ -5358,7 +5542,71 @@
      }
     ]
    },
-   "anotadas": []
+   "anotadas": [
+    {
+     "titulo": "Pie con red oscura",
+     "foto": {
+      "sp": "Tylopilus felleus",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/318385593/{s}.jpeg",
+      "autor": "Elena A. Kizilova (Елена А. Кизилова)",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/182589139",
+      "origen": "iNaturalist",
+      "ar": 0.75
+     },
+     "puntos": [
+      {
+       "x": 48,
+       "y": 62,
+       "parte": "pie",
+       "titulo": "Red parda gruesa",
+       "texto": "Redecilla oscura, de malla grande, sobre fondo claro.",
+       "d": "der"
+      },
+      {
+       "x": 45,
+       "y": 20,
+       "parte": "himenio",
+       "titulo": "Poros claros",
+       "texto": "Blancos de joven, luego rosados.",
+       "d": "arriba"
+      }
+     ],
+     "ojo": "Muy amargo: un solo ejemplar estropea un guiso. Se confunde con el boleto (Boletus edulis), que tiene la red del pie BLANCA y los poros nunca rosas."
+    },
+    {
+     "titulo": "Poros que se vuelven rosados",
+     "foto": {
+      "sp": "Tylopilus felleus",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/142729595/{s}.jpg",
+      "autor": "Thomas Dreux",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/86621064",
+      "origen": "iNaturalist",
+      "ar": 0.75
+     },
+     "puntos": [
+      {
+       "x": 70,
+       "y": 40,
+       "parte": "himenio",
+       "titulo": "Poros rosados",
+       "texto": "Blanco-rosados, más rosados con la edad.",
+       "d": "der"
+      },
+      {
+       "x": 59,
+       "y": 74,
+       "parte": "himenio",
+       "titulo": "Manchas pardo-rojizas",
+       "texto": "Se manchan al tocarlos.",
+       "d": "abajo-izq"
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "boletus-edulis",
@@ -6419,7 +6667,71 @@
      }
     ]
    },
-   "anotadas": []
+   "anotadas": [
+    {
+     "titulo": "Por fuera: liso, sin láminas",
+     "foto": {
+      "sp": "Craterellus cornucopioides",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/399207844/{s}.jpg",
+      "autor": "Kristian Bosak",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/225185984",
+      "origen": "iNaturalist",
+      "ar": 0.75
+     },
+     "puntos": [
+      {
+       "x": 55,
+       "y": 55,
+       "parte": "himenio",
+       "titulo": "Cara externa lisa",
+       "texto": "Gris, lisa o con arrugas suaves. Sin láminas ni pliegues marcados.",
+       "d": "der"
+      },
+      {
+       "x": 40,
+       "y": 18,
+       "parte": "sombrero",
+       "titulo": "Borde ondulado",
+       "texto": "Borde fino, oscuro y ondulado.",
+       "d": "arriba-izq"
+      }
+     ],
+     "ojo": "Una trompeta negra se reconoce bien, pero al ser oscura pasa desapercibida entre las hojas. Revisa que no lleves trozos de otras setas pardas mezclados."
+    },
+    {
+     "titulo": "Desde arriba: embudo hueco y negro",
+     "foto": {
+      "sp": "Craterellus cornucopioides",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/593131076/{s}.jpg",
+      "autor": "Paula Nimigean",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/327396920",
+      "origen": "iNaturalist",
+      "ar": 1.369
+     },
+     "puntos": [
+      {
+       "x": 38,
+       "y": 45,
+       "parte": "sombrero",
+       "titulo": "Embudo negro",
+       "texto": "Hueco hasta la base, como una trompeta.",
+       "d": "izq"
+      },
+      {
+       "x": 75,
+       "y": 88,
+       "parte": "habitat",
+       "titulo": "Entre hojas de haya o roble",
+       "texto": "Suele salir en grupos bajo frondosas, entre la hojarasca.",
+       "d": "abajo"
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "hydnum-repandum",
@@ -6644,6 +6956,61 @@
     }
    ],
    "anotadas": [
+    {
+     "titulo": "Por debajo: pinchos, no láminas",
+     "foto": {
+      "sp": "Hydnum repandum",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/608952568/{s}.jpg",
+      "autor": "Carminda Santos",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/335230011",
+      "origen": "iNaturalist",
+      "ar": 0.5625
+     },
+     "puntos": [
+      {
+       "x": 50,
+       "y": 30,
+       "parte": "himenio",
+       "titulo": "Pinchos",
+       "texto": "En lugar de láminas, cuelgan pinchitos finos y frágiles.",
+       "d": "arriba-der"
+      },
+      {
+       "x": 40,
+       "y": 60,
+       "parte": "pie",
+       "titulo": "Pie blanco",
+       "texto": "Corto y blanco; amarillea al tocarlo.",
+       "d": "izq"
+      }
+     ],
+     "ojo": "Es de las más fáciles para empezar: ninguna seta tóxica de aquí tiene pinchos bajo el sombrero. Aun así, compruébalo siempre."
+    },
+    {
+     "titulo": "Los pinchos de cerca",
+     "foto": {
+      "sp": "Hydnum repandum",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/616292028/{s}.jpg",
+      "autor": "Chaym Turak",
+      "licencia": "CC BY-SA 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/338845322",
+      "origen": "iNaturalist",
+      "ar": 1.4993
+     },
+     "puntos": [
+      {
+       "x": 55,
+       "y": 50,
+       "parte": "himenio",
+       "titulo": "Pinchos crema",
+       "texto": "Cuelgan hacia abajo; se desprenden con el dedo.",
+       "d": "der"
+      }
+     ]
+    },
     {
      "foto": {
       "sp": "Hydnum repandum",
@@ -7723,7 +8090,71 @@
      }
     ]
    },
-   "anotadas": []
+   "anotadas": [
+    {
+     "titulo": "Por debajo: láminas separadas",
+     "foto": {
+      "sp": "Marasmius oreades",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/94205161/{s}.jpeg",
+      "autor": "goldfjnch",
+      "licencia": "CC0",
+      "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "pagina": "https://www.inaturalist.org/observations/58984897",
+      "origen": "iNaturalist",
+      "ar": 1.4993
+     },
+     "puntos": [
+      {
+       "x": 62,
+       "y": 32,
+       "parte": "himenio",
+       "titulo": "Láminas espaciadas",
+       "texto": "Gruesas, crema, con hueco entre ellas; no bajan por el pie.",
+       "d": "arriba-der"
+      },
+      {
+       "x": 20,
+       "y": 45,
+       "parte": "pie",
+       "titulo": "Pie fino y tenaz",
+       "texto": "Duro y flexible: se retuerce sin romperse.",
+       "d": "abajo"
+      }
+     ],
+     "ojo": "En los mismos prados salen Clitocybe blancas tóxicas, con láminas apretadas que bajan por el pie. La senderuela tiene láminas espaciadas y el pie se puede retorcer sin que se rompa."
+    },
+    {
+     "titulo": "En grupo, en la hierba",
+     "foto": {
+      "sp": "Marasmius oreades",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/3462110/{s}.jpg",
+      "autor": "Peter de Lange",
+      "licencia": "CC0",
+      "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "pagina": "https://www.inaturalist.org/observations/3009505",
+      "origen": "iNaturalist",
+      "ar": 1.1949
+     },
+     "puntos": [
+      {
+       "x": 57,
+       "y": 18,
+       "parte": "sombrero",
+       "titulo": "Sombrero crema con mamelón",
+       "texto": "Pequeño, crema-ocre, con un bultito central.",
+       "d": "arriba"
+      },
+      {
+       "x": 26,
+       "y": 60,
+       "parte": "himenio",
+       "titulo": "Láminas crema",
+       "texto": "Separadas, del color del sombrero.",
+       "d": "izq"
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "calocybe-gambosa",
@@ -8341,6 +8772,69 @@
    },
    "familia": "Morchellaceae",
    "anotadas": [
+    {
+     "titulo": "Cabeza en panal, con huecos",
+     "foto": {
+      "sp": "Morchella esculenta",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/247193447/{s}.jpg",
+      "autor": "Jamie O'Neill",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/144069801",
+      "origen": "iNaturalist",
+      "ar": 1.3333
+     },
+     "puntos": [
+      {
+       "x": 50,
+       "y": 45,
+       "parte": "sombrero",
+       "titulo": "Alveolos",
+       "texto": "Huecos separados por costillas, como un panal.",
+       "d": "der"
+      },
+      {
+       "x": 42,
+       "y": 18,
+       "parte": "sombrero",
+       "titulo": "Costillas",
+       "texto": "Crestas algo más claras o más oscuras que el fondo.",
+       "d": "arriba-izq"
+      }
+     ],
+     "ojo": "Cruda es tóxica: siempre bien cocinada. Y córtala de arriba abajo: debe estar hueca por completo. Si ves pliegues tipo cerebro o algodón dentro, es Gyromitra (falsa colmenilla), que puede ser mortal."
+    },
+    {
+     "titulo": "Unión de la cabeza con el pie",
+     "foto": {
+      "sp": "Morchella esculenta",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/247193463/{s}.jpg",
+      "autor": "Jamie O'Neill",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/144069801",
+      "origen": "iNaturalist",
+      "ar": 1.3333
+     },
+     "puntos": [
+      {
+       "x": 60,
+       "y": 70,
+       "parte": "pie",
+       "titulo": "Pie blanco",
+       "texto": "Blanquecino, granuloso y hueco.",
+       "d": "der"
+      },
+      {
+       "x": 25,
+       "y": 60,
+       "parte": "sombrero",
+       "titulo": "Cabeza unida al pie",
+       "texto": "La cabeza se une al pie por la parte de abajo, sin falda suelta.",
+       "d": "izq"
+      }
+     ]
+    },
     {
      "foto": {
       "sp": "Morchella esculenta",

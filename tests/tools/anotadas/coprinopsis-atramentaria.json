@@ -1,0 +1,67 @@
+[
+ {
+  "_cand": "1.1",
+  "titulo": "Sombrero gris acampanado que se deshace",
+  "foto": {
+   "sp": "Coprinopsis atramentaria",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/751297752/{s}.jpg",
+   "autor": "Vincent B.",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/408688207",
+   "origen": "iNaturalist",
+   "ar": 0.75
+  },
+  "puntos": [
+   {
+    "x": 30,
+    "y": 40,
+    "parte": "sombrero",
+    "titulo": "Gris con surcos",
+    "texto": "Acampanado, gris-pardo, con estrías de arriba abajo.",
+    "d": "izq"
+   },
+   {
+    "x": 75,
+    "y": 76,
+    "parte": "sombrero",
+    "titulo": "Borde que se rasga",
+    "texto": "El borde se raja y se va deshaciendo en tinta negra.",
+    "d": "abajo"
+   }
+  ],
+  "ojo": "Nunca la comas si has bebido alcohol o vas a beber en los días siguientes: da una reacción fuerte (sofocos, palpitaciones, vómitos). Mejor ni tocarla."
+ },
+ {
+  "_cand": "4.1",
+  "titulo": "Por debajo: láminas que se vuelven tinta",
+  "foto": {
+   "sp": "Coprinopsis atramentaria",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/301994360/{s}.jpg",
+   "autor": "Peter Chen 2.0",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/173870260",
+   "origen": "iNaturalist",
+   "ar": 1.3333
+  },
+  "puntos": [
+   {
+    "x": 72,
+    "y": 55,
+    "parte": "himenio",
+    "titulo": "Láminas negras",
+    "texto": "Muy apretadas; pasan de blanco a gris y negro y se licúan.",
+    "d": "der"
+   },
+   {
+    "x": 45,
+    "y": 35,
+    "parte": "pie",
+    "titulo": "Pie blanco hueco",
+    "texto": "Liso, sin anillo (a veces con una marca baja).",
+    "d": "arriba"
+   }
+  ]
+ }
+]

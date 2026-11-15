@@ -1,0 +1,67 @@
+[
+ {
+  "_cand": "1.2",
+  "titulo": "Pie con red oscura",
+  "foto": {
+   "sp": "Tylopilus felleus",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/318385593/{s}.jpeg",
+   "autor": "Elena A. Kizilova (Елена А. Кизилова)",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/182589139",
+   "origen": "iNaturalist",
+   "ar": 0.75
+  },
+  "puntos": [
+   {
+    "x": 48,
+    "y": 62,
+    "parte": "pie",
+    "titulo": "Red parda gruesa",
+    "texto": "Redecilla oscura, de malla grande, sobre fondo claro.",
+    "d": "der"
+   },
+   {
+    "x": 45,
+    "y": 20,
+    "parte": "himenio",
+    "titulo": "Poros claros",
+    "texto": "Blancos de joven, luego rosados.",
+    "d": "arriba"
+   }
+  ],
+  "ojo": "Muy amargo: un solo ejemplar estropea un guiso. Se confunde con el boleto (Boletus edulis), que tiene la red del pie BLANCA y los poros nunca rosas."
+ },
+ {
+  "_cand": "2.3",
+  "titulo": "Poros que se vuelven rosados",
+  "foto": {
+   "sp": "Tylopilus felleus",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/142729595/{s}.jpg",
+   "autor": "Thomas Dreux",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/86621064",
+   "origen": "iNaturalist",
+   "ar": 0.75
+  },
+  "puntos": [
+   {
+    "x": 70,
+    "y": 40,
+    "parte": "himenio",
+    "titulo": "Poros rosados",
+    "texto": "Blanco-rosados, más rosados con la edad.",
+    "d": "der"
+   },
+   {
+    "x": 59,
+    "y": 74,
+    "parte": "himenio",
+    "titulo": "Manchas pardo-rojizas",
+    "texto": "Se manchan al tocarlos.",
+    "d": "abajo-izq"
+   }
+  ]
+ }
+]

@@ -1,0 +1,67 @@
+[
+ {
+  "_cand": "3.2",
+  "titulo": "Por debajo: láminas separadas",
+  "foto": {
+   "sp": "Marasmius oreades",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/94205161/{s}.jpeg",
+   "autor": "goldfjnch",
+   "licencia": "CC0",
+   "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+   "pagina": "https://www.inaturalist.org/observations/58984897",
+   "origen": "iNaturalist",
+   "ar": 1.4993
+  },
+  "puntos": [
+   {
+    "x": 62,
+    "y": 32,
+    "parte": "himenio",
+    "titulo": "Láminas espaciadas",
+    "texto": "Gruesas, crema, con hueco entre ellas; no bajan por el pie.",
+    "d": "arriba-der"
+   },
+   {
+    "x": 20,
+    "y": 45,
+    "parte": "pie",
+    "titulo": "Pie fino y tenaz",
+    "texto": "Duro y flexible: se retuerce sin romperse.",
+    "d": "abajo"
+   }
+  ],
+  "ojo": "En los mismos prados salen Clitocybe blancas tóxicas, con láminas apretadas que bajan por el pie. La senderuela tiene láminas espaciadas y el pie se puede retorcer sin que se rompa."
+ },
+ {
+  "_cand": "2.1",
+  "titulo": "En grupo, en la hierba",
+  "foto": {
+   "sp": "Marasmius oreades",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/3462110/{s}.jpg",
+   "autor": "Peter de Lange",
+   "licencia": "CC0",
+   "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+   "pagina": "https://www.inaturalist.org/observations/3009505",
+   "origen": "iNaturalist",
+   "ar": 1.1949
+  },
+  "puntos": [
+   {
+    "x": 57,
+    "y": 18,
+    "parte": "sombrero",
+    "titulo": "Sombrero crema con mamelón",
+    "texto": "Pequeño, crema-ocre, con un bultito central.",
+    "d": "arriba"
+   },
+   {
+    "x": 26,
+    "y": 60,
+    "parte": "himenio",
+    "titulo": "Láminas crema",
+    "texto": "Separadas, del color del sombrero.",
+    "d": "izq"
+   }
+  ]
+ }
+]

@@ -1,0 +1,67 @@
+[
+ {
+  "_cand": "3.3",
+  "titulo": "Por fuera: liso, sin láminas",
+  "foto": {
+   "sp": "Craterellus cornucopioides",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/399207844/{s}.jpg",
+   "autor": "Kristian Bosak",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/225185984",
+   "origen": "iNaturalist",
+   "ar": 0.75
+  },
+  "puntos": [
+   {
+    "x": 55,
+    "y": 55,
+    "parte": "himenio",
+    "titulo": "Cara externa lisa",
+    "texto": "Gris, lisa o con arrugas suaves. Sin láminas ni pliegues marcados.",
+    "d": "der"
+   },
+   {
+    "x": 40,
+    "y": 18,
+    "parte": "sombrero",
+    "titulo": "Borde ondulado",
+    "texto": "Borde fino, oscuro y ondulado.",
+    "d": "arriba-izq"
+   }
+  ],
+  "ojo": "Una trompeta negra se reconoce bien, pero al ser oscura pasa desapercibida entre las hojas. Revisa que no lleves trozos de otras setas pardas mezclados."
+ },
+ {
+  "_cand": "2.0",
+  "titulo": "Desde arriba: embudo hueco y negro",
+  "foto": {
+   "sp": "Craterellus cornucopioides",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/593131076/{s}.jpg",
+   "autor": "Paula Nimigean",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/327396920",
+   "origen": "iNaturalist",
+   "ar": 1.369
+  },
+  "puntos": [
+   {
+    "x": 38,
+    "y": 45,
+    "parte": "sombrero",
+    "titulo": "Embudo negro",
+    "texto": "Hueco hasta la base, como una trompeta.",
+    "d": "izq"
+   },
+   {
+    "x": 75,
+    "y": 88,
+    "parte": "habitat",
+    "titulo": "Entre hojas de haya o roble",
+    "texto": "Suele salir en grupos bajo frondosas, entre la hojarasca.",
+    "d": "abajo"
+   }
+  ]
+ }
+]

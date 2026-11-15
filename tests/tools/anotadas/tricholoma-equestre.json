@@ -1,0 +1,59 @@
+[
+ {
+  "_cand": "1.0",
+  "titulo": "Amarilla con el centro pardo",
+  "foto": {
+   "sp": "Tricholoma equestre",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/320790488/{s}.jpeg",
+   "autor": "Veeti Varjo",
+   "licencia": "CC0",
+   "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+   "pagina": "https://www.inaturalist.org/observations/183837798",
+   "origen": "iNaturalist",
+   "ar": 1.7778
+  },
+  "puntos": [
+   {
+    "x": 45,
+    "y": 25,
+    "parte": "sombrero",
+    "titulo": "Centro con escamitas pardas",
+    "texto": "Amarillo verdoso, con el centro más pardo y escamoso; piel pegajosa.",
+    "d": "arriba"
+   },
+   {
+    "x": 58,
+    "y": 76,
+    "parte": "pie",
+    "titulo": "Pie amarillo",
+    "texto": "Amarillo, macizo, sin anillo.",
+    "d": "der"
+   }
+  ],
+  "ojo": "Se vendía y se comía como «seta de los caballeros», pero comida en cantidad o varios días seguidos ha causado intoxicaciones graves que dañan los músculos. Hoy se considera tóxica."
+ },
+ {
+  "_cand": "1.1",
+  "titulo": "Por debajo: láminas amarillo azufre",
+  "foto": {
+   "sp": "Tricholoma equestre",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/320790506/{s}.jpeg",
+   "autor": "Veeti Varjo",
+   "licencia": "CC0",
+   "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+   "pagina": "https://www.inaturalist.org/observations/183837798",
+   "origen": "iNaturalist",
+   "ar": 1.7778
+  },
+  "puntos": [
+   {
+    "x": 72,
+    "y": 62,
+    "parte": "himenio",
+    "titulo": "Láminas amarillas",
+    "texto": "Amarillo vivo, con muesca junto al pie.",
+    "d": "der"
+   }
+  ]
+ }
+]

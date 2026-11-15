@@ -1,0 +1,59 @@
+[
+ {
+  "_cand": "0.2",
+  "titulo": "Por debajo: pinchos, no láminas",
+  "foto": {
+   "sp": "Hydnum repandum",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/608952568/{s}.jpg",
+   "autor": "Carminda Santos",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/335230011",
+   "origen": "iNaturalist",
+   "ar": 0.5625
+  },
+  "puntos": [
+   {
+    "x": 50,
+    "y": 30,
+    "parte": "himenio",
+    "titulo": "Pinchos",
+    "texto": "En lugar de láminas, cuelgan pinchitos finos y frágiles.",
+    "d": "arriba-der"
+   },
+   {
+    "x": 40,
+    "y": 60,
+    "parte": "pie",
+    "titulo": "Pie blanco",
+    "texto": "Corto y blanco; amarillea al tocarlo.",
+    "d": "izq"
+   }
+  ],
+  "ojo": "Es de las más fáciles para empezar: ninguna seta tóxica de aquí tiene pinchos bajo el sombrero. Aun así, compruébalo siempre."
+ },
+ {
+  "_cand": "3.3",
+  "titulo": "Los pinchos de cerca",
+  "foto": {
+   "sp": "Hydnum repandum",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/616292028/{s}.jpg",
+   "autor": "Chaym Turak",
+   "licencia": "CC BY-SA 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/338845322",
+   "origen": "iNaturalist",
+   "ar": 1.4993
+  },
+  "puntos": [
+   {
+    "x": 55,
+    "y": 50,
+    "parte": "himenio",
+    "titulo": "Pinchos crema",
+    "texto": "Cuelgan hacia abajo; se desprenden con el dedo.",
+    "d": "der"
+   }
+  ]
+ }
+]

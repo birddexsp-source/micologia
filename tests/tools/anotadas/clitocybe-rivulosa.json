@@ -1,0 +1,67 @@
+[
+ {
+  "_cand": "2.3",
+  "titulo": "Láminas que bajan por el pie",
+  "foto": {
+   "sp": "Clitocybe sp. 'rivulosa-PNW07'",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/592098354/{s}.jpg",
+   "autor": "Alex Reitan",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/326879276",
+   "origen": "iNaturalist",
+   "ar": 0.75
+  },
+  "puntos": [
+   {
+    "x": 35,
+    "y": 40,
+    "parte": "himenio",
+    "titulo": "Láminas apretadas y decurrentes",
+    "texto": "Blanquecinas, juntas, y bajan por el pie.",
+    "d": "arriba-der"
+   },
+   {
+    "x": 75,
+    "y": 58,
+    "parte": "sombrero",
+    "titulo": "Sombrero blanquecino",
+    "texto": "Pequeño, aplanado o en embudo, con tonos crema o rosados.",
+    "d": "der"
+   }
+  ],
+  "ojo": "Sale en los mismos prados y corros que la senderuela (Marasmius oreades) y es tóxica (muscarina). La senderuela tiene láminas SEPARADAS que no bajan por el pie y un pie duro y flexible."
+ },
+ {
+  "_cand": "0.0",
+  "titulo": "En grupo, entre la hierba",
+  "foto": {
+   "sp": "Clitocybe sp. 'rivulosa-PNW07'",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/593007839/{s}.jpg",
+   "autor": "Leanne Stacy Reitan",
+   "licencia": "CC0",
+   "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+   "pagina": "https://www.inaturalist.org/observations/327334583",
+   "origen": "iNaturalist",
+   "ar": 0.665
+  },
+  "puntos": [
+   {
+    "x": 75,
+    "y": 25,
+    "parte": "sombrero",
+    "titulo": "Blanco harinoso",
+    "texto": "Superficie blanca como enharinada.",
+    "d": "der"
+   },
+   {
+    "x": 50,
+    "y": 70,
+    "parte": "pie",
+    "titulo": "Pie corto blanco",
+    "texto": "Fino, sin anillo.",
+    "d": "izq"
+   }
+  ]
+ }
+]
