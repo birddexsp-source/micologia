@@ -1,0 +1,97 @@
+[
+ {
+  "_cand": 3,
+  "titulo": "Toda blanca: láminas, anillo y volva",
+  "foto": {
+   "sp": "Amanita verna",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Amanita_verna_2.jpg/{w}px-Amanita_verna_2.jpg",
+   "autor": "Sinisa Radic",
+   "licencia": "CC BY-SA 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+   "pagina": "https://commons.wikimedia.org/wiki/File:Amanita_verna_2.jpg",
+   "origen": "Wikimedia Commons"
+  },
+  "puntos": [
+   {
+    "x": 80,
+    "y": 26,
+    "parte": "himenio",
+    "titulo": "Láminas blancas",
+    "texto": "Blancas siempre, también de vieja. En el champiñón pasan de rosa a marrón chocolate.",
+    "d": "abajo-der"
+   },
+   {
+    "x": 40,
+    "y": 40,
+    "parte": "anillo",
+    "titulo": "Anillo membranoso",
+    "texto": "Falda blanca colgante bajo el sombrero.",
+    "d": "izq"
+   },
+   {
+    "x": 40,
+    "y": 62,
+    "parte": "volva",
+    "titulo": "Volva en la base",
+    "texto": "Bolsa blanca alrededor del pie. Desentierra siempre la base.",
+    "d": "izq"
+   },
+   {
+    "x": 44,
+    "y": 82,
+    "parte": "volva",
+    "titulo": "Base engrosada con su saco",
+    "texto": "Aquí la volva sale manchada de tierra: fíjate bien.",
+    "d": "abajo-der"
+   }
+  ],
+  "ojo": "Una seta blanca entera con anillo y volva no se recoge nunca. Se parece al champiñón, pero el champiñón tiene láminas rosas o pardas y no tiene volva."
+ },
+ {
+  "_cand": 10,
+  "titulo": "Dibujo: lo que hay que comprobar, de joven a abierta",
+  "foto": {
+   "sp": "Amanita verna (lámina de Bresadola)",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Bresadola_-_Amanita_verna.png/{w}px-Bresadola_-_Amanita_verna.png",
+   "autor": "Giacomo Bresadola",
+   "licencia": "Dominio público",
+   "licenciaUrl": "https://commons.wikimedia.org/wiki/File:Bresadola_-_Amanita_verna.png",
+   "pagina": "https://commons.wikimedia.org/wiki/File:Bresadola_-_Amanita_verna.png",
+   "origen": "Wikimedia Commons"
+  },
+  "puntos": [
+   {
+    "x": 44,
+    "y": 36,
+    "parte": "anillo",
+    "titulo": "Anillo colgante",
+    "texto": "Falda en lo alto del pie.",
+    "d": "izq"
+   },
+   {
+    "x": 46,
+    "y": 74,
+    "parte": "volva",
+    "titulo": "Volva en saco",
+    "texto": "La bolsa envuelve la base como una cáscara de huevo rota.",
+    "d": "izq"
+   },
+   {
+    "x": 76,
+    "y": 42,
+    "parte": "himenio",
+    "titulo": "Láminas libres (corte)",
+    "texto": "Cortada por la mitad: láminas blancas que no tocan el pie.",
+    "d": "der"
+   },
+   {
+    "x": 20,
+    "y": 86,
+    "parte": "volva",
+    "titulo": "Ejemplar joven",
+    "texto": "De joven ya tiene la volva: ninguna seta blanca es «segura» por ser pequeña.",
+    "d": "der"
+   }
+  ]
+ }
+]

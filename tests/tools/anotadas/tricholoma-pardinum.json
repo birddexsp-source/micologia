@@ -1,0 +1,65 @@
+[
+ {
+  "_cand": "1.2",
+  "titulo": "Grande, gris y con escamas",
+  "foto": {
+   "sp": "Tricholoma pardinum",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/102367145/{s}.jpeg",
+   "autor": "Alan Rockefeller",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/63750191",
+   "origen": "iNaturalist"
+  },
+  "puntos": [
+   {
+    "x": 78,
+    "y": 33,
+    "parte": "sombrero",
+    "titulo": "Sombrero gris con escamas",
+    "texto": "5–15 cm, escamas gris-pardo oscuras en círculos sobre fondo más claro.",
+    "d": "arriba"
+   },
+   {
+    "x": 57,
+    "y": 42,
+    "parte": "himenio",
+    "titulo": "Láminas blancas",
+    "texto": "Blancas o con tinte amarillento-verdoso; a veces gotean.",
+    "d": "arriba-der"
+   },
+   {
+    "x": 45,
+    "y": 66,
+    "parte": "pie",
+    "titulo": "Pie robusto blanquecino",
+    "texto": "Grueso y macizo, sin anillo ni volva.",
+    "d": "abajo-der"
+   }
+  ],
+  "ojo": "Seta grande, carnosa y con buen olor: justo por eso engaña. No recojas ningún Tricholoma gris sin que lo revise alguien que sepa."
+ },
+ {
+  "_cand": "4.1",
+  "titulo": "Por debajo",
+  "foto": {
+   "sp": "Tricholoma pardinum",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/55555726/{s}.jpeg",
+   "autor": "Gail A Baker",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/35244644",
+   "origen": "iNaturalist"
+  },
+  "puntos": [
+   {
+    "x": 66,
+    "y": 78,
+    "parte": "himenio",
+    "titulo": "Láminas blancas y gruesas",
+    "texto": "Bastante separadas; con una muesca al llegar al pie, como en todos los Tricholoma.",
+    "d": "der"
+   }
+  ]
+ }
+]

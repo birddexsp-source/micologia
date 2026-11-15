@@ -16,7 +16,7 @@ import * as off from './offline.js';
 import { renderPlan } from './plan.js';
 import * as lug from './lugar.js';
 
-const APP_V = 'micologia-v33';   // = V de sw.js
+const APP_V = 'micologia-v34';   // = V de sw.js
 const S = { view: 'mapa', arg: '', map: null, pins: null, me: null, acc: null, tmp: null, mini: null, centered: false, filtro: { salida: '', especie: '' }, clase: '', q: '', syncErr: false, mes: new Date().getMonth() + 1 };
 const VIEWS = ['mapa', 'salidas', 'salida', 'setas', 'mes', 'plan', 'ajustes'];
 const TITULOS = { mapa: 'Mapa', salidas: 'Salidas', salida: 'Salida', setas: 'Setas', mes: 'Este mes', plan: 'Plan de salida', ajustes: 'Ajustes' };
@@ -1035,7 +1035,7 @@ function ajustesWire(root, c) {
   $('#a-fotos', root).onclick = async ev => { const st = $('#a-fst', root); ev.target.disabled = true; const r = await descargarFotos(m => { st.textContent = m; }); ev.target.disabled = false; st.textContent = r.fail ? 'Listo con ' + r.fail + ' fallos de ' + r.total + '. Vuelve a pulsar para reintentar.' : 'Listo: ' + r.ok + ' fotos guardadas.'; };
   root.onclick = async e => { const b = e.target.closest('[data-zd]'); if (!b) return; if (b.dataset.sure) { await db.remove('zonas', b.dataset.zd); toast('Zona borrada'); } else { b.dataset.sure = 1; b.textContent = '¿Seguro?'; } };
 }
-function urlsFotos() { const u = []; cat.todas().forEach(e => (e.fotos || []).forEach(f => { u.push(fi.fotoURL(f, 250)); u.push(fi.fotoURL(f, 960)); })); return u; }
+function urlsFotos() { const u = []; cat.todas().forEach(e => { (e.fotos || []).forEach(f => { u.push(fi.fotoURL(f, 250)); u.push(fi.fotoURL(f, 960)); }); (e.anotadas || []).forEach(a => u.push(fi.fotoURL(a.foto, 960))); }); return [...new Set(u)]; }
 async function fotosEstado(el) {
   try { const c = await caches.open('fotos-v1'), n = (await c.keys()).length, t = urlsFotos().length; el.textContent = n >= t ? 'Todas las fotos están guardadas (' + n + ').' : n + ' de ' + t + ' fotos guardadas.'; }
   catch (e) { el.textContent = 'Este navegador no permite guardar fotos sin conexión.'; }

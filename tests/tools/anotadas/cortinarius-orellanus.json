@@ -1,0 +1,73 @@
+[
+ {
+  "_cand": 0,
+  "titulo": "Color naranja-óxido y pie con restos de velo",
+  "foto": {
+   "sp": "Cortinarius orellanus",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/2013-10-16_Cortinarius_orellanus_1a.jpg/{w}px-2013-10-16_Cortinarius_orellanus_1a.jpg",
+   "autor": "Andreas Kunze",
+   "licencia": "CC BY-SA 3.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+   "pagina": "https://commons.wikimedia.org/wiki/File:2013-10-16_Cortinarius_orellanus_1a.jpg",
+   "origen": "Wikimedia Commons"
+  },
+  "puntos": [
+   {
+    "x": 50,
+    "y": 18,
+    "parte": "sombrero",
+    "titulo": "Sombrero naranja-pardo",
+    "texto": "3–6 cm, con fibrillas finas, seco.",
+    "d": "arriba"
+   },
+   {
+    "x": 42,
+    "y": 39,
+    "parte": "himenio",
+    "titulo": "Láminas, no pliegues",
+    "texto": "Láminas verdaderas, finas y separadas, color óxido. El rebozuelo tiene pliegues gruesos.",
+    "d": "izq"
+   },
+   {
+    "x": 40,
+    "y": 64,
+    "parte": "pie",
+    "titulo": "Pie con restos de cortina",
+    "texto": "Restos de velo amarillento en el pie, que es del color del sombrero.",
+    "d": "der"
+   }
+  ],
+  "ojo": "Su veneno daña el riñón y los síntomas pueden tardar días en aparecer. Por el color se confunde con el rebozuelo: mira siempre debajo del sombrero."
+ },
+ {
+  "_cand": 2,
+  "titulo": "Por debajo: láminas color óxido",
+  "foto": {
+   "sp": "Cortinarius orellanus",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/2013-10-16_Cortinarius_orellanus_1b.jpg/{w}px-2013-10-16_Cortinarius_orellanus_1b.jpg",
+   "autor": "Andreas Kunze",
+   "licencia": "CC BY-SA 3.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+   "pagina": "https://commons.wikimedia.org/wiki/File:2013-10-16_Cortinarius_orellanus_1b.jpg",
+   "origen": "Wikimedia Commons"
+  },
+  "puntos": [
+   {
+    "x": 30,
+    "y": 66,
+    "parte": "himenio",
+    "titulo": "Láminas pardo-óxido",
+    "texto": "Gruesas, espaciadas; se vuelven color óxido al madurar las esporas.",
+    "d": "izq"
+   },
+   {
+    "x": 49,
+    "y": 47,
+    "parte": "pie",
+    "titulo": "Cortina amarillenta",
+    "texto": "Restos de la «cortina» (un velo como telaraña) en lo alto del pie.",
+    "d": "der"
+   }
+  ]
+ }
+]

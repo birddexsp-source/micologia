@@ -1,0 +1,73 @@
+[
+ {
+  "_cand": "3.0",
+  "titulo": "Grande, blanquecina y robusta",
+  "foto": {
+   "sp": "Entoloma sinuatum",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/569059759/{s}.jpg",
+   "autor": "Todd Patterson",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/315032736",
+   "origen": "iNaturalist"
+  },
+  "puntos": [
+   {
+    "x": 62,
+    "y": 15,
+    "parte": "sombrero",
+    "titulo": "Sombrero marfil-grisáceo",
+    "texto": "6–20 cm, aspecto sedoso o satinado, borde ondulado. Se oscurece con la edad.",
+    "d": "arriba-der"
+   },
+   {
+    "x": 52,
+    "y": 55,
+    "parte": "pie",
+    "titulo": "Pie robusto blanco",
+    "texto": "Grueso, macizo y sin anillo ni volva.",
+    "d": "der"
+   }
+  ],
+  "ojo": "Es una de las setas que más intoxicaciones causa porque se confunde con la seta de San Jorge (perretxiko) y la pardilla. Mira siempre el color de las láminas."
+ },
+ {
+  "_cand": "0.3",
+  "titulo": "Por debajo: láminas que se vuelven rosas",
+  "foto": {
+   "sp": "Entoloma sinuatum",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/236603327/{s}.jpeg",
+   "autor": "Lazar Popović",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/138431069",
+   "origen": "iNaturalist"
+  },
+  "puntos": [
+   {
+    "x": 72,
+    "y": 55,
+    "parte": "himenio",
+    "titulo": "Láminas rosadas",
+    "texto": "Amarillentas de joven y luego rosa-salmón (esporada rosa). La perretxiko las tiene blancas y muy apretadas.",
+    "d": "der"
+   },
+   {
+    "x": 42,
+    "y": 45,
+    "parte": "himenio",
+    "titulo": "Escotadas junto al pie",
+    "texto": "Cerca del pie las láminas hacen una muesca: desde abajo parece un pequeño foso alrededor del pie.",
+    "d": "izq"
+   },
+   {
+    "x": 55,
+    "y": 80,
+    "parte": "pie",
+    "titulo": "Pie blanco",
+    "texto": "Liso o algo fibroso.",
+    "d": "abajo"
+   }
+  ]
+ }
+]

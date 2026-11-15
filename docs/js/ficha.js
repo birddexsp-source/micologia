@@ -6,7 +6,8 @@ import { esquemaEsp, partesDe, rasgos } from './esquema.js';
 import { barrasHTML, fuenteTxt, datos, mesNombre, MESES } from './temporada.js';
 import { H, GRUPOS, ARBOL, CONSEJOS, dondeSimple, GREMIO, gremioNom } from './habitat.js';
 
-export const fotoURL = (f, w) => f.url.replace('{w}', w);
+/* Commons: {w} = ancho en px · iNaturalist: {s} = small (240) / medium (500) / large (1024) */
+export const fotoURL = (f, w) => f.url.includes('{s}') ? f.url.replace('{s}', w <= 250 ? 'small' : w <= 500 ? 'medium' : 'large') : f.url.replace('{w}', w);
 export const credito = f => f.autor + ' · ' + f.licencia + ' · ' + f.origen;
 /* Foto con marco: si falla la carga (sin red y sin caché) se queda el marco con la silueta de seta */
 export function foto(f, w, { cls = '', alt = '' } = {}) {
@@ -120,11 +121,15 @@ function leyenda(e) {
   return '<div class="clv-l">' + ps.map((p, i) => '<span style="--c:' + parte(p).color + '"><i>' + (i + 1) + '</i>' + esc(parte(p).nombre) + '</span>').join('') + '</div>';
 }
 /* Fotos reales con los rasgos señalados (puntos numerados sobre la foto) */
+/* Fotos con flechas: cada punto marca el sitio exacto (x, y en % de la foto) con un aro y una línea hasta su número.
+   `d` dice hacia dónde sale el número (arriba, abajo, izq, der o combinaciones); por defecto, arriba (abajo si está muy arriba). */
+const ANG = { der: 0, 'abajo-der': 45, abajo: 90, 'abajo-izq': 135, izq: 180, 'arriba-izq': -135, arriba: -90, 'arriba-der': -45 };
 function anotadas(e) {
   const A = e.anotadas || []; if (!A.length) return '';
-  return A.map(a => '<figure class="anot"><span class="anw">' + foto(a.foto, 960, { cls: 'big', alt: e.nombreCientifico }) +
-    a.puntos.map((p, i) => '<b class="ap" style="left:' + p.x + '%;top:' + p.y + '%;--c:' + parte(p.parte).color + '">' + (i + 1) + '</b>').join('') + '</span>' +
+  return A.map(a => '<figure class="anot">' + (a.titulo ? '<b class="a-t">' + esc(a.titulo) + '</b>' : '') + '<span class="anw">' + foto(a.foto, 960, { cls: 'big', alt: e.nombreCientifico + (a.titulo ? ': ' + a.titulo : '') }) +
+    a.puntos.map((p, i) => '<span class="ap" style="left:' + p.x + '%;top:' + p.y + '%;--c:' + parte(p.parte).color + ';--a:' + (ANG[p.d] != null ? ANG[p.d] : p.y < 18 ? 90 : -90) + 'deg"><i class="ap-l"></i><i class="ap-p"></i><b class="ap-n">' + (i + 1) + '</b></span>').join('') + '</span>' +
     '<ol class="apl">' + a.puntos.map((p, i) => '<li style="--c:' + parte(p.parte).color + '"><i>' + (i + 1) + '</i><span><b>' + esc(p.titulo) + '</b>' + (p.texto ? ' ' + esc(p.texto) : '') + '</span></li>').join('') + '</ol>' +
+    (a.ojo ? '<p class="a-ojo">⚠ ' + esc(a.ojo) + '</p>' : '') +
     '<figcaption>' + esc(a.foto.sp) + ' · ' + esc(a.foto.autor) + ' · ' + esc(a.foto.licencia) + '</figcaption></figure>').join('');
 }
 /* ---------- estructura: cabecera fija, resumen rápido y pestañas; dentro, tarjetas con el mismo formato ---------- */

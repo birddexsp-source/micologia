@@ -1,0 +1,73 @@
+[
+ {
+  "_cand": "6.0",
+  "titulo": "Pardo con verrugas blancas",
+  "foto": {
+   "sp": "Amanita pantherina",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/536572797/{s}.jpg",
+   "autor": "Johan Adler",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/297915912",
+   "origen": "iNaturalist"
+  },
+  "puntos": [
+   {
+    "x": 40,
+    "y": 33,
+    "parte": "sombrero",
+    "titulo": "Verrugas blancas",
+    "texto": "Restos del velo sobre el sombrero pardo (en A. muscaria, sobre rojo). Se quitan con el dedo.",
+    "d": "arriba-der"
+   },
+   {
+    "x": 14,
+    "y": 50,
+    "parte": "sombrero",
+    "titulo": "Borde estriado",
+    "texto": "Rayitas finas en el borde del sombrero.",
+    "d": "izq"
+   }
+  ],
+  "ojo": "Las verrugas se van con la lluvia: un sombrero liso no descarta que sea una Amanita. Comprueba siempre anillo y volva."
+ },
+ {
+  "_cand": "0.1",
+  "titulo": "Entera: anillo y base con volva",
+  "foto": {
+   "sp": "Amanita pantherina",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/165670038/{s}.jpg",
+   "autor": "Donald Davesne",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/99389943",
+   "origen": "iNaturalist"
+  },
+  "puntos": [
+   {
+    "x": 78,
+    "y": 56,
+    "parte": "himenio",
+    "titulo": "Láminas blancas y libres",
+    "texto": "Blancas, apretadas, no tocan el pie.",
+    "d": "abajo"
+   },
+   {
+    "x": 52,
+    "y": 46,
+    "parte": "anillo",
+    "titulo": "Anillo",
+    "texto": "Falda membranosa en el pie.",
+    "d": "arriba"
+   },
+   {
+    "x": 26,
+    "y": 44,
+    "parte": "volva",
+    "titulo": "Bulbo con reborde",
+    "texto": "La base es un bulbo con un reborde de volva, como un «cuello». Hay que sacarla entera para verlo.",
+    "d": "abajo"
+   }
+  ]
+ }
+]

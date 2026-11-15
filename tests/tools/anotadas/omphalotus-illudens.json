@@ -1,0 +1,73 @@
+[
+ {
+  "_cand": "0.0",
+  "titulo": "En mata, pegada a la madera",
+  "foto": {
+   "sp": "Omphalotus olearius",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/450819713/{s}.jpeg",
+   "autor": "Santiago Martín-Bravo",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/251900798",
+   "origen": "iNaturalist"
+  },
+  "puntos": [
+   {
+    "x": 33,
+    "y": 28,
+    "parte": "himenio",
+    "titulo": "Láminas finas y afiladas",
+    "texto": "Como hojas de papel, juntas y flexibles. El rebozuelo tiene pliegues gruesos y romos.",
+    "d": "arriba-izq"
+   },
+   {
+    "x": 42,
+    "y": 57,
+    "parte": "sombrero",
+    "titulo": "Naranja intenso",
+    "texto": "Sombreros naranja vivo, a menudo en embudo, solapados unos con otros.",
+    "d": "abajo"
+   },
+   {
+    "x": 12,
+    "y": 70,
+    "parte": "habitat",
+    "titulo": "Sobre tocón o raíz",
+    "texto": "Sale en grupos apretados desde madera (a veces enterrada), no suelta en el suelo.",
+    "d": "izq"
+   }
+  ],
+  "ojo": "Por el color se confunde con el rebozuelo, pero sale en racimos sobre tocones o raíces y tiene láminas finas de verdad. Provoca vómitos y diarreas fuertes."
+ },
+ {
+  "_cand": "5.1",
+  "titulo": "Las láminas bajan por el pie",
+  "foto": {
+   "sp": "Omphalotus olearius",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/444310735/{s}.jpeg",
+   "autor": "David Pereira",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/248641362",
+   "origen": "iNaturalist"
+  },
+  "puntos": [
+   {
+    "x": 45,
+    "y": 50,
+    "parte": "himenio",
+    "titulo": "Láminas decurrentes",
+    "texto": "Bajan por el pie. Son láminas finas, no venas romas.",
+    "d": "der"
+   },
+   {
+    "x": 44,
+    "y": 32,
+    "parte": "pie",
+    "titulo": "Pie del mismo color",
+    "texto": "Naranja, a menudo curvado y unido a otros en la base.",
+    "d": "der"
+   }
+  ]
+ }
+]

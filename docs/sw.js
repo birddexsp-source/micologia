@@ -1,10 +1,10 @@
 /* Service worker: la app funciona sin red. Sube V en cada publicación (si no, el móvil no recarga). */
-const V = 'micologia-v33';
+const V = 'micologia-v34';
 const SHELL = ['./', 'index.html', 'css/app.css', 'js/app.js', 'js/db.js', 'js/sync.js', 'js/geo.js', 'js/map.js', 'js/catalog.js', 'js/util.js', 'js/guia.js', 'js/ficha.js', 'js/temporada.js', 'js/track.js', 'js/libro.js', 'js/ia.js', 'js/offline.js', 'js/clima.js', 'js/modelo.js', 'js/plan.js', 'js/habitat.js', 'js/lugar.js', 'js/audio.js', 'js/iconos.js', 'js/esquema.js',
   'vendor/leaflet/leaflet.js', 'vendor/leaflet/leaflet.css', 'data/especies.json', 'data/topo.json', 'manifest.webmanifest', 'icon.svg', 'icon-192.png', 'icon-512.png'];
 const TILE_HOSTS = /(^|\.)ign\.es$|^tile\.openstreetmap\.org$/;
 const TILES = 'tiles-v1', MAX_TILES = 1500, OFFLINE = 'mapa-offline-v1';   // OFFLINE: zonas descargadas a propósito; nunca se recorta
-const FOTO_HOST = /^upload\.wikimedia\.org$/, FOTOS = 'fotos-v1';
+const FOTO_HOST = /^(upload\.wikimedia\.org|inaturalist-open-data\.s3\.amazonaws\.com)$/, FOTOS = 'fotos-v1';
 
 /* cache:'reload' salta la caché HTTP de GitHub Pages (10 min): si no, al instalar se podrían guardar archivos viejos mezclados con los nuevos */
 self.addEventListener('install', e => { e.waitUntil(caches.open(V).then(c => c.addAll(SHELL.map(u => new Request(u, { cache: 'reload' })))).then(() => self.skipWaiting())); });

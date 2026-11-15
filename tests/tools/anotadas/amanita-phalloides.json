@@ -1,0 +1,96 @@
+[
+ {
+  "_cand": 15,
+  "titulo": "Desenterrada entera: así se ve la volva",
+  "foto": {
+   "sp": "Amanita phalloides",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Amanita_phalloides_%281%29.JPG/{w}px-Amanita_phalloides_%281%29.JPG",
+   "autor": "Thomas Pruß",
+   "licencia": "CC BY-SA 3.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+   "pagina": "https://commons.wikimedia.org/wiki/File:Amanita_phalloides_(1).JPG",
+   "origen": "Wikimedia Commons"
+  },
+  "puntos": [
+   {
+    "x": 50,
+    "y": 22,
+    "parte": "sombrero",
+    "titulo": "Sombrero verde-oliva",
+    "texto": "Verde pálido, oliváceo o amarillento, más claro hacia el borde. Hay una forma casi blanca."
+   },
+   {
+    "x": 32,
+    "y": 66,
+    "parte": "volva",
+    "titulo": "Volva en saco",
+    "texto": "Bolsa blanca membranosa que envuelve la base. Es la señal clave: desentierra siempre la base.",
+    "d": "izq"
+   },
+   {
+    "x": 50,
+    "y": 55,
+    "parte": "pie",
+    "titulo": "Pie blanco",
+    "texto": "Blanco o con tonos verdosos; sale del saco de la volva.",
+    "d": "der"
+   }
+  ],
+  "ojo": "Si la cortas a ras de suelo, la volva se queda enterrada y pierdes la pista más importante. Un solo ejemplar puede matar a un adulto."
+ },
+ {
+  "_cand": 4,
+  "titulo": "Vista de lado: láminas, anillo y pie atigrado",
+  "foto": {
+   "sp": "Amanita phalloides",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/03_Amanita_phalloides_in_Zalas%2C_Poland.jpg/{w}px-03_Amanita_phalloides_in_Zalas%2C_Poland.jpg",
+   "autor": "Krzysztof Ślusarczyk (upload by Marek Ślusarczyk)",
+   "licencia": "CC BY 3.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/3.0",
+   "pagina": "https://commons.wikimedia.org/wiki/File:03_Amanita_phalloides_in_Zalas,_Poland.jpg",
+   "origen": "Wikimedia Commons"
+  },
+  "puntos": [
+   {
+    "x": 46,
+    "y": 33,
+    "parte": "himenio",
+    "titulo": "Láminas blancas",
+    "texto": "Siempre blancas y libres, también de vieja. Si son rosadas o marrones, es otra cosa (p. ej. un champiñón).",
+    "d": "arriba-izq"
+   },
+   {
+    "x": 55,
+    "y": 35,
+    "parte": "anillo",
+    "titulo": "Anillo colgante",
+    "texto": "Falda floja en lo alto del pie. Puede romperse o caerse con la lluvia.",
+    "d": "der"
+   },
+   {
+    "x": 55,
+    "y": 66,
+    "parte": "pie",
+    "titulo": "Pie con dibujo en zigzag",
+    "texto": "Blanco con bandas o motas gris-oliva.",
+    "d": "der"
+   },
+   {
+    "x": 58,
+    "y": 93,
+    "parte": "volva",
+    "titulo": "Base con volva",
+    "texto": "Aquí asoma la volva. Para verla bien, desentierra con cuidado.",
+    "d": "der"
+   },
+   {
+    "x": 39,
+    "y": 62,
+    "parte": "sombrero",
+    "titulo": "Ejemplar joven",
+    "texto": "De joven el sombrero es redondeado y el saco de la volva lo envuelve casi entero: no se reconoce a simple vista.",
+    "d": "izq"
+   }
+  ]
+ }
+]

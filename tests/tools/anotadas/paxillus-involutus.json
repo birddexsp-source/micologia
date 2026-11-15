@@ -1,0 +1,73 @@
+[
+ {
+  "_cand": "2.1",
+  "titulo": "Por debajo: láminas que bajan por el pie",
+  "foto": {
+   "sp": "Paxillus involutus",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/584691495/{s}.jpg",
+   "autor": "Michael Werth",
+   "licencia": "CC0",
+   "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+   "pagina": "https://www.inaturalist.org/observations/323143945",
+   "origen": "iNaturalist"
+  },
+  "puntos": [
+   {
+    "x": 30,
+    "y": 45,
+    "parte": "himenio",
+    "titulo": "Láminas decurrentes",
+    "texto": "Crema a amarillo-pardas, bajan por el pie y se despegan fácil de la carne con el dedo. Se manchan de pardo al tocarlas.",
+    "d": "abajo"
+   },
+   {
+    "x": 16,
+    "y": 45,
+    "parte": "sombrero",
+    "titulo": "Borde enrollado",
+    "texto": "El margen se dobla hacia dentro, como un rollo.",
+    "d": "izq"
+   },
+   {
+    "x": 57,
+    "y": 46,
+    "parte": "pie",
+    "titulo": "Pie corto",
+    "texto": "Del color del sombrero, sin anillo.",
+    "d": "arriba"
+   }
+  ],
+  "ojo": "Durante años se comió, pero puede causar una reacción inmune grave, a veces mortal, incluso en quien ya la había comido antes. No se come."
+ },
+ {
+  "_cand": "6.0",
+  "titulo": "De lado: sombrero en embudo",
+  "foto": {
+   "sp": "Paxillus involutus",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/74373601/{s}.jpeg",
+   "autor": "John Walter",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/46896252",
+   "origen": "iNaturalist"
+  },
+  "puntos": [
+   {
+    "x": 64,
+    "y": 40,
+    "parte": "sombrero",
+    "titulo": "Sombrero pardo en embudo",
+    "texto": "4–12 cm, pardo-oliváceo, aterciopelado de joven, pegajoso con humedad.",
+    "d": "arriba"
+   },
+   {
+    "x": 42,
+    "y": 56,
+    "parte": "himenio",
+    "titulo": "Láminas amarillentas",
+    "texto": "Sin leche al romperlas (un níscalo o Lactarius suelta látex).",
+    "d": "abajo"
+   }
+  ]
+ }
+]

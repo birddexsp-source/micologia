@@ -117,8 +117,9 @@ module.exports = {
       await t.page.evaluate(() => { document.querySelector('#sheet').hidden = true; }); await t.go('#ajustes'); t.photoReqs.length = 0;
       await t.tap('#a-fotos', 1500);
       for (let i = 0; i < 20 && !/Listo/.test(await t.T('#a-fst') || ''); i++) await t.wait(300);
-      t.ok('descarga 582 fotos (291 × 2 tamaños)', /Listo: 582 fotos/.test(await t.T('#a-fst') || ''), await t.T('#a-fst'));
-      t.eq('582 peticiones a Commons', t.photoReqs.length, 582);
+      const NF = await t.page.evaluate(() => { const u = new Set(); window.__MI.cat.todas().forEach(e => { (e.fotos || []).forEach(f => { u.add(f.url.replace('{w}', 250)); u.add(f.url.replace('{w}', 960)); }); (e.anotadas || []).forEach(a => u.add(a.foto.url.replace('{w}', 960).replace('{s}', 'large'))); }); return u.size; });
+      t.ok('descarga todas las fotos (291 × 2 tamaños + las de las flechas)', new RegExp('Listo: ' + NF + ' fotos').test(await t.T('#a-fst') || ''), await t.T('#a-fst') + ' / ' + NF);
+      t.eq('una petición por foto (Commons e iNaturalist)', t.photoReqs.length, NF);
     });
   }
 };

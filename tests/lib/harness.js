@@ -79,7 +79,7 @@ class T {
     /* el tiempo (Open-Meteo): nunca red real en pruebas; sin simulador propio la petición falla, como sin cobertura */
     await page.route(/open-meteo\.com/, r => r.abort());
     /* fotos del catálogo (Wikimedia Commons): también simuladas */
-    await page.route(/upload\.wikimedia\.org/, r => { this.photoReqs.push(r.request().url()); r.fulfill({ status: 200, contentType: 'image/png', body: PNG1, headers: { 'access-control-allow-origin': '*' } }); });
+    await page.route(/upload\.wikimedia\.org|inaturalist-open-data\.s3\.amazonaws\.com/, r => { this.photoReqs.push(r.request().url()); r.fulfill({ status: 200, contentType: 'image/png', body: PNG1, headers: { 'access-control-allow-origin': '*' } }); });
     return page;
   }
   async context(o = {}) {

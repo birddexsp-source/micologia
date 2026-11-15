@@ -101,5 +101,16 @@ module.exports = {
         if (e.candidataComestible) t.ok(e.id + ': las pistas de una candidata no la declaran comestible', !/\bes comestible\b|\bse puede comer\b|\bbuen comestible\b/i.test([e.clave, ...(e.queMirar || []).map(x => x.texto)].join(' ')));
       });
     });
+    await t.case('fotos con flechas: datos completos y puntos dentro de la foto', async () => {
+      const cat = JSON.parse(rd('data/especies.json')), PARTES = ['sombrero', 'cutis', 'himenio', 'carne', 'pie', 'anillo', 'volva', 'micelio', 'olor', 'esporada', 'habitat', 'otro'], DIR = ['der', 'abajo-der', 'abajo', 'abajo-izq', 'izq', 'arriba-izq', 'arriba', 'arriba-der'];
+      const con = cat.especies.filter(e => (e.anotadas || []).length);
+      t.ok('hay fichas con fotos anotadas', con.length >= 10, String(con.length));
+      con.forEach(e => e.anotadas.forEach((a, k) => {
+        const f = a.foto || {}, id = e.id + ' foto ' + (k + 1);
+        t.ok(id + ': foto con autor, licencia libre y página', !!(f.autor && f.pagina && /^(CC0|CC BY(-SA)? [0-9.]+|Dominio público)$/.test(f.licencia)) && /\{w\}|\{s\}/.test(f.url) && /^https:\/\/(upload\.wikimedia\.org|inaturalist-open-data\.s3\.amazonaws\.com)\//.test(f.url), JSON.stringify(f));
+        t.ok(id + ': 1–6 puntos válidos', a.puntos.length >= 1 && a.puntos.length <= 6 && a.puntos.every(p => p.x >= 0 && p.x <= 100 && p.y >= 0 && p.y <= 100 && PARTES.includes(p.parte) && p.titulo && (!p.d || DIR.includes(p.d))));
+        if (e.clase === 'mortal' || e.clase === 'toxica') t.ok(id + ': una peligrosa no se presenta como comestible', !/\bes comestible\b|\bse puede comer\b|\bbuen comestible\b/i.test(JSON.stringify(a)));
+      }));
+    });
   }
 };

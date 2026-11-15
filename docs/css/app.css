@@ -885,3 +885,13 @@ input[type=text]:not(.tit),input[type=password],input[type=search],select,textar
 .mes-mias{border-radius:var(--r2)}
 .ord-b{display:flex;gap:6px}.ord-b .btn{min-width:42px;font-size:16px}
 .st-sug{margin-top:8px;font-size:13px;color:#a3c46a}
+
+/* ===== v34: fotos con flechas ===== */
+.anw{overflow:hidden}
+.ap{position:absolute;width:0;height:0;z-index:2;pointer-events:none}
+.ap .ap-p{position:absolute;left:-7px;top:-7px;width:14px;height:14px;border-radius:50%;border:3px solid var(--c);box-shadow:0 0 0 1.5px rgba(10,15,14,.85),inset 0 0 0 1.5px rgba(10,15,14,.6)}
+.ap .ap-l{position:absolute;left:0;top:-1.5px;width:30px;height:3px;background:var(--c);transform-origin:0 50%;transform:rotate(var(--a)) translateX(7px);box-shadow:0 0 0 1px rgba(10,15,14,.75);border-radius:2px}
+.ap .ap-n{position:absolute;left:-14px;top:-14px;width:28px;height:28px;border-radius:50%;background:var(--c);color:#0a0f0e;font:800 14px/23px var(--mono);text-align:center;border:2.5px solid #0a0f0e;box-shadow:0 0 0 2px rgba(255,255,255,.85),0 3px 10px rgba(0,0,0,.5);transform:rotate(var(--a)) translateX(46px) rotate(calc(-1 * var(--a)))}
+.a-t{display:block;font-size:14px;padding:0 0 8px}
+.fc .anot .a-t{padding-top:0}
+.a-ojo{margin:8px 0 0;padding:9px 12px;border-radius:12px;background:#2a1214;border:1px solid #5a2327;color:#ffc9c9;font-size:13px;line-height:1.4}
