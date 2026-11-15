@@ -1,0 +1,67 @@
+[
+ {
+  "_cand": "6.1",
+  "titulo": "Pezuña con anillos de crecimiento",
+  "foto": {
+   "sp": "Fomes fomentarius",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/743882405/{s}.jpg",
+   "autor": "Thomas Boe",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/405026155",
+   "origen": "iNaturalist",
+   "ar": 1.3333
+  },
+  "puntos": [
+   {
+    "x": 50,
+    "y": 45,
+    "parte": "cutis",
+    "titulo": "Anillos concéntricos",
+    "texto": "Superficie dura, gris-parda, con bandas de cada año.",
+    "d": "arriba"
+   },
+   {
+    "x": 55,
+    "y": 85,
+    "parte": "sombrero",
+    "titulo": "Borde claro y redondeado",
+    "texto": "Margen grueso, más claro mientras crece.",
+    "d": "abajo"
+   }
+  ],
+  "ojo": "No se come: es duro como la madera. Se usaba como yesca para encender fuego."
+ },
+ {
+  "_cand": "2.1",
+  "titulo": "En el tronco: forma de pezuña",
+  "foto": {
+   "sp": "Fomes fomentarius",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/499861396/{s}.jpeg",
+   "autor": "Heiko Weber",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/278385209",
+   "origen": "iNaturalist",
+   "ar": 0.4619
+  },
+  "puntos": [
+   {
+    "x": 50,
+    "y": 33,
+    "parte": "sombrero",
+    "titulo": "Pisos oscuros",
+    "texto": "Capas grises duras, una por año.",
+    "d": "arriba-der"
+   },
+   {
+    "x": 50,
+    "y": 53,
+    "parte": "himenio",
+    "titulo": "Cara inferior crema",
+    "texto": "Con poros finos que oscurecen al tocarlos.",
+    "d": "der"
+   }
+  ]
+ }
+]

@@ -1,0 +1,59 @@
+[
+ {
+  "_cand": "0.1",
+  "titulo": "Anillos de colores, como una cola de pavo",
+  "foto": {
+   "sp": "Trametes versicolor",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/160331738/{s}.jpg",
+   "autor": "Christine Young",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/96503798",
+   "origen": "iNaturalist",
+   "ar": 0.7627
+  },
+  "puntos": [
+   {
+    "x": 45,
+    "y": 55,
+    "parte": "cutis",
+    "titulo": "Bandas de colores",
+    "texto": "Zonas concéntricas azules, pardas y grises, con pelusa fina.",
+    "d": "der"
+   },
+   {
+    "x": 55,
+    "y": 33,
+    "parte": "sombrero",
+    "titulo": "Borde claro",
+    "texto": "El margen siempre es más claro.",
+    "d": "arriba"
+   }
+  ],
+  "ojo": "No es tóxica, pero es dura como cuero y no se come. Sirve para practicar: fíjate en que tiene poros, no láminas."
+ },
+ {
+  "_cand": "4.2",
+  "titulo": "Por debajo: blanca y con poros",
+  "foto": {
+   "sp": "Trametes versicolor",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/58342593/{s}.jpg",
+   "autor": "common_snowball",
+   "licencia": "CC0",
+   "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+   "pagina": "https://www.inaturalist.org/observations/36834943",
+   "origen": "iNaturalist",
+   "ar": 0.75
+  },
+  "puntos": [
+   {
+    "x": 50,
+    "y": 64,
+    "parte": "himenio",
+    "titulo": "Poros blanquecinos",
+    "texto": "Diminutos, casi no se ven a simple vista.",
+    "d": "abajo"
+   }
+  ]
+ }
+]

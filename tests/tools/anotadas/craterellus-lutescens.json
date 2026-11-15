@@ -1,0 +1,59 @@
+[
+ {
+  "_cand": "1.1",
+  "titulo": "Sombrero pardo y pie naranja vivo",
+  "foto": {
+   "sp": "Craterellus lutescens",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/451165637/{s}.jpg",
+   "autor": "Darío Estraviz López",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/252073985",
+   "origen": "iNaturalist",
+   "ar": 1.2816
+  },
+  "puntos": [
+   {
+    "x": 60,
+    "y": 30,
+    "parte": "sombrero",
+    "titulo": "Sombrero pardo y ondulado",
+    "texto": "Pequeño, irregular, de pardo a color tabaco.",
+    "d": "arriba"
+   },
+   {
+    "x": 55,
+    "y": 60,
+    "parte": "pie",
+    "titulo": "Pie amarillo-naranja",
+    "texto": "Liso, hueco, de un naranja muy vivo.",
+    "d": "der"
+   }
+  ],
+  "ojo": "Fácil de confundir con la trompeta amarilla (Craterellus tubaeformis), también comestible. Lo importante: que no tenga láminas finas debajo."
+ },
+ {
+  "_cand": "1.4",
+  "titulo": "Por debajo: casi liso",
+  "foto": {
+   "sp": "Craterellus lutescens",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/451165653/{s}.jpg",
+   "autor": "Darío Estraviz López",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/252073985",
+   "origen": "iNaturalist",
+   "ar": 0.9481
+  },
+  "puntos": [
+   {
+    "x": 75,
+    "y": 62,
+    "parte": "himenio",
+    "titulo": "Envés con venas suaves",
+    "texto": "Sin láminas: liso o con arrugas poco marcadas.",
+    "d": "izq"
+   }
+  ]
+ }
+]

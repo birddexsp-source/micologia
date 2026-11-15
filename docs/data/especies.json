@@ -17945,6 +17945,69 @@
    "familia": "Hygrophoropsidaceae",
    "anotadas": [
     {
+     "titulo": "Por debajo: láminas finas y bifurcadas",
+     "foto": {
+      "sp": "Hygrophoropsis aurantiaca",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/98408580/{s}.jpg",
+      "autor": "Christine Young",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/61491873",
+      "origen": "iNaturalist",
+      "ar": 1.1949
+     },
+     "puntos": [
+      {
+       "x": 55,
+       "y": 45,
+       "parte": "himenio",
+       "titulo": "Láminas finas que se bifurcan",
+       "texto": "Naranja intenso, más que el sombrero; se dividen en Y.",
+       "d": "arriba-der"
+      },
+      {
+       "x": 12,
+       "y": 55,
+       "parte": "sombrero",
+       "titulo": "Borde enrollado",
+       "texto": "Margen fino y algo enrollado.",
+       "d": "izq"
+      }
+     ],
+     "ojo": "Es el «falso rebozuelo». El rebozuelo de verdad tiene pliegues gruesos y romos, no láminas finas, y su carne es blanca y firme, no blanda."
+    },
+    {
+     "titulo": "Sombrero aterciopelado en embudo",
+     "foto": {
+      "sp": "Hygrophoropsis aurantiaca",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/307121260/{s}.jpg",
+      "autor": "Teemu Kurppa",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/176640067",
+      "origen": "iNaturalist",
+      "ar": 1.3333
+     },
+     "puntos": [
+      {
+       "x": 72,
+       "y": 45,
+       "parte": "sombrero",
+       "titulo": "Pelusa fina",
+       "texto": "Naranja dorado, con tacto de terciopelo.",
+       "d": "arriba"
+      },
+      {
+       "x": 40,
+       "y": 62,
+       "parte": "pie",
+       "titulo": "Pie naranja, a menudo curvo",
+       "texto": "Fino, sin anillo; más oscuro en la base.",
+       "d": "izq"
+      }
+     ]
+    },
+    {
      "foto": {
       "sp": "Hygrophoropsis aurantiaca",
       "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/False_Chanterelle_Hygrophoropsis_aurantiaca.jpg/{w}px-False_Chanterelle_Hygrophoropsis_aurantiaca.jpg",
@@ -18221,7 +18284,63 @@
     ],
     "fuentes": []
    },
-   "anotadas": []
+   "anotadas": [
+    {
+     "titulo": "Anillos de colores, como una cola de pavo",
+     "foto": {
+      "sp": "Trametes versicolor",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/160331738/{s}.jpg",
+      "autor": "Christine Young",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/96503798",
+      "origen": "iNaturalist",
+      "ar": 0.7627
+     },
+     "puntos": [
+      {
+       "x": 45,
+       "y": 55,
+       "parte": "cutis",
+       "titulo": "Bandas de colores",
+       "texto": "Zonas concéntricas azules, pardas y grises, con pelusa fina.",
+       "d": "der"
+      },
+      {
+       "x": 55,
+       "y": 33,
+       "parte": "sombrero",
+       "titulo": "Borde claro",
+       "texto": "El margen siempre es más claro.",
+       "d": "arriba"
+      }
+     ],
+     "ojo": "No es tóxica, pero es dura como cuero y no se come. Sirve para practicar: fíjate en que tiene poros, no láminas."
+    },
+    {
+     "titulo": "Por debajo: blanca y con poros",
+     "foto": {
+      "sp": "Trametes versicolor",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/58342593/{s}.jpg",
+      "autor": "common_snowball",
+      "licencia": "CC0",
+      "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "pagina": "https://www.inaturalist.org/observations/36834943",
+      "origen": "iNaturalist",
+      "ar": 0.75
+     },
+     "puntos": [
+      {
+       "x": 50,
+       "y": 64,
+       "parte": "himenio",
+       "titulo": "Poros blanquecinos",
+       "texto": "Diminutos, casi no se ven a simple vista.",
+       "d": "abajo"
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "fomes-fomentarius",
@@ -18427,7 +18546,71 @@
     ],
     "fuentes": []
    },
-   "anotadas": []
+   "anotadas": [
+    {
+     "titulo": "Pezuña con anillos de crecimiento",
+     "foto": {
+      "sp": "Fomes fomentarius",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/743882405/{s}.jpg",
+      "autor": "Thomas Boe",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/405026155",
+      "origen": "iNaturalist",
+      "ar": 1.3333
+     },
+     "puntos": [
+      {
+       "x": 50,
+       "y": 45,
+       "parte": "cutis",
+       "titulo": "Anillos concéntricos",
+       "texto": "Superficie dura, gris-parda, con bandas de cada año.",
+       "d": "arriba"
+      },
+      {
+       "x": 55,
+       "y": 85,
+       "parte": "sombrero",
+       "titulo": "Borde claro y redondeado",
+       "texto": "Margen grueso, más claro mientras crece.",
+       "d": "abajo"
+      }
+     ],
+     "ojo": "No se come: es duro como la madera. Se usaba como yesca para encender fuego."
+    },
+    {
+     "titulo": "En el tronco: forma de pezuña",
+     "foto": {
+      "sp": "Fomes fomentarius",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/499861396/{s}.jpeg",
+      "autor": "Heiko Weber",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/278385209",
+      "origen": "iNaturalist",
+      "ar": 0.4619
+     },
+     "puntos": [
+      {
+       "x": 50,
+       "y": 33,
+       "parte": "sombrero",
+       "titulo": "Pisos oscuros",
+       "texto": "Capas grises duras, una por año.",
+       "d": "arriba-der"
+      },
+      {
+       "x": 50,
+       "y": 53,
+       "parte": "himenio",
+       "titulo": "Cara inferior crema",
+       "texto": "Con poros finos que oscurecen al tocarlos.",
+       "d": "der"
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "inocybe-erubescens",
@@ -19559,7 +19742,63 @@
      }
     ]
    },
-   "anotadas": []
+   "anotadas": [
+    {
+     "titulo": "Sombrero pardo y pie naranja vivo",
+     "foto": {
+      "sp": "Craterellus lutescens",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/451165637/{s}.jpg",
+      "autor": "Darío Estraviz López",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/252073985",
+      "origen": "iNaturalist",
+      "ar": 1.2816
+     },
+     "puntos": [
+      {
+       "x": 60,
+       "y": 30,
+       "parte": "sombrero",
+       "titulo": "Sombrero pardo y ondulado",
+       "texto": "Pequeño, irregular, de pardo a color tabaco.",
+       "d": "arriba"
+      },
+      {
+       "x": 55,
+       "y": 60,
+       "parte": "pie",
+       "titulo": "Pie amarillo-naranja",
+       "texto": "Liso, hueco, de un naranja muy vivo.",
+       "d": "der"
+      }
+     ],
+     "ojo": "Fácil de confundir con la trompeta amarilla (Craterellus tubaeformis), también comestible. Lo importante: que no tenga láminas finas debajo."
+    },
+    {
+     "titulo": "Por debajo: casi liso",
+     "foto": {
+      "sp": "Craterellus lutescens",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/451165653/{s}.jpg",
+      "autor": "Darío Estraviz López",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/252073985",
+      "origen": "iNaturalist",
+      "ar": 0.9481
+     },
+     "puntos": [
+      {
+       "x": 75,
+       "y": 62,
+       "parte": "himenio",
+       "titulo": "Envés con venas suaves",
+       "texto": "Sin láminas: liso o con arrugas poco marcadas.",
+       "d": "izq"
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "clitocybe-odora",
