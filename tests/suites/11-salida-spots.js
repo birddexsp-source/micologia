@@ -39,5 +39,22 @@ module.exports = {
     await t.case('salida terminada: no se mezcla con la salida en curso', async () => {
       t.eq('ninguna en curso', (await t.docs('salidas')).filter(s => s.estado === 'en_curso').length, 0);
     });
-  }
+      await t.case('cambiar el orden de los spots (invertir y mover)', async () => {
+      const ini = Date.now() - 4e6;
+      for (const [id, n] of [['o1', 'Uno'], ['o2', 'Dos'], ['o3', 'Tres']]) await t.put('zonas', id, { nombre: n, estado: 'visitada', lat: 43.39, lon: -2.74 });
+      await t.put('salidas', 'so', { fecha: '2026-11-11', titulo: 'Orden', notas: '', zonaIds: ['o1', 'o2', 'o3'], fotos: [], fotosCosecha: [], track: [], grabar: false, estado: 'terminada', totalTxt: '', zonaMejorId: '', creada: ini, fin: ini + 9e5 });
+      await t.go('#salida/so'); await t.wait(400);
+      const nombres = () => t.page.evaluate(() => [...document.querySelectorAll('.tl .th b')].map(b => b.textContent));
+      t.eq('orden inicial', await nombres(), ['Uno', 'Dos', 'Tres']);
+      await t.tap('#sd-ord', 400); t.ok('modo ordenar: flechas y sin «+ Especie»', (await t.N('[data-up]')) === 3 && !(await t.has('[data-sa]')));
+      await t.tap('#sd-inv', 500); t.eq('invertido', await nombres(), ['Tres', 'Dos', 'Uno']);
+      t.eq('se guarda en la salida', (await t.page.evaluate(() => window.__MI.db.M.get('salidas/so').d.ordenSpots)), ['o3', 'o2', 'o1']);
+      await t.tap('[data-dn="0"]', 500); t.eq('bajar el primero', await nombres(), ['Dos', 'Tres', 'Uno']);
+      t.eq('los números del mapa siguen el orden', await t.page.evaluate(() => [...document.querySelectorAll('.tl .tn')].map(x => x.textContent)), ['1', '2', '3']);
+      await t.tap('#sd-ordok', 400); t.ok('«Listo» vuelve a la vista normal', (await t.N('[data-sa]')) === 3 && !(await t.has('[data-up]')));
+      await t.reload(); await t.go('#salida/so'); await t.wait(400);
+      t.eq('se mantiene tras recargar', await nombres(), ['Dos', 'Tres', 'Uno']);
+      t.ok('queda pendiente de sincronizar', await t.page.evaluate(() => window.__MI.db.dirtyCount() > 0));
+    });
+}
 };

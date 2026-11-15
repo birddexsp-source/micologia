@@ -15,7 +15,7 @@ import * as au from './audio.js';
 import * as off from './offline.js';
 import { renderPlan } from './plan.js';
 
-const APP_V = 'micologia-v31';   // = V de sw.js
+const APP_V = 'micologia-v32';   // = V de sw.js
 const S = { view: 'mapa', arg: '', map: null, pins: null, me: null, acc: null, tmp: null, mini: null, centered: false, filtro: { salida: '', especie: '' }, clase: '', q: '', syncErr: false, mes: new Date().getMonth() + 1 };
 const VIEWS = ['mapa', 'salidas', 'salida', 'setas', 'mes', 'plan', 'ajustes'];
 const TITULOS = { mapa: 'Mapa', salidas: 'Salidas', salida: 'Salida', setas: 'Setas', mes: 'Este mes', plan: 'Plan de salida', ajustes: 'Ajustes' };
@@ -567,7 +567,9 @@ async function renderSalida(id) {
   const live = () => trk.activo() === id ? { ...s, track: trk.puntos() } : s;
   /* spots en el orden en que se recorrieron (por la hora del primer hallazgo) */
   const t0 = zid => Math.min(Infinity, ...hs.filter(h => h.zonaId === zid).map(h => h.ts));
-  const orden = zids.slice().sort((a, b) => t0(a) - t0(b));
+  /* si lo has ordenado a mano (ordenSpots), manda ese orden; los spots nuevos van al final */
+  const auto0 = zids.slice().sort((a, b) => t0(a) - t0(b)), man = (s.ordenSpots || []).filter(z => zids.includes(z));
+  const orden = man.length ? [...man, ...auto0.filter(z => !man.includes(z))] : auto0, ordenando = S.ordenando === id;
   const tramo = zid => { const ts = hs.filter(h => h.zonaId === zid).map(h => h.ts); if (!ts.length) return ''; const a = hhmm(Math.min(...ts)), b = hhmm(Math.max(...ts)); return a === b ? a : a + '–' + b; };
   const chips = zid => { const g = {}; hs.filter(h => h.zonaId === zid).forEach(h => { const k = h.especieId || 'x:' + norm(h.especieTxt); (g[k] = g[k] || { h, n: 0 }).n++; });
     const l = Object.values(g); return l.length ? '<div class="echs">' + l.map(r => { const e = cat.byId(r.h.especieId); return '<button class="ech" ' + (e ? 'data-e="' + e.id + '"' : 'data-h="' + r.h.id + '"') + '>' + mini(e) + '<span>' + esc(nombreCorto(r.h)) + (r.n > 1 ? ' <em>×' + r.n + '</em>' : '') + '</span></button>'; }).join('') + '</div>' : '<p class="mut sm" style="margin:4px 0 0">Sin especies anotadas</p>'; };
@@ -576,8 +578,8 @@ async function renderSalida(id) {
   const TABS = [['spots', 'Spots', zids.length], ['hall', 'Hallazgos', hs.length], ['fotos', 'Fotos', cos.length + (s.fotos || []).length], ['mas', 'Más', '']];
   const panel = (k, html) => '<div class="tabp" data-p="' + k + '"' + (k === tab ? '' : ' hidden') + '>' + html + '</div>';
   const pSpots = (orden.length ? '<div class="tline">' + orden.map((zid, i) => { const z = zonas.find(x => x.id === zid), n = hs.filter(h => h.zonaId === zid).length;
-      return '<div class="tl"><span class="tn">' + (i + 1) + '</span><div class="tc"><div class="th"><div><b>' + esc(z.nombre) + '</b><small>' + [tramo(zid), n ? plural(n, 'hallazgo', 'hallazgos') : ''].filter(Boolean).join(' · ') + '</small></div><button class="btn sm" data-sa="' + zid + '">＋ Especie</button></div>' + chips(zid) + '</div></div>'; }).join('') + '</div>'
-      : '<div class="sv-empty">' + I.flag + '<div><b>Aún sin spots.</b> ' + (curso ? 'Cuando llegues a un sitio interesante pulsa «Spot aquí».' : 'Añade los sitios por los que pasaste.') + '</div></div>') + '<div class="row"><button class="btn" id="sd-addspot">＋ Añadir spot a la salida</button></div>';
+      return '<div class="tl"><span class="tn">' + (i + 1) + '</span><div class="tc"><div class="th"><div><b>' + esc(z.nombre) + '</b><small>' + [tramo(zid), n ? plural(n, 'hallazgo', 'hallazgos') : ''].filter(Boolean).join(' · ') + '</small></div>' + (ordenando ? '<span class="ord-b"><button class="btn sm" data-up="' + i + '"' + (i ? '' : ' disabled') + ' aria-label="Subir">↑</button><button class="btn sm" data-dn="' + i + '"' + (i < orden.length - 1 ? '' : ' disabled') + ' aria-label="Bajar">↓</button></span>' : '<button class="btn sm" data-sa="' + zid + '">＋ Especie</button>') + '</div>' + chips(zid) + '</div></div>'; }).join('') + '</div>'
+      : '<div class="sv-empty">' + I.flag + '<div><b>Aún sin spots.</b> ' + (curso ? 'Cuando llegues a un sitio interesante pulsa «Spot aquí».' : 'Añade los sitios por los que pasaste.') + '</div></div>') + '<div class="row">' + (orden.length > 1 ? (ordenando ? '<button class="btn" id="sd-inv">⇅ Invertir orden</button><button class="btn p" id="sd-ordok">Listo</button>' : '<button class="btn" id="sd-ord">⇅ Cambiar orden</button>') : '') + (ordenando ? '' : '<button class="btn" id="sd-addspot">＋ Añadir spot a la salida</button>') + '</div>';
   const pHall = hs.length ? hs.map(h => { const e = cat.byId(h.especieId); return '<button class="item" data-h="' + h.id + '">' + (e ? fi.avatar(e) : '<span class="dot" style="--c:' + (IDENT[h.identificacion] || IDENT.sin_identificar).color + '"></span>') + '<div class="t"><b>' + esc(nombreCorto(h)) + '</b><small>' + hhmm(h.ts) + (h.zonaId ? ' · ' + esc(zn(h.zonaId)) : '') + (h.cantidad ? ' · ' + esc(h.cantidad) : '') + ' · ' + (IDENT[h.identificacion] || IDENT.sin_identificar).label + '</small></div>' + I.chev + '</button>'; }).join('') + (mejor ? '<p class="mut sm">Donde más hubo: <b>' + esc(zn(mejor)) + '</b></p>' : '') : '<div class="empty">Sin hallazgos todavía.</div>';
   const pFotos = '<div class="cosecha"><b>Lo que me llevé</b><div class="gal" id="sd-cos">' + (cos.length ? galHTML(cos, 'fotosCosecha') : '') + '</div>' + (cos.length ? '' : '<p>Al llegar a casa, una foto de todo lo recogido.</p>') + '<div class="row"><button class="btn p" id="sd-cos-add">Añadir foto de lo recogido</button></div>' +
     '<label class="l">Total recogido</label><input type="text" id="sd-tot" value="' + esc(s.totalTxt) + '" placeholder="p. ej. ≈2 kg"></div>' +
@@ -620,6 +622,13 @@ async function renderSalida(id) {
     else if (t.id === 'sd-mk') marcar();
     else if (t.id === 'sd-sp') editarSpot(null, { salida: id });
     else if (t.id === 'sd-gpxin') importarGPX(id);
+    else if (t.id === 'sd-ord') { S.ordenando = id; renderSalida(id); }
+    else if (t.id === 'sd-ordok') { S.ordenando = null; renderSalida(id); }
+    else if (t.id === 'sd-inv' || t.dataset.up || t.dataset.dn) {
+      const o = orden.slice();
+      if (t.id === 'sd-inv') o.reverse(); else { const i = +(t.dataset.up || t.dataset.dn), j = t.dataset.up ? i - 1 : i + 1; if (j < 0 || j >= o.length) return; [o[i], o[j]] = [o[j], o[i]]; }
+      db.patch('salidas', id, { ordenSpots: o }).then(() => renderSalida(id));
+    }
     else if (t.dataset.sa) { const z = zonas.find(x => x.id === t.dataset.sa); if (z) marcar({ zona: z.id, salida: id, pos: { lat: z.lat, lon: z.lon }, ts: curso ? Date.now() : (s.creada || Date.now()) }); }
     else if (t.id === 'sd-addspot') {
       const libres = zonas.filter(z => !zids.includes(z.id) && z.lat != null).sort((a, b) => a.nombre.localeCompare(b.nombre, 'es', { numeric: true }));
