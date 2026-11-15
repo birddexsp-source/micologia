@@ -1,4 +1,4 @@
-:root{--bg:#0a0f0e;--s1:#111917;--s2:#18221f;--s3:#1f2c28;--line:#243230;--ink:#e8efec;--mut:#8a9a95;--acc:#e0a458;--acc-ink:#1a1206;--bad:#e5484d;--ok:#46b36b;--r:14px;--nav:58px;--sb:env(safe-area-inset-bottom,0px);--mono:ui-monospace,SFMono-Regular,Menlo,monospace}
+:root{--bg:#0a0f0e;--s1:#111917;--s2:#18221f;--s3:#1f2c28;--line:#243230;--ink:#e8efec;--mut:#8a9a95;--acc:#e0a458;--acc-ink:#1a1206;--bad:#e5484d;--ok:#46b36b;--r:14px;--nav:58px;--sb:env(safe-area-inset-bottom,0px);--mono:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,system-ui,sans-serif;--code:ui-monospace,SFMono-Regular,Menlo,monospace;--r2:18px;--shc:0 1px 0 rgba(255,255,255,.03) inset,0 6px 18px rgba(0,0,0,.22)}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{height:100%;margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,system-ui,sans-serif;overscroll-behavior:none}
 body{display:flex;flex-direction:column;height:100dvh;overflow:hidden}
@@ -776,3 +776,110 @@ button.hab{cursor:pointer;color:var(--ink);font-family:inherit}.hab em{font-styl
 .fc.conf .cmp figure{background-clip:padding-box}
 .fc.tox{border-color:#5a2327;background:#1f1214}.fc.tox .fc-h i{color:#ff9b9b;background:#3a1a1d}
 .fc .cs-l{margin-top:10px}
+
+/* ===== v31 · Fase 1: base visual común =====
+   Una sola familia de letra (la del sistema) con números tabulares; títulos de sección, etiquetas y tarjetas con el mismo estilo. */
+html,body{font-variant-numeric:tabular-nums;-webkit-font-smoothing:antialiased}
+.top{height:56px;background:var(--bg);border-bottom:1px solid #1a2522}
+.top h1{font-size:21px;font-weight:750;letter-spacing:-.02em}
+.syncbtn{width:38px;height:38px;background:var(--s2)}
+.nav{background:#0c1311;border-top:1px solid #1a2522}
+.nav a{font-size:11px;letter-spacing:.01em}
+/* títulos de sección y de grupo: mayúsculas pequeñas, mismo tamaño, mismo color */
+.sec,.grp,.pl-lh,.pl-why-h{font:700 12px/1.2 var(--mono);text-transform:uppercase;letter-spacing:.07em;color:#9cada7;margin:22px 2px 10px}
+.grp{color:var(--c)}
+.sec small,.grp small{font:600 12px var(--mono);letter-spacing:0;text-transform:none;color:var(--mut);background:var(--s2);border:1px solid var(--line);border-radius:99px;padding:1px 8px;margin-left:auto}
+/* etiquetas de formulario en minúscula normal, más legibles */
+label.l{font:600 13px var(--mono);text-transform:none;letter-spacing:0;color:#aebdb8;margin:16px 0 7px}
+.sh .sub{font:500 13px var(--mono)}
+.gps,.sh .sub.code{font-family:var(--code)}
+/* tarjetas y bloques: mismo radio, mismo borde y una sombra suave */
+.item,.note,.warn,.empty{border-radius:var(--r2)}
+.item{background:var(--s1);border-color:#22302c;box-shadow:var(--shc);padding:14px}
+.item:active{transform:scale(.99)}
+.note{background:var(--s1);border-color:#22302c}
+.btn{border-radius:14px}
+.opt{padding:8px 14px}
+input[type=text]:not(.tit),input[type=password],input[type=search],select,textarea{border-radius:14px;background:#0d1412;padding:13px 14px}
+
+/* ===== v31 · Fase 2: Setas — buscador arriba, aprender compacto ===== */
+#v-setas .sbar{margin:-14px -14px 12px;padding:12px 14px 10px;background:rgba(10,15,14,.94);backdrop-filter:blur(10px);border-bottom:1px solid #1a2522}
+#v-setas .sbar input[type=search]{padding-left:42px;background:#121a17 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238a9a95' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='M20 20l-4-4'/%3E%3C/svg%3E") no-repeat 14px center/18px}
+#v-setas.busca #intro-w{display:none}
+.learn2{display:flex;gap:8px;margin:2px 0 12px;overflow-x:auto;scrollbar-width:none}
+.learn2::-webkit-scrollbar{display:none}
+.lc{flex:1 0 auto;flex-direction:row;align-items:center;gap:8px;padding:9px 12px;border-radius:999px;background:var(--s1)}
+.lc svg,.lc .ic{width:22px;height:22px;margin:0;flex:none;color:var(--c)}.lc .ic{font-size:17px}.lc .ic svg{width:20px;height:20px}
+.lc small{display:none}.lc b{font-size:13px;white-space:nowrap}
+.lec{padding:12px;border-radius:var(--r2)}
+.lec-f{aspect-ratio:2/1;border-radius:14px}
+.lec-vs .pf{aspect-ratio:16/10;border-radius:14px}
+.lec-t{font-size:16px;margin-top:10px}
+.lec p{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;font-size:13.5px}
+.lec-b .btn{padding:9px}
+.col{border-radius:var(--r2);padding:12px 14px}
+.col-row{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}
+/* lección en horizontal: foto a la izquierda, texto a la derecha */
+.lec{display:grid;grid-template-columns:108px 1fr;column-gap:12px;align-items:start}
+.lec>.lec-h,.lec>.lec-vs,.lec>.lec-b{grid-column:1/-1}
+.lec>.lec-f{grid-row:2/span 2;aspect-ratio:1;align-self:start}
+.lec>.lec-t{margin-top:0;font-size:15px}
+.lec>.lec-vs~.lec-t,.lec>.lec-vs~p{grid-column:1/-1}
+.lec>.lec-vs~.lec-t{margin-top:10px}
+.lec-b{margin-top:10px}
+
+/* ===== v31 · Fase 3: Mapa — chips que caben, leyenda ===== */
+.mchips{right:68px;gap:5px}
+.mchips button{padding:7px 11px;font-size:12.5px}
+.mleg{position:absolute;z-index:650;right:68px;top:calc(104px + env(safe-area-inset-top,0px));width:230px;background:rgba(12,18,16,.9);border:1px solid var(--glass-b);border-radius:16px;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:0 10px 30px rgba(0,0,0,.5);padding:12px 14px;font-size:13px;cursor:pointer}
+.mleg b{display:block;font-size:14px;margin-bottom:8px}
+.mleg small{display:block;color:var(--mut);font-size:11.5px;margin:10px 0 6px}.mleg .ml-x{text-align:right;margin:8px 0 0}
+.ml-r{display:flex;align-items:center;gap:9px;padding:3px 0;color:#dfe8e4}
+.ml-r i{flex:none;width:16px;height:16px;border-radius:50%;background:#0a0f0e;border:3px solid var(--c);box-shadow:0 0 0 1px rgba(255,255,255,.5)}
+.ml-sp{flex:none;display:grid;place-items:center;width:20px;height:20px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);background:var(--c)}
+.ml-sp svg{width:12px;height:12px;transform:rotate(45deg);fill:#06140b;stroke:#06140b;stroke-width:1}
+.ml-sp.por{background:#0e1a1d;border:2px dashed var(--por)}.ml-sp.por svg{fill:none;stroke:var(--por);stroke-width:2}
+
+/* ===== v31 · Fase 4: Plan — selectores en fila, mejor día protagonista, gráfico en tarjeta ===== */
+.pl-sel{display:grid;grid-template-columns:1.25fr 1fr;gap:10px}
+.pl-f{min-width:0}.pl-f label.l{margin:0 0 6px;font-size:12.5px}
+.pl select{margin:0;padding:11px 12px;font-size:14px;border-radius:14px;background:#121a17;text-overflow:ellipsis}
+.pl-donde{display:flex;align-items:center;gap:10px;margin:12px 0 4px;padding:10px 12px;border-left-width:1px;border-radius:14px;background:var(--s1)}
+.pl-donde i{flex:none;display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:#26361f;color:#a3c46a;font:800 13px var(--mono);font-style:normal}
+.pl-donde b{flex:1;font-size:14px}.pl-donde span{margin:0;color:#a3c46a;font-weight:650;font-size:13px}
+.pl-st{justify-content:space-between;flex-wrap:nowrap;font-size:12px;margin:12px 2px 10px}
+.pl-st .btn{flex:none;padding:6px 12px;font-size:12px;border-radius:999px;background:var(--s2)}
+.pl-top{border-radius:var(--r2);padding:16px;box-shadow:0 10px 30px color-mix(in srgb,var(--c) 18%,transparent)}
+.pl-top b{font-size:24px;letter-spacing:-.02em}.pl-top .pl-n{font-size:40px;top:14px;right:16px;letter-spacing:-.03em}
+.pl-chart{background:var(--s1);border:1px solid #22302c;border-radius:var(--r2);padding:12px 10px 10px;margin:0 0 12px}
+.pl-ch{display:flex;align-items:baseline;justify-content:space-between;gap:8px;padding:0 4px 4px}.pl-ch b{font-size:15px}.pl-ch span{font-size:11.5px;color:var(--mut)}
+.pl-bars{height:184px}
+.pl-b .pl-d{font-size:11.5px}.pl-b .pl-d small{font-size:11px}
+.pl-leg,.pl-leg2{padding:0 4px}.pl-leg2{margin:6px 0 0}.pl-mm{color:#5aa7e0;font-weight:700}
+.pl-det{background:var(--s1);border-color:#22302c;border-radius:var(--r2);padding:14px}
+.pl-dh b{font-size:15.5px}
+.pl-sp{border-radius:var(--r2);border-left-width:1px;box-shadow:inset 4px 0 0 var(--ok)}.pl-sp.pel{box-shadow:inset 4px 0 0 var(--bad)}
+.pl-dh{flex-direction:column;gap:2px}.pl-dh span{font-size:13.5px}
+.pl-b .pl-v{font-size:10px;letter-spacing:-.05em}
+
+/* ===== v31 · Fase 5: Ajustes con panel de estado; Salidas y Este mes ===== */
+.aj-panel{background:var(--s1);border:1px solid #22302c;border-radius:var(--r2);padding:6px;margin-bottom:14px;box-shadow:var(--shc)}
+.aj-panel .aj-st{margin:0;border:0;border-radius:14px}
+.aj-ts{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:6px}
+.aj-t{display:flex;flex-direction:column;align-items:flex-start;gap:1px;min-width:0;text-align:left;background:var(--s2);border:1px solid var(--line);border-radius:14px;padding:10px;color:var(--ink);cursor:pointer;font-family:inherit}
+.aj-t span{display:flex;width:22px;height:22px;color:var(--mut);margin-bottom:4px}.aj-t span svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.aj-t small{font-size:11px;color:var(--mut)}.aj-t b{font-size:13px;line-height:1.2}
+.aj-t.ok span{color:#46d27a}.aj-t:not(.ok) b{color:#cfd9d5}
+.aj{border-color:#22302c;border-radius:var(--r2);scroll-margin-top:10px}
+.aj-i{color:#e0a458}
+.sal-res{display:grid;grid-template-columns:repeat(4,1fr);background:var(--s1);border:1px solid #22302c;border-radius:var(--r2);margin:12px 0 0;padding:10px 4px}
+.sal-res div{text-align:center;border-left:1px solid var(--line)}.sal-res div:first-child{border:0}
+.sal-res b{display:block;font-size:20px;font-weight:750;letter-spacing:-.02em}.sal-res small{font-size:11.5px;color:var(--mut)}
+.start{border-radius:var(--r2)}
+/* Este mes: contadores en una sola tarjeta como en Salidas */
+.mes-sum{gap:0;background:var(--s1);border:1px solid #22302c;border-radius:var(--r2);padding:10px 4px}
+.mes-sum>div{background:none;border:0;border-left:1px solid var(--line);border-radius:0;padding:2px 6px}
+.mes-sum>div:first-child{border:0}
+.mes-sum b{font-size:22px;font-weight:750;letter-spacing:-.02em}.mes-sum span{display:block;line-height:1.25}
+.mes-sum .pel{background:none;border-color:var(--line)}
+.mes-mias{border-radius:var(--r2)}

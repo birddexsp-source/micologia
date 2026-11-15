@@ -15,7 +15,7 @@ import * as au from './audio.js';
 import * as off from './offline.js';
 import { renderPlan } from './plan.js';
 
-const APP_V = 'micologia-v30';   // = V de sw.js
+const APP_V = 'micologia-v31';   // = V de sw.js
 const S = { view: 'mapa', arg: '', map: null, pins: null, me: null, acc: null, tmp: null, mini: null, centered: false, filtro: { salida: '', especie: '' }, clase: '', q: '', syncErr: false, mes: new Date().getMonth() + 1 };
 const VIEWS = ['mapa', 'salidas', 'salida', 'setas', 'mes', 'plan', 'ajustes'];
 const TITULOS = { mapa: 'Mapa', salidas: 'Salidas', salida: 'Salida', setas: 'Setas', mes: 'Este mes', plan: 'Plan de salida', ajustes: 'Ajustes' };
@@ -24,6 +24,7 @@ const ESTADOS = [['joven', 'Joven'], ['madura', 'Madura'], ['pasada', 'Pasada']]
 
 /* ---------- utilidades de interfaz ---------- */
 function openSheet(html, { dim = true } = {}) {
+  const lg = $('#mleg'); if (lg && !lg.hidden) { lg.hidden = true; $('#legbtn').classList.remove('on'); }
   const s = $('#sheet'); s.className = 'sheet' + (dim ? ' dim' : '');
   s.innerHTML = '<div class="sh"><div class="grab"></div>' + html + '</div>'; s.hidden = false;
   s.onclick = dim ? e => { if (e.target === s) closeSheet(); } : null;
@@ -146,7 +147,7 @@ function initMap() {
   S.me = L.marker([0, 0], { icon: L.divIcon({ className: 'me', html: '<i></i>', iconSize: [22, 22], iconAnchor: [11, 11] }), interactive: false, opacity: 0, zIndexOffset: 900 }).addTo(S.map);
   S.acc = L.circle([0, 0], { radius: 0, color: '#4c9bff', weight: 1, fillOpacity: .1, interactive: false }).addTo(S.map);
   $('#v-mapa').insertAdjacentHTML('beforeend', '<div class="mhint" id="mhint" hidden>' + I.flag + '<div><b>Tu mapa está vacío</b><small>Crea tu primer spot con la bandera de la derecha, o pulsa «Marcar aquí» cuando encuentres una seta.</small></div></div>');
-  $('#locate').innerHTML = I.locate; $('#layerbtn').innerHTML = I.layers; $('#spotbtn').innerHTML = I.flag; $('#filterbtn').innerHTML = I.filter; $('#fab .fi').innerHTML = I.plus;
+  $('#locate').innerHTML = I.locate; $('#layerbtn').innerHTML = I.layers; $('#spotbtn').innerHTML = I.flag; $('#filterbtn').innerHTML = I.filter; $('#legbtn').innerHTML = I.info; $('#fab .fi').innerHTML = I.plus;
   geo.onFix((f, err) => {
     const g = $('#gps');
     if (f) {
@@ -158,6 +159,9 @@ function initMap() {
   $('#locate').onclick = () => { const f = geo.fix(); if (f) S.map.setView([f.lat, f.lon], Math.max(S.map.getZoom(), 16)); else toast('Aún sin GPS'); };
   $('#layerbtn').onclick = abrirCapas;
   $('#filterbtn').onclick = abrirFiltro;
+  /* leyenda: qué significa cada marca del mapa */
+  $('#legbtn').onclick = () => { const l = $('#mleg'), ver = l.hidden; if (ver) l.innerHTML = leyendaMapa(); l.hidden = !ver; $('#legbtn').classList.toggle('on', ver); };
+  $('#mleg').onclick = () => { $('#mleg').hidden = true; $('#legbtn').classList.remove('on'); };
   $('#fab').onclick = () => marcar();
   $('#spotbtn').onclick = () => editarSpot();
   /* tocar el mapa fuera de un marcador cierra el resumen abierto */
@@ -501,9 +505,10 @@ async function renderSalidas() {
     return '<button class="item spotc' + (por ? ' por' : '') + '" data-spot="' + z.id + '"><span class="sico">' + (por ? I.flag : I.seta) + '</span><div class="t"><b>' + esc(z.nombre) + '</b><small>' + [ne ? plural(ne, 'especie', 'especies') : (por ? 'sin visitar' : 'sin especies'), yo ? kmFmt(distM(yo, z)) : '', ultZ(z)].filter(Boolean).join(' · ') + '</small>' + avatares(h) + '</div>' + I.chev + '</button>'; };
   const grupo = (est, tit) => { const l = zs.filter(z => (z.estado || 'visitada') === est).sort((a, b) => yo ? distM(yo, a) - distM(yo, b) : a.nombre.localeCompare(b.nombre, 'es', { numeric: true })); return l.length ? '<div class="grp" style="--c:' + spotColor({ estado: est }) + '">' + tit + '<small>' + l.length + '</small></div>' + l.map(filaZ).join('') : ''; };
   const filaS = s => { const h = deS(s.id), n = nSpots(s);
-    return '<a class="item sal" href="#salida/' + s.id + '">' + diaMes(s.fecha) + '<div class="t"><b>' + esc(s.titulo || fecha(s.fecha)) + '</b><small>' + [(s.fecha || '').slice(0, 4), n ? plural(n, 'spot', 'spots') : '', plural(h.length, 'hallazgo', 'hallazgos'), s.totalTxt ? esc(s.totalTxt) : '', s.estado === 'en_curso' ? 'en curso' : ''].filter(Boolean).join(' · ') + '</small>' + avatares(h) + '</div>' + I.chev + '</a>'; };
+    return '<a class="item sal" href="#salida/' + s.id + '">' + diaMes(s.fecha) + '<div class="t"><b>' + esc(s.titulo || fecha(s.fecha)) + '</b><small>' + [(s.fecha || '').slice(0, 4) === String(new Date().getFullYear()) ? '' : (s.fecha || '').slice(0, 4), n ? plural(n, 'spot', 'spots') : '', plural(h.length, 'hallazgo', 'hallazgos'), s.totalTxt ? esc(s.totalTxt) : '', s.estado === 'en_curso' ? 'en curso' : ''].filter(Boolean).join(' · ') + '</small>' + avatares(h) + '</div>' + I.chev + '</a>'; };
   $('#v-salidas').innerHTML = '<div class="pad">' + (act ? '<a class="item cur-sal" href="#salida/' + act.id + '"><span class="rdot"></span><div class="t"><b>Salida en curso</b><small>' + esc(fecha(act.fecha)) + ' · ' + plural(deS(act.id).length, 'hallazgo', 'hallazgos') + ' · ' + durTxt(act) + '</small></div><span class="tag" style="--c:#e0a458;color:#1a1206">Abrir</span></a>'
     : '<button class="start" id="s-new"><span class="ic">' + I.plus + '</span><span class="t"><b>Empezar salida</b><small>Graba el recorrido y lo que encuentres en cada spot</small></span></button>') +
+    (ss.length ? (() => { const ne = especiesDe(hs.filter(h => h.especieId)).length; return '<div class="sal-res"><div><b>' + ss.length + '</b><small>' + (ss.length === 1 ? 'salida' : 'salidas') + '</small></div><div><b>' + hs.length + '</b><small>' + (hs.length === 1 ? 'hallazgo' : 'hallazgos') + '</small></div><div><b>' + ne + '</b><small>' + (ne === 1 ? 'especie' : 'especies') + '</small></div><div><b>' + zs.length + '</b><small>spots</small></div></div>'; })() : '') +
     '<div class="sec">Salidas<small>' + (ss.length || '') + '</small></div>' + (ss.length ? ss.map(filaS).join('') : '<div class="empty">Aún no hay salidas.<br>Empieza una cuando salgas al monte.</div>') +
     '<div class="sec">Mis spots<small>' + (zs.length || '') + '</small></div>' + (zs.length ? grupo('por_visitar', 'Quiero ir') + grupo('visitada', 'Visitados') : '<div class="empty">Marca sitios que has visitado o que quieres visitar y aparecerán aquí y en el mapa.</div>') +
     '<div class="row"><button class="btn" id="s-spot">' + I.flag + ' Nuevo spot</button></div></div>';
@@ -690,12 +695,14 @@ async function pintarAprender() {
 function renderSetas() {
   const root = $('#v-setas');
   if (!$('#q', root)) {
-    root.innerHTML = '<div class="pad"><div id="lec-w"></div><div id="col-w"></div>' +
-      '<div class="learn2"><button class="lc" id="gu-open" style="--c:#e0a458">' + ICO_SETA + '<b>Partes de una seta</b><small>Esquema con nombres</small></button><button class="lc" id="li-open" style="--c:#7ccf8e"><span class="ic">' + lib.CAPS[0].ico + '</span><b>El libro</b><small>Para empezar</small></button><button class="lc" id="ia-open" style="--c:#b48cff"><span class="ic">✨</span><b>Reconocer con IA</b><small>Con 1–3 fotos</small></button></div>' +
+    root.innerHTML = '<div class="pad">' +
       '<div class="sbar"><input type="search" id="q" placeholder="Buscar seta por nombre (es, eu, latín)…" autocomplete="off"><div class="seg ord" id="ord">' + [['peligro', 'Por peligro'], ['col', 'Colecciones'], ['az', 'A–Z']].map(([k, t]) => '<button data-ord="' + k + '">' + t + '</button>').join('') + '</div><div class="chips" id="cl"></div></div>' +
+      '<div id="intro-w">' +
+      '<div class="learn2"><button class="lc" id="gu-open" style="--c:#e0a458">' + ICO_SETA + '<b>Partes de una seta</b><small>Esquema con nombres</small></button><button class="lc" id="li-open" style="--c:#7ccf8e"><span class="ic">' + lib.CAPS[0].ico + '</span><b>El libro</b><small>Para empezar</small></button><button class="lc" id="ia-open" style="--c:#b48cff"><span class="ic">✨</span><b>Reconocer con IA</b><small>Con 1–3 fotos</small></button></div>' +
+      '<div id="lec-w"></div><div id="col-w"></div></div>' +
       '<div class="warn sm2">' + esc(cat.aviso()) + '</div><div id="slist"></div>' +
       '<p class="note" style="margin-top:14px">Catálogo en borrador: ' + cat.todas().length + ' fichas sin revisar por una persona experta. Las comestibles llevan «según fuentes» porque lo dicen Wikipedia y guías divulgativas, no una persona experta: siguen pendientes de revisión. Fotos de Wikimedia Commons con su autoría y licencia en cada ficha.</p></div>';
-    $('#q', root).oninput = e => { S.q = e.target.value; listaSetas(); };
+    $('#q', root).oninput = e => { S.q = e.target.value; root.classList.toggle('busca', !!S.q.trim()); listaSetas(); };
     root.onclick = e => {
       if (e.target.closest('#gu-open')) return abrirGuia('');
       if (e.target.closest('#li-open')) return abrirLibro('');
@@ -744,6 +751,11 @@ function fichaTab(sh, k, { ir = false } = {}) {
   const bar = $('#ftabs', sh), on = $('.ft.on', sh); if (on && bar) bar.scrollTo({ left: on.offsetLeft - 12, behavior: 'smooth' });
   if (ir && bar) { const d = bar.getBoundingClientRect().top - sh.getBoundingClientRect().top; if (d > 4) sh.scrollTo({ top: sh.scrollTop + d - 4, behavior: 'smooth' }); }
   S.ftab = { id: sh.dataset.fid, tab: k };
+}
+function leyendaMapa() {
+  const cl = ['ok_fuentes', 'cond_fuentes', 'no_comestible', 'toxica', 'mortal'].map(k => cat.CLASES[k]);
+  return '<b>Qué significa cada marca</b><div class="ml-r"><span class="ml-sp" style="--c:var(--spot)">' + I.seta + '</span>Spot visitado</div><div class="ml-r"><span class="ml-sp por">' + I.flag + '</span>Spot «quiero ir» (sin visitar)</div>' +
+    '<small>Hallazgos: el borde es el color de la especie</small>' + cl.map(c => '<div class="ml-r"><i style="--c:' + c.color + '"></i>' + esc(c.label) + '</div>').join('') + '<div class="ml-r"><i style="--c:#9aa5a1"></i>Sin identificar o sin datos</div><small class="ml-x">Toca para cerrar</small>';
 }
 function abrirFicha(id) {
   const e = cat.byId(id); if (!e) return;
@@ -870,8 +882,14 @@ async function renderAjustes() {
   const root = $('#v-ajustes'), c = syn.cfg(), zonas = (await db.list('zonas')).sort((a, b) => a.nombre.localeCompare(b.nombre));
   if (root.contains(document.activeElement) && /INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)) return;
   const last = syn.lastSync();
-  root.innerHTML = '<div class="pad">' + estadoSyncHTML() + ajustesResto(c, last, zonas) + '</div>';
+  root.innerHTML = '<div class="pad"><div class="aj-panel">' + estadoSyncHTML() + resumenAjustes() + '</div>' + ajustesResto(c, last, zonas) + '</div>';
   ajustesWire.zonas = zonas; ajustesWire(root, c);
+}
+/* resumen: cómo está cada cosa de un vistazo; tocar lleva a su bloque */
+function resumenAjustes() {
+  const nz = off.zonas().filter(z => z.completa).length, k = !!ia.getKey(), inst = instalada();
+  const t = (id, ic, n, v, ok) => '<button class="aj-t' + (ok ? ' ok' : '') + '" data-aj="' + id + '"><span>' + ic + '</span><small>' + n + '</small><b>' + v + '</b></button>';
+  return '<div class="aj-ts">' + t('aj-ia', I.chispa, 'IA', k ? 'Activa' : 'Sin clave', k) + t('aj-off', I.mapa, 'Mapa sin red', nz ? plural(nz, 'zona', 'zonas') : 'Nada guardado', nz > 0) + t('aj-inst', I.movil, 'App', inst ? 'Instalada' : 'Sin instalar', inst) + '</div>';
 }
 function estadoSyncHTML() {
   const c = syn.cfg(), last = syn.lastSync(), pend = db.dirtyCount(), ok = !!(c.repo && c.token);
@@ -880,16 +898,16 @@ function estadoSyncHTML() {
 }
 function ajustesResto(c, last, zonas) {
   const pend = db.dirtyCount(), ok = !!(c.repo && c.token);
-  const sec = (ic, t, sub, body) => '<section class="aj"><div class="aj-h"><span class="aj-i">' + ic + '</span><div><h3>' + t + '</h3>' + (sub ? '<small>' + sub + '</small>' : '') + '</div></div>' + body + '</section>';
+  const sec = (ic, t, sub, body, id = '') => '<section class="aj"' + (id ? ' id="' + id + '"' : '') + '><div class="aj-h"><span class="aj-i">' + ic + '</span><div><h3>' + t + '</h3>' + (sub ? '<small>' + sub + '</small>' : '') + '</div></div>' + body + '</section>';
   const nf = Math.round(cat.todas().reduce((n, e) => n + (e.fotos || []).length, 0) * 0.2 / 5) * 5;
   return sec(ICON_SYNC, 'Sincronización', 'Copia en tu repositorio privado de GitHub',
       '<label class="l">Repositorio de datos</label><input type="text" id="a-repo" placeholder="usuario/micologia-datos" autocapitalize="off" autocomplete="off" value="' + esc(c.repo || '') + '">' +
       '<label class="l">Token de GitHub</label><input type="password" id="a-tok" placeholder="' + (c.token ? '•••••• guardado (déjalo vacío para conservarlo)' : 'github_pat_…') + '" autocomplete="off">' +
       '<div class="row"><button class="btn p" id="a-sync">' + (ok ? 'Sincronizar ahora' : 'Guardar y sincronizar') + '</button></div><div class="note" id="a-st" style="margin-top:10px">' + (last ? 'Última sincronización: ' + new Date(last).toLocaleString('es-ES') : 'Aún no has sincronizado.') + (pend ? '<br>Pendiente de subir: ' + pend : '') + '</div>') +
-    sec('<span style="font-size:20px">✨</span>', 'Reconocer con IA', ia.getKey() ? '<span class="okc">✓ Clave guardada y sincronizada con tus dispositivos</span>' : 'Clave gratuita de aistudio.google.com/apikey',
-      '<input type="password" id="a-gk" placeholder="' + (ia.getKey() ? '•••••• guardada' : 'AIza… o AQ.…') + '" autocomplete="off" autocapitalize="off" style="margin-top:8px"><div class="row"><button class="btn p" id="a-gks">Guardar</button>' + (ia.getKey() ? '<button class="btn d" id="a-gkd">Borrar</button>' : '') + '</div><div class="note" id="a-gst" style="margin-top:8px"></div>') +
+    sec(I.chispa, 'Reconocer con IA', ia.getKey() ? '<span class="okc">✓ Clave guardada y sincronizada con tus dispositivos</span>' : 'Clave gratuita de aistudio.google.com/apikey',
+      '<input type="password" id="a-gk" placeholder="' + (ia.getKey() ? '•••••• guardada' : 'AIza… o AQ.…') + '" autocomplete="off" autocapitalize="off" style="margin-top:8px"><div class="row"><button class="btn p" id="a-gks">Guardar</button>' + (ia.getKey() ? '<button class="btn d" id="a-gkd">Borrar</button>' : '') + '</div><div class="note" id="a-gst" style="margin-top:8px"></div>', 'aj-ia') +
     instalarHTML(sec) +
-    sec('<span style="font-size:20px">🗺️</span>', 'Mapa sin conexión', 'Satélite guardado en el móvil para el monte sin cobertura', offHTML()) +
+    sec(I.mapa, 'Mapa sin conexión', 'Satélite guardado en el móvil para el monte sin cobertura', offHTML(), 'aj-off') +
     sec(I.foto, 'Fotos sin conexión', 'Las fichas con foto en el monte sin cobertura (≈' + nf + ' MB)',
       '<div class="row"><button class="btn" id="a-fotos">Descargar fotos</button></div><div class="note" id="a-fst" style="margin-top:10px">Comprobando…</div>') +
     sec(I.flag, 'Tus datos', plural(zonas.length, 'spot', 'spots'),
@@ -904,14 +922,14 @@ addEventListener('beforeinstallprompt', e => { e.preventDefault(); PROMPT = e; c
 addEventListener('appinstalled', () => { PROMPT = null; try { renderAjustes(); } catch (e) { } });
 const instalada = () => matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
 function instalarHTML(sec) {
-  if (instalada()) return sec('<span style="font-size:20px">📲</span>', 'App instalada', '<span class="okc">✓ Ya la tienes en tu pantalla de inicio</span>', '');
+  if (instalada()) return sec(I.movil, 'App instalada', '<span class="okc">✓ Ya la tienes en tu pantalla de inicio</span>', '', 'aj-inst');
   const ios = /iPhone|iPad|iPod/.test(navigator.userAgent);
-  return sec('<span style="font-size:20px">📲</span>', 'Instalar en el móvil', 'Icono en la pantalla de inicio, abre a pantalla completa y funciona con lo ya cargado',
+  return sec(I.movil, 'Instalar en el móvil', 'Icono en la pantalla de inicio, abre a pantalla completa y funciona con lo ya cargado',
     '<div class="row"><button class="btn p" id="a-inst"' + (PROMPT ? '' : ' hidden') + '>Instalar app</button></div>' +
     '<div class="note" id="a-instn" style="margin-top:8px">' + (ios
       ? 'En iPhone, con Safari: pulsa <b>Compartir</b> (cuadrado con flecha) → <b>Añadir a pantalla de inicio</b>.'
       : 'En Android, con Chrome: menú <b>⋮</b> → <b>Instalar aplicación</b> (o «Añadir a pantalla de inicio»).') +
-    '<br>Abre la app desde ese icono la primera vez con conexión para que guarde todo.</div>');
+    '<br>Abre la app desde ese icono la primera vez con conexión para que guarde todo.</div>', 'aj-inst');
 }
 /* ---------- mapa sin conexión ---------- */
 const OFF = { sel: null, km: 5, det: 'normal', ctl: null, msg: '' };
@@ -973,6 +991,7 @@ async function offWire(root, zonas) {
 }
 function ajustesWire(root, c) {
   offWire(root, ajustesWire.zonas || []);
+  $$('[data-aj]', root).forEach(b => b.onclick = () => { const x = $('#' + b.dataset.aj, root); if (x) x.scrollIntoView({ behavior: 'smooth', block: 'start' }); });
   const bi = $('#a-inst', root); if (bi) bi.onclick = async () => { if (!PROMPT) return; PROMPT.prompt(); try { await PROMPT.userChoice; } catch (e) { } PROMPT = null; renderAjustes(); };
   $('#a-sync', root).onclick = async () => {
     const repo = $('#a-repo', root).value.trim().replace(/^https?:\/\/github\.com\//, '').replace(/\.git$/, ''), tok = $('#a-tok', root).value.trim() || c.token, st = $('#a-st', root);

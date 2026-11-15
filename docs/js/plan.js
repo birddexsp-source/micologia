@@ -65,7 +65,7 @@ export async function renderPlan(root, arg) {
   if (arg && cat.byId(arg) && P.obj !== arg) { P.obj = arg; P.sel = null; guarda(LS, { obj: P.obj, zona: P.zona }); }
   CACHE_L = await lugares(); if (!CACHE_L.some(l => l.id === P.zona)) P.zona = 'bermeo';
   const lug = CACHE_L.find(l => l.id === P.zona);
-  root.innerHTML = '<div class="pad pl"><button class="pl-donde" id="pl-donde"><b>¿No sabes dónde mirar?</b><span>Guía sencilla: cómo reconocer cada tipo de sitio y dónde buscar ›</span></button><div class="pl-sel" id="pl-sel"></div><div id="pl-res"><div class="pl-carg">Buscando el tiempo…</div></div><div id="pl-acc"></div></div>';
+  root.innerHTML = '<div class="pad pl"><div class="pl-sel" id="pl-sel"></div><button class="pl-donde" id="pl-donde"><i>?</i><b>¿No sabes dónde mirar?</b><span>Guía ›</span></button><div id="pl-res"><div class="pl-carg">Buscando el tiempo…</div></div><div id="pl-acc"></div></div>';
   pintarSelectores(root);
   root.onchange = e => {
     if (e.target.id === 'pl-obj') { P.obj = e.target.value; P.sel = null; } else if (e.target.id === 'pl-lug') { P.zona = e.target.value; P.sel = null; } else return;
@@ -84,9 +84,9 @@ export async function renderPlan(root, arg) {
 }
 function pintarSelectores(root) {
   const g = gremios(), esp = especies().sort((a, b) => nombre(a).localeCompare(nombre(b)));
-  $('#pl-sel', root).innerHTML = '<label class="l">¿A por qué salgo?</label><select id="pl-obj"><optgroup label="General"><option value="general">Setas en general</option></optgroup><optgroup label="Por tipo">' +
-    g.map(x => '<option value="g:' + x.id + '">' + esc(x.nombre) + '</option>').join('') + '</optgroup><optgroup label="Una especie">' + esp.map(e => '<option value="' + e.id + '">' + esc(nombre(e)) + '</option>').join('') + '</optgroup></select>' +
-    '<label class="l">¿Dónde?</label><select id="pl-lug">' + CACHE_L.map(l => '<option value="' + l.id + '">' + esc(l.nombre) + '</option>').join('') + '</select>';
+  $('#pl-sel', root).innerHTML = '<div class="pl-f"><label class="l" for="pl-obj">¿A por qué salgo?</label><select id="pl-obj"><optgroup label="General"><option value="general">Setas en general</option></optgroup><optgroup label="Por tipo">' +
+    g.map(x => '<option value="g:' + x.id + '">' + esc(x.nombre) + '</option>').join('') + '</optgroup><optgroup label="Una especie">' + esp.map(e => '<option value="' + e.id + '">' + esc(nombre(e)) + '</option>').join('') + '</optgroup></select></div>' +
+    '<div class="pl-f"><label class="l" for="pl-lug">¿Dónde?</label><select id="pl-lug">' + CACHE_L.map(l => '<option value="' + l.id + '">' + esc(l.nombre) + '</option>').join('') + '</select></div>';
   $('#pl-obj', root).value = P.obj; $('#pl-lug', root).value = P.zona;
 }
 let ESTADO = null;
@@ -113,10 +113,10 @@ function pintarResultado(root) {
     '<div class="pl-top" style="--c:' + md.COL(mejor ? mejor.score : 0) + '"><small>Mejor día para «' + esc(titulo) + '»</small>' +
     (mejor ? '<b>' + fechaLarga(mejor.f) + (mejor.d === 0 ? ' (hoy)' : mejor.d === 1 ? ' (mañana)' : '') + '</b><span class="pl-n">' + mejor.score + '<i>/100</i></span><em>' + md.ETIQ(mejor.score) + '</em>' : '<b>—</b>') +
     (mejor && mejor.score < 30 ? '<p>Ningún día de los próximos 10 pinta bien' + (dia && dia.r && dia.r.limitante ? '. Lo que más falta: ' + etiquetaLim(mejor.r) : '') + '.</p>' : '') + '</div>' +
-    '<div class="pl-bars" role="img" aria-label="Puntuación por día">' + s.map(x => {
+    '<div class="pl-chart"><div class="pl-ch"><b>Día a día</b><span>Toca un día para ver el detalle</span></div><div class="pl-bars" role="img" aria-label="Puntuación por día">' + s.map(x => {
       const sc = x.score == null ? 0 : x.score;
       return '<button data-pf="' + x.f + '" class="pl-b' + (x.d < 0 ? ' pas' : '') + (x.d === 0 ? ' hoy' : '') + (x.f === sel ? ' on' : '') + '" style="--h:' + Math.max(4, sc / mx * 100) + '%;--c:' + md.COL(sc) + '"><span class="pl-v">' + (x.score == null ? '' : sc) + '</span><u></u><span class="pl-p">' + (x.p == null ? '' : x.p >= 1 ? Math.round(x.p) : '·') + '</span><span class="pl-d">' + DIA1[cl.aFecha(x.f).getDay()] + '<small>' + cl.aFecha(x.f).getDate() + '</small></span></button>';
-    }).join('') + '</div><div class="pl-leg"><span>◀ ya pasado (tiempo real)</span><span>previsión ▶</span></div><div class="pl-leg2">Número bajo cada barra: lluvia del día en mm. Pasado y presente: datos medidos. A más de 5 días, la previsión es menos fiable.</div>' +
+    }).join('') + '</div><div class="pl-leg"><span>◀ ya pasado (tiempo real)</span><span>previsión ▶</span></div><div class="pl-leg2"><span class="pl-mm">azul</span> = lluvia del día (mm). Lo pasado son datos medidos; a más de 5 días, la previsión es menos fiable.</div></div>' +
     detalleDia(dia, titulo, E) + (dia && dia.score != null ? '<div class="pl-lista">' + listaDia(dia) + '</div>' : '') + (cal ? '<div class="note pl-cal">Modelo ajustado con tus ' + cal.n + ' visitas.</div>' : '');
 }
 const etiquetaLim = r => { const m = { lluvia: 'lluvia acumulada', temp: 'temperatura', helada: 'helada', seco: 'suelo seco', temporada: 'época del año' }; const x = r && (r.limitante || (r.general && r.general.mejor && null)); return m[x] || 'varios factores'; };
@@ -173,11 +173,11 @@ function listaDia(d) {
 async function aciertosUI(root, calcular) {
   const box = $('#pl-acc', root); if (!box) return;
   const ex = await ejemplos(), prev = lee(ACC, null);
-  if (!ex.length) { box.innerHTML = '<section class="aj"><div class="aj-h"><span class="aj-i">📈</span><div><h3>Tus aciertos</h3><small>El modelo aprende de tus salidas</small></div></div><p class="note">Aún no hay salidas terminadas con spots. Cuando termines salidas (con o sin hallazgos), aquí verás si los días que el modelo daba por buenos fueron los de éxito, y se ajusta solo.</p></section>'; return; }
+  if (!ex.length) { box.innerHTML = '<section class="aj"><div class="aj-h"><span class="aj-i"><svg viewBox="0 0 24 24"><path d="M4 19h16"/><path d="M5 15l4-4 3 3 6-7"/><path d="M14 7h4v4"/></svg></span><div><h3>Tus aciertos</h3><small>El modelo aprende de tus salidas</small></div></div><p class="note">Aún no hay salidas terminadas con spots. Cuando termines salidas (con o sin hallazgos), aquí verás si los días que el modelo daba por buenos fueron los de éxito, y se ajusta solo.</p></section>'; return; }
   if (calcular) { box.innerHTML = '<p class="note">Calculando con el tiempo real de tus salidas…</p>'; try { await calcularAciertos(); } catch (e) { toast('No se han podido calcular los aciertos'); } renderPlan(root); return; }
   const a = prev && prev.ac, cal = lee(CAL, null);
   const fila = (t, x) => '<tr><td>' + t + '</td><td>' + x.n + '</td><td>' + (x.tasa == null ? '—' : x.tasa + ' %') + '</td></tr>';
-  box.innerHTML = '<section class="aj"><div class="aj-h"><span class="aj-i">📈</span><div><h3>Tus aciertos</h3><small>' + ex.length + ' visitas a spots · ' + (a ? 'con tiempo real de cada día' : 'sin calcular') + '</small></div></div>' +
+  box.innerHTML = '<section class="aj"><div class="aj-h"><span class="aj-i"><svg viewBox="0 0 24 24"><path d="M4 19h16"/><path d="M5 15l4-4 3 3 6-7"/><path d="M14 7h4v4"/></svg></span><div><h3>Tus aciertos</h3><small>' + ex.length + ' visitas a spots · ' + (a ? 'con tiempo real de cada día' : 'sin calcular') + '</small></div></div>' +
     (a && a.n ? '<table class="pl-t"><tr><th>El modelo daba</th><th>Visitas</th><th>Con hallazgo</th></tr>' + fila('Buen momento (≥ 60)', a.alto) + fila('Regular (40–59)', a.medio) + fila('Flojo (< 40)', a.bajo) + '</table>' +
       '<p class="note">Base: encontraste algo en el ' + a.base + ' % de tus visitas.' + (a.auc != null ? ' Acierto al ordenar (AUC): ' + String(a.auc).replace('.', ',') + ' (0,5 = azar, 1 = perfecto).' : '') + '</p>' +
       '<p class="note">' + (cal && cal.n >= MIN_CAL ? 'El modelo ya está ajustado con tus ' + cal.n + ' visitas.' : 'Con ' + (MIN_CAL - (cal ? cal.n : 0)) + ' visitas más el modelo empezará a ajustarse a ti; hasta entonces usa solo la ficha de cada seta.') + '</p>' : '<p class="note">Pulsa para calcular qué puntuaba el modelo en cada visita (necesita conexión para traer el tiempo de esos días).</p>') +
