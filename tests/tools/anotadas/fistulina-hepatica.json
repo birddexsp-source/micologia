@@ -1,0 +1,67 @@
+[
+ {
+  "_cand": "3.0",
+  "titulo": "Una lengua rojiza en el tronco",
+  "foto": {
+   "sp": "Fistulina hepatica",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/26463471/{s}.jpeg",
+   "autor": "Simon Rolph",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/17415963",
+   "origen": "iNaturalist",
+   "ar": 1.3333
+  },
+  "puntos": [
+   {
+    "x": 45,
+    "y": 55,
+    "parte": "sombrero",
+    "titulo": "Superficie pegajosa y rojiza",
+    "texto": "Como una lengua o un hígado; rojo-pardo y algo viscosa.",
+    "d": "arriba"
+   },
+   {
+    "x": 83,
+    "y": 55,
+    "parte": "sombrero",
+    "titulo": "Borde redondeado",
+    "texto": "Grueso y carnoso.",
+    "d": "der"
+   }
+  ],
+  "ojo": "Sale en robles y castaños vivos o muertos. No se parece a nada peligroso, pero solo se aprovecha joven; de vieja es dura y muy ácida."
+ },
+ {
+  "_cand": "0.5",
+  "titulo": "Cortada: parece carne cruda",
+  "foto": {
+   "sp": "Fistulina hepatica",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/5677100/{s}.jpeg",
+   "autor": "Alan Rockefeller",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/4678583",
+   "origen": "iNaturalist",
+   "ar": 0.75
+  },
+  "puntos": [
+   {
+    "x": 52,
+    "y": 32,
+    "parte": "carne",
+    "titulo": "Fibras rojas",
+    "texto": "Por dentro tiene vetas como un filete; suelta jugo rojo.",
+    "d": "der"
+   },
+   {
+    "x": 70,
+    "y": 80,
+    "parte": "himenio",
+    "titulo": "Poros finos",
+    "texto": "La cara de abajo tiene poros diminutos; crema de joven y rojiza al rozarse.",
+    "d": "der"
+   }
+  ]
+ }
+]

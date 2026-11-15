@@ -1,0 +1,67 @@
+[
+ {
+  "_cand": "5.0",
+  "titulo": "Sombrero pardo y pie amarillo",
+  "foto": {
+   "sp": "Craterellus tubaeformis",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/164609135/{s}.jpeg",
+   "autor": "Erin Springinotic",
+   "licencia": "CC0",
+   "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+   "pagina": "https://www.inaturalist.org/observations/98817790",
+   "origen": "iNaturalist",
+   "ar": 1.3333
+  },
+  "puntos": [
+   {
+    "x": 60,
+    "y": 12,
+    "parte": "sombrero",
+    "titulo": "Sombrero pardo-grisáceo",
+    "texto": "Pequeño, en embudo y con el borde ondulado.",
+    "d": "arriba-der"
+   },
+   {
+    "x": 52,
+    "y": 55,
+    "parte": "pie",
+    "titulo": "Pie amarillo hueco",
+    "texto": "Amarillo-naranja, liso y hueco.",
+    "d": "der"
+   }
+  ],
+  "ojo": "Pequeña y en grupos: fácil de confundir con otras setitas pardas si no miras debajo. Debe tener pliegues romos, no láminas finas, y el pie hueco y amarillo."
+ },
+ {
+  "_cand": "3.1",
+  "titulo": "Por debajo: pliegues pálidos y ramificados",
+  "foto": {
+   "sp": "Craterellus tubaeformis",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/599577988/{s}.jpg",
+   "autor": "Heiko Weber",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/330622599",
+   "origen": "iNaturalist",
+   "ar": 0.4619
+  },
+  "puntos": [
+   {
+    "x": 60,
+    "y": 32,
+    "parte": "himenio",
+    "titulo": "Pliegues bifurcados",
+    "texto": "Venas gruesas y ramificadas, gris-amarillentas, que bajan por el pie.",
+    "d": "der"
+   },
+   {
+    "x": 65,
+    "y": 62,
+    "parte": "pie",
+    "titulo": "Pie amarillo",
+    "texto": "Largo, fino y hueco.",
+    "d": "der"
+   }
+  ]
+ }
+]

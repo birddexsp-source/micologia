@@ -14253,6 +14253,69 @@
    "familia": "Cantharellaceae",
    "anotadas": [
     {
+     "titulo": "Sombrero pardo y pie amarillo",
+     "foto": {
+      "sp": "Craterellus tubaeformis",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/164609135/{s}.jpeg",
+      "autor": "Erin Springinotic",
+      "licencia": "CC0",
+      "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "pagina": "https://www.inaturalist.org/observations/98817790",
+      "origen": "iNaturalist",
+      "ar": 1.3333
+     },
+     "puntos": [
+      {
+       "x": 60,
+       "y": 12,
+       "parte": "sombrero",
+       "titulo": "Sombrero pardo-grisáceo",
+       "texto": "Pequeño, en embudo y con el borde ondulado.",
+       "d": "arriba-der"
+      },
+      {
+       "x": 52,
+       "y": 55,
+       "parte": "pie",
+       "titulo": "Pie amarillo hueco",
+       "texto": "Amarillo-naranja, liso y hueco.",
+       "d": "der"
+      }
+     ],
+     "ojo": "Pequeña y en grupos: fácil de confundir con otras setitas pardas si no miras debajo. Debe tener pliegues romos, no láminas finas, y el pie hueco y amarillo."
+    },
+    {
+     "titulo": "Por debajo: pliegues pálidos y ramificados",
+     "foto": {
+      "sp": "Craterellus tubaeformis",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/599577988/{s}.jpg",
+      "autor": "Heiko Weber",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/330622599",
+      "origen": "iNaturalist",
+      "ar": 0.4619
+     },
+     "puntos": [
+      {
+       "x": 60,
+       "y": 32,
+       "parte": "himenio",
+       "titulo": "Pliegues bifurcados",
+       "texto": "Venas gruesas y ramificadas, gris-amarillentas, que bajan por el pie.",
+       "d": "der"
+      },
+      {
+       "x": 65,
+       "y": 62,
+       "parte": "pie",
+       "titulo": "Pie amarillo",
+       "texto": "Largo, fino y hueco.",
+       "d": "der"
+      }
+     ]
+    },
+    {
      "foto": {
       "sp": "Craterellus tubaeformis",
       "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Craterellus_tubaeformis_(37297104720).jpg/{w}px-Craterellus_tubaeformis_(37297104720).jpg",
@@ -14561,7 +14624,71 @@
      }
     ]
    },
-   "anotadas": []
+   "anotadas": [
+    {
+     "titulo": "Cortado: tiene que ser blanco por dentro",
+     "foto": {
+      "sp": "Lycoperdon perlatum",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/335810104/{s}.jpg",
+      "autor": "Kate Manning",
+      "licencia": "CC0",
+      "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "pagina": "https://www.inaturalist.org/observations/191424174",
+      "origen": "iNaturalist",
+      "ar": 1.3333
+     },
+     "puntos": [
+      {
+       "x": 55,
+       "y": 55,
+       "parte": "carne",
+       "titulo": "Interior blanco y uniforme",
+       "texto": "Blanco puro, como malvavisco, sin dibujo de seta dentro.",
+       "d": "arriba"
+      },
+      {
+       "x": 22,
+       "y": 58,
+       "parte": "cutis",
+       "titulo": "Pinchitos",
+       "texto": "Superficie cubierta de pinchos y verruguitas.",
+       "d": "izq"
+      }
+     ],
+     "ojo": "Córtala siempre de arriba abajo: si dentro ves la silueta de una seta (sombrero, láminas) es un huevo de Amanita, mortal. Si el interior está amarillo, verde o en polvo, ya no se come."
+    },
+    {
+     "titulo": "Por fuera: pinchos que dejan red",
+     "foto": {
+      "sp": "Lycoperdon perlatum",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/444217185/{s}.jpeg",
+      "autor": "Kieran Roy Powell",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/248592115",
+      "origen": "iNaturalist",
+      "ar": 0.75
+     },
+     "puntos": [
+      {
+       "x": 40,
+       "y": 45,
+       "parte": "cutis",
+       "titulo": "Pinchos cónicos",
+       "texto": "Se caen al tocarlos y dejan marcas en red.",
+       "d": "izq"
+      },
+      {
+       "x": 55,
+       "y": 54,
+       "parte": "otro",
+       "titulo": "Agujero en lo alto",
+       "texto": "De vieja se abre por arriba y suelta polvo de esporas.",
+       "d": "der"
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "laetiporus-sulphureus",
@@ -14807,7 +14934,71 @@
      }
     ]
    },
-   "anotadas": []
+   "anotadas": [
+    {
+     "titulo": "Repisas naranja y amarillo en pisos",
+     "foto": {
+      "sp": "Laetiporus sulphureus",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/151257149/{s}.jpeg",
+      "autor": "Tom Norton",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/91443365",
+      "origen": "iNaturalist",
+      "ar": 0.75
+     },
+     "puntos": [
+      {
+       "x": 45,
+       "y": 45,
+       "parte": "sombrero",
+       "titulo": "Repisas superpuestas",
+       "texto": "Abanicos carnosos, unos encima de otros.",
+       "d": "der"
+      },
+      {
+       "x": 55,
+       "y": 90,
+       "parte": "cutis",
+       "titulo": "Borde amarillo",
+       "texto": "El borde es amarillo azufre; el centro, naranja.",
+       "d": "abajo"
+      }
+     ],
+     "ojo": "Nunca cruda y solo los bordes tiernos de ejemplares jóvenes. A algunas personas les sienta mal aunque esté bien cocinada. Evita los que crecen sobre tejo o eucalipto."
+    },
+    {
+     "titulo": "Joven: más amarillo y tierno",
+     "foto": {
+      "sp": "Laetiporus sulphureus",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/98944797/{s}.jpg",
+      "autor": "Bethany Teigen",
+      "licencia": "CC0",
+      "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "pagina": "https://www.inaturalist.org/observations/61805691",
+      "origen": "iNaturalist",
+      "ar": 0.75
+     },
+     "puntos": [
+      {
+       "x": 65,
+       "y": 50,
+       "parte": "himenio",
+       "titulo": "Cara inferior amarilla",
+       "texto": "Con poros diminutos, sin láminas.",
+       "d": "der"
+      },
+      {
+       "x": 28,
+       "y": 42,
+       "parte": "habitat",
+       "titulo": "Pegado al tronco",
+       "texto": "Sale directamente de la madera, sin pie.",
+       "d": "izq"
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "fistulina-hepatica",
@@ -15052,7 +15243,71 @@
      }
     ]
    },
-   "anotadas": []
+   "anotadas": [
+    {
+     "titulo": "Una lengua rojiza en el tronco",
+     "foto": {
+      "sp": "Fistulina hepatica",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/26463471/{s}.jpeg",
+      "autor": "Simon Rolph",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/17415963",
+      "origen": "iNaturalist",
+      "ar": 1.3333
+     },
+     "puntos": [
+      {
+       "x": 45,
+       "y": 55,
+       "parte": "sombrero",
+       "titulo": "Superficie pegajosa y rojiza",
+       "texto": "Como una lengua o un hígado; rojo-pardo y algo viscosa.",
+       "d": "arriba"
+      },
+      {
+       "x": 83,
+       "y": 55,
+       "parte": "sombrero",
+       "titulo": "Borde redondeado",
+       "texto": "Grueso y carnoso.",
+       "d": "der"
+      }
+     ],
+     "ojo": "Sale en robles y castaños vivos o muertos. No se parece a nada peligroso, pero solo se aprovecha joven; de vieja es dura y muy ácida."
+    },
+    {
+     "titulo": "Cortada: parece carne cruda",
+     "foto": {
+      "sp": "Fistulina hepatica",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/5677100/{s}.jpeg",
+      "autor": "Alan Rockefeller",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/4678583",
+      "origen": "iNaturalist",
+      "ar": 0.75
+     },
+     "puntos": [
+      {
+       "x": 52,
+       "y": 32,
+       "parte": "carne",
+       "titulo": "Fibras rojas",
+       "texto": "Por dentro tiene vetas como un filete; suelta jugo rojo.",
+       "d": "der"
+      },
+      {
+       "x": 70,
+       "y": 80,
+       "parte": "himenio",
+       "titulo": "Poros finos",
+       "texto": "La cara de abajo tiene poros diminutos; crema de joven y rojiza al rozarse.",
+       "d": "der"
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "auricularia-auricula-judae",

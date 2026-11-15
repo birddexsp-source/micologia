@@ -1,0 +1,67 @@
+[
+ {
+  "_cand": "0.2",
+  "titulo": "Cortado: tiene que ser blanco por dentro",
+  "foto": {
+   "sp": "Lycoperdon perlatum",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/335810104/{s}.jpg",
+   "autor": "Kate Manning",
+   "licencia": "CC0",
+   "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+   "pagina": "https://www.inaturalist.org/observations/191424174",
+   "origen": "iNaturalist",
+   "ar": 1.3333
+  },
+  "puntos": [
+   {
+    "x": 55,
+    "y": 55,
+    "parte": "carne",
+    "titulo": "Interior blanco y uniforme",
+    "texto": "Blanco puro, como malvavisco, sin dibujo de seta dentro.",
+    "d": "arriba"
+   },
+   {
+    "x": 22,
+    "y": 58,
+    "parte": "cutis",
+    "titulo": "Pinchitos",
+    "texto": "Superficie cubierta de pinchos y verruguitas.",
+    "d": "izq"
+   }
+  ],
+  "ojo": "Córtala siempre de arriba abajo: si dentro ves la silueta de una seta (sombrero, láminas) es un huevo de Amanita, mortal. Si el interior está amarillo, verde o en polvo, ya no se come."
+ },
+ {
+  "_cand": "1.1",
+  "titulo": "Por fuera: pinchos que dejan red",
+  "foto": {
+   "sp": "Lycoperdon perlatum",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/444217185/{s}.jpeg",
+   "autor": "Kieran Roy Powell",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/248592115",
+   "origen": "iNaturalist",
+   "ar": 0.75
+  },
+  "puntos": [
+   {
+    "x": 40,
+    "y": 45,
+    "parte": "cutis",
+    "titulo": "Pinchos cónicos",
+    "texto": "Se caen al tocarlos y dejan marcas en red.",
+    "d": "izq"
+   },
+   {
+    "x": 55,
+    "y": 54,
+    "parte": "otro",
+    "titulo": "Agujero en lo alto",
+    "texto": "De vieja se abre por arriba y suelta polvo de esporas.",
+    "d": "der"
+   }
+  ]
+ }
+]
