@@ -1,0 +1,67 @@
+[
+ {
+  "_cand": "6.1",
+  "titulo": "Láminas y pie lila",
+  "foto": {
+   "sp": "Collybia nuda",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/6351610/{s}.jpeg",
+   "autor": "Francesco Cecere",
+   "licencia": "CC0",
+   "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+   "pagina": "https://www.inaturalist.org/observations/5154924",
+   "origen": "iNaturalist",
+   "ar": 1.3333
+  },
+  "puntos": [
+   {
+    "x": 50,
+    "y": 42,
+    "parte": "himenio",
+    "titulo": "Láminas lila",
+    "texto": "Violeta-lila, apretadas, pegadas al pie.",
+    "d": "arriba-der"
+   },
+   {
+    "x": 30,
+    "y": 50,
+    "parte": "pie",
+    "titulo": "Pie violáceo y fibroso",
+    "texto": "Corto, robusto, sin anillo ni restos de telilla.",
+    "d": "izq"
+   }
+  ],
+  "ojo": "Hay Cortinarius violetas venenosos muy parecidos. Diferencia: esta NO tiene telilla (cortina) bajo el sombrero y su esporada es blanca-rosada; la de Cortinarius es marrón-óxido. Haz la esporada antes de comerla y cocínala siempre."
+ },
+ {
+  "_cand": "2.0",
+  "titulo": "En grupo, con el sombrero que palidece",
+  "foto": {
+   "sp": "Collybia nuda",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/173638578/{s}.jpeg",
+   "autor": "Alan Rockefeller",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/103710064",
+   "origen": "iNaturalist",
+   "ar": 1.7778
+  },
+  "puntos": [
+   {
+    "x": 62,
+    "y": 15,
+    "parte": "sombrero",
+    "titulo": "Sombrero lila a beige",
+    "texto": "Lila de joven, se va decolorando a beige-rosado.",
+    "d": "der"
+   },
+   {
+    "x": 33,
+    "y": 46,
+    "parte": "himenio",
+    "titulo": "Láminas violetas",
+    "texto": "Más intensas que el sombrero.",
+    "d": "izq"
+   }
+  ]
+ }
+]

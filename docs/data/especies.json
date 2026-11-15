@@ -11211,7 +11211,71 @@
      }
     ]
    },
-   "anotadas": []
+   "anotadas": [
+    {
+     "titulo": "Poros rojos bajo el sombrero",
+     "foto": {
+      "sp": "Neoboletus erythropus",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/567628326/{s}.jpg",
+      "autor": "Denis A",
+      "licencia": "CC0",
+      "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "pagina": "https://www.inaturalist.org/observations/314273811",
+      "origen": "iNaturalist",
+      "ar": 0.7529
+     },
+     "puntos": [
+      {
+       "x": 42,
+       "y": 42,
+       "parte": "himenio",
+       "titulo": "Poros rojo-anaranjados",
+       "texto": "La cara de abajo del sombrero es roja.",
+       "d": "izq"
+      },
+      {
+       "x": 57,
+       "y": 65,
+       "parte": "pie",
+       "titulo": "Pie amarillento con tonos rojos",
+       "texto": "Con puntitos rojos o con redecilla, según la especie.",
+       "d": "der"
+      }
+     ],
+     "ojo": "Poros rojos o naranjas = no se recoge si no lo confirma alguien que sepa. Hay especies muy parecidas tóxicas (como el boleto de Satanás)."
+    },
+    {
+     "titulo": "Al tocarlos, azul al instante",
+     "foto": {
+      "sp": "Neoboletus erythropus",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/682246242/{s}.jpg",
+      "autor": "Patrick Le Mao",
+      "licencia": "CC0",
+      "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "pagina": "https://www.inaturalist.org/observations/373324756",
+      "origen": "iNaturalist",
+      "ar": 1.7747
+     },
+     "puntos": [
+      {
+       "x": 38,
+       "y": 22,
+       "parte": "himenio",
+       "titulo": "Se pone azul",
+       "texto": "Donde se toca o se corta, el color pasa a azul oscuro en segundos.",
+       "d": "arriba"
+      },
+      {
+       "x": 65,
+       "y": 70,
+       "parte": "himenio",
+       "titulo": "Poros naranjas",
+       "texto": "La capa de poros es naranja-roja.",
+       "d": "der"
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "amanita-caesarea",
@@ -11450,6 +11514,69 @@
    },
    "familia": "Amanitaceae",
    "anotadas": [
+    {
+     "titulo": "Por debajo: láminas y pie AMARILLOS",
+     "foto": {
+      "sp": "Amanita caesarea",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/237320486/{s}.jpeg",
+      "autor": "Ferenc Molnár",
+      "licencia": "CC0",
+      "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "pagina": "https://www.inaturalist.org/observations/138815145",
+      "origen": "iNaturalist",
+      "ar": 0.75
+     },
+     "puntos": [
+      {
+       "x": 30,
+       "y": 60,
+       "parte": "himenio",
+       "titulo": "Láminas amarillas",
+       "texto": "Apretadas, amarillas; en la cicuta y la blanca son blancas.",
+       "d": "arriba-izq"
+      },
+      {
+       "x": 58,
+       "y": 52,
+       "parte": "anillo",
+       "titulo": "Anillo amarillo",
+       "texto": "Colgante y amarillento.",
+       "d": "der"
+      }
+     ],
+     "ojo": "De joven, cerrada como un huevo, es igual por fuera que una cicuta verde joven (mortal). Nunca cojas huevos sin abrir. Y si las láminas son blancas o el sombrero tiene verrugas blancas, es otra Amanita."
+    },
+    {
+     "titulo": "La volva: un huevo blanco",
+     "foto": {
+      "sp": "Amanita caesarea",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/237320522/{s}.jpeg",
+      "autor": "Ferenc Molnár",
+      "licencia": "CC0",
+      "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "pagina": "https://www.inaturalist.org/observations/138815145",
+      "origen": "iNaturalist",
+      "ar": 0.75
+     },
+     "puntos": [
+      {
+       "x": 30,
+       "y": 60,
+       "parte": "volva",
+       "titulo": "Volva blanca en copa",
+       "texto": "Saco blanco y grueso que envuelve la base.",
+       "d": "izq"
+      },
+      {
+       "x": 55,
+       "y": 50,
+       "parte": "sombrero",
+       "titulo": "El huevo abierto",
+       "texto": "Dentro asoma el sombrero naranja. Ábrelo solo para identificar, no para comer.",
+       "d": "arriba-der"
+      }
+     ]
+    },
     {
      "foto": {
       "sp": "Amanita caesarea",
@@ -12514,7 +12641,71 @@
      }
     ]
    },
-   "anotadas": []
+   "anotadas": [
+    {
+     "titulo": "Jóvenes: cilindros blancos con escamas",
+     "foto": {
+      "sp": "Coprinus comatus",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/164366213/{s}.jpeg",
+      "autor": "Tom Norton",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/98687583",
+      "origen": "iNaturalist",
+      "ar": 0.75
+     },
+     "puntos": [
+      {
+       "x": 30,
+       "y": 30,
+       "parte": "sombrero",
+       "titulo": "Escamas lanosas",
+       "texto": "Sombrero blanco, alargado, cubierto de escamas que se levantan.",
+       "d": "der"
+      },
+      {
+       "x": 42,
+       "y": 70,
+       "parte": "sombrero",
+       "titulo": "Ejemplar joven",
+       "texto": "Cerrado y blanco por completo: es el momento de recogerlo.",
+       "d": "izq"
+      }
+     ],
+     "ojo": "Solo se aprovechan jóvenes y totalmente blancos, y hay que cocinarlos el mismo día porque se deshacen. No la confundas con la Coprinopsis atramentaria (gris, lisa), que es tóxica con alcohol."
+    },
+    {
+     "titulo": "Más viejo: el borde se vuelve tinta",
+     "foto": {
+      "sp": "Coprinus comatus",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/164366209/{s}.jpeg",
+      "autor": "Tom Norton",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/98687583",
+      "origen": "iNaturalist",
+      "ar": 0.75
+     },
+     "puntos": [
+      {
+       "x": 23,
+       "y": 53,
+       "parte": "himenio",
+       "titulo": "Borde negro que gotea",
+       "texto": "Las láminas pasan de blanco a rosa y negro, y se licúan. Así ya no sirve.",
+       "d": "izq"
+      },
+      {
+       "x": 48,
+       "y": 70,
+       "parte": "anillo",
+       "titulo": "Anillo suelto",
+       "texto": "Anillo fino que se mueve, a menudo caído abajo.",
+       "d": "der"
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "lepista-nuda",
@@ -12785,7 +12976,71 @@
      }
     ]
    },
-   "anotadas": []
+   "anotadas": [
+    {
+     "titulo": "Láminas y pie lila",
+     "foto": {
+      "sp": "Collybia nuda",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/6351610/{s}.jpeg",
+      "autor": "Francesco Cecere",
+      "licencia": "CC0",
+      "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "pagina": "https://www.inaturalist.org/observations/5154924",
+      "origen": "iNaturalist",
+      "ar": 1.3333
+     },
+     "puntos": [
+      {
+       "x": 50,
+       "y": 42,
+       "parte": "himenio",
+       "titulo": "Láminas lila",
+       "texto": "Violeta-lila, apretadas, pegadas al pie.",
+       "d": "arriba-der"
+      },
+      {
+       "x": 30,
+       "y": 50,
+       "parte": "pie",
+       "titulo": "Pie violáceo y fibroso",
+       "texto": "Corto, robusto, sin anillo ni restos de telilla.",
+       "d": "izq"
+      }
+     ],
+     "ojo": "Hay Cortinarius violetas venenosos muy parecidos. Diferencia: esta NO tiene telilla (cortina) bajo el sombrero y su esporada es blanca-rosada; la de Cortinarius es marrón-óxido. Haz la esporada antes de comerla y cocínala siempre."
+    },
+    {
+     "titulo": "En grupo, con el sombrero que palidece",
+     "foto": {
+      "sp": "Collybia nuda",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/173638578/{s}.jpeg",
+      "autor": "Alan Rockefeller",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/103710064",
+      "origen": "iNaturalist",
+      "ar": 1.7778
+     },
+     "puntos": [
+      {
+       "x": 62,
+       "y": 15,
+       "parte": "sombrero",
+       "titulo": "Sombrero lila a beige",
+       "texto": "Lila de joven, se va decolorando a beige-rosado.",
+       "d": "der"
+      },
+      {
+       "x": 33,
+       "y": 46,
+       "parte": "himenio",
+       "titulo": "Láminas violetas",
+       "texto": "Más intensas que el sombrero.",
+       "d": "izq"
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "armillaria-mellea",
@@ -13376,7 +13631,71 @@
      }
     ]
    },
-   "anotadas": []
+   "anotadas": [
+    {
+     "titulo": "Racimo escalonado sobre un tronco",
+     "foto": {
+      "sp": "Pleurotus ostreatus",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/34047609/{s}.jpg",
+      "autor": "Katja Schulz",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/21968122",
+      "origen": "iNaturalist",
+      "ar": 0.75
+     },
+     "puntos": [
+      {
+       "x": 60,
+       "y": 25,
+       "parte": "sombrero",
+       "titulo": "Sombreros en abanico",
+       "texto": "Blancos a gris-pardos, como ostras, montados unos sobre otros.",
+       "d": "der"
+      },
+      {
+       "x": 20,
+       "y": 60,
+       "parte": "habitat",
+       "titulo": "Sobre madera",
+       "texto": "Pegados a troncos de árboles de hoja ancha, a menudo muertos.",
+       "d": "izq"
+      }
+     ],
+     "ojo": "En la madera también salen setas tóxicas en grupo (como Omphalotus, naranja). La seta de ostra es blanca-gris, sin anillo, y huele suave a anís o almendra."
+    },
+    {
+     "titulo": "Por debajo: láminas que bajan hasta la madera",
+     "foto": {
+      "sp": "Pleurotus ostreatus",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/171608407/{s}.jpg",
+      "autor": "Annie Weissman",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/102633129",
+      "origen": "iNaturalist",
+      "ar": 1.3333
+     },
+     "puntos": [
+      {
+       "x": 58,
+       "y": 40,
+       "parte": "himenio",
+       "titulo": "Láminas decurrentes",
+       "texto": "Blancas o crema; bajan por el pie, que es corto y lateral.",
+       "d": "arriba-der"
+      },
+      {
+       "x": 44,
+       "y": 68,
+       "parte": "pie",
+       "titulo": "Pie corto lateral",
+       "texto": "Casi sin pie, unido de lado a la madera.",
+       "d": "abajo-izq"
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "russula-cyanoxantha",
@@ -13646,7 +13965,63 @@
      }
     ]
    },
-   "anotadas": []
+   "anotadas": [
+    {
+     "titulo": "Sombrero violáceo",
+     "foto": {
+      "sp": "Russula cyanoxantha",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/170412950/{s}.jpeg",
+      "autor": "Carminda Santos",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/101994561",
+      "origen": "iNaturalist",
+      "ar": 1.3333
+     },
+     "puntos": [
+      {
+       "x": 70,
+       "y": 75,
+       "parte": "sombrero",
+       "titulo": "Violeta, verde o gris",
+       "texto": "Color muy variable; aquí lila. Nunca rojo.",
+       "d": "der"
+      }
+     ],
+     "ojo": "Hay muchas rúsulas y algunas pican y sientan mal. Esta se reconoce por las láminas: al pasar el dedo se doblan como goma en lugar de romperse."
+    },
+    {
+     "titulo": "Láminas blancas y flexibles",
+     "foto": {
+      "sp": "Russula cyanoxantha",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/170413425/{s}.jpeg",
+      "autor": "Carminda Santos",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/101994561",
+      "origen": "iNaturalist",
+      "ar": 1.3333
+     },
+     "puntos": [
+      {
+       "x": 55,
+       "y": 75,
+       "parte": "himenio",
+       "titulo": "Láminas que no se rompen",
+       "texto": "Blancas, grasientas al tacto y flexibles: es la clave.",
+       "d": "izq"
+      },
+      {
+       "x": 70,
+       "y": 25,
+       "parte": "pie",
+       "titulo": "Pie blanco",
+       "texto": "Blanco puro, sin anillo.",
+       "d": "der"
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "craterellus-tubaeformis",

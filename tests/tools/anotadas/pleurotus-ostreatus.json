@@ -1,0 +1,67 @@
+[
+ {
+  "_cand": "0.1",
+  "titulo": "Racimo escalonado sobre un tronco",
+  "foto": {
+   "sp": "Pleurotus ostreatus",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/34047609/{s}.jpg",
+   "autor": "Katja Schulz",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/21968122",
+   "origen": "iNaturalist",
+   "ar": 0.75
+  },
+  "puntos": [
+   {
+    "x": 60,
+    "y": 25,
+    "parte": "sombrero",
+    "titulo": "Sombreros en abanico",
+    "texto": "Blancos a gris-pardos, como ostras, montados unos sobre otros.",
+    "d": "der"
+   },
+   {
+    "x": 20,
+    "y": 60,
+    "parte": "habitat",
+    "titulo": "Sobre madera",
+    "texto": "Pegados a troncos de árboles de hoja ancha, a menudo muertos.",
+    "d": "izq"
+   }
+  ],
+  "ojo": "En la madera también salen setas tóxicas en grupo (como Omphalotus, naranja). La seta de ostra es blanca-gris, sin anillo, y huele suave a anís o almendra."
+ },
+ {
+  "_cand": "6.1",
+  "titulo": "Por debajo: láminas que bajan hasta la madera",
+  "foto": {
+   "sp": "Pleurotus ostreatus",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/171608407/{s}.jpg",
+   "autor": "Annie Weissman",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/102633129",
+   "origen": "iNaturalist",
+   "ar": 1.3333
+  },
+  "puntos": [
+   {
+    "x": 58,
+    "y": 40,
+    "parte": "himenio",
+    "titulo": "Láminas decurrentes",
+    "texto": "Blancas o crema; bajan por el pie, que es corto y lateral.",
+    "d": "arriba-der"
+   },
+   {
+    "x": 44,
+    "y": 68,
+    "parte": "pie",
+    "titulo": "Pie corto lateral",
+    "texto": "Casi sin pie, unido de lado a la madera.",
+    "d": "abajo-izq"
+   }
+  ]
+ }
+]

@@ -1,0 +1,67 @@
+[
+ {
+  "_cand": "1.3",
+  "titulo": "Por debajo: láminas y pie AMARILLOS",
+  "foto": {
+   "sp": "Amanita caesarea",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/237320486/{s}.jpeg",
+   "autor": "Ferenc Molnár",
+   "licencia": "CC0",
+   "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+   "pagina": "https://www.inaturalist.org/observations/138815145",
+   "origen": "iNaturalist",
+   "ar": 0.75
+  },
+  "puntos": [
+   {
+    "x": 30,
+    "y": 60,
+    "parte": "himenio",
+    "titulo": "Láminas amarillas",
+    "texto": "Apretadas, amarillas; en la cicuta y la blanca son blancas.",
+    "d": "arriba-izq"
+   },
+   {
+    "x": 58,
+    "y": 52,
+    "parte": "anillo",
+    "titulo": "Anillo amarillo",
+    "texto": "Colgante y amarillento.",
+    "d": "der"
+   }
+  ],
+  "ojo": "De joven, cerrada como un huevo, es igual por fuera que una cicuta verde joven (mortal). Nunca cojas huevos sin abrir. Y si las láminas son blancas o el sombrero tiene verrugas blancas, es otra Amanita."
+ },
+ {
+  "_cand": "1.4",
+  "titulo": "La volva: un huevo blanco",
+  "foto": {
+   "sp": "Amanita caesarea",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/237320522/{s}.jpeg",
+   "autor": "Ferenc Molnár",
+   "licencia": "CC0",
+   "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+   "pagina": "https://www.inaturalist.org/observations/138815145",
+   "origen": "iNaturalist",
+   "ar": 0.75
+  },
+  "puntos": [
+   {
+    "x": 30,
+    "y": 60,
+    "parte": "volva",
+    "titulo": "Volva blanca en copa",
+    "texto": "Saco blanco y grueso que envuelve la base.",
+    "d": "izq"
+   },
+   {
+    "x": 55,
+    "y": 50,
+    "parte": "sombrero",
+    "titulo": "El huevo abierto",
+    "texto": "Dentro asoma el sombrero naranja. Ábrelo solo para identificar, no para comer.",
+    "d": "arriba-der"
+   }
+  ]
+ }
+]

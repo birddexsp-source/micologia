@@ -1,0 +1,67 @@
+[
+ {
+  "_cand": "4.1",
+  "titulo": "Jóvenes: cilindros blancos con escamas",
+  "foto": {
+   "sp": "Coprinus comatus",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/164366213/{s}.jpeg",
+   "autor": "Tom Norton",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/98687583",
+   "origen": "iNaturalist",
+   "ar": 0.75
+  },
+  "puntos": [
+   {
+    "x": 30,
+    "y": 30,
+    "parte": "sombrero",
+    "titulo": "Escamas lanosas",
+    "texto": "Sombrero blanco, alargado, cubierto de escamas que se levantan.",
+    "d": "der"
+   },
+   {
+    "x": 42,
+    "y": 70,
+    "parte": "sombrero",
+    "titulo": "Ejemplar joven",
+    "texto": "Cerrado y blanco por completo: es el momento de recogerlo.",
+    "d": "izq"
+   }
+  ],
+  "ojo": "Solo se aprovechan jóvenes y totalmente blancos, y hay que cocinarlos el mismo día porque se deshacen. No la confundas con la Coprinopsis atramentaria (gris, lisa), que es tóxica con alcohol."
+ },
+ {
+  "_cand": "4.0",
+  "titulo": "Más viejo: el borde se vuelve tinta",
+  "foto": {
+   "sp": "Coprinus comatus",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/164366209/{s}.jpeg",
+   "autor": "Tom Norton",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/98687583",
+   "origen": "iNaturalist",
+   "ar": 0.75
+  },
+  "puntos": [
+   {
+    "x": 23,
+    "y": 53,
+    "parte": "himenio",
+    "titulo": "Borde negro que gotea",
+    "texto": "Las láminas pasan de blanco a rosa y negro, y se licúan. Así ya no sirve.",
+    "d": "izq"
+   },
+   {
+    "x": 48,
+    "y": 70,
+    "parte": "anillo",
+    "titulo": "Anillo suelto",
+    "texto": "Anillo fino que se mueve, a menudo caído abajo.",
+    "d": "der"
+   }
+  ]
+ }
+]

@@ -1,0 +1,59 @@
+[
+ {
+  "_cand": "2.0",
+  "titulo": "Sombrero violáceo",
+  "foto": {
+   "sp": "Russula cyanoxantha",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/170412950/{s}.jpeg",
+   "autor": "Carminda Santos",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/101994561",
+   "origen": "iNaturalist",
+   "ar": 1.3333
+  },
+  "puntos": [
+   {
+    "x": 70,
+    "y": 75,
+    "parte": "sombrero",
+    "titulo": "Violeta, verde o gris",
+    "texto": "Color muy variable; aquí lila. Nunca rojo.",
+    "d": "der"
+   }
+  ],
+  "ojo": "Hay muchas rúsulas y algunas pican y sientan mal. Esta se reconoce por las láminas: al pasar el dedo se doblan como goma en lugar de romperse."
+ },
+ {
+  "_cand": "2.2",
+  "titulo": "Láminas blancas y flexibles",
+  "foto": {
+   "sp": "Russula cyanoxantha",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/170413425/{s}.jpeg",
+   "autor": "Carminda Santos",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/101994561",
+   "origen": "iNaturalist",
+   "ar": 1.3333
+  },
+  "puntos": [
+   {
+    "x": 55,
+    "y": 75,
+    "parte": "himenio",
+    "titulo": "Láminas que no se rompen",
+    "texto": "Blancas, grasientas al tacto y flexibles: es la clave.",
+    "d": "izq"
+   },
+   {
+    "x": 70,
+    "y": 25,
+    "parte": "pie",
+    "titulo": "Pie blanco",
+    "texto": "Blanco puro, sin anillo.",
+    "d": "der"
+   }
+  ]
+ }
+]

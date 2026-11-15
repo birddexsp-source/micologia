@@ -1,0 +1,67 @@
+[
+ {
+  "_cand": "1.0",
+  "titulo": "Poros rojos bajo el sombrero",
+  "foto": {
+   "sp": "Neoboletus erythropus",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/567628326/{s}.jpg",
+   "autor": "Denis A",
+   "licencia": "CC0",
+   "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+   "pagina": "https://www.inaturalist.org/observations/314273811",
+   "origen": "iNaturalist",
+   "ar": 0.7529
+  },
+  "puntos": [
+   {
+    "x": 42,
+    "y": 42,
+    "parte": "himenio",
+    "titulo": "Poros rojo-anaranjados",
+    "texto": "La cara de abajo del sombrero es roja.",
+    "d": "izq"
+   },
+   {
+    "x": 57,
+    "y": 65,
+    "parte": "pie",
+    "titulo": "Pie amarillento con tonos rojos",
+    "texto": "Con puntitos rojos o con redecilla, según la especie.",
+    "d": "der"
+   }
+  ],
+  "ojo": "Poros rojos o naranjas = no se recoge si no lo confirma alguien que sepa. Hay especies muy parecidas tóxicas (como el boleto de Satanás)."
+ },
+ {
+  "_cand": "0.2",
+  "titulo": "Al tocarlos, azul al instante",
+  "foto": {
+   "sp": "Neoboletus erythropus",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/682246242/{s}.jpg",
+   "autor": "Patrick Le Mao",
+   "licencia": "CC0",
+   "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+   "pagina": "https://www.inaturalist.org/observations/373324756",
+   "origen": "iNaturalist",
+   "ar": 1.7747
+  },
+  "puntos": [
+   {
+    "x": 38,
+    "y": 22,
+    "parte": "himenio",
+    "titulo": "Se pone azul",
+    "texto": "Donde se toca o se corta, el color pasa a azul oscuro en segundos.",
+    "d": "arriba"
+   },
+   {
+    "x": 65,
+    "y": 70,
+    "parte": "himenio",
+    "titulo": "Poros naranjas",
+    "texto": "La capa de poros es naranja-roja.",
+    "d": "der"
+   }
+  ]
+ }
+]
