@@ -5210,31 +5210,31 @@
     {
      "titulo": "Láminas que bajan por el pie",
      "foto": {
-      "sp": "Clitocybe sp. 'rivulosa-PNW07'",
-      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/592098354/{s}.jpg",
-      "autor": "Alex Reitan",
+      "sp": "Collybia rivulosa",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/236994929/{s}.jpg",
+      "autor": "Георгий Виноградов (Georgy Vinogradov)",
       "licencia": "CC BY 4.0",
       "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
-      "pagina": "https://www.inaturalist.org/observations/326879276",
+      "pagina": "https://www.inaturalist.org/observations/138636354",
       "origen": "iNaturalist",
-      "ar": 0.75
+      "ar": 1.3961
      },
      "puntos": [
       {
-       "x": 35,
-       "y": 40,
+       "x": 60,
+       "y": 60,
        "parte": "himenio",
-       "titulo": "Láminas apretadas y decurrentes",
-       "texto": "Blanquecinas, juntas, y bajan por el pie.",
-       "d": "arriba-der"
+       "titulo": "Láminas apretadas",
+       "texto": "Crema, juntas, y bajan un poco por el pie.",
+       "d": "der"
       },
       {
-       "x": 75,
-       "y": 58,
-       "parte": "sombrero",
-       "titulo": "Sombrero blanquecino",
-       "texto": "Pequeño, aplanado o en embudo, con tonos crema o rosados.",
-       "d": "der"
+       "x": 38,
+       "y": 30,
+       "parte": "pie",
+       "titulo": "Pie corto",
+       "texto": "Blanquecino, sin anillo.",
+       "d": "arriba-izq"
       }
      ],
      "ojo": "Sale en los mismos prados y corros que la senderuela (Marasmius oreades) y es tóxica (muscarina). La senderuela tiene láminas SEPARADAS que no bajan por el pie y un pie duro y flexible."
@@ -5242,31 +5242,23 @@
     {
      "titulo": "En grupo, entre la hierba",
      "foto": {
-      "sp": "Clitocybe sp. 'rivulosa-PNW07'",
-      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/593007839/{s}.jpg",
-      "autor": "Leanne Stacy Reitan",
-      "licencia": "CC0",
-      "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
-      "pagina": "https://www.inaturalist.org/observations/327334583",
+      "sp": "Collybia rivulosa",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/246230330/{s}.jpg",
+      "autor": "Kristian Bosak",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/143564018",
       "origen": "iNaturalist",
-      "ar": 0.665
+      "ar": 1.3333
      },
      "puntos": [
       {
-       "x": 75,
-       "y": 25,
+       "x": 30,
+       "y": 30,
        "parte": "sombrero",
        "titulo": "Blanco harinoso",
-       "texto": "Superficie blanca como enharinada.",
-       "d": "der"
-      },
-      {
-       "x": 50,
-       "y": 70,
-       "parte": "pie",
-       "titulo": "Pie corto blanco",
-       "texto": "Fino, sin anillo.",
-       "d": "izq"
+       "texto": "Superficie blanca como enharinada, a veces con zonas rosadas.",
+       "d": "arriba"
       }
      ]
     }
@@ -5867,29 +5859,29 @@
    "familia": "Boletaceae",
    "anotadas": [
     {
-     "titulo": "Entero: sombrero pardo y pie panzudo con redecilla",
+     "titulo": "Entero: sombrero pardo y pie con redecilla",
      "foto": {
-      "sp": "Boletus edulis grandedulis",
-      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/233282091/{s}.jpg",
-      "autor": "Alan Rockefeller",
-      "licencia": "CC BY 4.0",
-      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
-      "pagina": "https://www.inaturalist.org/observations/136662465",
+      "sp": "Boletus edulis",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/438308629/{s}.jpeg",
+      "autor": "Jean-Paul Boerekamps",
+      "licencia": "CC0",
+      "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "pagina": "https://www.inaturalist.org/observations/245608179",
       "origen": "iNaturalist",
-      "ar": 1.3421
+      "ar": 0.75
      },
      "puntos": [
       {
-       "x": 55,
-       "y": 25,
+       "x": 45,
+       "y": 15,
        "parte": "sombrero",
        "titulo": "Sombrero pardo, como pan tostado",
        "texto": "Liso o algo arrugado; con humedad, algo pegajoso.",
        "d": "arriba"
       },
       {
-       "x": 37,
-       "y": 50,
+       "x": 12,
+       "y": 32,
        "parte": "sombrero",
        "titulo": "Borde más claro",
        "texto": "A menudo con un ribete blanquecino.",
@@ -5897,10 +5889,10 @@
       },
       {
        "x": 55,
-       "y": 68,
+       "y": 62,
        "parte": "pie",
        "titulo": "Redecilla blanca",
-       "texto": "Red fina y clara, sobre todo en la parte alta del pie.",
+       "texto": "Red fina y clara sobre el pie, sobre todo arriba.",
        "d": "der"
       }
      ],
@@ -6320,24 +6312,32 @@
      "ojo": "Si debajo ves láminas finas y afiladas (como hojas de papel) o sale en racimos sobre madera, no es un rebozuelo."
     },
     {
-     "titulo": "Cortado por la mitad",
+     "titulo": "De lado: los pliegues bajan hasta el pie",
      "foto": {
-      "sp": "Cantharellus roseocanus",
-      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/48923586/{s}.jpg",
-      "autor": "Andrew W. Wilson",
-      "licencia": "CC0",
-      "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
-      "pagina": "https://www.inaturalist.org/observations/31262001",
+      "sp": "Cantharellus cibarius",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/242562739/{s}.jpeg",
+      "autor": "Ewa Olchanowska",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/141569251",
       "origen": "iNaturalist",
       "ar": 0.75
      },
      "puntos": [
       {
+       "x": 48,
+       "y": 46,
+       "parte": "himenio",
+       "titulo": "Pliegues que bajan",
+       "texto": "Arrugas romas y ramificadas que llegan al pie, sin borde marcado.",
+       "d": "der"
+      },
+      {
        "x": 30,
-       "y": 55,
-       "parte": "carne",
-       "titulo": "Carne blanca y maciza",
-       "texto": "Firme, blanca o amarillenta; huele a albaricoque.",
+       "y": 70,
+       "parte": "pie",
+       "titulo": "Pie macizo",
+       "texto": "Del mismo color, se estrecha hacia la base.",
        "d": "izq"
       }
      ]
