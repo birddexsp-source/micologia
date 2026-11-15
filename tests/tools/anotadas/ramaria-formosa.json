@@ -1,0 +1,75 @@
+[
+ {
+  "_cand": 0,
+  "titulo": "Coral salmón con puntas amarillas",
+  "foto": {
+   "sp": "Ramaria formosa",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Ramaria_formosa_-_Dreifarbige_Koralle.jpg/{w}px-Ramaria_formosa_-_Dreifarbige_Koralle.jpg",
+   "autor": "Ra'ike",
+   "licencia": "CC BY-SA 3.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+   "pagina": "https://commons.wikimedia.org/wiki/File:Ramaria_formosa_-_Dreifarbige_Koralle.jpg",
+   "origen": "Wikimedia Commons",
+   "ar": 0.7202
+  },
+  "puntos": [
+   {
+    "x": 45,
+    "y": 16,
+    "parte": "sombrero",
+    "titulo": "Puntas amarillas",
+    "texto": "Las puntas de las ramas son amarillo limón.",
+    "d": "arriba"
+   },
+   {
+    "x": 50,
+    "y": 42,
+    "parte": "sombrero",
+    "titulo": "Ramas rosa-salmón",
+    "texto": "Muchas ramas finas desde una base gruesa.",
+    "d": "der"
+   },
+   {
+    "x": 30,
+    "y": 62,
+    "parte": "carne",
+    "titulo": "Se mancha de vino",
+    "texto": "Al rozarla vira a color vino o negruzco.",
+    "d": "izq"
+   }
+  ],
+  "ojo": "Tóxica (purgante fuerte). Hay muchas Ramaria parecidas y algunas también lo son: los corales del suelo no se recogen sin experto. Distinta de la Calocera (gomosa, pequeña y sobre madera)."
+ },
+ {
+  "_cand": 1,
+  "titulo": "Base blanca y gruesa",
+  "foto": {
+   "sp": "Ramaria formosa",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Ramaria_formosa_Alan_Rockefeller.JPG/{w}px-Ramaria_formosa_Alan_Rockefeller.JPG",
+   "autor": "Alan Rockefeller",
+   "licencia": "CC BY-SA 3.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+   "pagina": "https://commons.wikimedia.org/wiki/File:Ramaria_formosa_Alan_Rockefeller.JPG",
+   "origen": "Wikimedia Commons",
+   "ar": 1.5
+  },
+  "puntos": [
+   {
+    "x": 50,
+    "y": 62,
+    "parte": "pie",
+    "titulo": "Tronco blanco",
+    "texto": "Base maciza blanca de la que salen las ramas.",
+    "d": "abajo"
+   },
+   {
+    "x": 30,
+    "y": 25,
+    "parte": "sombrero",
+    "titulo": "Ramificación densa",
+    "texto": "Como una coliflor o un coral, hasta 30 cm.",
+    "d": "izq"
+   }
+  ]
+ }
+]

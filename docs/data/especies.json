@@ -25097,7 +25097,79 @@
      }
     ]
    },
-   "anotadas": []
+   "anotadas": [
+    {
+     "titulo": "Láminas blancas y bulbo con volva",
+     "foto": {
+      "sp": "Amanita junquillea",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/391013573/{s}.jpg",
+      "autor": "Markus Lampinen",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/220823678",
+      "origen": "iNaturalist",
+      "ar": 0.75
+     },
+     "puntos": [
+      {
+       "x": 35,
+       "y": 36,
+       "parte": "himenio",
+       "titulo": "Láminas blancas",
+       "texto": "Libres, blancas: señal de Amanita.",
+       "d": "arriba-izq"
+      },
+      {
+       "x": 55,
+       "y": 75,
+       "parte": "volva",
+       "titulo": "Bulbo con volva",
+       "texto": "Bulbo redondo con un borde de volva pegado, como un calcetín.",
+       "d": "der"
+      },
+      {
+       "x": 48,
+       "y": 55,
+       "parte": "pie",
+       "titulo": "Pie blanco",
+       "texto": "El anillo, si lo tiene, es frágil y desaparece pronto.",
+       "d": "der"
+      }
+     ],
+     "ojo": "Tóxica. Es una Amanita: láminas blancas + bulbo con volva = no se recoge nunca. La amarilla-verdosa sin verrugas puede ser la oronja verde (A. phalloides), mortal. En iNaturalist figura como Amanita junquillea (mismo hongo)."
+    },
+    {
+     "titulo": "Sombrero amarillo pálido con placas",
+     "foto": {
+      "sp": "Amanita junquillea",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/599249926/{s}.jpg",
+      "autor": "Simon Colenutt",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/330464289",
+      "origen": "iNaturalist",
+      "ar": 0.75
+     },
+     "puntos": [
+      {
+       "x": 66,
+       "y": 50,
+       "parte": "cutis",
+       "titulo": "Restos blancos",
+       "texto": "Placas o verrugas blancas que la lluvia puede quitar.",
+       "d": "arriba-der"
+      },
+      {
+       "x": 50,
+       "y": 82,
+       "parte": "sombrero",
+       "titulo": "Borde con rayitas",
+       "texto": "Margen estriado; color de crema a amarillo yema.",
+       "d": "abajo"
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "hygrocybe-coccinea",
@@ -28267,7 +28339,71 @@
      }
     ]
    },
-   "anotadas": []
+   "anotadas": [
+    {
+     "titulo": "Poros blancos y pie castaña",
+     "foto": {
+      "sp": "Gyroporus castaneus",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/430776841/{s}.jpeg",
+      "autor": "bogsuckers",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/241689551",
+      "origen": "iNaturalist",
+      "ar": 1.0417
+     },
+     "puntos": [
+      {
+       "x": 35,
+       "y": 25,
+       "parte": "himenio",
+       "titulo": "Poros blancos",
+       "texto": "Blancos, finos; amarillean un poco con la edad. No azulean.",
+       "d": "arriba-izq"
+      },
+      {
+       "x": 55,
+       "y": 60,
+       "parte": "pie",
+       "titulo": "Pie color castaña",
+       "texto": "Del color del sombrero, liso, sin red.",
+       "d": "der"
+      }
+     ],
+     "ojo": "Es raro que un boleto tenga los poros blancos: también los tiene el Tylopilus felleus de joven (amargo, con red oscura en el pie). Algunos autores lo consideran indigesto; no merece la pena."
+    },
+    {
+     "titulo": "El pie cortado: lleno de huecos",
+     "foto": {
+      "sp": "Gyroporus castaneus",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/570613487/{s}.jpg",
+      "autor": "Oksana Sintia",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/315833241",
+      "origen": "iNaturalist",
+      "ar": 1.7778
+     },
+     "puntos": [
+      {
+       "x": 31,
+       "y": 40,
+       "parte": "pie",
+       "titulo": "Cámaras por dentro",
+       "texto": "Al cortarlo a lo largo, el pie está hueco o con cavidades: lo distingue de casi todos los boletos.",
+       "d": "arriba"
+      },
+      {
+       "x": 50,
+       "y": 60,
+       "parte": "carne",
+       "titulo": "Carne blanca",
+       "texto": "Firme, blanca, no cambia de color al cortarla.",
+       "d": "der"
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "ramaria-formosa",
@@ -28456,7 +28592,79 @@
      }
     ]
    },
-   "anotadas": []
+   "anotadas": [
+    {
+     "titulo": "Coral salmón con puntas amarillas",
+     "foto": {
+      "sp": "Ramaria formosa",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Ramaria_formosa_-_Dreifarbige_Koralle.jpg/{w}px-Ramaria_formosa_-_Dreifarbige_Koralle.jpg",
+      "autor": "Ra'ike",
+      "licencia": "CC BY-SA 3.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "pagina": "https://commons.wikimedia.org/wiki/File:Ramaria_formosa_-_Dreifarbige_Koralle.jpg",
+      "origen": "Wikimedia Commons",
+      "ar": 0.7202
+     },
+     "puntos": [
+      {
+       "x": 45,
+       "y": 16,
+       "parte": "sombrero",
+       "titulo": "Puntas amarillas",
+       "texto": "Las puntas de las ramas son amarillo limón.",
+       "d": "arriba"
+      },
+      {
+       "x": 50,
+       "y": 42,
+       "parte": "sombrero",
+       "titulo": "Ramas rosa-salmón",
+       "texto": "Muchas ramas finas desde una base gruesa.",
+       "d": "der"
+      },
+      {
+       "x": 30,
+       "y": 62,
+       "parte": "carne",
+       "titulo": "Se mancha de vino",
+       "texto": "Al rozarla vira a color vino o negruzco.",
+       "d": "izq"
+      }
+     ],
+     "ojo": "Tóxica (purgante fuerte). Hay muchas Ramaria parecidas y algunas también lo son: los corales del suelo no se recogen sin experto. Distinta de la Calocera (gomosa, pequeña y sobre madera)."
+    },
+    {
+     "titulo": "Base blanca y gruesa",
+     "foto": {
+      "sp": "Ramaria formosa",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Ramaria_formosa_Alan_Rockefeller.JPG/{w}px-Ramaria_formosa_Alan_Rockefeller.JPG",
+      "autor": "Alan Rockefeller",
+      "licencia": "CC BY-SA 3.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "pagina": "https://commons.wikimedia.org/wiki/File:Ramaria_formosa_Alan_Rockefeller.JPG",
+      "origen": "Wikimedia Commons",
+      "ar": 1.5
+     },
+     "puntos": [
+      {
+       "x": 50,
+       "y": 62,
+       "parte": "pie",
+       "titulo": "Tronco blanco",
+       "texto": "Base maciza blanca de la que salen las ramas.",
+       "d": "abajo"
+      },
+      {
+       "x": 30,
+       "y": 25,
+       "parte": "sombrero",
+       "titulo": "Ramificación densa",
+       "texto": "Como una coliflor o un coral, hasta 30 cm.",
+       "d": "izq"
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "clavulina-cristata",
@@ -28614,7 +28822,71 @@
      }
     ]
    },
-   "anotadas": []
+   "anotadas": [
+    {
+     "titulo": "Coral blanco en el suelo",
+     "foto": {
+      "sp": "Clavulina coralloides",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/101742613/{s}.jpg",
+      "autor": "Katrin Simon",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/63401544",
+      "origen": "iNaturalist",
+      "ar": 1.3333
+     },
+     "puntos": [
+      {
+       "x": 45,
+       "y": 25,
+       "parte": "otro",
+       "titulo": "Puntas en cresta",
+       "texto": "Cada rama acaba en varias puntitas, como una cresta o un peine.",
+       "d": "arriba"
+      },
+      {
+       "x": 22,
+       "y": 62,
+       "parte": "sombrero",
+       "titulo": "Ramas blancas",
+       "texto": "Blanco-crema, frágiles; pocas ramas desde la base.",
+       "d": "izq"
+      },
+      {
+       "x": 80,
+       "y": 80,
+       "parte": "habitat",
+       "titulo": "Musgo y hojarasca",
+       "texto": "En el suelo de bosques, a menudo entre musgo.",
+       "d": "der"
+      }
+     ],
+     "ojo": "Comestible poco interesante. Hay otros corales blancos o crema (Ramaria, alguna purgante). En iNaturalist figura como Clavulina coralloides (mismo hongo)."
+    },
+    {
+     "titulo": "De cerca: puntas finas",
+     "foto": {
+      "sp": "Clavulina coralloides",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/448350712/{s}.jpeg",
+      "autor": "Jean-Paul Boerekamps",
+      "licencia": "CC0",
+      "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "pagina": "https://www.inaturalist.org/observations/250661985",
+      "origen": "iNaturalist",
+      "ar": 1.3333
+     },
+     "puntos": [
+      {
+       "x": 35,
+       "y": 15,
+       "parte": "otro",
+       "titulo": "Puntas afiladas",
+       "texto": "Muy finas, en grupos; con la edad se oscurecen.",
+       "d": "arriba"
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "leucoagaricus-leucothites",
@@ -28789,7 +29061,79 @@
      }
     ]
    },
-   "anotadas": []
+   "anotadas": [
+    {
+     "titulo": "Láminas BLANCAS y anillo",
+     "foto": {
+      "sp": "Leucocoprinus leucothites",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/53640374/{s}.jpg",
+      "autor": "Peter Gabler",
+      "licencia": "CC0",
+      "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "pagina": "https://www.inaturalist.org/observations/34108879",
+      "origen": "iNaturalist",
+      "ar": 0.75
+     },
+     "puntos": [
+      {
+       "x": 70,
+       "y": 55,
+       "parte": "himenio",
+       "titulo": "Láminas blancas",
+       "texto": "Blancas o crema, nunca rosas ni chocolate.",
+       "d": "der"
+      },
+      {
+       "x": 30,
+       "y": 38,
+       "parte": "anillo",
+       "titulo": "Anillo fino",
+       "texto": "Anillo blanco, a veces se mueve por el pie.",
+       "d": "izq"
+      }
+     ],
+     "ojo": "Tóxica (indigesta) y, sobre todo, peligrosa por parecido: seta blanca + láminas blancas + anillo es también lo que tienen las Amanitas blancas mortales (A. verna, A. virosa). El champiñón de prado tiene láminas rosas o chocolate. Ante una seta blanca con láminas blancas: no."
+    },
+    {
+     "titulo": "Base engrosada, sin volva",
+     "foto": {
+      "sp": "Leucocoprinus leucothites",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/438204617/{s}.jpeg",
+      "autor": "bogsuckers",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/245553360",
+      "origen": "iNaturalist",
+      "ar": 1.0364
+     },
+     "puntos": [
+      {
+       "x": 22,
+       "y": 25,
+       "parte": "sombrero",
+       "titulo": "Sombrero blanco liso",
+       "texto": "Blanco o algo grisáceo, seco, como de seda.",
+       "d": "arriba"
+      },
+      {
+       "x": 38,
+       "y": 48,
+       "parte": "anillo",
+       "titulo": "Anillo en el pie",
+       "texto": "Membranoso, a media altura.",
+       "d": "abajo"
+      },
+      {
+       "x": 90,
+       "y": 85,
+       "parte": "pie",
+       "titulo": "Base sin bolsa",
+       "texto": "Algo engrosada pero sin volva. Comprueba siempre la base sacando la seta entera.",
+       "d": "abajo-izq"
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "tricholoma-sulphureum",
@@ -28977,7 +29321,79 @@
      }
     ]
    },
-   "anotadas": []
+   "anotadas": [
+    {
+     "titulo": "Todo amarillo azufre",
+     "foto": {
+      "sp": "Tricholoma sulphureum",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/333766837/{s}.jpeg",
+      "autor": "Piermario Maculan",
+      "licencia": "CC0",
+      "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "pagina": "https://www.inaturalist.org/observations/190401344",
+      "origen": "iNaturalist",
+      "ar": 0.7529
+     },
+     "puntos": [
+      {
+       "x": 40,
+       "y": 40,
+       "parte": "himenio",
+       "titulo": "Láminas amarillas separadas",
+       "texto": "Gruesas y espaciadas, amarillo azufre.",
+       "d": "izq"
+      },
+      {
+       "x": 50,
+       "y": 70,
+       "parte": "pie",
+       "titulo": "Pie amarillo",
+       "texto": "Fibroso, sin anillo, del mismo color.",
+       "d": "der"
+      },
+      {
+       "x": 75,
+       "y": 25,
+       "parte": "sombrero",
+       "titulo": "Sombrero amarillo apagado",
+       "texto": "A veces con el centro algo pardo.",
+       "d": "arriba-der"
+      }
+     ],
+     "ojo": "Tóxica. Se reconoce por el olor fuerte a gas del alumbrado. Peligro de confusión con la seta de los caballeros (T. equestre), que huele a harina y tiene el sombrero más pardo (y que tampoco se recomienda comer)."
+    },
+    {
+     "titulo": "Debajo, todo amarillo",
+     "foto": {
+      "sp": "Tricholoma sulphureum",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/327966913/{s}.jpeg",
+      "autor": "Stephen James McWilliam",
+      "licencia": "CC0",
+      "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "pagina": "https://www.inaturalist.org/observations/187533398",
+      "origen": "iNaturalist",
+      "ar": 1.4993
+     },
+     "puntos": [
+      {
+       "x": 18,
+       "y": 42,
+       "parte": "himenio",
+       "titulo": "Láminas amarillo azufre",
+       "texto": "Escotadas cerca del pie.",
+       "d": "izq"
+      },
+      {
+       "x": 72,
+       "y": 40,
+       "parte": "olor",
+       "titulo": "Huele a gas",
+       "texto": "Huélela: olor fuerte y desagradable a gas o alquitrán.",
+       "d": "der"
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "entoloma-clypeatum",
@@ -29169,7 +29585,71 @@
      }
     ]
    },
-   "anotadas": []
+   "anotadas": [
+    {
+     "titulo": "Primavera, bajo frutales",
+     "foto": {
+      "sp": "Entoloma clypeatum",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/270414202/{s}.jpeg",
+      "autor": "Björn Sothmann",
+      "licencia": "CC BY-SA 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/156382573",
+      "origen": "iNaturalist",
+      "ar": 1.4993
+     },
+     "puntos": [
+      {
+       "x": 55,
+       "y": 25,
+       "parte": "himenio",
+       "titulo": "Láminas blancas → rosa",
+       "texto": "Separadas; con la edad toman tono rosado por las esporas.",
+       "d": "arriba"
+      },
+      {
+       "x": 52,
+       "y": 55,
+       "parte": "pie",
+       "titulo": "Pie blanquecino fibroso",
+       "texto": "Sin anillo, a menudo retorcido.",
+       "d": "der"
+      },
+      {
+       "x": 18,
+       "y": 55,
+       "parte": "sombrero",
+       "titulo": "Sombrero gris-pardo",
+       "texto": "Con mamelón y borde ondulado.",
+       "d": "izq"
+      }
+     ],
+     "ojo": "Comestible conocido en algunas zonas, pero es un Entoloma: hay varios muy tóxicos (E. sinuatum, en otoño). Sólo en primavera, bajo rosales, espinos o frutales, y con experto. Láminas rosadas al madurar."
+    },
+    {
+     "titulo": "Láminas rosadas",
+     "foto": {
+      "sp": "Entoloma clypeatum",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/515852074/{s}.jpg",
+      "autor": "narwa",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/286915902",
+      "origen": "iNaturalist",
+      "ar": 1.3333
+     },
+     "puntos": [
+      {
+       "x": 30,
+       "y": 30,
+       "parte": "himenio",
+       "titulo": "Rosa al madurar",
+       "texto": "Esporada rosa: lo que delata a los Entoloma.",
+       "d": "izq"
+      }
+     ]
+    }
+   ]
   }
  ]
 }

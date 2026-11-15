@@ -1,0 +1,67 @@
+[
+ {
+  "_cand": "0.0",
+  "titulo": "Primavera, bajo frutales",
+  "foto": {
+   "sp": "Entoloma clypeatum",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/270414202/{s}.jpeg",
+   "autor": "Björn Sothmann",
+   "licencia": "CC BY-SA 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/156382573",
+   "origen": "iNaturalist",
+   "ar": 1.4993
+  },
+  "puntos": [
+   {
+    "x": 55,
+    "y": 25,
+    "parte": "himenio",
+    "titulo": "Láminas blancas → rosa",
+    "texto": "Separadas; con la edad toman tono rosado por las esporas.",
+    "d": "arriba"
+   },
+   {
+    "x": 52,
+    "y": 55,
+    "parte": "pie",
+    "titulo": "Pie blanquecino fibroso",
+    "texto": "Sin anillo, a menudo retorcido.",
+    "d": "der"
+   },
+   {
+    "x": 18,
+    "y": 55,
+    "parte": "sombrero",
+    "titulo": "Sombrero gris-pardo",
+    "texto": "Con mamelón y borde ondulado.",
+    "d": "izq"
+   }
+  ],
+  "ojo": "Comestible conocido en algunas zonas, pero es un Entoloma: hay varios muy tóxicos (E. sinuatum, en otoño). Sólo en primavera, bajo rosales, espinos o frutales, y con experto. Láminas rosadas al madurar."
+ },
+ {
+  "_cand": "2.2",
+  "titulo": "Láminas rosadas",
+  "foto": {
+   "sp": "Entoloma clypeatum",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/515852074/{s}.jpg",
+   "autor": "narwa",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/286915902",
+   "origen": "iNaturalist",
+   "ar": 1.3333
+  },
+  "puntos": [
+   {
+    "x": 30,
+    "y": 30,
+    "parte": "himenio",
+    "titulo": "Rosa al madurar",
+    "texto": "Esporada rosa: lo que delata a los Entoloma.",
+    "d": "izq"
+   }
+  ]
+ }
+]

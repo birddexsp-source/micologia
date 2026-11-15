@@ -1,0 +1,75 @@
+[
+ {
+  "_cand": "0.1",
+  "titulo": "Láminas blancas y bulbo con volva",
+  "foto": {
+   "sp": "Amanita junquillea",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/391013573/{s}.jpg",
+   "autor": "Markus Lampinen",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/220823678",
+   "origen": "iNaturalist",
+   "ar": 0.75
+  },
+  "puntos": [
+   {
+    "x": 35,
+    "y": 36,
+    "parte": "himenio",
+    "titulo": "Láminas blancas",
+    "texto": "Libres, blancas: señal de Amanita.",
+    "d": "arriba-izq"
+   },
+   {
+    "x": 55,
+    "y": 75,
+    "parte": "volva",
+    "titulo": "Bulbo con volva",
+    "texto": "Bulbo redondo con un borde de volva pegado, como un calcetín.",
+    "d": "der"
+   },
+   {
+    "x": 48,
+    "y": 55,
+    "parte": "pie",
+    "titulo": "Pie blanco",
+    "texto": "El anillo, si lo tiene, es frágil y desaparece pronto.",
+    "d": "der"
+   }
+  ],
+  "ojo": "Tóxica. Es una Amanita: láminas blancas + bulbo con volva = no se recoge nunca. La amarilla-verdosa sin verrugas puede ser la oronja verde (A. phalloides), mortal. En iNaturalist figura como Amanita junquillea (mismo hongo)."
+ },
+ {
+  "_cand": "1.1",
+  "titulo": "Sombrero amarillo pálido con placas",
+  "foto": {
+   "sp": "Amanita junquillea",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/599249926/{s}.jpg",
+   "autor": "Simon Colenutt",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/330464289",
+   "origen": "iNaturalist",
+   "ar": 0.75
+  },
+  "puntos": [
+   {
+    "x": 66,
+    "y": 50,
+    "parte": "cutis",
+    "titulo": "Restos blancos",
+    "texto": "Placas o verrugas blancas que la lluvia puede quitar.",
+    "d": "arriba-der"
+   },
+   {
+    "x": 50,
+    "y": 82,
+    "parte": "sombrero",
+    "titulo": "Borde con rayitas",
+    "texto": "Margen estriado; color de crema a amarillo yema.",
+    "d": "abajo"
+   }
+  ]
+ }
+]

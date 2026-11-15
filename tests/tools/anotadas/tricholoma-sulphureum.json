@@ -1,0 +1,75 @@
+[
+ {
+  "_cand": "2.0",
+  "titulo": "Todo amarillo azufre",
+  "foto": {
+   "sp": "Tricholoma sulphureum",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/333766837/{s}.jpeg",
+   "autor": "Piermario Maculan",
+   "licencia": "CC0",
+   "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+   "pagina": "https://www.inaturalist.org/observations/190401344",
+   "origen": "iNaturalist",
+   "ar": 0.7529
+  },
+  "puntos": [
+   {
+    "x": 40,
+    "y": 40,
+    "parte": "himenio",
+    "titulo": "Láminas amarillas separadas",
+    "texto": "Gruesas y espaciadas, amarillo azufre.",
+    "d": "izq"
+   },
+   {
+    "x": 50,
+    "y": 70,
+    "parte": "pie",
+    "titulo": "Pie amarillo",
+    "texto": "Fibroso, sin anillo, del mismo color.",
+    "d": "der"
+   },
+   {
+    "x": 75,
+    "y": 25,
+    "parte": "sombrero",
+    "titulo": "Sombrero amarillo apagado",
+    "texto": "A veces con el centro algo pardo.",
+    "d": "arriba-der"
+   }
+  ],
+  "ojo": "Tóxica. Se reconoce por el olor fuerte a gas del alumbrado. Peligro de confusión con la seta de los caballeros (T. equestre), que huele a harina y tiene el sombrero más pardo (y que tampoco se recomienda comer)."
+ },
+ {
+  "_cand": "3.2",
+  "titulo": "Debajo, todo amarillo",
+  "foto": {
+   "sp": "Tricholoma sulphureum",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/327966913/{s}.jpeg",
+   "autor": "Stephen James McWilliam",
+   "licencia": "CC0",
+   "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+   "pagina": "https://www.inaturalist.org/observations/187533398",
+   "origen": "iNaturalist",
+   "ar": 1.4993
+  },
+  "puntos": [
+   {
+    "x": 18,
+    "y": 42,
+    "parte": "himenio",
+    "titulo": "Láminas amarillo azufre",
+    "texto": "Escotadas cerca del pie.",
+    "d": "izq"
+   },
+   {
+    "x": 72,
+    "y": 40,
+    "parte": "olor",
+    "titulo": "Huele a gas",
+    "texto": "Huélela: olor fuerte y desagradable a gas o alquitrán.",
+    "d": "der"
+   }
+  ]
+ }
+]

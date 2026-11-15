@@ -1,0 +1,67 @@
+[
+ {
+  "_cand": "6.0",
+  "titulo": "Poros blancos y pie castaña",
+  "foto": {
+   "sp": "Gyroporus castaneus",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/430776841/{s}.jpeg",
+   "autor": "bogsuckers",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/241689551",
+   "origen": "iNaturalist",
+   "ar": 1.0417
+  },
+  "puntos": [
+   {
+    "x": 35,
+    "y": 25,
+    "parte": "himenio",
+    "titulo": "Poros blancos",
+    "texto": "Blancos, finos; amarillean un poco con la edad. No azulean.",
+    "d": "arriba-izq"
+   },
+   {
+    "x": 55,
+    "y": 60,
+    "parte": "pie",
+    "titulo": "Pie color castaña",
+    "texto": "Del color del sombrero, liso, sin red.",
+    "d": "der"
+   }
+  ],
+  "ojo": "Es raro que un boleto tenga los poros blancos: también los tiene el Tylopilus felleus de joven (amargo, con red oscura en el pie). Algunos autores lo consideran indigesto; no merece la pena."
+ },
+ {
+  "_cand": "4.3",
+  "titulo": "El pie cortado: lleno de huecos",
+  "foto": {
+   "sp": "Gyroporus castaneus",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/570613487/{s}.jpg",
+   "autor": "Oksana Sintia",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/315833241",
+   "origen": "iNaturalist",
+   "ar": 1.7778
+  },
+  "puntos": [
+   {
+    "x": 31,
+    "y": 40,
+    "parte": "pie",
+    "titulo": "Cámaras por dentro",
+    "texto": "Al cortarlo a lo largo, el pie está hueco o con cavidades: lo distingue de casi todos los boletos.",
+    "d": "arriba"
+   },
+   {
+    "x": 50,
+    "y": 60,
+    "parte": "carne",
+    "titulo": "Carne blanca",
+    "texto": "Firme, blanca, no cambia de color al cortarla.",
+    "d": "der"
+   }
+  ]
+ }
+]

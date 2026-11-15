@@ -1,0 +1,67 @@
+[
+ {
+  "_cand": "0.0",
+  "titulo": "Coral blanco en el suelo",
+  "foto": {
+   "sp": "Clavulina coralloides",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/101742613/{s}.jpg",
+   "autor": "Katrin Simon",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/63401544",
+   "origen": "iNaturalist",
+   "ar": 1.3333
+  },
+  "puntos": [
+   {
+    "x": 45,
+    "y": 25,
+    "parte": "otro",
+    "titulo": "Puntas en cresta",
+    "texto": "Cada rama acaba en varias puntitas, como una cresta o un peine.",
+    "d": "arriba"
+   },
+   {
+    "x": 22,
+    "y": 62,
+    "parte": "sombrero",
+    "titulo": "Ramas blancas",
+    "texto": "Blanco-crema, frágiles; pocas ramas desde la base.",
+    "d": "izq"
+   },
+   {
+    "x": 80,
+    "y": 80,
+    "parte": "habitat",
+    "titulo": "Musgo y hojarasca",
+    "texto": "En el suelo de bosques, a menudo entre musgo.",
+    "d": "der"
+   }
+  ],
+  "ojo": "Comestible poco interesante. Hay otros corales blancos o crema (Ramaria, alguna purgante). En iNaturalist figura como Clavulina coralloides (mismo hongo)."
+ },
+ {
+  "_cand": "6.0",
+  "titulo": "De cerca: puntas finas",
+  "foto": {
+   "sp": "Clavulina coralloides",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/448350712/{s}.jpeg",
+   "autor": "Jean-Paul Boerekamps",
+   "licencia": "CC0",
+   "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+   "pagina": "https://www.inaturalist.org/observations/250661985",
+   "origen": "iNaturalist",
+   "ar": 1.3333
+  },
+  "puntos": [
+   {
+    "x": 35,
+    "y": 15,
+    "parte": "otro",
+    "titulo": "Puntas afiladas",
+    "texto": "Muy finas, en grupos; con la edad se oscurecen.",
+    "d": "arriba"
+   }
+  ]
+ }
+]
