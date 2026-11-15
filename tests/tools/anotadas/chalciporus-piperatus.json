@@ -1,0 +1,67 @@
+[
+ {
+  "_cand": "4.2",
+  "titulo": "Boleto pequeño y anaranjado",
+  "foto": {
+   "sp": "Chalciporus piperatus",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/736151007/{s}.jpg",
+   "autor": "ikelman",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/401098763",
+   "origen": "iNaturalist",
+   "ar": 0.9004
+  },
+  "puntos": [
+   {
+    "x": 45,
+    "y": 25,
+    "parte": "sombrero",
+    "titulo": "Sombrero pardo-anaranjado",
+    "texto": "Pequeño, algo viscoso en húmedo.",
+    "d": "arriba"
+   },
+   {
+    "x": 50,
+    "y": 55,
+    "parte": "pie",
+    "titulo": "Pie fino del mismo color",
+    "texto": "Delgado para ser un boleto.",
+    "d": "der"
+   },
+   {
+    "x": 45,
+    "y": 80,
+    "parte": "pie",
+    "titulo": "Base amarillo limón",
+    "texto": "Micelio amarillo intenso en la base: muy característico.",
+    "d": "abajo"
+   }
+  ],
+  "ojo": "No se come: sabe muy picante, como la pimienta. No confundir con boletos de poros rojos y pie grueso (algunos tóxicos): este es pequeño, de pie fino y con la base amarillo limón."
+ },
+ {
+  "_cand": "4.1",
+  "titulo": "Poros color cobre",
+  "foto": {
+   "sp": "Chalciporus piperatus",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/736150979/{s}.jpg",
+   "autor": "ikelman",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/401098763",
+   "origen": "iNaturalist",
+   "ar": 0.8564
+  },
+  "puntos": [
+   {
+    "x": 55,
+    "y": 75,
+    "parte": "himenio",
+    "titulo": "Poros rojizo-canela",
+    "texto": "Grandes y angulosos, del color del óxido; no azulean.",
+    "d": "abajo"
+   }
+  ]
+ }
+]

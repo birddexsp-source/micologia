@@ -1,0 +1,75 @@
+[
+ {
+  "_cand": "2.0",
+  "titulo": "Grande y naranja en tocones",
+  "foto": {
+   "sp": "Gymnopilus junonius",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/603484663/{s}.jpg",
+   "autor": "zebedeugalinha",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/332522662",
+   "origen": "iNaturalist",
+   "ar": 1.3333
+  },
+  "puntos": [
+   {
+    "x": 25,
+    "y": 25,
+    "parte": "sombrero",
+    "titulo": "Naranja dorado y seco",
+    "texto": "Grande (hasta 30 cm), fibroso o con escamitas finas.",
+    "d": "arriba-izq"
+   },
+   {
+    "x": 75,
+    "y": 20,
+    "parte": "habitat",
+    "titulo": "Al pie de un tocón",
+    "texto": "En racimos sobre madera de frondosas o coníferas.",
+    "d": "arriba-der"
+   }
+  ],
+  "ojo": "Tóxica (alucinógena en algunas zonas) y muy amarga. No confundir con la armillaria ni con la seta de olivo (Omphalotus, láminas naranjas sin anillo y muy tóxica)."
+ },
+ {
+  "_cand": "1.2",
+  "titulo": "Debajo: láminas óxido y anillo",
+  "foto": {
+   "sp": "Gymnopilus junonius",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/406937465/{s}.jpeg",
+   "autor": "relew",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/229263743",
+   "origen": "iNaturalist",
+   "ar": 1.3333
+  },
+  "puntos": [
+   {
+    "x": 28,
+    "y": 15,
+    "parte": "himenio",
+    "titulo": "Láminas amarillas → óxido",
+    "texto": "Se manchan de color herrumbre con las esporas.",
+    "d": "arriba"
+   },
+   {
+    "x": 46,
+    "y": 37,
+    "parte": "anillo",
+    "titulo": "Anillo manchado",
+    "texto": "Frágil, teñido de polvo óxido.",
+    "d": "izq"
+   },
+   {
+    "x": 50,
+    "y": 70,
+    "parte": "pie",
+    "titulo": "Pie grueso fibroso",
+    "texto": "Amarillo, ensanchado en medio.",
+    "d": "der"
+   }
+  ]
+ }
+]

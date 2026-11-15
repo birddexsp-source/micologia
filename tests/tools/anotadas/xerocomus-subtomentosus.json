@@ -1,0 +1,75 @@
+[
+ {
+  "_cand": "5.0",
+  "titulo": "Sombrero de terciopelo",
+  "foto": {
+   "sp": "Xerocomus subtomentosus",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/413194363/{s}.jpeg",
+   "autor": "ikelman",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/232565768",
+   "origen": "iNaturalist",
+   "ar": 1.2457
+  },
+  "puntos": [
+   {
+    "x": 45,
+    "y": 35,
+    "parte": "sombrero",
+    "titulo": "Aterciopelado, oliva-pardo",
+    "texto": "Seco y suave como gamuza; con la edad se agrieta.",
+    "d": "arriba"
+   },
+   {
+    "x": 45,
+    "y": 90,
+    "parte": "pie",
+    "titulo": "Pie sin anillo",
+    "texto": "Pálido, algo estriado, sin red.",
+    "d": "abajo"
+   }
+  ],
+  "ojo": "Comestible mediocre. Revisa que los poros no sean rojos ni naranjas y que el pie no tenga red roja (boletos tóxicos). Puede confundirse con otros Xerocomus parecidos, ninguno peligroso."
+ },
+ {
+  "_cand": "5.1",
+  "titulo": "Poros amarillo vivo y grandes",
+  "foto": {
+   "sp": "Xerocomus subtomentosus",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/413194388/{s}.jpeg",
+   "autor": "ikelman",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/232565768",
+   "origen": "iNaturalist",
+   "ar": 0.7942
+  },
+  "puntos": [
+   {
+    "x": 50,
+    "y": 25,
+    "parte": "himenio",
+    "titulo": "Poros grandes y angulosos",
+    "texto": "Amarillo dorado; se ven a simple vista.",
+    "d": "arriba"
+   },
+   {
+    "x": 78,
+    "y": 60,
+    "parte": "himenio",
+    "titulo": "Pueden azulear",
+    "texto": "Al apretar, se manchan algo de azul-verde.",
+    "d": "der"
+   },
+   {
+    "x": 30,
+    "y": 65,
+    "parte": "pie",
+    "titulo": "Pie estriado",
+    "texto": "Con costillas o líneas pardas, sin red.",
+    "d": "izq"
+   }
+  ]
+ }
+]

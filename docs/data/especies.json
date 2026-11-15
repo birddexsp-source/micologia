@@ -26837,7 +26837,79 @@
      }
     ]
    },
-   "anotadas": []
+   "anotadas": [
+    {
+     "titulo": "Grande y naranja en tocones",
+     "foto": {
+      "sp": "Gymnopilus junonius",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/603484663/{s}.jpg",
+      "autor": "zebedeugalinha",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/332522662",
+      "origen": "iNaturalist",
+      "ar": 1.3333
+     },
+     "puntos": [
+      {
+       "x": 25,
+       "y": 25,
+       "parte": "sombrero",
+       "titulo": "Naranja dorado y seco",
+       "texto": "Grande (hasta 30 cm), fibroso o con escamitas finas.",
+       "d": "arriba-izq"
+      },
+      {
+       "x": 75,
+       "y": 20,
+       "parte": "habitat",
+       "titulo": "Al pie de un tocón",
+       "texto": "En racimos sobre madera de frondosas o coníferas.",
+       "d": "arriba-der"
+      }
+     ],
+     "ojo": "Tóxica (alucinógena en algunas zonas) y muy amarga. No confundir con la armillaria ni con la seta de olivo (Omphalotus, láminas naranjas sin anillo y muy tóxica)."
+    },
+    {
+     "titulo": "Debajo: láminas óxido y anillo",
+     "foto": {
+      "sp": "Gymnopilus junonius",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/406937465/{s}.jpeg",
+      "autor": "relew",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/229263743",
+      "origen": "iNaturalist",
+      "ar": 1.3333
+     },
+     "puntos": [
+      {
+       "x": 28,
+       "y": 15,
+       "parte": "himenio",
+       "titulo": "Láminas amarillas → óxido",
+       "texto": "Se manchan de color herrumbre con las esporas.",
+       "d": "arriba"
+      },
+      {
+       "x": 46,
+       "y": 37,
+       "parte": "anillo",
+       "titulo": "Anillo manchado",
+       "texto": "Frágil, teñido de polvo óxido.",
+       "d": "izq"
+      },
+      {
+       "x": 50,
+       "y": 70,
+       "parte": "pie",
+       "titulo": "Pie grueso fibroso",
+       "texto": "Amarillo, ensanchado en medio.",
+       "d": "der"
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "ganoderma-applanatum",
@@ -26969,7 +27041,79 @@
     ],
     "fuentes": []
    },
-   "anotadas": []
+   "anotadas": [
+    {
+     "titulo": "Repisa dura en el tronco",
+     "foto": {
+      "sp": "Ganoderma applanatum",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/450087918/{s}.jpeg",
+      "autor": "Arto Määttä",
+      "licencia": "CC0",
+      "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "pagina": "https://www.inaturalist.org/observations/251533541",
+      "origen": "iNaturalist",
+      "ar": 1.0
+     },
+     "puntos": [
+      {
+       "x": 45,
+       "y": 30,
+       "parte": "sombrero",
+       "titulo": "Arriba, pardo y con zonas",
+       "texto": "Duro, con bandas concéntricas; a menudo cubierto de polvo marrón (esporas).",
+       "d": "arriba"
+      },
+      {
+       "x": 50,
+       "y": 72,
+       "parte": "sombrero",
+       "titulo": "Crece por capas",
+       "texto": "Vive varios años: el borde es grueso y redondeado.",
+       "d": "abajo"
+      },
+      {
+       "x": 15,
+       "y": 30,
+       "parte": "habitat",
+       "titulo": "Base de troncos",
+       "texto": "Árboles vivos o muertos, sobre todo hayas.",
+       "d": "izq"
+      }
+     ],
+     "ojo": "No se come: es leñoso como la madera. Útil para reconocer: sale años seguidos en el mismo árbol y le pudre la madera."
+    },
+    {
+     "titulo": "Debajo: blanco que se raya",
+     "foto": {
+      "sp": "Ganoderma applanatum",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/640099858/{s}.jpg",
+      "autor": "Heiko Weber",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/350795656",
+      "origen": "iNaturalist",
+      "ar": 0.4619
+     },
+     "puntos": [
+      {
+       "x": 45,
+       "y": 45,
+       "parte": "himenio",
+       "titulo": "Superficie blanca de poros",
+       "texto": "Poros finísimos: no se ven sin lupa.",
+       "d": "izq"
+      },
+      {
+       "x": 62,
+       "y": 52,
+       "parte": "himenio",
+       "titulo": "Se mancha al rozar",
+       "texto": "Si lo rayas con una ramita, queda marcado en marrón (por eso se llama «hongo del artista»).",
+       "d": "der"
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "calocera-viscosa",
@@ -27143,7 +27287,71 @@
      }
     ]
    },
-   "anotadas": []
+   "anotadas": [
+    {
+     "titulo": "Coral amarillo y gelatinoso",
+     "foto": {
+      "sp": "Calocera viscosa",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/339929224/{s}.jpg",
+      "autor": "Viktor",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/193508101",
+      "origen": "iNaturalist",
+      "ar": 1.3281
+     },
+     "puntos": [
+      {
+       "x": 45,
+       "y": 20,
+       "parte": "sombrero",
+       "titulo": "Ramitas en horquilla",
+       "texto": "Puntas que se bifurcan, amarillo-naranja brillante.",
+       "d": "arriba"
+      },
+      {
+       "x": 40,
+       "y": 55,
+       "parte": "carne",
+       "titulo": "Gomosa y viscosa",
+       "texto": "Elástica al tacto, como una gominola dura.",
+       "d": "izq"
+      },
+      {
+       "x": 80,
+       "y": 35,
+       "parte": "habitat",
+       "titulo": "Tocón de pino",
+       "texto": "Siempre sobre madera muerta de coníferas, aunque esté enterrada.",
+       "d": "der"
+      }
+     ],
+     "ojo": "No se come (dura y sin sabor). No confundir con las Ramaria amarillas (crecen en el suelo, carne frágil, algunas purgantes): esta sale de madera de pino y es gomosa."
+    },
+    {
+     "titulo": "Base más pálida",
+     "foto": {
+      "sp": "Calocera viscosa",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/147329331/{s}.jpeg",
+      "autor": "Jacek Pietruszewski",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/89230208",
+      "origen": "iNaturalist",
+      "ar": 0.75
+     },
+     "puntos": [
+      {
+       "x": 55,
+       "y": 72,
+       "parte": "pie",
+       "titulo": "Base que se hunde en la madera",
+       "texto": "Más pálida y con una «raíz» que entra en la madera.",
+       "d": "abajo"
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "tremella-mesenterica",
@@ -27307,7 +27515,63 @@
      }
     ]
    },
-   "anotadas": []
+   "anotadas": [
+    {
+     "titulo": "Gelatina amarilla en una rama",
+     "foto": {
+      "sp": "Tremella mesenterica",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/354574137/{s}.jpeg",
+      "autor": "sharoncooper",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/200918224",
+      "origen": "iNaturalist",
+      "ar": 1.001
+     },
+     "puntos": [
+      {
+       "x": 50,
+       "y": 35,
+       "parte": "sombrero",
+       "titulo": "Lóbulos como un cerebro",
+       "texto": "Amarillo limón, blanda y brillante cuando está mojada.",
+       "d": "arriba-der"
+      },
+      {
+       "x": 75,
+       "y": 60,
+       "parte": "habitat",
+       "titulo": "Rama muerta",
+       "texto": "Ramas caídas de frondosas, sobre todo en invierno.",
+       "d": "der"
+      }
+     ],
+     "ojo": "No se come. Hay otras gelatinas parecidas (Dacrymyces, más pequeña y naranja); ninguna es peligrosa, pero tampoco interesan."
+    },
+    {
+     "titulo": "Rompe la corteza",
+     "foto": {
+      "sp": "Tremella mesenterica",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/355665539/{s}.jpeg",
+      "autor": "Dr. Alan Inman",
+      "licencia": "CC0",
+      "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "pagina": "https://www.inaturalist.org/observations/201477778",
+      "origen": "iNaturalist",
+      "ar": 1.3333
+     },
+     "puntos": [
+      {
+       "x": 55,
+       "y": 50,
+       "parte": "otro",
+       "titulo": "Sale de las grietas",
+       "texto": "Brota por la corteza rota; en seco se encoge y se pone dura y naranja.",
+       "d": "abajo"
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "xerocomus-subtomentosus",
@@ -27507,7 +27771,79 @@
      }
     ]
    },
-   "anotadas": []
+   "anotadas": [
+    {
+     "titulo": "Sombrero de terciopelo",
+     "foto": {
+      "sp": "Xerocomus subtomentosus",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/413194363/{s}.jpeg",
+      "autor": "ikelman",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/232565768",
+      "origen": "iNaturalist",
+      "ar": 1.2457
+     },
+     "puntos": [
+      {
+       "x": 45,
+       "y": 35,
+       "parte": "sombrero",
+       "titulo": "Aterciopelado, oliva-pardo",
+       "texto": "Seco y suave como gamuza; con la edad se agrieta.",
+       "d": "arriba"
+      },
+      {
+       "x": 45,
+       "y": 90,
+       "parte": "pie",
+       "titulo": "Pie sin anillo",
+       "texto": "Pálido, algo estriado, sin red.",
+       "d": "abajo"
+      }
+     ],
+     "ojo": "Comestible mediocre. Revisa que los poros no sean rojos ni naranjas y que el pie no tenga red roja (boletos tóxicos). Puede confundirse con otros Xerocomus parecidos, ninguno peligroso."
+    },
+    {
+     "titulo": "Poros amarillo vivo y grandes",
+     "foto": {
+      "sp": "Xerocomus subtomentosus",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/413194388/{s}.jpeg",
+      "autor": "ikelman",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/232565768",
+      "origen": "iNaturalist",
+      "ar": 0.7942
+     },
+     "puntos": [
+      {
+       "x": 50,
+       "y": 25,
+       "parte": "himenio",
+       "titulo": "Poros grandes y angulosos",
+       "texto": "Amarillo dorado; se ven a simple vista.",
+       "d": "arriba"
+      },
+      {
+       "x": 78,
+       "y": 60,
+       "parte": "himenio",
+       "titulo": "Pueden azulear",
+       "texto": "Al apretar, se manchan algo de azul-verde.",
+       "d": "der"
+      },
+      {
+       "x": 30,
+       "y": 65,
+       "parte": "pie",
+       "titulo": "Pie estriado",
+       "texto": "Con costillas o líneas pardas, sin red.",
+       "d": "izq"
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "chalciporus-piperatus",
@@ -27685,7 +28021,71 @@
      }
     ]
    },
-   "anotadas": []
+   "anotadas": [
+    {
+     "titulo": "Boleto pequeño y anaranjado",
+     "foto": {
+      "sp": "Chalciporus piperatus",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/736151007/{s}.jpg",
+      "autor": "ikelman",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/401098763",
+      "origen": "iNaturalist",
+      "ar": 0.9004
+     },
+     "puntos": [
+      {
+       "x": 45,
+       "y": 25,
+       "parte": "sombrero",
+       "titulo": "Sombrero pardo-anaranjado",
+       "texto": "Pequeño, algo viscoso en húmedo.",
+       "d": "arriba"
+      },
+      {
+       "x": 50,
+       "y": 55,
+       "parte": "pie",
+       "titulo": "Pie fino del mismo color",
+       "texto": "Delgado para ser un boleto.",
+       "d": "der"
+      },
+      {
+       "x": 45,
+       "y": 80,
+       "parte": "pie",
+       "titulo": "Base amarillo limón",
+       "texto": "Micelio amarillo intenso en la base: muy característico.",
+       "d": "abajo"
+      }
+     ],
+     "ojo": "No se come: sabe muy picante, como la pimienta. No confundir con boletos de poros rojos y pie grueso (algunos tóxicos): este es pequeño, de pie fino y con la base amarillo limón."
+    },
+    {
+     "titulo": "Poros color cobre",
+     "foto": {
+      "sp": "Chalciporus piperatus",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/736150979/{s}.jpg",
+      "autor": "ikelman",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/401098763",
+      "origen": "iNaturalist",
+      "ar": 0.8564
+     },
+     "puntos": [
+      {
+       "x": 55,
+       "y": 75,
+       "parte": "himenio",
+       "titulo": "Poros rojizo-canela",
+       "texto": "Grandes y angulosos, del color del óxido; no azulean.",
+       "d": "abajo"
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "gyroporus-castaneus",

@@ -1,0 +1,75 @@
+[
+ {
+  "_cand": "0.1",
+  "titulo": "Repisa dura en el tronco",
+  "foto": {
+   "sp": "Ganoderma applanatum",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/450087918/{s}.jpeg",
+   "autor": "Arto Määttä",
+   "licencia": "CC0",
+   "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+   "pagina": "https://www.inaturalist.org/observations/251533541",
+   "origen": "iNaturalist",
+   "ar": 1.0
+  },
+  "puntos": [
+   {
+    "x": 45,
+    "y": 30,
+    "parte": "sombrero",
+    "titulo": "Arriba, pardo y con zonas",
+    "texto": "Duro, con bandas concéntricas; a menudo cubierto de polvo marrón (esporas).",
+    "d": "arriba"
+   },
+   {
+    "x": 50,
+    "y": 72,
+    "parte": "sombrero",
+    "titulo": "Crece por capas",
+    "texto": "Vive varios años: el borde es grueso y redondeado.",
+    "d": "abajo"
+   },
+   {
+    "x": 15,
+    "y": 30,
+    "parte": "habitat",
+    "titulo": "Base de troncos",
+    "texto": "Árboles vivos o muertos, sobre todo hayas.",
+    "d": "izq"
+   }
+  ],
+  "ojo": "No se come: es leñoso como la madera. Útil para reconocer: sale años seguidos en el mismo árbol y le pudre la madera."
+ },
+ {
+  "_cand": "2.1",
+  "titulo": "Debajo: blanco que se raya",
+  "foto": {
+   "sp": "Ganoderma applanatum",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/640099858/{s}.jpg",
+   "autor": "Heiko Weber",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/350795656",
+   "origen": "iNaturalist",
+   "ar": 0.4619
+  },
+  "puntos": [
+   {
+    "x": 45,
+    "y": 45,
+    "parte": "himenio",
+    "titulo": "Superficie blanca de poros",
+    "texto": "Poros finísimos: no se ven sin lupa.",
+    "d": "izq"
+   },
+   {
+    "x": 62,
+    "y": 52,
+    "parte": "himenio",
+    "titulo": "Se mancha al rozar",
+    "texto": "Si lo rayas con una ramita, queda marcado en marrón (por eso se llama «hongo del artista»).",
+    "d": "der"
+   }
+  ]
+ }
+]

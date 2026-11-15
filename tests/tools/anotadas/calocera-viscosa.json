@@ -1,0 +1,67 @@
+[
+ {
+  "_cand": "2.4",
+  "titulo": "Coral amarillo y gelatinoso",
+  "foto": {
+   "sp": "Calocera viscosa",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/339929224/{s}.jpg",
+   "autor": "Viktor",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/193508101",
+   "origen": "iNaturalist",
+   "ar": 1.3281
+  },
+  "puntos": [
+   {
+    "x": 45,
+    "y": 20,
+    "parte": "sombrero",
+    "titulo": "Ramitas en horquilla",
+    "texto": "Puntas que se bifurcan, amarillo-naranja brillante.",
+    "d": "arriba"
+   },
+   {
+    "x": 40,
+    "y": 55,
+    "parte": "carne",
+    "titulo": "Gomosa y viscosa",
+    "texto": "Elástica al tacto, como una gominola dura.",
+    "d": "izq"
+   },
+   {
+    "x": 80,
+    "y": 35,
+    "parte": "habitat",
+    "titulo": "Tocón de pino",
+    "texto": "Siempre sobre madera muerta de coníferas, aunque esté enterrada.",
+    "d": "der"
+   }
+  ],
+  "ojo": "No se come (dura y sin sabor). No confundir con las Ramaria amarillas (crecen en el suelo, carne frágil, algunas purgantes): esta sale de madera de pino y es gomosa."
+ },
+ {
+  "_cand": "6.0",
+  "titulo": "Base más pálida",
+  "foto": {
+   "sp": "Calocera viscosa",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/147329331/{s}.jpeg",
+   "autor": "Jacek Pietruszewski",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/89230208",
+   "origen": "iNaturalist",
+   "ar": 0.75
+  },
+  "puntos": [
+   {
+    "x": 55,
+    "y": 72,
+    "parte": "pie",
+    "titulo": "Base que se hunde en la madera",
+    "texto": "Más pálida y con una «raíz» que entra en la madera.",
+    "d": "abajo"
+   }
+  ]
+ }
+]
