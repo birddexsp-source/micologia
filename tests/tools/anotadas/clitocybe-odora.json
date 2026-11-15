@@ -1,0 +1,35 @@
+[
+ {
+  "_cand": "3.1",
+  "titulo": "Toda azul-verdosa y huele a anís",
+  "foto": {
+   "sp": "Collybia odora",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/165647647/{s}.jpeg",
+   "autor": "My-Lan Le",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/99377085",
+   "origen": "iNaturalist",
+   "ar": 0.75
+  },
+  "puntos": [
+   {
+    "x": 45,
+    "y": 55,
+    "parte": "himenio",
+    "titulo": "Láminas azuladas",
+    "texto": "Crema o verde-azuladas, bajan un poco por el pie.",
+    "d": "arriba-izq"
+   },
+   {
+    "x": 70,
+    "y": 75,
+    "parte": "pie",
+    "titulo": "Pie sin anillo",
+    "texto": "Del color del sombrero, liso.",
+    "d": "der"
+   }
+  ],
+  "ojo": "El color no basta: la estrofaria verde (Stropharia aeruginosa) también es azul-verdosa, pero tiene anillo y láminas que se oscurecen. Huele siempre: esta huele fuerte a anís."
+ }
+]

@@ -1,0 +1,59 @@
+[
+ {
+  "_cand": "6.0",
+  "titulo": "Pequeña, gris y escamosa",
+  "foto": {
+   "sp": "Tricholoma terreum",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/60350688/{s}.jpeg",
+   "autor": "Matt Berger",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/38012485",
+   "origen": "iNaturalist",
+   "ar": 0.75
+  },
+  "puntos": [
+   {
+    "x": 55,
+    "y": 45,
+    "parte": "sombrero",
+    "titulo": "Escamitas grises",
+    "texto": "Sombrero gris oscuro, como de fieltro.",
+    "d": "arriba"
+   },
+   {
+    "x": 48,
+    "y": 70,
+    "parte": "pie",
+    "titulo": "Pie blanco sin anillo",
+    "texto": "Frágil y fino.",
+    "d": "der"
+   }
+  ],
+  "ojo": "Se parece al Tricholoma pardinum (tóxico), que es más grande y robusto, con escamas en círculos, y que suele salir con hayas o abetos. Y a otros Tricholoma grises: no es para empezar."
+ },
+ {
+  "_cand": "6.2",
+  "titulo": "Por debajo: láminas gris claro",
+  "foto": {
+   "sp": "Tricholoma terreum",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/60350804/{s}.jpeg",
+   "autor": "Matt Berger",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/38012485",
+   "origen": "iNaturalist",
+   "ar": 0.75
+  },
+  "puntos": [
+   {
+    "x": 70,
+    "y": 70,
+    "parte": "himenio",
+    "titulo": "Láminas blanquecinas",
+    "texto": "Gris claro, con muesca junto al pie.",
+    "d": "der"
+   }
+  ]
+ }
+]

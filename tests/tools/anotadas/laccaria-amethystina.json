@@ -1,0 +1,59 @@
+[
+ {
+  "_cand": "3.0",
+  "titulo": "Violeta de arriba abajo",
+  "foto": {
+   "sp": "Laccaria amethystina",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/167761041/{s}.jpeg",
+   "autor": "eightpictures",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/100509406",
+   "origen": "iNaturalist",
+   "ar": 1.3333
+  },
+  "puntos": [
+   {
+    "x": 38,
+    "y": 38,
+    "parte": "himenio",
+    "titulo": "Láminas violetas y separadas",
+    "texto": "Gruesas y espaciadas, del color del sombrero.",
+    "d": "arriba"
+   },
+   {
+    "x": 45,
+    "y": 70,
+    "parte": "pie",
+    "titulo": "Pie fibroso",
+    "texto": "Fino, violeta, con fibras a lo largo.",
+    "d": "der"
+   }
+  ],
+  "ojo": "Se reconoce por el color, pero al secarse palidece a lila-blanquecino. Hay Cortinarius violetas tóxicos: esta es pequeña, con láminas separadas y SIN telilla bajo el sombrero."
+ },
+ {
+  "_cand": "2.1",
+  "titulo": "Sombrero violeta mate",
+  "foto": {
+   "sp": "Laccaria amethystina",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/443478022/{s}.jpeg",
+   "autor": "Carlos Muñoz-Amezcua",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/248223500",
+   "origen": "iNaturalist",
+   "ar": 1.3333
+  },
+  "puntos": [
+   {
+    "x": 60,
+    "y": 40,
+    "parte": "sombrero",
+    "titulo": "Sombrero violeta",
+    "texto": "Pequeño, mate; palidece al secarse.",
+    "d": "arriba"
+   }
+  ]
+ }
+]

@@ -1,0 +1,43 @@
+[
+ {
+  "_cand": "3.2",
+  "titulo": "Pie blanco con tono amarillo",
+  "foto": {
+   "sp": "Tricholoma portentosum",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/750530238/{s}.jpg",
+   "autor": "Alex Reitan",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/408311635",
+   "origen": "iNaturalist",
+   "ar": 0.75
+  },
+  "puntos": [
+   {
+    "x": 45,
+    "y": 40,
+    "parte": "sombrero",
+    "titulo": "Fibras radiales oscuras",
+    "texto": "Gris con fibras negruzcas que salen del centro.",
+    "d": "arriba-izq"
+   },
+   {
+    "x": 60,
+    "y": 75,
+    "parte": "pie",
+    "titulo": "Pie blanco-amarillo",
+    "texto": "Macizo; con tono amarillo limón.",
+    "d": "der"
+   },
+   {
+    "x": 62,
+    "y": 49,
+    "parte": "himenio",
+    "titulo": "Láminas blancas-amarillentas",
+    "texto": "Apretadas, con muesca junto al pie.",
+    "d": "der"
+   }
+  ],
+  "ojo": "Hay Tricholoma grises tóxicos muy parecidos (como T. pardinum). Comprueba el tono amarillo en pie y láminas y el olor a harina; ante la duda, no."
+ }
+]

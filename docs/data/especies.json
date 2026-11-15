@@ -19994,7 +19994,40 @@
      }
     ]
    },
-   "anotadas": []
+   "anotadas": [
+    {
+     "titulo": "Toda azul-verdosa y huele a anís",
+     "foto": {
+      "sp": "Collybia odora",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/165647647/{s}.jpeg",
+      "autor": "My-Lan Le",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/99377085",
+      "origen": "iNaturalist",
+      "ar": 0.75
+     },
+     "puntos": [
+      {
+       "x": 45,
+       "y": 55,
+       "parte": "himenio",
+       "titulo": "Láminas azuladas",
+       "texto": "Crema o verde-azuladas, bajan un poco por el pie.",
+       "d": "arriba-izq"
+      },
+      {
+       "x": 70,
+       "y": 75,
+       "parte": "pie",
+       "titulo": "Pie sin anillo",
+       "texto": "Del color del sombrero, liso.",
+       "d": "der"
+      }
+     ],
+     "ojo": "El color no basta: la estrofaria verde (Stropharia aeruginosa) también es azul-verdosa, pero tiene anillo y láminas que se oscurecen. Huele siempre: esta huele fuerte a anís."
+    }
+   ]
   },
   {
    "id": "laccaria-amethystina",
@@ -20201,7 +20234,63 @@
      }
     ]
    },
-   "anotadas": []
+   "anotadas": [
+    {
+     "titulo": "Violeta de arriba abajo",
+     "foto": {
+      "sp": "Laccaria amethystina",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/167761041/{s}.jpeg",
+      "autor": "eightpictures",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/100509406",
+      "origen": "iNaturalist",
+      "ar": 1.3333
+     },
+     "puntos": [
+      {
+       "x": 38,
+       "y": 38,
+       "parte": "himenio",
+       "titulo": "Láminas violetas y separadas",
+       "texto": "Gruesas y espaciadas, del color del sombrero.",
+       "d": "arriba"
+      },
+      {
+       "x": 45,
+       "y": 70,
+       "parte": "pie",
+       "titulo": "Pie fibroso",
+       "texto": "Fino, violeta, con fibras a lo largo.",
+       "d": "der"
+      }
+     ],
+     "ojo": "Se reconoce por el color, pero al secarse palidece a lila-blanquecino. Hay Cortinarius violetas tóxicos: esta es pequeña, con láminas separadas y SIN telilla bajo el sombrero."
+    },
+    {
+     "titulo": "Sombrero violeta mate",
+     "foto": {
+      "sp": "Laccaria amethystina",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/443478022/{s}.jpeg",
+      "autor": "Carlos Muñoz-Amezcua",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/248223500",
+      "origen": "iNaturalist",
+      "ar": 1.3333
+     },
+     "puntos": [
+      {
+       "x": 60,
+       "y": 40,
+       "parte": "sombrero",
+       "titulo": "Sombrero violeta",
+       "texto": "Pequeño, mate; palidece al secarse.",
+       "d": "arriba"
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "hygrophorus-marzuolus",
@@ -20381,7 +20470,63 @@
      }
     ]
    },
-   "anotadas": []
+   "anotadas": [
+    {
+     "titulo": "Junto a la nieve, bajo abetos",
+     "foto": {
+      "sp": "Hygrophorus marzuolus",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/102372027/{s}.jpeg",
+      "autor": "Alan Rockefeller",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/63752560",
+      "origen": "iNaturalist",
+      "ar": 1.2564
+     },
+     "puntos": [
+      {
+       "x": 72,
+       "y": 40,
+       "parte": "sombrero",
+       "titulo": "Sombrero gris oscuro",
+       "texto": "Liso, algo viscoso, con el borde más oscuro.",
+       "d": "der"
+      },
+      {
+       "x": 45,
+       "y": 52,
+       "parte": "pie",
+       "titulo": "Pie blanco y grueso",
+       "texto": "Blanquecino, a veces gris arriba.",
+       "d": "abajo"
+      }
+     ],
+     "ojo": "Es de montaña alta; en la costa de Bizkaia es raro verla. Se parece a otras setas grises de pie blanco: comprueba las láminas separadas y gruesas."
+    },
+    {
+     "titulo": "Láminas gruesas y separadas",
+     "foto": {
+      "sp": "Hygrophorus marzuolus",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/102372021/{s}.jpeg",
+      "autor": "Alan Rockefeller",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/63752560",
+      "origen": "iNaturalist",
+      "ar": 1.4862
+     },
+     "puntos": [
+      {
+       "x": 30,
+       "y": 60,
+       "parte": "himenio",
+       "titulo": "Láminas espaciadas",
+       "texto": "Gruesas, blancas de joven y luego gris-azuladas.",
+       "d": "izq"
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "tricholoma-portentosum",
@@ -20587,7 +20732,48 @@
      }
     ]
    },
-   "anotadas": []
+   "anotadas": [
+    {
+     "titulo": "Pie blanco con tono amarillo",
+     "foto": {
+      "sp": "Tricholoma portentosum",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/750530238/{s}.jpg",
+      "autor": "Alex Reitan",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/408311635",
+      "origen": "iNaturalist",
+      "ar": 0.75
+     },
+     "puntos": [
+      {
+       "x": 45,
+       "y": 40,
+       "parte": "sombrero",
+       "titulo": "Fibras radiales oscuras",
+       "texto": "Gris con fibras negruzcas que salen del centro.",
+       "d": "arriba-izq"
+      },
+      {
+       "x": 60,
+       "y": 75,
+       "parte": "pie",
+       "titulo": "Pie blanco-amarillo",
+       "texto": "Macizo; con tono amarillo limón.",
+       "d": "der"
+      },
+      {
+       "x": 62,
+       "y": 49,
+       "parte": "himenio",
+       "titulo": "Láminas blancas-amarillentas",
+       "texto": "Apretadas, con muesca junto al pie.",
+       "d": "der"
+      }
+     ],
+     "ojo": "Hay Tricholoma grises tóxicos muy parecidos (como T. pardinum). Comprueba el tono amarillo en pie y láminas y el olor a harina; ante la duda, no."
+    }
+   ]
   },
   {
    "id": "tricholoma-terreum",
@@ -20794,7 +20980,63 @@
      }
     ]
    },
-   "anotadas": []
+   "anotadas": [
+    {
+     "titulo": "Pequeña, gris y escamosa",
+     "foto": {
+      "sp": "Tricholoma terreum",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/60350688/{s}.jpeg",
+      "autor": "Matt Berger",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/38012485",
+      "origen": "iNaturalist",
+      "ar": 0.75
+     },
+     "puntos": [
+      {
+       "x": 55,
+       "y": 45,
+       "parte": "sombrero",
+       "titulo": "Escamitas grises",
+       "texto": "Sombrero gris oscuro, como de fieltro.",
+       "d": "arriba"
+      },
+      {
+       "x": 48,
+       "y": 70,
+       "parte": "pie",
+       "titulo": "Pie blanco sin anillo",
+       "texto": "Frágil y fino.",
+       "d": "der"
+      }
+     ],
+     "ojo": "Se parece al Tricholoma pardinum (tóxico), que es más grande y robusto, con escamas en círculos, y que suele salir con hayas o abetos. Y a otros Tricholoma grises: no es para empezar."
+    },
+    {
+     "titulo": "Por debajo: láminas gris claro",
+     "foto": {
+      "sp": "Tricholoma terreum",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/60350804/{s}.jpeg",
+      "autor": "Matt Berger",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/38012485",
+      "origen": "iNaturalist",
+      "ar": 0.75
+     },
+     "puntos": [
+      {
+       "x": 70,
+       "y": 70,
+       "parte": "himenio",
+       "titulo": "Láminas blanquecinas",
+       "texto": "Gris claro, con muesca junto al pie.",
+       "d": "der"
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "xerocomellus-chrysenteron",
@@ -21005,7 +21247,63 @@
      }
     ]
    },
-   "anotadas": []
+   "anotadas": [
+    {
+     "titulo": "Sombrero agrietado con fondo amarillento-rojizo",
+     "foto": {
+      "sp": "Xerocomellus chrysenteron",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/88245070/{s}.jpg",
+      "autor": "Dani Holmes",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/55418749",
+      "origen": "iNaturalist",
+      "ar": 1.0407
+     },
+     "puntos": [
+      {
+       "x": 45,
+       "y": 45,
+       "parte": "sombrero",
+       "titulo": "Grietas",
+       "texto": "La piel parda se cuartea y deja ver carne clara o rojiza.",
+       "d": "arriba"
+      }
+     ],
+     "ojo": "Es pequeño y se pone blando pronto; si los poros son rojos, no es este."
+    },
+    {
+     "titulo": "Pie amarillo y rojo",
+     "foto": {
+      "sp": "Xerocomellus chrysenteron",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/88245040/{s}.jpg",
+      "autor": "Dani Holmes",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/55418749",
+      "origen": "iNaturalist",
+      "ar": 0.9492
+     },
+     "puntos": [
+      {
+       "x": 57,
+       "y": 68,
+       "parte": "pie",
+       "titulo": "Pie con rojo coral",
+       "texto": "Rojo coral, a menudo amarillento en lo alto; sin anillo.",
+       "d": "der"
+      },
+      {
+       "x": 32,
+       "y": 40,
+       "parte": "himenio",
+       "titulo": "Poros amarillo-oliva",
+       "texto": "Grandes y angulosos; azulean al apretarlos.",
+       "d": "abajo-izq"
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "suillus-granulatus",

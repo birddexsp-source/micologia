@@ -1,0 +1,59 @@
+[
+ {
+  "_cand": "0.0",
+  "titulo": "Sombrero agrietado con fondo amarillento-rojizo",
+  "foto": {
+   "sp": "Xerocomellus chrysenteron",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/88245070/{s}.jpg",
+   "autor": "Dani Holmes",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/55418749",
+   "origen": "iNaturalist",
+   "ar": 1.0407
+  },
+  "puntos": [
+   {
+    "x": 45,
+    "y": 45,
+    "parte": "sombrero",
+    "titulo": "Grietas",
+    "texto": "La piel parda se cuartea y deja ver carne clara o rojiza.",
+    "d": "arriba"
+   }
+  ],
+  "ojo": "Es pequeño y se pone blando pronto; si los poros son rojos, no es este."
+ },
+ {
+  "_cand": "0.1",
+  "titulo": "Pie amarillo y rojo",
+  "foto": {
+   "sp": "Xerocomellus chrysenteron",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/88245040/{s}.jpg",
+   "autor": "Dani Holmes",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/55418749",
+   "origen": "iNaturalist",
+   "ar": 0.9492
+  },
+  "puntos": [
+   {
+    "x": 57,
+    "y": 68,
+    "parte": "pie",
+    "titulo": "Pie con rojo coral",
+    "texto": "Rojo coral, a menudo amarillento en lo alto; sin anillo.",
+    "d": "der"
+   },
+   {
+    "x": 32,
+    "y": 40,
+    "parte": "himenio",
+    "titulo": "Poros amarillo-oliva",
+    "texto": "Grandes y angulosos; azulean al apretarlos.",
+    "d": "abajo-izq"
+   }
+  ]
+ }
+]

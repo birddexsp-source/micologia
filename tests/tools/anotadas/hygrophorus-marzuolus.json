@@ -1,0 +1,59 @@
+[
+ {
+  "_cand": "6.3",
+  "titulo": "Junto a la nieve, bajo abetos",
+  "foto": {
+   "sp": "Hygrophorus marzuolus",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/102372027/{s}.jpeg",
+   "autor": "Alan Rockefeller",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/63752560",
+   "origen": "iNaturalist",
+   "ar": 1.2564
+  },
+  "puntos": [
+   {
+    "x": 72,
+    "y": 40,
+    "parte": "sombrero",
+    "titulo": "Sombrero gris oscuro",
+    "texto": "Liso, algo viscoso, con el borde más oscuro.",
+    "d": "der"
+   },
+   {
+    "x": 45,
+    "y": 52,
+    "parte": "pie",
+    "titulo": "Pie blanco y grueso",
+    "texto": "Blanquecino, a veces gris arriba.",
+    "d": "abajo"
+   }
+  ],
+  "ojo": "Es de montaña alta; en la costa de Bizkaia es raro verla. Se parece a otras setas grises de pie blanco: comprueba las láminas separadas y gruesas."
+ },
+ {
+  "_cand": "6.0",
+  "titulo": "Láminas gruesas y separadas",
+  "foto": {
+   "sp": "Hygrophorus marzuolus",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/102372021/{s}.jpeg",
+   "autor": "Alan Rockefeller",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/63752560",
+   "origen": "iNaturalist",
+   "ar": 1.4862
+  },
+  "puntos": [
+   {
+    "x": 30,
+    "y": 60,
+    "parte": "himenio",
+    "titulo": "Láminas espaciadas",
+    "texto": "Gruesas, blancas de joven y luego gris-azuladas.",
+    "d": "izq"
+   }
+  ]
+ }
+]
