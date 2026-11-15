@@ -1,44 +1,76 @@
 [
  {
-  "_cand": "0.0",
+  "_cand": "4.0",
   "titulo": "Naranja que se mancha de verde",
   "foto": {
-   "sp": "Lactarius deliciosus piceus",
-   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/453385752/{s}.jpeg",
-   "autor": "Alan Rockefeller",
+   "sp": "Lactarius deliciosus",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/238544658/{s}.jpg",
+   "autor": "Petr Harant",
    "licencia": "CC BY 4.0",
    "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
-   "pagina": "https://www.inaturalist.org/observations/253233776",
+   "pagina": "https://www.inaturalist.org/observations/139466436",
    "origen": "iNaturalist",
-   "ar": 1.3333
+   "ar": 0.8828
   },
   "puntos": [
    {
-    "x": 58,
-    "y": 28,
+    "x": 38,
+    "y": 58,
     "parte": "sombrero",
     "titulo": "Manchas verdes",
     "texto": "Con la edad o al tocarlo, el sombrero y las láminas se manchan de verde.",
-    "d": "arriba-der"
+    "d": "izq"
    },
    {
-    "x": 77,
-    "y": 40,
+    "x": 22,
+    "y": 34,
     "parte": "himenio",
     "titulo": "Láminas naranjas",
     "texto": "Apretadas, bajan un poco por el pie.",
-    "d": "der"
+    "d": "arriba-izq"
    },
    {
-    "x": 68,
-    "y": 62,
-    "parte": "pie",
-    "titulo": "Pie corto y hueco",
-    "texto": "Naranja, a veces con hoyitos; por dentro está hueco.",
+    "x": 70,
+    "y": 45,
+    "parte": "sombrero",
+    "titulo": "Círculos concéntricos",
+    "texto": "Zonas más oscuras en anillos, a veces poco marcadas.",
     "d": "der"
    }
   ],
-  "ojo": "Rompe una lámina: debe salir leche (látex) naranja-zanahoria. Si es blanca, o vira a otro color, no es un níscalo."
+  "ojo": "Rompe una lámina: debe salir leche (látex) naranja-zanahoria. Si es blanca, o vira a otro color, no es un níscalo. Ojo con Lactarius torminosus (rosado, borde con pelos, leche blanca y muy picante)."
+ },
+ {
+  "_cand": "2.0",
+  "titulo": "Por debajo: pie hueco",
+  "foto": {
+   "sp": "Lactarius deliciosus",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/233347142/{s}.jpeg",
+   "autor": "Gleb Barmashenko",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/136699564",
+   "origen": "iNaturalist",
+   "ar": 0.75
+  },
+  "puntos": [
+   {
+    "x": 48,
+    "y": 52,
+    "parte": "pie",
+    "titulo": "Pie corto y hueco",
+    "texto": "Naranja pálido, a veces con hoyitos; por dentro hueco.",
+    "d": "abajo"
+   },
+   {
+    "x": 80,
+    "y": 40,
+    "parte": "himenio",
+    "titulo": "Láminas naranja vivo",
+    "texto": "Finas y juntas; donde se hieren, verdean.",
+    "d": "der"
+   }
+  ]
  },
  {
   "_cand": "1.1",

@@ -41,42 +41,42 @@
   "ojo": "A algunas personas les sienta mal. Y hay parientes tóxicos parecidos con láminas verdosas (Chlorophyllum molybdites): si la esporada sale verde, fuera."
  },
  {
-  "_cand": "0.1",
-  "titulo": "El pie: liso, con anillo y bulbo",
+  "_cand": "1.1",
+  "titulo": "El pie: liso, con anillo",
   "foto": {
    "sp": "Chlorophyllum rhacodes",
-   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/2629708/{s}.jpg",
-   "autor": "Paul Wheeler",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/237323988/{s}.jpg",
+   "autor": "spoonbilling",
    "licencia": "CC BY 4.0",
    "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
-   "pagina": "https://www.inaturalist.org/observations/2363373",
+   "pagina": "https://www.inaturalist.org/observations/138817282",
    "origen": "iNaturalist",
-   "ar": 1.3333
+   "ar": 0.75
   },
   "puntos": [
    {
-    "x": 58,
-    "y": 50,
+    "x": 59,
+    "y": 65,
     "parte": "pie",
     "titulo": "Sin bandas",
     "texto": "Liso, de un solo color. El parasol tiene bandas tipo serpiente.",
     "d": "der"
    },
    {
-    "x": 62,
-    "y": 76,
+    "x": 57,
+    "y": 42,
     "parte": "anillo",
     "titulo": "Anillo móvil",
     "texto": "Grueso, doble; se desliza por el pie.",
     "d": "izq"
    },
    {
-    "x": 55,
-    "y": 18,
+    "x": 78,
+    "y": 32,
     "parte": "himenio",
     "titulo": "Láminas blancas",
     "texto": "Se manchan de rojizo al rozarlas; la carne enrojece al cortar.",
-    "d": "arriba-izq"
+    "d": "der"
    }
   ]
  }

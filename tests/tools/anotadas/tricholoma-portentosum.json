@@ -1,43 +1,67 @@
 [
  {
-  "_cand": "3.2",
-  "titulo": "Pie blanco con tono amarillo",
+  "_cand": "6.1",
+  "titulo": "Sombrero gris con fibras oscuras",
   "foto": {
    "sp": "Tricholoma portentosum",
-   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/750530238/{s}.jpg",
-   "autor": "Alex Reitan",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/237411015/{s}.jpeg",
+   "autor": "Марина Давлетшина",
    "licencia": "CC BY 4.0",
    "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
-   "pagina": "https://www.inaturalist.org/observations/408311635",
+   "pagina": "https://www.inaturalist.org/observations/138869485",
    "origen": "iNaturalist",
-   "ar": 0.75
+   "ar": 0.751
   },
   "puntos": [
    {
-    "x": 45,
-    "y": 40,
+    "x": 62,
+    "y": 55,
     "parte": "sombrero",
     "titulo": "Fibras radiales oscuras",
-    "texto": "Gris con fibras negruzcas que salen del centro.",
-    "d": "arriba-izq"
-   },
-   {
-    "x": 60,
-    "y": 75,
-    "parte": "pie",
-    "titulo": "Pie blanco-amarillo",
-    "texto": "Macizo; con tono amarillo limón.",
+    "texto": "Gris con fibras negruzcas que salen del centro; algo pegajoso en húmedo.",
     "d": "der"
    },
    {
-    "x": 62,
-    "y": 49,
-    "parte": "himenio",
-    "titulo": "Láminas blancas-amarillentas",
-    "texto": "Apretadas, con muesca junto al pie.",
-    "d": "der"
+    "x": 45,
+    "y": 30,
+    "parte": "sombrero",
+    "titulo": "Mamelón oscuro",
+    "texto": "Centro más oscuro, a veces con un bulto.",
+    "d": "arriba"
    }
   ],
   "ojo": "Hay Tricholoma grises tóxicos muy parecidos (como T. pardinum). Comprueba el tono amarillo en pie y láminas y el olor a harina; ante la duda, no."
+ },
+ {
+  "_cand": "3.2",
+  "titulo": "Láminas y pie con tono amarillo",
+  "foto": {
+   "sp": "Tricholoma portentosum",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/237380092/{s}.jpeg",
+   "autor": "Марина Давлетшина",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/138852654",
+   "origen": "iNaturalist",
+   "ar": 0.751
+  },
+  "puntos": [
+   {
+    "x": 35,
+    "y": 55,
+    "parte": "himenio",
+    "titulo": "Láminas blancas-amarillentas",
+    "texto": "Apretadas, con muesca junto al pie.",
+    "d": "izq"
+   },
+   {
+    "x": 80,
+    "y": 35,
+    "parte": "pie",
+    "titulo": "Pie blanco-amarillo",
+    "texto": "Macizo; con tono amarillo limón.",
+    "d": "arriba-der"
+   }
+  ]
  }
 ]

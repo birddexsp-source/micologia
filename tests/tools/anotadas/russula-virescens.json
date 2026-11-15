@@ -33,34 +33,34 @@
   "ojo": "Una seta verde puede ser la cicuta verde (Amanita phalloides), mortal. Esta no tiene anillo ni volva y su carne se rompe como tiza: si dudas en uno solo de estos puntos, déjala."
  },
  {
-  "_cand": "1.1",
+  "_cand": "5.1",
   "titulo": "Por debajo: láminas blancas, sin anillo",
   "foto": {
    "sp": "Russula virescens",
-   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/161939199/{s}.jpg",
-   "autor": "Jeff Clark",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/545236535/{s}.jpg",
+   "autor": "Evgenij Samarin",
    "licencia": "CC BY 4.0",
    "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
-   "pagina": "https://www.inaturalist.org/observations/97378187",
+   "pagina": "https://www.inaturalist.org/observations/302535365",
    "origen": "iNaturalist",
-   "ar": 0.75
+   "ar": 0.751
   },
   "puntos": [
    {
-    "x": 64,
-    "y": 40,
+    "x": 40,
+    "y": 52,
     "parte": "himenio",
     "titulo": "Láminas blancas",
-    "texto": "Apretadas y frágiles: se rompen al pasar el dedo.",
-    "d": "der"
+    "texto": "Blancas o crema, quebradizas.",
+    "d": "izq"
    },
    {
-    "x": 45,
-    "y": 56,
+    "x": 55,
+    "y": 72,
     "parte": "pie",
-    "titulo": "Pie blanco, sin anillo",
-    "texto": "Corto y macizo. Sin anillo ni saco en la base.",
-    "d": "abajo"
+    "titulo": "Pie blanco sin anillo",
+    "texto": "Liso, se rompe como tiza; sin bolsa en la base.",
+    "d": "der"
    }
   ]
  }

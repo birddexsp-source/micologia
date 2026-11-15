@@ -7301,42 +7301,73 @@
     {
      "titulo": "Naranja que se mancha de verde",
      "foto": {
-      "sp": "Lactarius deliciosus piceus",
-      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/453385752/{s}.jpeg",
-      "autor": "Alan Rockefeller",
+      "sp": "Lactarius deliciosus",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/238544658/{s}.jpg",
+      "autor": "Petr Harant",
       "licencia": "CC BY 4.0",
       "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
-      "pagina": "https://www.inaturalist.org/observations/253233776",
+      "pagina": "https://www.inaturalist.org/observations/139466436",
       "origen": "iNaturalist",
-      "ar": 1.3333
+      "ar": 0.8828
      },
      "puntos": [
       {
-       "x": 58,
-       "y": 28,
+       "x": 38,
+       "y": 58,
        "parte": "sombrero",
        "titulo": "Manchas verdes",
        "texto": "Con la edad o al tocarlo, el sombrero y las láminas se manchan de verde.",
-       "d": "arriba-der"
+       "d": "izq"
       },
       {
-       "x": 77,
-       "y": 40,
+       "x": 22,
+       "y": 34,
        "parte": "himenio",
        "titulo": "Láminas naranjas",
        "texto": "Apretadas, bajan un poco por el pie.",
-       "d": "der"
+       "d": "arriba-izq"
       },
       {
-       "x": 68,
-       "y": 62,
-       "parte": "pie",
-       "titulo": "Pie corto y hueco",
-       "texto": "Naranja, a veces con hoyitos; por dentro está hueco.",
+       "x": 70,
+       "y": 45,
+       "parte": "sombrero",
+       "titulo": "Círculos concéntricos",
+       "texto": "Zonas más oscuras en anillos, a veces poco marcadas.",
        "d": "der"
       }
      ],
-     "ojo": "Rompe una lámina: debe salir leche (látex) naranja-zanahoria. Si es blanca, o vira a otro color, no es un níscalo."
+     "ojo": "Rompe una lámina: debe salir leche (látex) naranja-zanahoria. Si es blanca, o vira a otro color, no es un níscalo. Ojo con Lactarius torminosus (rosado, borde con pelos, leche blanca y muy picante)."
+    },
+    {
+     "titulo": "Por debajo: pie hueco",
+     "foto": {
+      "sp": "Lactarius deliciosus",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/233347142/{s}.jpeg",
+      "autor": "Gleb Barmashenko",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/136699564",
+      "origen": "iNaturalist",
+      "ar": 0.75
+     },
+     "puntos": [
+      {
+       "x": 48,
+       "y": 52,
+       "parte": "pie",
+       "titulo": "Pie corto y hueco",
+       "texto": "Naranja pálido, a veces con hoyitos; por dentro hueco.",
+       "d": "abajo"
+      },
+      {
+       "x": 80,
+       "y": 40,
+       "parte": "himenio",
+       "titulo": "Láminas naranja vivo",
+       "texto": "Finas y juntas; donde se hieren, verdean.",
+       "d": "der"
+      }
+     ]
     },
     {
      "titulo": "Roto: la leche naranja",
@@ -9527,73 +9558,81 @@
    },
    "anotadas": [
     {
-     "titulo": "Sombrero rojizo y pie con red gruesa",
+     "titulo": "Sombrero granate y pie rojizo con red",
      "foto": {
       "sp": "Boletus pinophilus",
-      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/5774685/{s}.jpeg",
-      "autor": "Alan Rockefeller",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/556482232/{s}.jpg",
+      "autor": "Марина Давлетшина",
       "licencia": "CC BY 4.0",
       "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
-      "pagina": "https://www.inaturalist.org/observations/4750416",
+      "pagina": "https://www.inaturalist.org/observations/308449131",
       "origen": "iNaturalist",
-      "ar": 0.9756
+      "ar": 0.751
      },
      "puntos": [
       {
        "x": 45,
-       "y": 18,
+       "y": 8,
        "parte": "sombrero",
        "titulo": "Pardo-rojizo",
        "texto": "Granate, castaño o rojo ladrillo; mate.",
        "d": "arriba"
       },
       {
-       "x": 48,
-       "y": 55,
+       "x": 50,
+       "y": 35,
        "parte": "pie",
-       "titulo": "Red gruesa",
-       "texto": "Redecilla marcada, rojiza, sobre todo arriba.",
+       "titulo": "Red fina rojiza",
+       "texto": "Redecilla en la parte alta del pie, sobre fondo rojizo.",
        "d": "der"
       },
       {
-       "x": 70,
-       "y": 35,
+       "x": 15,
+       "y": 25,
        "parte": "himenio",
-       "titulo": "Poros amarillo-oliva",
+       "titulo": "Tubos amarillo-oliva",
        "texto": "Bajo el sombrero, la capa de tubos.",
-       "d": "der"
+       "d": "izq"
+      },
+      {
+       "x": 20,
+       "y": 85,
+       "parte": "pie",
+       "titulo": "Base blanca y gruesa",
+       "texto": "Pie robusto, más pálido abajo.",
+       "d": "abajo"
       }
      ],
      "ojo": "Su color rojizo engaña, pero los poros son blancos o amarillo-oliva, nunca rojos, y la carne no se pone azul."
     },
     {
-     "titulo": "Por debajo: tubos amarillo-oliva",
+     "titulo": "Por debajo: poros amarillo-oliva",
      "foto": {
       "sp": "Boletus pinophilus",
-      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/5774686/{s}.jpeg",
-      "autor": "Alan Rockefeller",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/556482278/{s}.jpg",
+      "autor": "Марина Давлетшина",
       "licencia": "CC BY 4.0",
       "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
-      "pagina": "https://www.inaturalist.org/observations/4750416",
+      "pagina": "https://www.inaturalist.org/observations/308449131",
       "origen": "iNaturalist",
-      "ar": 1.4993
+      "ar": 0.751
      },
      "puntos": [
       {
-       "x": 75,
-       "y": 40,
+       "x": 70,
+       "y": 25,
        "parte": "himenio",
        "titulo": "Poros oliva",
-       "texto": "Pequeños; no azulean al tocarlos.",
-       "d": "der"
+       "texto": "Pequeños y redondos; no azulean al tocarlos.",
+       "d": "arriba-der"
       },
       {
-       "x": 60,
-       "y": 63,
+       "x": 30,
+       "y": 45,
        "parte": "pie",
        "titulo": "Pie con red",
        "texto": "Rojizo con redecilla.",
-       "d": "abajo"
+       "d": "izq"
       }
      ]
     }
@@ -14256,29 +14295,37 @@
      "titulo": "Sombrero pardo y pie amarillo",
      "foto": {
       "sp": "Craterellus tubaeformis",
-      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/164609135/{s}.jpeg",
-      "autor": "Erin Springinotic",
-      "licencia": "CC0",
-      "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
-      "pagina": "https://www.inaturalist.org/observations/98817790",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/225661184/{s}.jpeg",
+      "autor": "Andreas Schneider",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/132521829",
       "origen": "iNaturalist",
-      "ar": 1.3333
+      "ar": 0.582
      },
      "puntos": [
       {
-       "x": 60,
-       "y": 12,
+       "x": 55,
+       "y": 75,
        "parte": "sombrero",
        "titulo": "Sombrero pardo-grisáceo",
-       "texto": "Pequeño, en embudo y con el borde ondulado.",
-       "d": "arriba-der"
+       "texto": "Pequeño, en embudo con un hoyo en el centro y el borde ondulado.",
+       "d": "abajo"
       },
       {
-       "x": 52,
-       "y": 55,
+       "x": 45,
+       "y": 42,
        "parte": "pie",
        "titulo": "Pie amarillo hueco",
-       "texto": "Amarillo-naranja, liso y hueco.",
+       "texto": "Amarillo-naranja, liso, largo y hueco.",
+       "d": "der"
+      },
+      {
+       "x": 70,
+       "y": 28,
+       "parte": "himenio",
+       "titulo": "Pliegues pálidos",
+       "texto": "Por debajo, pliegues gris-amarillentos (no láminas).",
        "d": "der"
       }
      ],
@@ -17359,65 +17406,73 @@
    },
    "anotadas": [
     {
-     "titulo": "Sombrero rojo y pie blanco",
+     "titulo": "Rojo intenso y pie blanco",
      "foto": {
       "sp": "Russula emetica",
-      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/735740898/{s}.jpg",
-      "autor": "Eli Talhouk",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/552202319/{s}.jpg",
+      "autor": "Bohan Jia",
       "licencia": "CC BY 4.0",
       "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
-      "pagina": "https://www.inaturalist.org/observations/400890865",
+      "pagina": "https://www.inaturalist.org/observations/306217379",
       "origen": "iNaturalist",
       "ar": 0.75
      },
      "puntos": [
       {
        "x": 45,
-       "y": 25,
+       "y": 35,
        "parte": "sombrero",
-       "titulo": "Rojo cereza, brillante",
-       "texto": "Piel pegajosa que se pela casi hasta el centro.",
+       "titulo": "Rojo cereza brillante",
+       "texto": "Liso, algo viscoso en húmedo.",
        "d": "arriba"
       },
       {
-       "x": 52,
-       "y": 60,
+       "x": 35,
+       "y": 50,
+       "parte": "cutis",
+       "titulo": "La piel se pela",
+       "texto": "Se quita casi entera; debajo la carne es blanca o rosada.",
+       "d": "izq"
+      },
+      {
+       "x": 45,
+       "y": 80,
        "parte": "pie",
        "titulo": "Pie blanco puro",
-       "texto": "Liso, sin anillo ni volva; se rompe como tiza.",
+       "texto": "Sin anillo ni volva; se rompe como tiza.",
        "d": "der"
       }
      ],
-     "ojo": "Muy picante y causa vómitos. Hay varias rúsulas rojas, y no merece la pena: no recojas ninguna rúsula roja."
+     "ojo": "Muy picante y causa vómitos. Hay muchas rúsulas rojas parecidas y alguna buena, pero no merece la pena: no recojas ninguna rúsula roja."
     },
     {
      "titulo": "Láminas blancas y quebradizas",
      "foto": {
       "sp": "Russula emetica",
-      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/735740893/{s}.jpg",
-      "autor": "Eli Talhouk",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/552202336/{s}.jpg",
+      "autor": "Bohan Jia",
       "licencia": "CC BY 4.0",
       "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
-      "pagina": "https://www.inaturalist.org/observations/400890865",
+      "pagina": "https://www.inaturalist.org/observations/306217379",
       "origen": "iNaturalist",
       "ar": 0.75
      },
      "puntos": [
       {
        "x": 45,
-       "y": 18,
+       "y": 62,
        "parte": "himenio",
        "titulo": "Láminas blancas",
-       "texto": "Apretadas; se rompen al pasar el dedo.",
-       "d": "arriba"
+       "texto": "Blancas o crema pálido, frágiles: se rompen al pasar el dedo.",
+       "d": "abajo"
       },
       {
-       "x": 14,
-       "y": 50,
-       "parte": "carne",
-       "titulo": "Bajo la piel, carne rojiza",
-       "texto": "Justo bajo la piel roja, la carne se tiñe de rosa.",
-       "d": "izq"
+       "x": 90,
+       "y": 30,
+       "parte": "sombrero",
+       "titulo": "Borde rojo",
+       "texto": "El rojo llega hasta el borde.",
+       "d": "der"
       }
      ]
     }
@@ -19156,30 +19211,30 @@
      "titulo": "Por debajo: láminas blancas, sin anillo",
      "foto": {
       "sp": "Russula virescens",
-      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/161939199/{s}.jpg",
-      "autor": "Jeff Clark",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/545236535/{s}.jpg",
+      "autor": "Evgenij Samarin",
       "licencia": "CC BY 4.0",
       "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
-      "pagina": "https://www.inaturalist.org/observations/97378187",
+      "pagina": "https://www.inaturalist.org/observations/302535365",
       "origen": "iNaturalist",
-      "ar": 0.75
+      "ar": 0.751
      },
      "puntos": [
       {
-       "x": 64,
-       "y": 40,
+       "x": 40,
+       "y": 52,
        "parte": "himenio",
        "titulo": "Láminas blancas",
-       "texto": "Apretadas y frágiles: se rompen al pasar el dedo.",
-       "d": "der"
+       "texto": "Blancas o crema, quebradizas.",
+       "d": "izq"
       },
       {
-       "x": 45,
-       "y": 56,
+       "x": 55,
+       "y": 72,
        "parte": "pie",
-       "titulo": "Pie blanco, sin anillo",
-       "texto": "Corto y macizo. Sin anillo ni saco en la base.",
-       "d": "abajo"
+       "titulo": "Pie blanco sin anillo",
+       "texto": "Liso, se rompe como tiza; sin bolsa en la base.",
+       "d": "der"
       }
      ]
     },
@@ -20472,33 +20527,41 @@
    },
    "anotadas": [
     {
-     "titulo": "Junto a la nieve, bajo abetos",
+     "titulo": "Gris, pie blanco, a finales de invierno",
      "foto": {
       "sp": "Hygrophorus marzuolus",
-      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/102372027/{s}.jpeg",
-      "autor": "Alan Rockefeller",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/447447791/{s}.jpeg",
+      "autor": "vuikaan",
       "licencia": "CC BY 4.0",
       "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
-      "pagina": "https://www.inaturalist.org/observations/63752560",
+      "pagina": "https://www.inaturalist.org/observations/250215875",
       "origen": "iNaturalist",
-      "ar": 1.2564
+      "ar": 1.3333
      },
      "puntos": [
       {
-       "x": 72,
-       "y": 40,
+       "x": 22,
+       "y": 20,
        "parte": "sombrero",
-       "titulo": "Sombrero gris oscuro",
-       "texto": "Liso, algo viscoso, con el borde más oscuro.",
-       "d": "der"
+       "titulo": "Sombrero gris",
+       "texto": "Liso, algo viscoso, gris claro a casi negro, con el borde más oscuro.",
+       "d": "arriba"
       },
       {
-       "x": 45,
-       "y": 52,
+       "x": 30,
+       "y": 55,
        "parte": "pie",
        "titulo": "Pie blanco y grueso",
-       "texto": "Blanquecino, a veces gris arriba.",
-       "d": "abajo"
+       "texto": "Blanquecino, a veces gris arriba; sin anillo.",
+       "d": "izq"
+      },
+      {
+       "x": 55,
+       "y": 40,
+       "parte": "himenio",
+       "titulo": "Láminas espaciadas",
+       "texto": "Gruesas, blancas de joven y luego gris-azuladas.",
+       "d": "arriba-der"
       }
      ],
      "ojo": "Es de montaña alta; en la costa de Bizkaia es raro verla. Se parece a otras setas grises de pie blanco: comprueba las láminas separadas y gruesas."
@@ -20507,21 +20570,29 @@
      "titulo": "Láminas gruesas y separadas",
      "foto": {
       "sp": "Hygrophorus marzuolus",
-      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/102372021/{s}.jpeg",
-      "autor": "Alan Rockefeller",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/624838110/{s}.jpg",
+      "autor": "Paula Nimigean",
       "licencia": "CC BY 4.0",
       "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
-      "pagina": "https://www.inaturalist.org/observations/63752560",
+      "pagina": "https://www.inaturalist.org/observations/343060742",
       "origen": "iNaturalist",
-      "ar": 1.4862
+      "ar": 1.258
      },
      "puntos": [
       {
-       "x": 30,
-       "y": 60,
+       "x": 55,
+       "y": 30,
        "parte": "himenio",
        "titulo": "Láminas espaciadas",
-       "texto": "Gruesas, blancas de joven y luego gris-azuladas.",
+       "texto": "Muy separadas entre sí, gruesas, gris pálido.",
+       "d": "arriba"
+      },
+      {
+       "x": 22,
+       "y": 45,
+       "parte": "habitat",
+       "titulo": "Entre hojarasca",
+       "texto": "Sale medio enterrada, a veces junto a la nieve que se derrite.",
        "d": "izq"
       }
      ]
@@ -20734,44 +20805,67 @@
    },
    "anotadas": [
     {
-     "titulo": "Pie blanco con tono amarillo",
+     "titulo": "Sombrero gris con fibras oscuras",
      "foto": {
       "sp": "Tricholoma portentosum",
-      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/750530238/{s}.jpg",
-      "autor": "Alex Reitan",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/237411015/{s}.jpeg",
+      "autor": "Марина Давлетшина",
       "licencia": "CC BY 4.0",
       "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
-      "pagina": "https://www.inaturalist.org/observations/408311635",
+      "pagina": "https://www.inaturalist.org/observations/138869485",
       "origen": "iNaturalist",
-      "ar": 0.75
+      "ar": 0.751
      },
      "puntos": [
       {
-       "x": 45,
-       "y": 40,
+       "x": 62,
+       "y": 55,
        "parte": "sombrero",
        "titulo": "Fibras radiales oscuras",
-       "texto": "Gris con fibras negruzcas que salen del centro.",
-       "d": "arriba-izq"
-      },
-      {
-       "x": 60,
-       "y": 75,
-       "parte": "pie",
-       "titulo": "Pie blanco-amarillo",
-       "texto": "Macizo; con tono amarillo limón.",
+       "texto": "Gris con fibras negruzcas que salen del centro; algo pegajoso en húmedo.",
        "d": "der"
       },
       {
-       "x": 62,
-       "y": 49,
-       "parte": "himenio",
-       "titulo": "Láminas blancas-amarillentas",
-       "texto": "Apretadas, con muesca junto al pie.",
-       "d": "der"
+       "x": 45,
+       "y": 30,
+       "parte": "sombrero",
+       "titulo": "Mamelón oscuro",
+       "texto": "Centro más oscuro, a veces con un bulto.",
+       "d": "arriba"
       }
      ],
      "ojo": "Hay Tricholoma grises tóxicos muy parecidos (como T. pardinum). Comprueba el tono amarillo en pie y láminas y el olor a harina; ante la duda, no."
+    },
+    {
+     "titulo": "Láminas y pie con tono amarillo",
+     "foto": {
+      "sp": "Tricholoma portentosum",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/237380092/{s}.jpeg",
+      "autor": "Марина Давлетшина",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/138852654",
+      "origen": "iNaturalist",
+      "ar": 0.751
+     },
+     "puntos": [
+      {
+       "x": 35,
+       "y": 55,
+       "parte": "himenio",
+       "titulo": "Láminas blancas-amarillentas",
+       "texto": "Apretadas, con muesca junto al pie.",
+       "d": "izq"
+      },
+      {
+       "x": 80,
+       "y": 35,
+       "parte": "pie",
+       "titulo": "Pie blanco-amarillo",
+       "texto": "Macizo; con tono amarillo limón.",
+       "d": "arriba-der"
+      }
+     ]
     }
    ]
   },
@@ -20982,56 +21076,72 @@
    },
    "anotadas": [
     {
-     "titulo": "Pequeña, gris y escamosa",
+     "titulo": "Gris, de fieltro, en grupo",
      "foto": {
       "sp": "Tricholoma terreum",
-      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/60350688/{s}.jpeg",
-      "autor": "Matt Berger",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/593143595/{s}.jpg",
+      "autor": "Petr Harant",
       "licencia": "CC BY 4.0",
       "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
-      "pagina": "https://www.inaturalist.org/observations/38012485",
+      "pagina": "https://www.inaturalist.org/observations/327403705",
       "origen": "iNaturalist",
-      "ar": 0.75
+      "ar": 1.0
      },
      "puntos": [
       {
-       "x": 55,
-       "y": 45,
+       "x": 65,
+       "y": 40,
        "parte": "sombrero",
        "titulo": "Escamitas grises",
-       "texto": "Sombrero gris oscuro, como de fieltro.",
-       "d": "arriba"
+       "texto": "Sombrero gris ratón, como de fieltro, con mamelón.",
+       "d": "arriba-der"
       },
       {
-       "x": 48,
-       "y": 70,
+       "x": 8,
+       "y": 56,
+       "parte": "himenio",
+       "titulo": "Láminas gris claro",
+       "texto": "Blanquecinas a grises, con muesca junto al pie.",
+       "d": "izq"
+      },
+      {
+       "x": 19,
+       "y": 46,
        "parte": "pie",
        "titulo": "Pie blanco sin anillo",
        "texto": "Frágil y fino.",
-       "d": "der"
+       "d": "abajo-izq"
       }
      ],
      "ojo": "Se parece al Tricholoma pardinum (tóxico), que es más grande y robusto, con escamas en círculos, y que suele salir con hayas o abetos. Y a otros Tricholoma grises: no es para empezar."
     },
     {
-     "titulo": "Por debajo: láminas gris claro",
+     "titulo": "De lado: pequeña y frágil",
      "foto": {
       "sp": "Tricholoma terreum",
-      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/60350804/{s}.jpeg",
-      "autor": "Matt Berger",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/339087121/{s}.jpeg",
+      "autor": "Ross Krisztina",
       "licencia": "CC BY 4.0",
       "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
-      "pagina": "https://www.inaturalist.org/observations/38012485",
+      "pagina": "https://www.inaturalist.org/observations/193069638",
       "origen": "iNaturalist",
-      "ar": 0.75
+      "ar": 1.1315
      },
      "puntos": [
       {
-       "x": 70,
-       "y": 70,
-       "parte": "himenio",
-       "titulo": "Láminas blanquecinas",
-       "texto": "Gris claro, con muesca junto al pie.",
+       "x": 40,
+       "y": 40,
+       "parte": "sombrero",
+       "titulo": "Gris oscuro afieltrado",
+       "texto": "Pequeño (4–8 cm), seco.",
+       "d": "arriba"
+      },
+      {
+       "x": 45,
+       "y": 64,
+       "parte": "pie",
+       "titulo": "Pie blanco",
+       "texto": "Sin anillo ni volva.",
        "d": "der"
       }
      ]
@@ -21249,16 +21359,16 @@
    },
    "anotadas": [
     {
-     "titulo": "Sombrero agrietado con fondo amarillento-rojizo",
+     "titulo": "Sombrero agrietado",
      "foto": {
       "sp": "Xerocomellus chrysenteron",
-      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/88245070/{s}.jpg",
-      "autor": "Dani Holmes",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/231835483/{s}.jpg",
+      "autor": "Michel Langeveld",
       "licencia": "CC BY 4.0",
       "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
-      "pagina": "https://www.inaturalist.org/observations/55418749",
+      "pagina": "https://www.inaturalist.org/observations/135886375",
       "origen": "iNaturalist",
-      "ar": 1.0407
+      "ar": 0.5625
      },
      "puntos": [
       {
@@ -21266,8 +21376,8 @@
        "y": 45,
        "parte": "sombrero",
        "titulo": "Grietas",
-       "texto": "La piel parda se cuartea y deja ver carne clara o rojiza.",
-       "d": "arriba"
+       "texto": "La piel parda se cuartea y deja ver carne clara o rosada por debajo.",
+       "d": "der"
       }
      ],
      "ojo": "Es pequeño y se pone blando pronto; si los poros son rojos, no es este."
@@ -21276,30 +21386,38 @@
      "titulo": "Pie amarillo y rojo",
      "foto": {
       "sp": "Xerocomellus chrysenteron",
-      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/88245040/{s}.jpg",
-      "autor": "Dani Holmes",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/237720760/{s}.jpg",
+      "autor": "nbasargin",
       "licencia": "CC BY 4.0",
       "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
-      "pagina": "https://www.inaturalist.org/observations/55418749",
+      "pagina": "https://www.inaturalist.org/observations/139032907",
       "origen": "iNaturalist",
-      "ar": 0.9492
+      "ar": 1.0
      },
      "puntos": [
       {
-       "x": 57,
-       "y": 68,
+       "x": 55,
+       "y": 75,
        "parte": "pie",
        "titulo": "Pie con rojo coral",
-       "texto": "Rojo coral, a menudo amarillento en lo alto; sin anillo.",
+       "texto": "Rojo coral con fibras, más amarillo arriba; sin anillo.",
        "d": "der"
       },
       {
-       "x": 32,
-       "y": 40,
+       "x": 30,
+       "y": 45,
        "parte": "himenio",
        "titulo": "Poros amarillo-oliva",
        "texto": "Grandes y angulosos; azulean al apretarlos.",
-       "d": "abajo-izq"
+       "d": "izq"
+      },
+      {
+       "x": 30,
+       "y": 32,
+       "parte": "sombrero",
+       "titulo": "Línea roja bajo la piel",
+       "texto": "Bajo la cutícula, una franja rojiza.",
+       "d": "arriba-izq"
       }
      ]
     }
@@ -22518,41 +22636,41 @@
      "ojo": "A algunas personas les sienta mal. Y hay parientes tóxicos parecidos con láminas verdosas (Chlorophyllum molybdites): si la esporada sale verde, fuera."
     },
     {
-     "titulo": "El pie: liso, con anillo y bulbo",
+     "titulo": "El pie: liso, con anillo",
      "foto": {
       "sp": "Chlorophyllum rhacodes",
-      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/2629708/{s}.jpg",
-      "autor": "Paul Wheeler",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/237323988/{s}.jpg",
+      "autor": "spoonbilling",
       "licencia": "CC BY 4.0",
       "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
-      "pagina": "https://www.inaturalist.org/observations/2363373",
+      "pagina": "https://www.inaturalist.org/observations/138817282",
       "origen": "iNaturalist",
-      "ar": 1.3333
+      "ar": 0.75
      },
      "puntos": [
       {
-       "x": 58,
-       "y": 50,
+       "x": 59,
+       "y": 65,
        "parte": "pie",
        "titulo": "Sin bandas",
        "texto": "Liso, de un solo color. El parasol tiene bandas tipo serpiente.",
        "d": "der"
       },
       {
-       "x": 62,
-       "y": 76,
+       "x": 57,
+       "y": 42,
        "parte": "anillo",
        "titulo": "Anillo móvil",
        "texto": "Grueso, doble; se desliza por el pie.",
        "d": "izq"
       },
       {
-       "x": 55,
-       "y": 18,
+       "x": 78,
+       "y": 32,
        "parte": "himenio",
        "titulo": "Láminas blancas",
        "texto": "Se manchan de rojizo al rozarlas; la carne enrojece al cortar.",
-       "d": "arriba-izq"
+       "d": "der"
       }
      ]
     }

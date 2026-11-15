@@ -1,74 +1,82 @@
 [
  {
-  "_cand": "0.2",
-  "titulo": "Sombrero rojizo y pie con red gruesa",
+  "_cand": "2.2",
+  "titulo": "Sombrero granate y pie rojizo con red",
   "foto": {
    "sp": "Boletus pinophilus",
-   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/5774685/{s}.jpeg",
-   "autor": "Alan Rockefeller",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/556482232/{s}.jpg",
+   "autor": "Марина Давлетшина",
    "licencia": "CC BY 4.0",
    "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
-   "pagina": "https://www.inaturalist.org/observations/4750416",
+   "pagina": "https://www.inaturalist.org/observations/308449131",
    "origen": "iNaturalist",
-   "ar": 0.9756
+   "ar": 0.751
   },
   "puntos": [
    {
     "x": 45,
-    "y": 18,
+    "y": 8,
     "parte": "sombrero",
     "titulo": "Pardo-rojizo",
     "texto": "Granate, castaño o rojo ladrillo; mate.",
     "d": "arriba"
    },
    {
-    "x": 48,
-    "y": 55,
+    "x": 50,
+    "y": 35,
     "parte": "pie",
-    "titulo": "Red gruesa",
-    "texto": "Redecilla marcada, rojiza, sobre todo arriba.",
+    "titulo": "Red fina rojiza",
+    "texto": "Redecilla en la parte alta del pie, sobre fondo rojizo.",
     "d": "der"
    },
    {
-    "x": 70,
-    "y": 35,
+    "x": 15,
+    "y": 25,
     "parte": "himenio",
-    "titulo": "Poros amarillo-oliva",
+    "titulo": "Tubos amarillo-oliva",
     "texto": "Bajo el sombrero, la capa de tubos.",
-    "d": "der"
+    "d": "izq"
+   },
+   {
+    "x": 20,
+    "y": 85,
+    "parte": "pie",
+    "titulo": "Base blanca y gruesa",
+    "texto": "Pie robusto, más pálido abajo.",
+    "d": "abajo"
    }
   ],
   "ojo": "Su color rojizo engaña, pero los poros son blancos o amarillo-oliva, nunca rojos, y la carne no se pone azul."
  },
  {
-  "_cand": "0.3",
-  "titulo": "Por debajo: tubos amarillo-oliva",
+  "_cand": "2.3",
+  "titulo": "Por debajo: poros amarillo-oliva",
   "foto": {
    "sp": "Boletus pinophilus",
-   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/5774686/{s}.jpeg",
-   "autor": "Alan Rockefeller",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/556482278/{s}.jpg",
+   "autor": "Марина Давлетшина",
    "licencia": "CC BY 4.0",
    "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
-   "pagina": "https://www.inaturalist.org/observations/4750416",
+   "pagina": "https://www.inaturalist.org/observations/308449131",
    "origen": "iNaturalist",
-   "ar": 1.4993
+   "ar": 0.751
   },
   "puntos": [
    {
-    "x": 75,
-    "y": 40,
+    "x": 70,
+    "y": 25,
     "parte": "himenio",
     "titulo": "Poros oliva",
-    "texto": "Pequeños; no azulean al tocarlos.",
-    "d": "der"
+    "texto": "Pequeños y redondos; no azulean al tocarlos.",
+    "d": "arriba-der"
    },
    {
-    "x": 60,
-    "y": 63,
+    "x": 30,
+    "y": 45,
     "parte": "pie",
     "titulo": "Pie con red",
     "texto": "Rojizo con redecilla.",
-    "d": "abajo"
+    "d": "izq"
    }
   ]
  }

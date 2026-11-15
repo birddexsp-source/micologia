@@ -1,57 +1,73 @@
 [
  {
-  "_cand": "6.0",
-  "titulo": "Pequeña, gris y escamosa",
+  "_cand": "4.2",
+  "titulo": "Gris, de fieltro, en grupo",
   "foto": {
    "sp": "Tricholoma terreum",
-   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/60350688/{s}.jpeg",
-   "autor": "Matt Berger",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/593143595/{s}.jpg",
+   "autor": "Petr Harant",
    "licencia": "CC BY 4.0",
    "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
-   "pagina": "https://www.inaturalist.org/observations/38012485",
+   "pagina": "https://www.inaturalist.org/observations/327403705",
    "origen": "iNaturalist",
-   "ar": 0.75
+   "ar": 1.0
   },
   "puntos": [
    {
-    "x": 55,
-    "y": 45,
+    "x": 65,
+    "y": 40,
     "parte": "sombrero",
     "titulo": "Escamitas grises",
-    "texto": "Sombrero gris oscuro, como de fieltro.",
-    "d": "arriba"
+    "texto": "Sombrero gris ratón, como de fieltro, con mamelón.",
+    "d": "arriba-der"
    },
    {
-    "x": 48,
-    "y": 70,
+    "x": 8,
+    "y": 56,
+    "parte": "himenio",
+    "titulo": "Láminas gris claro",
+    "texto": "Blanquecinas a grises, con muesca junto al pie.",
+    "d": "izq"
+   },
+   {
+    "x": 19,
+    "y": 46,
     "parte": "pie",
     "titulo": "Pie blanco sin anillo",
     "texto": "Frágil y fino.",
-    "d": "der"
+    "d": "abajo-izq"
    }
   ],
   "ojo": "Se parece al Tricholoma pardinum (tóxico), que es más grande y robusto, con escamas en círculos, y que suele salir con hayas o abetos. Y a otros Tricholoma grises: no es para empezar."
  },
  {
-  "_cand": "6.2",
-  "titulo": "Por debajo: láminas gris claro",
+  "_cand": "2.0",
+  "titulo": "De lado: pequeña y frágil",
   "foto": {
    "sp": "Tricholoma terreum",
-   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/60350804/{s}.jpeg",
-   "autor": "Matt Berger",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/339087121/{s}.jpeg",
+   "autor": "Ross Krisztina",
    "licencia": "CC BY 4.0",
    "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
-   "pagina": "https://www.inaturalist.org/observations/38012485",
+   "pagina": "https://www.inaturalist.org/observations/193069638",
    "origen": "iNaturalist",
-   "ar": 0.75
+   "ar": 1.1315
   },
   "puntos": [
    {
-    "x": 70,
-    "y": 70,
-    "parte": "himenio",
-    "titulo": "Láminas blanquecinas",
-    "texto": "Gris claro, con muesca junto al pie.",
+    "x": 40,
+    "y": 40,
+    "parte": "sombrero",
+    "titulo": "Gris oscuro afieltrado",
+    "texto": "Pequeño (4–8 cm), seco.",
+    "d": "arriba"
+   },
+   {
+    "x": 45,
+    "y": 64,
+    "parte": "pie",
+    "titulo": "Pie blanco",
+    "texto": "Sin anillo ni volva.",
     "d": "der"
    }
   ]

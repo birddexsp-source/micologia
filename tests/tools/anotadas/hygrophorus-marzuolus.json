@@ -1,57 +1,73 @@
 [
  {
-  "_cand": "6.3",
-  "titulo": "Junto a la nieve, bajo abetos",
+  "_cand": "4.0",
+  "titulo": "Gris, pie blanco, a finales de invierno",
   "foto": {
    "sp": "Hygrophorus marzuolus",
-   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/102372027/{s}.jpeg",
-   "autor": "Alan Rockefeller",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/447447791/{s}.jpeg",
+   "autor": "vuikaan",
    "licencia": "CC BY 4.0",
    "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
-   "pagina": "https://www.inaturalist.org/observations/63752560",
+   "pagina": "https://www.inaturalist.org/observations/250215875",
    "origen": "iNaturalist",
-   "ar": 1.2564
+   "ar": 1.3333
   },
   "puntos": [
    {
-    "x": 72,
-    "y": 40,
+    "x": 22,
+    "y": 20,
     "parte": "sombrero",
-    "titulo": "Sombrero gris oscuro",
-    "texto": "Liso, algo viscoso, con el borde más oscuro.",
-    "d": "der"
+    "titulo": "Sombrero gris",
+    "texto": "Liso, algo viscoso, gris claro a casi negro, con el borde más oscuro.",
+    "d": "arriba"
    },
    {
-    "x": 45,
-    "y": 52,
+    "x": 30,
+    "y": 55,
     "parte": "pie",
     "titulo": "Pie blanco y grueso",
-    "texto": "Blanquecino, a veces gris arriba.",
-    "d": "abajo"
+    "texto": "Blanquecino, a veces gris arriba; sin anillo.",
+    "d": "izq"
+   },
+   {
+    "x": 55,
+    "y": 40,
+    "parte": "himenio",
+    "titulo": "Láminas espaciadas",
+    "texto": "Gruesas, blancas de joven y luego gris-azuladas.",
+    "d": "arriba-der"
    }
   ],
   "ojo": "Es de montaña alta; en la costa de Bizkaia es raro verla. Se parece a otras setas grises de pie blanco: comprueba las láminas separadas y gruesas."
  },
  {
-  "_cand": "6.0",
+  "_cand": "3.1",
   "titulo": "Láminas gruesas y separadas",
   "foto": {
    "sp": "Hygrophorus marzuolus",
-   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/102372021/{s}.jpeg",
-   "autor": "Alan Rockefeller",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/624838110/{s}.jpg",
+   "autor": "Paula Nimigean",
    "licencia": "CC BY 4.0",
    "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
-   "pagina": "https://www.inaturalist.org/observations/63752560",
+   "pagina": "https://www.inaturalist.org/observations/343060742",
    "origen": "iNaturalist",
-   "ar": 1.4862
+   "ar": 1.258
   },
   "puntos": [
    {
-    "x": 30,
-    "y": 60,
+    "x": 55,
+    "y": 30,
     "parte": "himenio",
     "titulo": "Láminas espaciadas",
-    "texto": "Gruesas, blancas de joven y luego gris-azuladas.",
+    "texto": "Muy separadas entre sí, gruesas, gris pálido.",
+    "d": "arriba"
+   },
+   {
+    "x": 22,
+    "y": 45,
+    "parte": "habitat",
+    "titulo": "Entre hojarasca",
+    "texto": "Sale medio enterrada, a veces junto a la nieve que se derrite.",
     "d": "izq"
    }
   ]
