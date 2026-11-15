@@ -1,0 +1,75 @@
+[
+ {
+  "_cand": "3.1",
+  "titulo": "Azul-verde y con copos blancos",
+  "foto": {
+   "sp": "Stropharia aeruginosa",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/324766145/{s}.jpeg",
+   "autor": "Ирина Хохрякова",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/185906863",
+   "origen": "iNaturalist",
+   "ar": 1.5037
+  },
+  "puntos": [
+   {
+    "x": 60,
+    "y": 22,
+    "parte": "sombrero",
+    "titulo": "Sombrero viscoso azul-verde",
+    "texto": "Brillante y baboso; con la edad pierde color hacia ocre.",
+    "d": "arriba"
+   },
+   {
+    "x": 76,
+    "y": 36,
+    "parte": "cutis",
+    "titulo": "Restos blancos en el borde",
+    "texto": "Copos blancos colgando del borde del sombrero.",
+    "d": "der"
+   },
+   {
+    "x": 62,
+    "y": 57,
+    "parte": "pie",
+    "titulo": "Pie con escamas blancas",
+    "texto": "Por debajo del anillo, lleno de escamitas como algodón.",
+    "d": "der"
+   }
+  ],
+  "ojo": "Tóxica. Se puede confundir con la anisada azul-verde (Clitocybe odora): esa huele fuerte a anís, no es viscosa, no tiene anillo y sus láminas son blancas que bajan por el pie."
+ },
+ {
+  "_cand": "2.0",
+  "titulo": "Anillo y pie escamoso",
+  "foto": {
+   "sp": "Stropharia aeruginosa",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/226443273/{s}.jpeg",
+   "autor": "snaily_naily",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/132984656",
+   "origen": "iNaturalist",
+   "ar": 1.3333
+  },
+  "puntos": [
+   {
+    "x": 50,
+    "y": 48,
+    "parte": "anillo",
+    "titulo": "Zona del anillo",
+    "texto": "Anillo pequeño y frágil; encima suele quedar oscuro de esporas.",
+    "d": "der"
+   },
+   {
+    "x": 45,
+    "y": 65,
+    "parte": "pie",
+    "titulo": "Escamas como copos",
+    "texto": "Blancas, algodonosas, sobre fondo azulado.",
+    "d": "izq"
+   }
+  ]
+ }
+]

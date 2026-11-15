@@ -1,0 +1,75 @@
+[
+ {
+  "_cand": "1.0",
+  "titulo": "Color salmón, en prado",
+  "foto": {
+   "sp": "Cuphophyllus pratensis",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/332111248/{s}.jpeg",
+   "autor": "Björn Sothmann",
+   "licencia": "CC BY-SA 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/189566870",
+   "origen": "iNaturalist",
+   "ar": 1.4993
+  },
+  "puntos": [
+   {
+    "x": 30,
+    "y": 28,
+    "parte": "sombrero",
+    "titulo": "Salmón-anaranjado",
+    "texto": "Seco y liso, a veces con un pequeño bulto.",
+    "d": "arriba-izq"
+   },
+   {
+    "x": 80,
+    "y": 70,
+    "parte": "himenio",
+    "titulo": "Láminas gruesas pálidas",
+    "texto": "Separadas, crema, bajan por el pie.",
+    "d": "der"
+   },
+   {
+    "x": 56,
+    "y": 66,
+    "parte": "pie",
+    "titulo": "Pie crema",
+    "texto": "Se estrecha hacia la base, sin anillo.",
+    "d": "abajo"
+   }
+  ],
+  "ojo": "Comestible conocido, pero hay Hygrocybe y Clitocybe de prado que se le parecen; aprende a reconocer las láminas gruesas, céreas y decurrentes."
+ },
+ {
+  "_cand": "6.0",
+  "titulo": "De lado: forma de peonza",
+  "foto": {
+   "sp": "Cuphophyllus pratensis",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/244394183/{s}.jpg",
+   "autor": "David Callender",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/142540971",
+   "origen": "iNaturalist",
+   "ar": 1.3344
+  },
+  "puntos": [
+   {
+    "x": 55,
+    "y": 35,
+    "parte": "himenio",
+    "titulo": "Láminas que bajan",
+    "texto": "Gruesas, como de cera, muy decurrentes.",
+    "d": "der"
+   },
+   {
+    "x": 60,
+    "y": 75,
+    "parte": "pie",
+    "titulo": "Pie que se afina",
+    "texto": "Más estrecho abajo.",
+    "d": "der"
+   }
+  ]
+ }
+]

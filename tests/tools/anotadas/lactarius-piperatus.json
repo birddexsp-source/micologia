@@ -1,0 +1,75 @@
+[
+ {
+  "_cand": "1.1",
+  "titulo": "Embudo blanco, láminas apretadísimas",
+  "foto": {
+   "sp": "Lactifluus piperatus",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/93236247/{s}.jpeg",
+   "autor": "Jens Ullenius",
+   "licencia": "CC0",
+   "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+   "pagina": "https://www.inaturalist.org/observations/58399690",
+   "origen": "iNaturalist",
+   "ar": 0.75
+  },
+  "puntos": [
+   {
+    "x": 10,
+    "y": 29,
+    "parte": "sombrero",
+    "titulo": "Embudo blanco",
+    "texto": "Seco, liso, blanco; el centro hundido.",
+    "d": "arriba-izq"
+   },
+   {
+    "x": 40,
+    "y": 40,
+    "parte": "himenio",
+    "titulo": "Láminas muy juntas",
+    "texto": "Estrechísimas y apretadas, bajan un poco por el pie.",
+    "d": "arriba"
+   },
+   {
+    "x": 45,
+    "y": 65,
+    "parte": "pie",
+    "titulo": "Pie corto y blanco",
+    "texto": "Grueso, liso, sin anillo.",
+    "d": "der"
+   }
+  ],
+  "ojo": "No se come: la leche pica muchísimo. Hay otros lactarios blancos parecidos (L. vellereus, con sombrero aterciopelado y láminas separadas). Ninguno merece la pena."
+ },
+ {
+  "_cand": "5.3",
+  "titulo": "Leche blanca al cortar",
+  "foto": {
+   "sp": "Lactifluus piperatus",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/291720454/{s}.jpeg",
+   "autor": "Carminda Santos",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/168335961",
+   "origen": "iNaturalist",
+   "ar": 0.75
+  },
+  "puntos": [
+   {
+    "x": 42,
+    "y": 63,
+    "parte": "carne",
+    "titulo": "Gotas de leche",
+    "texto": "Leche blanca abundante que pica en la lengua; al secarse se pone verdosa.",
+    "d": "abajo-izq"
+   },
+   {
+    "x": 65,
+    "y": 35,
+    "parte": "himenio",
+    "titulo": "Láminas finas y juntas",
+    "texto": "Se bifurcan cerca del borde.",
+    "d": "arriba-der"
+   }
+  ]
+ }
+]

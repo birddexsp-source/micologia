@@ -1,0 +1,67 @@
+[
+ {
+  "_cand": "4.0",
+  "titulo": "Escamas puntiagudas levantadas",
+  "foto": {
+   "sp": "Pholiota squarrosa",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/440384801/{s}.jpeg",
+   "autor": "Kian Hayles-Cotton",
+   "licencia": "CC0",
+   "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+   "pagina": "https://www.inaturalist.org/observations/246660560",
+   "origen": "iNaturalist",
+   "ar": 0.75
+  },
+  "puntos": [
+   {
+    "x": 38,
+    "y": 42,
+    "parte": "sombrero",
+    "titulo": "Escamas erizadas",
+    "texto": "Pardas, puntiagudas, vueltas hacia arriba, sobre fondo amarillo.",
+    "d": "arriba"
+   },
+   {
+    "x": 80,
+    "y": 60,
+    "parte": "sombrero",
+    "titulo": "Borde con flecos",
+    "texto": "El borde lleva escamas colgando.",
+    "d": "der"
+   }
+  ],
+  "ojo": "Tóxica (sobre todo con alcohol). No confundir con la armillaria (Armillaria mellea): esa tiene escamas finas y oscuras en el centro, no erizadas por todo el sombrero y el pie."
+ },
+ {
+  "_cand": "4.2",
+  "titulo": "Pie con escamas y anillo",
+  "foto": {
+   "sp": "Pholiota squarrosa",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/440384858/{s}.jpeg",
+   "autor": "Kian Hayles-Cotton",
+   "licencia": "CC0",
+   "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+   "pagina": "https://www.inaturalist.org/observations/246660560",
+   "origen": "iNaturalist",
+   "ar": 0.75
+  },
+  "puntos": [
+   {
+    "x": 70,
+    "y": 35,
+    "parte": "pie",
+    "titulo": "Pie escamoso",
+    "texto": "Cubierto de escamas como el sombrero por debajo del anillo.",
+    "d": "der"
+   },
+   {
+    "x": 20,
+    "y": 36,
+    "parte": "sombrero",
+    "titulo": "Borde con escamas",
+    "texto": "El sombrero, visto de lado, también erizado.",
+    "d": "izq"
+   }
+  ]
+ }
+]

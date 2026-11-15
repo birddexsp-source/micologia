@@ -1,0 +1,75 @@
+[
+ {
+  "_cand": "1.1",
+  "titulo": "Racimo sobre un tocón",
+  "foto": {
+   "sp": "Kuehneromyces mutabilis",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/337701494/{s}.jpeg",
+   "autor": "Ross Krisztina",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/192379258",
+   "origen": "iNaturalist",
+   "ar": 0.75
+  },
+  "puntos": [
+   {
+    "x": 45,
+    "y": 20,
+    "parte": "sombrero",
+    "titulo": "Sombreros ocre-canela",
+    "texto": "Lisos, húmedos y brillantes, muy apretados.",
+    "d": "arriba"
+   },
+   {
+    "x": 55,
+    "y": 45,
+    "parte": "himenio",
+    "titulo": "Láminas canela",
+    "texto": "Crema y luego pardo-óxido por las esporas.",
+    "d": "der"
+   },
+   {
+    "x": 90,
+    "y": 22,
+    "parte": "habitat",
+    "titulo": "Siempre en madera",
+    "texto": "Tocones y troncos de frondosas.",
+    "d": "der"
+   }
+  ],
+  "ojo": "PELIGRO: la Galerina marginata (mortal, con amatoxinas) es casi idéntica, sale en el mismo sitio y en la misma época, a veces mezclada. La diferencia (pie con escamas finas bajo el anillo y olor) no es fiable para un principiante. No se recoge sin experto."
+ },
+ {
+  "_cand": "5.2",
+  "titulo": "Sombrero de dos colores",
+  "foto": {
+   "sp": "Kuehneromyces mutabilis",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/460531509/{s}.jpeg",
+   "autor": "vuikaan",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/256808887",
+   "origen": "iNaturalist",
+   "ar": 1.3333
+  },
+  "puntos": [
+   {
+    "x": 40,
+    "y": 30,
+    "parte": "sombrero",
+    "titulo": "Centro más claro",
+    "texto": "Al secarse aclara desde el centro: queda un anillo oscuro en el borde.",
+    "d": "arriba"
+   },
+   {
+    "x": 66,
+    "y": 50,
+    "parte": "sombrero",
+    "titulo": "Borde oscuro húmedo",
+    "texto": "Pardo-canela, como mojado.",
+    "d": "der"
+   }
+  ]
+ }
+]
