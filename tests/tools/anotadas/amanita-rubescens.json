@@ -1,0 +1,75 @@
+[
+ {
+  "_cand": "0.0",
+  "titulo": "Anillo, bulbo y manchas rosadas",
+  "foto": {
+   "sp": "Amanita rubescens",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/549735048/{s}.jpg",
+   "autor": "Myles McSweeney",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/304920154",
+   "origen": "iNaturalist",
+   "ar": 0.75
+  },
+  "puntos": [
+   {
+    "x": 40,
+    "y": 20,
+    "parte": "sombrero",
+    "titulo": "Verrugas",
+    "texto": "Restos de velo sobre el sombrero pardo-rosado (aquí, forma pálida).",
+    "d": "arriba"
+   },
+   {
+    "x": 62,
+    "y": 35,
+    "parte": "anillo",
+    "titulo": "Anillo estriado",
+    "texto": "Por arriba tiene rayitas finas; en la pantera es liso.",
+    "d": "der"
+   },
+   {
+    "x": 55,
+    "y": 63,
+    "parte": "pie",
+    "titulo": "Base que enrojece",
+    "texto": "Bulbo sin volva en saco, con manchas rosa-rojizas.",
+    "d": "der"
+   }
+  ],
+  "ojo": "Comestible solo bien cocinada (cruda es tóxica) y muy fácil de confundir con la pantera, que es tóxica. No es para empezar."
+ },
+ {
+  "_cand": "0.4",
+  "titulo": "Cortada: la carne se pone rosa-rojiza",
+  "foto": {
+   "sp": "Amanita rubescens",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/549735329/{s}.jpg",
+   "autor": "Myles McSweeney",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/304920154",
+   "origen": "iNaturalist",
+   "ar": 0.75
+  },
+  "puntos": [
+   {
+    "x": 45,
+    "y": 45,
+    "parte": "carne",
+    "titulo": "Manchas rosa-vino",
+    "texto": "Al cortar o con los bichos, la carne enrojece. Es la pista principal.",
+    "d": "izq"
+   },
+   {
+    "x": 78,
+    "y": 32,
+    "parte": "himenio",
+    "titulo": "Láminas blancas",
+    "texto": "Libres; se manchan de rojo al dañarse.",
+    "d": "der"
+   }
+  ]
+ }
+]

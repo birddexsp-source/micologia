@@ -1,0 +1,67 @@
+[
+ {
+  "_cand": "2.2",
+  "titulo": "Por debajo: láminas blancas muy apretadas",
+  "foto": {
+   "sp": "Calocybe gambosa",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/259358632/{s}.jpg",
+   "autor": "Ellie B",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/150415220",
+   "origen": "iNaturalist",
+   "ar": 0.75
+  },
+  "puntos": [
+   {
+    "x": 60,
+    "y": 72,
+    "parte": "himenio",
+    "titulo": "Láminas muy apretadas",
+    "texto": "Blancas o crema, finas y muy juntas.",
+    "d": "der"
+   },
+   {
+    "x": 40,
+    "y": 25,
+    "parte": "pie",
+    "titulo": "Pie grueso",
+    "texto": "Blanco, macizo, más ancho en la base.",
+    "d": "izq"
+   }
+  ],
+  "ojo": "En primavera también salen setas blancas tóxicas o mortales (Inocybe erubescens, Entoloma). Huele: la buena huele a harina recién molida. Si se mancha de rojo o las láminas son rosas, no."
+ },
+ {
+  "_cand": "0.1",
+  "titulo": "En la hierba, en primavera",
+  "foto": {
+   "sp": "Calocybe gambosa",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/265753980/{s}.jpeg",
+   "autor": "Susan Marley",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "pagina": "https://www.inaturalist.org/observations/153840815",
+   "origen": "iNaturalist",
+   "ar": 1.3333
+  },
+  "puntos": [
+   {
+    "x": 50,
+    "y": 40,
+    "parte": "sombrero",
+    "titulo": "Sombrero crema, carnoso",
+    "texto": "Abombado, con bultos; borde enrollado de joven.",
+    "d": "arriba"
+   },
+   {
+    "x": 82,
+    "y": 82,
+    "parte": "habitat",
+    "titulo": "En corros en prados",
+    "texto": "Abril-mayo, en prados, bordes de bosque y setos; vuelve al mismo sitio cada año.",
+    "d": "der"
+   }
+  ]
+ }
+]

@@ -7966,6 +7966,69 @@
    "familia": "Lyophyllaceae",
    "anotadas": [
     {
+     "titulo": "Por debajo: láminas blancas muy apretadas",
+     "foto": {
+      "sp": "Calocybe gambosa",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/259358632/{s}.jpg",
+      "autor": "Ellie B",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/150415220",
+      "origen": "iNaturalist",
+      "ar": 0.75
+     },
+     "puntos": [
+      {
+       "x": 60,
+       "y": 72,
+       "parte": "himenio",
+       "titulo": "Láminas muy apretadas",
+       "texto": "Blancas o crema, finas y muy juntas.",
+       "d": "der"
+      },
+      {
+       "x": 40,
+       "y": 25,
+       "parte": "pie",
+       "titulo": "Pie grueso",
+       "texto": "Blanco, macizo, más ancho en la base.",
+       "d": "izq"
+      }
+     ],
+     "ojo": "En primavera también salen setas blancas tóxicas o mortales (Inocybe erubescens, Entoloma). Huele: la buena huele a harina recién molida. Si se mancha de rojo o las láminas son rosas, no."
+    },
+    {
+     "titulo": "En la hierba, en primavera",
+     "foto": {
+      "sp": "Calocybe gambosa",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/265753980/{s}.jpeg",
+      "autor": "Susan Marley",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/153840815",
+      "origen": "iNaturalist",
+      "ar": 1.3333
+     },
+     "puntos": [
+      {
+       "x": 50,
+       "y": 40,
+       "parte": "sombrero",
+       "titulo": "Sombrero crema, carnoso",
+       "texto": "Abombado, con bultos; borde enrollado de joven.",
+       "d": "arriba"
+      },
+      {
+       "x": 82,
+       "y": 82,
+       "parte": "habitat",
+       "titulo": "En corros en prados",
+       "texto": "Abril-mayo, en prados, bordes de bosque y setos; vuelve al mismo sitio cada año.",
+       "d": "der"
+      }
+     ]
+    },
+    {
      "foto": {
       "sp": "Calocybe gambosa",
       "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Calocybe_gambosa_(36064595975).jpg/{w}px-Calocybe_gambosa_(36064595975).jpg",
@@ -12087,7 +12150,79 @@
      }
     ]
    },
-   "anotadas": []
+   "anotadas": [
+    {
+     "titulo": "En mata: pies unidos y anillo",
+     "foto": {
+      "sp": "Armillaria mellea",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/237958093/{s}.jpg",
+      "autor": "MichellePrice_CJBG",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/139156344",
+      "origen": "iNaturalist",
+      "ar": 1.3333
+     },
+     "puntos": [
+      {
+       "x": 51,
+       "y": 49,
+       "parte": "anillo",
+       "titulo": "Anillo blanquecino",
+       "texto": "Ancho, persistente, en lo alto del pie.",
+       "d": "izq"
+      },
+      {
+       "x": 42,
+       "y": 86,
+       "parte": "pie",
+       "titulo": "Pies unidos por la base",
+       "texto": "Salen muchos de la misma base, a menudo oscura.",
+       "d": "abajo"
+      },
+      {
+       "x": 60,
+       "y": 23,
+       "parte": "sombrero",
+       "titulo": "Sombrero miel o pardo",
+       "texto": "Color muy variable, con escamitas oscuras en el centro.",
+       "d": "arriba"
+      }
+     ],
+     "ojo": "Comestible solo bien cocinada y para gente con experiencia: cruda o mal hecha sienta mal, y se confunde con la Galerina mortal. Haz siempre la esporada: debe ser blanca."
+    },
+    {
+     "titulo": "Por debajo: anillo algodonoso y láminas blancas",
+     "foto": {
+      "sp": "Armillaria mellea",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/237958282/{s}.jpg",
+      "autor": "MichellePrice_CJBG",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/139156344",
+      "origen": "iNaturalist",
+      "ar": 1.3333
+     },
+     "puntos": [
+      {
+       "x": 40,
+       "y": 50,
+       "parte": "anillo",
+       "titulo": "Velo amarillento",
+       "texto": "De joven cubre las láminas; luego queda como anillo con pelusa amarilla.",
+       "d": "izq"
+      },
+      {
+       "x": 57,
+       "y": 70,
+       "parte": "himenio",
+       "titulo": "Láminas blancas",
+       "texto": "Blanquecinas, algo separadas; esporada blanca.",
+       "d": "der"
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "pleurotus-ostreatus",
@@ -14391,7 +14526,79 @@
      }
     ]
    },
-   "anotadas": []
+   "anotadas": [
+    {
+     "titulo": "Anillo, bulbo y manchas rosadas",
+     "foto": {
+      "sp": "Amanita rubescens",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/549735048/{s}.jpg",
+      "autor": "Myles McSweeney",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/304920154",
+      "origen": "iNaturalist",
+      "ar": 0.75
+     },
+     "puntos": [
+      {
+       "x": 40,
+       "y": 20,
+       "parte": "sombrero",
+       "titulo": "Verrugas",
+       "texto": "Restos de velo sobre el sombrero pardo-rosado (aquí, forma pálida).",
+       "d": "arriba"
+      },
+      {
+       "x": 62,
+       "y": 35,
+       "parte": "anillo",
+       "titulo": "Anillo estriado",
+       "texto": "Por arriba tiene rayitas finas; en la pantera es liso.",
+       "d": "der"
+      },
+      {
+       "x": 55,
+       "y": 63,
+       "parte": "pie",
+       "titulo": "Base que enrojece",
+       "texto": "Bulbo sin volva en saco, con manchas rosa-rojizas.",
+       "d": "der"
+      }
+     ],
+     "ojo": "Comestible solo bien cocinada (cruda es tóxica) y muy fácil de confundir con la pantera, que es tóxica. No es para empezar."
+    },
+    {
+     "titulo": "Cortada: la carne se pone rosa-rojiza",
+     "foto": {
+      "sp": "Amanita rubescens",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/549735329/{s}.jpg",
+      "autor": "Myles McSweeney",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/304920154",
+      "origen": "iNaturalist",
+      "ar": 0.75
+     },
+     "puntos": [
+      {
+       "x": 45,
+       "y": 45,
+       "parte": "carne",
+       "titulo": "Manchas rosa-vino",
+       "texto": "Al cortar o con los bichos, la carne enrojece. Es la pista principal.",
+       "d": "izq"
+      },
+      {
+       "x": 78,
+       "y": 32,
+       "parte": "himenio",
+       "titulo": "Láminas blancas",
+       "texto": "Libres; se manchan de rojo al dañarse.",
+       "d": "der"
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "clitocybe-nebularis",
@@ -14889,7 +15096,71 @@
      }
     ]
    },
-   "anotadas": []
+   "anotadas": [
+    {
+     "titulo": "Mata amarillo azufre sobre un tocón",
+     "foto": {
+      "sp": "Hypholoma fasciculare",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/453097555/{s}.jpeg",
+      "autor": "Piermario Maculan",
+      "licencia": "CC0",
+      "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "pagina": "https://www.inaturalist.org/observations/253084368",
+      "origen": "iNaturalist",
+      "ar": 1.3281
+     },
+     "puntos": [
+      {
+       "x": 52,
+       "y": 47,
+       "parte": "sombrero",
+       "titulo": "Amarillo azufre, centro naranja",
+       "texto": "Sombrero liso, amarillo con el centro más anaranjado.",
+       "d": "der"
+      },
+      {
+       "x": 20,
+       "y": 30,
+       "parte": "habitat",
+       "titulo": "Sobre madera muerta",
+       "texto": "En grupos apretados en tocones y troncos.",
+       "d": "izq"
+      },
+      {
+       "x": 60,
+       "y": 76,
+       "parte": "sombrero",
+       "titulo": "Borde más pálido",
+       "texto": "A veces con restos de la cortina colgando.",
+       "d": "abajo"
+      }
+     ],
+     "ojo": "Muy amarga y tóxica. Se confunde con la armilaria (color miel) y con otras setas en mata: mira el color de las láminas."
+    },
+    {
+     "titulo": "Por debajo: láminas verdosas a gris-púrpura",
+     "foto": {
+      "sp": "Hypholoma fasciculare",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/335699255/{s}.jpeg",
+      "autor": "ÖkopatóPál",
+      "licencia": "CC0",
+      "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "pagina": "https://www.inaturalist.org/observations/191367997",
+      "origen": "iNaturalist",
+      "ar": 0.5625
+     },
+     "puntos": [
+      {
+       "x": 60,
+       "y": 28,
+       "parte": "himenio",
+       "titulo": "Láminas gris-verdosas",
+       "texto": "Amarillas de joven, luego verdosas y al final pardo-púrpura por las esporas. La armilaria las tiene blancas.",
+       "d": "der"
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "scleroderma-citrinum",
@@ -16805,6 +17076,69 @@
     "txt": "La primera vez, sácala entera con la base del pie para estudiarla y tapa el hueco con tierra. Que la confirme una persona experta."
    },
    "anotadas": [
+    {
+     "titulo": "Sombrero verde cuarteado",
+     "foto": {
+      "sp": "Russula virescens",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/315019932/{s}.jpeg",
+      "autor": "Thomas",
+      "licencia": "CC0",
+      "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "pagina": "https://www.inaturalist.org/observations/180809773",
+      "origen": "iNaturalist",
+      "ar": 0.8672
+     },
+     "puntos": [
+      {
+       "x": 30,
+       "y": 70,
+       "parte": "sombrero",
+       "titulo": "Placas",
+       "texto": "La piel se agrieta en placas, como un mosaico.",
+       "d": "abajo-izq"
+      },
+      {
+       "x": 62,
+       "y": 42,
+       "parte": "sombrero",
+       "titulo": "Centro más verde",
+       "texto": "Más oscuro y a menudo hundido.",
+       "d": "arriba-der"
+      }
+     ],
+     "ojo": "Una seta verde puede ser la cicuta verde (Amanita phalloides), mortal. Esta no tiene anillo ni volva y su carne se rompe como tiza: si dudas en uno solo de estos puntos, déjala."
+    },
+    {
+     "titulo": "Por debajo: láminas blancas, sin anillo",
+     "foto": {
+      "sp": "Russula virescens",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/161939199/{s}.jpg",
+      "autor": "Jeff Clark",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/97378187",
+      "origen": "iNaturalist",
+      "ar": 0.75
+     },
+     "puntos": [
+      {
+       "x": 64,
+       "y": 40,
+       "parte": "himenio",
+       "titulo": "Láminas blancas",
+       "texto": "Apretadas y frágiles: se rompen al pasar el dedo.",
+       "d": "der"
+      },
+      {
+       "x": 45,
+       "y": 56,
+       "parte": "pie",
+       "titulo": "Pie blanco, sin anillo",
+       "texto": "Corto y macizo. Sin anillo ni saco en la base.",
+       "d": "abajo"
+      }
+     ]
+    },
     {
      "foto": {
       "sp": "Russula virescens",
@@ -19502,7 +19836,87 @@
      }
     ]
    },
-   "anotadas": []
+   "anotadas": [
+    {
+     "titulo": "Escamas gruesas, como tejas levantadas",
+     "foto": {
+      "sp": "Chlorophyllum rhacodes",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/235045285/{s}.jpg",
+      "autor": "Piermario Maculan",
+      "licencia": "CC0",
+      "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "pagina": "https://www.inaturalist.org/observations/137603729",
+      "origen": "iNaturalist",
+      "ar": 0.75
+     },
+     "puntos": [
+      {
+       "x": 45,
+       "y": 37,
+       "parte": "sombrero",
+       "titulo": "Escamas gruesas",
+       "texto": "Placas pardas levantadas sobre fondo blanco, mucho más bastas que en el parasol.",
+       "d": "arriba-izq"
+      },
+      {
+       "x": 42,
+       "y": 18,
+       "parte": "sombrero",
+       "titulo": "Centro liso pardo",
+       "texto": "Una «gorra» parda en el centro.",
+       "d": "arriba-der"
+      },
+      {
+       "x": 44,
+       "y": 66,
+       "parte": "pie",
+       "titulo": "Pie liso",
+       "texto": "Blanquecino y sin dibujo atigrado: así se distingue del parasol.",
+       "d": "der"
+      }
+     ],
+     "ojo": "A algunas personas les sienta mal. Y hay parientes tóxicos parecidos con láminas verdosas (Chlorophyllum molybdites): si la esporada sale verde, fuera."
+    },
+    {
+     "titulo": "El pie: liso, con anillo y bulbo",
+     "foto": {
+      "sp": "Chlorophyllum rhacodes",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/2629708/{s}.jpg",
+      "autor": "Paul Wheeler",
+      "licencia": "CC BY 4.0",
+      "licenciaUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "pagina": "https://www.inaturalist.org/observations/2363373",
+      "origen": "iNaturalist",
+      "ar": 1.3333
+     },
+     "puntos": [
+      {
+       "x": 58,
+       "y": 50,
+       "parte": "pie",
+       "titulo": "Sin bandas",
+       "texto": "Liso, de un solo color. El parasol tiene bandas tipo serpiente.",
+       "d": "der"
+      },
+      {
+       "x": 62,
+       "y": 76,
+       "parte": "anillo",
+       "titulo": "Anillo móvil",
+       "texto": "Grueso, doble; se desliza por el pie.",
+       "d": "izq"
+      },
+      {
+       "x": 55,
+       "y": 18,
+       "parte": "himenio",
+       "titulo": "Láminas blancas",
+       "texto": "Se manchan de rojizo al rozarlas; la carne enrojece al cortar.",
+       "d": "arriba-izq"
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "cortinarius-rubellus",

@@ -1,0 +1,67 @@
+[
+ {
+  "_cand": "4.0",
+  "titulo": "Mata amarillo azufre sobre un tocón",
+  "foto": {
+   "sp": "Hypholoma fasciculare",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/453097555/{s}.jpeg",
+   "autor": "Piermario Maculan",
+   "licencia": "CC0",
+   "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+   "pagina": "https://www.inaturalist.org/observations/253084368",
+   "origen": "iNaturalist",
+   "ar": 1.3281
+  },
+  "puntos": [
+   {
+    "x": 52,
+    "y": 47,
+    "parte": "sombrero",
+    "titulo": "Amarillo azufre, centro naranja",
+    "texto": "Sombrero liso, amarillo con el centro más anaranjado.",
+    "d": "der"
+   },
+   {
+    "x": 20,
+    "y": 30,
+    "parte": "habitat",
+    "titulo": "Sobre madera muerta",
+    "texto": "En grupos apretados en tocones y troncos.",
+    "d": "izq"
+   },
+   {
+    "x": 60,
+    "y": 76,
+    "parte": "sombrero",
+    "titulo": "Borde más pálido",
+    "texto": "A veces con restos de la cortina colgando.",
+    "d": "abajo"
+   }
+  ],
+  "ojo": "Muy amarga y tóxica. Se confunde con la armilaria (color miel) y con otras setas en mata: mira el color de las láminas."
+ },
+ {
+  "_cand": "5.1",
+  "titulo": "Por debajo: láminas verdosas a gris-púrpura",
+  "foto": {
+   "sp": "Hypholoma fasciculare",
+   "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/335699255/{s}.jpeg",
+   "autor": "ÖkopatóPál",
+   "licencia": "CC0",
+   "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+   "pagina": "https://www.inaturalist.org/observations/191367997",
+   "origen": "iNaturalist",
+   "ar": 0.5625
+  },
+  "puntos": [
+   {
+    "x": 60,
+    "y": 28,
+    "parte": "himenio",
+    "titulo": "Láminas gris-verdosas",
+    "texto": "Amarillas de joven, luego verdosas y al final pardo-púrpura por las esporas. La armilaria las tiene blancas.",
+    "d": "der"
+   }
+  ]
+ }
+]
