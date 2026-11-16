@@ -36,7 +36,10 @@ jobs:
           MICO_VC: ${{ github.run_number }}
         run: |
           export MICO_VN=$(grep -o 'micologia-v[0-9]*' ../../docs/sw.js | head -1 | sed 's/micologia-//')
-          ./gradlew -I ../firma.gradle assembleRelease --no-daemon
+          chmod +x gradlew
+          # si falla, el motivo queda como anotación visible (sin iniciar sesión) en la ejecución
+          set -o pipefail
+          ./gradlew -I ../firma.gradle assembleRelease --no-daemon 2>&1 | tee ../build.log || { echo "::error title=Gradle::$(grep -E 'What went wrong|FAILURE|error:|Caused by|Could not|not found|Exception' ../build.log | head -12 | cut -c1-300 | tr '\n' '|')"; exit 1; }
           cp app/build/outputs/apk/release/app-release.apk ../micologia.apk
       - uses: actions/upload-artifact@v4
         with: { name: micologia-apk, path: android-app/micologia.apk }
