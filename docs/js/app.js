@@ -18,7 +18,7 @@ import * as lug from './lugar.js';
 import * as zon from './zona.js';
 import * as tr from './tramos.js';
 
-const APP_V = 'micologia-v48';   // = V de sw.js
+const APP_V = 'micologia-v49';   // = V de sw.js
 const S = { view: 'mapa', arg: '', map: null, pins: null, me: null, acc: null, tmp: null, mini: null, centered: false, filtro: { salida: '', especie: '' }, clase: '', q: '', syncErr: false, mes: new Date().getMonth() + 1 };
 const VIEWS = ['mapa', 'salidas', 'salida', 'setas', 'mes', 'plan', 'ajustes'];
 const TITULOS = { mapa: 'Mapa', salidas: 'Salidas', salida: 'Salida', setas: 'Setas', mes: 'Este mes', plan: 'Plan de salida', ajustes: 'Ajustes' };
@@ -1309,6 +1309,27 @@ function badge() {
   b.className = 'syncbtn' + (syn.syncing() ? ' run' : '') + (navigator.onLine ? '' : ' off') + (S.syncErr ? ' err' : '');
 }
 
+/* ---------- botón «atrás» de Android: cierra lo abierto y retrocede de pantalla en pantalla; solo sale desde el mapa ---------- */
+function padre(h) {
+  const [v, arg, sub, key] = (h || '#mapa').slice(1).split('/');
+  if (v === 'salida') return sub ? (sub === 'especie' && key ? '#salida/' + arg + '/especies' : '#salida/' + arg) : '#salidas';
+  return v && v !== 'mapa' ? '#mapa' : null;
+}
+function atras() {
+  const vis = document.getElementById('visor'); if (vis) { vis.remove(); return 'visor'; }
+  const sh = $('#sheet'); if (sh && !sh.hidden) { closeSheet(); return 'hoja'; }
+  const lg = $('#mleg'); if (lg && !lg.hidden) { lg.hidden = true; $('#legbtn').classList.remove('on'); return 'leyenda'; }
+  const p = padre(location.hash); if (p) { location.hash = p; return p; }
+  return null;   /* ya estás en el mapa: ahí sí se sale de la app */
+}
+function atrasAndroid() {
+  try {
+    const C = window.Capacitor; if (!(C && C.isNativePlatform && C.isNativePlatform())) return;
+    const A = (C.Plugins && C.Plugins.App) || (C.registerPlugin && C.registerPlugin('App')); if (!A || !A.addListener) return;
+    A.addListener('backButton', () => { if (atras() === null) A.exitApp(); });
+  } catch (e) { }
+}
+
 /* ---------- navegación ---------- */
 function route() {
   const [v, arg, sub, key] = (location.hash || '#mapa').slice(1).split('/'), view = VIEWS.includes(v) ? v : 'mapa';
@@ -1331,7 +1352,7 @@ async function renderView() {
 }
 async function boot() {
   await db.init(); await cat.load(); lug.cargar();
-  initMap(); badge(); route(); chipSalida();
+  initMap(); badge(); route(); chipSalida(); atrasAndroid();
   /* si había una salida en curso (la app se cerró o se recargó), sigue grabando el recorrido */
   { const a = await activa(); if (a && (tr.tiene(a) ? tr.activo(a) : a.grabar !== false)) await trk.start(a.id); }
   addEventListener('hashchange', route);
@@ -1356,7 +1377,7 @@ async function boot() {
       buscar();
     }).catch(() => { });
   }
-  window.__MI = { abrirVisor, fichaTab: k => fichaTab($('#sheet .sh'), k), abrirHabitat, abrirDondeBuscar, db, geo, syn, cat, trk, S, abrirHallazgo, abrirFicha, abrirLibro, abrirIA, ia, abrirSpot, verSpot, editarSpot, verHallazgo, leerGPX };
+  window.__MI = { atras, padre, abrirVisor, fichaTab: k => fichaTab($('#sheet .sh'), k), abrirHabitat, abrirDondeBuscar, db, geo, syn, cat, trk, S, abrirHallazgo, abrirFicha, abrirLibro, abrirIA, ia, abrirSpot, verSpot, editarSpot, verHallazgo, leerGPX };
   document.body.dataset.ready = '1';
 }
 boot().catch(e => { console.error(e); document.body.insertAdjacentHTML('beforeend', '<div class="warn" style="position:fixed;top:60px;left:12px;right:12px;z-index:9999">No se pudo arrancar la app: ' + esc(e.message || e) + '</div>'); });

@@ -9,7 +9,8 @@ module.exports = {
     await t.page.addInitScript(() => {
       window.Capacitor = { isNativePlatform: () => true, Plugins: {
         BackgroundGeolocation: { addWatcher: async (o, cb) => { window.__bgo = o; window.__bgcb = cb; return 'w1'; }, removeWatcher: async o => { window.__bgrm = o.id; } },
-        LocalNotifications: { requestPermissions: async () => { window.__notif = true; return {}; } } } };
+        LocalNotifications: { requestPermissions: async () => { window.__notif = true; return {}; } },
+        App: { addListener: (n, cb) => { if (n === 'backButton') window.__atras = cb; }, exitApp: () => { window.__salio = true; } } } };
     });
     await t.page.reload(); await t.wait(800);
     const E = (fn, arg) => t.page.evaluate(new Function('arg', 'return (async()=>{' + MOD + fn + '})()'), arg);
@@ -157,11 +158,27 @@ module.exports = {
       t.ok('terminada con todas las zonas cerradas', s.estado === 'terminada' && s.tramos.every(z => z.fin !== null));
       t.eq('el grabador queda parado', await t.page.evaluate(() => window.__MI.trk.activo()), null);
     });
+    await t.case('botón atrás de Android: cierra lo abierto, retrocede de pantalla en pantalla y solo sale desde el mapa', async () => {
+      const atras = async () => { await t.page.evaluate(() => window.__atras()); await t.wait(300); }, H = () => t.page.evaluate(() => location.hash), S_ = id => '#salida/' + id;
+      t.ok('la app registra el botón atrás', await t.page.evaluate(() => typeof window.__atras === 'function'));
+      await t.put('salidas', 'sb', { fecha: '2026-11-16', titulo: '', notas: '', zonaIds: [], fotos: [], fotosCosecha: [], track: [], grabar: false, estado: 'terminada', creada: 1, fin: 2 });
+      await t.go('#salida/sb/especie/x'); await t.wait(400);
+      await atras(); t.eq('especie → lista de especies', await H(), '#salida/sb/especies');
+      await atras(); t.eq('especies → resumen de la salida', await H(), '#salida/sb');
+      await t.page.evaluate(() => window.__MI.abrirSpot ? 0 : 0); await t.go('#salida/sb/mas'); await t.wait(300);
+      await t.page.evaluate(() => { const s = document.querySelector('#sheet'); s.hidden = false; s.innerHTML = '<div class="sh">x</div>'; });
+      await atras(); t.eq('con una hoja abierta, atrás solo la cierra', [await H(), await t.page.evaluate(() => document.querySelector('#sheet').hidden)], ['#salida/sb/mas', true]);
+      await atras(); t.eq('más → resumen', await H(), '#salida/sb');
+      await atras(); t.eq('resumen → lista de salidas', await H(), '#salidas');
+      await atras(); t.eq('salidas → mapa', await H(), '#mapa');
+      t.eq('desde el mapa todavía no ha salido', await t.page.evaluate(() => !!window.__salio), false);
+      await atras(); t.eq('desde el mapa sale de la app', await t.page.evaluate(() => !!window.__salio), true);
+    });
     await t.case('app Android: proyecto, permisos y compilación automática preparados', async () => {
       const R = f => fs.readFileSync(path.join(__dirname, '..', '..', f), 'utf8'), ex = f => fs.existsSync(path.join(__dirname, '..', '..', f));
       const cfg = JSON.parse(R('android-app/capacitor.config.json')), pk = JSON.parse(R('android-app/package.json')), wf = R('.github/workflows/apk.yml'), sw = R('docs/sw.js');
       t.ok('Capacitor carga la web en vivo de Pages (se actualiza sola) y no deja que Android pare el GPS a los 5 min', cfg.webDir === '../docs' && /^https:\/\/birddexsp-source\.github\.io\/micologia\/$/.test(cfg.server.url) && cfg.android.useLegacyBridge === true && /^[a-z.]+$/.test(cfg.appId));
-      t.ok('plugin de GPS en segundo plano y avisos', !!pk.dependencies['@capacitor-community/background-geolocation'] && !!pk.dependencies['@capacitor/local-notifications']);
+      t.ok('plugin de GPS en segundo plano, avisos y botón atrás', !!pk.dependencies['@capacitor-community/background-geolocation'] && !!pk.dependencies['@capacitor/local-notifications'] && !!pk.dependencies['@capacitor/app']);
       t.ok('clave de firma fija y script de firma (para actualizar sin desinstalar)', ex('android-app/micologia.keystore') && /signingConfig/.test(R('android-app/firma.gradle')));
       t.ok('permisos de micrófono y cámara', /RECORD_AUDIO/.test(R('android-app/permisos.txt')) && /CAMERA/.test(R('android-app/permisos.txt')));
       t.ok('el workflow compila, firma y publica con enlace fijo', /assembleRelease/.test(wf) && /apk-latest/.test(wf) && /permissions:\s*\n\s*contents: write/.test(wf));
