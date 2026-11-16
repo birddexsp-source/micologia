@@ -89,10 +89,18 @@ export async function reconocer(files, opts = {}) {
 }
 /* Transcribe una nota de voz (castellano, a veces con palabras en euskera). Solo texto: no interpreta ni resume. */
 export async function transcribir(blob, opts = {}) {
-  const partes = [{ text: 'Transcribe literalmente este audio (castellano; puede haber palabras en euskera o nombres de setas). Devuelve SOLO el texto transcrito, sin comentarios. Si no se entiende nada, devuelve una cadena vacía.' },
-    { inline_data: { mime_type: (blob.type || 'audio/webm').split(';')[0], data: await b64(blob) } }];
-  const t = (await generar(partes, { temperature: 0, maxOutputTokens: 2048 }, opts)).trim();
-  if (!t) throw new Error('vacio');
-  return t.slice(0, 4000);
+  const prompt_ = { text: 'Transcribe literalmente este audio (castellano; puede haber palabras en euskera o nombres de setas). Devuelve SOLO el texto transcrito, sin comentarios. Si no se entiende nada, devuelve una cadena vacía.' };
+  const mime = (blob.type || 'audio/webm').split(';')[0], data = await b64(blob);
+  /* el móvil a veces graba en MP4 (iPhone, algunos Android): si Google rechaza ese tipo, se reintenta como AAC */
+  const tipos = /mp4|m4a/.test(mime) ? [mime, 'audio/aac'] : [mime];
+  let err;
+  for (const m of tipos) {
+    try {
+      const t = (await generar([prompt_, { inline_data: { mime_type: m, data } }], { temperature: 0, maxOutputTokens: 4096 }, opts)).trim();
+      if (!t) throw new Error('vacio');
+      return t.slice(0, 4000);
+    } catch (e) { err = e; if (e.message !== 'formato') throw e; }
+  }
+  throw err;
 }
 export const mensajeError = e => ({ 'sin-clave': 'Falta la clave de Gemini (Ajustes).', clave: 'Google no acepta la clave: revísala en Ajustes.', red: 'No hay conexión. Prueba cuando tengas cobertura.', tiempo: 'Ha tardado demasiado. Prueba otra vez.', formato: 'Google no ha podido leer este audio.', vacio: 'No se ha entendido nada en el audio.' }[e && e.message] || 'No se ha podido reconocer ahora. Prueba más tarde.');

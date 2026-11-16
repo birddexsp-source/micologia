@@ -117,9 +117,10 @@ function pintarResultado(root) {
       const sc = x.score == null ? 0 : x.score;
       return '<button data-pf="' + x.f + '" class="pl-b' + (x.d < 0 ? ' pas' : '') + (x.d === 0 ? ' hoy' : '') + (x.f === sel ? ' on' : '') + '" style="--h:' + Math.max(4, sc / mx * 100) + '%;--c:' + md.COL(sc) + '"><span class="pl-v">' + (x.score == null ? '' : sc) + '</span><u></u><span class="pl-p">' + (x.p == null ? '' : x.p >= 1 ? Math.round(x.p) : '·') + '</span><span class="pl-d">' + DIA1[cl.aFecha(x.f).getDay()] + '<small>' + cl.aFecha(x.f).getDate() + '</small></span></button>';
     }).join('') + '</div><div class="pl-leg"><span>◀ ya pasado (tiempo real)</span><span>previsión ▶</span></div><div class="pl-leg2"><span class="pl-mm">azul</span> = lluvia del día (mm). Lo pasado son datos medidos; a más de 5 días, la previsión es menos fiable.</div></div>' +
-    detalleDia(dia, titulo, E) + (dia && dia.score != null ? '<div class="pl-lista">' + listaDia(dia) + '</div>' : '') + (cal ? '<div class="note pl-cal">Modelo ajustado con tus ' + cal.n + ' visitas.</div>' : '');
+    detalleDia(dia, titulo, E) + (dia && dia.score != null ? '<div class="pl-lista">' + listaDia(dia) + '</div>' : '') + (cal ? '<div class="note pl-cal">Modelo ajustado con tus ' + cal.n + ' visitas.</div>' : '') +
+    '<div class="note pl-gente"><b>La gente también cuenta.</b> Tras un fin de semana de lluvia, el lunes ya ha pasado la gente a recoger y quedan sobre todo las setas que nadie se lleva; jueves y viernes por la mañana suele haber tanda nueva. Es una hipótesis tuya, sin contrastar: solo resta hasta un 30 % a las especies que la gente suele recoger.</div>';
 }
-const etiquetaLim = r => { const m = { lluvia: 'lluvia acumulada', temp: 'temperatura', helada: 'helada', seco: 'suelo seco', temporada: 'época del año' }; const x = r && (r.limitante || (r.general && r.general.mejor && null)); return m[x] || 'varios factores'; };
+const etiquetaLim = r => { const m = { lluvia: 'lluvia acumulada', temp: 'temperatura', helada: 'helada', seco: 'suelo seco', temporada: 'época del año', gente: 'gente (recolectores)' }; const x = r && (r.limitante || (r.general && r.general.mejor && null)); return m[x] || 'varios factores'; };
 function detalleDia(d, titulo, E) {
   if (!d || d.score == null) return '';
   const tipo = d.d < 0 ? 'Cómo estaba' : d.d === 0 ? 'Hoy' : 'Previsión';

@@ -15,8 +15,9 @@ import * as au from './audio.js';
 import * as off from './offline.js';
 import { renderPlan } from './plan.js';
 import * as lug from './lugar.js';
+import * as zon from './zona.js';
 
-const APP_V = 'micologia-v45';   // = V de sw.js
+const APP_V = 'micologia-v46';   // = V de sw.js
 const S = { view: 'mapa', arg: '', map: null, pins: null, me: null, acc: null, tmp: null, mini: null, centered: false, filtro: { salida: '', especie: '' }, clase: '', q: '', syncErr: false, mes: new Date().getMonth() + 1 };
 const VIEWS = ['mapa', 'salidas', 'salida', 'setas', 'mes', 'plan', 'ajustes'];
 const TITULOS = { mapa: 'Mapa', salidas: 'Salidas', salida: 'Salida', setas: 'Setas', mes: 'Este mes', plan: 'Plan de salida', ajustes: 'Ajustes' };
@@ -202,6 +203,10 @@ async function refreshPins() {
       const n = new Set(hs.filter(h => h.zonaId === z.id).map(h => h.especieId || norm(h.especieTxt))).size;
       S.spotM[z.id] = spotPin(z, { n }).on('click', () => verSpot(z.id)).addTo(S.spotsL);
     });
+  /* zona de cada salida: el círculo que cubre sus spots y sus hallazgos */
+  if (capa !== 'porir' && capa !== 'hallazgos') (await db.list('salidas')).filter(x => !f.salida || (f.salida === 'activa' ? act && x.id === act.id : x.id === f.salida)).forEach(x => {
+    const c = zon.zonaSalida(x, hs, zs); if (c && c.n >= 2) L.circle([c.lat, c.lon], { radius: c.r, color: '#4cc3d9', weight: 2, dashArray: '7 6', fillColor: '#4cc3d9', fillOpacity: .07, interactive: false, className: 'zona-circ' }).addTo(S.spotsL);
+  });
   if (S.selId) marcarSel(S.selId);
   $('#mhint').hidden = !!(hs.length || zs.length);
   $('#filterbtn').classList.toggle('on', !!(f.salida || f.especie));
@@ -236,7 +241,8 @@ async function marcar(opts = {}) {
   const horaTxt = () => (opts.ts ? new Date(opts.ts).toLocaleDateString('es-ES') + ' ' : '') + hhmm(opts.ts || Date.now());
   const [zonas, act] = [await db.list('zonas'), await activa()];
   /* barrido: si ya estás a menos de 150 m de un spot, se elige solo */
-  if (!m.zona) { const c = zonas.filter(z => z.lat != null).map(z => [z, distM(pos, z)]).sort((a, b) => a[1] - b[1])[0]; if (c && c[1] <= 150) m.zona = c[0].id; }
+  /* dentro de una salida, el spot por defecto es el más cercano de ESA salida (su zona); fuera, el que tengas a menos de 150 m */
+  if (!m.zona) m.zona = zon.spotDefecto(pos, zonas, opts.salida ? await db.get('salidas', opts.salida) : act);
   /* rejilla de especies probables: las que ya salieron en este spot, las de hoy, las que más encuentras y las de temporada */
   const hs0 = await db.list('hallazgos'), mes = new Date(opts.ts || Date.now()).getMonth() + 1, sal = opts.salida || (act && act.id);
   const freq = l => { const c = {}; l.forEach(h => { if (h.especieId) c[h.especieId] = (c[h.especieId] || 0) + 1; }); return Object.keys(c).sort((a, b) => c[b] - c[a]); };
@@ -604,7 +610,7 @@ async function addFoto(sid, k, fid) { const cur = await db.get('salidas', sid); 
 async function abrirNotaSalida(sid) {
   const s = await db.get('salidas', sid); if (!s) return;
   const f = geo.fix(), zonas = (await db.list('zonas')).filter(z => z.lat != null), vz = nuevoVoz(); let tipo = 'nota', zona = null;
-  if (f) { const c = zonas.map(z => [z, distM(f, z)]).sort((a, b) => a[1] - b[1])[0]; if (c && c[1] <= 150) zona = c[0].id; }
+  zona = zon.spotDefecto(f, zonas, s);
   const sh = openSheet('<h2>Nota de voz</h2><p class="sub">' + hhmm(Date.now()) + (f ? ' · ' + ((lug.nombrar(f.lat, f.lon) || {}).etiqueta || f.lat.toFixed(5) + ', ' + f.lon.toFixed(5)) : ' · sin GPS') + '</p>' +
     '<label class="l">Qué es</label><div class="seg" id="dn-tipo"><button data-tp="nota" class="on">Nota</button><button data-tp="sin_setas">Aquí no hay setas</button></div>' +
     '<label class="l">Spot</label><select id="dn-zona"><option value="">Ninguno</option>' + zonas.slice().sort((a, b) => a.nombre.localeCompare(b.nombre)).map(z => '<option value="' + z.id + '"' + (z.id === zona ? ' selected' : '') + '>' + esc(z.nombre) + '</option>').join('') + '</select>' +
@@ -653,9 +659,10 @@ async function renderSalida(id) {
     const l = Object.values(g); return l.length ? '<div class="echs">' + l.map(r => { const e = cat.byId(r.h.especieId); return '<button class="ech" ' + (e ? 'data-e="' + e.id + '"' : 'data-h="' + r.h.id + '"') + '>' + mini(e) + '<span>' + esc(nombreCorto(r.h)) + (r.n > 1 ? ' <em>×' + r.n + '</em>' : '') + '</span></button>'; }).join('') + '</div>' : '<p class="mut sm" style="margin:4px 0 0">Sin especies anotadas</p>'; };
   const nEsp = especiesDe(hs).length;
   const tab = S.sdTab && S.sdTab.id === id ? S.sdTab.t : 'spots', tieneTrk = (live().track || []).length > 1;
+  const zc = zon.zonaSalida(s, hs, zonas);
   const TABS = [['spots', 'Spots', zids.length], ['hall', 'Hallazgos', hs.length], ['fotos', 'Fotos', cos.length + (s.fotos || []).length], ['diario', 'Diario', (s.diario || []).length], ['mas', 'Más', '']];
   const panel = (k, html) => '<div class="tabp" data-p="' + k + '"' + (k === tab ? '' : ' hidden') + '>' + html + '</div>';
-  const pSpots = (orden.length ? '<div class="tline">' + orden.map((zid, i) => { const z = zonas.find(x => x.id === zid), n = hs.filter(h => h.zonaId === zid).length;
+  const pSpots = (zc && zc.n >= 2 ? '<div class="zona-i"><i></i><span><b>Zona de la salida</b> · radio de unos ' + zc.r + ' m · ' + zc.spots + ' spots · ' + zc.especies + ' especies</span></div>' : '') + (orden.length ? '<div class="tline">' + orden.map((zid, i) => { const z = zonas.find(x => x.id === zid), n = hs.filter(h => h.zonaId === zid).length;
       return '<div class="tl"><span class="tn">' + (i + 1) + '</span><div class="tc"><div class="th"><div><b>' + esc(z.nombre) + '</b><small>' + [tramo(zid), n ? plural(n, 'hallazgo', 'hallazgos') : ''].filter(Boolean).join(' · ') + '</small></div>' + (ordenando ? '<span class="ord-b"><button class="btn sm" data-up="' + i + '"' + (i ? '' : ' disabled') + ' aria-label="Subir">↑</button><button class="btn sm" data-dn="' + i + '"' + (i < orden.length - 1 ? '' : ' disabled') + ' aria-label="Bajar">↓</button></span>' : '<button class="btn sm" data-sa="' + zid + '">＋ Especie</button>') + '</div>' + chips(zid) + '</div></div>'; }).join('') + '</div>'
       : '<div class="sv-empty">' + I.flag + '<div><b>Aún sin spots.</b> ' + (curso ? 'Cuando llegues a un sitio interesante pulsa «Spot aquí».' : 'Añade los sitios por los que pasaste.') + '</div></div>') + '<div class="row">' + (orden.length > 1 ? (ordenando ? '<button class="btn" id="sd-inv">⇅ Invertir orden</button><button class="btn p" id="sd-ordok">Listo</button>' : '<button class="btn" id="sd-ord">⇅ Cambiar orden</button>') : '') + (ordenando ? '' : '<button class="btn" id="sd-addspot">＋ Añadir spot a la salida</button>') + '</div>';
   const pHall = hs.length ? hs.map(h => { const e = cat.byId(h.especieId); return '<button class="item" data-h="' + h.id + '">' + (e ? fi.avatar(e) : '<span class="dot" style="--c:' + (IDENT[h.identificacion] || IDENT.sin_identificar).color + '"></span>') + '<div class="t"><b>' + esc(nombreCorto(h)) + '</b><small>' + hhmm(h.ts) + (h.zonaId ? ' · ' + esc(zn(h.zonaId)) : '') + (h.cantidad ? ' · ' + esc(h.cantidad) : '') + ' · ' + (IDENT[h.identificacion] || IDENT.sin_identificar).label + '</small></div>' + I.chev + '</button>'; }).join('') + (mejor ? '<p class="mut sm">Donde más hubo: <b>' + esc(zn(mejor)) + '</b></p>' : '') : '<div class="empty">Sin hallazgos todavía.</div>';
@@ -687,6 +694,7 @@ async function renderSalida(id) {
   const pintar = () => { capa.clearLayers(); trazo(live().track).addTo(capa); };
   pintar(); trk.lineas(live().track).forEach(l => l.forEach(p => ls.push([p[0], p[1]])));
   hs.forEach(h => { pinH(h, { interactive: false }).addTo(S.mini); ls.push([h.lat, h.lon]); });
+  if (zc && zc.n >= 2) { const ci = L.circle([zc.lat, zc.lon], { radius: zc.r, color: '#4cc3d9', weight: 2, dashArray: '7 6', fillColor: '#4cc3d9', fillOpacity: .08, interactive: false, className: 'zona-circ' }).addTo(S.mini), bb = ci.getBounds(); ls.push([bb.getSouth(), bb.getWest()], [bb.getNorth(), bb.getEast()]); }
   orden.forEach((zid, i) => { const z = zonas.find(x => x.id === zid); if (!z || z.lat == null) return; L.marker([z.lat, z.lon], { interactive: false, zIndexOffset: 500, icon: L.divIcon({ className: 'tnm', html: '<b>' + (i + 1) + '</b>', iconSize: [24, 24], iconAnchor: [12, 12] }) }).addTo(S.mini); ls.push([z.lat, z.lon]); });
   if (!ls.length) { const f = geo.fix(); if (f) { S.mini.setView([f.lat, f.lon], 15); L.marker([f.lat, f.lon], { interactive: false, icon: L.divIcon({ className: 'me', html: '<i></i>', iconSize: [22, 22], iconAnchor: [11, 11] }) }).addTo(S.mini); } }
   if (ls.length) S.mini.fitBounds(ls, { padding: [30, 30], maxZoom: 17, animate: false });
@@ -886,7 +894,7 @@ function fichaTab(sh, k, { ir = false } = {}) {
 function leyendaMapa() {
   const cl = ['ok_fuentes', 'cond_fuentes', 'no_comestible', 'toxica', 'mortal'].map(k => cat.CLASES[k]);
   return '<b>Qué significa cada marca</b><div class="ml-r"><span class="ml-sp" style="--c:var(--spot)">' + I.seta + '</span>Spot visitado</div><div class="ml-r"><span class="ml-sp por">' + I.flag + '</span>Spot «quiero ir» (sin visitar)</div>' +
-    '<small>Hallazgos: el borde es el color de la especie</small>' + cl.map(c => '<div class="ml-r"><i style="--c:' + c.color + '"></i>' + esc(c.label) + '</div>').join('') + '<div class="ml-r"><i style="--c:#9aa5a1"></i>Sin identificar o sin datos</div><small class="ml-x">Toca para cerrar</small>';
+    '<div class="ml-r"><i style="--c:#4cc3d9;background:none;border:2px dashed #4cc3d9"></i>Zona de una salida (cubre sus spots y hallazgos)</div>' + '<small>Hallazgos: el borde es el color de la especie</small>' + cl.map(c => '<div class="ml-r"><i style="--c:' + c.color + '"></i>' + esc(c.label) + '</div>').join('') + '<div class="ml-r"><i style="--c:#9aa5a1"></i>Sin identificar o sin datos</div><small class="ml-x">Toca para cerrar</small>';
 }
 function abrirFicha(id) {
   const e = cat.byId(id); if (!e) return;

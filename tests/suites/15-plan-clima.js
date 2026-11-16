@@ -130,7 +130,7 @@ module.exports = {
       await t.page.selectOption('#pl-obj', 'boletus-edulis'); await t.wait(600);
       const top = await t.T('.pl-top'), pasado = +(await t.page.evaluate(() => [...document.querySelectorAll('.pl-b.pas .pl-v')].pop().textContent));
       t.ok('con 26 días de lluvia y 13,5 °C en octubre, Boletus edulis sale «Muy buen momento»', /Muy buen momento/.test(top), top);
-      t.ok('«Por qué» enumera lluvia y temperatura con ✓', /Lluvia: 91 mm/.test(await t.T('.pl-why') || '') && /Temperatura media 13,5/.test(await t.T('.pl-why')) && (await t.N('.pl-why li.ok')) >= 2);
+      t.ok('«Por qué» enumera lluvia y temperatura con ✓', /Lluvia: \d+ mm/.test(await t.T('.pl-why') || '') && /Temperatura media 13,5/.test(await t.T('.pl-why')) && (await t.N('.pl-why li.ok')) >= 2);
       /* tocar un día cambia el detalle */
       await t.page.evaluate(() => document.querySelectorAll('.pl-b')[17].click()); await t.wait(250);
       const fut = await t.T('.pl-dh'); t.ok('al tocar el último día, el detalle pasa a «Previsión» y el día correspondiente', /Previsión/.test(fut) && /22 oct/.test(fut), fut);

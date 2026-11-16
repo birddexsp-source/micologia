@@ -1079,3 +1079,8 @@ button.rz{cursor:pointer}
 .dn textarea{width:100%;min-height:64px;resize:vertical}
 .btn.sm{padding:6px 10px;font-size:13px;min-height:0}
 .ia-go{width:100%}#mk-iares{margin:10px 0}#mk-iares .row{margin-top:8px}.ia-go svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.8;vertical-align:-3px}
+
+/* v46: zona de la salida */
+.zona-i{display:flex;gap:10px;align-items:center;margin:0 0 12px;padding:9px 12px;border-radius:12px;background:rgba(76,195,217,.1);border:1px dashed #4cc3d9;font-size:.88rem}
+.zona-i i{flex:none;width:16px;height:16px;border-radius:50%;border:2px dashed #4cc3d9}
+.zona-circ{pointer-events:none}

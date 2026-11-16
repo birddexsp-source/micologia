@@ -33,6 +33,15 @@ export function temporada(e, f) {
   const cur = n(m - 1); const t = d > 20 ? (d - 20) / 22 : d < 10 ? (10 - d) / 22 : 0;     // en los extremos del mes se mezcla con el vecino
   return d > 20 ? cur * (1 - t) + n(m) * t : d < 10 ? cur * (1 - t) + n(m - 2) * t : cur;
 }
+/* Presión de recolectores (HIPÓTESIS de Jon, sin contrastar): tras el fin de semana la gente ya ha recogido las setas que se recogen
+   (quedan las que nadie se lleva, y los boletos pasados o agusanados); jueves y viernes por la mañana hay tanda nueva y poca gente.
+   Solo afecta a las especies candidatas a comestibles y resta como mucho un 30 % (los lunes). No depende de la lluvia, para que más lluvia nunca baje la puntuación. */
+export const DIA_GENTE = [0.5, 1, 0.7, 0.4, 0, 0, 0.3];   // domingo … sábado
+const DIAS_ES = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
+export function presion(e, dias, f) {
+  const [y, m, d] = f.split('-').map(Number), dow = new Date(y, m - 1, d, 12).getDay(), peso = e.candidataComestible ? DIA_GENTE[dow] : 0;
+  return { v: Math.round((1 - 0.3 * peso) * 1000) / 1000, dow, peso, dia: DIAS_ES[dow], aplica: !!e.candidataComestible };
+}
 /* factores 0–1 de una especie en una fecha */
 export function factores(e, dias, f) {
   const fr = e.fructificacion; if (!fr || fr.perenne) return null;
@@ -42,15 +51,15 @@ export function factores(e, dias, f) {
   const duro = fr.helada === 'fuerte';
   const helada = c.minT == null ? 1 : c.minT <= -3 ? (duro ? 0.15 : 0.4) : c.minT <= 0 ? (duro ? 0.35 : 0.7) : 1;
   const seco = c.seco ? 0.7 : 1, temp_ = temporada(e, f);
-  return { c, lluvia, temp, helada, seco, temporada: temp_ };
+  return { c, lluvia, temp, helada, seco, temporada: temp_, gente: presion(e, dias, f) };
 }
 /* puntuación 0–100 + explicación */
 export function puntuar(e, dias, f, cal) {
   const x = factores(e, dias, f); if (!x) return null;
-  const crudo = 100 * x.lluvia * x.temp * x.helada * x.seco * Math.pow(x.temporada, 0.7);
+  const crudo = 100 * x.lluvia * x.temp * x.helada * x.seco * x.gente.v * Math.pow(x.temporada, 0.7);
   const score = Math.round(cal ? aplicarCal(crudo, cal) : crudo);
-  const nombres = { lluvia: 'lluvia', temp: 'temperatura', helada: 'helada', seco: 'sequedad', temporada: 'época del año' };
-  const orden = Object.keys(nombres).map(k => [k, x[k]]).sort((a, b) => a[1] - b[1]);
+  const nombres = { lluvia: 'lluvia', temp: 'temperatura', helada: 'helada', seco: 'sequedad', temporada: 'época del año', gente: 'recolectores' };
+  const orden = Object.keys(nombres).map(k => [k, k === 'gente' ? x.gente.v : x[k]]).sort((a, b) => a[1] - b[1]);
   return { score, crudo: Math.round(crudo), x, limitante: orden[0][1] < 0.85 ? orden[0][0] : null, explicacion: explicar(e, x, nombres), prevision: false };
 }
 function explicar(e, x, nombres) {
@@ -60,6 +69,9 @@ function explicar(e, x, nombres) {
   if (x.helada < 1) out.push({ k: 'helada', v: x.helada, t: 'Helada: mínima de ' + String(c.minT).replace('.', ',') + ' °C en los últimos días, frena la salida' });
   if (x.seco < 1) out.push({ k: 'seco', v: x.seco, t: 'Seco y caluroso los últimos días: el suelo se seca' });
   if (x.temporada < 0.5) out.push({ k: 'temporada', v: x.temporada, t: 'Fuera de su época habitual en la costa cantábrica' });
+  const g = x.gente;
+  if (g.aplica && g.peso >= 0.7) out.push({ k: 'gente', v: g.v < 0.8 ? 0.6 : 0.8, t: 'Hay que contar con la gente: un ' + g.dia + ', tras el fin de semana, ya han pasado a recoger; quedan sobre todo las setas que nadie se lleva (hipótesis, sin contrastar)' });
+  else if (g.aplica && g.peso === 0) out.push({ k: 'gente', v: 1, t: 'Un ' + g.dia + ' hay poca gente: tanda nueva sin recoger (hipótesis, sin contrastar)' });
   return out;
 }
 /* Gremios: «setas en general» = el gremio que mejor puntúa ese día (con la especie más representativa en cuenta de la temporada) */
