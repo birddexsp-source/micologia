@@ -7,14 +7,14 @@ module.exports = {
   async run(t) {
     const E = (fn, arg) => t.page.evaluate(new Function('arg', 'return (async()=>{' + MOD + fn + '})()'), arg);
     /* ---------- datos de las fichas ---------- */
-    await t.case('las 98 fichas traen «cuándo sale» con fuentes y honestidad sobre lo que es hipótesis', async () => {
+    await t.case('las 128 fichas traen «cuándo sale» con fuentes y honestidad sobre lo que es hipótesis', async () => {
       const r = await t.page.evaluate(() => { const es = window.__MI.cat.todas(); return {
         n: es.length, sin: es.filter(e => !e.fructificacion).map(e => e.id), perenne: es.filter(e => e.fructificacion && e.fructificacion.perenne).map(e => e.id),
         estudio: es.filter(e => e.fructificacion && e.fructificacion.base === 'estudio').map(e => e.id),
         malos: es.filter(e => { const f = e.fructificacion; if (!f || f.perenne) return false; return !(f.lluvia.ventana >= 7 && f.lluvia.ideal >= 10 && f.temp.opt > 0 && f.temp.opt < 25 && f.temp.rango[0] < f.temp.opt && f.temp.opt < f.temp.rango[1] && f.texto.length === 4 && f.fuentes.length >= 1 && f.fuentes.every(x => /^https:\/\//.test(x.url))); }).map(e => e.id),
         hipSinAviso: es.filter(e => e.fructificacion && e.fructificacion.base === 'hipotesis' && e.fructificacion.confianza !== 'baja' && !e.fructificacion.perenne).map(e => e.id) }; });
-      t.eq('las 98 tienen la sección', [r.n, r.sin], [98, []]);
-      t.eq('solo 3 son perennes de madera', r.perenne.sort(), ['fomes-fomentarius', 'ganoderma-applanatum', 'trametes-versicolor']);
+      t.eq('las 128 tienen la sección', [r.n, r.sin], [128, []]);
+      t.eq('solo 4 son perennes de madera', r.perenne.sort(), ['fomes-fomentarius', 'fomitopsis-pinicola', 'ganoderma-applanatum', 'trametes-versicolor']);
       t.eq('solo Boletus edulis cita un estudio con umbrales; el resto es hipótesis marcada «baja»', [r.estudio, r.hipSinAviso], [['boletus-edulis'], []]);
       t.eq('parámetros coherentes y fuentes con enlace en todas', r.malos, []);
       await t.page.evaluate(() => (window.__MI.abrirFicha('boletus-edulis'), window.__MI.fichaTab('todo'))); await t.wait(500);

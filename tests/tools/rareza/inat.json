@@ -880,5 +880,275 @@
 "cant": 3,
 "esp": 35,
 "eu": 115
+},
+"suillus-bovinus": {
+"nc": "Suillus bovinus",
+"tx": "",
+"n": 32,
+"biz": 2,
+"cant": 32,
+"esp": 336,
+"eu": 2804
+},
+"russula-sanguinea": {
+"nc": "Russula sanguinea",
+"tx": "",
+"n": 52,
+"biz": 17,
+"cant": 52,
+"esp": 355,
+"eu": 692
+},
+"amanita-excelsa": {
+"nc": "Amanita excelsa",
+"tx": "",
+"n": 52,
+"biz": 4,
+"cant": 52,
+"esp": 216,
+"eu": 2532
+},
+"clitopilus-prunulus": {
+"nc": "Clitopilus prunulus",
+"tx": "",
+"n": 43,
+"biz": 2,
+"cant": 43,
+"esp": 180,
+"eu": 1179
+},
+"laccaria-laccata": {
+"nc": "Laccaria laccata",
+"tx": "",
+"n": 39,
+"biz": 5,
+"cant": 39,
+"esp": 433,
+"eu": 1904
+},
+"volvopluteus-gloiocephalus": {
+"nc": "Volvopluteus gloiocephalus",
+"tx": "",
+"n": 52,
+"biz": 10,
+"cant": 52,
+"esp": 1679,
+"eu": 5268
+},
+"protostropharia-semiglobata": {
+"nc": "Protostropharia semiglobata",
+"tx": "",
+"n": 58,
+"biz": 3,
+"cant": 58,
+"esp": 280,
+"eu": 872
+},
+"clathrus-archeri": {
+"nc": "Clathrus archeri",
+"tx": "",
+"n": 228,
+"biz": 20,
+"cant": 228,
+"esp": 757,
+"eu": 5083
+},
+"apioperdon-pyriforme": {
+"nc": "Apioperdon pyriforme",
+"tx": "",
+"n": 59,
+"biz": 1,
+"cant": 59,
+"esp": 147,
+"eu": 9079
+},
+"coprinopsis-picacea": {
+"nc": "Coprinopsis picacea",
+"tx": "",
+"n": 103,
+"biz": 0,
+"cant": 103,
+"esp": 542,
+"eu": 10320
+},
+"coprinellus-disseminatus": {
+"nc": "Coprinellus disseminatus",
+"tx": "",
+"n": 60,
+"biz": 7,
+"cant": 60,
+"esp": 224,
+"eu": 8309
+},
+"candolleomyces-candolleanus": {
+"nc": "Candolleomyces candolleanus",
+"tx": "",
+"n": 78,
+"biz": 4,
+"cant": 78,
+"esp": 710,
+"eu": 2553
+},
+"cyclocybe-cylindracea": {
+"nc": "Cyclocybe cylindracea",
+"tx": "",
+"n": 132,
+"biz": 11,
+"cant": 132,
+"esp": 1963,
+"eu": 3635
+},
+"pluteus-cervinus": {
+"nc": "Pluteus cervinus",
+"tx": "",
+"n": 37,
+"biz": 3,
+"cant": 37,
+"esp": 250,
+"eu": 1927
+},
+"mycena-galericulata": {
+"nc": "Mycena galericulata",
+"tx": "",
+"n": 38,
+"biz": 1,
+"cant": 38,
+"esp": 188,
+"eu": 2223
+},
+"megacollybia-platyphylla": {
+"nc": "Megacollybia platyphylla",
+"tx": "",
+"n": 65,
+"biz": 1,
+"cant": 65,
+"esp": 177,
+"eu": 2040
+},
+"oudemansiella-radicata": {
+"nc": "Oudemansiella radicata",
+"tx": "",
+"n": 101,
+"biz": 2,
+"cant": 101,
+"esp": 168,
+"eu": 3494
+},
+"oudemansiella-mucida": {
+"nc": "Oudemansiella mucida",
+"tx": "",
+"n": 217,
+"biz": 1,
+"cant": 217,
+"esp": 427,
+"eu": 10980
+},
+"mycetinis-alliaceus": {
+"nc": "Mycetinis alliaceus",
+"tx": "",
+"n": 71,
+"biz": 0,
+"cant": 71,
+"esp": 111,
+"eu": 1975
+},
+"marasmius-rotula": {
+"nc": "Marasmius rotula",
+"tx": "",
+"n": 53,
+"biz": 1,
+"cant": 53,
+"esp": 121,
+"eu": 1577
+},
+"fomitopsis-pinicola": {
+"nc": "Fomitopsis pinicola",
+"tx": "",
+"n": 101,
+"biz": 0,
+"cant": 101,
+"esp": 974,
+"eu": 38006
+},
+"fomitopsis-betulina": {
+"nc": "Fomitopsis betulina",
+"tx": "",
+"n": 50,
+"biz": 5,
+"cant": 50,
+"esp": 318,
+"eu": 30038
+},
+"daedaleopsis-confragosa": {
+"nc": "Daedaleopsis confragosa",
+"tx": "",
+"n": 109,
+"biz": 6,
+"cant": 109,
+"esp": 214,
+"eu": 8515
+},
+"stereum-hirsutum": {
+"nc": "Stereum hirsutum",
+"tx": "",
+"n": 169,
+"biz": 9,
+"cant": 169,
+"esp": 1754,
+"eu": 11317
+},
+"trametes-hirsuta": {
+"nc": "Trametes hirsuta",
+"tx": "",
+"n": 68,
+"biz": 1,
+"cant": 68,
+"esp": 204,
+"eu": 4522
+},
+"schizophyllum-commune": {
+"nc": "Schizophyllum commune",
+"tx": "",
+"n": 131,
+"biz": 9,
+"cant": 131,
+"esp": 1643,
+"eu": 21826
+},
+"xylaria-hypoxylon": {
+"nc": "Xylaria hypoxylon",
+"tx": "",
+"n": 60,
+"biz": 0,
+"cant": 60,
+"esp": 297,
+"eu": 18411
+},
+"inonotus-hispidus": {
+"nc": "Inonotus hispidus",
+"tx": "",
+"n": 72,
+"biz": 1,
+"cant": 72,
+"esp": 790,
+"eu": 2078
+},
+"favolaschia-claudopus": {
+"nc": "Favolaschia claudopus",
+"tx": "",
+"n": 253,
+"biz": 37,
+"cant": 253,
+"esp": 453,
+"eu": 1729
+},
+"chlorociboria-aeruginascens": {
+"nc": "Chlorociboria aeruginascens",
+"tx": "",
+"n": 67,
+"biz": 1,
+"cant": 67,
+"esp": 166,
+"eu": 2330
 }
 }

@@ -18,7 +18,7 @@ module.exports = {
       t.eq('ningún texto usa jerga (caducifolio, micorrícica, saprótrofa…)', r.malos, []);
       t.eq('todos tienen nombre, qué es, cómo se reconoce y dónde mirar', r.vacios, []);
       t.eq('todos pertenecen a un grupo de la guía general', r.sinGrupo, []);
-      t.eq('las 98 fichas tienen su frase «Mira…»', r.sinDonde, []);
+      t.eq('las 128 fichas tienen su frase «Mira…»', r.sinDonde, []);
       t.eq('los tipos de seta se explican sin jerga', r.gj, 0);
     });
     await t.case('ficha: «Mira bajo…» y chips tocables que abren la guía del sitio y vuelven', async () => {

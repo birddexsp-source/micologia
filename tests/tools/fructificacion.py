@@ -31,16 +31,16 @@ M = {
  'ecm': '''amanita-phalloides amanita-verna-virosa amanita-pantherina-muscaria amanita-rubescens amanita-citrina amanita-gemmata cortinarius-orellanus cortinarius-rubellus
    entoloma-lividum-sinuatum inocybe-erubescens paxillus-involutus laccaria-amethystina tricholoma-pardinum tricholoma-equestre tricholoma-sulphureum xerocomellus-chrysenteron
    xerocomus-subtomentosus suillus-luteus suillus-granulatus leccinum-scabrum imleria-badia chalciporus-piperatus russula-cyanoxantha russula-emetica lactarius-torminosus
-   lactarius-piperatus sparassis-crispa cantharellus-cibarius ramaria-formosa clavulina-cristata scleroderma-citrinum''',
+   lactarius-piperatus sparassis-crispa cantharellus-cibarius ramaria-formosa clavulina-cristata scleroderma-citrinum suillus-bovinus russula-sanguinea amanita-excelsa laccaria-laccata''',
  'tardia': '''lactarius-deliciosus hydnum-repandum hydnum-rufescens craterellus-cornucopioides craterellus-tubaeformis craterellus-lutescens tricholoma-portentosum tricholoma-terreum
    clitocybe-nebularis lepista-nuda helvella-crispa aleuria-aurantia hygrophoropsis-aurantiaca''',
  'prado': '''lepiota-brunneoincarnata clitocybe-rivulosa macrolepiota-procera marasmius-oreades agaricus-campestris agaricus-xanthodermus agaricus-arvensis coprinus-comatus
    lycoperdon-perlatum chlorophyllum-rhacodes leucoagaricus-leucothites infundibulicybe-gibba infundibulicybe-geotropa lyophyllum-decastes hygrocybe-coccinea cuphophyllus-pratensis
-   stropharia-aeruginosa clitocybe-odora mycena-pura''',
- 'madera': '''galerina-marginata omphalotus-illudens coprinopsis-atramentaria armillaria-mellea pleurotus-ostreatus laetiporus-sulphureus fistulina-hepatica auricularia-auricula-judae
-   hypholoma-fasciculare coprinellus-micaceus kuehneromyces-mutabilis pholiota-squarrosa gymnopilus-junonius calocera-viscosa tremella-mesenterica clathrus-ruber phallus-impudicus''',
+   stropharia-aeruginosa clitocybe-odora mycena-pura clitopilus-prunulus volvopluteus-gloiocephalus protostropharia-semiglobata coprinopsis-picacea candolleomyces-candolleanus clathrus-archeri megacollybia-platyphylla oudemansiella-radicata mycetinis-alliaceus marasmius-rotula''',
+ 'madera': '''daedaleopsis-confragosa stereum-hirsutum trametes-hirsuta schizophyllum-commune galerina-marginata omphalotus-illudens coprinopsis-atramentaria armillaria-mellea pleurotus-ostreatus laetiporus-sulphureus fistulina-hepatica auricularia-auricula-judae
+   hypholoma-fasciculare coprinellus-micaceus kuehneromyces-mutabilis pholiota-squarrosa gymnopilus-junonius calocera-viscosa tremella-mesenterica clathrus-ruber phallus-impudicus apioperdon-pyriforme coprinellus-disseminatus cyclocybe-cylindracea pluteus-cervinus mycena-galericulata oudemansiella-mucida fomitopsis-betulina xylaria-hypoxylon inonotus-hispidus favolaschia-claudopus chlorociboria-aeruginascens''',
  'primavera': 'calocybe-gambosa morchella gyromitra entoloma-clypeatum hygrophorus-marzuolus',
- 'perenne': 'trametes-versicolor fomes-fomentarius ganoderma-applanatum',
+ 'perenne': 'trametes-versicolor fomes-fomentarius ganoderma-applanatum fomitopsis-pinicola',
 }
 GREMIO = {i: g for g, ids in M.items() for i in ids.split()}
 # valores propios de una especie (solo cuando hay fuente)

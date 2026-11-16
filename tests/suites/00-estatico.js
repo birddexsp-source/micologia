@@ -37,12 +37,12 @@ module.exports = {
       const j = JSON.parse(rd('data/especies.json')), E = j.especies;
       t.ok('hay aviso de seguridad', /no se come/i.test(j.aviso));
       t.eq('ids únicos', new Set(E.map(e => e.id)).size, E.length);
-      t.eq('número de fichas (25 del MVP + 31 de la ampliación + 42 de nov-2026)', E.length, 98);
-      const COLS = ['Amanitaceae', 'Agaricaceae', 'Tricholomataceae', 'Clitocybaceae', 'Lyophyllaceae', 'Hygrophoraceae', 'Hydnangiaceae', 'Marasmiaceae', 'Mycenaceae', 'Entolomataceae', 'Cortinariaceae', 'Inocybaceae', 'Hymenogastraceae', 'Strophariaceae', 'Psathyrellaceae', 'Paxillaceae', 'Russulaceae', 'Boletaceae', 'Suillaceae', 'Cantharellaceae', 'Hydnaceae', 'Physalacriaceae', 'Pleurotaceae', 'Polyporaceae', 'Laetiporaceae', 'Fistulinaceae', 'Auriculariaceae', 'Sparassidaceae', 'Omphalotaceae', 'Sclerodermataceae', 'Phallaceae', 'Morchellaceae', 'Discinaceae', 'Helvellaceae', 'Pyronemataceae', 'Hygrophoropsidaceae', 'Gyroporaceae', 'Ganodermataceae', 'Tremellaceae', 'Gomphaceae', 'Clavulinaceae', 'Dacrymycetaceae'];
+      t.eq('número de fichas (25 del MVP + 31 de la ampliación + 42 de nov-2026 + 30 de la ampliación 4)', E.length, 128);
+      const COLS = ['Amanitaceae', 'Agaricaceae', 'Tricholomataceae', 'Clitocybaceae', 'Lyophyllaceae', 'Hygrophoraceae', 'Hydnangiaceae', 'Marasmiaceae', 'Mycenaceae', 'Entolomataceae', 'Cortinariaceae', 'Inocybaceae', 'Hymenogastraceae', 'Strophariaceae', 'Psathyrellaceae', 'Paxillaceae', 'Russulaceae', 'Boletaceae', 'Suillaceae', 'Cantharellaceae', 'Hydnaceae', 'Physalacriaceae', 'Pleurotaceae', 'Polyporaceae', 'Laetiporaceae', 'Fistulinaceae', 'Auriculariaceae', 'Sparassidaceae', 'Omphalotaceae', 'Sclerodermataceae', 'Phallaceae', 'Morchellaceae', 'Discinaceae', 'Helvellaceae', 'Pyronemataceae', 'Hygrophoropsidaceae', 'Gyroporaceae', 'Ganodermataceae', 'Tremellaceae', 'Gomphaceae', 'Clavulinaceae', 'Dacrymycetaceae', 'Pluteaceae', 'Fomitopsidaceae', 'Stereaceae', 'Schizophyllaceae', 'Hymenochaetaceae', 'Xylariaceae', 'Helotiaceae'];
       t.ok('todas las fichas tienen familia y cae en una colección', E.every(e => e.familia && COLS.includes(e.familia)), E.filter(e => !COLS.includes(e.familia)).map(e => e.id).join(','));
       t.ok('cada confusión con id apunta a una ficha que existe', E.every(e => (e.confusiones || []).every(c => !c.id || E.some(x => x.id === c.id))));
       t.ok('las fichas nuevas citan su página de Wikipedia con fecha', E.filter(e => e.familia && e.fuentes.some(f => /Wikipedia \(inglés\): /.test(f.nombre))).every(e => e.fuentes.every(f => !/Wikipedia \(inglés\): /.test(f.nombre) || (/^https:\/\/en\.wikipedia\.org\/wiki\//.test(f.url) && f.fechaConsulta))));
-      t.ok('toda foto lleva autor y licencia', E.every(e => (e.fotos || []).every(f => f.autor && f.licencia && /^https:\/\/upload\.wikimedia\.org\//.test(f.url))));
+      t.ok('toda foto lleva autor y licencia', E.every(e => (e.fotos || []).every(f => f.autor && f.licencia && /^https:\/\/(upload\.wikimedia\.org|inaturalist-open-data\.s3\.amazonaws\.com)\//.test(f.url))));
       E.forEach(e => {
         t.ok(e.id + ': id, nombre científico y clase', !!(e.id && e.nombreCientifico && CLASES.includes(e.clase)), e.clase);
         t.ok(e.id + ': tiene fuentes', Array.isArray(e.fuentes) && e.fuentes.length >= 1);
@@ -60,7 +60,7 @@ module.exports = {
         t.ok(x.id + ': comestibilidad atribuida a las fuentes, en borrador', !!x.comestibilidad && ['si', 'cond'].includes(x.comestibilidad.nivel) && /^Según|xixa|«xixa»/.test(x.comestibilidad.txt) && /sin revisión experta/.test(x.comestibilidad.segun) && x.nivelVerificacion === 'borrador');
       });
       E.filter(x => x.clase === 'mortal' || x.clase === 'toxica' || x.clase === 'no_comestible').forEach(x => t.ok(x.id + ': peligrosa/no comestible sin marca de comestible', !x.comestibilidad));
-      t.ok('las 56 candidatas a comestible están como sin_datos', E.filter(e => e.candidataComestible).length === 56 && E.filter(e => e.candidataComestible).every(e => e.clase === 'sin_datos'));
+      t.ok('las 65 candidatas a comestible están como sin_datos', E.filter(e => e.candidataComestible).length === 65 && E.filter(e => e.candidataComestible).every(e => e.clase === 'sin_datos'));
       ['amanita-phalloides', 'amanita-verna-virosa', 'lepiota-brunneoincarnata', 'galerina-marginata', 'cortinarius-orellanus'].forEach(id => t.eq(id + ' es mortal', (E.find(e => e.id === id) || {}).clase, 'mortal'));
     });
     await t.case('catálogo v3: datos de libro (hábitat, cómo recoger, curiosidades, nombres) con fuente', async () => {
@@ -87,8 +87,8 @@ module.exports = {
         t.ok(e.id + ': al menos 1 foto', (e.fotos || []).length >= 1);
         if (!e.ampliacion) t.ok(e.id + ': ≥3 fotos o las que haya (mín. 3)', (e.fotos || []).length >= 3, String((e.fotos || []).length));
         (e.fotos || []).forEach((f, i) => {
-          t.ok(e.id + ' foto ' + i + ': autor, licencia libre y página de origen', !!f.autor && LIC.includes(f.licencia) && /^https:\/\/commons\.wikimedia\.org\/wiki\/File:/.test(f.pagina), f.licencia);
-          t.ok(e.id + ' foto ' + i + ': URL de Commons con {w}', /^https:\/\/upload\.wikimedia\.org\/wikipedia\/commons\/thumb\/.+\/\{w\}px-/.test(f.url));
+          t.ok(e.id + ' foto ' + i + ': autor, licencia libre y página de origen', !!f.autor && LIC.includes(f.licencia) && /^https:\/\/(commons\.wikimedia\.org\/wiki\/File:|www\.inaturalist\.org\/observations\/)/.test(f.pagina), f.licencia);
+          t.ok(e.id + ' foto ' + i + ': URL de Commons con {w} o de iNaturalist con {s}', /^https:\/\/upload\.wikimedia\.org\/wikipedia\/commons\/thumb\/.+\/\{w\}px-/.test(f.url) || /^https:\/\/inaturalist-open-data\.s3\.amazonaws\.com\/photos\/\d+\/\{s\}\.jpe?g$/.test(f.url));
           if (f.licencia !== 'Dominio público') t.ok(e.id + ' foto ' + i + ': enlace a la licencia', /^https:\/\/creativecommons\.org\//.test(f.licenciaUrl || ''));
         });
         t.ok(e.id + ': «qué mirar» con ≥3 puntos y partes válidas', (e.queMirar || []).length >= 3 && e.queMirar.every(x => PARTES.includes(x.parte) && x.titulo && x.texto));

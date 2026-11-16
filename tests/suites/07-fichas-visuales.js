@@ -4,11 +4,11 @@ module.exports = {
   async run(t) {
     await t.case('lista de setas: avatares con foto y grupos por clase', async () => {
       await t.go('#setas'); await t.wait(300);
-      t.ok('todas las especies tienen avatar con foto (98)', (await t.N('#slist .item .phw.av img.ph')) === 98 && (await t.N('#slist .item .phw.av')) === 98);
+      t.ok('todas las especies tienen avatar con foto (128)', (await t.N('#slist .item .phw.av img.ph')) === 128 && (await t.N('#slist .item .phw.av')) === 128);
       t.ok('las fotos de la lista se piden a 250 px', t.photoReqs.some(u => /\/250px-/.test(u)));
       await t.tap('[data-ord="peligro"]', 300);
       t.ok('los encabezados agrupan por clase', (await t.N('#slist .grp')) >= 4);
-      t.ok('las 56 comestibles llevan chip verde o amarillo y los encabezados dicen «según fuentes»', (await t.page.evaluate(() => [...document.querySelectorAll('#slist .item .tag')].filter(x => /^(Comestible|Con condiciones)$/.test(x.textContent)).length)) === 56 && /según fuentes/i.test(await t.T('#slist') || ''));
+      t.ok('las 65 comestibles llevan chip verde o amarillo y los encabezados dicen «según fuentes»', (await t.page.evaluate(() => [...document.querySelectorAll('#slist .item .tag')].filter(x => /^(Comestible|Con condiciones)$/.test(x.textContent)).length)) === 65 && /según fuentes/i.test(await t.T('#slist') || ''));
       t.ok('nunca «Comestible buena» sin más: siempre «según fuentes»', !/Comestible buena/i.test(await t.T('#slist') || '') && (await t.N('#slist .grp')) >= 5);
       await t.shot('captura-07-lista');
     });
@@ -118,8 +118,8 @@ module.exports = {
       await t.page.evaluate(() => { document.querySelector('#sheet').hidden = true; }); await t.go('#ajustes'); t.photoReqs.length = 0;
       await t.tap('#a-fotos', 1500);
       for (let i = 0; i < 20 && !/Listo/.test(await t.T('#a-fst') || ''); i++) await t.wait(300);
-      const NF = await t.page.evaluate(() => { const u = new Set(); window.__MI.cat.todas().forEach(e => { (e.fotos || []).forEach(f => { u.add(f.url.replace('{w}', 250)); u.add(f.url.replace('{w}', 960)); }); (e.anotadas || []).forEach(a => u.add(a.foto.url.replace('{w}', 960).replace('{s}', 'large'))); }); return u.size; });
-      t.ok('descarga todas las fotos (291 × 2 tamaños + las de las flechas)', new RegExp('Listo: ' + NF + ' fotos').test(await t.T('#a-fst') || ''), await t.T('#a-fst') + ' / ' + NF);
+      const NF = await t.page.evaluate(() => { const u = new Set(); window.__MI.cat.todas().forEach(e => { (e.fotos || []).forEach(f => { u.add(f.url.replace('{w}', 250).replace('{s}', 'small')); u.add(f.url.replace('{w}', 960).replace('{s}', 'large')); }); (e.anotadas || []).forEach(a => u.add(a.foto.url.replace('{w}', 960).replace('{s}', 'large'))); }); return u.size; });
+      t.ok('descarga todas las fotos (todas × 2 tamaños + las de las flechas)', new RegExp('Listo: ' + NF + ' fotos').test(await t.T('#a-fst') || ''), await t.T('#a-fst') + ' / ' + NF);
       t.eq('una petición por foto (Commons e iNaturalist)', t.photoReqs.length, NF);
     });
   }

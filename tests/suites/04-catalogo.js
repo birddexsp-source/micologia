@@ -3,7 +3,7 @@ module.exports = {
   async run(t) {
     await t.go('#setas');
     await t.case('lista completa y aviso fijo', async () => {
-      t.eq('98 fichas', await t.N('#slist .item'), 98);
+      t.eq('128 fichas', await t.N('#slist .item'), 128);
       t.ok('aviso de seguridad siempre visible', /Ninguna seta se come por lo que diga la app/.test(await t.T('#v-setas .warn') || ''));
       await t.tap('[data-ord="peligro"]', 200);
       t.ok('primero las más peligrosas', /Mortal/.test(await t.T('#slist .item') || ''));
@@ -21,13 +21,13 @@ module.exports = {
     });
     await t.case('filtro por clase (semáforo)', async () => {
       await t.tap('#cl button[data-c="mortal"]'); t.eq('mortales', await t.N('#slist .item'), 8);
-      await t.tap('#cl button[data-c="toxica"]'); t.eq('tóxicas', await t.N('#slist .item'), 24);
-      await t.tap('#cl button[data-c="no_comestible"]'); t.eq('no comestibles', await t.N('#slist .item'), 10);
-      await t.tap('#cl button[data-c="ok_fuentes"]'); t.eq('comestibles según fuentes', await t.N('#slist .item'), 23);
-      await t.tap('#cl button[data-c="cond_fuentes"]'); t.eq('comestibles con condiciones', await t.N('#slist .item'), 33);
+      await t.tap('#cl button[data-c="toxica"]'); t.eq('tóxicas', await t.N('#slist .item'), 27);
+      await t.tap('#cl button[data-c="no_comestible"]'); t.eq('no comestibles', await t.N('#slist .item'), 28);
+      await t.tap('#cl button[data-c="ok_fuentes"]'); t.eq('comestibles según fuentes', await t.N('#slist .item'), 25);
+      await t.tap('#cl button[data-c="cond_fuentes"]'); t.eq('comestibles con condiciones', await t.N('#slist .item'), 40);
       t.ok('ya no queda ninguna «sin datos»', !(await t.has('#cl button[data-c="sin_datos"]')));
       t.ok('no existe «comestible buena» en la app hasta verificar', !(await t.has('#cl button[data-c="comestible_buena"]')));
-      await t.tap('#cl button[data-c=""]'); t.eq('todas', await t.N('#slist .item'), 98);
+      await t.tap('#cl button[data-c=""]'); t.eq('todas', await t.N('#slist .item'), 128);
     });
     await t.case('ficha de una mortal: síndrome, latencia, confusiones, fuentes', async () => {
       await t.page.fill('#q', 'cicuta'); await t.wait(150); await t.tap('#slist .item', 300); await t.page.evaluate(() => window.__MI.fichaTab('todo'));
