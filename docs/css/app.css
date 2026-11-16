@@ -1062,3 +1062,5 @@ button.rz{cursor:pointer}
 .ia-bar.alta i{background:#46b36b}.ia-bar.media i{background:#e0a458}.ia-bar.baja i{background:#7b8683}
 .ia-pc{flex:none;font-size:26px;font-weight:800;letter-spacing:-.5px;font-variant-numeric:tabular-nums}.ia-pc small{font-size:13px;font-weight:600;color:var(--mut)}
 .ia-nota{margin-top:2px}
+.ia-n{display:flex;align-items:center;gap:8px;margin:2px 0 10px;color:var(--acc)}.ia-n svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.8}.ia-n b{font-size:14px}
+#mk-iares .row{margin-top:10px}#mk-iares .btn.p svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.8;vertical-align:-3px}
