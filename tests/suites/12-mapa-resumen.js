@@ -152,7 +152,7 @@ module.exports = {
       t.ok('un GPX roto no rompe nada', await t.page.evaluate(() => { try { window.__MI.leerGPX('<gpx><trk></trk></gpx>'); return false; } catch (e) { return /recorrido/.test(e.message); } }));
     });
     await t.case('salida en curso: «Spot aquí» crea el spot y lo añade a la salida', async () => {
-      await t.go('#salidas'); await t.tap('#s-new', 600);
+      await t.salidaSinZona();
       const sid = (await t.docs('salidas')).find(x => x.estado === 'en_curso').id;
       await t.tap('#sd-sp', 700);
       const nom0 = await t.page.inputValue('#st-nom'); t.ok('nombre ya puesto con el sitio (se puede cambiar)', /, /.test(nom0), nom0);

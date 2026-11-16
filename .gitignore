@@ -3,3 +3,5 @@ node_modules/
 .DS_Store
 __pycache__/
 *.whl
+android-app/android/
+android-app/node_modules/

@@ -11,7 +11,7 @@ module.exports = {
     const paso = async (n = 1, acc = 8) => { for (let i = 0; i < n; i++) { lat += PASO; await t.setGeo(lat, LON, acc); await t.wait(350); } };
 
     await t.case('empezar salida: no graba el GPS hasta que lo pides', async () => {
-      await t.go('#salidas'); await t.tap('#s-new', 600);
+      await t.salidaSinZona();
       let s = (await t.docs('salidas'))[0]; sid = s.id;
       t.ok('campos nuevos de la salida', Array.isArray(s.track) && s.grabar === false && Array.isArray(s.fotosCosecha) && s.fin === null);
       t.eq('el grabador está parado', await t.page.evaluate(() => window.__MI.trk.activo()), null);

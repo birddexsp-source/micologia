@@ -1,0 +1,7 @@
+{
+  "appId": "eus.bermeo.micologia",
+  "appName": "Micología",
+  "webDir": "../docs",
+  "server": { "androidScheme": "https" },
+  "android": { "useLegacyBridge": true, "allowMixedContent": false }
+}

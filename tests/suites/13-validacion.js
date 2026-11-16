@@ -71,7 +71,7 @@ module.exports = {
       await t.go('#mapa'); await t.fixGPS();
       await t.tap('#spotbtn', 500); await t.page.fill('#st-nom', 'Hayedo de validación'); await t.tap('#st-ok', 500);
       t.eq('spot creado', (await t.docs('zonas')).length, 1);
-      await t.go('#salidas'); await t.tap('#s-new', 600); sid = (await t.docs('salidas'))[0].id;
+      sid = await t.salidaSinZona();
       t.ok('salida en curso sin GPS grabando', (await t.docs('salidas'))[0].grabar === false && await t.page.evaluate(() => window.__MI.trk.activo()) === null);
       t.ok('pasos de ayuda en la salida vacía', await t.has('#v-salida .pasos'));
       await t.tap('#sd-mk', 800);

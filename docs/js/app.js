@@ -16,8 +16,9 @@ import * as off from './offline.js';
 import { renderPlan } from './plan.js';
 import * as lug from './lugar.js';
 import * as zon from './zona.js';
+import * as tr from './tramos.js';
 
-const APP_V = 'micologia-v46';   // = V de sw.js
+const APP_V = 'micologia-v47';   // = V de sw.js
 const S = { view: 'mapa', arg: '', map: null, pins: null, me: null, acc: null, tmp: null, mini: null, centered: false, filtro: { salida: '', especie: '' }, clase: '', q: '', syncErr: false, mes: new Date().getMonth() + 1 };
 const VIEWS = ['mapa', 'salidas', 'salida', 'setas', 'mes', 'plan', 'ajustes'];
 const TITULOS = { mapa: 'Mapa', salidas: 'Salidas', salida: 'Salida', setas: 'Setas', mes: 'Este mes', plan: 'Plan de salida', ajustes: 'Ajustes' };
@@ -192,6 +193,19 @@ function pinH(h, o = {}) {
   if (h.fotos && h.fotos[0]) m.on('add', async () => { const u = await db.blobURL(h.fotos[0]), i = m.getElement() && m.getElement().querySelector('i'); if (!u || !i) return; const im = i.querySelector('img'); if (im) im.src = u; else i.insertAdjacentHTML('beforeend', '<img src="' + u + '" alt="">'); });
   return m;
 }
+function dibujarZona(z, g) {
+  const c = zon.color(z.i), o = { color: c, weight: 1.5, fillColor: c, interactive: false, className: 'zona-circ' };
+  if (z.anillos.length) return L.polygon(z.anillos, { ...o, fillOpacity: .22, fillRule: 'nonzero' }).addTo(g);
+  if (z.circulo && z.circulo.n >= 2) return L.circle([z.circulo.lat, z.circulo.lon], { ...o, radius: z.circulo.r, dashArray: '7 6', weight: 2, fillOpacity: .08 }).addTo(g);
+  return null;
+}
+/* lista de zonas de la salida: color, hora, tiempo en marcha, km y qué has encontrado */
+function zonasHTML(s, zs) {
+  if (!tr.tiene(s)) return '';
+  return '<div class="zlist">' + zs.map(z => '<div class="zc" style="--c:' + zon.color(z.i) + '"><i class="zd"></i><div class="zt"><b>' + (z.i + 1) + ' · ' + esc(z.nombre) + (z.en ? ' <em class="zlive">en marcha</em>' : '') + '</b>' +
+    '<small>' + hhmm(z.tramo.ini) + (z.en ? '' : '–' + hhmm(z.tramo.fin)) + ' · ' + trk.fmtDur(z.seg) + (z.m ? ' · ' + trk.fmtKm(z.m) : '') + '</small></div>' +
+    '<span class="zn">' + plural(z.hallazgos, 'hallazgo', 'hallazgos') + ' · ' + plural(z.especies, 'especie', 'especies') + '</span>' + (z.hallazgos ? avatares(z.hhs, 5) : '') + '</div>').join('') + '</div>';
+}
 async function refreshPins() {
   if (!S.map) return; S.pins.clearLayers(); S.spotsL.clearLayers(); S.spotM = {};
   const [hs, act, zs] = [await db.list('hallazgos'), await activa(), await db.list('zonas')], f = S.filtro, capa = S.capa || 'todo';
@@ -203,10 +217,9 @@ async function refreshPins() {
       const n = new Set(hs.filter(h => h.zonaId === z.id).map(h => h.especieId || norm(h.especieTxt))).size;
       S.spotM[z.id] = spotPin(z, { n }).on('click', () => verSpot(z.id)).addTo(S.spotsL);
     });
-  /* zona de cada salida: el círculo que cubre sus spots y sus hallazgos */
-  if (capa !== 'porir' && capa !== 'hallazgos') (await db.list('salidas')).filter(x => !f.salida || (f.salida === 'activa' ? act && x.id === act.id : x.id === f.salida)).forEach(x => {
-    const c = zon.zonaSalida(x, hs, zs); if (c && c.n >= 2) L.circle([c.lat, c.lon], { radius: c.r, color: '#4cc3d9', weight: 2, dashArray: '7 6', fillColor: '#4cc3d9', fillOpacity: .07, interactive: false, className: 'zona-circ' }).addTo(S.spotsL);
-  });
+  /* zonas de cada salida: la mancha que has pisado (o un círculo si no hay recorrido) */
+  if (capa !== 'porir' && capa !== 'hallazgos') (await db.list('salidas')).filter(x => !f.salida || (f.salida === 'activa' ? act && x.id === act.id : x.id === f.salida))
+    .forEach(x => zon.zonasDeSalida(x, hs, zs).forEach(z => dibujarZona(z, S.spotsL)));
   if (S.selId) marcarSel(S.selId);
   $('#mhint').hidden = !!(hs.length || zs.length);
   $('#filterbtn').classList.toggle('on', !!(f.salida || f.especie));
@@ -333,7 +346,7 @@ async function marcar(opts = {}) {
       t.disabled = true;
       try {
         const a = await activa(), q = $('#sp-q', sh).value.trim();
-        const sid = opts.salida || (a ? a.id : null), h = { salidaId: sid, zonaId: m.zona, lat: pos.lat, lon: pos.lon, precisionM: pos.acc, ts: opts.ts || Date.now(), especieId: m.esp.id, especieTxt: m.esp.id ? '' : q,
+        const sid = opts.salida || (a ? a.id : null), sa0 = sid && (a && a.id === sid ? a : await db.get('salidas', sid)), tAct = sa0 ? tr.activo(sa0) : null, h = { salidaId: sid, tramoId: opts.ts ? ((sa0 && (tr.deTs(sa0, opts.ts) || {}).id) || undefined) : (tAct ? tAct.id : undefined), zonaId: m.zona, lat: pos.lat, lon: pos.lon, precisionM: pos.acc, ts: opts.ts || Date.now(), especieId: m.esp.id, especieTxt: m.esp.id ? '' : q,
           cantidad: $('#mk-cant', sh).value.trim(), estadoSeta: m.estado, sustrato: '', notas: $('#mk-nota', sh).value.trim(), fotos: m.fotos,
           identificacion: m.esp.id ? 'provisional' : 'sin_identificar', confirmadoPor: '', recogida: false, iaSugerencias: iaCands.length ? iaCands : undefined, lugar: (lug.nombrar(pos.lat, pos.lon) || {}).etiqueta || '', ajustadoAMano: !!(pos.adj || pos.manual), audios: vz.audios, transcripciones: vz.trans };
         if (S.rec) { S.rec.cancel(); S.rec = null; clearInterval(S.recT); }
@@ -362,13 +375,13 @@ async function editarSpot(id, o = {}) {
   const pos = { lat: z.lat, lon: z.lon }, fotos = [...(z.fotos || [])], vz = nuevoVoz(z); let estado = z.estado || 'visitada';
   S.map.setView([pos.lat, pos.lon], Math.max(S.map.getZoom(), 16));
   S.tmp = dragPin()(pos.lat, pos.lon).addTo(S.map);
-  const sh = openSheet('<h2>' + (nuevo ? 'Nuevo spot' : 'Editar spot') + '</h2><p class="sub" id="st-pos"></p>' +
+  const sh = openSheet('<h2>' + (nuevo ? (o.zona ? 'Empezar zona' : 'Nuevo spot') : 'Editar spot') + '</h2><p class="sub" id="st-pos"></p>' +
     '<input type="text" id="st-nom" placeholder="Nombre del sitio (p. ej. Hayedo de Otzarreta)" value="' + esc(z.nombre) + '"><button class="opt st-sug" id="st-sug" hidden></button>' +
     '<label class="l">Estado</label><div class="seg" id="st-est">' + SPOT_EST.map(e => '<button data-s="' + e[0] + '" class="' + (estado === e[0] ? 'on' : '') + '">' + e[1] + '</button>').join('') + '</div>' +
     '<div class="row"><button class="btn" id="st-aqui">Usar mi posición</button>' + (nuevo ? '' : '<a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=' + z.lat + ',' + z.lon + '">Cómo llegar</a>') + '</div>' +
     '<label class="l">Nota</label><textarea id="st-nota" placeholder="Cómo se llega, qué árboles hay, qué esperas encontrar…">' + esc(z.notas) + '</textarea>' + vozHTML(vz) +
     '<label class="l">Fotos</label><div class="thumbs" id="st-th">' + fotos.map(f => '<img data-blob="' + f + '">').join('') + '</div><div class="row"><button class="btn" id="st-foto">Añadir foto</button></div>' +
-    '<div class="row">' + (nuevo ? '' : '<button class="btn d" id="st-del">Borrar</button>') + '<button class="btn" id="st-x">Cancelar</button><button class="btn p" id="st-ok" style="flex:2">Guardar</button></div>', { dim: false });
+    '<div class="row">' + (nuevo ? '' : '<button class="btn d" id="st-del">Borrar</button>') + '<button class="btn" id="st-x">Cancelar</button><button class="btn p" id="st-ok" style="flex:2">' + (o.zona ? 'Empezar zona' : 'Guardar') + '</button></div>', { dim: false });
   const posTxt = () => {
     const r = lug.nombrar(pos.lat, pos.lon), sug = lug.nombreSpot(pos.lat, pos.lon, otrosNom), inp = $('#st-nom', sh);
     if (auto && sug) inp.value = sug;
@@ -394,9 +407,15 @@ async function editarSpot(id, o = {}) {
         if (S.rec) { S.rec.cancel(); S.rec = null; clearInterval(S.recT); }
         const d = { nombre, estado, lat: pos.lat, lon: pos.lon, notas: $('#st-nota', sh).value.trim(), fotos, audios: vz.audios, transcripciones: vz.trans };
         if (estado === 'visitada' && !z.visitadaTs) d.visitadaTs = Date.now();
-        if (nuevo) { const nid = await db.add('zonas', { ...d, creada: Date.now() }); if (o.salida) { const ss = await db.get('salidas', o.salida); if (ss) await db.patch('salidas', o.salida, { zonaIds: [...(ss.zonaIds || []), nid] }); } }
+        if (nuevo) {
+          const ahora = Date.now(), nid = await db.add('zonas', { ...d, creada: ahora });
+          if (o.salida) { const ss = await db.get('salidas', o.salida); if (ss) {
+            await db.patch('salidas', o.salida, { zonaIds: [...(ss.zonaIds || []), nid], ...(o.zona ? { tramos: tr.abrir(ss, nid, ahora), grabar: true } : {}) });
+            if (o.zona) await trk.start(o.salida, (ss.track || []).length > 0);
+          } }
+        }
         else await db.patch('zonas', id, d);
-        closeSheet(); toast(nuevo ? (o.salida ? 'Spot añadido a la salida' : 'Spot guardado') : 'Guardado'); syn.auto();
+        closeSheet(); toast(nuevo ? (o.zona ? 'Zona empezada: te sigo el recorrido' : o.salida ? 'Spot añadido a la salida' : 'Spot guardado') : 'Guardado'); syn.auto();
         if (!nuevo) verSpot(id); else if (o.salida) location.hash = '#salida/' + o.salida;
       } catch (e) { t.disabled = false; toast('No se pudo guardar: ' + (e.message || e)); }
     }
@@ -539,10 +558,10 @@ function mejorZonaId(hs) { const c = {}; hs.forEach(h => { if (h.zonaId) c[h.zon
 async function empezarSalida() {
   if (await activa()) { toast('Ya hay una salida en curso'); return; }
   const id = await db.add('salidas', { fecha: hoy(), titulo: '', notas: '', zonaIds: [], fotos: [], fotosCosecha: [], track: [], grabar: false, estado: 'en_curso', totalTxt: '', zonaMejorId: '', creada: Date.now(), fin: null });
-  toast('Salida empezada'); location.hash = '#salida/' + id;
+  toast('Salida empezada: marca la primera zona'); editarSpot(null, { salida: id, zona: true });
 }
 /* Duración de la salida: desde que se empieza hasta que se termina (o hasta ahora si sigue en curso) */
-const durSeg = s => !s.creada ? 0 : Math.max(0, Math.round(((s.estado === 'en_curso' ? Date.now() : s.fin) || s.creada) - s.creada) / 1000);
+const durSeg = s => tr.tiene(s) ? tr.durTotal(s) : !s.creada ? 0 : Math.max(0, Math.round(((s.estado === 'en_curso' ? Date.now() : s.fin) || s.creada) - s.creada) / 1000);
 const kmTxt = s => { const m = trk.metros(s.track); return m > 0 ? trk.fmtKm(m) : '—'; };
 const durTxt = s => { const d = durSeg(s); return d >= 60 ? trk.fmtDur(d) : '—'; };
 /* fila de caritas de especie (foto pequeña con el color de su clase) */
@@ -561,9 +580,9 @@ async function renderSalidas() {
     return '<button class="item spotc' + (por ? ' por' : '') + '" data-spot="' + z.id + '"><span class="sico">' + (por ? I.flag : I.seta) + '</span><div class="t"><b>' + esc(z.nombre) + '</b><small>' + [ne ? plural(ne, 'especie', 'especies') : (por ? 'sin visitar' : 'sin especies'), yo ? kmFmt(distM(yo, z)) : '', ultZ(z)].filter(Boolean).join(' · ') + '</small>' + avatares(h) + '</div>' + I.chev + '</button>'; };
   const grupo = (est, tit) => { const l = zs.filter(z => (z.estado || 'visitada') === est).sort((a, b) => yo ? distM(yo, a) - distM(yo, b) : a.nombre.localeCompare(b.nombre, 'es', { numeric: true })); return l.length ? '<div class="grp" style="--c:' + spotColor({ estado: est }) + '">' + tit + '<small>' + l.length + '</small></div>' + l.map(filaZ).join('') : ''; };
   const filaS = s => { const h = deS(s.id), n = nSpots(s);
-    return '<a class="item sal" href="#salida/' + s.id + '">' + diaMes(s.fecha) + '<div class="t"><b>' + esc(s.titulo || fecha(s.fecha)) + '</b><small>' + [(s.fecha || '').slice(0, 4) === String(new Date().getFullYear()) ? '' : (s.fecha || '').slice(0, 4), n ? plural(n, 'spot', 'spots') : '', plural(h.length, 'hallazgo', 'hallazgos'), s.totalTxt ? esc(s.totalTxt) : '', s.estado === 'en_curso' ? 'en curso' : ''].filter(Boolean).join(' · ') + '</small>' + avatares(h) + '</div>' + I.chev + '</a>'; };
+    return '<a class="item sal" href="#salida/' + s.id + '">' + diaMes(s.fecha) + '<div class="t"><b>' + esc(s.titulo || fecha(s.fecha)) + '</b><small>' + [(s.fecha || '').slice(0, 4) === String(new Date().getFullYear()) ? '' : (s.fecha || '').slice(0, 4), tr.lista(s).length > 1 ? plural(tr.lista(s).length, 'zona', 'zonas') : n ? plural(n, 'spot', 'spots') : '', plural(h.length, 'hallazgo', 'hallazgos'), s.totalTxt ? esc(s.totalTxt) : '', s.estado === 'en_curso' ? 'en curso' : ''].filter(Boolean).join(' · ') + '</small>' + avatares(h) + '</div>' + I.chev + '</a>'; };
   $('#v-salidas').innerHTML = '<div class="pad">' + (act ? '<a class="item cur-sal" href="#salida/' + act.id + '"><span class="rdot"></span><div class="t"><b>Salida en curso</b><small>' + esc(fecha(act.fecha)) + ' · ' + plural(deS(act.id).length, 'hallazgo', 'hallazgos') + ' · ' + durTxt(act) + '</small></div><span class="tag" style="--c:#e0a458;color:#1a1206">Abrir</span></a>'
-    : '<button class="start" id="s-new"><span class="ic">' + I.plus + '</span><span class="t"><b>Empezar salida</b><small>Graba el recorrido y lo que encuentres en cada spot</small></span></button>') +
+    : '<button class="start" id="s-new"><span class="ic">' + I.plus + '</span><span class="t"><b>Empezar salida</b><small>Marca dónde aparcas, graba tu recorrido y lo que encuentres</small></span></button>') +
     (ss.length ? (() => { const ne = especiesDe(hs.filter(h => h.especieId)).length; return '<div class="sal-res"><div><b>' + ss.length + '</b><small>' + (ss.length === 1 ? 'salida' : 'salidas') + '</small></div><div><b>' + hs.length + '</b><small>' + (hs.length === 1 ? 'hallazgo' : 'hallazgos') + '</small></div><div><b>' + ne + '</b><small>' + (ne === 1 ? 'especie' : 'especies') + '</small></div><div><b>' + zs.length + '</b><small>spots</small></div></div>'; })() : '') +
     '<div class="sec">Salidas<small>' + (ss.length || '') + '</small></div>' + (ss.length ? ss.map(filaS).join('') : '<div class="empty">Aún no hay salidas.<br>Empieza una cuando salgas al monte.</div>') +
     '<div class="sec">Mis spots<small>' + (zs.length || '') + '</small></div>' + (zs.length ? grupo('por_visitar', 'Quiero ir') + grupo('visitada', 'Visitados') : '<div class="empty">Marca sitios que has visitado o que quieres visitar y aparecerán aquí y en el mapa.</div>') +
@@ -647,7 +666,7 @@ async function renderSalida(id) {
   const porZona = {}; hs.forEach(h => { if (h.zonaId) porZona[h.zonaId] = (porZona[h.zonaId] || 0) + 1; });
   const zids = [...new Set([...(s.zonaIds || []), ...Object.keys(porZona)])].filter(zid => zonas.some(z => z.id === zid));
   const auto = mejorZonaId(hs), mejor = s.zonaMejorId || auto, pend = hs.filter(h => h.identificacion !== 'confirmada').length;
-  const curso = s.estado === 'en_curso', graba = curso && s.grabar !== false, cos = s.fotosCosecha || [];
+  const curso = s.estado === 'en_curso', graba = curso && (tr.tiene(s) ? !!tr.activo(s) : s.grabar !== false), cos = s.fotosCosecha || [];
   const live = () => trk.activo() === id ? { ...s, track: trk.puntos() } : s;
   /* spots en el orden en que se recorrieron (por la hora del primer hallazgo) */
   const t0 = zid => Math.min(Infinity, ...hs.filter(h => h.zonaId === zid).map(h => h.ts));
@@ -659,10 +678,10 @@ async function renderSalida(id) {
     const l = Object.values(g); return l.length ? '<div class="echs">' + l.map(r => { const e = cat.byId(r.h.especieId); return '<button class="ech" ' + (e ? 'data-e="' + e.id + '"' : 'data-h="' + r.h.id + '"') + '>' + mini(e) + '<span>' + esc(nombreCorto(r.h)) + (r.n > 1 ? ' <em>×' + r.n + '</em>' : '') + '</span></button>'; }).join('') + '</div>' : '<p class="mut sm" style="margin:4px 0 0">Sin especies anotadas</p>'; };
   const nEsp = especiesDe(hs).length;
   const tab = S.sdTab && S.sdTab.id === id ? S.sdTab.t : 'spots', tieneTrk = (live().track || []).length > 1;
-  const zc = zon.zonaSalida(s, hs, zonas);
+  const tAct = tr.activo(s), zonasS = zon.zonasDeSalida(s, hs, zonas);
   const TABS = [['spots', 'Spots', zids.length], ['hall', 'Hallazgos', hs.length], ['fotos', 'Fotos', cos.length + (s.fotos || []).length], ['diario', 'Diario', (s.diario || []).length], ['mas', 'Más', '']];
   const panel = (k, html) => '<div class="tabp" data-p="' + k + '"' + (k === tab ? '' : ' hidden') + '>' + html + '</div>';
-  const pSpots = (zc && zc.n >= 2 ? '<div class="zona-i"><i></i><span><b>Zona de la salida</b> · radio de unos ' + zc.r + ' m · ' + zc.spots + ' spots · ' + zc.especies + ' especies</span></div>' : '') + (orden.length ? '<div class="tline">' + orden.map((zid, i) => { const z = zonas.find(x => x.id === zid), n = hs.filter(h => h.zonaId === zid).length;
+  const pSpots = zonasHTML(s, zonasS) + (orden.length ? '<div class="tline">' + orden.map((zid, i) => { const z = zonas.find(x => x.id === zid), n = hs.filter(h => h.zonaId === zid).length;
       return '<div class="tl"><span class="tn">' + (i + 1) + '</span><div class="tc"><div class="th"><div><b>' + esc(z.nombre) + '</b><small>' + [tramo(zid), n ? plural(n, 'hallazgo', 'hallazgos') : ''].filter(Boolean).join(' · ') + '</small></div>' + (ordenando ? '<span class="ord-b"><button class="btn sm" data-up="' + i + '"' + (i ? '' : ' disabled') + ' aria-label="Subir">↑</button><button class="btn sm" data-dn="' + i + '"' + (i < orden.length - 1 ? '' : ' disabled') + ' aria-label="Bajar">↓</button></span>' : '<button class="btn sm" data-sa="' + zid + '">＋ Especie</button>') + '</div>' + chips(zid) + '</div></div>'; }).join('') + '</div>'
       : '<div class="sv-empty">' + I.flag + '<div><b>Aún sin spots.</b> ' + (curso ? 'Cuando llegues a un sitio interesante pulsa «Spot aquí».' : 'Añade los sitios por los que pasaste.') + '</div></div>') + '<div class="row">' + (orden.length > 1 ? (ordenando ? '<button class="btn" id="sd-inv">⇅ Invertir orden</button><button class="btn p" id="sd-ordok">Listo</button>' : '<button class="btn" id="sd-ord">⇅ Cambiar orden</button>') : '') + (ordenando ? '' : '<button class="btn" id="sd-addspot">＋ Añadir spot a la salida</button>') + '</div>';
   const pHall = hs.length ? hs.map(h => { const e = cat.byId(h.especieId); return '<button class="item" data-h="' + h.id + '">' + (e ? fi.avatar(e) : '<span class="dot" style="--c:' + (IDENT[h.identificacion] || IDENT.sin_identificar).color + '"></span>') + '<div class="t"><b>' + esc(nombreCorto(h)) + '</b><small>' + hhmm(h.ts) + (h.zonaId ? ' · ' + esc(zn(h.zonaId)) : '') + (h.cantidad ? ' · ' + esc(h.cantidad) : '') + ' · ' + (IDENT[h.identificacion] || IDENT.sin_identificar).label + '</small></div>' + I.chev + '</button>'; }).join('') + (mejor ? '<p class="mut sm">Donde más hubo: <b>' + esc(zn(mejor)) + '</b></p>' : '') : '<div class="empty">Sin hallazgos todavía.</div>';
@@ -677,14 +696,16 @@ async function renderSalida(id) {
     '<label class="l">Recorrido</label><div class="card trk-c"><div class="kv2"><div><b id="sd-km">' + kmTxt(live()) + '</b><span>distancia</span></div><div><b id="sd-dur">' + durTxt(s) + '</b><span>duración</span></div></div>' +
     '<p class="mut sm">' + (tieneTrk ? 'Se ve en el mapa de arriba y en los spots que visitaste.' : 'Opcional. Puedes importar el GPX de Wikiloc al volver.') + '</p>' +
     '<div class="row"><button class="btn" id="sd-gpxin">Importar GPX (Wikiloc)</button>' + (hs.length || tieneTrk ? '<button class="btn" id="sd-gpx">Exportar GPX</button>' : '') + '</div>' +
-    (curso ? '<div class="rec ' + (graba ? 'on' : '') + '" style="margin-top:10px"><span class="rdot"></span><div class="t"><b>' + (graba ? 'Grabando el recorrido' : tieneTrk ? 'Recorrido en pausa' : 'Grabar con el GPS del móvil') + '</b><small>' + (graba ? 'Mantén la app abierta: si el móvil bloquea la pantalla puede dejar de grabar.' : 'Apagado: gasta batería y no hace falta si usas Wikiloc.') + '</small></div><button class="btn" id="sd-pau">' + (graba ? 'Pausar' : (tieneTrk ? 'Reanudar' : 'Grabar')) + '</button></div>' +
-      (graba && trk.pantallaSoportada() ? '<div class="rec"><div class="t"><b>Pantalla encendida</b><small>Evita que se apague mientras andas. Gasta más batería.</small></div><button class="btn' + (trk.pantallaOn() ? ' p' : '') + '" id="sd-wake">' + (trk.pantallaOn() ? 'Activada' : 'Activar') + '</button></div>' : '') : '') + '</div>' +
+    (curso ? '<div class="rec ' + (graba ? 'on' : '') + '" style="margin-top:10px"><span class="rdot"></span><div class="t"><b>' + (graba ? 'Grabando el recorrido' : tieneTrk ? 'Recorrido en pausa' : 'Grabar con el GPS del móvil') + '</b><small>' + (graba ? (trk.nativo() ? 'Puedes bloquear el móvil: sigo grabando (verás un aviso fijo en la barra).' : 'Mantén la app abierta: si el móvil bloquea la pantalla puede dejar de grabar.') : (tr.tiene(s) ? 'Entre zonas no se graba: empieza la siguiente zona y te sigo.' : 'Apagado: gasta batería y no hace falta si usas Wikiloc.')) + '</small></div>' + (tr.tiene(s) ? '' : '<button class="btn" id="sd-pau">' + (graba ? 'Pausar' : (tieneTrk ? 'Reanudar' : 'Grabar')) + '</button>') + '</div>' +
+      (graba && trk.pantallaSoportada() && !trk.nativo() ? '<div class="rec"><div class="t"><b>Pantalla encendida</b><small>Evita que se apague mientras andas. Gasta más batería.</small></div><button class="btn' + (trk.pantallaOn() ? ' p' : '') + '" id="sd-wake">' + (trk.pantallaOn() ? 'Activada' : 'Activar') + '</button></div>' : '') : '') + '</div>' +
     '<div class="row" style="margin-top:18px">' + (curso ? '' : '<button class="btn" id="sd-reab">Reabrir salida</button>') + '<button class="btn d" id="sd-del">Borrar salida</button></div>';
   root.innerHTML = '<div class="pad sal-pg"><a class="back" href="#salidas">‹ Salidas</a>' +
     '<div class="hero-m"><div class="smap big" id="smap"></div>' + (curso ? '<span class="live"><i></i>En curso · ' + durTxt(s).replace('—', 'recién empezada') + '</span>' : '') + '</div>' +
     '<div class="sd-hd"><div class="sd-tt"><input type="text" id="sd-tit" class="tit" value="' + esc(s.titulo) + '" placeholder="Ponle un título"><div class="sd-date">' + esc(fecha(s.fecha)) + (curso ? '' : ' · terminada') + '</div></div>' + (curso ? '<button class="btn p" id="sd-fin">Terminar</button>' : '') + '</div>' +
-    (curso && !hs.length && !zids.length ? '<div class="pasos"><div><i>1</i><span><b>Llegas a un sitio bueno</b>«Spot aquí» y queda guardado</span></div><div><i>2</i><span><b>Ves una seta</b>«Especie aquí»: foto y nota de voz</span></div><div><i>3</i><span><b>En casa</b>foto de lo recogido y «Terminar»</span></div></div>' : '') +
+    (curso && !hs.length && !zids.length ? '<div class="pasos"><div><i>1</i><span><b>Llegas a una zona</b>«Empezar zona»: marca dónde aparcas y te sigo</span></div><div><i>2</i><span><b>Ves una seta</b>«Especie aquí»: foto y nota de voz</span></div><div><i>3</i><span><b>En casa</b>foto de lo recogido y «Terminar»</span></div></div>' : '') +
     (!hs.length && !zids.length ? '' : '<div class="kpis"><div class="stats"><div><b>' + hs.length + '</b><span>hallazgos</span></div><div><b>' + zids.length + '</b><span>spots</span></div><div><b>' + nEsp + '</b><span>especies</span></div><div><b>' + pend + '</b><span>por identificar</span></div></div></div>') +
+    (curso ? '<div class="zbar' + (tAct ? ' on' : '') + '">' + (tAct ? '<i class="zd" style="--c:' + zon.color(zonasS.findIndex(z => z.en)) + '"></i><div class="zt"><b>Zona ' + (zonasS.findIndex(z => z.en) + 1) + ' · ' + esc((zonasS.find(z => z.en) || {}).nombre || '') + '</b><small>en marcha · <span id="sd-zdur">' + trk.fmtDur(tr.dur(tAct)) + '</span> · te sigo el recorrido</small></div><button class="btn" id="sd-zcam">Cambiar de zona</button>'
+      : '<i class="zd"></i><div class="zt"><b>' + (tr.tiene(s) ? 'Entre zonas' : 'Sin zona en marcha') + '</b><small>Sin contar tiempo ni grabar el recorrido</small></div><button class="btn p" id="sd-zini">Empezar zona</button>') + '</div>' : '') +
     (curso ? '<div class="quick"><button class="qb p" id="sd-mk">' + I.plus + '<span><b>Especie aquí</b><small>con tu GPS</small></span></button><button class="qb" id="sd-sp">' + I.flag + '<span><b>Spot aquí</b><small>nuevo sitio</small></span></button><button class="qb w" id="sd-vozq">' + I.mic + '<span><b>Nota de voz</b><small>«aquí no hay setas porque…»</small></span></button></div>' : '') +
     '<div class="tabs" role="tablist">' + TABS.map(([k, t, n]) => '<button data-tb="' + k + '" class="' + (k === tab ? 'on' : '') + '">' + t + (n ? '<em>' + n + '</em>' : '') + '</button>').join('') + '</div>' +
     panel('spots', pSpots) + panel('hall', pHall) + panel('fotos', pFotos) + panel('diario', pDiario) + panel('mas', pMas) + '</div>';
@@ -694,12 +715,12 @@ async function renderSalida(id) {
   const pintar = () => { capa.clearLayers(); trazo(live().track).addTo(capa); };
   pintar(); trk.lineas(live().track).forEach(l => l.forEach(p => ls.push([p[0], p[1]])));
   hs.forEach(h => { pinH(h, { interactive: false }).addTo(S.mini); ls.push([h.lat, h.lon]); });
-  if (zc && zc.n >= 2) { const ci = L.circle([zc.lat, zc.lon], { radius: zc.r, color: '#4cc3d9', weight: 2, dashArray: '7 6', fillColor: '#4cc3d9', fillOpacity: .08, interactive: false, className: 'zona-circ' }).addTo(S.mini), bb = ci.getBounds(); ls.push([bb.getSouth(), bb.getWest()], [bb.getNorth(), bb.getEast()]); }
+  zonasS.forEach(z => { const g = dibujarZona(z, S.mini); if (g) { const bb = g.getBounds(); ls.push([bb.getSouth(), bb.getWest()], [bb.getNorth(), bb.getEast()]); } });
   orden.forEach((zid, i) => { const z = zonas.find(x => x.id === zid); if (!z || z.lat == null) return; L.marker([z.lat, z.lon], { interactive: false, zIndexOffset: 500, icon: L.divIcon({ className: 'tnm', html: '<b>' + (i + 1) + '</b>', iconSize: [24, 24], iconAnchor: [12, 12] }) }).addTo(S.mini); ls.push([z.lat, z.lon]); });
   if (!ls.length) { const f = geo.fix(); if (f) { S.mini.setView([f.lat, f.lon], 15); L.marker([f.lat, f.lon], { interactive: false, icon: L.divIcon({ className: 'me', html: '<i></i>', iconSize: [22, 22], iconAnchor: [11, 11] }) }).addTo(S.mini); } }
   if (ls.length) S.mini.fitBounds(ls, { padding: [30, 30], maxZoom: 17, animate: false });
   if (trk.activo() === id) S.unlive = trk.onAdd(() => { if (S.view !== 'salida' || S.arg !== id || !S.mini) return; pintar(); const k = $('#sd-km'); if (k) k.textContent = kmTxt(live()); });
-  if (curso) S.tick = setInterval(() => { const d = $('#sd-dur'); if (S.view === 'salida' && S.arg === id && d) d.textContent = durTxt(s); }, 30000);
+  if (curso) S.tick = setInterval(() => { const d = $('#sd-dur'); if (S.view === 'salida' && S.arg === id && d) d.textContent = durTxt(s); const zd = $('#sd-zdur'); if (zd && tAct) zd.textContent = trk.fmtDur(tr.dur(tAct)); }, 30000);
   $('#sd-tit', root).onchange = e => db.patch('salidas', id, { titulo: e.target.value.trim() });
   $('#sd-tot', root).onchange = e => db.patch('salidas', id, { totalTxt: e.target.value.trim() });
   $('#sd-mej', root).onchange = e => db.patch('salidas', id, { zonaMejorId: e.target.value });
@@ -714,6 +735,8 @@ async function renderSalida(id) {
     else if (t.id === 'sd-voz' || t.id === 'sd-vozq') abrirNotaSalida(id);
     else if (t.dataset.dd) { const cur = await db.get('salidas', id); await db.patch('salidas', id, { diario: (cur.diario || []).filter(x => x.id !== t.dataset.dd) }); S.sdTab = { id, t: 'diario' }; renderSalida(id); }
     else if (t.id === 'sd-sp') editarSpot(null, { salida: id });
+    else if (t.id === 'sd-zini') editarSpot(null, { salida: id, zona: true });
+    else if (t.id === 'sd-zcam') { await trk.stop(); const cur = await db.get('salidas', id); await db.patch('salidas', id, { tramos: tr.cerrar(cur), grabar: false }); toast('Zona cerrada: entre zonas no cuento tiempo'); syn.auto(); renderSalida(id); }
     else if (t.id === 'sd-gpxin') importarGPX(id);
     else if (t.id === 'sd-ord') { S.ordenando = id; renderSalida(id); }
     else if (t.id === 'sd-ordok') { S.ordenando = null; renderSalida(id); }
@@ -751,7 +774,7 @@ function terminarSalida(s, hs, zonas, porZona, mejor) {
   $('#tf-cam', sh).onclick = () => pickFoto(nueva);
   $('#tf-gal-b', sh).onclick = () => pickFoto(nueva, { galeria: true });
   $('#tf-x', sh).onclick = closeSheet;
-  $('#tf-ok', sh).onclick = async () => { await trk.stop(); await db.patch('salidas', s.id, { estado: 'terminada', fin: Date.now(), totalTxt: $('#tf-tot', sh).value.trim(), notas: $('#tf-nota', sh).value.trim(), zonaMejorId: s.zonaMejorId || mejor || '' }); closeSheet(); toast('Salida terminada'); syn.auto(1500); };
+  $('#tf-ok', sh).onclick = async () => { await trk.stop(); const cur = await db.get('salidas', s.id); await db.patch('salidas', s.id, { ...(tr.tiene(cur) ? { tramos: tr.cerrar(cur) } : {}), estado: 'terminada', fin: Date.now(), totalTxt: $('#tf-tot', sh).value.trim(), notas: $('#tf-nota', sh).value.trim(), zonaMejorId: s.zonaMejorId || mejor || '' }); closeSheet(); toast('Salida terminada'); syn.auto(1500); };
 }
 async function chipSalida() {
   const a = await activa(), c = $('#chip');
@@ -1206,7 +1229,7 @@ async function boot() {
   await db.init(); await cat.load(); lug.cargar();
   initMap(); badge(); route(); chipSalida();
   /* si había una salida en curso (la app se cerró o se recargó), sigue grabando el recorrido */
-  { const a = await activa(); if (a && a.grabar !== false) await trk.start(a.id); }
+  { const a = await activa(); if (a && (tr.tiene(a) ? tr.activo(a) : a.grabar !== false)) await trk.start(a.id); }
   addEventListener('hashchange', route);
   document.addEventListener('error', e => { if (e.target.tagName === 'IMG' && e.target.classList.contains('ph')) e.target.classList.add('x'); }, true);
   db.onChange(() => { badge(); refreshPins(); chipSalida(); if (S.view !== 'setas' && S.view !== 'mes' && S.view !== 'plan' && !trk.guardando()) renderView(); });

@@ -1,0 +1,12 @@
+// Script de inicio de Gradle: firma la APK con la clave del repo y pone la versión. Se pasa con «-I firma.gradle».
+allprojects {
+  afterEvaluate { p ->
+    if (p.plugins.hasPlugin('com.android.application')) {
+      p.android {
+        signingConfigs { micologia { storeFile file(System.getenv('MICO_KS')); storePassword 'micologia'; keyAlias 'micologia'; keyPassword 'micologia' } }
+        buildTypes { release { signingConfig signingConfigs.micologia } }
+        defaultConfig { versionCode (System.getenv('MICO_VC') ?: '1') as int; versionName System.getenv('MICO_VN') ?: '1' }
+      }
+    }
+  }
+}

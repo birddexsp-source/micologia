@@ -4,12 +4,14 @@ module.exports = {
     let sid;
     await t.case('empezar salida: fecha automática y chip «En curso»', async () => {
       await t.go('#salidas'); t.ok('botón Empezar salida', await t.visible('#s-new'));
-      await t.tap('#s-new', 500);
-      const ss = await t.docs('salidas'); t.eq('1 salida', ss.length, 1); sid = ss[0].id;
+      await t.tap('#s-new', 700);
+      t.ok('pide marcar la primera zona (dónde aparcas)', /Empezar zona/.test(await t.T('#sheet h2') || '') && await t.visible('#st-nom'));
+      await t.tap('#st-x', 500);   /* si cancelas, la salida queda empezada y puedes empezar la zona luego */
+      const ss = await t.docs('salidas'); t.eq('1 salida', ss.length, 1); sid = ss[0].id; await t.go('#salida/' + sid); await t.wait(400);
+      t.ok('sin zona en marcha ofrece «Empezar zona»', await t.visible('#sd-zini'));
       t.eq('estado en curso', ss[0].estado, 'en_curso');
       const hoy = await t.page.evaluate(() => { const d = new Date(), p = n => String(n).padStart(2, '0'); return d.getFullYear() + '-' + p(d.getMonth() + 1) + '-' + p(d.getDate()); });
       t.eq('fecha automática = hoy', ss[0].fecha, hoy);
-      t.ok('navega al detalle', /#salida\//.test(await t.page.evaluate(() => location.hash)));
       t.ok('chip visible', await t.visible('#chip') && /En curso · 0/.test(await t.T('#chip')), await t.T('#chip'));
       await t.go('#salidas'); t.ok('ya no ofrece empezar otra', !(await t.has('#s-new')));
     });

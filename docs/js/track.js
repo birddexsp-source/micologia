@@ -5,6 +5,20 @@ import * as db from './db.js';
 import * as geo from './geo.js';
 export const MIN_M = 12, MAX_ACC = 40, FLUSH_MS = 45000, HUECO_S = 1200;
 let R = null, wake = null, escribiendo = false; const subs = new Set();
+/* En la app Android (Capacitor) hay un plugin de GPS en segundo plano: sigue grabando con el móvil bloqueado (con un aviso fijo en la barra).
+   En el navegador no existe y se usa el GPS normal, que Android pausa al bloquear la pantalla. */
+const nat = () => { try { const C = window.Capacitor; return C && C.isNativePlatform && C.isNativePlatform() ? ((C.Plugins && C.Plugins.BackgroundGeolocation) || (C.registerPlugin && C.registerPlugin('BackgroundGeolocation'))) : null; } catch (e) { return null; } };
+export const nativo = () => !!nat();
+async function avisos() { try { const L = window.Capacitor.Plugins && window.Capacitor.Plugins.LocalNotifications; if (L && L.requestPermissions) await L.requestPermissions(); } catch (e) { } }
+async function ponerNativo(r) {
+  const B = nat(); if (!B) return;
+  await avisos();
+  try {
+    r.wid = await B.addWatcher({ backgroundTitle: 'Micología: grabando tu salida', backgroundMessage: 'Sigo tu recorrido aunque bloquees el móvil. Se para al cambiar de zona o terminar.', requestPermissions: true, stale: false, distanceFilter: 8 },
+      (l, err) => { if (err) { if (err.code === 'NOT_AUTHORIZED' && B.openSettings) B.openSettings(); return; } if (l && R === r) add({ lat: l.latitude, lon: l.longitude, acc: Math.round(l.accuracy), ts: l.time }); });
+    if (R !== r && r.wid != null) B.removeWatcher({ id: r.wid });   /* se paró mientras se concedía el permiso */
+  } catch (e) { r.wid = null; }
+}
 export const guardando = () => escribiendo;
 
 export const dist = (a, b) => { const r = Math.PI / 180, dLa = (b[0] - a[0]) * r, dLo = (b[1] - a[1]) * r, x = Math.sin(dLa / 2) ** 2 + Math.cos(a[0] * r) * Math.cos(b[0] * r) * Math.sin(dLo / 2) ** 2; return 12742000 * Math.asin(Math.sqrt(x)); };
@@ -23,7 +37,9 @@ function add(f) {
   const p = [+f.lat.toFixed(5), +f.lon.toFixed(5), Math.round((f.ts || Date.now()) / 1000)], l = R.pts[R.pts.length - 1];
   if (l && dist(l, p) < MIN_M) return false;
   if (R.corte || (l && p[2] - l[2] > HUECO_S)) { p.push(1); R.corte = false; }
-  R.pts.push(p); R.dirty = true; subs.forEach(fn => { try { fn(p, R.pts); } catch (e) { } }); return true;
+  R.pts.push(p); R.dirty = true; subs.forEach(fn => { try { fn(p, R.pts); } catch (e) { } });
+  if (document.visibilityState === 'hidden') flush();   /* con la pantalla apagada los temporizadores se frenan: se guarda en el momento */
+  return true;
 }
 export async function flush() {
   if (!R || !R.dirty) return; R.dirty = false; escribiendo = true;
@@ -35,10 +51,11 @@ export async function start(id, corte = false) {
   await parar(); const s = await db.get('salidas', id);
   R = { id, pts: ((s && s.track) || []).map(p => p.slice()), off: null, timer: null, dirty: false, corte: !!corte };
   geo.start(); R.off = geo.onFix(f => add(f)); const f = geo.fix(); if (f) add(f);
+  ponerNativo(R);
   R.timer = setInterval(flush, FLUSH_MS); document.addEventListener('visibilitychange', onVis);
 }
 async function parar() {
-  if (!R) return; const r = R; if (r.off) r.off(); clearInterval(r.timer); document.removeEventListener('visibilitychange', onVis);
+  if (!R) return; const r = R; if (r.off) r.off(); if (r.wid != null) { try { const B = nat(); B && B.removeWatcher({ id: r.wid }); } catch (e) { } } clearInterval(r.timer); document.removeEventListener('visibilitychange', onVis);
   await flush(); R = null;
 }
 /* Parar de grabar (terminar, pausar, borrar). La pantalla vuelve a poder apagarse. */

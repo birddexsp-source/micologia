@@ -1,0 +1,47 @@
+# Compila la APK de Android (la misma web de docs/ dentro de una app, con GPS en segundo plano).
+# Se ejecuta sola al cambiar la web o el envoltorio, y a mano desde la pestaña Actions → «APK Android» → Run workflow.
+# Descarga: https://github.com/birddexsp-source/micologia/releases/download/apk-latest/micologia.apk
+name: APK Android
+on:
+  push:
+    branches: [main]
+    paths: ['docs/**', 'android-app/**', '.github/workflows/apk.yml']
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: apk
+  cancel-in-progress: true
+jobs:
+  apk:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 20 }
+      - uses: actions/setup-java@v4
+        with: { distribution: temurin, java-version: 21 }
+      - name: Proyecto Android (Capacitor)
+        working-directory: android-app
+        run: |
+          npm ci
+          npx cap add android
+          npx cap sync android
+          # permisos extra: micrófono (notas de voz) y cámara (fotos)
+          sed -i "/<\/manifest>/e cat permisos.txt" android/app/src/main/AndroidManifest.xml
+      - name: Compilar y firmar
+        working-directory: android-app/android
+        env:
+          MICO_KS: ${{ github.workspace }}/android-app/micologia.keystore
+          MICO_VC: ${{ github.run_number }}
+        run: |
+          export MICO_VN=$(grep -o 'micologia-v[0-9]*' ../../docs/sw.js | head -1 | sed 's/micologia-//')
+          ./gradlew -I ../firma.gradle assembleRelease --no-daemon
+          cp app/build/outputs/apk/release/app-release.apk ../micologia.apk
+      - uses: actions/upload-artifact@v4
+        with: { name: micologia-apk, path: android-app/micologia.apk }
+      - name: Publicar en Releases (enlace fijo)
+        env: { GH_TOKEN: '${{ github.token }}' }
+        run: |
+          gh release delete apk-latest --yes --cleanup-tag || true
+          gh release create apk-latest android-app/micologia.apk --title "APK Android (última)" --notes "Versión $(grep -o 'micologia-v[0-9]*' docs/sw.js | head -1). Instala sobre la anterior sin desinstalar."

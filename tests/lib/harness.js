@@ -123,6 +123,11 @@ class T {
   setGeo(lat, lon, acc = 8) { return this.ctx.setGeolocation({ latitude: lat, longitude: lon, accuracy: acc }); }
   async fixGPS() { for (let i = 0; i < 30; i++) { if (await this.page.evaluate(() => !!window.__MI.geo.fix())) return true; await this.wait(150); } return false; }
   /* Marca un hallazgo con el botón (2 toques: Marcar aquí → Guardar) */
+  /* Salida en curso SIN zona (como las de antes de las zonas): para probar el recorrido manual y el resto de pantallas. Va a su página. */
+  async salidaSinZona() {
+    const id = await this.page.evaluate(async () => { const { hoy } = await import('./js/util.js'); return window.__MI.db.add('salidas', { fecha: hoy(), titulo: '', notas: '', zonaIds: [], fotos: [], fotosCosecha: [], track: [], grabar: false, estado: 'en_curso', totalTxt: '', zonaMejorId: '', creada: Date.now(), fin: null }); });
+    await this.go('#salida/' + id); await this.wait(500); return id;
+  }
   async marcarRapido(extra = {}) {
     await this.fixGPS(); await this.tap('#fab', 350);
     if (extra.esp) { await this.page.fill('#sp-q', extra.esp); await this.wait(120); await this.tap('#sp-sugs button'); }

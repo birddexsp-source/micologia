@@ -13,7 +13,7 @@ module.exports = {
       t.ok('«Marcar aquí» queda por encima de la barra', r[0] <= r[1], JSON.stringify(r));
     });
     await t.case('datos de ejemplo y todas las pantallas', async () => {
-      await t.go('#salidas'); await t.tap('#s-new', 400); await t.go('#mapa');
+      await t.salidaSinZona(); await t.go('#mapa');
       await t.marcarRapido({ zona: 'Zona con un nombre bastante largo para probar el desborde', esp: 'cicuta', cant: '≈200 g' });
       await t.marcarRapido({ zonaExistente: true, esp: 'rebozuelo' });
       for (const h of ['#salidas', '#setas', '#mes', '#ajustes']) { await t.go(h); await limpio(h); await t.shot('captura-m-' + h.slice(1)); }

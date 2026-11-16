@@ -1084,3 +1084,13 @@ button.rz{cursor:pointer}
 .zona-i{display:flex;gap:10px;align-items:center;margin:0 0 12px;padding:9px 12px;border-radius:12px;background:rgba(76,195,217,.1);border:1px dashed #4cc3d9;font-size:.88rem}
 .zona-i i{flex:none;width:16px;height:16px;border-radius:50%;border:2px dashed #4cc3d9}
 .zona-circ{pointer-events:none}
+
+/* v47: zonas de la salida */
+.zbar{display:flex;align-items:center;gap:12px;margin:0 0 12px;padding:11px 12px;border-radius:14px;background:var(--card,#16201e);border:1px solid rgba(255,255,255,.08)}
+.zbar.on{border-color:#4cc3d9;background:rgba(76,195,217,.1)}
+.zbar .zt{flex:1;min-width:0}.zbar .zt b{display:block}.zbar .zt small{opacity:.75}
+.zd{flex:none;width:14px;height:14px;border-radius:50%;background:var(--c,#8a9a95);box-shadow:0 0 0 3px rgba(255,255,255,.08)}
+.zlist{display:flex;flex-direction:column;gap:8px;margin:0 0 14px}
+.zc{display:grid;grid-template-columns:auto 1fr;gap:4px 10px;align-items:center;padding:10px 12px;border-radius:12px;border:1px solid rgba(255,255,255,.08);border-left:4px solid var(--c)}
+.zc .zt small{opacity:.75;display:block}.zc .zn{grid-column:2;font-size:.82rem;opacity:.85}.zc .mavs{grid-column:2}
+.zlive{font-style:normal;font-size:.72rem;padding:1px 7px;border-radius:9px;background:rgba(76,195,217,.2);color:#4cc3d9;margin-left:6px;vertical-align:middle}
