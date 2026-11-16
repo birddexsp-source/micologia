@@ -1064,3 +1064,17 @@ button.rz{cursor:pointer}
 .ia-nota{margin-top:2px}
 .ia-n{display:flex;align-items:center;gap:8px;margin:2px 0 10px;color:var(--acc)}.ia-n svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.8}.ia-n b{font-size:14px}
 #mk-iares .row{margin-top:10px}#mk-iares .btn.p svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.8;vertical-align:-3px}
+
+/* v44: ver la especie antes de elegirla, «No sé», y diario de voz de la salida */
+.ia-w{display:grid;gap:6px}
+.ia-ver{justify-self:start;border:0;background:none;color:var(--acc);font-weight:650;font-size:13.5px;padding:2px 4px 2px 14px;cursor:pointer}
+.ia-prev{border:1px solid var(--line);border-radius:14px;background:var(--s1);padding:10px;display:grid;gap:8px}
+.ia-fs{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}.ia-fs img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:10px;background:var(--s3)}
+.ia-pt{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.ia-prev p{margin:0;font-size:14px;line-height:1.4}
+.ia-no{width:100%;margin-top:4px}
+.ia-sug p{margin:4px 0 0}
+.quick .qb.w{grid-column:1/-1}
+.dn{border:1px solid var(--line);background:var(--s2);border-radius:16px;padding:12px;margin-top:10px;display:grid;gap:8px}
+.dn-h{display:flex;align-items:center;gap:8px}.dn-h small{color:var(--mut);flex:1;min-width:0}.dn audio{width:100%}
+.dn textarea{width:100%;min-height:64px;resize:vertical}
+.btn.sm{padding:6px 10px;font-size:13px;min-height:0}

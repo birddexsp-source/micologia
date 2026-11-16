@@ -114,10 +114,14 @@ module.exports = {
       t.eq('una sola llamada con las 3 fotos', llamadas.map(l => l.n), [3]);
       t.ok('porcentaje del más probable', /80\s*%/.test(await t.T('#mk-iares .ia-row') || ''));
       await t.page.evaluate(() => document.querySelector('#mk-iares').scrollIntoView({ block: 'center', behavior: 'instant' })); await t.wait(600); await t.shot('captura-ia-hallazgo');
-      await t.tap('#mk-iares .ia-row[data-iae]', 300);
+      await t.tap('#mk-iares [data-iav]', 400);
+      t.ok('«Ver la especie» abre una vista previa con fotos y la clave, sin salir del hallazgo', await t.page.evaluate(() => { const p = document.querySelector('#mk-iares .ia-prev:not([hidden])'); return !!p && p.querySelectorAll('img').length >= 1 && p.textContent.length > 40 && !!document.querySelector('#mk-ok'); }));
+      await t.shot('captura-ia-ver');
+      await t.tap('#mk-iares .ia-prev [data-iae]', 300);
       t.ok('elige la especie del catálogo', (await t.page.evaluate(() => document.querySelector('#sp-q').value)).length > 3);
       await t.tap('#mk-ok', 500);
       const hh = (await t.docs('hallazgos')).find(x => (x.fotos || []).length && x.especieId);
+      t.ok('guarda lo que sugirió la IA', !!hh && Array.isArray(hh.iaSugerencias) && hh.iaSugerencias.length === 2 && hh.iaSugerencias[0].c === 80);
       t.ok('hallazgo guardado con las 3 fotos y especie provisional', !!hh && hh.fotos.length === 3 && hh.identificacion === 'provisional');
       await t.fixGPS(); await t.tap('#fab', 500); modo = '500'; llamadas = [];
       { const [f2] = await Promise.all([t.page.waitForEvent('filechooser'), t.page.evaluate(() => document.querySelector('#mk-ia').click())]); await f2.setFiles(png); await t.wait(400); }
@@ -125,6 +129,19 @@ module.exports = {
       t.ok('si falla: mensaje y se puede volver a escanear, la foto se conserva', await t.has('#mk-iaes') && (await t.N('#mk-th img')) === 1);
       modo = 'ok'; await t.tap('#mk-iaes', 1500); t.ok('volver a escanear funciona', await t.has('#mk-iares .ia-row'));
       await t.tap('#mk-x', 300);
+    });
+    await t.case('en el hallazgo: «No sé · lo miro en casa» guarda sin identificar con las sugerencias de la IA', async () => {
+      modo = 'ok'; llamadas = []; await t.fixGPS(); await t.tap('#fab', 500);
+      { const [fc] = await Promise.all([t.page.waitForEvent('filechooser'), t.page.evaluate(() => document.querySelector('#mk-ia').click())]); await fc.setFiles({ name: 'd.png', mimeType: 'image/png', buffer: Buffer.from(PNG1, 'base64') }); await t.wait(400); }
+      await t.tap('#mk-iaes', 500); await t.page.waitForSelector('#mk-iares .ia-row', { timeout: 8000 });
+      await t.tap('#mk-iano', 300);
+      t.eq('sin especie elegida', await t.page.evaluate(() => document.querySelector('#sp-q').value), '');
+      const antes = (await t.docs('hallazgos')).length; await t.tap('#mk-ok', 600);
+      const hs = await t.docs('hallazgos'), hh = hs.find(x => x.iaSugerencias && !x.especieId);
+      t.ok('queda sin identificar y con las sugerencias', hs.length === antes + 1 && !!hh && hh.identificacion === 'sin_identificar' && hh.iaSugerencias.length === 2);
+      await t.page.evaluate(id => window.__MI.verHallazgo(id), hh.id); await t.wait(400);
+      t.ok('al verlo se ven las sugerencias con su porcentaje', /Sugerencias de la IA[\s\S]*80 %/.test(await t.T('#sheet') || ''));
+      await t.page.evaluate(() => { document.querySelector('#sheet').hidden = true; });
     });
     await t.case('ajustes: guardar y borrar la clave', async () => {
       await t.page.evaluate(() => document.querySelector('#sheet').hidden = true);
