@@ -16,7 +16,7 @@ import * as off from './offline.js';
 import { renderPlan } from './plan.js';
 import * as lug from './lugar.js';
 
-const APP_V = 'micologia-v39';   // = V de sw.js
+const APP_V = 'micologia-v40';   // = V de sw.js
 const S = { view: 'mapa', arg: '', map: null, pins: null, me: null, acc: null, tmp: null, mini: null, centered: false, filtro: { salida: '', especie: '' }, clase: '', q: '', syncErr: false, mes: new Date().getMonth() + 1 };
 const VIEWS = ['mapa', 'salidas', 'salida', 'setas', 'mes', 'plan', 'ajustes'];
 const TITULOS = { mapa: 'Mapa', salidas: 'Salidas', salida: 'Salida', setas: 'Setas', mes: 'Este mes', plan: 'Plan de salida', ajustes: 'Ajustes' };
@@ -844,9 +844,9 @@ function abrirLibro(cap, volverA) {
 }
 
 /* ---------- reconocer con IA ---------- */
-const IA_SLOTS = [['Sombrero (desde arriba)', 'Por encima'], ['Láminas o poros (por debajo)', 'Por debajo'], ['Base del pie (con la volva si hay)', 'Base del pie']];
+const IA_SLOTS = [['Sombrero (desde arriba)', 'Por encima'], ['Láminas o poros (por debajo)', 'Por debajo'], ['Base del pie (con la volva si hay)', 'Base del pie'], ['Cualquier otra vista (entera, en el suelo, corte…)', 'Otra']];
 function abrirIA() {
-  const fotos = [null, null, null], urls = [];
+  const fotos = [null, null, null, null], urls = []; let nota = '';
   const sh = openSheet('');
   const pintar = (res, err, cargando) => {
     const hay = fotos.some(Boolean), key = ia.getKey();
@@ -856,8 +856,8 @@ function abrirIA() {
         '<input type="password" id="ia-k" placeholder="AIza…" autocomplete="off" autocapitalize="off" style="margin-top:10px"><div class="row"><button class="btn p" id="ia-ks">Guardar clave</button><button class="btn" id="gu-x">Cerrar</button></div>' + (err ? '<div class="warn" style="margin-top:10px">' + esc(err) + '</div>' : '');
       sh.innerHTML = h; return;
     }
-    h += '<p class="sub" style="font-family:inherit">Cuantas más vistas, mejor: arriba, por debajo y la base del pie.</p><div class="ia-slots">' +
-      IA_SLOTS.map((s, i) => '<label class="ia-slot' + (fotos[i] ? ' ok' : '') + '" data-i="' + i + '">' + (fotos[i] ? '<img src="' + urls[i] + '" alt="">' : '<span>＋</span>') + '<small>' + s[1] + '</small><input type="file" accept="image/*" data-i="' + i + '" hidden></label>').join('') + '</div>';
+    h += '<p class="sub" style="font-family:inherit">Vale una sola foto o las que tengas, en el orden que sea: cuantas más vistas, mejor (arriba, por debajo, base del pie). Si sabes el árbol o el sitio, anótalo.</p><div class="ia-slots">' +
+      IA_SLOTS.map((s, i) => '<label class="ia-slot' + (fotos[i] ? ' ok' : '') + '" data-i="' + i + '">' + (fotos[i] ? '<img src="' + urls[i] + '" alt="">' : '<span>＋</span>') + '<small>' + s[1] + '</small><input type="file" accept="image/*" data-i="' + i + '" hidden></label>').join('') + '</div><input type="text" id="ia-nota" maxlength="120" placeholder="Árbol o sitio (opcional): pino, robledal, hierba…" value="' + esc(nota) + '">';
     if (cargando) h += '<div class="note" style="margin-top:12px">Mirando las fotos…</div>';
     if (err) h += '<div class="warn" style="margin-top:12px">' + esc(err) + '</div>';
     if (res) h += resultadoIA(res);
@@ -865,6 +865,7 @@ function abrirIA() {
       '<p class="note" style="margin-top:12px">Es una pista, no una identificación. Nunca se come una seta por lo que diga una IA ni esta app. Las fotos se envían a Google (Gemini) solo al pulsar «Reconocer». <a href="#" id="ia-kc" style="color:var(--acc)">Cambiar clave</a></p>';
     sh.innerHTML = h;
   };
+  sh.oninput = e => { if (e.target.id === 'ia-nota') nota = e.target.value; };
   sh.onchange = e => {
     const f = e.target.files && e.target.files[0], i = +e.target.dataset.i; if (!f || isNaN(i)) return;
     fotos[i] = f; if (urls[i]) URL.revokeObjectURL(urls[i]); urls[i] = URL.createObjectURL(f); pintar();
@@ -878,7 +879,7 @@ function abrirIA() {
     if (b.id === 'ia-go') {
       if (!navigator.onLine) return pintar(null, ia.mensajeError(new Error('red')));
       pintar(null, '', true);
-      try { pintar(await ia.reconocer(fotos.filter(Boolean))); }
+      try { pintar(await ia.reconocer(fotos.filter(Boolean), { nota })); }
       catch (err) { if (err.message === 'clave') ia.setKey(''); pintar(null, ia.mensajeError(err)); }
     }
   };

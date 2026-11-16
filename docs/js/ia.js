@@ -32,13 +32,13 @@ const SCHEMA = { type: 'OBJECT', properties: {
   faltaVer: { type: 'STRING' }
 }, required: ['esSeta', 'calidad', 'candidatas', 'faltaVer'] };
 
-export function prompt(especies) {
+export function prompt(especies, nota) {
   const lista = especies.map(e => e.id + ' | ' + e.nombreCientifico.split(' (')[0] + ' | ' + ((e.nombresComunes && e.nombresComunes.es && e.nombresComunes.es[0]) || '')).join('\n');
-  return 'Eres un micólogo prudente. Te paso 1 a 3 fotos de la MISMA seta (sombrero, láminas/poros, base del pie) hechas en España.\n' +
+  return 'Eres un micólogo prudente. Te paso de 1 a 4 fotos de la MISMA seta (o grupo de setas), hechas en España, en cualquier orden y encuadre: pueden ser solo del sombrero, de las láminas, del pie, la seta entera en el suelo o en el árbol, o fotos poco nítidas.\n' + (nota ? 'Dato de la persona (puede ser erróneo): ' + nota + '\n' : '') + +
     'Esta es la colección de la persona (id | nombre científico | nombre común):\n' + lista + '\n\n' +
     'Devuelve SOLO JSON con: esSeta, calidad (de las fotos: buena/regular/mala), candidatas (como máximo 3, de más a menos probable) y faltaVer.\n' +
-    'Para cada candidata: si es de la colección, copia su id EXACTO de la lista; si no lo es, id vacío "" y pon su nombre científico y común reales. confianza 0-100. rasgosVistos: solo lo que se VE en las fotos, en una frase corta.\n' +
-    'Reglas: no inventes rasgos que no se vean (color, láminas, anillo, volva, base). Si las fotos no bastan para decidir, devuelve candidatas con confianza baja o una lista vacía, y en faltaVer di qué foto o rasgo haría falta (p. ej. «la base del pie con la volva», «las láminas por debajo»). Si hay especies tóxicas parecidas, inclúyelas entre las candidatas. No hables de si se puede comer. Si no es una seta, esSeta=false.';
+    'Para cada candidata: si es de la colección, copia su id EXACTO de la lista; si no lo es, id vacío "" y pon su nombre científico y común reales. confianza 0-100. rasgosVistos: solo lo que se VE (y qué vistas hay) en las fotos, en una frase corta.\n' +
+    'Reglas: no inventes rasgos que no se vean (color, láminas, anillo, volva, base). Aprovecha el hábitat y el sustrato que se vean (madera, hierba, hojarasca, árbol cercano). Si las fotos no bastan para decidir, devuelve candidatas con confianza baja o una lista vacía, y en faltaVer di qué foto o rasgo haría falta (p. ej. «la base del pie con la volva», «las láminas por debajo»). Si hay especies tóxicas parecidas, inclúyelas entre las candidatas. No hables de si se puede comer. Si no es una seta, esSeta=false.';
 }
 
 /* Valida y limpia lo que devuelve el modelo: un id que no esté en el catálogo pasa a «no está en tu colección». */
@@ -81,7 +81,7 @@ async function generar(partes, gen, { key = getKey(), fetchImpl = fetch } = {}) 
   throw new Error(ultimo);
 }
 export async function reconocer(files, opts = {}) {
-  const especies = cat.todas(), partes = [{ text: prompt(especies) }];
+  const especies = cat.todas(), partes = [{ text: prompt(especies, (opts.nota || '').trim().slice(0, 120)) }];
   for (const f of files) partes.push({ inline_data: { mime_type: 'image/jpeg', data: await b64(await reducirFoto(f, 1024, 0.7)) } });
   const txt = await generar(partes, { responseMimeType: 'application/json', responseSchema: SCHEMA, temperature: 0.4, maxOutputTokens: 1024 }, opts);
   let r; try { r = JSON.parse(txt); } catch (e) { throw new Error('incompleta'); }

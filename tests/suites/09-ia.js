@@ -30,9 +30,12 @@ module.exports = {
     });
     let llamadas = [], modo = 'ok', ids = [];
     await t.page.route('https://generativelanguage.googleapis.com/**', async r => {
-      const rq = r.request(); llamadas.push({ key: rq.headers()['x-goog-api-key'], n: (rq.postDataJSON().contents[0].parts.length - 1) });
+      const rq = r.request(); llamadas.push({ key: rq.headers()['x-goog-api-key'], n: (rq.postDataJSON().contents[0].parts.length - 1), txt: rq.postDataJSON().contents[0].parts[0].text });
       const h = { 'access-control-allow-origin': '*', 'access-control-allow-headers': '*' };
       if (rq.method() === 'OPTIONS') return r.fulfill({ status: 204, headers: h });
+      if (modo === 'rota') return r.fulfill({ status: 200, contentType: 'application/json', headers: h, body: JSON.stringify({ candidates: [{ finishReason: 'STOP', content: { parts: [{ text: '{esSeta: tru' }] } }] }) });
+      if (modo === 'noseta') return r.fulfill({ status: 200, contentType: 'application/json', headers: h, body: JSON.stringify(respuesta({ esSeta: false, calidad: 'buena', candidatas: [], faltaVer: '' })) });
+      if (modo === '500') return r.fulfill({ status: 503, contentType: 'application/json', body: '{}', headers: h });
       if (modo === 'clave') return r.fulfill({ status: 403, contentType: 'application/json', body: '{}', headers: h });
       const cands = modo === 'ok'
         ? [{ id: ids[0], nombreCientifico: 'x', nombreComun: 'x', confianza: 80, rasgosVistos: 'sombrero rojo con puntos blancos' }, { id: '', nombreCientifico: 'Amanita nueva', nombreComun: 'Rara', confianza: 30, rasgosVistos: '' }]
@@ -45,7 +48,7 @@ module.exports = {
       t.ok('pide la clave', /clave gratuita de Gemini/.test(await t.T('#sheet') || ''));
       await t.page.fill('#ia-k', 'hola'); await t.tap('#ia-ks'); t.ok('rechaza una clave mal formada', /no tiene la forma/.test(await t.T('#sheet') || ''));
       await t.page.fill('#ia-k', KEY); await t.tap('#ia-ks');
-      t.ok('ya enseña las 3 ranuras', (await t.N('.ia-slot')) === 3);
+      t.ok('ya enseña las 4 ranuras', (await t.N('.ia-slot')) === 4);
       t.eq('clave en localStorage', await t.page.evaluate(() => window.__MI.ia.getKey()), KEY);
       t.eq('«Reconocer» apagado sin fotos', await t.page.evaluate(() => document.querySelector('#ia-go').disabled), true);
     });
@@ -74,6 +77,25 @@ module.exports = {
       await t.page.setInputFiles('.ia-slot[data-i="1"] input', { name: 'b.png', mimeType: 'image/png', buffer: Buffer.from(PNG1, 'base64') }); await t.wait(150);
       await t.tap('#ia-go', 1500);
       t.ok('mensaje de clave', /clave/i.test(await t.T('#sheet .warn') || '')); t.eq('clave borrada', await t.page.evaluate(() => window.__MI.ia.getKey()), '');
+    });
+    await t.case('variedad: 1 foto, 4 fotos con nota, no seta, respuesta rota y servidor caído', async () => {
+      const png = n => ({ name: n + '.png', mimeType: 'image/png', buffer: Buffer.from(PNG1, 'base64') });
+      const abrir = async m => { modo = m; llamadas = []; await t.page.evaluate(k => { window.__MI.ia.setKey(k); window.__MI.abrirIA(); }, KEY); await t.wait(200); };
+      await abrir('ok'); await t.page.setInputFiles('.ia-slot[data-i="3"] input', png('o')); await t.wait(150);
+      await t.page.fill('#ia-nota', 'pinar de Pinus radiata'); await t.tap('#ia-go', 1500);
+      t.eq('una sola foto, en la ranura «otra»', llamadas.map(l => l.n), [1]);
+      t.ok('la nota viaja en el prompt', /pinar de Pinus radiata/.test(llamadas[0].txt));
+      t.ok('el prompt admite fotos sueltas y desordenadas', /cualquier orden/.test(llamadas[0].txt));
+      await abrir('ok');
+      for (let i = 0; i < 4; i++) { await t.page.setInputFiles('.ia-slot[data-i="' + i + '"] input', png('f' + i)); await t.wait(120); }
+      await t.tap('#ia-go', 1500); t.eq('cuatro fotos', llamadas.map(l => l.n), [4]);
+      await abrir('noseta'); await t.page.setInputFiles('.ia-slot[data-i="0"] input', png('n')); await t.wait(120); await t.tap('#ia-go', 1200);
+      t.ok('no parece una seta', /No parece una seta/.test(await t.T('#sheet') || ''));
+      await abrir('rota'); await t.page.setInputFiles('.ia-slot[data-i="0"] input', png('r')); await t.wait(120); await t.tap('#ia-go', 2500);
+      t.ok('JSON roto: mensaje claro, sin colgarse', /No se ha podido reconocer/.test(await t.T('#sheet .warn') || '')); t.ok('Reconocer vuelve a estar activo', await t.page.evaluate(() => !document.querySelector('#ia-go').disabled));
+      t.ok('la clave sigue guardada', (await t.page.evaluate(() => window.__MI.ia.getKey())) === KEY);
+      await abrir('500'); await t.page.setInputFiles('.ia-slot[data-i="0"] input', png('s')); await t.wait(120); await t.tap('#ia-go', 3000);
+      t.ok('servidor caído: mensaje y prueba los 3 modelos', /No se ha podido reconocer/.test(await t.T('#sheet .warn') || '') && llamadas.length === 3);
     });
     await t.case('ajustes: guardar y borrar la clave', async () => {
       await t.page.evaluate(() => document.querySelector('#sheet').hidden = true);
