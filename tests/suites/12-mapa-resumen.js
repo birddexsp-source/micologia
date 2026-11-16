@@ -84,7 +84,7 @@ module.exports = {
     });
     await t.case('lista de la salida abre el resumen del hallazgo', async () => {
       await t.go('#salida/sa'); await t.wait(500); await t.tab('hall');
-      await t.tap('#v-salida .item[data-h]', 500);
+      await t.tap('#v-salida .rg', 500);
       t.ok('resumen (no formulario)', await t.has('#sheet #hv-edit') && !(await t.has('#sheet #hd-ok')));
       await t.go('#mapa'); t.ok('al cambiar de pestaña se cierra la hoja', !(await t.visible('#sheet .sh')));
     });
@@ -122,12 +122,13 @@ module.exports = {
       t.ok('resumen de la salida en la tarjeta', /1 spot · 3 hallazgos/.test(await t.T('#v-salidas a.sal') || ''), await t.T('#v-salidas a.sal'));
       t.ok('spot visitado con nº de especies', /Hayedo A[\s\S]*3 especies/.test(await t.T('#v-salidas [data-spot="za"]') || ''));
       t.ok('spot por visitar: «sin visitar»', /sin visitar/.test(await t.T('#v-salidas [data-spot="zb"]') || ''));
-      await t.go('#salida/sa'); await t.wait(500); await t.tab('spots');
+      await t.go('#salida/sa'); await t.wait(700);
+      t.eq('número del spot también en el minimapa', await t.N('#smap .tnm'), 1);
+      await t.tab('spots');
       t.eq('1 spot en la línea de tiempo, numerado', await t.T('#v-salida .tl .tn'), '1');
       t.ok('franja horaria del spot', /\d\d:00–17:00/.test(await t.T('#v-salida .tl') || ''), await t.T('#v-salida .tl'));
       t.eq('2 especies en chips', await t.N('#v-salida .tl .ech'), 2);
       t.ok('×2 en la repetida', /×2/.test(await t.T('#v-salida .tl') || ''));
-      t.eq('número del spot también en el minimapa', await t.N('#smap .tnm'), 1);
       await t.tap('#v-salida .ech[data-e="amanita-phalloides"]', 500);
       t.ok('el chip abre la ficha', /phalloides/i.test(await t.T('#sheet') || ''));
       await t.go('#mapa');
@@ -144,8 +145,9 @@ module.exports = {
       t.eq('2 tramos (uno por trkseg)', sa.track.filter(p => p[3] === 1).length, 1);
       t.ok('con la hora del GPX', sa.track[0][2] === Date.parse('2026-11-11T15:30:00Z') / 1000);
       t.ok('no enciende el GPS', sa.grabar === false && await t.page.evaluate(() => window.__MI.trk.activo()) === null);
-      t.ok('recorrido dibujado en la salida', (await t.N('#smap .trk-line')) >= 2);
       t.ok('distancia calculada', /\d/.test(await t.T('#sd-km') || ''));
+      await t.go('#salida/sa'); await t.wait(600);
+      t.ok('recorrido dibujado en la salida', (await t.N('#smap .trk-line')) >= 2);
       await t.page.evaluate(() => window.__MI.verSpot('za')); await t.wait(500);
       t.ok('al abrir el spot se ve el recorrido de esa visita', (await t.N('#map .trk-line')) >= 1);
       await t.tap('#sv-x', 300); t.eq('y se quita al cerrar', await t.N('#map .trk-line'), 0);
@@ -160,7 +162,7 @@ module.exports = {
       const sv = (await t.docs('salidas')).find(x => x.id === sid), z = (await t.docs('zonas')).find(x => x.id === sv.zonaIds[0]);
       t.ok('spot añadido a la salida en curso', !!z && z.nombre === nom0);
       t.ok('vuelve a la salida', await t.page.evaluate(id => location.hash === '#salida/' + id, sid));
-      t.eq('sale en la línea de tiempo', await t.N('#v-salida .tl'), 1);
+      await t.tab('spots'); t.eq('sale en la línea de tiempo', await t.N('#v-salida .tl'), 1);
     });
     await t.case('marcar rápido: elegir especie en la rejilla y cantidad con un toque', async () => {
       await t.go('#mapa'); await t.page.evaluate(() => window.__MI.verSpot('za')); await t.wait(400);

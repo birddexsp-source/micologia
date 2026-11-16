@@ -119,7 +119,7 @@ module.exports = {
       for (let i = 1; i <= 3; i++) { await t.page.evaluate(i => window.__bgcb({ latitude: 43.4 + i * 0.0003, longitude: -2.7468, accuracy: 6, time: Date.now() }), i); await t.wait(120); }
       t.ok('los puntos del GPS en segundo plano entran en el recorrido', await t.page.evaluate(() => window.__MI.trk.puntos().length) >= 3);
       await t.tab('mas'); t.ok('dice que puedes bloquear el móvil y no ofrece pausar a mano ni «pantalla encendida»', /bloquear el móvil/.test(await t.T('#v-salida .rec') || '') && !(await t.has('#sd-pau')) && !(await t.has('#sd-wake')));
-      await t.tab('spots');
+      await t.go('#salida/' + sid); await t.wait(500);
     });
     await t.case('cambiar de zona: se cierra, no cuenta tiempo ni graba mientras conduces', async () => {
       await t.tap('#sd-zcam', 800);
@@ -142,9 +142,11 @@ module.exports = {
       s = (await t.docs('salidas')).find(x => x.estado === 'en_curso'); const h = (await t.docs('hallazgos')).find(x => x.salidaId === s.id);
       t.ok('el hallazgo queda en la zona 2', h.tramoId === s.tramos[1].id && h.zonaId === s.tramos[1].zonaId);
       await t.go('#salida/' + s.id); await t.wait(700);
+      t.eq('dos tarjetas de zona en el resumen', await t.N('.zcards .zcard'), 2);
+      t.eq('dos manchas de zona en el minimapa (una por recorrido)', await t.N('#smap path.zona-circ'), 2);
+      await t.tab('spots');
       t.eq('dos tarjetas de zona', await t.N('.zc'), 2);
       t.ok('con color, hora, tiempo y hallazgos', /1 · Aparcamiento A/.test(await t.T('.zc') || '') && /en marcha/.test(await t.T('.zlist') || '') && /1 hallazgo/.test(await t.T('.zlist') || ''), await t.T('.zlist'));
-      t.eq('dos manchas de zona en el minimapa (una por recorrido)', await t.N('#smap path.zona-circ'), 2);
       await t.shot('zonas-salida');
       await t.go('#mapa'); await t.wait(800); t.eq('y en el mapa principal (las 2 de hoy + la salida antigua, que sigue siendo un círculo)', await t.N('#map path.zona-circ'), 3);
     });

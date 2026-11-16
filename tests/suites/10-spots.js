@@ -70,7 +70,9 @@ module.exports = {
       await t.tap('#dn-ok', 600);
       const sd = (await t.docs('salidas')).find(x => x.id === 'sdia');
       t.ok('nota guardada con tipo, spot, audio y transcripción', !!sd && sd.diario.length === 1 && sd.diario[0].tipo === 'sin_setas' && sd.diario[0].zonaId === 'zd1' && sd.diario[0].audios.length === 1 && /sin llover/.test(sd.diario[0].texto) && /rebozuelos/.test(sd.diario[0].transcripciones[sd.diario[0].audios[0]]), JSON.stringify(sd && sd.diario));
-      t.ok('pestaña Diario con la nota y su audio', /Aquí no hay setas/.test(await t.T('.tabp[data-p="diario"]') || '') && (await t.N('.tabp[data-p="diario"] audio')) === 1 && (await t.T('.tabs [data-tb="diario"] em')) === '1');
+      t.ok('al guardar la nota se abre el Diario', await t.page.evaluate(() => /\/diario$/.test(location.hash)));
+      t.ok('pantalla Diario con la nota y su audio', /Aquí no hay setas/.test(await t.page.evaluate(() => [...document.querySelectorAll('.dn')].map(d => d.innerText).join(' '))) && (await t.N('.dn audio')) === 1);
+      await t.go('#salida/sdia'); await t.wait(500); t.eq('el resumen cuenta 1 nota de Diario', await t.T('.navrow[href$="/diario"] em'), '1'); await t.tab('diario');
       await t.page.fill('.dn textarea', 'Corrijo: suelo seco y sin lluvia desde hace diez días.'); await t.page.evaluate(() => document.activeElement.blur()); await t.wait(300);
       t.ok('se puede corregir el texto', /diez días/.test(((await t.docs('salidas')).find(x => x.id === 'sdia').diario[0].texto)));
       await t.shot('captura-diario');

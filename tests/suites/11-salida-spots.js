@@ -12,8 +12,9 @@ module.exports = {
       await t.put('zonas', 'zc1', { nombre: 'Boletus 3', estado: 'por_visitar', lat: 43.4024, lon: -2.7421 });
       sid = 's11'; await t.put('salidas', sid, { fecha: '2026-11-11', titulo: 'Boletus · 4 spots', notas: '', zonaIds: [za], fotos: [], fotosCosecha: [], track: [], grabar: false, estado: 'terminada', totalTxt: '', zonaMejorId: '', creada: ini, fin: ini + 9000000 });
       await t.go('#salida/' + sid);
-      t.ok('sección de spots con el spot', /Spots[\s\S]*Boletus 1[\s\S]*Sin especies anotadas/i.test(await t.T('#v-salida') || ''));
       t.eq('estadística de zonas = 1', await t.T('#v-salida .stats div:nth-child(2) b'), '1');
+      t.ok('el resumen enseña el spot', /Spots[\s\S]*Boletus 1/i.test(await t.T('#v-salida') || ''));
+      await t.tab('spots'); t.ok('pantalla de spots con el spot y sin especies', /Boletus 1[\s\S]*Sin especies anotadas/i.test(await t.T('#v-salida') || ''));
     });
     await t.case('añadir un spot a la salida lo marca como visitado', async () => {
       await t.tap('#sd-addspot', 300);
@@ -43,7 +44,7 @@ module.exports = {
       const ini = Date.now() - 4e6;
       for (const [id, n] of [['o1', 'Uno'], ['o2', 'Dos'], ['o3', 'Tres']]) await t.put('zonas', id, { nombre: n, estado: 'visitada', lat: 43.39, lon: -2.74 });
       await t.put('salidas', 'so', { fecha: '2026-11-11', titulo: 'Orden', notas: '', zonaIds: ['o1', 'o2', 'o3'], fotos: [], fotosCosecha: [], track: [], grabar: false, estado: 'terminada', totalTxt: '', zonaMejorId: '', creada: ini, fin: ini + 9e5 });
-      await t.go('#salida/so'); await t.wait(400);
+      await t.go('#salida/so/zonas'); await t.wait(400);
       const nombres = () => t.page.evaluate(() => [...document.querySelectorAll('.tl .th b')].map(b => b.textContent));
       t.eq('orden inicial', await nombres(), ['Uno', 'Dos', 'Tres']);
       await t.tap('#sd-ord', 400); t.ok('modo ordenar: flechas y sin «+ Especie»', (await t.N('[data-up]')) === 3 && !(await t.has('[data-sa]')));
@@ -52,7 +53,7 @@ module.exports = {
       await t.tap('[data-dn="0"]', 500); t.eq('bajar el primero', await nombres(), ['Dos', 'Tres', 'Uno']);
       t.eq('los números del mapa siguen el orden', await t.page.evaluate(() => [...document.querySelectorAll('.tl .tn')].map(x => x.textContent)), ['1', '2', '3']);
       await t.tap('#sd-ordok', 400); t.ok('«Listo» vuelve a la vista normal', (await t.N('[data-sa]')) === 3 && !(await t.has('[data-up]')));
-      await t.reload(); await t.go('#salida/so'); await t.wait(400);
+      await t.reload(); await t.go('#salida/so/zonas'); await t.wait(400);
       t.eq('se mantiene tras recargar', await nombres(), ['Dos', 'Tres', 'Uno']);
       t.ok('queda pendiente de sincronizar', await t.page.evaluate(() => window.__MI.db.dirtyCount() > 0));
     });

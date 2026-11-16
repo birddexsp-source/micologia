@@ -18,7 +18,7 @@ import * as lug from './lugar.js';
 import * as zon from './zona.js';
 import * as tr from './tramos.js';
 
-const APP_V = 'micologia-v47';   // = V de sw.js
+const APP_V = 'micologia-v48';   // = V de sw.js
 const S = { view: 'mapa', arg: '', map: null, pins: null, me: null, acc: null, tmp: null, mini: null, centered: false, filtro: { salida: '', especie: '' }, clase: '', q: '', syncErr: false, mes: new Date().getMonth() + 1 };
 const VIEWS = ['mapa', 'salidas', 'salida', 'setas', 'mes', 'plan', 'ajustes'];
 const TITULOS = { mapa: 'Mapa', salidas: 'Salidas', salida: 'Salida', setas: 'Setas', mes: 'Este mes', plan: 'Plan de salida', ajustes: 'Ajustes' };
@@ -648,7 +648,7 @@ async function abrirNotaSalida(sid) {
       try {
         const cur = await db.get('salidas', sid), fx = geo.fix(), e = { id: Date.now().toString(36) + Math.random().toString(36).slice(2, 6), ts: Date.now(), tipo, zonaId: $('#dn-zona', sh).value || null, lat: fx ? fx.lat : null, lon: fx ? fx.lon : null, precisionM: fx ? fx.acc : null, texto, audios: vz.audios, transcripciones: vz.trans };
         await db.patch('salidas', sid, { diario: [...(cur.diario || []), e] });
-        closeSheet(); toast('Nota guardada en la salida'); syn.auto(); S.sdTab = { id: sid, t: 'diario' }; if (S.view === 'salida' && S.arg === sid) renderSalida(sid);
+        closeSheet(); toast('Nota guardada en la salida'); syn.auto(); if (S.view === 'salida' && S.arg === sid) location.hash = '#salida/' + sid + '/diario'; else renderView();
       } catch (er) { t.disabled = false; toast('No se pudo guardar: ' + (er.message || er)); }
     }
   });
@@ -679,8 +679,6 @@ async function renderSalida(id) {
   const nEsp = especiesDe(hs).length;
   const tab = S.sdTab && S.sdTab.id === id ? S.sdTab.t : 'spots', tieneTrk = (live().track || []).length > 1;
   const tAct = tr.activo(s), zonasS = zon.zonasDeSalida(s, hs, zonas);
-  const TABS = [['spots', 'Spots', zids.length], ['hall', 'Hallazgos', hs.length], ['fotos', 'Fotos', cos.length + (s.fotos || []).length], ['diario', 'Diario', (s.diario || []).length], ['mas', 'Más', '']];
-  const panel = (k, html) => '<div class="tabp" data-p="' + k + '"' + (k === tab ? '' : ' hidden') + '>' + html + '</div>';
   const pSpots = zonasHTML(s, zonasS) + (orden.length ? '<div class="tline">' + orden.map((zid, i) => { const z = zonas.find(x => x.id === zid), n = hs.filter(h => h.zonaId === zid).length;
       return '<div class="tl"><span class="tn">' + (i + 1) + '</span><div class="tc"><div class="th"><div><b>' + esc(z.nombre) + '</b><small>' + [tramo(zid), n ? plural(n, 'hallazgo', 'hallazgos') : ''].filter(Boolean).join(' · ') + '</small></div>' + (ordenando ? '<span class="ord-b"><button class="btn sm" data-up="' + i + '"' + (i ? '' : ' disabled') + ' aria-label="Subir">↑</button><button class="btn sm" data-dn="' + i + '"' + (i < orden.length - 1 ? '' : ' disabled') + ' aria-label="Bajar">↓</button></span>' : '<button class="btn sm" data-sa="' + zid + '">＋ Especie</button>') + '</div>' + chips(zid) + '</div></div>'; }).join('') + '</div>'
       : '<div class="sv-empty">' + I.flag + '<div><b>Aún sin spots.</b> ' + (curso ? 'Cuando llegues a un sitio interesante pulsa «Spot aquí».' : 'Añade los sitios por los que pasaste.') + '</div></div>') + '<div class="row">' + (orden.length > 1 ? (ordenando ? '<button class="btn" id="sd-inv">⇅ Invertir orden</button><button class="btn p" id="sd-ordok">Listo</button>' : '<button class="btn" id="sd-ord">⇅ Cambiar orden</button>') : '') + (ordenando ? '' : '<button class="btn" id="sd-addspot">＋ Añadir spot a la salida</button>') + '</div>';
@@ -699,31 +697,114 @@ async function renderSalida(id) {
     (curso ? '<div class="rec ' + (graba ? 'on' : '') + '" style="margin-top:10px"><span class="rdot"></span><div class="t"><b>' + (graba ? 'Grabando el recorrido' : tieneTrk ? 'Recorrido en pausa' : 'Grabar con el GPS del móvil') + '</b><small>' + (graba ? (trk.nativo() ? 'Puedes bloquear el móvil: sigo grabando (verás un aviso fijo en la barra).' : 'Mantén la app abierta: si el móvil bloquea la pantalla puede dejar de grabar.') : (tr.tiene(s) ? 'Entre zonas no se graba: empieza la siguiente zona y te sigo.' : 'Apagado: gasta batería y no hace falta si usas Wikiloc.')) + '</small></div>' + (tr.tiene(s) ? '' : '<button class="btn" id="sd-pau">' + (graba ? 'Pausar' : (tieneTrk ? 'Reanudar' : 'Grabar')) + '</button>') + '</div>' +
       (graba && trk.pantallaSoportada() && !trk.nativo() ? '<div class="rec"><div class="t"><b>Pantalla encendida</b><small>Evita que se apague mientras andas. Gasta más batería.</small></div><button class="btn' + (trk.pantallaOn() ? ' p' : '') + '" id="sd-wake">' + (trk.pantallaOn() ? 'Activada' : 'Activar') + '</button></div>' : '') : '') + '</div>' +
     '<div class="row" style="margin-top:18px">' + (curso ? '' : '<button class="btn" id="sd-reab">Reabrir salida</button>') + '<button class="btn d" id="sd-del">Borrar salida</button></div>';
-  root.innerHTML = '<div class="pad sal-pg"><a class="back" href="#salidas">‹ Salidas</a>' +
-    '<div class="hero-m"><div class="smap big" id="smap"></div>' + (curso ? '<span class="live"><i></i>En curso · ' + durTxt(s).replace('—', 'recién empezada') + '</span>' : '') + '</div>' +
-    '<div class="sd-hd"><div class="sd-tt"><input type="text" id="sd-tit" class="tit" value="' + esc(s.titulo) + '" placeholder="Ponle un título"><div class="sd-date">' + esc(fecha(s.fecha)) + (curso ? '' : ' · terminada') + '</div></div>' + (curso ? '<button class="btn p" id="sd-fin">Terminar</button>' : '') + '</div>' +
-    (curso && !hs.length && !zids.length ? '<div class="pasos"><div><i>1</i><span><b>Llegas a una zona</b>«Empezar zona»: marca dónde aparcas y te sigo</span></div><div><i>2</i><span><b>Ves una seta</b>«Especie aquí»: foto y nota de voz</span></div><div><i>3</i><span><b>En casa</b>foto de lo recogido y «Terminar»</span></div></div>' : '') +
-    (!hs.length && !zids.length ? '' : '<div class="kpis"><div class="stats"><div><b>' + hs.length + '</b><span>hallazgos</span></div><div><b>' + zids.length + '</b><span>spots</span></div><div><b>' + nEsp + '</b><span>especies</span></div><div><b>' + pend + '</b><span>por identificar</span></div></div></div>') +
-    (curso ? '<div class="zbar' + (tAct ? ' on' : '') + '">' + (tAct ? '<i class="zd" style="--c:' + zon.color(zonasS.findIndex(z => z.en)) + '"></i><div class="zt"><b>Zona ' + (zonasS.findIndex(z => z.en) + 1) + ' · ' + esc((zonasS.find(z => z.en) || {}).nombre || '') + '</b><small>en marcha · <span id="sd-zdur">' + trk.fmtDur(tr.dur(tAct)) + '</span> · te sigo el recorrido</small></div><button class="btn" id="sd-zcam">Cambiar de zona</button>'
-      : '<i class="zd"></i><div class="zt"><b>' + (tr.tiene(s) ? 'Entre zonas' : 'Sin zona en marcha') + '</b><small>Sin contar tiempo ni grabar el recorrido</small></div><button class="btn p" id="sd-zini">Empezar zona</button>') + '</div>' : '') +
-    (curso ? '<div class="quick"><button class="qb p" id="sd-mk">' + I.plus + '<span><b>Especie aquí</b><small>con tu GPS</small></span></button><button class="qb" id="sd-sp">' + I.flag + '<span><b>Spot aquí</b><small>nuevo sitio</small></span></button><button class="qb w" id="sd-vozq">' + I.mic + '<span><b>Nota de voz</b><small>«aquí no hay setas porque…»</small></span></button></div>' : '') +
-    '<div class="tabs" role="tablist">' + TABS.map(([k, t, n]) => '<button data-tb="' + k + '" class="' + (k === tab ? 'on' : '') + '">' + t + (n ? '<em>' + n + '</em>' : '') + '</button>').join('') + '</div>' +
-    panel('spots', pSpots) + panel('hall', pHall) + panel('fotos', pFotos) + panel('diario', pDiario) + panel('mas', pMas) + '</div>';
+  /* ---------- pantalla de la salida: resumen corto + pantallas de detalle ---------- */
+  const sub = S.sub || '', clave = S.key || '', raiz = '#salida/' + id;
+  const volver = def => { const p = S.prevHash || ''; return p.startsWith(raiz) && p !== location.hash ? p : def; };
+  const keyH = h => h.especieId || (h.especieTxt ? 'x:' + norm(h.especieTxt) : 'u:' + h.id);
+  const grupos = (() => { const g = new Map(); hs.forEach(h => { const k = keyH(h); if (!g.has(k)) g.set(k, { k, hs: [], e: cat.byId(h.especieId) }); g.get(k).hs.push(h); }); return [...g.values()].sort((a, b) => b.hs.length - a.hs.length || a.hs[0].ts - b.hs[0].ts); })();
+  const fotosG = g => g.hs.flatMap(h => h.fotos || []);
+  const portada = g => { const f = fotosG(g)[0], r = g.e && g.e.fotos && g.e.fotos[0]; return f ? '<img data-blob="' + f + '" alt="">' : r ? '<img class="ph" src="' + esc(fi.fotoURL(r, 250)) + '" alt="" loading="lazy" crossorigin="anonymous">' : '<span class="ph0">?</span>'; };
+  const cardG = g => '<a class="spc" style="--c:' + colorEsp(g.e) + '" href="' + raiz + '/especie/' + encodeURIComponent(g.k) + '"><span class="spf">' + portada(g) + (fotosG(g).length ? '<i class="spn">' + I.foto + fotosG(g).length + '</i>' : '') + '</span><b>' + esc(nombreCorto(g.hs[0])) + '</b><small>' + plural(g.hs.length, 'hallazgo', 'hallazgos') + '</small></a>';
+  /* todas las fotos de la salida: las de cada hallazgo (las tuyas de cada seta), las de la salida y las de lo recogido */
+  const capH = h => nombreCorto(h) + ' · ' + hhmm(h.ts) + (h.zonaId ? ' · ' + zn(h.zonaId) : '');
+  const fotosAll = [...hs.slice().sort((a, b) => b.ts - a.ts).flatMap(h => (h.fotos || []).map(b => ({ b, k: 'h', h: h.id, g: keyH(h), cap: capH(h) }))),
+    ...(s.fotos || []).map(b => ({ b, k: 'fotos', cap: 'Foto de la salida' })), ...cos.map(b => ({ b, k: 'fotosCosecha', cap: 'Lo que me llevé' }))];
+  const ffil = S.fFoto && S.fFoto.id === id ? S.fFoto.f : 'todas';
+  const filtraF = f => fotosAll.filter(x => f === 'todas' || (f === 'setas' && x.k === 'h') || (f === 'recogido' && x.k === 'fotosCosecha') || (f === 'otras' && x.k === 'fotos') || (f.startsWith('sp:') && x.g === f.slice(3)));
+  let vista = fotosAll;
+  const thumbs = (l, max) => l.slice(0, max).map((x, i) => '<button class="fth" data-vi="' + i + '"><img data-blob="' + x.b + '" alt=""></button>').join('');
+  const filaH = h => { const e = cat.byId(h.especieId), f = (h.fotos || [])[0], idn = IDENT[h.identificacion] || IDENT.sin_identificar;
+    return '<button class="rg" data-h="' + h.id + '"><span class="rgt">' + (f ? '<img data-blob="' + f + '" alt="">' : e ? fi.avatar(e) : '<span class="dot" style="--c:' + idn.color + '"></span>') + '</span><div class="t"><b>' + esc(nombreCorto(h)) + '</b><small>' + hhmm(h.ts) + (h.cantidad ? ' · ' + esc(h.cantidad) : '') + ' · ' + idn.label + '</small></div>' + ((h.fotos || []).length ? '<span class="rgn">' + I.foto + h.fotos.length + '</span>' : '') + I.chev + '</button>'; };
+  const volverHTML = (def, txt) => '<a class="back" href="' + volver(def) + '">‹ ' + txt + '</a>';
+  const zonasPag = tr.tiene(s) ? zonasS : orden.map((zid, i) => ({ id: zid, i, nombre: zn(zid), hhs: hs.filter(h => h.zonaId === zid), legado: true, spot: true, tramo: null, anillos: [], circulo: null, seg: 0, m: 0, en: false }));
+  const zonaSel = sub === 'zona' ? zonasPag.find(z => z.id === clave) : null;
+  const zcard = z => '<a class="zcard" style="--c:' + zon.color(z.i) + '" href="' + raiz + '/zona/' + z.id + '"><i class="zd"></i><div class="t"><b>' + (z.i + 1) + ' · ' + esc(z.nombre) + (z.en ? ' <em class="zlive">en marcha</em>' : '') + '</b><small>' +
+    (z.tramo ? hhmm(z.tramo.ini) + (z.en ? '' : '–' + hhmm(z.tramo.fin)) + ' · ' + trk.fmtDur(z.seg) + (z.m ? ' · ' + trk.fmtKm(z.m) : '') : (tramo(z.id) || 'sin hora')) + '</small>' + (z.hhs.length ? avatares(z.hhs, 6) : '') + '</div>' + I.chev + '</a>';
+  const fila = (href, ic, t, d, n) => '<a class="navrow" href="' + href + '"><span class="nri">' + ic + '</span><div class="t"><b>' + t + '</b><small>' + d + '</small></div>' + (n !== '' ? '<em>' + n + '</em>' : '') + I.chev + '</a>';
+  const bl = (t, ver, cuerpo) => '<section class="bl"><div class="bl-h"><b>' + t + '</b>' + (ver || '') + '</div>' + cuerpo + '</section>';
+  const verMas = (href, n, extra) => '<a class="bl-m" href="' + href + '">' + (extra || 'Ver todas') + (n ? ' (' + n + ')' : '') + ' ›</a>';
+  const mapaHero = '<div class="hero-m"><div class="smap' + (sub ? '' : ' big') + '" id="smap"></div>' + (curso && !sub ? '<span class="live"><i></i>En curso · ' + durTxt(s).replace('—', 'recién empezada') + (tieneTrk ? ' · <b id="sd-km">' + kmTxt(live()) + '</b>' : '') + '</span>' : '') + '</div>';
+  let cuerpo = '';
+  if (!sub) {
+    const quick = curso ? '<div class="zbar' + (tAct ? ' on' : '') + '">' + (tAct ? '<i class="zd" style="--c:' + zon.color(zonasS.findIndex(z => z.en)) + '"></i><div class="zt"><b>Zona ' + (zonasS.findIndex(z => z.en) + 1) + ' · ' + esc((zonasS.find(z => z.en) || {}).nombre || '') + '</b><small>en marcha · <span id="sd-zdur">' + trk.fmtDur(tr.dur(tAct)) + '</span> · te sigo el recorrido</small></div><button class="btn" id="sd-zcam">Cambiar de zona</button>'
+        : '<i class="zd"></i><div class="zt"><b>' + (tr.tiene(s) ? 'Entre zonas' : 'Sin zona en marcha') + '</b><small>Sin contar tiempo ni grabar el recorrido</small></div><button class="btn p" id="sd-zini">Empezar zona</button>') + '</div>' +
+      '<div class="quick"><button class="qb p" id="sd-mk">' + I.plus + '<span><b>Especie aquí</b><small>con tu GPS</small></span></button><button class="qb" id="sd-sp">' + I.flag + '<span><b>Spot aquí</b><small>nuevo sitio</small></span></button><button class="qb w" id="sd-vozq">' + I.mic + '<span><b>Nota de voz</b><small>«aquí no hay setas porque…»</small></span></button></div>' : '';
+    const pasos = curso && !hs.length && !zids.length ? '<div class="pasos"><div><i>1</i><span><b>Llegas a una zona</b>«Empezar zona»: marca dónde aparcas y te sigo</span></div><div><i>2</i><span><b>Ves una seta</b>«Especie aquí»: foto y nota de voz</span></div><div><i>3</i><span><b>En casa</b>foto de lo recogido y «Terminar»</span></div></div>' : '';
+    const kpis = !hs.length && !zids.length ? '' : '<div class="kpis"><div class="stats"><div><b>' + hs.length + '</b><span>hallazgos</span></div><div><b>' + zids.length + '</b><span>spots</span></div><div><b>' + nEsp + '</b><span>especies</span></div><div><b>' + pend + '</b><span>por identificar</span></div></div></div>';
+    const bEsp = grupos.length ? bl('Qué has visto', verMas(raiz + '/especies', grupos.length), '<div class="hscroll">' + grupos.slice(0, 8).map(cardG).join('') + (grupos.length > 8 ? '<a class="spc mas" href="' + raiz + '/especies"><span class="spf"><b>+' + (grupos.length - 8) + '</b></span><small>ver todas</small></a>' : '') + '</div>') : (curso ? '' : bl('Qué has visto', '', '<div class="empty">Sin hallazgos en esta salida.</div>'));
+    const bZon = zonasPag.length ? bl(tr.tiene(s) ? 'Zonas' : 'Spots', zonasPag.length > 3 ? verMas(raiz + '/zonas', zonasPag.length) : verMas(raiz + '/zonas', 0, 'Editar'), '<div class="zcards">' + zonasPag.slice(0, 3).map(zcard).join('') + '</div>') : '';
+    const bFot = fotosAll.length ? bl('Fotos', verMas(raiz + '/fotos', fotosAll.length), '<div class="fstrip">' + thumbs(fotosAll, 9) + (fotosAll.length > 9 ? '<a class="fth mas" href="' + raiz + '/fotos"><b>+' + (fotosAll.length - 9) + '</b></a>' : '') + '</div>') : '';
+    const entradas = '<div class="navrows">' + fila(raiz + '/registro', I.libro, 'Registro', hs.length ? 'Hora a hora, zona por zona' : 'Aún sin hallazgos', hs.length) + fila(raiz + '/diario', I.mic, 'Diario', (s.diario || []).length ? 'Tus notas de voz' : 'Notas de voz de la salida', (s.diario || []).length || '') +
+      fila(raiz + '/fotos', I.foto, 'Fotos', fotosAll.length ? 'Tus fotos, filtradas por seta' : 'Añade fotos de la salida', fotosAll.length || '') + fila(raiz + '/mas', I.edit, 'Más', 'Total recogido, recorrido, GPX', '') + '</div>';
+    cuerpo = '<a class="back" href="#salidas">‹ Salidas</a>' + mapaHero +
+      '<div class="sd-hd"><div class="sd-tt"><input type="text" id="sd-tit" class="tit" value="' + esc(s.titulo) + '" placeholder="Ponle un título"><div class="sd-date">' + esc(fecha(s.fecha)) + (curso ? '' : ' · terminada') + '</div></div>' + (curso ? '<button class="btn p" id="sd-fin">Terminar</button>' : '') + '</div>' +
+      pasos + kpis + quick + bEsp + bZon + bFot + entradas;
+  } else if (sub === 'especies') {
+    cuerpo = volverHTML(raiz, 'Salida') + '<h2 class="sp-t">Especies de la salida</h2><p class="mut sm sp-s">' + plural(grupos.length, 'especie', 'especies') + ' · ' + plural(hs.length, 'hallazgo', 'hallazgos') + '. Toca una para ver tus fotos y dónde la encontraste.</p><div class="spgrid">' + grupos.map(cardG).join('') + '</div>' + (grupos.length ? '' : '<div class="empty">Sin hallazgos todavía.</div>');
+  } else if (sub === 'especie') {
+    const g = grupos.find(x => x.k === clave); vista = g ? fotosAll.filter(x => x.g === g.k) : [];
+    if (!g) cuerpo = volverHTML(raiz + '/especies', 'Especies') + '<div class="empty">Esta especie ya no está en la salida.</div>';
+    else {
+      const zs = [...new Set(g.hs.map(h => h.zonaId).filter(Boolean))].map(zn), ts = g.hs.map(h => h.ts), ia = (g.hs.find(h => (h.iaSugerencias || []).length) || {}).iaSugerencias || [];
+      cuerpo = volverHTML(raiz + '/especies', 'Especies') + '<div class="esp-h" style="--c:' + colorEsp(g.e) + '"><h2 class="sp-t">' + esc(nombreCorto(g.hs[0])) + '</h2>' + (g.e ? '<small class="sci">' + esc(g.e.nombreCientifico) + '</small>' : '') + '<div class="chs">' + (g.e ? tag(cat.vista(g.e)) : '<span class="tag" style="--c:#9aa5a1">Sin identificar</span>') + '</div></div>' +
+        '<div class="stats"><div><b>' + g.hs.length + '</b><span>hallazgos</span></div><div><b>' + fotosG(g).length + '</b><span>fotos</span></div><div><b>' + hhmm(Math.min(...ts)) + '</b><span>primera</span></div><div><b>' + (g.hs.length > 1 ? hhmm(Math.max(...ts)) : '—') + '</b><span>última</span></div></div>' +
+        (vista.length ? '<div class="gcar">' + thumbs(vista, 40) + '</div>' : '<div class="sv-empty">' + I.foto + '<div><b>Sin fotos tuyas.</b> ' + (g.e && g.e.fotos && g.e.fotos[0] ? 'Esta es una foto de referencia.' : '') + '</div></div>' + (g.e && g.e.fotos && g.e.fotos[0] ? '<div class="ref-f"><img class="ph" src="' + esc(fi.fotoURL(g.e.fotos[0], 500)) + '" alt="" loading="lazy" crossorigin="anonymous"></div>' : '')) +
+        (zs.length ? '<p class="mut sm">Zonas: <b>' + zs.map(esc).join(', ') + '</b></p>' : '') +
+        '<label class="l">Cada hallazgo</label>' + g.hs.map(filaH).join('') +
+        (ia.length ? '<label class="l">Lo que sugirió la IA</label><div class="card">' + ia.slice(0, 4).map(c => '<div class="iaf"><span>' + esc(c.nombre || c.nombreCientifico || c.id || '') + '</span><b>' + (c.pct != null ? c.pct + ' %' : c.confianza != null ? Math.round(c.confianza * 100) + ' %' : '') + '</b></div>').join('') + '</div>' : '') +
+        (g.e ? '<div class="row" style="margin-top:12px"><button class="btn p" data-e="' + g.e.id + '">Ver la ficha de la especie</button></div>' : '');
+    }
+  } else if (sub === 'registro') {
+    const asig = new Set(), grp = zonasPag.map(z => { z.hhs.forEach(h => asig.add(h.id)); return { t: (z.i + 1) + ' · ' + z.nombre, d: z.tramo ? hhmm(z.tramo.ini) + (z.en ? ' · en marcha' : '–' + hhmm(z.tramo.fin)) : tramo(z.id), c: zon.color(z.i), hs: z.hhs.slice().sort((a, b) => a.ts - b.ts) }; });
+    const resto = hs.filter(h => !asig.has(h.id)); if (resto.length) grp.push({ t: tr.tiene(s) ? 'Entre zonas' : 'Sin spot', d: '', c: '#8a9a95', hs: resto });
+    cuerpo = volverHTML(raiz, 'Salida') + '<h2 class="sp-t">Registro</h2><p class="mut sm sp-s">Hora a hora. Toca un hallazgo para ver sus fotos y datos.</p>' +
+      (grp.filter(x => x.hs.length).map(x => '<div class="rgg" style="--c:' + x.c + '"><div class="rgh"><i class="zd"></i><b>' + esc(x.t) + '</b><small>' + esc(x.d || '') + '</small></div>' + x.hs.map(filaH).join('') + '</div>').join('') || '<div class="empty">Sin hallazgos todavía.</div>') +
+      (mejor ? '<p class="mut sm">Donde más hubo: <b>' + esc(zn(mejor)) + '</b></p>' : '');
+  } else if (sub === 'zonas') {
+    cuerpo = volverHTML(raiz, 'Salida') + '<h2 class="sp-t">' + (tr.tiene(s) ? 'Zonas y spots' : 'Spots') + '</h2>' + pSpots;
+  } else if (sub === 'zona') {
+    if (!zonaSel) cuerpo = volverHTML(raiz, 'Salida') + '<div class="empty">Esa zona no existe.</div>';
+    else {
+      const z = zonaSel, gz = []; z.hhs.forEach(h => { const k = keyH(h); let g = gz.find(x => x.k === k); if (!g) gz.push(g = { k, hs: [], e: cat.byId(h.especieId) }); g.hs.push(h); }); vista = fotosAll.filter(x => x.h && z.hhs.some(h => h.id === x.h));
+      cuerpo = volverHTML(raiz, 'Salida') + mapaHero + '<h2 class="sp-t" style="--c:' + zon.color(z.i) + '"><i class="zd"></i> ' + (z.i + 1) + ' · ' + esc(z.nombre) + (z.en ? ' <em class="zlive">en marcha</em>' : '') + '</h2>' +
+        '<div class="stats"><div><b>' + (z.tramo ? trk.fmtDur(z.seg) : '—') + '</b><span>tiempo</span></div><div><b>' + (z.m ? trk.fmtKm(z.m) : '—') + '</b><span>recorrido</span></div><div><b>' + z.hhs.length + '</b><span>hallazgos</span></div><div><b>' + gz.length + '</b><span>especies</span></div></div>' +
+        (gz.length ? bl('Qué has visto aquí', '', '<div class="hscroll">' + gz.map(cardG).join('') + '</div>') : '') +
+        (vista.length ? bl('Fotos de esta zona', '', '<div class="fstrip">' + thumbs(vista, 12) + '</div>') : '') +
+        (z.hhs.length ? '<label class="l">Registro de la zona</label>' + z.hhs.slice().sort((a, b) => a.ts - b.ts).map(filaH).join('') : '<div class="empty">Sin hallazgos en esta zona.</div>') +
+        (z.spot ? '<div class="row" style="margin-top:12px"><button class="btn" data-spot="' + z.id + '">Ver el spot en el mapa</button></div>' : '');
+    }
+  } else if (sub === 'fotos') {
+    vista = filtraF(ffil); const sps = grupos.filter(g => fotosG(g).length), chipF = (f, t) => '<button class="opt' + (ffil === f ? ' on' : '') + '" data-ff="' + f + '">' + t + '</button>';
+    cuerpo = volverHTML(raiz, 'Salida') + '<h2 class="sp-t">Fotos</h2><div class="chips fch">' + chipF('todas', 'Todas ' + fotosAll.length) + (fotosAll.some(x => x.k === 'h') ? chipF('setas', 'Mis setas') : '') + (cos.length ? chipF('recogido', 'Lo recogido') : '') + ((s.fotos || []).length ? chipF('otras', 'Otras') : '') + sps.map(g => chipF('sp:' + g.k, esc(nombreCorto(g.hs[0])))).join('') + '</div>' +
+      (vista.length ? '<div class="fgrid">' + thumbs(vista, 400) + '</div>' : '<div class="empty">Sin fotos aquí todavía.</div>') +
+      '<div class="row" style="margin-top:14px"><button class="btn p" id="sd-cos-add">Foto de lo recogido</button><button class="btn" id="sd-foto">Otra foto</button></div>';
+  } else if (sub === 'diario') {
+    cuerpo = volverHTML(raiz, 'Salida') + '<h2 class="sp-t">Diario</h2>' + pDiario;
+  } else {
+    cuerpo = volverHTML(raiz, 'Salida') + '<h2 class="sp-t">Más</h2><label class="l" style="margin-top:4px">Total recogido</label><input type="text" id="sd-tot" value="' + esc(s.totalTxt) + '" placeholder="p. ej. ≈2 kg"><label class="l">Notas</label><p class="mut sm">' + (s.notas ? esc(s.notas) : 'Sin notas de la salida.') + '</p>' + pMas;
+  }
+  root.innerHTML = '<div class="pad sal-pg" data-sub="' + (sub || 'resumen') + '">' + cuerpo + '</div>';
+  { const k = id + '/' + sub + '/' + clave; if (S.sdScroll !== k) root.scrollTop = 0; S.sdScroll = k; }
   hydrate(root);
-  /* minimapa: recorrido + hallazgos */
-  S.mini = createMap('smap', { zoom: 10 }); const ls = [], capa = L.layerGroup().addTo(S.mini);
-  const pintar = () => { capa.clearLayers(); trazo(live().track).addTo(capa); };
-  pintar(); trk.lineas(live().track).forEach(l => l.forEach(p => ls.push([p[0], p[1]])));
-  hs.forEach(h => { pinH(h, { interactive: false }).addTo(S.mini); ls.push([h.lat, h.lon]); });
-  zonasS.forEach(z => { const g = dibujarZona(z, S.mini); if (g) { const bb = g.getBounds(); ls.push([bb.getSouth(), bb.getWest()], [bb.getNorth(), bb.getEast()]); } });
-  orden.forEach((zid, i) => { const z = zonas.find(x => x.id === zid); if (!z || z.lat == null) return; L.marker([z.lat, z.lon], { interactive: false, zIndexOffset: 500, icon: L.divIcon({ className: 'tnm', html: '<b>' + (i + 1) + '</b>', iconSize: [24, 24], iconAnchor: [12, 12] }) }).addTo(S.mini); ls.push([z.lat, z.lon]); });
-  if (!ls.length) { const f = geo.fix(); if (f) { S.mini.setView([f.lat, f.lon], 15); L.marker([f.lat, f.lon], { interactive: false, icon: L.divIcon({ className: 'me', html: '<i></i>', iconSize: [22, 22], iconAnchor: [11, 11] }) }).addTo(S.mini); } }
-  if (ls.length) S.mini.fitBounds(ls, { padding: [30, 30], maxZoom: 17, animate: false });
+  /* minimapa: recorrido + hallazgos (en la pantalla de una zona, solo lo de esa zona) */
+  let ls = [], pintar = () => { };
+  if ($('#smap', root)) {
+    const mz = zonaSel, hsM = mz ? mz.hhs : hs, zonasM = mz ? [mz] : zonasS, trackDe = () => mz && mz.tramo ? tr.puntos(mz.tramo, live().track) : live().track;
+    S.mini = createMap('smap', { zoom: 10 }); const capa = L.layerGroup().addTo(S.mini);
+    pintar = () => { capa.clearLayers(); trazo(trackDe()).addTo(capa); };
+    pintar(); trk.lineas(trackDe()).forEach(l => l.forEach(p => ls.push([p[0], p[1]])));
+    hsM.forEach(h => { pinH(h, { interactive: false }).addTo(S.mini); ls.push([h.lat, h.lon]); });
+    zonasM.forEach(z => { const g = dibujarZona(z, S.mini); if (g) { const bb = g.getBounds(); ls.push([bb.getSouth(), bb.getWest()], [bb.getNorth(), bb.getEast()]); } });
+    (mz ? (mz.spot ? [mz.id] : []) : orden).forEach((zid, i) => { const z = zonas.find(x => x.id === zid); if (!z || z.lat == null) return; L.marker([z.lat, z.lon], { interactive: false, zIndexOffset: 500, icon: L.divIcon({ className: 'tnm', html: '<b>' + (mz ? 1 : i + 1) + '</b>', iconSize: [24, 24], iconAnchor: [12, 12] }) }).addTo(S.mini); ls.push([z.lat, z.lon]); });
+    if (!ls.length) { const f = geo.fix(); if (f) { S.mini.setView([f.lat, f.lon], 15); L.marker([f.lat, f.lon], { interactive: false, icon: L.divIcon({ className: 'me', html: '<i></i>', iconSize: [22, 22], iconAnchor: [11, 11] }) }).addTo(S.mini); } }
+    if (ls.length) S.mini.fitBounds(ls, { padding: [30, 30], maxZoom: 17, animate: false });
+  }
   if (trk.activo() === id) S.unlive = trk.onAdd(() => { if (S.view !== 'salida' || S.arg !== id || !S.mini) return; pintar(); const k = $('#sd-km'); if (k) k.textContent = kmTxt(live()); });
   if (curso) S.tick = setInterval(() => { const d = $('#sd-dur'); if (S.view === 'salida' && S.arg === id && d) d.textContent = durTxt(s); const zd = $('#sd-zdur'); if (zd && tAct) zd.textContent = trk.fmtDur(tr.dur(tAct)); }, 30000);
-  $('#sd-tit', root).onchange = e => db.patch('salidas', id, { titulo: e.target.value.trim() });
-  $('#sd-tot', root).onchange = e => db.patch('salidas', id, { totalTxt: e.target.value.trim() });
-  $('#sd-mej', root).onchange = e => db.patch('salidas', id, { zonaMejorId: e.target.value });
+  const on = (sel, f) => { const el = $(sel, root); if (el) el.onchange = f; };
+  on('#sd-tit', e => db.patch('salidas', id, { titulo: e.target.value.trim() }));
+  on('#sd-tot', e => db.patch('salidas', id, { totalTxt: e.target.value.trim() }));
+  on('#sd-mej', e => db.patch('salidas', id, { zonaMejorId: e.target.value }));
   root.addEventListener('change', async e => { const k = e.target.dataset && e.target.dataset.dt; if (!k) return; const cur = await db.get('salidas', id); await db.patch('salidas', id, { diario: (cur.diario || []).map(x => x.id === k ? { ...x, texto: e.target.value.trim() } : x) }); });
   root.onclick = async ev => {
     const im = ev.target.closest('img[data-blob]'); if (im && im.dataset.k) { verFoto(id, im.dataset.k, im.dataset.blob); return; }
@@ -731,6 +812,9 @@ async function renderSalida(id) {
     if (t.dataset.tb) { S.sdTab = { id, t: t.dataset.tb }; $$('.tabs button', root).forEach(b => b.classList.toggle('on', b === t)); $$('.tabp', root).forEach(p => { p.hidden = p.dataset.p !== t.dataset.tb; }); }
     else if (t.dataset.h) verHallazgo(t.dataset.h);
     else if (t.dataset.e) abrirFicha(t.dataset.e);
+    else if (t.dataset.vi != null) abrirVisor(vista, +t.dataset.vi, id);
+    else if (t.dataset.ff) { S.fFoto = { id, f: t.dataset.ff }; renderSalida(id); }
+    else if (t.dataset.spot) { location.hash = '#mapa'; setTimeout(() => verSpot(t.dataset.spot), 400); }
     else if (t.id === 'sd-mk') marcar();
     else if (t.id === 'sd-voz' || t.id === 'sd-vozq') abrirNotaSalida(id);
     else if (t.dataset.dd) { const cur = await db.get('salidas', id); await db.patch('salidas', id, { diario: (cur.diario || []).filter(x => x.id !== t.dataset.dd) }); S.sdTab = { id, t: 'diario' }; renderSalida(id); }
@@ -775,6 +859,23 @@ function terminarSalida(s, hs, zonas, porZona, mejor) {
   $('#tf-gal-b', sh).onclick = () => pickFoto(nueva, { galeria: true });
   $('#tf-x', sh).onclick = closeSheet;
   $('#tf-ok', sh).onclick = async () => { await trk.stop(); const cur = await db.get('salidas', s.id); await db.patch('salidas', s.id, { ...(tr.tiene(cur) ? { tramos: tr.cerrar(cur) } : {}), estado: 'terminada', fin: Date.now(), totalTxt: $('#tf-tot', sh).value.trim(), notas: $('#tf-nota', sh).value.trim(), zonaMejorId: s.zonaMejorId || mejor || '' }); closeSheet(); toast('Salida terminada'); syn.auto(1500); };
+}
+/* Visor de fotos a pantalla completa: se desliza de una a otra, con el pie (seta · hora · zona) y acceso al hallazgo */
+function abrirVisor(items, i, sid) {
+  if (!items || !items.length) return;
+  const v = document.createElement('div'); v.className = 'visor'; v.id = 'visor';
+  v.innerHTML = '<div class="vs-top"><span id="vs-n"></span><button class="vs-x" aria-label="Cerrar">' + I.close + '</button></div><div class="vs-tr">' + items.map((it, k) => '<figure data-k="' + k + '"><img data-blob="' + it.b + '" alt=""><figcaption><b>' + esc(it.cap) + '</b><span>' +
+    (it.h ? '<button class="btn sm" data-vh="' + it.h + '">Ver hallazgo</button>' : '<button class="btn d sm" data-vq="' + it.k + '|' + it.b + '">Quitar</button>') + '</span></figcaption></figure>').join('') + '</div>';
+  document.body.appendChild(v); hydrate(v);
+  const tr_ = v.querySelector('.vs-tr'), n = v.querySelector('#vs-n'), upd = () => { n.textContent = (Math.round(tr_.scrollLeft / Math.max(1, tr_.clientWidth)) + 1) + ' / ' + items.length; };
+  tr_.scrollLeft = i * tr_.clientWidth; tr_.onscroll = upd; upd();
+  const cerrar = () => { v.remove(); document.removeEventListener('keydown', tecla); }, tecla = e => { if (e.key === 'Escape') cerrar(); };
+  document.addEventListener('keydown', tecla);
+  v.onclick = async e => {
+    if (e.target.closest('.vs-x') || e.target === tr_) return cerrar();
+    const h = e.target.closest('[data-vh]'); if (h) { cerrar(); return verHallazgo(h.dataset.vh); }
+    const q = e.target.closest('[data-vq]'); if (q) { const [k, b] = q.dataset.vq.split('|'), cur = await db.get('salidas', sid); if (cur) await db.patch('salidas', sid, { [k]: (cur[k] || []).filter(x => x !== b) }); cerrar(); toast('Foto quitada'); syn.auto(); }
+  };
 }
 async function chipSalida() {
   const a = await activa(), c = $('#chip');
@@ -1210,9 +1311,12 @@ function badge() {
 
 /* ---------- navegación ---------- */
 function route() {
-  const [v, arg] = (location.hash || '#mapa').slice(1).split('/'), view = VIEWS.includes(v) ? v : 'mapa';
+  const [v, arg, sub, key] = (location.hash || '#mapa').slice(1).split('/'), view = VIEWS.includes(v) ? v : 'mapa';
+  S.prevHash = S.curHash || ''; S.curHash = location.hash; S.sub = sub || ''; S.key = key ? decodeURIComponent(key) : '';
+  const vis = document.getElementById('visor'); if (vis) vis.remove();
   if (S.mini && view !== 'salida') { S.mini.remove(); S.mini = null; }
-  if (view !== S.view || (arg || '') !== S.arg) closeSheet();
+  if (view !== S.view || (arg || '') !== S.arg || (sub || '') !== (S.subAnt || '')) closeSheet();
+  S.subAnt = sub || '';
   S.view = view; S.arg = arg || ''; document.body.dataset.view = view;
   VIEWS.forEach(x => { const el = $('#v-' + x), on = x === view; if (on && el.hidden) { el.classList.remove('entra'); void el.offsetWidth; el.classList.add('entra'); } el.hidden = !on; });
   $$('.nav a').forEach(a => a.classList.toggle('on', a.dataset.tab === (view === 'salida' ? 'salidas' : view)));
@@ -1252,7 +1356,7 @@ async function boot() {
       buscar();
     }).catch(() => { });
   }
-  window.__MI = { fichaTab: k => fichaTab($('#sheet .sh'), k), abrirHabitat, abrirDondeBuscar, db, geo, syn, cat, trk, S, abrirHallazgo, abrirFicha, abrirLibro, abrirIA, ia, abrirSpot, verSpot, editarSpot, verHallazgo, leerGPX };
+  window.__MI = { abrirVisor, fichaTab: k => fichaTab($('#sheet .sh'), k), abrirHabitat, abrirDondeBuscar, db, geo, syn, cat, trk, S, abrirHallazgo, abrirFicha, abrirLibro, abrirIA, ia, abrirSpot, verSpot, editarSpot, verHallazgo, leerGPX };
   document.body.dataset.ready = '1';
 }
 boot().catch(e => { console.error(e); document.body.insertAdjacentHTML('beforeend', '<div class="warn" style="position:fixed;top:60px;left:12px;right:12px;z-index:9999">No se pudo arrancar la app: ' + esc(e.message || e) + '</div>'); });

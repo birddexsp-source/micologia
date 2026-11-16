@@ -84,8 +84,9 @@ module.exports = {
       await t.tap('#sd-sp', 700); await t.tap('#st-ok', 700);
       const s = (await t.docs('salidas'))[0];
       t.eq('2 spots en la salida', s.zonaIds.length, 2);
-      t.eq('línea de tiempo con 2 spots', await t.N('#v-salida .tl'), 2);
       t.ok('cifras en lugar de pasos', !(await t.has('#v-salida .pasos')) && await t.has('#v-salida .kpis'));
+      await t.tab('spots'); t.eq('línea de tiempo con 2 spots', await t.N('#v-salida .tl'), 2);
+      await t.go('#salida/' + s.id); await t.wait(500);
       await t.tap('#sd-fin', 500); await t.page.fill('#tf-tot', '≈300 g'); await t.tap('#tf-ok', 700);
       t.eq('salida terminada', (await t.docs('salidas'))[0].estado, 'terminada');
       await t.go('#mapa'); await t.wait(300);

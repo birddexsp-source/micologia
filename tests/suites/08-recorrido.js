@@ -63,9 +63,11 @@ module.exports = {
     await t.case('hallazgo durante el recorrido y avatar en la lista', async () => {
       await t.go('#mapa'); await t.marcarRapido({ zona: 'Zona prueba', esp: 'amanita phalloides' });
       await t.go('#salida/' + sid); await t.wait(500);
-      t.eq('1 hallazgo', await t.N('#v-salida .item[data-h]'), 1);
-      t.ok('la fila usa la foto de la especie', (await t.N('#v-salida .item[data-h] .phw.av img.ph')) === 1);
-      t.ok('la fila indica el estado de identificación', /Sin identificar|Provisional/.test(await t.T('#v-salida .item[data-h]') || ''));
+      await t.tab('registro');
+      t.eq('1 hallazgo', await t.N('#v-salida .rg'), 1);
+      t.ok('la fila usa la foto de la especie', (await t.N('#v-salida .rg .phw.av img.ph')) === 1);
+      t.ok('la fila indica el estado de identificación', /Sin identificar|Provisional/.test(await t.T('#v-salida .rg') || ''));
+      await t.tab('mas');
     });
     await t.case('pausa y reanudar: no graba en pausa y no une los tramos', async () => {
       await t.tap('#sd-pau', 500);
@@ -84,6 +86,7 @@ module.exports = {
       t.eq('dos tramos', seg, 2);
       const bad = await t.page.evaluate(() => { const T = window.__MI.trk, p = T.puntos(), l = T.lineas(p); const a = T.metros(p), b = l.reduce((s, x) => s + T.metros(x), 0); return Math.abs(a - b) < 0.01; });
       t.ok('los metros no cuentan el salto de la pausa', bad);
+      await t.go('#salida/' + sid); await t.wait(600);
       t.eq('2 líneas pintadas (una por tramo)', await t.N('#smap .trk-line'), 2);
     });
     await t.case('si se cierra y se vuelve a abrir la app, sigue grabando y conserva lo grabado', async () => {
@@ -104,6 +107,7 @@ module.exports = {
       t.eq('lo suelta', await t.page.evaluate(() => window.__wl), 0);
     });
     await t.case('terminar: resumen con recorrido y fotos de lo recogido', async () => {
+      await t.go('#salida/' + sid); await t.wait(500);
       await t.tap('#sd-fin', 500);
       t.ok('el resumen enseña el recorrido y la duración', /recorrido/i.test(await t.T('#sheet') || '') && /duración/i.test(await t.T('#sheet') || ''));
       t.ok('bloque «Fotos de lo que te llevas» arriba', /Fotos de lo que te llevas/.test(await t.T('#sheet .cosecha') || ''));
@@ -130,17 +134,19 @@ module.exports = {
     });
     await t.case('salida terminada: «Lo que me llevé», visor y quitar foto', async () => {
       await t.go('#salida/' + sid); await t.wait(500);
-      t.eq('3 fotos en «Lo que me llevé»', await t.N('#sd-cos img'), 3);
-      t.ok('la duración y los km se ven en las estadísticas', /^\d+ m$|^\d,\d km$/.test(await t.T('#sd-km') || '') && !/^—$/.test(await t.T('#sd-km') || ''), await t.T('#sd-km'));
-      t.eq('el contador de la pestaña Fotos', await t.T('.tabs [data-tb="fotos"] em'), '3');
       t.ok('el recorrido sigue dibujado', (await t.N('#smap .trk-line')) >= 2);
-      await t.page.evaluate(() => document.querySelector('#sd-cos img').click()); await t.wait(400);
-      t.ok('visor de foto con botón Quitar', await t.has('#sheet img.big-foto') && await t.has('#vf-del'));
-      await t.tap('#vf-del', 500);
+      t.eq('el contador de Fotos en el resumen', await t.T('.navrow[href$="/fotos"] em'), '3');
+      await t.tab('mas'); t.ok('la duración y los km se ven en «Más»', /^\d+ m$|^\d,\d km$/.test(await t.T('#sd-km') || ''), await t.T('#sd-km'));
+      await t.tab('fotos'); await t.tap('[data-ff="recogido"]', 300);
+      t.eq('3 fotos en «Lo recogido»', await t.N('.fgrid .fth'), 3);
+      await t.tap('.fgrid .fth', 500);
+      t.ok('visor con botón Quitar', await t.has('#visor') && await t.has('#visor [data-vq]'));
+      await t.tap('#visor [data-vq]', 600);
       t.eq('queda 2', (await t.docs('salidas'))[0].fotosCosecha.length, 2);
       await t.shot('captura-08-salida-terminada');
     });
     await t.case('GPX: recorrido y hallazgos, XML bien formado', async () => {
+      await t.tab('mas');
       const [d] = await Promise.all([t.page.waitForEvent('download'), t.page.evaluate(() => document.querySelector('#sd-gpx').click())]);
       t.ok('nombre salida-AAAA-MM-DD.gpx', /^salida-\d{4}-\d{2}-\d{2}\.gpx$/.test(d.suggestedFilename()), d.suggestedFilename());
       const p = await d.path(), txt = fs.readFileSync(p, 'utf8');

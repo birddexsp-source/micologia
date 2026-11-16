@@ -29,9 +29,10 @@ module.exports = {
       await t.tap('#chip', 600);
       const stats = await t.page.evaluate(() => [...document.querySelectorAll('#v-salida .stats:not(#sd-st2) b')].map(b => b.textContent));
       t.eq('hallazgos · spots · por identificar', [stats[0], stats[1], stats[3]], ['3', '2', '3']);
-      t.ok('mejor zona automática: Pinar A', /Automático: Pinar A/.test(await t.T('#sd-mej') || ''), await t.T('#sd-mej'));
       t.ok('minimapa montado con 3 marcadores', await t.has('#smap.leaflet-container') && await t.N('#smap .pin i') === 3, 'pins: ' + await t.N('#smap .pin i'));
-      t.eq('3 filas de hallazgos', await t.N('#v-salida .item[data-h]'), 3);
+      await t.tab('registro'); t.eq('3 filas de hallazgos en el registro', await t.N('#v-salida .rg'), 3);
+      await t.tab('mas'); t.ok('mejor zona automática: Pinar A', /Automático: Pinar A/.test(await t.T('#sd-mej') || ''), await t.T('#sd-mej'));
+      await t.go('#salida/' + (await t.docs('salidas'))[0].id); await t.wait(500);
       await t.shot('captura-03-salida');
     });
     await t.case('terminar salida: resumen, total y estado', async () => {
