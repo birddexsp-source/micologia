@@ -102,16 +102,16 @@ module.exports = {
       const png = { name: 'c.png', mimeType: 'image/png', buffer: Buffer.from(PNG1, 'base64') };
       modo = 'ok'; llamadas = []; await t.page.evaluate(k => window.__MI.ia.setKey(k), KEY);
       await t.page.evaluate(() => { document.querySelector('#sheet').hidden = true; }); await t.go('#mapa'); await t.fixGPS(); await t.tap('#fab', 500);
-      t.ok('hay botón de IA en el hallazgo', await t.has('#mk-ia'));
-      const cam = async () => { const [fc] = await Promise.all([t.page.waitForEvent('filechooser'), t.page.evaluate(() => document.querySelector('#mk-ia').click())]); await fc.setFiles(png); await t.wait(400); };
+      t.ok('el botón de IA está, pero apagado hasta que haya foto (no hay pestañas separadas)', await t.has('#mk-iaes') && await t.page.evaluate(() => document.querySelector('#mk-iaes').disabled) && !(await t.has('#mk-ia')));
+      const cam = async () => { const [fc] = await Promise.all([t.page.waitForEvent('filechooser'), t.page.evaluate(() => document.querySelector('#mk-foto').click())]); await fc.setFiles(png); await t.wait(400); };
       await cam();
-      t.eq('abre la cámara trasera directamente', await t.page.evaluate(() => (document.querySelector('#file-ia') || { getAttribute: () => 'environment' }).getAttribute('capture')), 'environment');
+      t.eq('«Foto» abre la cámara trasera', await t.page.evaluate(() => (document.querySelector('#file-foto') || { getAttribute: () => 'environment' }).getAttribute('capture')), 'environment');
       t.eq('sacar una foto NO escanea todavía', llamadas.length, 0);
       await cam(); await cam();
-      t.ok('3 fotos listas y botón Escanear', /3 fotos listas/.test(await t.T('#mk-iares') || '') && await t.has('#mk-iaes') && (await t.N('#mk-th img')) === 3);
-      await t.page.evaluate(() => document.querySelector('#mk-ia').scrollIntoView({ block: 'start', behavior: 'instant' })); await t.wait(500); await t.shot('captura-ia-fotos');
+      t.ok('con 3 fotos hechas con «Foto», el botón dice Escanear con IA · 3 fotos', /Escanear con IA · 3 fotos/.test(await t.T('#mk-iaes') || '') && (await t.N('#mk-th img')) === 3);
+      await t.page.evaluate(() => document.querySelector('#mk-th').scrollIntoView({ block: 'start', behavior: 'instant' })); await t.wait(500); await t.shot('captura-ia-fotos');
       await t.tap('#mk-iaes', 500); await t.page.waitForSelector('#mk-iares .ia-row', { timeout: 8000 });
-      t.eq('una sola llamada con las 3 fotos', llamadas.map(l => l.n), [3]);
+      t.eq('una sola llamada con las 3 fotos hechas con «Foto» (sin repetirlas)', llamadas.map(l => l.n), [3]);
       t.ok('porcentaje del más probable', /80\s*%/.test(await t.T('#mk-iares .ia-row') || ''));
       await t.page.evaluate(() => document.querySelector('#mk-iares').scrollIntoView({ block: 'center', behavior: 'instant' })); await t.wait(600); await t.shot('captura-ia-hallazgo');
       await t.tap('#mk-iares [data-iav]', 400);
@@ -124,7 +124,7 @@ module.exports = {
       t.ok('guarda lo que sugirió la IA', !!hh && Array.isArray(hh.iaSugerencias) && hh.iaSugerencias.length === 2 && hh.iaSugerencias[0].c === 80);
       t.ok('hallazgo guardado con las 3 fotos y especie provisional', !!hh && hh.fotos.length === 3 && hh.identificacion === 'provisional');
       await t.fixGPS(); await t.tap('#fab', 500); modo = '500'; llamadas = [];
-      { const [f2] = await Promise.all([t.page.waitForEvent('filechooser'), t.page.evaluate(() => document.querySelector('#mk-ia').click())]); await f2.setFiles(png); await t.wait(400); }
+      { const [f2] = await Promise.all([t.page.waitForEvent('filechooser'), t.page.evaluate(() => document.querySelector('#mk-foto').click())]); await f2.setFiles(png); await t.wait(400); }
       await t.tap('#mk-iaes', 500); await t.page.waitForSelector('#mk-iares .warn', { timeout: 10000 });
       t.ok('si falla: mensaje y se puede volver a escanear, la foto se conserva', await t.has('#mk-iaes') && (await t.N('#mk-th img')) === 1);
       modo = 'ok'; await t.tap('#mk-iaes', 1500); t.ok('volver a escanear funciona', await t.has('#mk-iares .ia-row'));
@@ -132,7 +132,7 @@ module.exports = {
     });
     await t.case('en el hallazgo: «No sé · lo miro en casa» guarda sin identificar con las sugerencias de la IA', async () => {
       modo = 'ok'; llamadas = []; await t.fixGPS(); await t.tap('#fab', 500);
-      { const [fc] = await Promise.all([t.page.waitForEvent('filechooser'), t.page.evaluate(() => document.querySelector('#mk-ia').click())]); await fc.setFiles({ name: 'd.png', mimeType: 'image/png', buffer: Buffer.from(PNG1, 'base64') }); await t.wait(400); }
+      { const [fc] = await Promise.all([t.page.waitForEvent('filechooser'), t.page.evaluate(() => document.querySelector('#mk-foto').click())]); await fc.setFiles({ name: 'd.png', mimeType: 'image/png', buffer: Buffer.from(PNG1, 'base64') }); await t.wait(400); }
       await t.tap('#mk-iaes', 500); await t.page.waitForSelector('#mk-iares .ia-row', { timeout: 8000 });
       await t.tap('#mk-iano', 300);
       t.eq('sin especie elegida', await t.page.evaluate(() => document.querySelector('#sp-q').value), '');

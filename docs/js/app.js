@@ -16,7 +16,7 @@ import * as off from './offline.js';
 import { renderPlan } from './plan.js';
 import * as lug from './lugar.js';
 
-const APP_V = 'micologia-v44';   // = V de sw.js
+const APP_V = 'micologia-v45';   // = V de sw.js
 const S = { view: 'mapa', arg: '', map: null, pins: null, me: null, acc: null, tmp: null, mini: null, centered: false, filtro: { salida: '', especie: '' }, clase: '', q: '', syncErr: false, mes: new Date().getMonth() + 1 };
 const VIEWS = ['mapa', 'salidas', 'salida', 'setas', 'mes', 'plan', 'ajustes'];
 const TITULOS = { mapa: 'Mapa', salidas: 'Salidas', salida: 'Salida', setas: 'Setas', mes: 'Este mes', plan: 'Plan de salida', ajustes: 'Ajustes' };
@@ -255,9 +255,8 @@ async function marcar(opts = {}) {
     zonasOrd().map(z => '<button class="opt ' + (m.zona === z.id ? 'on' : '') + '" data-z="' + z.id + '">' + esc(z.nombre) + '</button>').join('') +
     '<button class="opt" id="mk-nz">+ Spot nuevo</button></div>' + (m.nueva ? '<div class="row" style="margin-top:8px"><input type="text" id="mk-znom" placeholder="Nombre del spot" value="' + esc(lug.nombreSpot(pos.lat, pos.lon, zonas.map(z => z.nombre))) + '" style="flex:1"><button class="btn p" id="mk-zok" style="flex:none">Crear</button></div>' : '');
   const sh = openSheet('<h2>Nuevo hallazgo</h2><p class="sub" id="mk-pos">' + horaTxt() + ' · ' + posTxt() + '</p>' +
-    '<button class="mtile mia" id="mk-ia">' + I.chispa + '<b>Reconocer con IA</b><small>Haz una o varias fotos y luego pulsa Escanear</small></button><div id="mk-iares"></div>' +
     '<div class="mtiles"><button class="mtile" id="mk-foto">' + I.foto + '<b>Foto</b></button><button class="mtile" id="au-rec"' + (au.soportado() ? '' : ' disabled') + '>' + I.mic + '<b>Nota de voz</b></button></div>' +
-    '<div id="mk-th" class="thumbs"></div><div id="au-list"></div>' +
+    '<div id="mk-th" class="thumbs"></div><div id="mk-iares"></div><div id="au-list"></div>' +
     '<label class="l">¿Qué es?</label><div class="gsp" id="mk-grid">' + gridHTML() + '</div>' + pickerHTML(m.esp, { rejilla: true }) +
     '<div id="mk-zona">' + zonaHTML() + '</div>' +
     '<label class="l">Cantidad</label><div class="cantq">' + ['1', '2–5', 'Muchas', '≈200 g'].map(x => '<button class="opt" data-cq="' + x + '">' + x + '</button>').join('') + '</div><input type="text" id="mk-cant" placeholder="o escríbela: 3 · ≈200 g" style="margin-top:8px">' +
@@ -265,38 +264,27 @@ async function marcar(opts = {}) {
     '<label class="l">Nota</label><input type="text" id="mk-nota" placeholder="Nota corta (o díctala con la nota de voz)"></details>' +
     '<div class="row mk-bar"><button class="btn" id="mk-x">Cancelar</button><button class="btn p" id="mk-ok" style="flex:2">Guardar</button></div>', { dim: !!opts.pos });
   const regrid = () => { $('#mk-grid', sh).innerHTML = gridHTML(); };
-  /* Reconocer con IA desde el propio hallazgo: haces las fotos que quieras (se guardan en el hallazgo), pulsas «Escanear» y la IA mira todas juntas */
-  const iaFiles = []; let iaBusy = false, iaEsc = 0, iaRes = '', iaCands = [];
+  /* Reconocer con IA desde el propio hallazgo: las fotos del hallazgo son las de la IA. Sacas las que quieras (botón Foto), y cuando quieras pulsas «Escanear»: mira todas juntas */
+  let iaBusy = false, iaEsc = 0, iaRes = '', iaCands = [];
   const iaPintar = (extra = '') => {
-    const n = iaFiles.length, box = $('#mk-iares', sh), t = $('#mk-ia', sh);
-    t.querySelector('b').textContent = n ? 'Añadir otra foto' : 'Reconocer con IA';
-    t.querySelector('small').textContent = n ? (n >= 4 ? 'Ya hay 4 fotos: es el máximo' : 'Cuantas más vistas, mejor (hasta 4)') : 'Haz una o varias fotos y luego pulsa Escanear';
-    t.disabled = n >= 4;
-    box.innerHTML = (n ? '<div class="ia-n">' + I.chispa + '<b>' + n + (n === 1 ? ' foto lista' : ' fotos listas') + '</b></div>' : '') + extra + iaRes +
-      (n && !iaBusy ? '<div class="row"><button class="btn p" id="mk-iaes">' + I.chispa + (iaEsc ? (iaEsc === n ? ' Escanear otra vez' : ' Escanear de nuevo con ' + n + (n === 1 ? ' foto' : ' fotos')) : ' Escanear con IA') + '</button></div>' : '');
-  };
-  const iaCamara = async () => {
-    const box = $('#mk-iares', sh);
-    if (!ia.getKey()) { box.innerHTML = '<div class="warn">Falta la clave de Gemini: pégala en Ajustes → Reconocer con IA.</div>'; return; }
-    if (iaBusy || iaFiles.length >= 4) return;
-    const f = await new Promise(ok => { const inp = document.createElement('input'); inp.type = 'file'; inp.accept = 'image/*'; inp.setAttribute('capture', 'environment'); inp.style.display = 'none'; inp.id = 'file-ia'; document.body.appendChild(inp);
-      inp.onchange = () => { const x = inp.files[0]; inp.remove(); ok(x || null); }; inp.addEventListener('cancel', () => { inp.remove(); ok(null); }); inp.click(); });
-    if (!f) return;
-    iaFiles.push(f);
-    try { const id = await db.putBlob(await reducirFoto(f)); m.fotos.push(id); const im = document.createElement('img'); im.dataset.blob = id; $('#mk-th', sh).appendChild(im); hydrate($('#mk-th', sh)); } catch (e) { toast('No se pudo guardar la foto'); }
-    iaPintar();
+    const n = m.fotos.length, box = $('#mk-iares', sh);
+    box.innerHTML = extra + iaRes + '<div class="row"><button class="btn ' + (n ? 'p' : '') + ' ia-go" id="mk-iaes"' + (n && !iaBusy ? '' : ' disabled') + '>' + I.chispa + ' ' +
+      (iaBusy ? 'Mirando…' : !n ? 'Escanear con IA · haz una foto primero' : iaEsc ? (iaEsc === Math.min(n, 4) ? 'Escanear otra vez' : 'Escanear de nuevo con ' + n + (n === 1 ? ' foto' : ' fotos')) : 'Escanear con IA · ' + n + (n === 1 ? ' foto' : ' fotos')) + '</button></div>';
   };
   const iaEscanear = async () => {
-    if (iaBusy || !iaFiles.length) return;
+    if (iaBusy || !m.fotos.length) return;
     if (!ia.getKey()) { iaPintar('<div class="warn">Falta la clave de Gemini: pégala en Ajustes → Reconocer con IA.</div>'); return; }
     if (!navigator.onLine) { iaPintar('<div class="warn">Sin conexión: las fotos quedan guardadas en el hallazgo. Escanea cuando tengas cobertura.</div>'); return; }
-    iaBusy = true; iaRes = ''; iaPintar('<div class="note ia-wait">' + I.chispa + ' Mirando ' + (iaFiles.length === 1 ? 'la foto' : 'las ' + iaFiles.length + ' fotos') + '…</div>');
+    const ids = m.fotos.slice(-4), files = ids.map(id => { const r = db.B.get(id); return r && r.blob; }).filter(Boolean);
+    if (!files.length) { iaPintar('<div class="warn">No encuentro las fotos para escanearlas. Haz otra.</div>'); return; }
+    iaBusy = true; iaRes = ''; iaPintar('<div class="note ia-wait">' + I.chispa + ' Mirando ' + (files.length === 1 ? 'la foto' : 'las ' + files.length + ' fotos') + '…</div>');
     let err = '';
-    try { const r = await ia.reconocer(iaFiles.slice(0, 4)); iaCands = (r.candidatas || []).map(c => ({ id: c.id, n: c.nombreCientifico, c: c.confianza })); iaRes = resultadoIA(r, 'marcar'); iaEsc = iaFiles.length; }
+    try { const r = await ia.reconocer(files); iaCands = (r.candidatas || []).map(c => ({ id: c.id, n: c.nombreCientifico, c: c.confianza })); iaRes = resultadoIA(r, 'marcar'); iaEsc = files.length; }
     catch (e) { if (e.message === 'clave') ia.setKey(''); err = '<div class="warn">' + esc(ia.mensajeError(e)) + '</div>'; }
     finally { iaBusy = false; }
     iaPintar(err);
   };
+  iaPintar();
   pickerWire(sh, m.esp); vozWire(sh, vz);
   vz.onTrans = (id, t) => { const n = $('#mk-nota', sh); if (n && !n.value.trim()) { n.value = t.slice(0, 300); $('#mk-det', sh).open = true; } };
   $('#sp-q', sh).addEventListener('input', regrid);
@@ -332,9 +320,8 @@ async function marcar(opts = {}) {
       box.hidden = false; t.textContent = 'Ocultar ‹';
     }
     else if (t.id === 'mk-iano') { m.esp.id = null; m.esp.txt = ''; $('#sp-q', sh).value = ''; $('#sp-sel', sh).innerHTML = ''; regrid(); $$('#mk-iares .ia-row', sh).forEach(x => x.classList.remove('sel')); toast('Se guardará sin identificar' + (iaCands.length ? ', con lo que sugirió la IA' : '') + '. Lo miras en casa.', 3600); }
-    else if (t.id === 'mk-ia') iaCamara()
     else if (t.id === 'mk-iaes') iaEscanear()
-    else if (t.id === 'mk-foto') pickFoto(id => { m.fotos.push(id); const im = document.createElement('img'); im.dataset.blob = id; $('#mk-th', sh).appendChild(im); hydrate($('#mk-th', sh)); });
+    else if (t.id === 'mk-foto') pickFoto(id => { m.fotos.push(id); const im = document.createElement('img'); im.dataset.blob = id; $('#mk-th', sh).appendChild(im); hydrate($('#mk-th', sh)); if (!iaBusy) iaPintar(); });
     else if (t.id === 'mk-x') closeSheet();
     else if (t.id === 'mk-ok') {
       t.disabled = true;
