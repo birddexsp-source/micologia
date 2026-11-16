@@ -16,7 +16,7 @@ import * as off from './offline.js';
 import { renderPlan } from './plan.js';
 import * as lug from './lugar.js';
 
-const APP_V = 'micologia-v41';   // = V de sw.js
+const APP_V = 'micologia-v42';   // = V de sw.js
 const S = { view: 'mapa', arg: '', map: null, pins: null, me: null, acc: null, tmp: null, mini: null, centered: false, filtro: { salida: '', especie: '' }, clase: '', q: '', syncErr: false, mes: new Date().getMonth() + 1 };
 const VIEWS = ['mapa', 'salidas', 'salida', 'setas', 'mes', 'plan', 'ajustes'];
 const TITULOS = { mapa: 'Mapa', salidas: 'Salidas', salida: 'Salida', setas: 'Setas', mes: 'Este mes', plan: 'Plan de salida', ajustes: 'Ajustes' };
@@ -255,6 +255,7 @@ async function marcar(opts = {}) {
     zonasOrd().map(z => '<button class="opt ' + (m.zona === z.id ? 'on' : '') + '" data-z="' + z.id + '">' + esc(z.nombre) + '</button>').join('') +
     '<button class="opt" id="mk-nz">+ Spot nuevo</button></div>' + (m.nueva ? '<div class="row" style="margin-top:8px"><input type="text" id="mk-znom" placeholder="Nombre del spot" value="' + esc(lug.nombreSpot(pos.lat, pos.lon, zonas.map(z => z.nombre))) + '" style="flex:1"><button class="btn p" id="mk-zok" style="flex:none">Crear</button></div>' : '');
   const sh = openSheet('<h2>Nuevo hallazgo</h2><p class="sub" id="mk-pos">' + horaTxt() + ' · ' + posTxt() + '</p>' +
+    '<button class="mtile mia" id="mk-ia">' + I.chispa + '<b>Reconocer con IA</b><small>Haz la foto y te digo qué puede ser</small></button><div id="mk-iares"></div>' +
     '<div class="mtiles"><button class="mtile" id="mk-foto">' + I.foto + '<b>Foto</b></button><button class="mtile" id="au-rec"' + (au.soportado() ? '' : ' disabled') + '>' + I.mic + '<b>Nota de voz</b></button></div>' +
     '<div id="mk-th" class="thumbs"></div><div id="au-list"></div>' +
     '<label class="l">¿Qué es?</label><div class="gsp" id="mk-grid">' + gridHTML() + '</div>' + pickerHTML(m.esp, { rejilla: true }) +
@@ -264,6 +265,30 @@ async function marcar(opts = {}) {
     '<label class="l">Nota</label><input type="text" id="mk-nota" placeholder="Nota corta (o díctala con la nota de voz)"></details>' +
     '<div class="row mk-bar"><button class="btn" id="mk-x">Cancelar</button><button class="btn p" id="mk-ok" style="flex:2">Guardar</button></div>', { dim: !!opts.pos });
   const regrid = () => { $('#mk-grid', sh).innerHTML = gridHTML(); };
+  /* Reconocer con IA desde el propio hallazgo: abre la cámara, guarda la foto en el hallazgo y la reconoce; cada foto nueva afina el resultado */
+  const iaFiles = []; let iaBusy = false;
+  const iaCamara = async reintento => {
+    const box = $('#mk-iares', sh);
+    if (!ia.getKey()) { box.innerHTML = '<div class="warn">Falta la clave de Gemini: pégala en Ajustes → Reconocer con IA.</div>'; return; }
+    if (iaBusy) return;
+    if (!reintento) {
+      const f = await new Promise(ok => { const inp = document.createElement('input'); inp.type = 'file'; inp.accept = 'image/*'; inp.setAttribute('capture', 'environment'); inp.style.display = 'none'; inp.id = 'file-ia'; document.body.appendChild(inp);
+        inp.onchange = () => { const x = inp.files[0]; inp.remove(); ok(x || null); }; inp.addEventListener('cancel', () => { inp.remove(); ok(null); }); inp.click(); });
+      if (!f) return;
+      iaFiles.push(f);
+      try { const id = await db.putBlob(await reducirFoto(f)); m.fotos.push(id); const im = document.createElement('img'); im.dataset.blob = id; $('#mk-th', sh).appendChild(im); hydrate($('#mk-th', sh)); } catch (e) { toast('No se pudo guardar la foto'); }
+    }
+    if (!iaFiles.length) return;
+    if (!navigator.onLine) { box.innerHTML = '<div class="warn">Sin conexión: la foto queda guardada. Reconoce cuando tengas cobertura.</div><button class="btn" id="mk-iar">Reintentar</button>'; return; }
+    iaBusy = true; box.innerHTML = '<div class="note ia-wait">' + I.chispa + ' Mirando la foto…</div>';
+    try {
+      const r = await ia.reconocer(iaFiles.slice(-4));
+      box.innerHTML = resultadoIA(r, 'marcar') + '<div class="row"><button class="btn" id="mk-ia">+ Otra foto para afinar</button></div>';
+    } catch (err) {
+      if (err.message === 'clave') ia.setKey('');
+      box.innerHTML = '<div class="warn">' + esc(ia.mensajeError(err)) + '</div><div class="row"><button class="btn" id="mk-iar">Reintentar</button></div>';
+    } finally { iaBusy = false; }
+  };
   pickerWire(sh, m.esp); vozWire(sh, vz);
   vz.onTrans = (id, t) => { const n = $('#mk-nota', sh); if (n && !n.value.trim()) { n.value = t.slice(0, 300); $('#mk-det', sh).open = true; } };
   $('#sp-q', sh).addEventListener('input', regrid);
@@ -283,6 +308,13 @@ async function marcar(opts = {}) {
       zonas.push({ id, nombre: n, lat: pos.lat, lon: pos.lon }); m.zona = id; m.nueva = false; rezona();
     }
     else if (t.dataset.e) { m.estado = m.estado === t.dataset.e ? '' : t.dataset.e; $$('#mk-est button', sh).forEach(b => b.classList.toggle('on', b.dataset.e === m.estado)); }
+    else if (t.dataset.iae || t.closest('[data-iae]') || t.closest('[data-iat]')) {
+      const r = t.closest('[data-iae]'), o = t.closest('[data-iat]');
+      if (r) { const e = cat.byId(r.dataset.iae); m.esp.id = e.id; m.esp.txt = ''; $('#sp-q', sh).value = cat.nombre(e); $('#sp-sel', sh).innerHTML = tag(cat.vista(e)); toast('Elegida: ' + corto(e) + ' (provisional)'); }
+      else if (o) { m.esp.id = null; m.esp.txt = o.dataset.iat; $('#sp-q', sh).value = o.dataset.iat; $('#sp-sel', sh).innerHTML = ''; toast('Anotada: ' + o.dataset.iat); }
+      $('#sp-sugs', sh).hidden = true; regrid(); $$('#mk-iares .ia-row', sh).forEach(x => x.classList.toggle('sel', x === (r || o)));
+    }
+    else if (t.id === 'mk-ia' || t.id === 'mk-iar') iaCamara(t.id === 'mk-iar')
     else if (t.id === 'mk-foto') pickFoto(id => { m.fotos.push(id); const im = document.createElement('img'); im.dataset.blob = id; $('#mk-th', sh).appendChild(im); hydrate($('#mk-th', sh)); });
     else if (t.id === 'mk-x') closeSheet();
     else if (t.id === 'mk-ok') {
@@ -885,18 +917,23 @@ function abrirIA() {
   };
   pintar();
 }
-function resultadoIA(r) {
-  const alta = c => c >= 75 ? 'confianza alta' : c >= 40 ? 'confianza media' : 'confianza baja';
+function resultadoIA(r, modo) {
+  const marcar = modo === 'marcar', pc = c => Math.max(0, Math.min(100, c.confianza | 0));
   if (!r.esSeta) return '<div class="ia-res"><b>No parece una seta.</b><p class="note">Prueba con una foto más cercana.</p></div>';
-  const peligro = r.candidatas.some(c => { const e = cat.byId(c.id); return e && (e.clase === 'mortal' || e.clase === 'toxica'); });
-  let h = '<div class="ia-res">';
-  if (!r.candidatas.length || r.candidatas.every(c => c.confianza < 25)) h += '<b>Con estas fotos no puedo decidirlo.</b>';
-  else h += '<b>Se parece a:</b>';
-  h += r.candidatas.map(c => {
-    const e = cat.byId(c.id);
-    if (e) return itemEsp(e, '<small class="ia-c">' + alta(c.confianza) + (c.rasgos ? ' · ' + esc(c.rasgos) : '') + '</small>');
-    return '<div class="item sp ia-fuera" style="--c:#7b8683"><div class="t"><b><i>' + esc(c.nombreCientifico) + '</i></b><small>' + esc(c.nombreComun) + ' · no está en tu colección</small><small class="ia-c">' + alta(c.confianza) + (c.rasgos ? ' · ' + esc(c.rasgos) : '') + '</small></div></div>';
+  const cs = r.candidatas.slice().sort((x, y) => y.confianza - x.confianza);
+  const peligro = cs.some(c => { const e = cat.byId(c.id); return e && (e.clase === 'mortal' || e.clase === 'toxica'); });
+  const top = cs[0], dudoso = !top || top.confianza < 25;
+  let h = '<div class="ia-res">' + (dudoso ? '<b>Con estas fotos no puedo decidirlo.</b>' : '<b>Lo más probable</b>');
+  h += cs.map((c, i) => {
+    const e = cat.byId(c.id), n = pc(c), niv = n >= 75 ? 'alta' : n >= 40 ? 'media' : 'baja';
+    const bar = '<span class="ia-bar ' + niv + '"><i style="width:' + n + '%"></i></span>';
+    const rasgos = c.rasgos ? '<small class="ia-c">' + esc(c.rasgos) + '</small>' : '';
+    const at = e ? (marcar ? ' data-iae="' + e.id + '"' : ' data-e="' + e.id + '"') : (marcar && c.nombreCientifico ? ' data-iat="' + esc(c.nombreCientifico) + '"' : '');
+    const nom = e ? esc(corto(e)) : '<i>' + esc(c.nombreCientifico) + '</i>', sub = e ? (corto(e) === e.nombreCientifico.split(' (')[0] ? esc(e.nombreCientifico.includes(' (') ? e.nombreCientifico.split(' (')[1].replace(')', '') : '') : '<i>' + esc(e.nombreCientifico) + '</i>') : esc(c.nombreComun) + ' · no está en tu colección';
+    return '<button class="ia-row' + (i === 0 && !dudoso ? ' mejor' : '') + (e ? '' : ' fuera') + '"' + at + ' style="--c:' + (e ? colorEsp(e) : '#7b8683') + '">' +
+      '<span class="pf">' + (e ? fotoEsp(e) : '<span class="ph0">?</span>') + '</span><span class="t"><b>' + nom + '</b><small>' + sub + '</small>' + bar + rasgos + '</span><span class="ia-pc">' + n + '<small>%</small></span></button>';
   }).join('');
+  h += '<p class="note ia-nota">El porcentaje es lo segura que está la IA con estas fotos, no una garantía.' + (marcar ? ' Toca una para elegirla (queda como provisional).' : '') + '</p>';
   if (peligro) h += '<div class="warn" style="margin-top:8px">Entre las candidatas hay una tóxica o mortal: con más motivo, no se come.</div>';
   if (r.faltaVer) h += '<p class="note" style="margin-top:8px"><b>Para afinar:</b> ' + esc(r.faltaVer) + '</p>';
   if (r.calidad === 'mala') h += '<p class="note">Las fotos no se ven bien: la respuesta es poco fiable.</p>';

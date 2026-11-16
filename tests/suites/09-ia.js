@@ -58,13 +58,14 @@ module.exports = {
       await t.page.setInputFiles('.ia-slot[data-i="2"] input', png); await t.wait(200);
       await t.tap('#ia-go', 1500);
       t.eq('una llamada con 2 imágenes y la clave en cabecera', llamadas.map(l => [l.key, l.n]), [[KEY, 2]]);
-      t.eq('1 candidata de tu colección (abre su ficha)', await t.N('#sheet button.item[data-e]'), 1);
+      t.eq('1 candidata de tu colección (abre su ficha)', await t.N('#sheet button.ia-row[data-e]'), 1);
       t.ok('la otra sale «no está en tu colección»', /Amanita nueva[\s\S]*no está en tu colección/i.test(await t.T('#sheet') || ''));
       t.ok('aviso de tóxica entre candidatas', /tóxica o mortal/.test(await t.T('#sheet') || ''));
+      t.ok('muestra porcentajes ordenados (el más probable arriba)', await t.page.evaluate(() => { const v = [...document.querySelectorAll('#sheet .ia-pc')].map(x => parseInt(x.textContent)); return v.length === 2 && v[0] >= v[1] && v[0] === 80 && document.querySelectorAll('#sheet .ia-bar').length === 2; }));
       t.ok('recuerda que es solo una pista', /Es una pista, no una identificación/.test(await t.T('#sheet') || ''));
       t.ok('nunca dice «comestible» como veredicto', !/es comestible|se puede comer/i.test(await t.T('#sheet .ia-res') || ''));
       await t.shot('captura-ia-resultado');
-      await t.tap('#sheet button.item[data-e]', 300); t.ok('abre la ficha', await t.has('#hero, .ficha'));
+      await t.tap('#sheet button.ia-row[data-e]', 300); t.ok('abre la ficha', await t.has('#hero, .ficha'));
     });
     await t.case('abstención: sin candidatas dice qué falta ver', async () => {
       modo = 'duda'; await t.page.evaluate(() => window.__MI.abrirIA()); await t.wait(150);
@@ -96,6 +97,31 @@ module.exports = {
       t.ok('la clave sigue guardada', (await t.page.evaluate(() => window.__MI.ia.getKey())) === KEY);
       await abrir('500'); await t.page.setInputFiles('.ia-slot[data-i="0"] input', png('s')); await t.wait(120); await t.tap('#ia-go', 3000);
       t.ok('servidor caído: mensaje y prueba los 3 modelos', /No se ha podido reconocer/.test(await t.T('#sheet .warn') || '') && llamadas.length === 3);
+    });
+    await t.case('en el hallazgo: «Reconocer con IA» abre la cámara, guarda la foto, muestra porcentajes y elige la especie', async () => {
+      const png = { name: 'c.png', mimeType: 'image/png', buffer: Buffer.from(PNG1, 'base64') };
+      modo = 'ok'; llamadas = []; await t.page.evaluate(k => window.__MI.ia.setKey(k), KEY);
+      await t.page.evaluate(() => { document.querySelector('#sheet').hidden = true; }); await t.go('#mapa'); await t.fixGPS(); await t.tap('#fab', 500);
+      t.ok('hay botón de IA en el hallazgo', await t.has('#mk-ia'));
+      const [fc] = await Promise.all([t.page.waitForEvent('filechooser'), t.page.evaluate(() => document.querySelector('#mk-ia').click())]);
+      t.eq('abre la cámara trasera directamente', await t.page.evaluate(() => document.querySelector('#file-ia').getAttribute('capture')), 'environment');
+      await fc.setFiles(png);
+      await t.page.waitForSelector('#mk-iares .ia-row', { timeout: 8000 });
+      t.eq('una llamada con 1 foto', llamadas.map(l => l.n), [1]);
+      t.ok('la foto queda en el hallazgo', (await t.N('#mk-th img')) === 1);
+      t.ok('porcentaje del más probable', /80\s*%/.test(await t.T('#mk-iares .ia-row') || ''));
+      await t.page.evaluate(() => document.querySelector('#mk-iares').scrollIntoView({ block: 'center', behavior: 'instant' })); await t.wait(600); await t.shot('captura-ia-hallazgo');
+      await t.tap('#mk-iares .ia-row[data-iae]', 300);
+      t.ok('elige la especie del catálogo', (await t.page.evaluate(() => document.querySelector('#sp-q').value)).length > 3);
+      await t.tap('#mk-ok', 500);
+      const hh = (await t.docs('hallazgos')).find(x => (x.fotos || []).length && x.especieId);
+      t.ok('hallazgo guardado con foto y especie provisional', !!hh && hh.fotos.length === 1 && hh.identificacion === 'provisional');
+      await t.fixGPS(); await t.tap('#fab', 500); modo = '500'; llamadas = [];
+      const [f2] = await Promise.all([t.page.waitForEvent('filechooser'), t.page.evaluate(() => document.querySelector('#mk-ia').click())]); await f2.setFiles(png);
+      await t.page.waitForSelector('#mk-iares .warn', { timeout: 10000 });
+      t.ok('si falla: mensaje y «Reintentar», la foto se conserva', await t.has('#mk-iar') && (await t.N('#mk-th img')) === 1);
+      modo = 'ok'; await t.tap('#mk-iar', 1500); t.ok('reintentar funciona', await t.has('#mk-iares .ia-row'));
+      await t.tap('#mk-x', 300);
     });
     await t.case('ajustes: guardar y borrar la clave', async () => {
       await t.page.evaluate(() => document.querySelector('#sheet').hidden = true);

@@ -1043,3 +1043,22 @@ button.rz{cursor:pointer}
 @media (min-width:700px){#slist{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}}
 .rzh-t>small b{display:inline;font:inherit;color:var(--ink);font-weight:700}
 .cx-lv{padding:6px 6px}.cx-lv span{font-size:11px;letter-spacing:-.01em}
+
+/* v42: reconocer con IA dentro del hallazgo + resultado con porcentajes */
+.mtile.mia{width:100%;flex-direction:row;flex-wrap:wrap;gap:4px 12px;min-height:76px;margin-bottom:10px;background:linear-gradient(135deg,rgba(224,164,88,.22),rgba(224,164,88,.06));border-color:rgba(224,164,88,.5);text-align:left;justify-content:flex-start;padding:12px 16px}
+.mtile.mia b{font-size:16px}.mtile.mia small{flex-basis:100%;margin-left:42px;margin-top:-2px;color:var(--mut);font-size:12.5px}
+.mtile.mia svg{flex:none}
+.ia-wait{display:flex;align-items:center;gap:8px;margin:10px 0}.ia-wait svg{width:20px;height:20px;fill:none;stroke:var(--acc);stroke-width:1.8;animation:iap 1s ease-in-out infinite}
+@keyframes iap{50%{opacity:.35}}
+.ia-row{display:flex;align-items:center;gap:12px;width:100%;text-align:left;border:1px solid var(--line);background:var(--s2);border-radius:16px;padding:10px 12px;color:var(--ink);cursor:pointer;position:relative;overflow:hidden}
+.ia-row::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--c,#7b8683)}
+.ia-row.mejor{border-color:var(--acc);background:rgba(224,164,88,.1)}
+.ia-row.sel{outline:2px solid var(--acc)}
+.ia-row.fuera{opacity:.85}
+.ia-row .pf{flex:none;width:52px;height:52px;border-radius:12px;overflow:hidden;position:relative;background:var(--s3);display:block}
+.ia-row .t{flex:1;min-width:0;display:grid;gap:3px}
+.ia-row .t b{font-size:15px;line-height:1.2}.ia-row .t small{color:var(--mut);font-size:12.5px;line-height:1.25}
+.ia-bar{display:block;height:7px;border-radius:5px;background:var(--s3);overflow:hidden}.ia-bar i{display:block;height:100%;border-radius:5px;background:var(--mut)}
+.ia-bar.alta i{background:#46b36b}.ia-bar.media i{background:#e0a458}.ia-bar.baja i{background:#7b8683}
+.ia-pc{flex:none;font-size:26px;font-weight:800;letter-spacing:-.5px;font-variant-numeric:tabular-nums}.ia-pc small{font-size:13px;font-weight:600;color:var(--mut)}
+.ia-nota{margin-top:2px}
