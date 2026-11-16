@@ -1,11 +1,11 @@
 # Compila la APK de Android (la misma web de docs/ dentro de una app, con GPS en segundo plano).
-# Se ejecuta sola al cambiar la web o el envoltorio, y a mano desde la pestaña Actions → «APK Android» → Run workflow.
+# La APK carga la web en vivo desde GitHub Pages (se actualiza sola, como la web instalada) y solo se recompila si cambia el envoltorio, y a mano desde la pestaña Actions → «APK Android» → Run workflow.
 # Descarga: https://github.com/birddexsp-source/micologia/releases/download/apk-latest/micologia.apk
 name: APK Android
 on:
   push:
     branches: [main]
-    paths: ['docs/**', 'android-app/**', '.github/workflows/apk.yml']
+    paths: ['android-app/**', '.github/workflows/apk.yml']   # la web se actualiza sola desde Pages: la APK solo cambia si cambia la parte nativa
   workflow_dispatch:
 permissions:
   contents: write

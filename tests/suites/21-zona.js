@@ -158,7 +158,7 @@ module.exports = {
     await t.case('app Android: proyecto, permisos y compilación automática preparados', async () => {
       const R = f => fs.readFileSync(path.join(__dirname, '..', '..', f), 'utf8'), ex = f => fs.existsSync(path.join(__dirname, '..', '..', f));
       const cfg = JSON.parse(R('android-app/capacitor.config.json')), pk = JSON.parse(R('android-app/package.json')), wf = R('.github/workflows/apk.yml'), sw = R('docs/sw.js');
-      t.ok('Capacitor sirve la carpeta docs y no deja que Android pare el GPS a los 5 min', cfg.webDir === '../docs' && cfg.android.useLegacyBridge === true && /^[a-z.]+$/.test(cfg.appId));
+      t.ok('Capacitor carga la web en vivo de Pages (se actualiza sola) y no deja que Android pare el GPS a los 5 min', cfg.webDir === '../docs' && /^https:\/\/birddexsp-source\.github\.io\/micologia\/$/.test(cfg.server.url) && cfg.android.useLegacyBridge === true && /^[a-z.]+$/.test(cfg.appId));
       t.ok('plugin de GPS en segundo plano y avisos', !!pk.dependencies['@capacitor-community/background-geolocation'] && !!pk.dependencies['@capacitor/local-notifications']);
       t.ok('clave de firma fija y script de firma (para actualizar sin desinstalar)', ex('android-app/micologia.keystore') && /signingConfig/.test(R('android-app/firma.gradle')));
       t.ok('permisos de micrófono y cámara', /RECORD_AUDIO/.test(R('android-app/permisos.txt')) && /CAMERA/.test(R('android-app/permisos.txt')));
