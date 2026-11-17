@@ -1231,3 +1231,4 @@ button.navrow{width:100%;font:inherit;color:inherit;text-align:left;cursor:point
 .ia-ver{font-weight:650}
 .cq{overflow:hidden;max-width:100vw}.cq-body{overflow-x:hidden}.cq-body>*{max-width:100%}
 .cq>*{min-width:0;width:100%;box-sizing:border-box}
+.cq .vz-s.anot{flex:0 0 100%;scroll-snap-align:start;margin:0;padding:0;box-sizing:border-box;border:0;background:none}.cq .anw .phw.big{border-radius:12px}.cq .apl{padding:10px 0 0}.cq .anot figcaption{padding:0}.cq .vz-tabs{margin-bottom:8px}
