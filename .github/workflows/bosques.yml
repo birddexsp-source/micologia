@@ -1,0 +1,22 @@
+name: bosques
+# Descarga el Inventario Forestal del Gobierno Vasco recortado a la zona de Bermeo y lo deja en la rama «bosques-datos»
+on:
+  workflow_dispatch:
+  push:
+    paths: ['tools/bosques/descargar.py', '.github/workflows/bosques.yml']
+permissions:
+  contents: write
+jobs:
+  bosques:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - run: pip install geopandas pyogrio
+      - run: python tools/bosques/descargar.py
+      - name: Publicar en la rama bosques-datos
+        run: |
+          cd out && git init -q -b bosques-datos && git add -A
+          git -c user.name=bosques-bot -c user.email=bot@users.noreply.github.com commit -qm "Inventario forestal recortado (Gobierno Vasco, CC BY 4.0)"
+          git push -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" bosques-datos
