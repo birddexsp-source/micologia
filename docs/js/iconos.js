@@ -1,6 +1,7 @@
 /* Iconos de línea (24×24). Se pintan con currentColor; el CSS pone el trazo. */
 const s = d => '<svg viewBox="0 0 24 24" aria-hidden="true">' + d + '</svg>';
 export const I = {
+  arbol: s('<path d="M12 21v-5"/><path d="M12 3.2l-6.3 8.3h3.1L5 16h14l-3.8-4.5h3.1z"/>'),
   locate: s('<circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="2.4" class="f"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3"/>'),
   layers: s('<path d="M12 3.5l8.5 4.6L12 12.7 3.5 8.1z"/><path d="M3.5 12.2L12 16.8l8.5-4.6"/><path d="M3.5 16.2L12 20.8l8.5-4.6"/>'),
   flag: s('<path d="M5.5 21V4"/><path d="M5.5 4.5h11.5l-2.3 4 2.3 4H5.5"/>'),

@@ -29,7 +29,7 @@ module.exports = {
       const bad = walk(DOCS).filter(f => !/\.(png|jpg|webp)$/.test(f)).filter(f => /ghp_[A-Za-z0-9]{20,}|github_pat_[A-Za-z0-9_]{20,}/.test(fs.readFileSync(f, 'utf8')));
       t.eq('ningún token en docs/', bad, []);
       const data = fs.readdirSync(path.join(DOCS, 'data'));
-      t.eq('docs/data solo contiene el catálogo y los topónimos públicos', data, ['especies.json', 'topo.json']);
+      t.eq('docs/data solo contiene datos públicos: catálogo, topónimos (IGN) e inventario forestal (Gobierno Vasco)', data, ['bosques.json', 'especies.json', 'topo.json']);
       { const tp = JSON.parse(fs.readFileSync(path.join(DOCS, 'data', 'topo.json'), 'utf8')); t.ok('topo.json: solo topónimos del IGN (CC BY), sin datos tuyos', /IGN/.test(tp.fuente) && Array.isArray(tp.n) && tp.n.length > 5000 && Object.keys(tp).sort().join() === 'fuente,m,n,pesos,tipos,v,zona'); }
       t.ok('no hay GPX/KML ni exportaciones en docs/', !walk(DOCS).some(f => /\.(gpx|kml|geojson)$/i.test(f)));
     });

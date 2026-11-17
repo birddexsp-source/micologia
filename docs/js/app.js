@@ -15,10 +15,11 @@ import * as au from './audio.js';
 import * as off from './offline.js';
 import { renderPlan } from './plan.js';
 import * as lug from './lugar.js';
+import * as bos from './bosques.js';
 import * as zon from './zona.js';
 import * as tr from './tramos.js';
 
-const APP_V = 'micologia-v50';   // = V de sw.js
+const APP_V = 'micologia-v51';   // = V de sw.js
 const S = { view: 'mapa', arg: '', map: null, pins: null, me: null, acc: null, tmp: null, mini: null, centered: false, filtro: { salida: '', especie: '' }, clase: '', q: '', syncErr: false, mes: new Date().getMonth() + 1 };
 const VIEWS = ['mapa', 'salidas', 'salida', 'setas', 'mes', 'plan', 'ajustes'];
 const TITULOS = { mapa: 'Mapa', salidas: 'Salidas', salida: 'Salida', setas: 'Setas', mes: 'Este mes', plan: 'Plan de salida', ajustes: 'Ajustes' };
@@ -47,6 +48,7 @@ function closeSheet() { S.ftBack = null;
   if (S.tmp) { S.tmp.remove(); S.tmp = null; }
   marcarSel(null);
   if (S.spTrk) { S.spTrk.remove(); S.spTrk = null; }
+  if (S.bqSel) { S.bqSel.remove(); S.bqSel = null; }
 }
 /* deja un punto del mapa en el hueco visible entre los filtros de arriba y la hoja de abajo */
 function encuadrar(lat, lon, sh) {
@@ -150,7 +152,7 @@ function initMap() {
   S.me = L.marker([0, 0], { icon: L.divIcon({ className: 'me', html: '<i></i>', iconSize: [22, 22], iconAnchor: [11, 11] }), interactive: false, opacity: 0, zIndexOffset: 900 }).addTo(S.map);
   S.acc = L.circle([0, 0], { radius: 0, color: '#4c9bff', weight: 1, fillOpacity: .1, interactive: false }).addTo(S.map);
   $('#v-mapa').insertAdjacentHTML('beforeend', '<div class="mhint" id="mhint" hidden>' + I.flag + '<div><b>Tu mapa está vacío</b><small>Crea tu primer spot con la bandera de la derecha, o pulsa «Marcar aquí» cuando encuentres una seta.</small></div></div>');
-  $('#locate').innerHTML = I.locate; $('#layerbtn').innerHTML = I.layers; $('#spotbtn').innerHTML = I.flag; $('#filterbtn').innerHTML = I.filter; $('#legbtn').innerHTML = I.info; $('#fab .fi').innerHTML = I.plus;
+  $('#locate').innerHTML = I.locate; $('#layerbtn').innerHTML = I.layers; $('#spotbtn').innerHTML = I.flag; $('#filterbtn').innerHTML = I.filter; $('#legbtn').innerHTML = I.info; $('#bosqbtn').innerHTML = I.arbol; $('#fab .fi').innerHTML = I.plus;
   geo.onFix((f, err) => {
     const g = $('#gps');
     if (f) {
@@ -161,6 +163,7 @@ function initMap() {
   });
   $('#locate').onclick = () => { const f = geo.fix(); if (f) S.map.setView([f.lat, f.lon], Math.max(S.map.getZoom(), 16)); else toast('Aún sin GPS'); };
   $('#layerbtn').onclick = abrirCapas;
+  $('#bosqbtn').onclick = abrirBosques;
   $('#filterbtn').onclick = abrirFiltro;
   /* leyenda: qué significa cada marca del mapa */
   $('#legbtn').onclick = () => { const l = $('#mleg'), ver = l.hidden; if (ver) l.innerHTML = leyendaMapa(); l.hidden = !ver; $('#legbtn').classList.toggle('on', ver); };
@@ -168,7 +171,10 @@ function initMap() {
   $('#fab').onclick = () => marcar();
   $('#spotbtn').onclick = () => editarSpot();
   /* tocar el mapa fuera de un marcador cierra el resumen abierto */
-  S.map.on('click', () => { const s = $('#sheet'); if (!S.tmp && !s.hidden && !s.classList.contains('dim')) closeSheet(); });
+  S.map.on('click', ev => {
+    /* con la capa de bosques puesta, tocar una mancha dice qué árbol es */
+    if (S.bosq && !S.tmp) { const r = bos.en(ev.latlng.lat, ev.latlng.lng); if (r) { abrirRodal(r, ev.latlng.lat, ev.latlng.lng); return; } }
+    const s = $('#sheet'); if (!S.tmp && !s.hidden && !s.classList.contains('dim')) closeSheet(); });
   $('#mchips').onclick = e => { const b = e.target.closest('[data-capa]'); if (!b) return; S.capa = b.dataset.capa; $$('#mchips button').forEach(x => x.classList.toggle('on', x === b)); refreshPins(); };
   trk.onAdd(() => { if (S.trkId && trk.activo() === S.trkId) pintarTrack(trk.puntos()); });
   geo.start();
@@ -182,6 +188,77 @@ function abrirCapas() {
   sh.onclick = e => {
     if (e.target.closest('#capa-off')) { S.lastCenter = S.map.getCenter(); (OFF.sel = OFF.sel || new Set(off.PRESETS.map(p => p.clave))).add('centro'); closeSheet(); location.hash = '#ajustes'; return; }
     const x = e.target.closest('[data-base]'); if (!x) return; S.map.setBase(x.dataset.base); closeSheet(); };
+}
+/* ---------- analizador de bosques (inventario forestal oficial, no a ojo) ---------- */
+async function capaBosques(on) {
+  if (!on) { if (S.bosq) { S.bosq.remove(); S.bosq = null; } $('#bosqbtn').classList.remove('on'); return true; }
+  if (!S.bosq) {
+    if (!bos.listo()) toast('Cargando el mapa de bosques…');
+    if (!(await bos.cargar())) { toast('No se pudo cargar el mapa de bosques'); return false; }
+    S.bosq = bos.capa(L).addTo(S.map);
+  }
+  $('#bosqbtn').classList.add('on'); return true;
+}
+const repartoHTML = l => { const t = l.reduce((a, c) => a + c.ha, 0) || 1;
+  return '<div class="bq-bar">' + l.map(c => '<i style="--c:' + c.c + ';flex:' + c.ha.toFixed(1) + '"></i>').join('') + '</div><div class="bq-ley">' +
+    l.map(c => '<span style="--c:' + c.c + '"><i></i>' + esc(c.n) + ' <b>' + Math.round(c.ha / t * 100) + '%</b></span>').join('') + '</div>'; };
+const tagBosque = r => '<span class="tag" style="--c:' + r.c.c + '">' + esc(r.c.n) + '</span>';
+async function abrirBosques() {
+  if (S.bosq && $('#sheet').hidden === false && $('#bq-h')) { closeSheet(); return; }
+  if (!(await capaBosques(true))) return;
+  const D = bos.datos(), b = S.map.getBounds(), yo = geo.fix(), ref = yo || { lat: S.map.getCenter().lat, lon: S.map.getCenter().lng };
+  const rep = bos.reparto([b.getSouth(), b.getNorth(), b.getWest(), b.getEast()]);
+  const zs = (await db.list('zonas')).filter(z => z.lat != null), spR = zs.map(z => ({ z, r: bos.cerca(z.lat, z.lon) })).filter(x => x.r);
+  const malos = spR.filter(x => x.r.c.k === 'euca'), buenos = spR.filter(x => x.r.s >= 60);
+  const cal = D.calientes.map(z => ({ ...z, d: distM(ref, z), nom: lug.nombreSpot(z.lat, z.lon) || 'Zona caliente' })).sort((a, c) => a.d - c.d);
+  const filaC = (z, i) => '<button class="item bq-z" data-cz="' + i + '"><span class="bq-n" style="--c:#2f9e44">' + z.s + '</span><div class="t"><b>' + esc(z.nom) + '</b><small>' +
+    esc(z.especies.slice(0, 2).join(' + ')) + ' · ' + z.ha + ' ha de buen bosque · ' + esc((bos.ESTADOS_TXT[D.estados[z.e]] || '')) + '</small></div><em class="bq-d">' + kmFmt(z.d) + '</em></button>';
+  const filaS = x => '<button class="item bq-s" data-spot="' + x.z.id + '"><span class="bq-n" style="--c:' + x.r.c.c + '">' + x.r.s + '</span><div class="t"><b>' + esc(x.z.nombre) + '</b><small>' + esc(x.r.c.n) + ' · ' + esc(x.r.sp.map(q => q.n).slice(0, 2).join(' + ')) + '</small></div></button>';
+  const sh = openSheet('<div class="sv-h" id="bq-h"><div class="sv-t"><h2>Analizador de bosques</h2><div class="meta"><span>Qué árbol hay en cada mancha · inventario oficial ' + D.ano + '</span></div></div><button class="icb" id="sv-x" aria-label="Cerrar">' + I.close + '</button></div>' +
+    (rep.length ? '<div class="sec">En lo que ves del mapa</div>' + repartoHTML(rep) : '<p class="mut sm">En esta parte del mapa no hay bosques del inventario (cubre de Bakio y Mungia a Gernika y Ea).</p>') +
+    '<p class="mut sm">Toca cualquier mancha del mapa para ver qué árboles tiene y qué setas de tu guía viven ahí.</p>' +
+    (malos.length ? '<div class="alerta">' + I.aviso + '<div><b>' + plural(malos.length, 'spot tuyo está', 'spots tuyos están') + ' en eucalipto:</b> ' + esc(malos.map(x => x.z.nombre).join(', ')) + '.</div></div>' : '') +
+    '<div class="sec">Zonas calientes cerca<small>' + cal.length + '</small></div><p class="mut sm">Manchas grandes de bosque autóctono maduro (16 ha cada cuadro). El número es el interés, de 0 a 100.</p>' +
+    '<div id="bq-cal">' + cal.slice(0, 5).map(filaC).join('') + '</div>' + (cal.length > 5 ? '<button class="btn" id="bq-mas" style="width:100%">Ver las ' + cal.length + ' zonas</button>' : '') +
+    (spR.length ? '<details class="det"><summary>Tus spots según su bosque (' + buenos.length + ' en buen bosque)</summary>' + spR.sort((a, c) => c.r.s - a.r.s).map(filaS).join('') + '</details>' : '') +
+    '<details class="det"><summary>Cómo se calcula</summary><p class="mut sm">Cada mancha es un rodal del <b>Inventario Forestal de la CAPV ' + D.ano + '</b> del Gobierno Vasco, con su especie dominante medida sobre el terreno y la foto aérea. No es una estimación desde el satélite.</p>' +
+      '<p class="mut sm">El interés (0–100) junta: el tipo de bosque (autóctono 100, frondosas plantadas 70, pinar 55, otras coníferas 45, otros árboles 25, eucalipto 3), lo maduro que está (maduro ×1, joven ×0,85, monte bravo ×0,5, repoblado ×0,3, talado ×0,15) y si hay mezcla de especies (+5 por especie). Es una guía de dónde mirar, no promete setas.</p>' +
+      '<div class="bq-ley col">' + D.clases.map(c => '<span style="--c:' + c.c + '"><i></i><b>' + esc(c.n) + '</b> ' + esc(c.d) + '</span>').join('') + '</div></details>' +
+    '<p class="mut sm bq-f">' + esc(D.fuente) + '</p><button class="btn" id="bq-off" style="width:100%">Quitar la capa de bosques</button>', { dim: false });
+  sh.addEventListener('click', e => {
+    const t = e.target.closest('button'); if (!t) return;
+    if (t.id === 'sv-x') closeSheet();
+    else if (t.id === 'bq-off') { capaBosques(false); closeSheet(); }
+    else if (t.id === 'bq-mas') { $('#bq-cal', sh).innerHTML = cal.map(filaC).join(''); t.remove(); }
+    else if (t.dataset.cz) { const z = cal[+t.dataset.cz]; closeSheet(); S.map.setView([z.lat, z.lon], 16); const r = bos.cerca(z.lat, z.lon); if (r) abrirRodal(r, z.lat, z.lon); }
+    else if (t.dataset.spot) abrirSpot(t.dataset.spot);
+  });
+}
+function abrirRodal(r, lat, lon) {
+  closeSheet();
+  S.bqSel = L.polygon(r.pts, { color: '#fff', weight: 3, fill: false, interactive: false }).addTo(S.map);
+  const est = bos.estado(r), habs = bos.habitats(r), euca = r.c.k === 'euca';
+  const setas = euca ? [] : cat.porRareza(cat.todas().filter(e => (e.habitats || []).some(h => habs.includes(h))));
+  const pct = o => o ? o * 10 + ' %' : '';
+  const sh = openSheet('<div class="sv-h"><div class="sv-t"><h2>' + esc(r.c.n) + '</h2><div class="meta">' + '<span class="bq-n sm" style="--c:' + r.c.c + '">' + r.s + '</span><span>Interés ' + bos.nivel(r.s).toLowerCase() + '</span>' +
+      (est ? '<span>' + esc(est) + '</span>' : '') + '<span>' + (Math.round(bos.ha(r) * 10) / 10).toString().replace('.', ',') + ' ha</span></div></div><button class="icb" id="sv-x" aria-label="Cerrar">' + I.close + '</button></div>' +
+    (euca ? '<div class="alerta">' + I.aviso + '<div><b>Eucalipto.</b> Casi no tiene setas de nuestros bosques: mejor busca en otra mancha.</div></div>' : '') +
+    '<div class="sec">Árboles de esta mancha</div><div class="bq-sp">' + r.sp.map(q => '<span><b>' + esc(q.n) + '</b>' + (r.sp.length > 1 ? '<em>' + pct(q.o) + '</em>' : '') + '</span>').join('') + '</div>' +
+    '<p class="mut sm">' + esc(r.c.d) + (est ? ' Estado: <b>' + esc(est.toLowerCase()) + '</b> (' + esc(bos.ESTADOS_TXT[est] || '') + ').' : '') + '</p>' +
+    (setas.length ? '<div class="sec">Setas de tu guía que viven en este bosque<small>' + setas.length + '</small></div><div class="echs">' + setas.slice(0, 12).map(e => '<button class="ech sin" data-e="' + e.id + '" style="--c:' + colorEsp(e) + '"><i></i>' + esc(corto(e)) + '</button>').join('') + '</div>' +
+      '<p class="mut sm">Según el hábitat de cada ficha. Que viva en este tipo de bosque no quiere decir que esté aquí.</p>' : '') +
+    '<div class="acts"><button class="btn" id="bq-spot">' + I.flag + 'Guardar «Quiero ir»</button><a class="btn" target="_blank" rel="noopener" href="' + rutaURL({ lat, lon }) + '">' + I.route + 'Cómo llegar</a></div>' +
+    '<p class="mut sm bq-f">' + esc(bos.datos().fuente) + '</p>', { dim: false });
+  sh.addEventListener('click', async e => {
+    const t = e.target.closest('button'); if (!t) return;
+    if (t.id === 'sv-x') closeSheet();
+    else if (t.dataset.e) abrirFicha(t.dataset.e);
+    else if (t.id === 'bq-spot') {
+      const zs = await db.list('zonas'), nom = lug.nombreSpot(lat, lon, zs.map(z => z.nombre)) || 'Bosque por visitar';
+      const id = await db.add('zonas', { nombre: nom, lat, lon, notas: r.c.n + ': ' + r.sp.map(q => q.n).join(', ') + ' (analizador de bosques)', estado: 'por_visitar', fotos: [], audios: [], transcripciones: {}, creada: Date.now() });
+      toast('Guardado en «Quiero ir»: ' + nom); closeSheet(); refreshPins(); abrirSpot(id);
+    }
+  });
 }
 const corto = e => { const n = e.nombresComunes && e.nombresComunes.es && e.nombresComunes.es[0]; return n ? n[0].toUpperCase() + n.slice(1) : e.nombreCientifico.split(' (')[0]; };
 const nombreCorto = h => { const e = cat.byId(h.especieId); return e ? corto(e) : (h.especieTxt || 'Sin identificar'); };
@@ -468,12 +545,16 @@ async function verSpot(id) {
     (z.notas || Object.values(z.transcripciones || {}).some(Boolean) ? '<div class="sec">Notas</div><div class="nota">' + (z.notas ? '<p>' + esc(z.notas) + '</p>' : '') + Object.values(z.transcripciones || {}).filter(Boolean).map(t => '<p class="vz">«' + esc(t) + '»</p>').join('') + '</div>' : '') +
     ((z.fotos || []).length ? '<div class="sec">Fotos</div><div class="gal">' + z.fotos.map(f => '<img data-blob="' + f + '" alt="">').join('') + '</div>' : ''), { dim: false });
   marcarSel(id);
+  /* qué bosque es, según el inventario forestal */
+  bos.cargar().then(() => { const r = bos.cerca(z.lat, z.lon), m = sh.querySelector('.sv-t'); if (!r || !m || !sh.isConnected) return;
+    m.insertAdjacentHTML('beforeend', '<button class="bq-spot' + (r.c.k === 'euca' ? ' mal' : '') + '" id="st-bosq" style="--c:' + r.c.c + '">' + I.arbol + '<span>' + esc(r.c.n) + ' · ' + esc(r.sp.map(q => q.n).slice(0, 2).join(' + ')) + '</span><b>' + r.s + '</b></button>'); });
   /* recorridos de las salidas que pasaron por aquí (para saber cómo se llega) */
   if (S.spTrk) S.spTrk.remove(); S.spTrk = L.layerGroup().addTo(S.map); ss.filter(x => (x.track || []).length > 1).forEach(x => trazo(x.track).addTo(S.spTrk));
   S.map.setView([z.lat, z.lon], Math.max(S.map.getZoom(), 15), { animate: false });
   encuadrar(z.lat, z.lon, sh);
   sh.addEventListener('click', ev => {
     const t = ev.target.closest('button'); if (!t) return;
+    if (t.id === 'st-bosq') { const r = bos.cerca(z.lat, z.lon); if (r) { capaBosques(true); abrirRodal(r, z.lat, z.lon); } return; }
     if (t.id === 'st-marcar') { closeSheet(); marcar(lejos ? { zona: id, pos: { lat: z.lat, lon: z.lon } } : { zona: id }); }
     else if (t.id === 'sv-x') closeSheet();
     else if (t.id === 'st-edit') editarSpot(id);
@@ -1380,7 +1461,7 @@ async function boot() {
       buscar();
     }).catch(() => { });
   }
-  window.__MI = { atras, padre, abrirVisor, fichaTab: k => fichaTab($('#sheet .sh'), k), abrirHabitat, abrirDondeBuscar, db, geo, syn, cat, trk, S, abrirHallazgo, abrirFicha, abrirLibro, abrirIA, ia, abrirSpot, verSpot, editarSpot, verHallazgo, leerGPX };
+  window.__MI = { bos, abrirBosques, abrirRodal, atras, padre, abrirVisor, fichaTab: k => fichaTab($('#sheet .sh'), k), abrirHabitat, abrirDondeBuscar, db, geo, syn, cat, trk, S, abrirHallazgo, abrirFicha, abrirLibro, abrirIA, ia, abrirSpot, verSpot, editarSpot, verHallazgo, leerGPX };
   document.body.dataset.ready = '1';
 }
 boot().catch(e => { console.error(e); document.body.insertAdjacentHTML('beforeend', '<div class="warn" style="position:fixed;top:60px;left:12px;right:12px;z-index:9999">No se pudo arrancar la app: ' + esc(e.message || e) + '</div>'); });
