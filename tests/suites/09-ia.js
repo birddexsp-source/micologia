@@ -65,7 +65,10 @@ module.exports = {
       t.ok('recuerda que es solo una pista', /Es una pista, no una identificación/.test(await t.T('#sheet') || ''));
       t.ok('nunca dice «comestible» como veredicto', !/es comestible|se puede comer/i.test(await t.T('#sheet .ia-res') || ''));
       await t.shot('captura-ia-resultado');
-      await t.tap('#sheet button.ia-row[data-e]', 300); t.ok('abre la ficha', await t.has('#hero, .ficha'));
+      await t.tap('#sheet button.ia-row[data-e]', 600);
+      t.ok('abre «¿Cuál es?» encima, sin perder el resultado', await t.has('#cuales') && (await t.N('#cuales .cq-pasos li')) >= 2 && await t.has('#sheet .ia-res'));
+      await t.tap('#cuales [data-cfi]', 500); t.ok('«Ficha completa» dentro, con sus pestañas', await t.has('#cuales #hero, #cuales .ftabs'));
+      await t.tap('#cuales [data-cx]', 300); t.ok('se cierra y sigue el resultado', !(await t.has('#cuales')) && await t.has('#sheet .ia-res'));
     });
     await t.case('abstención: sin candidatas dice qué falta ver', async () => {
       modo = 'duda'; await t.page.evaluate(() => window.__MI.abrirIA()); await t.wait(150);
@@ -114,10 +117,11 @@ module.exports = {
       t.eq('una sola llamada con las 3 fotos hechas con «Foto» (sin repetirlas)', llamadas.map(l => l.n), [3]);
       t.ok('porcentaje del más probable', /80\s*%/.test(await t.T('#mk-iares .ia-row') || ''));
       await t.page.evaluate(() => document.querySelector('#mk-iares').scrollIntoView({ block: 'center', behavior: 'instant' })); await t.wait(600); await t.shot('captura-ia-hallazgo');
-      await t.tap('#mk-iares [data-iav]', 400);
-      t.ok('«Ver la especie» abre una vista previa con fotos y la clave, sin salir del hallazgo', await t.page.evaluate(() => { const p = document.querySelector('#mk-iares .ia-prev:not([hidden])'); return !!p && p.querySelectorAll('img').length >= 1 && p.textContent.length > 40 && !!document.querySelector('#mk-ok'); }));
+      await t.tap('#mk-iares [data-iav]', 600);
+      t.ok('«Comprobar» abre «¿Cuál es?» a pantalla completa', await t.has('#cuales') && /Comprueba, paso a paso/i.test(await t.T('#cuales') || '') && (await t.N('#cuales img')) >= 1, (await t.T('#cuales') || '').slice(0, 200));
+      t.ok('sin cerrar el hallazgo que estás marcando', await t.has('#sheet #mk-ok'));
       await t.shot('captura-ia-ver');
-      await t.tap('#mk-iares .ia-prev [data-iae]', 300);
+      await t.tap('#cuales [data-cel]', 400); t.ok('«Es esta» cierra el comprobador', !(await t.has('#cuales')));
       t.ok('elige la especie del catálogo', (await t.page.evaluate(() => document.querySelector('#sp-q').value)).length > 3);
       await t.tap('#mk-ok', 500);
       const hh = (await t.docs('hallazgos')).find(x => (x.fotos || []).length && x.especieId);

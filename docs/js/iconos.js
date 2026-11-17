@@ -1,6 +1,8 @@
 /* Iconos de línea (24×24). Se pintan con currentColor; el CSS pone el trazo. */
 const s = d => '<svg viewBox="0 0 24 24" aria-hidden="true">' + d + '</svg>';
 export const I = {
+  lupa: s('<circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/>'),
+  check: s('<path d="M5 12.5l4.2 4.2L19 7"/>'),
   estrella: s('<path d="M12 3.2l2.6 5.6 6.1.7-4.5 4.2 1.2 6.1L12 16.8l-5.4 3 1.2-6.1-4.5-4.2 6.1-.7z"/>'),
   chart: s('<path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>'),
   arbol: s('<path d="M12 21v-5"/><path d="M12 3.2l-6.3 8.3h3.1L5 16h14l-3.8-4.5h3.1z"/>'),

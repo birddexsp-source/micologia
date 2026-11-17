@@ -1197,3 +1197,37 @@ button.navrow{width:100%;font:inherit;color:inherit;text-align:left;cursor:point
 /* el glifo de la chincheta encima de la gota (Leaflet pone z-index:200 a todos los svg del mapa) */
 .leaflet-map-pane .spm .gota{z-index:0}.spm .gl{z-index:1}.spm b{z-index:2}
 .mchips{gap:4px;right:64px}.mchips button{padding:7px 8px;font-size:12px;letter-spacing:-.1px}
+/* v56: «¿Cuál es?» comprobar lo que dice la IA */
+.cq{position:fixed;inset:0;z-index:2100;background:var(--bg);display:flex;flex-direction:column}
+.cq-top{flex:none;display:flex;align-items:center;gap:12px;padding:calc(10px + env(safe-area-inset-top,0px)) 14px 8px}.cq-top b{font-size:18px;flex:1}.cq-top small{color:var(--mut);font-size:12.5px}
+.cq-top .vs-x{background:var(--s2);color:var(--ink)}
+.cq-tabs{flex:none;display:flex;gap:8px;overflow-x:auto;padding:4px 14px 10px;scrollbar-width:none;border-bottom:1px solid var(--line)}.cq-tabs::-webkit-scrollbar{display:none}
+.cq-t{flex:none;display:flex;align-items:center;gap:8px;padding:5px 12px 5px 5px;border-radius:14px;border:1.5px solid var(--line);background:var(--s1);color:var(--ink);cursor:pointer;text-align:left;max-width:200px}
+.cq-t .phw.av{width:40px;height:40px;border-radius:10px;flex:none}.cq-t span{min-width:0}.cq-t b{display:block;font-size:13.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.cq-t small{color:var(--mut);font:600 11.5px var(--mono)}
+.cq-t.on{border-color:var(--c,var(--acc));background:var(--s2);box-shadow:0 0 0 1px var(--c,var(--acc)) inset}.cq-t.pel b::after{content:" ⚠";color:#ff6b6b}
+.cq-t.dif{padding:8px 14px}
+.cq-body{flex:1;min-height:0;overflow-y:auto;padding:12px 14px 20px;-webkit-overflow-scrolling:touch}
+.cq-bar{flex:none;display:flex;gap:8px;padding:10px 14px calc(10px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--line);background:var(--bg)}.cq-bar .btn{flex:1}.cq-bar .btn svg{width:18px;height:18px}
+.cq-ia{background:rgba(76,155,255,.1);border:1px solid rgba(76,155,255,.35);border-radius:12px;padding:10px 12px;font-size:13.5px;margin-bottom:12px;line-height:1.4}
+.cq-pel{background:rgba(229,72,77,.14);border:1px solid rgba(229,72,77,.6);color:#ffb3b3;border-radius:12px;padding:10px 12px;font-weight:700;font-size:13.5px;margin-bottom:10px}
+.cq-h h3{margin:0 0 6px;font-size:19px}.cq-h .chips{margin-bottom:10px}
+.cq-vs{background:var(--s1);border:1px solid var(--line);border-left:3px solid var(--acc);border-radius:10px;padding:9px 12px;margin:8px 0}.cq-vs small{color:var(--acc);font-weight:700;font-size:12px}.cq-vs p{margin:4px 0 0;font-size:13.5px;line-height:1.45}
+.cq-vs.grave{border-left-color:#e5484d}.cq-vs.grave small{color:#ff8787}
+.cq-fs{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none}.cq-fs .phw{flex:none;width:72%;aspect-ratio:4/3;border-radius:12px;overflow:hidden}.cq-fs img{width:100%;height:100%;object-fit:cover}
+.cq-pasos{list-style:none;margin:0;padding:0;counter-reset:p}
+.cq-pasos li{counter-increment:p;position:relative;padding:10px 0 10px 40px;border-bottom:1px solid var(--line)}
+.cq-pasos li::before{content:counter(p);position:absolute;left:0;top:10px;width:28px;height:28px;border-radius:50%;background:var(--c);color:#0a0f0e;font:800 13px/28px var(--mono);text-align:center}
+.cq-ph b{display:block;font-size:15px}.cq-ph small{display:block;color:var(--mut);font-size:12.5px;margin-top:1px}
+.cq-r{margin-top:6px;padding:7px 10px;background:var(--s1);border-radius:9px;border-left:3px solid var(--c)}.cq-r b{display:block;font-size:14px}.cq-r span{display:block;font-size:13px;color:#c9d3cf;margin-top:2px;line-height:1.4}
+.cq-tab{margin:8px 0;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.cq-fila{display:grid;grid-template-columns:86px repeat(var(--n),minmax(0,1fr));gap:1px;background:var(--line);list-style:none}
+.cq-fila::-webkit-details-marker{display:none}
+.cq-fila>*{background:var(--s1);padding:8px 7px;font-size:12.5px;line-height:1.3;font-style:normal;overflow-wrap:anywhere}
+.cq-fila>span{font-weight:700;color:var(--c,var(--mut));font-size:11.5px}
+.cq-fila.cab>*{background:var(--s2)}.cq-fila.cab b{color:var(--c);font-size:12.5px}
+.cq-fd summary{cursor:pointer}.cq-fd[open] summary>*{background:var(--s2)}
+.cq-det{padding:8px 10px;background:var(--bg);border-top:1px solid var(--line)}.cq-det p{margin:4px 0;font-size:13px;line-height:1.4}
+.cq-av{margin-top:16px}
+.ia-ver{font-weight:650}
+.cq{overflow:hidden;max-width:100vw}.cq-body{overflow-x:hidden}.cq-body>*{max-width:100%}
+.cq>*{min-width:0;width:100%;box-sizing:border-box}

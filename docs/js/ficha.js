@@ -237,7 +237,7 @@ export function fichaHTML(e, mes) {
     '<nav class="ftabs" id="ftabs" role="tablist">' + tabs.map(([k, n], i) => '<button role="tab" class="ft' + (i ? '' : ' on') + (k === 'conf' && grave ? ' grave' : '') + '" data-ft="' + k + '" aria-selected="' + (i ? 'false' : 'true') + '">' + n + (k === 'conf' ? '<em>' + nConf + '</em>' : '') + '</button>').join('') + '</nav>' +
     tabs.map(([k], i) => '<div class="fp" role="tabpanel" data-fp="' + k + '"' + (i ? ' hidden' : '') + '>' + P[k] + '</div>').join('');
 }
-export { mesNombre };
+export { mesNombre, anotadas as anotadasHTML };
 
 /* Cuándo sale: condiciones de tiempo (lluvia, temperatura, helada) según el gremio de la especie. Lo medido va separado de las hipótesis. */
 function cuandoSale(e) {

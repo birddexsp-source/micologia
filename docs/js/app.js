@@ -16,10 +16,11 @@ import * as off from './offline.js';
 import { renderPlan } from './plan.js';
 import * as lug from './lugar.js';
 import * as bos from './bosques.js';
+import * as cmpx from './comparar.js';
 import * as zon from './zona.js';
 import * as tr from './tramos.js';
 
-const APP_V = 'micologia-v55';   // = V de sw.js
+const APP_V = 'micologia-v56';   // = V de sw.js
 const S = { view: 'mapa', arg: '', map: null, pins: null, me: null, acc: null, tmp: null, mini: null, centered: false, filtro: { salida: '', especie: '' }, clase: '', q: '', syncErr: false, mes: new Date().getMonth() + 1 };
 const VIEWS = ['mapa', 'salidas', 'salida', 'setas', 'mes', 'plan', 'ajustes'];
 const TITULOS = { mapa: 'Mapa', salidas: 'Salidas', salida: 'Salida', setas: 'Setas', mes: 'Este mes', plan: 'Plan de salida', ajustes: 'Ajustes' };
@@ -399,7 +400,7 @@ async function marcar(opts = {}) {
     '<div class="row mk-bar"><button class="btn" id="mk-x">Cancelar</button><button class="btn p" id="mk-ok" style="flex:2">Guardar</button></div>', { dim: !!opts.pos });
   const regrid = () => { $('#mk-grid', sh).innerHTML = gridHTML(); };
   /* Reconocer con IA desde el propio hallazgo: las fotos del hallazgo son las de la IA. Sacas las que quieras (botón Foto), y cuando quieras pulsas «Escanear»: mira todas juntas */
-  let iaBusy = false, iaEsc = 0, iaRes = '', iaCands = [];
+  let iaBusy = false, iaEsc = 0, iaRes = '', iaCands = [], iaFalta = '';
   const iaPintar = (extra = '') => {
     const n = m.fotos.length, box = $('#mk-iares', sh);
     box.innerHTML = extra + iaRes + '<div class="row"><button class="btn ' + (n ? 'p' : '') + ' ia-go" id="mk-iaes"' + (n && !iaBusy ? '' : ' disabled') + '>' + I.chispa + ' ' +
@@ -413,7 +414,7 @@ async function marcar(opts = {}) {
     if (!files.length) { iaPintar('<div class="warn">No encuentro las fotos para escanearlas. Haz otra.</div>'); return; }
     iaBusy = true; iaRes = ''; iaPintar('<div class="note ia-wait">' + I.chispa + ' Mirando ' + (files.length === 1 ? 'la foto' : 'las ' + files.length + ' fotos') + '…</div>');
     let err = '';
-    try { const r = await ia.reconocer(files); iaCands = (r.candidatas || []).map(c => ({ id: c.id, n: c.nombreCientifico, c: c.confianza })); iaRes = resultadoIA(r, 'marcar'); iaEsc = files.length; }
+    try { const r = await ia.reconocer(files); iaCands = (r.candidatas || []).map(c => ({ id: c.id, n: c.nombreCientifico, c: c.confianza })); iaFalta = r.faltaVer || ''; iaRes = resultadoIA(r, 'marcar'); iaEsc = files.length; }
     catch (e) { if (e.message === 'clave') ia.setKey(''); err = '<div class="warn">' + esc(ia.mensajeError(e)) + '</div>'; }
     finally { iaBusy = false; }
     iaPintar(err);
@@ -445,13 +446,11 @@ async function marcar(opts = {}) {
       $('#sp-sugs', sh).hidden = true; regrid(); $$('#mk-iares .ia-row', sh).forEach(x => x.classList.toggle('sel', x === (r || o)));
     }
     else if (t.dataset.iav) {
-      const e = cat.byId(t.dataset.iav), box = $('#ia-prev-' + e.id, sh); if (!e || !box) return;
-      if (!box.hidden) { box.hidden = true; t.textContent = 'Ver la especie ›'; return; }
-      const v = cat.vista(e), peli = e.clase === 'mortal' || e.clase === 'toxica';
-      box.innerHTML = '<div class="ia-fs">' + (e.fotos || []).slice(0, 3).map(f => '<img src="' + esc(fi.fotoURL(f, 500)) + '" alt="" loading="lazy" crossorigin="anonymous">').join('') + '</div>' +
-        '<div class="ia-pt">' + tag(v) + fi.rarezaTag(e, { mini: true }) + '</div><p>' + esc(e.clave || '') + '</p>' + (peli ? '<p class="warn">' + esc(e.notaComestibilidad || 'Peligrosa: no se recoge.') + '</p>' : '') +
-        '<div class="row"><button class="btn p" data-iae="' + e.id + '">Elegir esta</button></div>';
-      box.hidden = false; t.textContent = 'Ocultar ‹';
+      /* comprobar a pantalla completa (sin perder lo que llevas marcado): qué mirar de cada candidata y sus diferencias */
+      const cs = iaCands.map(c => ({ e: cat.byId(c.id), pc: Math.max(0, Math.min(100, c.c | 0)) })).filter(c => c.e);
+      abrirComprobar(cs, { i: Math.max(0, cs.findIndex(c => c.e.id === t.dataset.iav)), faltaVer: iaFalta, elegir: e => {
+        m.esp.id = e.id; m.esp.txt = ''; $('#sp-q', sh).value = cat.nombre(e); $('#sp-sel', sh).innerHTML = tag(cat.vista(e)); $('#sp-sugs', sh).hidden = true; regrid();
+        $$('#mk-iares .ia-row', sh).forEach(x => x.classList.toggle('sel', x.dataset.iae === e.id)); toast('Elegida: ' + corto(e) + ' (provisional)'); } });
     }
     else if (t.id === 'mk-iano') { m.esp.id = null; m.esp.txt = ''; $('#sp-q', sh).value = ''; $('#sp-sel', sh).innerHTML = ''; regrid(); $$('#mk-iares .ia-row', sh).forEach(x => x.classList.remove('sel')); toast('Se guardará sin identificar' + (iaCands.length ? ', con lo que sugirió la IA' : '') + '. Lo miras en casa.', 3600); }
     else if (t.id === 'mk-iaes') iaEscanear()
@@ -612,11 +611,20 @@ async function verHallazgo(id) {
     '<div class="meta" style="margin-top:8px">' + (e ? fi.tagEsp(e) : '') + '<span class="tag" style="--c:' + idn.color + ';color:#0a0f0e">' + idn.label + '</span></div>' +
     '<dl class="dat">' + dato('Cuándo', new Date(h.ts).toLocaleDateString('es-ES', { day: 'numeric', month: 'short', year: 'numeric' }) + ' · ' + hhmm(h.ts)) + dato('Spot', z && z.nombre) + dato('Cantidad', h.cantidad) + dato('Estado', (ESTADOS.find(x => x[0] === h.estadoSeta) || [])[1]) + dato('Sustrato', h.sustrato) + dato('Confirmó', h.identificacion === 'confirmada' && h.confirmadoPor) + '</dl>' +
     (h.notas || Object.values(h.transcripciones || {}).some(Boolean) ? '<div class="nota">' + (h.notas ? '<p>' + esc(h.notas) + '</p>' : '') + Object.values(h.transcripciones || {}).filter(t => t && t !== h.notas).map(t => '<p class="vz">«' + esc(t) + '»</p>').join('') + '</div>' : '') +
-    (h.iaSugerencias && h.iaSugerencias.length ? '<div class="nota ia-sug"><b>Sugerencias de la IA</b>' + h.iaSugerencias.map(x => { const q = cat.byId(x.id); return '<p>' + (q ? '<button class="lnk" data-e="' + q.id + '">' + esc(corto(q)) + '</button>' : '<i>' + esc(x.n) + '</i>') + ' · ' + (x.c | 0) + ' %</p>'; }).join('') + '</div>' : '') +
+    (h.iaSugerencias && h.iaSugerencias.length ? '<div class="nota ia-sug"><b>Sugerencias de la IA</b>' + h.iaSugerencias.map(x => { const q = cat.byId(x.id); return '<p>' + (q ? '<button class="lnk" data-hc="' + q.id + '">' + esc(corto(q)) + '</button>' : '<i>' + esc(x.n) + '</i>') + ' · ' + (x.c | 0) + ' %</p>'; }).join('') +
+      (h.iaSugerencias.some(x => cat.byId(x.id)) ? '<button class="btn" data-hc="" style="width:100%;margin-top:6px">' + I.lupa + 'Comprobar cuál es: qué mirar y diferencias</button>' : '') + '</div>' : '') +
     avisoComer(e) +
     '<div class="acts">' + (e ? '<button class="btn" id="hv-ficha">' + I.libro + 'Ver ficha</button>' : '') + (z ? '<button class="btn" id="hv-spot">' + I.flag + esc(z.nombre) + '</button>' : '') + '</div>');
   sh.addEventListener('click', ev => {
     const t = ev.target.closest('button'); if (!t) return;
+    if (t.dataset.hc !== undefined) {
+      const cs = h.iaSugerencias.map(x => ({ e: cat.byId(x.id), pc: Math.max(0, Math.min(100, x.c | 0)) })).filter(c => c.e);
+      if (e && !cs.some(c => c.e.id === e.id)) cs.unshift({ e, pc: null });
+      abrirComprobar(cs, { i: Math.max(0, cs.findIndex(c => c.e.id === (t.dataset.hc || (e && e.id)))), elegir: async x => {
+        await db.patch('hallazgos', id, { especieId: x.id, especieTxt: '', identificacion: h.identificacion === 'confirmada' && h.especieId === x.id ? 'confirmada' : 'provisional' });
+        toast('Anotada como ' + corto(x) + ' (provisional)'); verHallazgo(id); refreshPins(); } });
+      return;
+    }
     if (t.id === 'hv-edit') abrirHallazgo(id);
     else if (t.id === 'sv-x') closeSheet();
     else if (t.id === 'hv-ficha') abrirFicha(e.id);
@@ -1180,7 +1188,7 @@ function abrirLibro(cap, volverA) {
 /* ---------- reconocer con IA ---------- */
 const IA_SLOTS = [['Sombrero (desde arriba)', 'Por encima'], ['Láminas o poros (por debajo)', 'Por debajo'], ['Base del pie (con la volva si hay)', 'Base del pie'], ['Cualquier otra vista (entera, en el suelo, corte…)', 'Otra']];
 function abrirIA() {
-  const fotos = [null, null, null, null], urls = []; let nota = '';
+  const fotos = [null, null, null, null], urls = []; let nota = '', ultimo = null;
   const sh = openSheet('');
   const pintar = (res, err, cargando) => {
     const hay = fotos.some(Boolean), key = ia.getKey();
@@ -1208,16 +1216,43 @@ function abrirIA() {
     const b = e.target.closest('button'), a = e.target.closest('#ia-kc');
     if (a) { e.preventDefault(); ia.setKey(''); return pintar(); }
     if (b.id === 'gu-x') { urls.forEach(u => u && URL.revokeObjectURL(u)); return closeSheet(); }
-    if (b.dataset.e) return abrirFicha(b.dataset.e);
+    if (b.dataset.e) { const cs = ((ultimo && ultimo.candidatas) || []).map(c => ({ e: cat.byId(c.id), pc: Math.max(0, Math.min(100, c.confianza | 0)) })).filter(c => c.e); return abrirComprobar(cs.length ? cs : [{ e: cat.byId(b.dataset.e), pc: null }], { i: Math.max(0, cs.findIndex(c => c.e.id === b.dataset.e)), faltaVer: ultimo && ultimo.faltaVer }); }
     if (b.id === 'ia-ks') { const k = $('#ia-k', sh).value; if (!ia.claveValida(k)) return pintar(null, 'Esa clave no tiene la forma correcta (la de Google AI Studio, empieza por AIza… o AQ.…).'); ia.setKey(k); return pintar(); }
     if (b.id === 'ia-go') {
       if (!navigator.onLine) return pintar(null, ia.mensajeError(new Error('red')));
       pintar(null, '', true);
-      try { pintar(await ia.reconocer(fotos.filter(Boolean), { nota })); }
+      try { ultimo = await ia.reconocer(fotos.filter(Boolean), { nota }); pintar(ultimo); }
       catch (err) { if (err.message === 'clave') ia.setKey(''); pintar(null, ia.mensajeError(err)); }
     }
   };
   pintar();
+}
+/* «¿Cuál es?» a pantalla completa, encima de lo que estés haciendo (no se pierde lo marcado) */
+function abrirComprobar(cands, o = {}) {
+  cands = (cands || []).filter(c => c && c.e); if (!cands.length) return;
+  const viejo = document.getElementById('cuales'); if (viejo) viejo.remove();
+  const ov = document.createElement('div'); ov.id = 'cuales'; ov.className = 'cq'; ov.setAttribute('role', 'dialog'); ov.setAttribute('aria-label', '¿Cuál es?');
+  let i = o.i || 0, ficha = false;
+  const pinta = () => {
+    const sel = i >= 0 ? cands[i] : null;
+    ov.innerHTML = '<div class="cq-top"><button class="vs-x" data-cx aria-label="Cerrar">' + I.close + '</button><b>¿Cuál es?</b><small>' + (cands.length > 1 ? cands.length + ' candidatas' : '') + '</small></div>' + cmpx.tabsHTML(cands, i) +
+      '<div class="cq-body">' + (o.faltaVer && !ficha ? '<div class="cq-ia"><b>Para salir de dudas, la IA pide mirar:</b> ' + esc(o.faltaVer) + '</div>' : '') +
+      (sel ? (ficha ? fi.fichaHTML(sel.e, S.mes) : cmpx.especieHTML(sel.e, cands.filter(c => c !== sel).map(c => c.e))) : cmpx.diferenciasHTML(cands)) +
+      '<p class="note cq-av">La IA y las fotos son una pista. Para comer, nunca basta: mira la seta entera y que la confirme alguien que sepa.</p></div>' +
+      '<div class="cq-bar">' + (sel && o.elegir ? '<button class="btn p" data-cel>' + I.check + 'Es esta</button>' : '') + (sel ? '<button class="btn" data-cfi>' + (ficha ? 'Volver a comprobar' : I.libro + 'Ficha completa') + '</button>' : '') +
+      (!sel && o.elegir ? '<p class="mut sm">Elige una candidata arriba para marcarla.</p>' : '') + '</div>';
+    fi.activarVisor(ov); hydrate(ov);
+  };
+  ov.addEventListener('click', ev => {
+    const b = ev.target.closest('button'); if (!b) return;
+    if (b.dataset.cx !== undefined) ov.remove();
+    else if (b.dataset.ck != null) { i = +b.dataset.ck; ficha = false; pinta(); }
+    else if (b.dataset.cel !== undefined) { const e = cands[i].e; ov.remove(); o.elegir(e); }
+    else if (b.dataset.cfi !== undefined) { ficha = !ficha; pinta(); }
+    else if (b.dataset.ft) fichaTab(ov, b.dataset.ft);
+    else if (b.dataset.e) { const x = cat.byId(b.dataset.e); if (!x) return; if (!cands.some(c => c.e.id === x.id)) cands.push({ e: x, pc: null }); i = cands.findIndex(c => c.e.id === x.id); ficha = false; pinta(); }
+  });
+  document.body.appendChild(ov); pinta();
 }
 function resultadoIA(r, modo) {
   const marcar = modo === 'marcar', pc = c => Math.max(0, Math.min(100, c.confianza | 0));
@@ -1234,7 +1269,7 @@ function resultadoIA(r, modo) {
     const nom = e ? esc(corto(e)) : '<i>' + esc(c.nombreCientifico) + '</i>', sub = e ? (corto(e) === e.nombreCientifico.split(' (')[0] ? esc(e.nombreCientifico.includes(' (') ? e.nombreCientifico.split(' (')[1].replace(')', '') : '') : '<i>' + esc(e.nombreCientifico) + '</i>') : esc(c.nombreComun) + ' · no está en tu colección';
     return '<div class="ia-w' + (i === 0 && !dudoso ? ' mejor' : '') + '"><button class="ia-row' + (i === 0 && !dudoso ? ' mejor' : '') + (e ? '' : ' fuera') + '"' + at + ' style="--c:' + (e ? colorEsp(e) : '#7b8683') + '">' +
       '<span class="pf">' + (e ? fotoEsp(e) : '<span class="ph0">?</span>') + '</span><span class="t"><b>' + nom + '</b><small>' + sub + '</small>' + bar + rasgos + '</span><span class="ia-pc">' + n + '<small>%</small></span></button>' +
-      (marcar && e ? '<button class="ia-ver" data-iav="' + e.id + '">Ver la especie ›</button><div class="ia-prev" id="ia-prev-' + e.id + '" hidden></div>' : '') + '</div>';
+      (marcar && e ? '<button class="ia-ver" data-iav="' + e.id + '">Comprobar: qué mirar y diferencias ›</button>' : '') + '</div>';
   }).join('');
   if (marcar) h += '<button class="btn ia-no" id="mk-iano">No sé · lo miro en casa</button>';
   h += '<p class="note ia-nota">El porcentaje es lo segura que está la IA con estas fotos, no una garantía.' + (marcar ? ' Toca una para elegirla (queda como provisional).' : '') + '</p>';
@@ -1444,6 +1479,7 @@ function padre(h) {
   return v && v !== 'mapa' ? '#mapa' : null;
 }
 function atras() {
+  const cm = document.getElementById('cuales'); if (cm) { cm.remove(); return 'comparar'; }
   const vis = document.getElementById('visor'); if (vis) { vis.remove(); return 'visor'; }
   const sh = $('#sheet'); if (sh && !sh.hidden) { closeSheet(); return 'hoja'; }
   const lg = $('#mleg'); if (lg && !lg.hidden) { lg.hidden = true; $('#legbtn').classList.remove('on'); return 'leyenda'; }
@@ -1505,7 +1541,7 @@ async function boot() {
       buscar();
     }).catch(() => { });
   }
-  window.__MI = { bos, abrirBosques, abrirRodal, atras, padre, abrirVisor, fichaTab: k => fichaTab($('#sheet .sh'), k), abrirHabitat, abrirDondeBuscar, db, geo, syn, cat, trk, S, abrirHallazgo, abrirFicha, abrirLibro, abrirIA, ia, abrirSpot, verSpot, editarSpot, verHallazgo, leerGPX };
+  window.__MI = { abrirComprobar, cmpx, bos, abrirBosques, abrirRodal, atras, padre, abrirVisor, fichaTab: k => fichaTab($('#sheet .sh'), k), abrirHabitat, abrirDondeBuscar, db, geo, syn, cat, trk, S, abrirHallazgo, abrirFicha, abrirLibro, abrirIA, ia, abrirSpot, verSpot, editarSpot, verHallazgo, leerGPX };
   document.body.dataset.ready = '1';
 }
 boot().catch(e => { console.error(e); document.body.insertAdjacentHTML('beforeend', '<div class="warn" style="position:fixed;top:60px;left:12px;right:12px;z-index:9999">No se pudo arrancar la app: ' + esc(e.message || e) + '</div>'); });
