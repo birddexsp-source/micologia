@@ -1,0 +1,26 @@
+https://www.geo.euskadi.eus/cartografia/DatosDescarga/Agricultura/INV_FORESTAL_2025_10000_ETRS89.zip: HTTP Error 404: Not Found
+http://www.geo.euskadi.eus/cartografia/DatosDescarga/Agricultura/INV_FORESTAL_2025_10000_ETRS89.zip: HTTP Error 404: Not Found
+fuente https://www.geo.euskadi.eus/cartografia/DatosDescarga/Agricultura/INV_FORESTAL_2024_10000_ETRS89.zip
+zip: INV_FORESTAL_2024_10000_ETRS89.cpg
+zip: INV_FORESTAL_2024_10000_ETRS89.dbf
+zip: INV_FORESTAL_2024_10000_ETRS89.prj
+zip: INV_FORESTAL_2024_10000_ETRS89.sbn
+zip: INV_FORESTAL_2024_10000_ETRS89.sbx
+zip: INV_FORESTAL_2024_10000_ETRS89.shp
+zip: INV_FORESTAL_2024_10000_ETRS89.shp.xml
+zip: INV_FORESTAL_2024_10000_ETRS89.shx
+raw/INV_FORESTAL_2024_10000_ETRS89.shp: 220606 rasgos, crs EPSG:25830
+  en la zona: 22975
+  TIPES_es: 29 valores · Bosque de Plantacion=13348 | Bosque=3314 | Arbustedos=1496 | Urbano discontinuo=1390 | Prados=1120 | Cultivos=874 | Pastizal-Matorral=379 | Herbazal-Pastizal=212 | Bosque de Galeria=175 | Transportes=121 | Urbano continuo=109 | Equipamiento/Dotacional=87 | Industrial=64 | Otras superficies artificiales=53 | Energia=44 | Acantilados marinos=36 | Primario=32 | Estuarios=20 | Cursos de agua=16 | Prados con setos=15 | Residuos=13 | Terciario=12 | Afloramientos rocosos=12 | Marismas=10 | Pantano, embalse=10 | Playas, dunas y arenales=6 | Mares y océanos=4 | Turberas=2 | Suministros de agua=1
+  SP1_es: 59 valores · nan=6138 | Pino radiata=5651 | Eucalipto globulus=3958 | Bosque mixto atlántico=2721 | Eucalipto nitens=1648 | Pino pináster=943 | Roble pedunculado=362 | Encina=337 | Plantaciones de frondosas variadas=179 | Árboles ripícolas=174 | Roble americano=149 | Falsa acacia=99 | Haya=86 | Pino laricio=85 | Criptomeria=61 | Abeto Douglas=51 | Chameciparis=37 | Castaño=30 | Plantaciones de frondosas y coníferas variadas=25 | Plantaciones de coníferas variadas=24 | Prunus=22 | Nogal=16 | Fresno=13 | Secuoya=12 | Frondosas de pequeño porte=10 | Otras frondosas=10 | Cerezo=10 | Álamo=10 | Otros pinos=10 | Alerce=8
+  O1: 8 valores · 10.0=15179 | 0.0=6138 | 5.0=407 | 7.0=389 | 8.0=372 | 6.0=338 | 9.0=108 | 4.0=44
+  E1: 6 valores · 4.0=6254 | 0.0=6138 | 3.0=3807 | 5.0=2528 | 1.0=2134 | 2.0=2114
+  EMASA1: 6 valores · Tantai basoa / Fustal=6254 | nan=6138 | Haga basoa / Latizal=3807 | Mozketa / Tala=2528 | Basoberrituak / Repoblado=2134 | Mendi zangarra / Monte Bravo=2114
+  SP2_es: 43 valores · nan=21317 | Bosque mixto atlántico=486 | Pino radiata=340 | Pino pináster=223 | Eucalipto globulus=207 | Encina=84 | Eucalipto nitens=75 | Roble pedunculado=38 | Roble americano=28 | Falsa acacia=25 | Abeto Douglas=20 | Pino laricio=20 | Chameciparis=16 | Abedul=12 | Madroño=12 | Haya=9 | Aliso=8 | Castaño=8 | Prunus=5 | Fresno excelsior=4 | Nogal=4 | Otras frondosas=3 | Otros eucaliptos=3 | Fresno=2 | Eucaliptos=2 | Cerezo=2 | Liquidambar=2 | Alerce=2 | Acacia=2 | Árboles ripícolas=2
+  O2: 6 valores · 0.0=21317 | 3.0=427 | 2.0=404 | 5.0=373 | 4.0=342 | 1.0=112
+  SP3_es: 29 valores · nan=22848 | Eucalipto globulus=26 | Bosque mixto atlántico=24 | Pino radiata=17 | Pino pináster=8 | Eucalipto nitens=6 | Fresno=5 | Madroño=4 | Pino laricio=3 | Nogal=3 | Encina=3 | Abedul=3 | Fresno excelsior=2 | Sauce cabruno=2 | Cerezo=2 | Roble pedunculado=2 | Otras frondosas=2 | Haya=2 | Roble americano=2 | Plantaciones de frondosas variadas=2 | Sauce=1 | Avellano=1 | Plantaciones de coníferas variadas=1 | Castaño=1 | Abeto Douglas=1 | Acacia=1 | Chameciparis=1 | Eucaliptos=1 | Prunus=1
+  O3: 4 valores · 0.0=22848 | 2.0=65 | 1.0=40 | 3.0=22
+  FCCARB: 19 valores · 0.0=6138 | 5.0=2523 | 20.0=2139 | 85.0=1665 | 80.0=1480 | 90.0=1271 | 75.0=1170 | 70.0=913 | 30.0=862 | 65.0=784 | 95.0=702 | 60.0=656 | 55.0=629 | 25.0=510 | 45.0=406 | 50.0=375 | 35.0=369 | 40.0=328 | 100.0=55
+  FORARB: 19 valores · 38=11857 | 0=6342 | 3=2774 | 26=873 | 4=316 | 18=300 | 33=207 | 49=98 | 25=79 | 1=59 | 29=28 | 12=16 | 14=7 | 44=6 | 15=5 | 8=3 | 16=2 | 43=2 | 7=1
+  DISTRIB: 4 valores · 1.0=15337 | 0.0=5792 | 3.0=1734 | 2.0=112
+  HMMAT: 5 valores · 10.0=14963 | 0.0=4286 | 15.0=2050 | 5.0=1675 | 2.0=1
