@@ -1151,3 +1151,9 @@ button.rz{cursor:pointer}
 .vs-tr figure{flex:none;width:100%;height:100%;margin:0;scroll-snap-align:center;display:flex;flex-direction:column;justify-content:center}
 .vs-tr img{width:100%;flex:1;min-height:0;object-fit:contain}
 .vs-tr figcaption{flex:none;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 16px calc(14px + env(safe-area-inset-bottom,0px));color:#fff}
+
+/* v50: botón discreto «Cómo llegar» en la lista de spots */
+.spotr{position:relative}.spotr .item{padding-right:62px;margin-bottom:9px}
+.spotr .goto{position:absolute;right:11px;top:calc(50% - 4px);transform:translateY(-50%);width:42px;height:42px;border-radius:50%;display:grid;place-items:center;color:var(--mut);background:var(--s2);border:1px solid var(--line);text-decoration:none}
+.spotr .goto svg{width:20px;height:20px}.spotr .goto:active{background:var(--s3);color:var(--acc)}
+.spotr>svg{position:absolute;right:18px;top:calc(50% - 4px);transform:translateY(-50%)}

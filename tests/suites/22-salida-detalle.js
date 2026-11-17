@@ -81,6 +81,17 @@ module.exports = {
       t.ok('bloque «Spots» con su tarjeta y especie con tu foto', /Spots/.test(await t.page.evaluate(() => document.body.innerText)) && (await t.N('.zcard')) === 1 && (await t.N('.bl .spc')) === 1);
       await t.tap('.zcard', 700); t.ok('abre el spot como zona con su mapa', (await t.has('#smap')) && (await t.N('.rg')) === 1);
     });
+    await t.case('Cómo llegar: botón discreto en cada spot de la lista, en la hoja del spot y en la zona', async () => {
+      await t.put('zonas', 'zp', { nombre: 'Garbola tontorra, Bakio', estado: 'por_visitar', lat: 43.41491, lon: -2.771079, creada: min(0) });
+      await t.go('#salidas'); await t.wait(700);
+      const dest = await t.page.evaluate(() => [...document.querySelectorAll('.spotr .goto')].map(a => a.href));
+      t.ok('un botón por spot, con la ruta en coche a sus coordenadas', dest.length >= 4 && dest.every(h => /google\.com\/maps\/dir\/\?api=1&destination=-?\d+\.\d+,-?\d+\.\d+&travelmode=driving&dir_action=navigate$/.test(h)) && dest.some(h => h.includes('43.41491,-2.771079')), dest.join(' | '));
+      t.ok('se abre fuera de la app (Maps), no dentro', await t.page.evaluate(() => [...document.querySelectorAll('.spotr .goto')].every(a => a.target === '_blank')));
+      await t.tap('.spotr .item[data-spot="zp"]', 700);
+      t.ok('en la hoja del spot también', await t.page.evaluate(() => [...document.querySelectorAll('#sheet .acts a')].some(a => /destination=43\.41491,-2\.771079/.test(a.href))));
+      await t.go('#salida/sd1/zona/t1'); await t.wait(700);
+      t.ok('y en la pantalla de la zona', await t.page.evaluate(() => [...document.querySelectorAll('#v-salida a.btn')].some(a => /dir\/\?api=1/.test(a.href))));
+    });
     await t.case('Más y Diario siguen funcionando en su pantalla', async () => {
       await t.go('#salida/sd1/diario'); await t.wait(500); t.ok('nota del diario', await t.has('.dn') && /no hay setas/.test(await t.page.evaluate(() => document.querySelector('.dn textarea').value)));
       await t.go('#salida/sd1/mas'); await t.wait(500); t.ok('total recogido y recorrido', (await t.page.inputValue('#sd-tot')) === '≈1 kg' && await t.has('#sd-gpx'));

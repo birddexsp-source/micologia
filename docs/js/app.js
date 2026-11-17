@@ -18,7 +18,7 @@ import * as lug from './lugar.js';
 import * as zon from './zona.js';
 import * as tr from './tramos.js';
 
-const APP_V = 'micologia-v49';   // = V de sw.js
+const APP_V = 'micologia-v50';   // = V de sw.js
 const S = { view: 'mapa', arg: '', map: null, pins: null, me: null, acc: null, tmp: null, mini: null, centered: false, filtro: { salida: '', especie: '' }, clase: '', q: '', syncErr: false, mes: new Date().getMonth() + 1 };
 const VIEWS = ['mapa', 'salidas', 'salida', 'setas', 'mes', 'plan', 'ajustes'];
 const TITULOS = { mapa: 'Mapa', salidas: 'Salidas', salida: 'Salida', setas: 'Setas', mes: 'Este mes', plan: 'Plan de salida', ajustes: 'Ajustes' };
@@ -361,6 +361,9 @@ async function marcar(opts = {}) {
 
 /* ---------- spots (= zonas): sitios visitados y por visitar ---------- */
 const SPOT_EST = [['visitada', 'Visitado'], ['por_visitar', 'Quiero ir']];
+/* Cómo llegar: abre Google Maps con la ruta en coche ya lista (en el móvil, la app de Maps y a navegar) */
+const rutaURL = z => 'https://www.google.com/maps/dir/?api=1&destination=' + z.lat + ',' + z.lon + '&travelmode=driving&dir_action=navigate';
+const irA = z => '<a class="goto" href="' + rutaURL(z) + '" target="_blank" rel="noopener" aria-label="Cómo llegar a ' + esc(z.nombre || 'este spot') + '" title="Cómo llegar">' + I.route + '</a>';
 const spotColor = z => z.estado === 'por_visitar' ? '#4cc3d9' : '#46b36b';
 const spotTag = z => '<span class="tag" style="--c:' + spotColor(z) + '">' + (z.estado === 'por_visitar' ? 'Quiero ir' : 'Visitado') + '</span>';
 async function irAlMapa() { if (S.view !== 'mapa') { location.hash = '#mapa'; await new Promise(r => setTimeout(r, 250)); } }
@@ -454,7 +457,7 @@ async function verSpot(id) {
   const card = r => '<button class="spc" ' + (r.e ? 'data-e="' + r.e.id + '"' : 'data-hv="' + r.h.id + '"') + ' style="--c:' + colorEsp(r.e) + '"><span class="pf">' + (r.foto ? '<img class="ph" data-blob="' + r.foto + '" alt="">' : fotoEsp(r.e)) + '<em>×' + r.n + '</em></span><b>' + esc(r.nom) + '</b><small>' + anosTxt(r.anos) + (r.e && r.e.clase === 'mortal' ? ' · mortal' : r.e && r.e.clase === 'toxica' ? ' · tóxica' : '') + '</small></button>';
   const delMes = esp.filter(r => hs.some(h => (h.especieId || 'x') === (r.e ? r.e.id : 'x') && new Date(h.ts).getMonth() === mesAct) && r.e);
   const sh = openSheet('<div class="sv-h"><div class="sv-t"><h2>' + esc(z.nombre || 'Spot') + '</h2><div class="meta">' + meta + '</div></div><button class="icb" id="st-edit" aria-label="Editar spot">' + I.edit + '</button><button class="icb" id="sv-x" aria-label="Cerrar">' + I.close + '</button></div>' +
-    '<div class="acts"><button class="btn p" id="st-marcar">' + I.plus + (lejos ? 'Añadir especie' : 'Marcar aquí') + '</button><a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=' + z.lat + ',' + z.lon + '">' + I.route + 'Cómo llegar</a></div>' +
+    '<div class="acts"><button class="btn p" id="st-marcar">' + I.plus + (lejos ? 'Añadir especie' : 'Marcar aquí') + '</button><a class="btn" target="_blank" rel="noopener" href="' + rutaURL(z) + '">' + I.route + 'Cómo llegar</a></div>' +
     (peligro.length ? '<div class="alerta">' + I.aviso + '<div>Aquí también has visto <b>' + esc(peligro.map(r => r.nom).join(', ')) + '</b>. Mira bien cada seta antes de cogerla.</div></div>' : '') +
     (esp.length ? '<div class="sec">Especies encontradas<small>' + esp.length + '</small></div><div class="spcs">' + esp.map(card).join('') + '</div>' +
       (delMes.length ? '<div class="tip">' + I.cal + '<div>En <b>' + MES_L[mesAct] + '</b> aquí te han salido: ' + esc(delMes.map(r => r.nom).join(', ')) + '.</div></div>' : '') +
@@ -577,7 +580,7 @@ async function renderSalidas() {
   const nSpots = s => new Set([...(s.zonaIds || []), ...deS(s.id).map(h => h.zonaId).filter(Boolean)]).size;
   const ultZ = z => { const t = Math.max(0, ...deZ(z.id).map(h => h.ts), ...ss.filter(s => (s.zonaIds || []).includes(z.id)).map(s => new Date(s.fecha + 'T12:00').getTime())); return t ? 'últ. ' + new Date(t).toLocaleDateString('es-ES', { day: 'numeric', month: 'short' }) : ''; };
   const filaZ = z => { const h = deZ(z.id), ne = especiesDe(h).length, por = z.estado === 'por_visitar';
-    return '<button class="item spotc' + (por ? ' por' : '') + '" data-spot="' + z.id + '"><span class="sico">' + (por ? I.flag : I.seta) + '</span><div class="t"><b>' + esc(z.nombre) + '</b><small>' + [ne ? plural(ne, 'especie', 'especies') : (por ? 'sin visitar' : 'sin especies'), yo ? kmFmt(distM(yo, z)) : '', ultZ(z)].filter(Boolean).join(' · ') + '</small>' + avatares(h) + '</div>' + I.chev + '</button>'; };
+    return '<div class="spotr"><button class="item spotc' + (por ? ' por' : '') + '" data-spot="' + z.id + '"><span class="sico">' + (por ? I.flag : I.seta) + '</span><div class="t"><b>' + esc(z.nombre) + '</b><small>' + [ne ? plural(ne, 'especie', 'especies') : (por ? 'sin visitar' : 'sin especies'), yo ? kmFmt(distM(yo, z)) : '', ultZ(z)].filter(Boolean).join(' · ') + '</small>' + avatares(h) + '</div></button>' + (z.lat != null && z.lon != null ? irA(z) : I.chev) + '</div>'; };
   const grupo = (est, tit) => { const l = zs.filter(z => (z.estado || 'visitada') === est).sort((a, b) => yo ? distM(yo, a) - distM(yo, b) : a.nombre.localeCompare(b.nombre, 'es', { numeric: true })); return l.length ? '<div class="grp" style="--c:' + spotColor({ estado: est }) + '">' + tit + '<small>' + l.length + '</small></div>' + l.map(filaZ).join('') : ''; };
   const filaS = s => { const h = deS(s.id), n = nSpots(s);
     return '<a class="item sal" href="#salida/' + s.id + '">' + diaMes(s.fecha) + '<div class="t"><b>' + esc(s.titulo || fecha(s.fecha)) + '</b><small>' + [(s.fecha || '').slice(0, 4) === String(new Date().getFullYear()) ? '' : (s.fecha || '').slice(0, 4), tr.lista(s).length > 1 ? plural(tr.lista(s).length, 'zona', 'zonas') : n ? plural(n, 'spot', 'spots') : '', plural(h.length, 'hallazgo', 'hallazgos'), s.totalTxt ? esc(s.totalTxt) : '', s.estado === 'en_curso' ? 'en curso' : ''].filter(Boolean).join(' · ') + '</small>' + avatares(h) + '</div>' + I.chev + '</a>'; };
@@ -765,13 +768,13 @@ async function renderSalida(id) {
   } else if (sub === 'zona') {
     if (!zonaSel) cuerpo = volverHTML(raiz, 'Salida') + '<div class="empty">Esa zona no existe.</div>';
     else {
-      const z = zonaSel, gz = []; z.hhs.forEach(h => { const k = keyH(h); let g = gz.find(x => x.k === k); if (!g) gz.push(g = { k, hs: [], e: cat.byId(h.especieId) }); g.hs.push(h); }); vista = fotosAll.filter(x => x.h && z.hhs.some(h => h.id === x.h));
+      const z = zonaSel, spIr = zonas.find(x => x.id === (z.spotId || z.id)), gz = []; z.hhs.forEach(h => { const k = keyH(h); let g = gz.find(x => x.k === k); if (!g) gz.push(g = { k, hs: [], e: cat.byId(h.especieId) }); g.hs.push(h); }); vista = fotosAll.filter(x => x.h && z.hhs.some(h => h.id === x.h));
       cuerpo = volverHTML(raiz, 'Salida') + mapaHero + '<h2 class="sp-t" style="--c:' + zon.color(z.i) + '"><i class="zd"></i> ' + (z.i + 1) + ' · ' + esc(z.nombre) + (z.en ? ' <em class="zlive">en marcha</em>' : '') + '</h2>' +
         '<div class="stats"><div><b>' + (z.tramo ? trk.fmtDur(z.seg) : '—') + '</b><span>tiempo</span></div><div><b>' + (z.m ? trk.fmtKm(z.m) : '—') + '</b><span>recorrido</span></div><div><b>' + z.hhs.length + '</b><span>hallazgos</span></div><div><b>' + gz.length + '</b><span>especies</span></div></div>' +
         (gz.length ? bl('Qué has visto aquí', '', '<div class="hscroll">' + gz.map(cardG).join('') + '</div>') : '') +
         (vista.length ? bl('Fotos de esta zona', '', '<div class="fstrip">' + thumbs(vista, 12) + '</div>') : '') +
         (z.hhs.length ? '<label class="l">Registro de la zona</label>' + z.hhs.slice().sort((a, b) => a.ts - b.ts).map(filaH).join('') : '<div class="empty">Sin hallazgos en esta zona.</div>') +
-        (z.spot ? '<div class="row" style="margin-top:12px"><button class="btn" data-spot="' + z.id + '">Ver el spot en el mapa</button></div>' : '');
+        (spIr ? '<div class="row" style="margin-top:12px"><button class="btn" data-spot="' + spIr.id + '">Ver el spot en el mapa</button>' + (spIr.lat != null ? '<a class="btn" target="_blank" rel="noopener" href="' + rutaURL(spIr) + '">' + I.route + 'Cómo llegar</a>' : '') + '</div>' : '');
     }
   } else if (sub === 'fotos') {
     vista = filtraF(ffil); const sps = grupos.filter(g => fotosG(g).length), chipF = (f, t) => '<button class="opt' + (ffil === f ? ' on' : '') + '" data-ff="' + f + '">' + t + '</button>';
