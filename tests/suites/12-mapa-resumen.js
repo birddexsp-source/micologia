@@ -149,7 +149,7 @@ module.exports = {
       await t.go('#salida/sa'); await t.wait(600);
       t.ok('recorrido dibujado en la salida', (await t.N('#smap .trk-line')) >= 2);
       await t.page.evaluate(() => window.__MI.verSpot('za')); await t.wait(500);
-      t.ok('al abrir el spot se ve el recorrido de esa visita', (await t.N('#map .trk-line')) >= 1);
+      t.ok('al abrir el spot se ve la zona recorrida en esa visita', (await t.N('#map .zona-circ')) >= 1);
       await t.tap('#sv-x', 300); t.eq('y se quita al cerrar', await t.N('#map .trk-line'), 0);
       t.ok('un GPX roto no rompe nada', await t.page.evaluate(() => { try { window.__MI.leerGPX('<gpx><trk></trk></gpx>'); return false; } catch (e) { return /recorrido/.test(e.message); } }));
     });

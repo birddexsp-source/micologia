@@ -66,10 +66,15 @@ module.exports = {
       t.eq('un círculo de zona en el minimapa', await t.N('#smap .zona-circ'), 1);
       await t.shot('zona-salida');
     });
-    await t.case('mapa: la zona de la salida sale en el mapa principal y se puede ocultar con «Hallazgos»', async () => {
+    await t.case('mapa: la zona recorrida no carga el mapa; sale al tocar el spot y se va al cerrarlo', async () => {
       await t.go('#mapa'); await t.wait(900);
-      t.eq('un círculo de zona en el mapa', await t.N('#map .zona-circ'), 1);
+      t.eq('sin zonas en el mapa principal', await t.N('#map .zona-circ'), 0);
+      await t.page.evaluate(() => window.__MI.verSpot ? window.__MI.verSpot('zz1') : null); await t.wait(900);
+      if (!(await t.has('#sheet h2'))) { await t.go('#salidas'); await t.wait(400); await t.tap('.spotr .item[data-spot="zz1"]', 900); }
+      t.eq('al tocar el spot: su zona recorrida', await t.N('#map .zona-circ'), 1);
       await t.shot('zona-mapa');
+      await t.page.evaluate(() => window.__MI.atras()); await t.wait(300);
+      t.eq('al cerrarlo desaparece', await t.N('#map .zona-circ'), 0);
     });
     await t.case('hallazgo dentro de una salida en curso: el spot por defecto es el de la salida aunque haya otro más cerca', async () => {
       await t.put('salidas', 'sc', { fecha: '2026-11-16', titulo: 'En curso', notas: '', zonaIds: ['zz1'], fotos: [], fotosCosecha: [], track: [], grabar: false, estado: 'en_curso', creada: Date.now() });
@@ -149,7 +154,9 @@ module.exports = {
       t.eq('dos tarjetas de zona', await t.N('.zc'), 2);
       t.ok('con color, hora, tiempo y hallazgos', /1 · Aparcamiento A/.test(await t.T('.zc') || '') && /en marcha/.test(await t.T('.zlist') || '') && /1 hallazgo/.test(await t.T('.zlist') || ''), await t.T('.zlist'));
       await t.shot('zonas-salida');
-      await t.go('#mapa'); await t.wait(800); t.eq('y en el mapa principal (las 2 de hoy + la salida antigua, que sigue siendo un círculo)', await t.N('#map path.zona-circ'), 3);
+      await t.go('#salida/' + (await t.docs('salidas')).find(x => x.estado === 'en_curso').id); await t.wait(700);
+      t.ok('las zonas son una mancha rellena, sin el borde de cada trocito (no parecen círculos)', await t.page.evaluate(() => [...document.querySelectorAll('#smap path.zona-circ')].filter(p => p.getAttribute('fill-rule') === 'nonzero').every(p => p.getAttribute('stroke') === 'none')));
+      await t.go('#mapa'); await t.wait(800); t.eq('en el mapa principal no salen solas', await t.N('#map path.zona-circ'), 0);
     });
     await t.case('terminar la salida cierra la zona abierta y suma solo el tiempo de las zonas', async () => {
       const s0 = (await t.docs('salidas')).find(x => x.estado === 'en_curso'); await t.go('#salida/' + s0.id); await t.wait(400);

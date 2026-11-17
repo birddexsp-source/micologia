@@ -20,7 +20,7 @@ import * as cmpx from './comparar.js';
 import * as zon from './zona.js';
 import * as tr from './tramos.js';
 
-const APP_V = 'micologia-v58';   // = V de sw.js
+const APP_V = 'micologia-v59';   // = V de sw.js
 const S = { view: 'mapa', arg: '', map: null, pins: null, me: null, acc: null, tmp: null, mini: null, centered: false, filtro: { salida: '', especie: '' }, clase: '', q: '', syncErr: false, mes: new Date().getMonth() + 1 };
 const VIEWS = ['mapa', 'salidas', 'salida', 'setas', 'mes', 'plan', 'ajustes'];
 const TITULOS = { mapa: 'Mapa', salidas: 'Salidas', salida: 'Salida', setas: 'Setas', mes: 'Este mes', plan: 'Plan de salida', ajustes: 'Ajustes' };
@@ -311,7 +311,8 @@ function pinH(h, o = {}) {
 }
 function dibujarZona(z, g) {
   const c = zon.color(z.i), o = { color: c, weight: 1.5, fillColor: c, interactive: false, className: 'zona-circ' };
-  if (z.anillos.length) return L.polygon(z.anillos, { ...o, fillOpacity: .22, fillRule: 'nonzero' }).addTo(g);
+  /* una sola mancha por donde has andado: relleno sin los bordes de cada trocito (que parecían círculos) */
+  if (z.anillos.length) return L.polygon(z.anillos, { ...o, stroke: false, fillOpacity: .3, fillRule: 'nonzero' }).addTo(g);
   if (z.circulo && z.circulo.n >= 2) return L.circle([z.circulo.lat, z.circulo.lon], { ...o, radius: z.circulo.r, dashArray: '7 6', weight: 2, fillOpacity: .08 }).addTo(g);
   return null;
 }
@@ -333,8 +334,8 @@ async function refreshPins() {
       const n = new Set(hs.filter(h => h.zonaId === z.id).map(h => h.especieId || norm(h.especieTxt))).size;
       S.spotM[z.id] = spotPin(z, { n }).on('click', () => verSpot(z.id)).addTo(S.spotsL);
     });
-  /* zonas de cada salida: la mancha que has pisado (o un círculo si no hay recorrido) */
-  if (capa === 'todo' || capa === 'visit') (await db.list('salidas')).filter(x => !f.salida || (f.salida === 'activa' ? act && x.id === act.id : x.id === f.salida))
+  /* zonas recorridas: no siempre (cargan el mapa); solo al filtrar por una salida. Al tocar un spot salen las suyas */
+  if (f.salida && (capa === 'todo' || capa === 'visit')) (await db.list('salidas')).filter(x => !f.salida || (f.salida === 'activa' ? act && x.id === act.id : x.id === f.salida))
     .forEach(x => zon.zonasDeSalida(x, hs, zs).forEach(z => dibujarZona(z, S.spotsL)));
   if (S.selId) marcarSel(S.selId);
   $('#mhint').hidden = !!(hs.length || zs.length);
@@ -585,8 +586,9 @@ async function verSpot(id) {
   /* qué bosque es, según el inventario forestal */
   bos.cargar().then(() => { const r = bos.cerca(z.lat, z.lon), m = sh.querySelector('.sv-t'); if (!r || !m || !sh.isConnected) return;
     m.insertAdjacentHTML('beforeend', '<button class="bq-spot' + (r.c.k === 'euca' ? ' mal' : '') + '" id="st-bosq" style="--c:' + r.c.c + '">' + I.arbol + '<span>' + esc(r.c.n) + ' · ' + esc(r.sp.map(q => q.n).slice(0, 2).join(' + ')) + '</span><b>' + r.s + '</b></button>'); });
-  /* recorridos de las salidas que pasaron por aquí (para saber cómo se llega) */
-  if (S.spTrk) S.spTrk.remove(); S.spTrk = L.layerGroup().addTo(S.map); ss.filter(x => (x.track || []).length > 1).forEach(x => trazo(x.track).addTo(S.spTrk));
+  /* la zona que has recorrido en este spot (en cada salida): aparece solo mientras miras el spot */
+  if (S.spTrk) S.spTrk.remove(); S.spTrk = L.layerGroup().addTo(S.map);
+  { const zz = await db.list('zonas'); ss.forEach(x => zon.zonasDeSalida(x, hs0, zz).filter(q => q.spotId === id || (q.legado && (x.zonaIds || []).includes(id))).forEach(q => dibujarZona(q, S.spTrk))); }
   S.map.setView([z.lat, z.lon], Math.max(S.map.getZoom(), 15), { animate: false });
   encuadrar(z.lat, z.lon, sh);
   sh.addEventListener('click', ev => {
@@ -1542,7 +1544,7 @@ async function boot() {
       buscar();
     }).catch(() => { });
   }
-  window.__MI = { abrirComprobar, cmpx, bos, abrirBosques, abrirRodal, atras, padre, abrirVisor, fichaTab: k => fichaTab($('#sheet .sh'), k), abrirHabitat, abrirDondeBuscar, db, geo, syn, cat, trk, S, abrirHallazgo, abrirFicha, abrirLibro, abrirIA, ia, abrirSpot, verSpot, editarSpot, verHallazgo, leerGPX };
+  window.__MI = { verSpot, abrirComprobar, cmpx, bos, abrirBosques, abrirRodal, atras, padre, abrirVisor, fichaTab: k => fichaTab($('#sheet .sh'), k), abrirHabitat, abrirDondeBuscar, db, geo, syn, cat, trk, S, abrirHallazgo, abrirFicha, abrirLibro, abrirIA, ia, abrirSpot, verSpot, editarSpot, verHallazgo, leerGPX };
   document.body.dataset.ready = '1';
 }
 boot().catch(e => { console.error(e); document.body.insertAdjacentHTML('beforeend', '<div class="warn" style="position:fixed;top:60px;left:12px;right:12px;z-index:9999">No se pudo arrancar la app: ' + esc(e.message || e) + '</div>'); });
