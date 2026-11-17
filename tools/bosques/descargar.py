@@ -15,12 +15,17 @@ for u in URLS:
 else: print('::error::' + ' ## '.join(log)); sys.exit(1)
 z = zipfile.ZipFile(io.BytesIO(raw)); z.extractall('raw'); log.append('fuente ' + fuente); log += ['zip: ' + n for n in z.namelist()]
 shps = [os.path.join(r, f) for r, _, fs in os.walk('raw') for f in fs if f.lower().endswith('.shp')]
-for shp in shps:
-    g = gpd.read_file(shp); log.append(f'{shp}: {len(g)} rasgos, crs {g.crs}, campos {list(g.columns)}')
-    g = g.to_crs(4326); g = g[g.intersects(box(*BBOX))].copy(); g['geometry'] = g.geometry.intersection(box(*BBOX))
+import traceback
+CAMPOS = ['TIPES_es', 'SP1_es', 'O1', 'E1', 'EMASA1', 'SP2_es', 'O2', 'SP3_es', 'O3', 'FCCARB', 'FORARB', 'DISTRIB', 'HMMAT']
+try:
+  for shp in shps:
+    g = gpd.read_file(shp); log.append(f'{shp}: {len(g)} rasgos, crs {g.crs}')
+    g = g.to_crs(4326); g = g[g.intersects(box(*BBOX))][[c for c in CAMPOS if c in g.columns] + ['geometry']].copy()
     log.append(f'  en la zona: {len(g)}')
     for c in g.columns:
-        if c != 'geometry' and g[c].dtype == object:
-            vc = collections.Counter(g[c].astype(str)); log.append(f'  {c}: {len(vc)} valores · ' + ' | '.join(f'{k}={v}' for k, v in vc.most_common(40)))
-    g.to_file('out/' + os.path.splitext(os.path.basename(shp))[0] + '.geojson', driver='GeoJSON')
+        if c != 'geometry':
+            vc = collections.Counter(g[c].astype(str)); log.append(f'  {c}: {len(vc)} valores · ' + ' | '.join(f'{k}={v}' for k, v in vc.most_common(30)))
+    g.to_file('out/inventario.geojson', driver='GeoJSON', COORDINATE_PRECISION=6)
+except Exception:
+  log.append(traceback.format_exc()); print('::error::' + ' ## '.join(log)[-3500:]); sys.exit(1)
 open('out/informe.txt', 'w').write('\n'.join(log)); print('\n'.join(log)); print('::notice::' + ' ## '.join(log)[:3500])
