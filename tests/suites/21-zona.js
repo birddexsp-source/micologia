@@ -180,7 +180,7 @@ module.exports = {
       t.ok('Capacitor carga la web en vivo de Pages (se actualiza sola) y no deja que Android pare el GPS a los 5 min', cfg.webDir === '../docs' && /^https:\/\/birddexsp-source\.github\.io\/micologia\/$/.test(cfg.server.url) && cfg.android.useLegacyBridge === true && /^[a-z.]+$/.test(cfg.appId));
       t.ok('plugin de GPS en segundo plano, avisos y botón atrás', !!pk.dependencies['@capacitor-community/background-geolocation'] && !!pk.dependencies['@capacitor/local-notifications'] && !!pk.dependencies['@capacitor/app']);
       t.ok('clave de firma fija y script de firma (para actualizar sin desinstalar)', ex('android-app/micologia.keystore') && /signingConfig/.test(R('android-app/firma.gradle')));
-      t.ok('permisos de micrófono y cámara', /RECORD_AUDIO/.test(R('android-app/permisos.txt')) && /CAMERA/.test(R('android-app/permisos.txt')));
+      t.ok('permisos de micrófono y cámara, y la cámara visible en Android 11+ (si no, «foto» abre la galería)', /RECORD_AUDIO/.test(R('android-app/permisos.txt')) && /CAMERA/.test(R('android-app/permisos.txt')) && /<queries>[\s\S]*android\.media\.action\.IMAGE_CAPTURE[\s\S]*<\/queries>/.test(R('android-app/permisos.txt')));
       t.ok('el workflow compila, firma y publica con enlace fijo', /assembleRelease/.test(wf) && /apk-latest/.test(wf) && /permissions:\s*\n\s*contents: write/.test(wf));
       const shell = JSON.parse(sw.match(/const SHELL = (\[[\s\S]*?\]);/)[1].replace(/'/g, '"'));
       t.eq('todos los módulos js están en el caché sin conexión', fs.readdirSync(path.join(__dirname, '..', '..', 'docs/js')).filter(f => f.endsWith('.js') && !shell.includes('js/' + f)), []);
