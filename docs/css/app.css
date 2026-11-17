@@ -1187,11 +1187,11 @@ button.navrow{width:100%;font:inherit;color:inherit;text-align:left;cursor:point
 .bq-n{font-size:12px}
 
 /* v54: spots recomendados por el análisis en amarillo, y su filtro */
-.spot.rec,.spotc.rec,.ml-sp.rec{--por:#ffd43b}
-.spot.rec .spm .gota path{fill:#2b2508;stroke-dasharray:none;stroke-width:2.6}
-.spot.rec .lbl{color:#ffe066}
-.spotc.rec .sico{background:rgba(255,212,59,.13);color:#ffd43b}
-.ml-sp.rec{border-style:solid}.ml-sp.rec svg{fill:#ffd43b;stroke:none}
+.spot.sug,.spotc.sug,.ml-sp.sug{--por:#ffd43b}
+.spot.sug .spm .gota path{fill:#2b2508;stroke-dasharray:none;stroke-width:2.6}
+.spot.sug .lbl{color:#ffe066}
+.spotc.sug .sico{background:rgba(255,212,59,.13);color:#ffd43b}
+.ml-sp.sug{border-style:solid}.ml-sp.sug svg{fill:#ffd43b;stroke:none}
 .mchips button.c-rec:not(.on){color:#ffe066;border-color:rgba(255,212,59,.45)}
 .mchips button.c-rec.on{background:#ffd43b;color:#1b1600}
 /* el glifo de la chincheta encima de la gota (Leaflet pone z-index:200 a todos los svg del mapa) */

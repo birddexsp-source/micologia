@@ -20,7 +20,7 @@ import * as cmpx from './comparar.js';
 import * as zon from './zona.js';
 import * as tr from './tramos.js';
 
-const APP_V = 'micologia-v57';   // = V de sw.js
+const APP_V = 'micologia-v58';   // = V de sw.js
 const S = { view: 'mapa', arg: '', map: null, pins: null, me: null, acc: null, tmp: null, mini: null, centered: false, filtro: { salida: '', especie: '' }, clase: '', q: '', syncErr: false, mes: new Date().getMonth() + 1 };
 const VIEWS = ['mapa', 'salidas', 'salida', 'setas', 'mes', 'plan', 'ajustes'];
 const TITULOS = { mapa: 'Mapa', salidas: 'Salidas', salida: 'Salida', setas: 'Setas', mes: 'Este mes', plan: 'Plan de salida', ajustes: 'Ajustes' };
@@ -707,7 +707,7 @@ async function renderSalidas() {
   const nSpots = s => new Set([...(s.zonaIds || []), ...deS(s.id).map(h => h.zonaId).filter(Boolean)]).size;
   const ultZ = z => { const t = Math.max(0, ...deZ(z.id).map(h => h.ts), ...ss.filter(s => (s.zonaIds || []).includes(z.id)).map(s => new Date(s.fecha + 'T12:00').getTime())); return t ? 'últ. ' + new Date(t).toLocaleDateString('es-ES', { day: 'numeric', month: 'short' }) : ''; };
   const filaZ = z => { const h = deZ(z.id), ne = especiesDe(h).length, por = z.estado === 'por_visitar', rec = recomendado(z);
-    return '<div class="spotr"><button class="item spotc' + (por ? ' por' : '') + (rec ? ' rec' : '') + '" data-spot="' + z.id + '"><span class="sico">' + (rec ? I.estrella : por ? I.flag : I.seta) + '</span><div class="t"><b>' + esc(z.nombre) + '</b><small>' + [ne ? plural(ne, 'especie', 'especies') : (por ? 'sin visitar' : 'sin especies'), yo ? kmFmt(distM(yo, z)) : '', ultZ(z)].filter(Boolean).join(' · ') + '</small>' + avatares(h) + '</div></button>' + (z.lat != null && z.lon != null ? irA(z) : I.chev) + '</div>'; };
+    return '<div class="spotr"><button class="item spotc' + (por ? ' por' : '') + (rec ? ' sug' : '') + '" data-spot="' + z.id + '"><span class="sico">' + (rec ? I.estrella : por ? I.flag : I.seta) + '</span><div class="t"><b>' + esc(z.nombre) + '</b><small>' + [ne ? plural(ne, 'especie', 'especies') : (por ? 'sin visitar' : 'sin especies'), yo ? kmFmt(distM(yo, z)) : '', ultZ(z)].filter(Boolean).join(' · ') + '</small>' + avatares(h) + '</div></button>' + (z.lat != null && z.lon != null ? irA(z) : I.chev) + '</div>'; };
   const grupo = (est, tit) => { const l = zs.filter(z => est === 'rec' ? recomendado(z) : (z.estado || 'visitada') === est && !recomendado(z)).sort((a, b) => yo ? distM(yo, a) - distM(yo, b) : a.nombre.localeCompare(b.nombre, 'es', { numeric: true })); return l.length ? '<div class="grp" style="--c:' + (est === 'rec' ? '#ffd43b' : spotColor({ estado: est })) + '">' + tit + '<small>' + l.length + '</small></div>' + l.map(filaZ).join('') : ''; };
   const filaS = s => { const h = deS(s.id), n = nSpots(s);
     return '<a class="item sal" href="#salida/' + s.id + '">' + diaMes(s.fecha) + '<div class="t"><b>' + esc(s.titulo || fecha(s.fecha)) + '</b><small>' + [(s.fecha || '').slice(0, 4) === String(new Date().getFullYear()) ? '' : (s.fecha || '').slice(0, 4), tr.lista(s).length > 1 ? plural(tr.lista(s).length, 'zona', 'zonas') : n ? plural(n, 'spot', 'spots') : '', plural(h.length, 'hallazgo', 'hallazgos'), s.totalTxt ? esc(s.totalTxt) : '', s.estado === 'en_curso' ? 'en curso' : ''].filter(Boolean).join(' · ') + '</small>' + avatares(h) + '</div>' + I.chev + '</a>'; };
@@ -1153,7 +1153,7 @@ function fichaTab(sh, k, { ir = false } = {}) {
 }
 function leyendaMapa() {
   const cl = ['ok_fuentes', 'cond_fuentes', 'no_comestible', 'toxica', 'mortal'].map(k => cat.CLASES[k]);
-  return '<b>Qué significa cada marca</b><div class="ml-r"><span class="ml-sp" style="--c:var(--spot)">' + I.seta + '</span>Spot visitado</div><div class="ml-r"><span class="ml-sp por">' + I.flag + '</span>Spot «quiero ir» (sin visitar)</div><div class="ml-r"><span class="ml-sp por rec">' + I.estrella + '</span>Recomendado por el análisis de tus setas</div>' +
+  return '<b>Qué significa cada marca</b><div class="ml-r"><span class="ml-sp" style="--c:var(--spot)">' + I.seta + '</span>Spot visitado</div><div class="ml-r"><span class="ml-sp por">' + I.flag + '</span>Spot «quiero ir» (sin visitar)</div><div class="ml-r"><span class="ml-sp por sug">' + I.estrella + '</span>Recomendado por el análisis de tus setas</div>' +
     '<div class="ml-r"><i style="--c:#4cc3d9;background:none;border:2px dashed #4cc3d9"></i>Zona de una salida (cubre sus spots y hallazgos)</div>' + '<small>Hallazgos: el borde es el color de la especie</small>' + cl.map(c => '<div class="ml-r"><i style="--c:' + c.color + '"></i>' + esc(c.label) + '</div>').join('') + '<div class="ml-r"><i style="--c:#9aa5a1"></i>Sin identificar o sin datos</div><small class="ml-x">Toca para cerrar</small>';
 }
 function abrirFicha(id) {

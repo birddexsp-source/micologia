@@ -85,18 +85,19 @@ module.exports = {
     await t.case('spots recomendados por el análisis: en amarillo, con estrella y su propio filtro', async () => {
       await t.put('zonas', 'zr', { nombre: 'Erlebaso, Bermeo', estado: 'por_visitar', origen: 'analisis', lat: 43.42416, lon: -2.763368, notas: 'Recomendado por el análisis de tus setas (17-11-2026): borde de pinar…', creada: 9 });
       await t.go('#mapa'); await t.wait(400); await t.page.evaluate(() => { const S = window.__MI.S; document.querySelector('#sheet').hidden = true; S.map.setView([43.4235, -2.7615], 15, { animate: false }); }); await t.wait(800);
-      t.ok('chincheta amarilla con estrella', await t.has('#map .spot.rec') && /Erlebaso/.test(await t.T('#map .spot.rec .lbl') || ''));
+      t.ok('la chincheta no hereda estilos de otras pantallas (sin fondo ni desplazada)', await t.page.evaluate(() => { const s = document.querySelector('#map .spot.sug'); return getComputedStyle(s).backgroundColor === 'rgba(0, 0, 0, 0)' && Math.abs(s.querySelector('.gota').getBoundingClientRect().left - s.getBoundingClientRect().left) < 1; }));
+      t.ok('chincheta amarilla con estrella', await t.has('#map .spot.sug') && /Erlebaso/.test(await t.T('#map .spot.sug .lbl') || ''));
       await t.tap('#mchips [data-capa="rec"]', 400);
-      t.ok('filtro «Recomendados»: solo esos', (await t.N('#map .spot')) === (await t.N('#map .spot.rec')) && (await t.N('#map .spot.rec')) >= 1 && (await t.N('#map .pin')) === 0);
+      t.ok('filtro «Recomendados»: solo esos', (await t.N('#map .spot')) === (await t.N('#map .spot.sug')) && (await t.N('#map .spot.sug')) >= 1 && (await t.N('#map .pin')) === 0);
       await t.tap('#mchips [data-capa="porir"]', 400);
-      t.ok('«Quiero ir»: los tuyos, sin los recomendados', !(await t.has('#map .spot.rec')) && (await t.N('#map .spot.por')) >= 1);
+      t.ok('«Quiero ir»: los tuyos, sin los recomendados', !(await t.has('#map .spot.sug')) && (await t.N('#map .spot.por')) >= 1);
       await t.tap('#mchips [data-capa="visit"]', 400);
       t.ok('«Visitados»: ni quiero ir ni recomendados', !(await t.has('#map .spot.por')) && (await t.N('#map .spot')) >= 1);
       await t.tap('#mchips [data-capa="visit"]', 400); t.eq('tocarlo otra vez: todo', await t.N('#mchips .on'), 0);
       await t.shot('mapa-recomendados');
       await t.go('#salidas'); await t.wait(500);
-      t.ok('lista: grupo «Recomendados por el análisis»', /Recomendados por el análisis[\s\S]*Erlebaso/i.test(await t.T('#v-salidas') || '') && await t.has('.spotc.rec'), (await t.T('#v-salidas')).slice(-400));
-      await t.tap('.spotc.rec', 900);
+      t.ok('lista: grupo «Recomendados por el análisis»', /Recomendados por el análisis[\s\S]*Erlebaso/i.test(await t.T('#v-salidas') || '') && await t.has('.spotc.sug'), (await t.T('#v-salidas')).slice(-400));
+      await t.tap('.spotc.sug', 900);
       t.ok('su ficha dice «Recomendado»', /Recomendado/.test(await t.T('#sheet') || ''));
     });
     await t.case('quitar la capa', async () => {
