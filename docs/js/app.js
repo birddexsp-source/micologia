@@ -20,7 +20,7 @@ import * as cmpx from './comparar.js';
 import * as zon from './zona.js';
 import * as tr from './tramos.js';
 
-const APP_V = 'micologia-v56';   // = V de sw.js
+const APP_V = 'micologia-v57';   // = V de sw.js
 const S = { view: 'mapa', arg: '', map: null, pins: null, me: null, acc: null, tmp: null, mini: null, centered: false, filtro: { salida: '', especie: '' }, clase: '', q: '', syncErr: false, mes: new Date().getMonth() + 1 };
 const VIEWS = ['mapa', 'salidas', 'salida', 'setas', 'mes', 'plan', 'ajustes'];
 const TITULOS = { mapa: 'Mapa', salidas: 'Salidas', salida: 'Salida', setas: 'Setas', mes: 'Este mes', plan: 'Plan de salida', ajustes: 'Ajustes' };
@@ -400,7 +400,7 @@ async function marcar(opts = {}) {
     '<div class="row mk-bar"><button class="btn" id="mk-x">Cancelar</button><button class="btn p" id="mk-ok" style="flex:2">Guardar</button></div>', { dim: !!opts.pos });
   const regrid = () => { $('#mk-grid', sh).innerHTML = gridHTML(); };
   /* Reconocer con IA desde el propio hallazgo: las fotos del hallazgo son las de la IA. Sacas las que quieras (botón Foto), y cuando quieras pulsas «Escanear»: mira todas juntas */
-  let iaBusy = false, iaEsc = 0, iaRes = '', iaCands = [], iaFalta = '';
+  let iaBusy = false, iaEsc = 0, iaRes = '', iaCands = [], iaFalta = '', iaDif = [];
   const iaPintar = (extra = '') => {
     const n = m.fotos.length, box = $('#mk-iares', sh);
     box.innerHTML = extra + iaRes + '<div class="row"><button class="btn ' + (n ? 'p' : '') + ' ia-go" id="mk-iaes"' + (n && !iaBusy ? '' : ' disabled') + '>' + I.chispa + ' ' +
@@ -414,7 +414,7 @@ async function marcar(opts = {}) {
     if (!files.length) { iaPintar('<div class="warn">No encuentro las fotos para escanearlas. Haz otra.</div>'); return; }
     iaBusy = true; iaRes = ''; iaPintar('<div class="note ia-wait">' + I.chispa + ' Mirando ' + (files.length === 1 ? 'la foto' : 'las ' + files.length + ' fotos') + '…</div>');
     let err = '';
-    try { const r = await ia.reconocer(files); iaCands = (r.candidatas || []).map(c => ({ id: c.id, n: c.nombreCientifico, c: c.confianza })); iaFalta = r.faltaVer || ''; iaRes = resultadoIA(r, 'marcar'); iaEsc = files.length; }
+    try { const r = await ia.reconocer(files); iaCands = (r.candidatas || []).map(c => ({ id: c.id, n: c.nombreCientifico, c: c.confianza, ...(c.encaja ? { si: c.encaja } : {}), ...(c.noEncaja ? { no: c.noEncaja } : {}), ...(c.comprobar ? { k: c.comprobar } : {}) })); iaFalta = r.faltaVer || ''; iaDif = r.diferencias || []; iaRes = resultadoIA(r, 'marcar'); iaEsc = files.length; }
     catch (e) { if (e.message === 'clave') ia.setKey(''); err = '<div class="warn">' + esc(ia.mensajeError(e)) + '</div>'; }
     finally { iaBusy = false; }
     iaPintar(err);
@@ -447,8 +447,8 @@ async function marcar(opts = {}) {
     }
     else if (t.dataset.iav) {
       /* comprobar a pantalla completa (sin perder lo que llevas marcado): qué mirar de cada candidata y sus diferencias */
-      const cs = iaCands.map(c => ({ e: cat.byId(c.id), pc: Math.max(0, Math.min(100, c.c | 0)) })).filter(c => c.e);
-      abrirComprobar(cs, { i: Math.max(0, cs.findIndex(c => c.e.id === t.dataset.iav)), faltaVer: iaFalta, elegir: e => {
+      const cs = iaCands.map(c => ({ e: cat.byId(c.id), pc: Math.max(0, Math.min(100, c.c | 0)), ia: { encaja: c.si, noEncaja: c.no, comprobar: c.k } })).filter(c => c.e);
+      abrirComprobar(cs, { i: Math.max(0, cs.findIndex(c => c.e.id === t.dataset.iav)), faltaVer: iaFalta, dif: iaDif, elegir: e => {
         m.esp.id = e.id; m.esp.txt = ''; $('#sp-q', sh).value = cat.nombre(e); $('#sp-sel', sh).innerHTML = tag(cat.vista(e)); $('#sp-sugs', sh).hidden = true; regrid();
         $$('#mk-iares .ia-row', sh).forEach(x => x.classList.toggle('sel', x.dataset.iae === e.id)); toast('Elegida: ' + corto(e) + ' (provisional)'); } });
     }
@@ -462,7 +462,7 @@ async function marcar(opts = {}) {
         const a = await activa(), q = $('#sp-q', sh).value.trim();
         const sid = opts.salida || (a ? a.id : null), sa0 = sid && (a && a.id === sid ? a : await db.get('salidas', sid)), tAct = sa0 ? tr.activo(sa0) : null, h = { salidaId: sid, tramoId: opts.ts ? ((sa0 && (tr.deTs(sa0, opts.ts) || {}).id) || undefined) : (tAct ? tAct.id : undefined), zonaId: m.zona, lat: pos.lat, lon: pos.lon, precisionM: pos.acc, ts: opts.ts || Date.now(), especieId: m.esp.id, especieTxt: m.esp.id ? '' : q,
           cantidad: $('#mk-cant', sh).value.trim(), estadoSeta: m.estado, sustrato: '', notas: $('#mk-nota', sh).value.trim(), fotos: m.fotos,
-          identificacion: m.esp.id ? 'provisional' : 'sin_identificar', confirmadoPor: '', recogida: false, iaSugerencias: iaCands.length ? iaCands : undefined, lugar: (lug.nombrar(pos.lat, pos.lon) || {}).etiqueta || '', ajustadoAMano: !!(pos.adj || pos.manual), audios: vz.audios, transcripciones: vz.trans };
+          identificacion: m.esp.id ? 'provisional' : 'sin_identificar', confirmadoPor: '', recogida: false, iaSugerencias: iaCands.length ? iaCands : undefined, iaDif: iaDif.length ? iaDif : undefined, lugar: (lug.nombrar(pos.lat, pos.lon) || {}).etiqueta || '', ajustadoAMano: !!(pos.adj || pos.manual), audios: vz.audios, transcripciones: vz.trans };
         if (S.rec) { S.rec.cancel(); S.rec = null; clearInterval(S.recT); }
         await db.add('hallazgos', h);
         { const zz = m.zona && zonas.find(z => z.id === m.zona); if (zz && zz.estado === 'por_visitar') await db.patch('zonas', zz.id, { estado: 'visitada', visitadaTs: Date.now() }); }
@@ -618,9 +618,9 @@ async function verHallazgo(id) {
   sh.addEventListener('click', ev => {
     const t = ev.target.closest('button'); if (!t) return;
     if (t.dataset.hc !== undefined) {
-      const cs = h.iaSugerencias.map(x => ({ e: cat.byId(x.id), pc: Math.max(0, Math.min(100, x.c | 0)) })).filter(c => c.e);
+      const cs = h.iaSugerencias.map(x => ({ e: cat.byId(x.id), pc: Math.max(0, Math.min(100, x.c | 0)), ia: { encaja: x.si, noEncaja: x.no, comprobar: x.k } })).filter(c => c.e);
       if (e && !cs.some(c => c.e.id === e.id)) cs.unshift({ e, pc: null });
-      abrirComprobar(cs, { i: Math.max(0, cs.findIndex(c => c.e.id === (t.dataset.hc || (e && e.id)))), elegir: async x => {
+      abrirComprobar(cs, { i: Math.max(0, cs.findIndex(c => c.e.id === (t.dataset.hc || (e && e.id)))), dif: h.iaDif, elegir: async x => {
         await db.patch('hallazgos', id, { especieId: x.id, especieTxt: '', identificacion: h.identificacion === 'confirmada' && h.especieId === x.id ? 'confirmada' : 'provisional' });
         toast('Anotada como ' + corto(x) + ' (provisional)'); verHallazgo(id); refreshPins(); } });
       return;
@@ -1216,7 +1216,7 @@ function abrirIA() {
     const b = e.target.closest('button'), a = e.target.closest('#ia-kc');
     if (a) { e.preventDefault(); ia.setKey(''); return pintar(); }
     if (b.id === 'gu-x') { urls.forEach(u => u && URL.revokeObjectURL(u)); return closeSheet(); }
-    if (b.dataset.e) { const cs = ((ultimo && ultimo.candidatas) || []).map(c => ({ e: cat.byId(c.id), pc: Math.max(0, Math.min(100, c.confianza | 0)) })).filter(c => c.e); return abrirComprobar(cs.length ? cs : [{ e: cat.byId(b.dataset.e), pc: null }], { i: Math.max(0, cs.findIndex(c => c.e.id === b.dataset.e)), faltaVer: ultimo && ultimo.faltaVer }); }
+    if (b.dataset.e) { const cs = ((ultimo && ultimo.candidatas) || []).map(c => ({ e: cat.byId(c.id), pc: Math.max(0, Math.min(100, c.confianza | 0)), ia: c })).filter(c => c.e); return abrirComprobar(cs.length ? cs : [{ e: cat.byId(b.dataset.e), pc: null }], { i: Math.max(0, cs.findIndex(c => c.e.id === b.dataset.e)), faltaVer: ultimo && ultimo.faltaVer, dif: ultimo && ultimo.diferencias }); }
     if (b.id === 'ia-ks') { const k = $('#ia-k', sh).value; if (!ia.claveValida(k)) return pintar(null, 'Esa clave no tiene la forma correcta (la de Google AI Studio, empieza por AIza… o AQ.…).'); ia.setKey(k); return pintar(); }
     if (b.id === 'ia-go') {
       if (!navigator.onLine) return pintar(null, ia.mensajeError(new Error('red')));
@@ -1237,7 +1237,7 @@ function abrirComprobar(cands, o = {}) {
     const sel = i >= 0 ? cands[i] : null;
     ov.innerHTML = '<div class="cq-top"><button class="vs-x" data-cx aria-label="Cerrar">' + I.close + '</button><b>¿Cuál es?</b><small>' + (cands.length > 1 ? cands.length + ' candidatas' : '') + '</small></div>' + cmpx.tabsHTML(cands, i) +
       '<div class="cq-body">' + (o.faltaVer && !ficha ? '<div class="cq-ia"><b>Para salir de dudas, la IA pide mirar:</b> ' + esc(o.faltaVer) + '</div>' : '') +
-      (sel ? (ficha ? fi.fichaHTML(sel.e, S.mes) : cmpx.especieHTML(sel.e, cands.filter(c => c !== sel).map(c => c.e))) : cmpx.diferenciasHTML(cands)) +
+      (sel ? (ficha ? fi.fichaHTML(sel.e, S.mes) : cmpx.especieHTML(sel.e, cands.filter(c => c !== sel).map(c => c.e), sel.ia)) : cmpx.diferenciasHTML(cands, o.dif || [])) +
       '<p class="note cq-av">La IA y las fotos son una pista. Para comer, nunca basta: mira la seta entera y que la confirme alguien que sepa.</p></div>' +
       '<div class="cq-bar">' + (sel && o.elegir ? '<button class="btn p" data-cel>' + I.check + 'Es esta</button>' : '') + (sel ? '<button class="btn" data-cfi>' + (ficha ? 'Volver a comprobar' : I.libro + 'Ficha completa') + '</button>' : '') +
       (!sel && o.elegir ? '<p class="mut sm">Elige una candidata arriba para marcarla.</p>' : '') + '</div>';
@@ -1264,13 +1264,14 @@ function resultadoIA(r, modo) {
   h += cs.map((c, i) => {
     const e = cat.byId(c.id), n = pc(c), niv = n >= 75 ? 'alta' : n >= 40 ? 'media' : 'baja';
     const bar = '<span class="ia-bar ' + niv + '"><i style="width:' + n + '%"></i></span>';
-    const rasgos = c.rasgos ? '<small class="ia-c">' + esc(c.rasgos) + '</small>' : '';
+    const rasgos = (c.encaja ? '<small class="ia-c si">✓ ' + esc(c.encaja) + '</small>' : c.rasgos ? '<small class="ia-c">' + esc(c.rasgos) + '</small>' : '') + (c.noEncaja ? '<small class="ia-c no">✗ ' + esc(c.noEncaja) + '</small>' : '');
     const at = e ? (marcar ? ' data-iae="' + e.id + '"' : ' data-e="' + e.id + '"') : (marcar && c.nombreCientifico ? ' data-iat="' + esc(c.nombreCientifico) + '"' : '');
     const nom = e ? esc(corto(e)) : '<i>' + esc(c.nombreCientifico) + '</i>', sub = e ? (corto(e) === e.nombreCientifico.split(' (')[0] ? esc(e.nombreCientifico.includes(' (') ? e.nombreCientifico.split(' (')[1].replace(')', '') : '') : '<i>' + esc(e.nombreCientifico) + '</i>') : esc(c.nombreComun) + ' · no está en tu colección';
     return '<div class="ia-w' + (i === 0 && !dudoso ? ' mejor' : '') + '"><button class="ia-row' + (i === 0 && !dudoso ? ' mejor' : '') + (e ? '' : ' fuera') + '"' + at + ' style="--c:' + (e ? colorEsp(e) : '#7b8683') + '">' +
       '<span class="pf">' + (e ? fotoEsp(e) : '<span class="ph0">?</span>') + '</span><span class="t"><b>' + nom + '</b><small>' + sub + '</small>' + bar + rasgos + '</span><span class="ia-pc">' + n + '<small>%</small></span></button>' +
       (marcar && e ? '<button class="ia-ver" data-iav="' + e.id + '">Comprobar: qué mirar y diferencias ›</button>' : '') + '</div>';
   }).join('');
+  if (cs.length && r.diferencias && r.diferencias.length) h += cmpx.pasosIA(r.diferencias);
   if (marcar) h += '<button class="btn ia-no" id="mk-iano">No sé · lo miro en casa</button>';
   h += '<p class="note ia-nota">El porcentaje es lo segura que está la IA con estas fotos, no una garantía.' + (marcar ? ' Toca una para elegirla (queda como provisional).' : '') + '</p>';
   if (peligro) h += '<div class="warn" style="margin-top:8px">Entre las candidatas hay una tóxica o mortal: con más motivo, no se come.</div>';

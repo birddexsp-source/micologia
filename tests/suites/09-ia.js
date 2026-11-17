@@ -38,9 +38,10 @@ module.exports = {
       if (modo === '500') return r.fulfill({ status: 503, contentType: 'application/json', body: '{}', headers: h });
       if (modo === 'clave') return r.fulfill({ status: 403, contentType: 'application/json', body: '{}', headers: h });
       const cands = modo === 'ok'
-        ? [{ id: ids[0], nombreCientifico: 'x', nombreComun: 'x', confianza: 80, rasgosVistos: 'sombrero rojo con puntos blancos' }, { id: '', nombreCientifico: 'Amanita nueva', nombreComun: 'Rara', confianza: 30, rasgosVistos: '' }]
+        ? [{ id: ids[0], nombreCientifico: 'x', nombreComun: 'x', confianza: 80, rasgosVistos: 'sombrero rojo con puntos blancos', encaja: 'láminas rosadas y pie robusto', noEncaja: 'no se ve la base', comprobar: 'Huele la carne: a harina' }, { id: '', nombreCientifico: 'Amanita nueva', nombreComun: 'Rara', confianza: 30, rasgosVistos: '', encaja: '', noEncaja: '', comprobar: '' }]
         : [];
-      r.fulfill({ status: 200, contentType: 'application/json', headers: h, body: JSON.stringify(respuesta({ esSeta: true, calidad: 'regular', candidatas: cands, faltaVer: modo === 'ok' ? '' : 'La base del pie con la volva' })) });
+      const dif = modo === 'ok' ? [{ mira: 'Mira debajo del sombrero', opciones: [{ si: 'láminas rosadas', entonces: 'la primera' }, { si: 'láminas blancas', entonces: 'Amanita nueva' }] }] : [];
+      r.fulfill({ status: 200, contentType: 'application/json', headers: h, body: JSON.stringify(respuesta({ esSeta: true, calidad: 'regular', candidatas: cands, diferencias: dif, faltaVer: modo === 'ok' ? '' : 'La base del pie con la volva' })) });
     });
     await t.case('pantalla: sin clave pide la clave y la guarda solo en el móvil', async () => {
       await t.go('#setas'); ids = [await t.page.evaluate(() => window.__MI.cat.todas().find(e => e.clase === 'toxica').id)];
@@ -63,10 +64,14 @@ module.exports = {
       t.ok('aviso de tóxica entre candidatas', /tóxica o mortal/.test(await t.T('#sheet') || ''));
       t.ok('muestra porcentajes ordenados (el más probable arriba)', await t.page.evaluate(() => { const v = [...document.querySelectorAll('#sheet .ia-pc')].map(x => parseInt(x.textContent)); return v.length === 2 && v[0] >= v[1] && v[0] === 80 && document.querySelectorAll('#sheet .ia-bar').length === 2; }));
       t.ok('recuerda que es solo una pista', /Es una pista, no una identificación/.test(await t.T('#sheet') || ''));
+      t.ok('qué encaja y qué no cuadra en cada candidata', /✓ láminas rosadas/.test(await t.T('#sheet .ia-res') || '') && /✗ no se ve la base/.test(await t.T('#sheet .ia-res') || ''));
+      t.ok('«Cómo diferenciarlas»: qué mirar y a cuál lleva', /Mira debajo del sombrero[\s\S]*láminas rosadas[\s\S]*→ la primera/i.test(await t.T('#sheet .cq-dif') || ''));
+      t.ok('el prompt pide encaja / no encaja / comprobar y diferencias, con la clave de cada ficha', /comprobar = UNA comprobación física/.test(llamadas[0].txt) && /diferencias: de 1 a 4/.test(llamadas[0].txt) && /lo que la distingue/.test(llamadas[0].txt) && !/NaN/.test(llamadas[0].txt));
       t.ok('nunca dice «comestible» como veredicto', !/es comestible|se puede comer/i.test(await t.T('#sheet .ia-res') || ''));
       await t.shot('captura-ia-resultado');
       await t.tap('#sheet button.ia-row[data-e]', 600);
       t.ok('abre «¿Cuál es?» encima, sin perder el resultado', await t.has('#cuales') && (await t.N('#cuales .cq-pasos li')) >= 2 && await t.has('#sheet .ia-res'));
+      t.ok('con lo que ve la IA en tus fotos y qué comprobar', /Encaja:[\s\S]*láminas rosadas[\s\S]*Compruébalo:[\s\S]*harina/.test(await t.T('#cuales .cq-iav') || ''));
       await t.tap('#cuales [data-cfi]', 500); t.ok('«Ficha completa» dentro, con sus pestañas', await t.has('#cuales #hero, #cuales .ftabs'));
       await t.tap('#cuales [data-cx]', 300); t.ok('se cierra y sigue el resultado', !(await t.has('#cuales')) && await t.has('#sheet .ia-res'));
     });
