@@ -1,0 +1,172 @@
+[
+ {
+  "v": 1231,
+  "pinar": 960,
+  "frondosa": 271,
+  "sp": [
+   "Pino radiata",
+   "Bosque mixto atlántico"
+  ],
+  "tipo": "pinar",
+  "lat": 43.402432,
+  "lon": -2.70058,
+  "km": 2.7,
+  "nombre": "Pinar de Mundaka"
+ },
+ {
+  "v": 1245,
+  "pinar": 1245,
+  "frondosa": 0,
+  "sp": [
+   "Pino laricio",
+   "Pino pináster"
+  ],
+  "tipo": "pinar",
+  "lat": 43.42416,
+  "lon": -2.763368,
+  "km": 3.3,
+  "nombre": "Erlebaso, Bermeo"
+ },
+ {
+  "v": 1034,
+  "pinar": 985,
+  "frondosa": 48,
+  "sp": [
+   "Pino pináster",
+   "Pino radiata",
+   "Bosque mixto atlántico"
+  ],
+  "tipo": "pinar",
+  "lat": 43.402541,
+  "lon": -2.756079,
+  "km": 3.3,
+  "nombre": "Truendegana, Bermeo"
+ },
+ {
+  "v": 992,
+  "pinar": 553,
+  "frondosa": 439,
+  "sp": [
+   "Pino radiata",
+   "Bosque mixto atlántico"
+  ],
+  "tipo": "pinar",
+  "lat": 43.40765,
+  "lon": -2.674964,
+  "km": 4.1,
+  "nombre": "Gametxo, Mundaka"
+ },
+ {
+  "v": 700,
+  "pinar": 353,
+  "frondosa": 347,
+  "sp": [
+   "Pino radiata",
+   "Encina",
+   "Bosque mixto atlántico"
+  ],
+  "tipo": "pinar",
+  "lat": 43.393685,
+  "lon": -2.700389,
+  "km": 3.5,
+  "nombre": "Pinar de Sukarrieta"
+ },
+ {
+  "v": 635,
+  "pinar": 380,
+  "frondosa": 255,
+  "sp": [
+   "Pino radiata",
+   "Bosque mixto atlántico"
+  ],
+  "tipo": "pinar",
+  "lat": 43.397382,
+  "lon": -2.737649,
+  "km": 2.8,
+  "nombre": "Artika, Bermeo"
+ },
+ {
+  "v": 1196,
+  "pinar": 77,
+  "frondosa": 1119,
+  "sp": [
+   "Bosque mixto atlántico",
+   "Roble pedunculado",
+   "Pino radiata"
+  ],
+  "tipo": "frondosa",
+  "lat": 43.41076,
+  "lon": -2.748702,
+  "km": 2.3,
+  "nombre": "San Andres, Bermeo"
+ },
+ {
+  "v": 977,
+  "pinar": 0,
+  "frondosa": 977,
+  "sp": [
+   "Bosque mixto atlántico"
+  ],
+  "tipo": "frondosa",
+  "lat": 43.426071,
+  "lon": -2.737372,
+  "km": 1.3,
+  "nombre": "Arane, Bermeo"
+ },
+ {
+  "v": 1326,
+  "pinar": 144,
+  "frondosa": 1182,
+  "sp": [
+   "Bosque mixto atlántico",
+   "Pino radiata"
+  ],
+  "tipo": "frondosa",
+  "lat": 43.388913,
+  "lon": -2.745026,
+  "km": 3.9,
+  "nombre": "Akulategi basoa, Busturia"
+ },
+ {
+  "v": 858,
+  "pinar": 53,
+  "frondosa": 805,
+  "sp": [
+   "Bosque mixto atlántico",
+   "Pino radiata"
+  ],
+  "tipo": "frondosa",
+  "lat": 43.404768,
+  "lon": -2.734189,
+  "km": 2,
+  "nombre": "Artika, Bermeo 2"
+ },
+ {
+  "v": 756,
+  "pinar": 0,
+  "frondosa": 756,
+  "sp": [
+   "Roble pedunculado"
+  ],
+  "tipo": "frondosa",
+  "lat": 43.416369,
+  "lon": -2.737528,
+  "km": 1.3,
+  "nombre": "Robledal de Bermeo"
+ },
+ {
+  "v": 1102,
+  "pinar": 97,
+  "frondosa": 1005,
+  "sp": [
+   "Bosque mixto atlántico",
+   "Plantaciones de frondosas variadas",
+   "Pino radiata"
+  ],
+  "tipo": "frondosa",
+  "lat": 43.386478,
+  "lon": -2.7193,
+  "km": 3.8,
+  "nombre": "Axpe-San Bartolome, Busturia"
+ }
+]

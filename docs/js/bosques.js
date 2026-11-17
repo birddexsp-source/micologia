@@ -17,7 +17,10 @@ function decodificar(j) {
     return { i, c: j.clases[r[0]], s: r[1], e: r[2], sp, pts: pts.map(([y, x]) => [y / 1e5, x / 1e5]), bb: [a / 1e5, b / 1e5, c / 1e5, e / 1e5] };
   });
   j.calientes.forEach(z => { z.especies = z.sp.map(k => j.especies[k]); });
-  delete j.r; return j;
+  /* bordes buenos: líneas entre pinar o frondosa (madura, no eucalipto) y prado/matorral/cortafuegos */
+  j.bord = (j.bordes || []).map(([k, d]) => { const pts = [[d[0], d[1]]]; for (let i = 2; i < d.length; i += 2) { const u = pts[pts.length - 1]; pts.push([u[0] + d[i], u[1] + d[i + 1]]); }
+    const P = pts.map(([y, x]) => [y / 1e5, x / 1e5]); let a = 90, b = -90, c = 180, e = -180; for (const [y, x] of P) { a = Math.min(a, y); b = Math.max(b, y); c = Math.min(c, x); e = Math.max(e, x); } return { k: k ? 'frondosa' : 'pinar', pts: P, bb: [a, b, c, e] }; });
+  delete j.r; delete j.bordes; return j;
 }
 export const cargar = () => P || (P = fetch('data/bosques.json').then(r => r.ok ? r.json() : null).then(j => (D = j && decodificar(j))).catch(() => (P = null, null)));
 export const listo = () => !!D;
@@ -55,12 +58,54 @@ export function reparto(bounds) {
   const [s, n, w, e] = bounds, t = {};
   if ((n - s) * (e - w) > 0.5) return [];   /* mapa muy alejado: no tiene sentido */
   for (const r of enRecuadro(s, n, w, e)) t[r.c.k] = (t[r.c.k] || 0) + ha(r);
-  return D.clases.map(c => ({ ...c, ha: t[c.k] || 0 })).filter(c => c.ha > 0);
+  return D.clases.filter(c => !ABIERTO.has(c.k)).map(c => ({ ...c, ha: t[c.k] || 0 })).filter(c => c.ha > 0);
 }
 export const estado = r => (D && D.estados[String(r.e)]) || '';
 export const nivel = s => s >= 80 ? 'Muy bueno' : s >= 60 ? 'Bueno' : s >= 40 ? 'Regular' : s >= 15 ? 'Poco' : 'Nada';
 /* hábitats de la app (los de las fichas) que corresponden a un rodal */
-export const habitats = r => [...new Set(r.sp.flatMap(x => (D && D.habitats[x.n]) || []))];
+export const ABIERTO = new Set(['mato', 'abie', 'line']);
+export const habitats = r => r.c.k === 'abie' ? ['prado'] : r.c.k === 'mato' ? ['claro', 'brezal'] : [...new Set(r.sp.flatMap(x => (D && D.habitats[x.n]) || []))];
+
+/* ---------- qué rodea a un punto: base de «Lo que dicen tus setas» ---------- */
+const GR = { auto: 'frondosa', fron: 'frondosa', pino: 'pinar', coni: 'coniferas', otra: 'otros', euca: 'eucalipto', mato: 'abierto', abie: 'abierto', line: 'abierto' };
+/* grupo del punto y grupos distintos a menos de `m` metros (8 direcciones + a mitad de camino) */
+export function contexto(lat, lon, m = 15) {
+  if (!D) return null;
+  const r = en(lat, lon), g = r ? GR[r.c.k] : 'fuera', vec = new Set();
+  const dy = m / 111320, dx = m / (111320 * Math.cos(lat * Math.PI / 180));
+  for (const f of [1, .5]) for (const [a, b] of [[1, 0], [-1, 0], [0, 1], [0, -1], [.7, .7], [-.7, -.7], [.7, -.7], [-.7, .7]]) {
+    const q = en(lat + a * dy * f, lon + b * dx * f), k = q ? GR[q.c.k] : 'fuera';
+    if (k !== g) vec.add(k);
+  }
+  return { r, g, vec, borde: [...vec].some(k => k === 'abierto' || k === 'fuera') || (g === 'abierto' && [...vec].some(k => k === 'pinar' || k === 'frondosa')) };
+}
+/* el «sitio» de un hallazgo en palabras (8 casos que se pueden comparar) */
+export const SITIOS = [
+  { k: 'ab-pin', n: 'Matorral, prado o cortafuegos pegado a pinar' },
+  { k: 'ab-fro', n: 'Matorral o prado pegado a bosque autóctono' },
+  { k: 'pin-b', n: 'Pinar, en el borde' },
+  { k: 'pin-i', n: 'Pinar, por dentro' },
+  { k: 'fro-b', n: 'Bosque autóctono o frondosas, en el borde' },
+  { k: 'fro-i', n: 'Bosque autóctono o frondosas, por dentro' },
+  { k: 'euc', n: 'Eucalipto' },
+  { k: 'otro', n: 'Otros (prado abierto, otras coníferas, pueblo…)' },
+];
+export function sitio(c) {
+  if (!c) return 'otro';
+  if (c.g === 'abierto' || c.g === 'fuera') return c.vec.has('pinar') ? 'ab-pin' : c.vec.has('frondosa') ? 'ab-fro' : 'otro';
+  if (c.g === 'pinar') return c.borde ? 'pin-b' : 'pin-i';
+  if (c.g === 'frondosa') return c.borde ? 'fro-b' : 'fro-i';
+  return c.g === 'eucalipto' ? 'euc' : 'otro';
+}
+/* estadística: hallazgos frente a lo andado (puntos de los recorridos): ¿dónde rinde más el tiempo? */
+export function estadistica(hs, track) {
+  const cuenta = l => { const t = {}; l.forEach(k => { t[k] = (t[k] || 0) + 1; }); return t; };
+  const sh = hs.map(h => ({ h, k: sitio(contexto(h.lat, h.lon)) })), st = track.map(p => sitio(contexto(p[0], p[1])));
+  const ch = cuenta(sh.map(x => x.k)), ct = cuenta(st), nh = sh.length || 1, nt = st.length;
+  return { sh, nh: sh.length, nt, sitios: SITIOS.map(s => ({ ...s, h: ch[s.k] || 0, ph: (ch[s.k] || 0) / nh, pt: nt ? (ct[s.k] || 0) / nt : null })).map(s => ({ ...s, x: s.pt ? s.ph / s.pt : null })),
+    bordeH: sh.filter(x => x.k !== 'pin-i' && x.k !== 'fro-i' && x.k !== 'otro' && x.k !== 'euc').length / nh,
+    bordeT: nt ? st.filter(k => k !== 'pin-i' && k !== 'fro-i' && k !== 'otro' && k !== 'euc').length / nt : null };
+}
 export const ESTADOS_TXT = { Repoblado: 'recién plantado', 'Monte bravo': 'joven y cerrado', Latizal: 'joven, troncos finos', Fustal: 'maduro, árboles grandes', Talado: 'cortado' };
 
 /* índice espacial: rodales por casillas de 0,02° para buscar rápido */
@@ -91,9 +136,19 @@ export function capa(L) {
       const lista = enRecuadro(b.lat, a.lat, a.lng, b.lng);
       g.lineJoin = 'round'; g.lineWidth = z >= 15 ? 1 : .6;
       for (const r of lista) {
+        if (ABIERTO.has(r.c.k)) continue;
         g.beginPath();
         r.pts.forEach(([y, x], i) => { const p = m.project([y, x], z).subtract(nw); i ? g.lineTo(p.x, p.y) : g.moveTo(p.x, p.y); });
         g.closePath(); g.fillStyle = hex(r.c.c, r.c.k === 'euca' ? .42 : .22 + r.s / 400); g.fill(); g.strokeStyle = hex(r.c.c, .9); g.stroke();
+      }
+      /* bordes buenos encima: amarillo = pinar con prado/matorral, verde claro = bosque autóctono con prado/matorral */
+      if (z >= 13) {
+        g.lineWidth = z >= 16 ? 3.2 : z >= 15 ? 2.6 : 1.8; g.lineCap = 'round';
+        for (const l of D.bord) {
+          if (l.bb[1] < b.lat || l.bb[0] > a.lat || l.bb[3] < a.lng || l.bb[2] > b.lng) continue;
+          g.beginPath(); l.pts.forEach(([y, x], i) => { const p = m.project([y, x], z).subtract(nw); i ? g.lineTo(p.x, p.y) : g.moveTo(p.x, p.y); });
+          g.strokeStyle = l.k === 'pinar' ? '#ffd43b' : '#8ce99a'; g.stroke();
+        }
       }
       return t;
     }

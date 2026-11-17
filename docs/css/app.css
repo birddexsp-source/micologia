@@ -1174,3 +1174,14 @@ button.rz{cursor:pointer}
 .bq-spot.mal{border-color:rgba(224,49,49,.55);background:rgba(224,49,49,.1)}
 .bq-f{font-size:11.5px;margin-top:14px}
 .ech.sin{padding:5px 11px 5px 9px}.ech.sin i{width:8px;height:8px;border-radius:50%;background:var(--c);flex:none}
+/* v53: lo que dicen tus setas */
+button.navrow{width:100%;font:inherit;color:inherit;text-align:left;cursor:pointer;margin:6px 0 2px}
+.bq-kpi{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:6px 0 4px}.bq-kpi div{background:var(--s1);border:1px solid var(--line);border-radius:12px;padding:11px 12px}
+.bq-kpi b{display:block;font:700 24px var(--mono);color:var(--acc)}.bq-kpi small{color:var(--mut);font-size:12px;line-height:1.35;display:block;margin-top:3px}
+.bq-sit{padding:9px 0;border-bottom:1px solid var(--line)}.bq-sit .t b{font-size:14px}.bq-sit small{display:block;color:var(--mut);font-size:12.5px;margin-top:2px}
+.bq-sit em{font-style:normal;font-weight:700}.bq-sit em.up{color:#69db7c}.bq-sit em.dn{color:#ff8787}
+.bq-b2{display:flex;flex-direction:column;gap:3px;margin-top:6px}.bq-b2 i{display:block;height:7px;border-radius:4px;min-width:2px}.bq-b2 i.h{background:#ffd43b}.bq-b2 i.t{background:#4c9bff;opacity:.85}
+.bq-esp{display:flex;flex-direction:column;gap:2px;padding:8px 0;border-bottom:1px solid var(--line)}.bq-esp span{font-size:12.5px;color:var(--mut)}
+.bq-ya{font-style:normal;font-size:11px;font-weight:600;color:var(--acc);margin-left:4px}
+.bq-amar{color:#ffd43b}.bq-verd{color:#8ce99a}
+.bq-n{font-size:12px}

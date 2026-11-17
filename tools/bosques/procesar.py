@@ -2,7 +2,7 @@
 en docs/data/bosques.json: rodales simplificados con su tipo de bosque, especies, estado y un índice de interés
 micológico, más las «zonas calientes» (manchas grandes de bosque autóctono maduro).
 Uso: python3 tools/bosques/procesar.py ruta/inventario.geojson"""
-import json, sys, math
+import json, sys, math, os
 import geopandas as gpd
 from shapely.geometry import Polygon, MultiPolygon, box
 from shapely.ops import unary_union
@@ -29,7 +29,11 @@ CLASES = {  # orden = prioridad en la leyenda · v = valor micológico base
   'coni': dict(n='Otras coníferas', c='#b08968', v=0.45, d='Douglas, alerce… Algunas setas propias (por ejemplo Suillus con el alerce).'),
   'otra': dict(n='Otros árboles', c='#868e96', v=0.25, d='Ribera, acacia, ciprés japonés, nogal…: pocas setas de las que buscas.'),
   'euca': dict(n='Eucalipto', c='#e03131', v=0.03, d='Plantación de eucalipto: casi sin setas de nuestros bosques. Evítalo.'),
+  'mato': dict(n='Matorral', c='#fcc419', v=0.0, d='Arbustedo o matorral (zarzas, argoma, árboles jóvenes): pegado a pinar o a bosque autóctono es muy buen sitio para buscar.'),
+  'abie': dict(n='Prado o pastizal', c='#ffe8a3', v=0.0, d='Zona abierta: sus bordes con pinar o con bosque autóctono son de lo mejor para buscar.'),
+  'line': dict(n='Línea eléctrica o cortafuegos', c='#fff3bf', v=0.0, d='Franja despejada dentro del monte: los bordes con pinar dan níscalos.'),
 }
+ABIERTOS = {'Arbustedos': 'mato', 'Prados': 'abie', 'Prados con setos': 'abie', 'Herbazal-Pastizal': 'abie', 'Pastizal-Matorral': 'abie', 'Energia': 'line'}
 ESTADO = {1: ('Repoblado', 0.3), 2: ('Monte bravo', 0.5), 3: ('Latizal', 0.85), 4: ('Fustal', 1.0), 5: ('Talado', 0.15)}
 
 def clase(sp):
@@ -42,13 +46,18 @@ def clase(sp):
     return 'otra', []
 
 g = gpd.read_file(ORIG)
-g = g[g.TIPES_es.isin(['Bosque', 'Bosque de Plantacion', 'Bosque de Galeria'])].to_crs(25830)
+g = g[g.TIPES_es.isin(['Bosque', 'Bosque de Plantacion', 'Bosque de Galeria'] + list(ABIERTOS))].to_crs(25830)
 sp_idx, raros = [], set()
 def idx(s):
     if s not in sp_idx: sp_idx.append(s)
     return sp_idx.index(s)
 P = []; fil = []
 for r in g.itertuples():
+    if r.TIPES_es in ABIERTOS:
+        geom = r.geometry.simplify(6, preserve_topology=True)
+        for p in (list(geom.geoms) if isinstance(geom, MultiPolygon) else [geom]):
+            if not p.is_empty and p.area >= 400: P.append(dict(c=ABIERTOS[r.TIPES_es], sp=[], e=0, s=0, geom=p))
+        continue
     sps = [(getattr(r, f'SP{i}_es'), getattr(r, f'O{i}') or 0) for i in (1, 2, 3)]
     sps = [(s, o) for s, o in sps if s and str(s) != 'nan']
     if not sps:
@@ -115,6 +124,8 @@ for p, geo in zip(P, gs):
 datos = dict(fuente='Inventario Forestal de la CAPV 2024 · © Gobierno Vasco / Eusko Jaurlaritza (CC BY 4.0)', ano=2024,
              clases=[dict(k=k, **{x: v for x, v in c.items()}) for k, c in CLASES.items()],
              estados={str(k): v[0] for k, v in ESTADO.items()}, especies=sp_idx,
-             habitats={s: clase(s)[1] for s in sp_idx}, calientes=cal, r=out)
+             habitats={s: clase(s)[1] for s in sp_idx}, calientes=cal, r=out,
+             bordes=json.load(open('tools/bosques/bordes.json')) if os.path.exists('tools/bosques/bordes.json') else [],
+             recomendados=json.load(open('tools/bosques/recomendados.json')) if os.path.exists('tools/bosques/recomendados.json') else [])
 json.dump(datos, open(SALIDA, 'w'), ensure_ascii=False, separators=(',', ':'))
 import os; print(SALIDA, round(os.path.getsize(SALIDA) / 1e6, 2), 'MB')

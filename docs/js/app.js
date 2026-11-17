@@ -19,7 +19,7 @@ import * as bos from './bosques.js';
 import * as zon from './zona.js';
 import * as tr from './tramos.js';
 
-const APP_V = 'micologia-v52';   // = V de sw.js
+const APP_V = 'micologia-v53';   // = V de sw.js
 const S = { view: 'mapa', arg: '', map: null, pins: null, me: null, acc: null, tmp: null, mini: null, centered: false, filtro: { salida: '', especie: '' }, clase: '', q: '', syncErr: false, mes: new Date().getMonth() + 1 };
 const VIEWS = ['mapa', 'salidas', 'salida', 'setas', 'mes', 'plan', 'ajustes'];
 const TITULOS = { mapa: 'Mapa', salidas: 'Salidas', salida: 'Salida', setas: 'Setas', mes: 'Este mes', plan: 'Plan de salida', ajustes: 'Ajustes' };
@@ -218,6 +218,7 @@ async function abrirBosques() {
     (rep.length ? '<div class="sec">En lo que ves del mapa</div>' + repartoHTML(rep) : '<p class="mut sm">En esta parte del mapa no hay bosques del inventario (cubre de Bakio y Mungia a Gernika y Ea).</p>') +
     '<p class="mut sm">Toca cualquier mancha del mapa para ver qué árboles tiene y qué setas de tu guía viven ahí.</p>' +
     (malos.length ? '<div class="alerta">' + I.aviso + '<div><b>' + plural(malos.length, 'spot tuyo está', 'spots tuyos están') + ' en eucalipto:</b> ' + esc(malos.map(x => x.z.nombre).join(', ')) + '.</div></div>' : '') +
+    '<button class="navrow" id="bq-est">' + I.chart + '<span class="t"><b>Lo que dicen tus setas</b><small>Dónde las encuentras y sitios recomendados que encajan</small></span>' + I.chev + '</button>' +
     '<div class="sec">Zonas calientes cerca<small>' + cal.length + '</small></div><p class="mut sm">Manchas grandes de bosque autóctono maduro (16 ha cada cuadro). El número es el interés, de 0 a 100.</p>' +
     '<div id="bq-cal">' + cal.slice(0, 5).map(filaC).join('') + '</div>' + (cal.length > 5 ? '<button class="btn" id="bq-mas" style="width:100%">Ver las ' + cal.length + ' zonas</button>' : '') +
     (spR.length ? '<details class="det"><summary>Tus spots según su bosque (' + buenos.length + ' en buen bosque)</summary>' + spR.sort((a, c) => c.r.s - a.r.s).map(filaS).join('') + '</details>' : '') +
@@ -229,9 +230,44 @@ async function abrirBosques() {
     const t = e.target.closest('button'); if (!t) return;
     if (t.id === 'sv-x') closeSheet();
     else if (t.id === 'bq-off') { capaBosques(false); closeSheet(); }
+    else if (t.id === 'bq-est') abrirEstadisticas();
     else if (t.id === 'bq-mas') { $('#bq-cal', sh).innerHTML = cal.map(filaC).join(''); t.remove(); }
     else if (t.dataset.cz) { const z = cal[+t.dataset.cz]; closeSheet(); S.map.setView([z.lat, z.lon], 16); const r = bos.cerca(z.lat, z.lon); if (r) abrirRodal(r, z.lat, z.lon); }
     else if (t.dataset.spot) abrirSpot(t.dataset.spot);
+  });
+}
+/* «Lo que dicen tus setas»: dónde salen tus hallazgos (tipo de bosque y bordes) frente a por dónde andas, y sitios que encajan */
+async function abrirEstadisticas() {
+  if (!(await capaBosques(true))) return;
+  const D = bos.datos(), hs = (await db.list('hallazgos')).filter(h => h.lat != null);
+  const sal = await db.list('salidas'), a = await activa();
+  const track = sal.flatMap(x => (a && x.id === a.id && trk.activo() === a.id ? trk.puntos() : x.track) || []);
+  const E = bos.estadistica(hs, track), yo = geo.fix() || { lat: 43.4205, lon: -2.723 };
+  const km = trk.metros(track) / 1000, pct = x => Math.round(x * 100) + ' %', maxP = Math.max(...E.sitios.map(x => Math.max(x.ph, x.pt || 0)), .01);
+  const conT = E.nt >= 30;
+  const filaSit = x => '<div class="bq-sit"><div class="t"><b>' + esc(x.n) + '</b><small>' + plural(x.h, 'hallazgo', 'hallazgos') + (conT && x.x != null && x.h ? ' · <em class="' + (x.x >= 1.3 ? 'up' : x.x < .8 ? 'dn' : '') + '">rinde ×' + x.x.toFixed(1).replace('.', ',') + '</em>' : '') + '</small></div>' +
+    '<div class="bq-b2"><i class="h" style="width:' + (x.ph / maxP * 100).toFixed(1) + '%"></i>' + (conT ? '<i class="t" style="width:' + ((x.pt || 0) / maxP * 100).toFixed(1) + '%"></i>' : '') + '</div></div>';
+  /* por especie (las identificadas) */
+  const porEsp = {}; E.sh.forEach(({ h, k }) => { const id = h.especieId; if (!id) return; (porEsp[id] = porEsp[id] || {})[k] = (porEsp[id][k] || 0) + 1; });
+  const corta = { 'ab-pin': 'claro junto a pinar', 'ab-fro': 'claro junto a autóctono', 'pin-b': 'borde de pinar', 'pin-i': 'dentro del pinar', 'fro-b': 'borde de autóctono', 'fro-i': 'dentro de autóctono', euc: 'eucalipto', otro: 'otros' };
+  const esp = Object.entries(porEsp).map(([id, t]) => ({ e: cat.byId(id), t, n: Object.values(t).reduce((a, b) => a + b, 0) })).filter(x => x.e).sort((a, b) => b.n - a.n);
+  const zs = await db.list('zonas');
+  const rec = (D.recomendados || []).map((z, i) => ({ ...z, i, d: distM(yo, z), ya: zs.find(s => s.lat != null && distM(s, z) < 80) })).sort((a, b) => a.d - b.d);
+  const sh = openSheet('<div class="sv-h"><div class="sv-t"><h2>Lo que dicen tus setas</h2><div class="meta"><span>' + plural(E.nh, 'hallazgo', 'hallazgos') + '</span><span>' + km.toFixed(1).replace('.', ',') + ' km con GPS</span></div></div><button class="icb" id="sv-x" aria-label="Cerrar">' + I.close + '</button></div>' +
+    (E.nh ? '<div class="bq-kpi"><div><b>' + pct(E.bordeH) + '</b><small>de tus setas, en un borde: a menos de 15 m de un prado, matorral o cortafuegos</small></div>' +
+      (conT ? '<div><b>' + pct(E.bordeT) + '</b><small>de lo que andas va por bordes (por eso compara lo que encuentras con lo que pisas)</small></div>' : '') + '</div>' +
+      '<div class="sec">Dónde salen</div>' + (conT ? '<div class="bq-ley"><span style="--c:#ffd43b"><i></i>tus hallazgos</span><span style="--c:#4c9bff"><i></i>lo que andas</span></div>' : '') +
+      E.sitios.filter(x => x.h || (conT && x.pt > .03)).sort((a, b) => b.h - a.h).map(filaSit).join('') +
+      '<p class="mut sm">«Rinde ×2» quiere decir: ahí sale el doble de setas de lo que te tocaría por el tiempo que pasas ahí. ' + (conT ? '' : 'Graba el recorrido en tus salidas para poder comparar. ') + 'Con ' + plural(E.nh, 'hallazgo', 'hallazgos') + ' es una primera pista: se recalcula sola con cada salida.</p>' +
+      (esp.length ? '<details class="det" open><summary>Por especie</summary>' + esp.slice(0, 8).map(x => '<div class="bq-esp"><b>' + esc(corto(x.e)) + '</b><span>' + Object.entries(x.t).sort((a, b) => b[1] - a[1]).map(([k, n]) => esc(corta[k]) + (n > 1 ? ' ×' + n : '')).join(' · ') + '</span></div>').join('') + '</details>' : '')
+      : '<p class="mut">Aún no hay hallazgos con posición para analizar.</p>') +
+    (rec.length ? '<div class="sec">Sitios que encajan<small>' + rec.length + '</small></div><p class="mut sm">Bordes de pinar o de bosque autóctono maduro con prado, matorral o cortafuegos, sin eucalipto, cerca de Bermeo: el tipo de sitio de tus níscalos y boletos. En el mapa son las líneas <b class="bq-amar">amarillas</b> (pinar) y <b class="bq-verd">verdes</b> (autóctono).</p>' +
+      rec.map(z => '<button class="item bq-z" data-rc="' + z.i + '"><span class="bq-n" style="--c:' + (z.tipo === 'pinar' ? '#ffd43b' : '#8ce99a') + '">' + (z.tipo === 'pinar' ? 'PIN' : 'AUT') + '</span><div class="t"><b>' + esc(z.nombre || 'Sitio recomendado') + (z.ya ? ' <em class="bq-ya">en tus spots</em>' : '') + '</b><small>' + esc(z.sp.slice(0, 2).join(' + ')) + ' · ' + Math.round(z.v / 10) * 10 + ' m de borde bueno</small></div><em class="bq-d">' + kmFmt(z.d) + '</em></button>').join('') : '') +
+    '<p class="mut sm bq-f">' + esc(D.fuente) + '</p>', { dim: false });
+  sh.addEventListener('click', e => {
+    const t = e.target.closest('button'); if (!t) return;
+    if (t.id === 'sv-x') closeSheet();
+    else if (t.dataset.rc) { const z = rec.find(x => x.i === +t.dataset.rc); closeSheet(); S.map.setView([z.lat, z.lon], 17); if (z.ya) abrirSpot(z.ya.id); else { const r = bos.cerca(z.lat, z.lon); if (r) abrirRodal(r, z.lat, z.lon); } }
   });
 }
 function abrirRodal(r, lat, lon) {
@@ -240,12 +276,13 @@ function abrirRodal(r, lat, lon) {
   const est = bos.estado(r), habs = bos.habitats(r), euca = r.c.k === 'euca';
   const setas = euca ? [] : cat.porRareza(cat.todas().filter(e => (e.habitats || []).some(h => habs.includes(h))));
   const pct = o => o ? o * 10 + ' %' : '';
-  const sh = openSheet('<div class="sv-h"><div class="sv-t"><h2>' + esc(r.c.n) + '</h2><div class="meta">' + '<span class="bq-n sm" style="--c:' + r.c.c + '">' + r.s + '</span><span>Interés ' + bos.nivel(r.s).toLowerCase() + '</span>' +
+  const abierto = bos.ABIERTO.has(r.c.k);
+  const sh = openSheet('<div class="sv-h"><div class="sv-t"><h2>' + esc(r.c.n) + '</h2><div class="meta">' + (abierto ? '<span>Zona abierta</span>' : '<span class="bq-n sm" style="--c:' + r.c.c + '">' + r.s + '</span><span>Interés ' + bos.nivel(r.s).toLowerCase() + '</span>') +
       (est ? '<span>' + esc(est) + '</span>' : '') + '<span>' + (Math.round(bos.ha(r) * 10) / 10).toString().replace('.', ',') + ' ha</span></div></div><button class="icb" id="sv-x" aria-label="Cerrar">' + I.close + '</button></div>' +
     (euca ? '<div class="alerta">' + I.aviso + '<div><b>Eucalipto.</b> Casi no tiene setas de nuestros bosques: mejor busca en otra mancha.</div></div>' : '') +
-    '<div class="sec">Árboles de esta mancha</div><div class="bq-sp">' + r.sp.map(q => '<span><b>' + esc(q.n) + '</b>' + (r.sp.length > 1 ? '<em>' + pct(q.o) + '</em>' : '') + '</span>').join('') + '</div>' +
+    (abierto ? '' : '<div class="sec">Árboles de esta mancha</div><div class="bq-sp">') + (abierto ? [] : r.sp).map(q => '<span><b>' + esc(q.n) + '</b>' + (r.sp.length > 1 ? '<em>' + pct(q.o) + '</em>' : '') + '</span>').join('') + (abierto ? '' : '</div>') +
     '<p class="mut sm">' + esc(r.c.d) + (est ? ' Estado: <b>' + esc(est.toLowerCase()) + '</b> (' + esc(bos.ESTADOS_TXT[est] || '') + ').' : '') + '</p>' +
-    (setas.length ? '<div class="sec">Setas de tu guía que viven en este bosque<small>' + setas.length + '</small></div><div class="echs">' + setas.slice(0, 12).map(e => '<button class="ech sin" data-e="' + e.id + '" style="--c:' + colorEsp(e) + '"><i></i>' + esc(corto(e)) + '</button>').join('') + '</div>' +
+    (setas.length ? '<div class="sec">Setas de tu guía que viven en ' + (abierto ? 'este tipo de sitio' : 'este bosque') + '<small>' + setas.length + '</small></div><div class="echs">' + setas.slice(0, 12).map(e => '<button class="ech sin" data-e="' + e.id + '" style="--c:' + colorEsp(e) + '"><i></i>' + esc(corto(e)) + '</button>').join('') + '</div>' +
       '<p class="mut sm">Según el hábitat de cada ficha. Que viva en este tipo de bosque no quiere decir que esté aquí.</p>' : '') +
     '<div class="acts"><button class="btn" id="bq-spot">' + I.flag + 'Guardar «Quiero ir»</button><a class="btn" target="_blank" rel="noopener" href="' + rutaURL({ lat, lon }) + '">' + I.route + 'Cómo llegar</a></div>' +
     '<p class="mut sm bq-f">' + esc(bos.datos().fuente) + '</p>', { dim: false });
