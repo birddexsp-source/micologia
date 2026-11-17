@@ -2,7 +2,7 @@ import * as db from './db.js';
 import * as geo from './geo.js';
 import * as syn from './sync.js';
 import * as cat from './catalog.js';
-import { createMap, pin, spotPin, dragPin, IDENT } from './map.js';
+import { createMap, pin, spotPin, dragPin, IDENT, recomendado } from './map.js';
 import { I } from './iconos.js';
 import { $, $$, esc, norm, hoy, hhmm, fecha, toast, reducirFoto } from './util.js';
 import { guiaHTML } from './guia.js';
@@ -19,7 +19,7 @@ import * as bos from './bosques.js';
 import * as zon from './zona.js';
 import * as tr from './tramos.js';
 
-const APP_V = 'micologia-v53';   // = V de sw.js
+const APP_V = 'micologia-v55';   // = V de sw.js
 const S = { view: 'mapa', arg: '', map: null, pins: null, me: null, acc: null, tmp: null, mini: null, centered: false, filtro: { salida: '', especie: '' }, clase: '', q: '', syncErr: false, mes: new Date().getMonth() + 1 };
 const VIEWS = ['mapa', 'salidas', 'salida', 'setas', 'mes', 'plan', 'ajustes'];
 const TITULOS = { mapa: 'Mapa', salidas: 'Salidas', salida: 'Salida', setas: 'Setas', mes: 'Este mes', plan: 'Plan de salida', ajustes: 'Ajustes' };
@@ -175,7 +175,8 @@ function initMap() {
     /* con la capa de bosques puesta, tocar una mancha dice qué árbol es */
     if (S.bosq && !S.tmp) { const r = bos.en(ev.latlng.lat, ev.latlng.lng); if (r) { abrirRodal(r, ev.latlng.lat, ev.latlng.lng); return; } }
     const s = $('#sheet'); if (!S.tmp && !s.hidden && !s.classList.contains('dim')) closeSheet(); });
-  $('#mchips').onclick = e => { const b = e.target.closest('[data-capa]'); if (!b) return; S.capa = b.dataset.capa; $$('#mchips button').forEach(x => x.classList.toggle('on', x === b)); refreshPins(); };
+  /* filtros rápidos: tocar uno enseña solo eso; tocarlo otra vez vuelve a enseñarlo todo */
+  $('#mchips').onclick = e => { const b = e.target.closest('[data-capa]'); if (!b) return; S.capa = S.capa === b.dataset.capa ? 'todo' : b.dataset.capa; $$('#mchips button').forEach(x => x.classList.toggle('on', x.dataset.capa === S.capa)); refreshPins(); };
   trk.onAdd(() => { if (S.trkId && trk.activo() === S.trkId) pintarTrack(trk.puntos()); });
   geo.start();
   /* sin GPS todavía (en casa, en interior): enseña tus spots en vez de un mapa de Bizkaia vacío */
@@ -327,12 +328,12 @@ async function refreshPins() {
     hs.filter(h => (!f.salida || (f.salida === 'activa' ? act && h.salidaId === act.id : h.salidaId === f.salida)) && (!f.especie || h.especieId === f.especie))
       .forEach(h => pinH(h).on('click', () => verHallazgo(h.id)).addTo(S.pins));
   if (capa !== 'hallazgos')
-    zs.filter(z => z.lat != null && z.lon != null && (capa !== 'porir' || z.estado === 'por_visitar')).forEach(z => {
+    zs.filter(z => z.lat != null && z.lon != null && (capa === 'todo' || (capa === 'visit' ? z.estado !== 'por_visitar' : capa === 'porir' ? z.estado === 'por_visitar' && !recomendado(z) : capa === 'rec' ? recomendado(z) : true))).forEach(z => {
       const n = new Set(hs.filter(h => h.zonaId === z.id).map(h => h.especieId || norm(h.especieTxt))).size;
       S.spotM[z.id] = spotPin(z, { n }).on('click', () => verSpot(z.id)).addTo(S.spotsL);
     });
   /* zonas de cada salida: la mancha que has pisado (o un círculo si no hay recorrido) */
-  if (capa !== 'porir' && capa !== 'hallazgos') (await db.list('salidas')).filter(x => !f.salida || (f.salida === 'activa' ? act && x.id === act.id : x.id === f.salida))
+  if (capa === 'todo' || capa === 'visit') (await db.list('salidas')).filter(x => !f.salida || (f.salida === 'activa' ? act && x.id === act.id : x.id === f.salida))
     .forEach(x => zon.zonasDeSalida(x, hs, zs).forEach(z => dibujarZona(z, S.spotsL)));
   if (S.selId) marcarSel(S.selId);
   $('#mhint').hidden = !!(hs.length || zs.length);
@@ -478,8 +479,8 @@ const SPOT_EST = [['visitada', 'Visitado'], ['por_visitar', 'Quiero ir']];
 /* Cómo llegar: abre Google Maps con la ruta en coche ya lista (en el móvil, la app de Maps y a navegar) */
 const rutaURL = z => 'https://www.google.com/maps/dir/?api=1&destination=' + z.lat + ',' + z.lon + '&travelmode=driving&dir_action=navigate';
 const irA = z => '<a class="goto" href="' + rutaURL(z) + '" target="_blank" rel="noopener" aria-label="Cómo llegar a ' + esc(z.nombre || 'este spot') + '" title="Cómo llegar">' + I.route + '</a>';
-const spotColor = z => z.estado === 'por_visitar' ? '#4cc3d9' : '#46b36b';
-const spotTag = z => '<span class="tag" style="--c:' + spotColor(z) + '">' + (z.estado === 'por_visitar' ? 'Quiero ir' : 'Visitado') + '</span>';
+const spotColor = z => recomendado(z) ? '#ffd43b' : z.estado === 'por_visitar' ? '#4cc3d9' : '#46b36b';
+const spotTag = z => '<span class="tag" style="--c:' + spotColor(z) + '">' + (recomendado(z) ? 'Recomendado' : z.estado === 'por_visitar' ? 'Quiero ir' : 'Visitado') + '</span>';
 async function irAlMapa() { if (S.view !== 'mapa') { location.hash = '#mapa'; await new Promise(r => setTimeout(r, 250)); } }
 const abrirSpot = id => id ? verSpot(id) : editarSpot();
 async function editarSpot(id, o = {}) {
@@ -697,16 +698,16 @@ async function renderSalidas() {
   const deS = id => hs.filter(h => h.salidaId === id), deZ = id => hs.filter(h => h.zonaId === id);
   const nSpots = s => new Set([...(s.zonaIds || []), ...deS(s.id).map(h => h.zonaId).filter(Boolean)]).size;
   const ultZ = z => { const t = Math.max(0, ...deZ(z.id).map(h => h.ts), ...ss.filter(s => (s.zonaIds || []).includes(z.id)).map(s => new Date(s.fecha + 'T12:00').getTime())); return t ? 'últ. ' + new Date(t).toLocaleDateString('es-ES', { day: 'numeric', month: 'short' }) : ''; };
-  const filaZ = z => { const h = deZ(z.id), ne = especiesDe(h).length, por = z.estado === 'por_visitar';
-    return '<div class="spotr"><button class="item spotc' + (por ? ' por' : '') + '" data-spot="' + z.id + '"><span class="sico">' + (por ? I.flag : I.seta) + '</span><div class="t"><b>' + esc(z.nombre) + '</b><small>' + [ne ? plural(ne, 'especie', 'especies') : (por ? 'sin visitar' : 'sin especies'), yo ? kmFmt(distM(yo, z)) : '', ultZ(z)].filter(Boolean).join(' · ') + '</small>' + avatares(h) + '</div></button>' + (z.lat != null && z.lon != null ? irA(z) : I.chev) + '</div>'; };
-  const grupo = (est, tit) => { const l = zs.filter(z => (z.estado || 'visitada') === est).sort((a, b) => yo ? distM(yo, a) - distM(yo, b) : a.nombre.localeCompare(b.nombre, 'es', { numeric: true })); return l.length ? '<div class="grp" style="--c:' + spotColor({ estado: est }) + '">' + tit + '<small>' + l.length + '</small></div>' + l.map(filaZ).join('') : ''; };
+  const filaZ = z => { const h = deZ(z.id), ne = especiesDe(h).length, por = z.estado === 'por_visitar', rec = recomendado(z);
+    return '<div class="spotr"><button class="item spotc' + (por ? ' por' : '') + (rec ? ' rec' : '') + '" data-spot="' + z.id + '"><span class="sico">' + (rec ? I.estrella : por ? I.flag : I.seta) + '</span><div class="t"><b>' + esc(z.nombre) + '</b><small>' + [ne ? plural(ne, 'especie', 'especies') : (por ? 'sin visitar' : 'sin especies'), yo ? kmFmt(distM(yo, z)) : '', ultZ(z)].filter(Boolean).join(' · ') + '</small>' + avatares(h) + '</div></button>' + (z.lat != null && z.lon != null ? irA(z) : I.chev) + '</div>'; };
+  const grupo = (est, tit) => { const l = zs.filter(z => est === 'rec' ? recomendado(z) : (z.estado || 'visitada') === est && !recomendado(z)).sort((a, b) => yo ? distM(yo, a) - distM(yo, b) : a.nombre.localeCompare(b.nombre, 'es', { numeric: true })); return l.length ? '<div class="grp" style="--c:' + (est === 'rec' ? '#ffd43b' : spotColor({ estado: est })) + '">' + tit + '<small>' + l.length + '</small></div>' + l.map(filaZ).join('') : ''; };
   const filaS = s => { const h = deS(s.id), n = nSpots(s);
     return '<a class="item sal" href="#salida/' + s.id + '">' + diaMes(s.fecha) + '<div class="t"><b>' + esc(s.titulo || fecha(s.fecha)) + '</b><small>' + [(s.fecha || '').slice(0, 4) === String(new Date().getFullYear()) ? '' : (s.fecha || '').slice(0, 4), tr.lista(s).length > 1 ? plural(tr.lista(s).length, 'zona', 'zonas') : n ? plural(n, 'spot', 'spots') : '', plural(h.length, 'hallazgo', 'hallazgos'), s.totalTxt ? esc(s.totalTxt) : '', s.estado === 'en_curso' ? 'en curso' : ''].filter(Boolean).join(' · ') + '</small>' + avatares(h) + '</div>' + I.chev + '</a>'; };
   $('#v-salidas').innerHTML = '<div class="pad">' + (act ? '<a class="item cur-sal" href="#salida/' + act.id + '"><span class="rdot"></span><div class="t"><b>Salida en curso</b><small>' + esc(fecha(act.fecha)) + ' · ' + plural(deS(act.id).length, 'hallazgo', 'hallazgos') + ' · ' + durTxt(act) + '</small></div><span class="tag" style="--c:#e0a458;color:#1a1206">Abrir</span></a>'
     : '<button class="start" id="s-new"><span class="ic">' + I.plus + '</span><span class="t"><b>Empezar salida</b><small>Marca dónde aparcas, graba tu recorrido y lo que encuentres</small></span></button>') +
     (ss.length ? (() => { const ne = especiesDe(hs.filter(h => h.especieId)).length; return '<div class="sal-res"><div><b>' + ss.length + '</b><small>' + (ss.length === 1 ? 'salida' : 'salidas') + '</small></div><div><b>' + hs.length + '</b><small>' + (hs.length === 1 ? 'hallazgo' : 'hallazgos') + '</small></div><div><b>' + ne + '</b><small>' + (ne === 1 ? 'especie' : 'especies') + '</small></div><div><b>' + zs.length + '</b><small>spots</small></div></div>'; })() : '') +
     '<div class="sec">Salidas<small>' + (ss.length || '') + '</small></div>' + (ss.length ? ss.map(filaS).join('') : '<div class="empty">Aún no hay salidas.<br>Empieza una cuando salgas al monte.</div>') +
-    '<div class="sec">Mis spots<small>' + (zs.length || '') + '</small></div>' + (zs.length ? grupo('por_visitar', 'Quiero ir') + grupo('visitada', 'Visitados') : '<div class="empty">Marca sitios que has visitado o que quieres visitar y aparecerán aquí y en el mapa.</div>') +
+    '<div class="sec">Mis spots<small>' + (zs.length || '') + '</small></div>' + (zs.length ? grupo('por_visitar', 'Quiero ir') + grupo('rec', 'Recomendados por el análisis') + grupo('visitada', 'Visitados') : '<div class="empty">Marca sitios que has visitado o que quieres visitar y aparecerán aquí y en el mapa.</div>') +
     '<div class="row"><button class="btn" id="s-spot">' + I.flag + ' Nuevo spot</button></div></div>';
   const b = $('#s-new'); if (b) b.onclick = empezarSalida;
   $('#s-spot').onclick = () => editarSpot();
@@ -1144,7 +1145,7 @@ function fichaTab(sh, k, { ir = false } = {}) {
 }
 function leyendaMapa() {
   const cl = ['ok_fuentes', 'cond_fuentes', 'no_comestible', 'toxica', 'mortal'].map(k => cat.CLASES[k]);
-  return '<b>Qué significa cada marca</b><div class="ml-r"><span class="ml-sp" style="--c:var(--spot)">' + I.seta + '</span>Spot visitado</div><div class="ml-r"><span class="ml-sp por">' + I.flag + '</span>Spot «quiero ir» (sin visitar)</div>' +
+  return '<b>Qué significa cada marca</b><div class="ml-r"><span class="ml-sp" style="--c:var(--spot)">' + I.seta + '</span>Spot visitado</div><div class="ml-r"><span class="ml-sp por">' + I.flag + '</span>Spot «quiero ir» (sin visitar)</div><div class="ml-r"><span class="ml-sp por rec">' + I.estrella + '</span>Recomendado por el análisis de tus setas</div>' +
     '<div class="ml-r"><i style="--c:#4cc3d9;background:none;border:2px dashed #4cc3d9"></i>Zona de una salida (cubre sus spots y hallazgos)</div>' + '<small>Hallazgos: el borde es el color de la especie</small>' + cl.map(c => '<div class="ml-r"><i style="--c:' + c.color + '"></i>' + esc(c.label) + '</div>').join('') + '<div class="ml-r"><i style="--c:#9aa5a1"></i>Sin identificar o sin datos</div><small class="ml-x">Toca para cerrar</small>';
 }
 function abrirFicha(id) {

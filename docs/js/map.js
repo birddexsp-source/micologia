@@ -30,13 +30,16 @@ export function pin(h, { color, foto = '', ok = false, enz = false, ...opts } = 
 }
 const GLIFO = {
   seta: '<svg viewBox="0 0 24 24"><path d="M12 4C7 4 3.5 7.3 3.5 11.2c0 .5.4.8.8.8h15.4c.4 0 .8-.3.8-.8C20.5 7.3 17 4 12 4z"/><path d="M9.6 13h4.8v3.6c0 1.9-1 3.2-2.4 3.2s-2.4-1.3-2.4-3.2z"/></svg>',
-  flag: '<svg viewBox="0 0 24 24"><path d="M6 21V3.5h1.9v1h9.8l-2.3 4 2.3 4H7.9V21z"/></svg>'
+  flag: '<svg viewBox="0 0 24 24"><path d="M6 21V3.5h1.9v1h9.8l-2.3 4 2.3 4H7.9V21z"/></svg>',
+  estrella: '<svg viewBox="0 0 24 24"><path d="M12 3.2l2.6 5.6 6.1.7-4.5 4.2 1.2 6.1L12 16.8l-5.4 3 1.2-6.1-4.5-4.2 6.1-.7z"/></svg>'
 };
+/* spot que propuso el análisis de tus setas (no lo marcaste tú): va en amarillo hasta que lo visites */
+export const recomendado = z => !!z && z.estado === 'por_visitar' && (z.origen === 'analisis' || /análisis de tus setas/.test(z.notas || ''));
 /* Spot: chincheta con número de especies y nombre debajo */
 export function spotPin(z, { n = 0, ...opts } = {}) {
-  const por = z.estado === 'por_visitar';
-  const html = '<div class="spm"><svg class="gota" viewBox="0 0 36 46"><path d="M18 44S33 29.4 33 17.5A15 15 0 0 0 3 17.5C3 29.4 18 44 18 44z"/></svg><span class="gl">' + (por ? GLIFO.flag : GLIFO.seta) + '</span>' + (n ? '<b>' + n + '</b>' : '') + '</div><span class="lbl">' + esc(z.nombre || 'Spot') + '</span>';
-  return L.marker([z.lat, z.lon], { icon: L.divIcon({ className: 'spot' + (por ? ' por' : ''), html, iconSize: [36, 46], iconAnchor: [18, 45] }), title: z.nombre, zIndexOffset: 400, riseOnHover: true, ...opts });
+  const por = z.estado === 'por_visitar', rec = recomendado(z);
+  const html = '<div class="spm"><svg class="gota" viewBox="0 0 36 46"><path d="M18 44S33 29.4 33 17.5A15 15 0 0 0 3 17.5C3 29.4 18 44 18 44z"/></svg><span class="gl">' + (rec ? GLIFO.estrella : por ? GLIFO.flag : GLIFO.seta) + '</span>' + (n ? '<b>' + n + '</b>' : '') + '</div><span class="lbl">' + esc(z.nombre || 'Spot') + '</span>';
+  return L.marker([z.lat, z.lon], { icon: L.divIcon({ className: 'spot' + (por ? ' por' : '') + (rec ? ' rec' : ''), html, iconSize: [36, 46], iconAnchor: [18, 45] }), title: z.nombre, zIndexOffset: 400, riseOnHover: true, ...opts });
 }
 export function dragPin() {
   return (lat, lon) => L.marker([lat, lon], { draggable: true, zIndexOffset: 1000, icon: L.divIcon({ className: 'pin drag', html: '<i></i>', iconSize: [30, 30], iconAnchor: [15, 15] }) });

@@ -22,16 +22,16 @@ module.exports = {
       t.eq('4 burbujas de hallazgo', await t.N('#map .pin'), 4);
       t.ok('iconos de las herramientas son SVG (no caracteres sueltos)', await t.page.evaluate(() => ['#locate', '#layerbtn', '#spotbtn', '#filterbtn'].every(s => document.querySelector(s + ' svg'))));
     });
-    await t.case('filtros rápidos: Spots, Quiero ir, Hallazgos, Todo', async () => {
-      await t.tap('#mchips [data-capa="spots"]', 300);
-      t.ok('Spots: sin hallazgos', (await t.N('#map .pin')) === 0 && (await t.N('#map .spot')) === 2);
+    await t.case('filtros rápidos: Visitados, Quiero ir, Hallazgos (y otra vez = todo)', async () => {
+      await t.tap('#mchips [data-capa="visit"]', 300);
+      t.ok('Visitados: solo el hayedo, sin hallazgos', (await t.N('#map .pin')) === 0 && (await t.N('#map .spot')) === 1 && !(await t.has('#map .spot.por')));
       await t.tap('#mchips [data-capa="porir"]', 300);
       t.ok('Quiero ir: solo el pinar', (await t.N('#map .spot')) === 1 && await t.has('#map .spot.por'));
       await t.tap('#mchips [data-capa="hallazgos"]', 300);
       t.ok('Hallazgos: sin spots', (await t.N('#map .spot')) === 0 && (await t.N('#map .pin')) === 4);
-      await t.tap('#mchips [data-capa="todo"]', 300);
-      t.ok('Todo otra vez', (await t.N('#map .spot')) === 2 && (await t.N('#map .pin')) === 4);
       t.eq('un solo filtro marcado', await t.N('#mchips .on'), 1);
+      await t.tap('#mchips [data-capa="hallazgos"]', 300);
+      t.ok('tocarlo otra vez lo enseña todo', (await t.N('#map .spot')) === 2 && (await t.N('#map .pin')) === 4 && (await t.N('#mchips .on')) === 0);
     });
     await t.case('tocar un spot: resumen sin formulario', async () => {
       await t.page.evaluate(() => document.querySelector('#map .spot:not(.por)').dispatchEvent(new MouseEvent('click', { bubbles: true })));

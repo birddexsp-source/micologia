@@ -1185,3 +1185,15 @@ button.navrow{width:100%;font:inherit;color:inherit;text-align:left;cursor:point
 .bq-ya{font-style:normal;font-size:11px;font-weight:600;color:var(--acc);margin-left:4px}
 .bq-amar{color:#ffd43b}.bq-verd{color:#8ce99a}
 .bq-n{font-size:12px}
+
+/* v54: spots recomendados por el análisis en amarillo, y su filtro */
+.spot.rec,.spotc.rec,.ml-sp.rec{--por:#ffd43b}
+.spot.rec .spm .gota path{fill:#2b2508;stroke-dasharray:none;stroke-width:2.6}
+.spot.rec .lbl{color:#ffe066}
+.spotc.rec .sico{background:rgba(255,212,59,.13);color:#ffd43b}
+.ml-sp.rec{border-style:solid}.ml-sp.rec svg{fill:#ffd43b;stroke:none}
+.mchips button.c-rec:not(.on){color:#ffe066;border-color:rgba(255,212,59,.45)}
+.mchips button.c-rec.on{background:#ffd43b;color:#1b1600}
+/* el glifo de la chincheta encima de la gota (Leaflet pone z-index:200 a todos los svg del mapa) */
+.leaflet-map-pane .spm .gota{z-index:0}.spm .gl{z-index:1}.spm b{z-index:2}
+.mchips{gap:4px;right:64px}.mchips button{padding:7px 8px;font-size:12px;letter-spacing:-.1px}
