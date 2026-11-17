@@ -88,10 +88,14 @@ module.exports = {
       t.ok('resumen (no formulario)', await t.has('#sheet #hv-edit') && !(await t.has('#sheet #hd-ok')));
       await t.go('#mapa'); t.ok('al cambiar de pestaña se cierra la hoja', !(await t.visible('#sheet .sh')));
     });
-    await t.case('cerrar el resumen: barrita, tocar el mapa, ×, arrastrar', async () => {
-      const abierto = () => t.visible('#sheet .sh');
+    await t.case('hoja del spot: la barrita la pliega (se ve el mapa y la zona) y la despliega; tocar el mapa, × o arrastrar dos veces la cierran', async () => {
+      const abierto = () => t.visible('#sheet .sh'), pleg = () => t.page.evaluate(() => document.querySelector('#sheet .sh').classList.contains('plegada'));
       await t.page.evaluate(() => window.__MI.verSpot('za')); await t.wait(400);
-      await t.tap('#sheet .grab', 300); t.ok('tocar la barrita cierra', !(await abierto()));
+      await t.tap('#sheet .grab', 400); t.ok('tocar la barrita la pliega: sigue abierta, solo la cabecera', await abierto() && await pleg());
+      t.ok('plegada deja libre casi todo el mapa', await t.page.evaluate(() => document.querySelector('#sheet .sh').getBoundingClientRect().top > innerHeight - 170));
+      t.ok('y el spot sigue seleccionado', await t.has('#map .spot.sel'));
+      await t.tap('#sheet .grab', 400); t.ok('tocarla otra vez la despliega', await abierto() && !(await pleg()));
+      await t.tap('#sv-x', 300);
       await t.page.evaluate(() => window.__MI.verSpot('za')); await t.wait(400);
       await t.page.evaluate(() => window.__MI.S.map.fire('click', { latlng: L.latLng(43.2, -2.7) })); await t.wait(300);
       t.ok('tocar el mapa cierra', !(await abierto()) && !(await t.has('#map .spot.sel')));
@@ -103,7 +107,13 @@ module.exports = {
         el.dispatchEvent(new TouchEvent('touchstart', { bubbles: true, touches: mk(y), changedTouches: mk(y) }));
         el.dispatchEvent(new TouchEvent('touchmove', { bubbles: true, touches: mk(y + 160), changedTouches: mk(y + 160) }));
         el.dispatchEvent(new TouchEvent('touchend', { bubbles: true, touches: [], changedTouches: mk(y + 160) })); }, [r.x + 5, r.y + 2]);
-      await t.wait(300); t.ok('arrastrar hacia abajo cierra', !(await abierto()));
+      await t.wait(300); t.ok('arrastrar hacia abajo la pliega', await abierto() && await pleg());
+      const r2 = await (await t.page.$('#sheet .grab')).boundingBox();
+      await t.page.evaluate(([x, y]) => { const el = document.querySelector('#sheet .grab'), mk = yy => [new Touch({ identifier: 1, target: el, clientX: x, clientY: yy })];
+        el.dispatchEvent(new TouchEvent('touchstart', { bubbles: true, touches: mk(y), changedTouches: mk(y) }));
+        el.dispatchEvent(new TouchEvent('touchmove', { bubbles: true, touches: mk(y + 120), changedTouches: mk(y + 120) }));
+        el.dispatchEvent(new TouchEvent('touchend', { bubbles: true, touches: [], changedTouches: mk(y + 120) })); }, [r2.x + 5, r2.y + 2]);
+      await t.wait(300); t.ok('y arrastrarla otra vez hacia abajo la cierra', !(await abierto()));
       await t.tap('#fab', 400); await t.tap('#sheet .grab', 200);
       t.ok('la hoja de marcar no se cierra sin querer', await abierto()); await t.tap('#mk-x', 300);
     });

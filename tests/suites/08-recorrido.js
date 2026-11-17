@@ -24,6 +24,7 @@ module.exports = {
       t.ok('avisa de la limitación al bloquear la pantalla', /bloquea la pantalla/.test(await t.T('#v-salida .rec') || ''));
     });
     await t.case('caminando: guarda puntos cada ≥12 m y descarta los imprecisos', async () => {
+      await t.page.evaluate(() => { globalThis.__MI_VEL_PIE = 1e6; });   /* la prueba camina 33 m en un tercio de segundo */
       await t.fixGPS(); const n0 = await pts(); t.ok('punto inicial guardado', n0 >= 1, 'n0=' + n0);
       await paso(4); const n1 = await pts(); t.ok('cuatro pasos de 33 m → +4 puntos', n1 - n0 === 4, 'antes ' + n0 + ', ahora ' + n1);
       lat += 0.00003; await t.setGeo(lat, LON, 8); await t.wait(350);   // ≈3 m: dentro del ruido

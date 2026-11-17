@@ -39,7 +39,29 @@ function aXY(p, o) { return [(p[1] - o[1]) * Math.cos(rad(o[0])) * R * Math.PI /
 function deXY(xy, o) { return [o[0] + xy[1] / (R * Math.PI / 180), o[1] + xy[0] / (R * Math.PI / 180 * Math.cos(rad(o[0])))]; }
 const area2 = r => r.reduce((a, p, i) => { const q = r[(i + 1) % r.length]; return a + p[0] * q[1] - q[0] * p[1]; }, 0);
 const antihorario = r => area2(r) >= 0 ? r : r.slice().reverse();
-export function cinta(puntos, ancho = ANCHO) {
+/* el recorrido a pie, sin lo que es ir en coche: se quitan los puntos a más de 9 km/h y se corta donde hay saltos de más de 60 m.
+   Devuelve tramos andados (listas de puntos seguidos). Así no aparece un «hilo» entre spots cuando vas de uno a otro en coche. */
+export const VEL_PIE = 2.5, SALTO = 60;
+export function andando(pts) {
+  const p = (pts || []).filter(x => Array.isArray(x) && Number.isFinite(x[0]) && Number.isFinite(x[1]));
+  const lim = globalThis.__MI_VEL_PIE || VEL_PIE;   /* las pruebas automáticas «andan» deprisa y lo suben */
+  const v = (a, b) => { const dt = (b[2] || 0) - (a[2] || 0); return dt > 0 ? dist({ lat: a[0], lon: a[1] }, { lat: b[0], lon: b[1] }) / dt / (lim / VEL_PIE) : 0; };
+  const pie = p.filter((x, i) => !((i > 0 && v(p[i - 1], x) > VEL_PIE) && (i === p.length - 1 || v(x, p[i + 1]) > VEL_PIE)));
+  const runs = []; let r = [];
+  pie.forEach((x, i) => { const a = pie[i - 1]; if (a && (x[3] === 1 || dist({ lat: a[0], lon: a[1] }, { lat: x[0], lon: x[1] }) > SALTO || v(a, x) > VEL_PIE)) { if (r.length) runs.push(r); r = []; } r.push(x); });
+  if (r.length) runs.push(r);
+  return runs;
+}
+export function cinta(puntos, ancho = ANCHO, sueltos = []) {
+  /* puntos: un recorrido o varios (lista de listas): solo se unen puntos seguidos del mismo recorrido; «sueltos» van sin unir */
+  if (Array.isArray(puntos[0]) && Array.isArray(puntos[0][0])) {
+    const tod = puntos.flatMap(r => cinta(r, ancho)); return tod.concat(sueltos.length ? cinta([], ancho, sueltos) : []);
+  }
+  if (sueltos.length) {
+    const o0 = sueltos[0], base = (puntos.length ? cinta(puntos, ancho) : []);
+    return base.concat(sueltos.map(x => { const o = Array.isArray(x) ? [x[0], x[1]] : [x.lat, x.lon], c = [0, 0];
+      return antihorario(Array.from({ length: 8 }, (_, k) => [c[0] + ancho * Math.cos(k * Math.PI / 4), c[1] + ancho * Math.sin(k * Math.PI / 4)])).map(q => deXY(q, o)); }));
+  }
   const p = puntos.filter(x => Array.isArray(x) ? Number.isFinite(x[0]) : ok(x)).map(x => Array.isArray(x) ? [x[0], x[1]] : [x.lat, x.lon]);
   if (!p.length) return [];
   const paso = Math.max(1, Math.ceil(p.length / MAX_PTS)), q = p.filter((_, i) => i % paso === 0 || i === p.length - 1), o = q[0], xy = q.map(x => aXY(x, o)), anillos = [];
@@ -54,14 +76,33 @@ export function cinta(puntos, ancho = ANCHO) {
 /* las zonas de una salida, listas para dibujar y resumir */
 export function zonasDeSalida(s, hs, zonas) {
   const lista = tr.comoTramos(s), mios = hs.filter(h => h.salidaId === s.id), now = Date.now();
+  /* trozos andados de cada zona; si un trozo está claramente en el sitio de otra zona (fuiste en coche al siguiente spot
+     y empezaste a andar antes de pulsar «Cambiar zona»), pasa a esa zona */
+  const spotDe = t => zonas.find(z => z.id === t.zonaId && ok(z)) || null;
+  const centro = r => ({ lat: r.reduce((a, p) => a + p[0], 0) / r.length, lon: r.reduce((a, p) => a + p[1], 0) / r.length });
+  const runsDe = lista.map(t => t.legado ? andando(s.track || []) : andando(tr.puntos(t, s.track)));
+  if (lista.length > 1) runsDe.forEach((rs, i) => {
+    const sp = spotDe(lista[i]);
+    runsDe[i] = rs.filter(r => {
+      const c = centro(r), dPropio = sp ? dist(c, sp) : Infinity;
+      let mejor = -1, dMejor = Infinity;
+      lista.forEach((t2, j) => { const q = j !== i && spotDe(t2); if (q) { const d = dist(c, q); if (d < dMejor) { dMejor = d; mejor = j; } } });
+      if (sp && mejor >= 0 && dMejor < 500 && dPropio > 500 && dMejor * 2 < dPropio) { runsDe[mejor] = runsDe[mejor].concat([r]); return false; }
+      return true;
+    });
+  });
   return lista.map((t, i) => {
     const legado = !!t.legado, hh = legado ? mios : mios.filter(h => h.tramoId === t.id || (!h.tramoId && tr.deTs({ tramos: [t] }, h.ts)));
     const pts = legado ? (s.track || []) : tr.puntos(t, s.track), sp = legado ? zonas.filter(z => (s.zonaIds || []).includes(z.id)) : tr.spotsDe(s, t, zonas);
-    const base = [...pts.map(q => [q[0], q[1]]), ...hh.filter(ok).map(h => [h.lat, h.lon]), ...sp.filter(ok).map(z => [z.lat, z.lon])];
+    const runs = runsDe[i], anduve = runs.flat();
+    /* sueltos: hallazgos y el spot si está donde anduviste (un spot marcado en el aparcamiento no estira la zona) */
+    const cerca = q => !anduve.length || anduve.some(a => dist({ lat: a[0], lon: a[1] }, q) < 100);
+    const sueltos = [...hh.filter(ok).map(h => [h.lat, h.lon]), ...sp.filter(ok).filter(cerca).map(z => [z.lat, z.lon])].filter(q => cerca({ lat: q[0], lon: q[1] }));
+    const base = [...anduve.map(q => [q[0], q[1]]), ...sueltos];
     const inicial = zonas.find(z => z.id === t.zonaId) || sp[0] || null;
     const c = circulo(base.map(q => ({ lat: q[0], lon: q[1] })));
     return { id: t.id, i, tramo: t, legado, nombre: inicial ? inicial.nombre : 'Zona ' + (i + 1), spotId: inicial ? inicial.id : null,
-      anillos: pts.length >= 2 ? cinta(base) : [], circulo: c, hallazgos: hh.length, especies: new Set(hh.map(h => h.especieId || h.especieTxt).filter(Boolean)).size,
+      anillos: anduve.length >= 2 ? cinta(runs, ANCHO, sueltos) : [], circulo: c, hallazgos: hh.length, especies: new Set(hh.map(h => h.especieId || h.especieTxt).filter(Boolean)).size,
       m: pts.length >= 2 ? Math.round(metrosPts(pts)) : 0, seg: legado ? Math.max(0, Math.round(((s.fin || now) - (s.creada || now)) / 1000)) : tr.dur(t, now), en: !legado && t.fin == null, hhs: hh };
   });
 }

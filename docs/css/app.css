@@ -1243,3 +1243,4 @@ button.navrow{width:100%;font:inherit;color:inherit;text-align:left;cursor:point
 .cq-dif ul li{display:flex;flex-wrap:wrap;gap:4px 8px;background:var(--bg);border-radius:8px;padding:6px 9px;font-size:13px}.cq-dif ul li em{font-style:normal;font-weight:700;color:#ffd43b}
 .cq-dif .mut{margin:4px 0 0}
 .ia-row small.ia-c.si{color:#8ce99a}.ia-row small.ia-c.no{color:#ffa8a8}
+.sheet .sh.plegada{overflow:hidden}.sheet .sh.plegada .grab{background:var(--acc)}

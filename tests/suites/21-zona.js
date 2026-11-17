@@ -181,6 +181,38 @@ module.exports = {
       t.eq('desde el mapa todavía no ha salido', await t.page.evaluate(() => !!window.__salio), false);
       await atras(); t.eq('desde el mapa sale de la app', await t.page.evaluate(() => !!window.__salio), true);
     });
+    await t.case('sin «hilo» entre spots: lo que vas en coche no forma parte de la zona ni de la línea', async () => {
+      const r = await t.page.evaluate(async () => {
+        const z = await import('./js/zona.js'), T = 1794900000;
+        /* andando por A (1 m/s), luego en coche 2 km hasta B (15 m/s), y andando por B */
+        const A = Array.from({ length: 12 }, (_, i) => [43.40 + i * 0.00009, -2.75, T + i * 10]);
+        const coche = Array.from({ length: 10 }, (_, i) => [43.401 + (i + 1) * 0.0018, -2.75, T + 120 + (i + 1) * 13]);
+        const B = Array.from({ length: 12 }, (_, i) => [43.42 + i * 0.00009, -2.75, T + 260 + i * 10]);
+        const runs = z.andando([...A, ...coche, ...B]);
+        const anillos = z.cinta(runs);
+        const lat = anillos.flat().map(p => p[0]), hueco = lat.filter(y => y > 43.4035 && y < 43.4185).length;
+        /* una salida con dos zonas: el spot de la zona B, marcado lejos (en el aparcamiento), no estira la zona */
+        const s = { id: 's', track: [...A, ...B], tramos: [{ id: 'a', zonaId: 'pa', ini: T * 1000, fin: (T + 115) * 1000 }, { id: 'b', zonaId: 'pb', ini: (T + 255) * 1000, fin: (T + 400) * 1000 }], zonaIds: ['pa', 'pb'] };
+        const zs = z.zonasDeSalida(s, [], [{ id: 'pa', lat: 43.4004, lon: -2.75, creada: 0 }, { id: 'pb', lat: 43.4150, lon: -2.75, creada: 0 }]);
+        const latB = zs[1].anillos.flat().map(p => p[0]);
+        return { runs: runs.length, enCoche: runs.flat().length, hueco, minB: Math.min(...latB) };
+      });
+      t.eq('dos recorridos a pie (el coche se quita)', [r.runs, r.enCoche], [2, 24]);
+      t.eq('nada dibujado en el trayecto en coche', r.hueco, 0);
+      t.ok('la zona B no llega hasta su spot del aparcamiento (a 500 m)', r.minB > 43.418, String(r.minB));
+      const r2 = await t.page.evaluate(async () => {
+        const z = await import('./js/zona.js'), T = 1794900000;
+        /* en la zona A anduviste, fuiste en coche al sitio de B y empezaste a andar ANTES de pulsar «Cambiar zona» */
+        const A = Array.from({ length: 10 }, (_, i) => [43.40 + i * 0.00009, -2.75, T + i * 10]);
+        const B1 = Array.from({ length: 10 }, (_, i) => [43.42 + i * 0.00009, -2.75, T + 400 + i * 10]);
+        const B2 = Array.from({ length: 10 }, (_, i) => [43.4209 + i * 0.00009, -2.75, T + 600 + i * 10]);
+        const s = { id: 's', track: [...A, ...B1, ...B2], tramos: [{ id: 'a', zonaId: 'pa', ini: T * 1000, fin: (T + 550) * 1000 }, { id: 'b', zonaId: 'pb', ini: (T + 590) * 1000, fin: (T + 800) * 1000 }], zonaIds: ['pa', 'pb'] };
+        const zs = z.zonasDeSalida(s, [], [{ id: 'pa', lat: 43.4004, lon: -2.75, creada: 0 }, { id: 'pb', lat: 43.4205, lon: -2.75, creada: 0 }]);
+        const lats = q => q.anillos.flat().map(p => p[0]);
+        return { maxA: Math.max(...lats(zs[0])), minB: Math.min(...lats(zs[1])) };
+      });
+      t.ok('lo andado en el sitio de B antes de cambiar de zona pasa a la zona B', r2.maxA < 43.402 && r2.minB < 43.4201, JSON.stringify(r2));
+    });
     await t.case('app Android: el GPS nativo también mueve el punto azul (si el GPS de la web no responde)', async () => {
       const r = await t.page.evaluate(() => { const g = window.__MI.geo; g.poner({ lat: 43.4013, lon: -2.7522, acc: 6, ts: Date.now() + 5000 }); const f = g.fix(); const m = window.__MI.S.me; return { f, op: m.options.opacity, ll: m.getLatLng() }; });
       t.ok('posición nativa = posición de la app y punto azul en ella', r.f.lat === 43.4013 && r.f.acc === 6 && r.op === 1 && Math.abs(r.ll.lat - 43.4013) < 1e-9, JSON.stringify(r));

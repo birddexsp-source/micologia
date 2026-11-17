@@ -20,7 +20,7 @@ import * as cmpx from './comparar.js';
 import * as zon from './zona.js';
 import * as tr from './tramos.js';
 
-const APP_V = 'micologia-v59';   // = V de sw.js
+const APP_V = 'micologia-v60';   // = V de sw.js
 const S = { view: 'mapa', arg: '', map: null, pins: null, me: null, acc: null, tmp: null, mini: null, centered: false, filtro: { salida: '', especie: '' }, clase: '', q: '', syncErr: false, mes: new Date().getMonth() + 1 };
 const VIEWS = ['mapa', 'salidas', 'salida', 'setas', 'mes', 'plan', 'ajustes'];
 const TITULOS = { mapa: 'Mapa', salidas: 'Salidas', salida: 'Salida', setas: 'Setas', mes: 'Este mes', plan: 'Plan de salida', ajustes: 'Ajustes' };
@@ -35,13 +35,30 @@ function openSheet(html, { dim = true } = {}) {
   s.onclick = dim ? e => { if (e.target === s) closeSheet(); } : null;
   hydrate(s); gestosHoja(s.firstChild); return s.firstChild;
 }
-/* Cerrar una hoja: tocar la barrita de arriba o arrastrarla hacia abajo. No en las que tienen un punto que mover (marcar, editar spot). */
+/* Hojas: arrastrar hacia abajo (o tocar la barrita) cierra las que tapan la pantalla. Las del mapa (spot, bosque…) se PLIEGAN:
+   queda solo la cabecera abajo y el mapa libre, con el spot y su zona a la vista; tocar o subir la cabecera la despliega otra vez. */
+function plegada(sh) { return sh && sh.classList.contains('plegada'); }
+function altoPlegada(sh) { const h = sh.querySelector('.sv-h'); return Math.min(150, (h ? h.offsetHeight : 52) + 30); }
+function plegarHoja(sh = $('#sheet .sh')) {
+  if (!sh) return; sh.classList.add('plegada'); sh.style.transition = 'transform .22s'; sh.style.transform = 'translateY(' + Math.max(0, sh.offsetHeight - altoPlegada(sh)) + 'px)';
+  /* que se vea entero lo que estás mirando: la zona recorrida del spot, o el sitio */
+  setTimeout(() => { try {
+    const capas = S.spTrk ? S.spTrk.getLayers() : [], b = capas.length ? L.featureGroup(capas).getBounds() : null;
+    if (b && b.isValid()) S.map.fitBounds(b, { paddingTopLeft: [24, 130], paddingBottomRight: [72, altoPlegada(sh) + 40], maxZoom: 18, animate: true });
+  } catch (e) { } }, 230);
+}
+function desplegarHoja(sh = $('#sheet .sh')) { if (!sh) return; sh.classList.remove('plegada'); sh.style.transition = 'transform .22s'; sh.style.transform = ''; }
 function gestosHoja(sh) {
-  const g = $('.grab', sh); let y0 = null, dy = 0;
-  g.onclick = () => { if (!S.tmp) closeSheet(); };
-  sh.addEventListener('touchstart', e => { if (S.tmp || (sh.scrollTop > 0 && !e.target.closest('.grab'))) return; y0 = e.touches[0].clientY; dy = 0; sh.style.transition = 'none'; }, { passive: true });
-  sh.addEventListener('touchmove', e => { if (y0 == null) return; dy = e.touches[0].clientY - y0; sh.style.transform = dy > 0 ? 'translateY(' + dy + 'px)' : ''; }, { passive: true });
-  sh.addEventListener('touchend', () => { if (y0 == null) return; y0 = null; sh.style.transition = 'transform .2s'; if (dy > 90) closeSheet(); else sh.style.transform = ''; });
+  const g = $('.grab', sh), plegable = () => !$('#sheet').classList.contains('dim') && !S.tmp; let y0 = null, dy = 0, base = 0;
+  g.onclick = e => { e.stopPropagation(); if (S.tmp) return; if (!plegable()) return closeSheet(); plegada(sh) ? desplegarHoja(sh) : plegarHoja(sh); };
+  sh.addEventListener('click', e => { if (plegada(sh) && !e.target.closest('button, a, input, textarea, select')) desplegarHoja(sh); });
+  sh.addEventListener('touchstart', e => { if (S.tmp || (sh.scrollTop > 0 && !e.target.closest('.grab') && !plegada(sh))) return; y0 = e.touches[0].clientY; dy = 0; base = plegada(sh) ? Math.max(0, sh.offsetHeight - altoPlegada(sh)) : 0; sh.style.transition = 'none'; }, { passive: true });
+  sh.addEventListener('touchmove', e => { if (y0 == null) return; dy = e.touches[0].clientY - y0; const t = Math.max(0, base + dy); sh.style.transform = t ? 'translateY(' + t + 'px)' : ''; }, { passive: true });
+  sh.addEventListener('touchend', () => {
+    if (y0 == null) return; y0 = null; sh.style.transition = 'transform .2s';
+    if (plegada(sh)) { if (dy < -40) desplegarHoja(sh); else if (dy > 60) closeSheet(); else plegarHoja(sh); return; }
+    if (dy > 90) { if (plegable()) plegarHoja(sh); else closeSheet(); } else sh.style.transform = '';
+  });
 }
 function closeSheet() { S.ftBack = null;
   const s = $('#sheet'); s.hidden = true; s.innerHTML = ''; s.onclick = null;
@@ -83,7 +100,7 @@ async function pickFoto(onId, { galeria = false } = {}) {
 /* Línea del recorrido: borde oscuro + trazo claro, legible sobre satélite */
 function trazo(pts) {
   const g = L.layerGroup();
-  trk.lineas(pts).forEach(l => {
+  zon.andando(pts).forEach(l => {   /* solo lo andado: sin los trayectos en coche entre spots */
     if (l.length < 2) return; const ll = l.map(p => [p[0], p[1]]);
     L.polyline(ll, { color: '#0b1210', weight: 7, opacity: .55, interactive: false }).addTo(g);
     L.polyline(ll, { color: '#ffd23f', weight: 3.5, opacity: .95, interactive: false, className: 'trk-line' }).addTo(g);
@@ -585,7 +602,7 @@ async function verSpot(id) {
   marcarSel(id);
   /* qué bosque es, según el inventario forestal */
   bos.cargar().then(() => { const r = bos.cerca(z.lat, z.lon), m = sh.querySelector('.sv-t'); if (!r || !m || !sh.isConnected) return;
-    m.insertAdjacentHTML('beforeend', '<button class="bq-spot' + (r.c.k === 'euca' ? ' mal' : '') + '" id="st-bosq" style="--c:' + r.c.c + '">' + I.arbol + '<span>' + esc(r.c.n) + ' · ' + esc(r.sp.map(q => q.n).slice(0, 2).join(' + ')) + '</span><b>' + r.s + '</b></button>'); });
+    m.insertAdjacentHTML('beforeend', '<button class="bq-spot' + (r.c.k === 'euca' ? ' mal' : '') + '" id="st-bosq" style="--c:' + r.c.c + '">' + I.arbol + '<span>' + esc(r.c.n) + (r.sp.length ? ' · ' + esc(r.sp.map(q => q.n).slice(0, 2).join(' + ')) : '') + '</span>' + (bos.ABIERTO.has(r.c.k) ? '' : '<b>' + r.s + '</b>') + '</button>'); });
   /* la zona que has recorrido en este spot (en cada salida): aparece solo mientras miras el spot */
   if (S.spTrk) S.spTrk.remove(); S.spTrk = L.layerGroup().addTo(S.map);
   { const zz = await db.list('zonas'); ss.forEach(x => zon.zonasDeSalida(x, hs0, zz).filter(q => q.spotId === id || (q.legado && (x.zonaIds || []).includes(id))).forEach(q => dibujarZona(q, S.spTrk))); }
@@ -1544,7 +1561,7 @@ async function boot() {
       buscar();
     }).catch(() => { });
   }
-  window.__MI = { verSpot, abrirComprobar, cmpx, bos, abrirBosques, abrirRodal, atras, padre, abrirVisor, fichaTab: k => fichaTab($('#sheet .sh'), k), abrirHabitat, abrirDondeBuscar, db, geo, syn, cat, trk, S, abrirHallazgo, abrirFicha, abrirLibro, abrirIA, ia, abrirSpot, verSpot, editarSpot, verHallazgo, leerGPX };
+  window.__MI = { plegarHoja, desplegarHoja, verSpot, abrirComprobar, cmpx, bos, abrirBosques, abrirRodal, atras, padre, abrirVisor, fichaTab: k => fichaTab($('#sheet .sh'), k), abrirHabitat, abrirDondeBuscar, db, geo, syn, cat, trk, S, abrirHallazgo, abrirFicha, abrirLibro, abrirIA, ia, abrirSpot, verSpot, editarSpot, verHallazgo, leerGPX };
   document.body.dataset.ready = '1';
 }
 boot().catch(e => { console.error(e); document.body.insertAdjacentHTML('beforeend', '<div class="warn" style="position:fixed;top:60px;left:12px;right:12px;z-index:9999">No se pudo arrancar la app: ' + esc(e.message || e) + '</div>'); });
