@@ -88,6 +88,10 @@ module.exports = {
       t.ok('los metros no cuentan el salto de la pausa', bad);
       await t.go('#salida/' + sid); await t.wait(600);
       t.eq('2 líneas pintadas (una por tramo)', await t.N('#smap .trk-line'), 2);
+      t.eq('salida en marcha: tu posición (punto azul) en el mapa de la salida', await t.N('#smap .me'), 1);
+      const antes = await t.page.evaluate(() => document.querySelector('#smap .me').getBoundingClientRect().top);
+      { const f = await t.page.evaluate(() => window.__MI.geo.fix()); await t.setGeo(f.lat + 0.0002, f.lon + 0.0002); } await t.wait(1500);
+      t.ok('el punto azul se mueve contigo', await t.page.evaluate(a => Math.abs(document.querySelector('#smap .me').getBoundingClientRect().top - a) > 2, antes));
     });
     await t.case('si se cierra y se vuelve a abrir la app, sigue grabando y conserva lo grabado', async () => {
       const antes = (await t.docs('salidas'))[0].track.length;

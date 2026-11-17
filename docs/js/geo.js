@@ -1,7 +1,23 @@
 /* GPS: vigila la posición y guarda siempre el último punto con su precisión. */
 let watch = null, last = null, lastErr = null;
 const subs = new Set();
+/* posición que llega por otra vía (el GPS nativo de la app Android): sirve igual para el punto azul y para marcar */
+export function poner(p) {
+  if (!p || p.lat == null || (last && last.ts > p.ts + 1000 && Date.now() - last.ts < 15000)) return;
+  last = { lat: p.lat, lon: p.lon, acc: Math.round(p.acc || 0), ts: p.ts || Date.now() }; lastErr = null; subs.forEach(f => f(last, null));
+}
+/* en la app Android el GPS de la web (dentro de la app) a veces no da posición: se usa también el GPS nativo, solo con la app abierta */
+const nat = () => { try { const C = window.Capacitor; return C && C.isNativePlatform && C.isNativePlatform() ? ((C.Plugins && C.Plugins.BackgroundGeolocation) || (C.registerPlugin && C.registerPlugin('BackgroundGeolocation'))) : null; } catch (e) { return null; } };
+let natW = null;
+function startNativo() {
+  const B = nat(); if (!B || natW) return; natW = 'pidiendo';
+  Promise.resolve(B.addWatcher({ requestPermissions: true, stale: false, distanceFilter: 3 }, (l, err) => {
+    if (l) poner({ lat: l.latitude, lon: l.longitude, acc: l.accuracy, ts: l.time || Date.now() });
+    else if (err && !last) { lastErr = { code: err.code === 'NOT_AUTHORIZED' ? 1 : 2 }; subs.forEach(f => f(null, lastErr)); }
+  })).then(id => { natW = id; }).catch(() => { natW = null; });
+}
 export function start() {
+  startNativo();
   if (watch !== null || !navigator.geolocation) return;
   watch = navigator.geolocation.watchPosition(
     p => { last = { lat: p.coords.latitude, lon: p.coords.longitude, acc: Math.round(p.coords.accuracy), ts: p.timestamp }; lastErr = null; subs.forEach(f => f(last, null)); },

@@ -19,7 +19,7 @@ import * as bos from './bosques.js';
 import * as zon from './zona.js';
 import * as tr from './tramos.js';
 
-const APP_V = 'micologia-v51';   // = V de sw.js
+const APP_V = 'micologia-v52';   // = V de sw.js
 const S = { view: 'mapa', arg: '', map: null, pins: null, me: null, acc: null, tmp: null, mini: null, centered: false, filtro: { salida: '', especie: '' }, clase: '', q: '', syncErr: false, mes: new Date().getMonth() + 1 };
 const VIEWS = ['mapa', 'salidas', 'salida', 'setas', 'mes', 'plan', 'ajustes'];
 const TITULOS = { mapa: 'Mapa', salidas: 'Salidas', salida: 'Salida', setas: 'Setas', mes: 'Este mes', plan: 'Plan de salida', ajustes: 'Ajustes' };
@@ -743,7 +743,7 @@ async function renderSalida(id) {
   const [hs0, zonas] = [await db.list('hallazgos'), await db.list('zonas')];
   if (gen !== S.gen) return;
   if (S.mini) { S.mini.remove(); S.mini = null; }
-  if (S.unlive) { S.unlive(); S.unlive = null; } clearInterval(S.tick);
+  if (S.unlive) { S.unlive(); S.unlive = null; } if (S.unme) { S.unme(); S.unme = null; } clearInterval(S.tick);
   if (!s) { root.innerHTML = '<div class="pad"><a class="back" href="#salidas">‹ Salidas</a><div class="empty">Esta salida no existe.</div></div>'; return; }
   const hs = hs0.filter(h => h.salidaId === id).sort((a, b) => a.ts - b.ts);
   const zn = zid => (zonas.find(z => z.id === zid) || {}).nombre || '—';
@@ -882,6 +882,12 @@ async function renderSalida(id) {
     (mz ? (mz.spot ? [mz.id] : []) : orden).forEach((zid, i) => { const z = zonas.find(x => x.id === zid); if (!z || z.lat == null) return; L.marker([z.lat, z.lon], { interactive: false, zIndexOffset: 500, icon: L.divIcon({ className: 'tnm', html: '<b>' + (mz ? 1 : i + 1) + '</b>', iconSize: [24, 24], iconAnchor: [12, 12] }) }).addTo(S.mini); ls.push([z.lat, z.lon]); });
     if (!ls.length) { const f = geo.fix(); if (f) { S.mini.setView([f.lat, f.lon], 15); L.marker([f.lat, f.lon], { interactive: false, icon: L.divIcon({ className: 'me', html: '<i></i>', iconSize: [22, 22], iconAnchor: [11, 11] }) }).addTo(S.mini); } }
     if (ls.length) S.mini.fitBounds(ls, { padding: [30, 30], maxZoom: 17, animate: false });
+    /* salida en marcha: dónde estás ahora (punto azul que se mueve) */
+    if (curso && !mz || (mz && mz.en)) {
+      const yo = L.marker([0, 0], { interactive: false, zIndexOffset: 900, icon: L.divIcon({ className: 'me', html: '<i></i>', iconSize: [22, 22], iconAnchor: [11, 11] }) });
+      const mover = f => { if (!f || !S.mini) return; yo.setLatLng([f.lat, f.lon]); if (!S.mini.hasLayer(yo)) { yo.addTo(S.mini); if (!S.mini.getBounds().contains([f.lat, f.lon])) S.mini.setView([f.lat, f.lon], Math.max(S.mini.getZoom(), 16), { animate: false }); } };
+      mover(geo.fix()); S.unme = geo.onFix(mover);
+    }
   }
   if (trk.activo() === id) S.unlive = trk.onAdd(() => { if (S.view !== 'salida' || S.arg !== id || !S.mini) return; pintar(); const k = $('#sd-km'); if (k) k.textContent = kmTxt(live()); });
   if (curso) S.tick = setInterval(() => { const d = $('#sd-dur'); if (S.view === 'salida' && S.arg === id && d) d.textContent = durTxt(s); const zd = $('#sd-zdur'); if (zd && tAct) zd.textContent = trk.fmtDur(tr.dur(tAct)); }, 30000);

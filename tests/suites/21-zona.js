@@ -8,7 +8,7 @@ module.exports = {
     /* la app Android (Capacitor) trae un plugin de GPS en segundo plano: aquí se simula */
     await t.page.addInitScript(() => {
       window.Capacitor = { isNativePlatform: () => true, Plugins: {
-        BackgroundGeolocation: { addWatcher: async (o, cb) => { window.__bgo = o; window.__bgcb = cb; return 'w1'; }, removeWatcher: async o => { window.__bgrm = o.id; } },
+        BackgroundGeolocation: { addWatcher: async (o, cb) => { (window.__bgAll = window.__bgAll || []).push(o); if (o.backgroundMessage) { window.__bgo = o; window.__bgcb = cb; } return 'w1'; }, removeWatcher: async o => { window.__bgrm = o.id; } },
         LocalNotifications: { requestPermissions: async () => { window.__notif = true; return {}; } },
         App: { addListener: (n, cb) => { if (n === 'backButton') window.__atras = cb; }, exitApp: () => { window.__salio = true; } } } };
     });
@@ -136,7 +136,7 @@ module.exports = {
       await t.tap('#sd-zini', 800); await t.page.fill('#st-nom', 'Aparcamiento B'); await t.tap('#st-ok', 1000);
       let s = (await t.docs('salidas')).find(x => x.estado === 'en_curso');
       t.ok('dos zonas; la 1 cerrada y la 2 en marcha', s.tramos.length === 2 && s.tramos[0].fin !== null && s.tramos[1].fin === null && s.zonaIds.length === 2);
-      for (let i = 1; i <= 3; i++) { await t.page.evaluate(i => window.__bgcb({ latitude: 43.41 + i * 0.0003, longitude: -2.74, accuracy: 6, time: Date.now() }), i); await t.wait(120); }
+      for (let i = 1; i <= 3; i++) { await t.page.evaluate(i => { const f = window.__MI.geo.fix(); window.__bgcb({ latitude: f.lat + 0.0002, longitude: f.lon, accuracy: 6, time: Date.now() }); }, i); await t.wait(120); }
       await t.tap('#sd-mk', 900);
       t.eq('el spot por defecto es el de la zona en marcha', await t.page.evaluate(() => (document.querySelector('#mk-zonas .opt.on') || {}).textContent), 'Aparcamiento B');
       await t.tap('#mk-ok', 900);
@@ -173,6 +173,11 @@ module.exports = {
       await atras(); t.eq('salidas → mapa', await H(), '#mapa');
       t.eq('desde el mapa todavía no ha salido', await t.page.evaluate(() => !!window.__salio), false);
       await atras(); t.eq('desde el mapa sale de la app', await t.page.evaluate(() => !!window.__salio), true);
+    });
+    await t.case('app Android: el GPS nativo también mueve el punto azul (si el GPS de la web no responde)', async () => {
+      const r = await t.page.evaluate(() => { const g = window.__MI.geo; g.poner({ lat: 43.4013, lon: -2.7522, acc: 6, ts: Date.now() + 5000 }); const f = g.fix(); const m = window.__MI.S.me; return { f, op: m.options.opacity, ll: m.getLatLng() }; });
+      t.ok('posición nativa = posición de la app y punto azul en ella', r.f.lat === 43.4013 && r.f.acc === 6 && r.op === 1 && Math.abs(r.ll.lat - 43.4013) < 1e-9, JSON.stringify(r));
+      t.ok('con la app abierta se pide el GPS nativo (sin aviso de segundo plano)', await t.page.evaluate(() => (window.__bgAll || []).some(o => !o.backgroundMessage)));
     });
     await t.case('app Android: proyecto, permisos y compilación automática preparados', async () => {
       const R = f => fs.readFileSync(path.join(__dirname, '..', '..', f), 'utf8'), ex = f => fs.existsSync(path.join(__dirname, '..', '..', f));

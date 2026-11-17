@@ -15,7 +15,7 @@ async function ponerNativo(r) {
   await avisos();
   try {
     r.wid = await B.addWatcher({ backgroundTitle: 'Micología: grabando tu salida', backgroundMessage: 'Sigo tu recorrido aunque bloquees el móvil. Se para al cambiar de zona o terminar.', requestPermissions: true, stale: false, distanceFilter: 8 },
-      (l, err) => { if (err) { if (err.code === 'NOT_AUTHORIZED' && B.openSettings) B.openSettings(); return; } if (l && R === r) add({ lat: l.latitude, lon: l.longitude, acc: Math.round(l.accuracy), ts: l.time }); });
+      (l, err) => { if (err) { if (err.code === 'NOT_AUTHORIZED' && B.openSettings) B.openSettings(); return; } if (l) geo.poner({ lat: l.latitude, lon: l.longitude, acc: l.accuracy, ts: l.time || Date.now() }); if (l && R === r) add({ lat: l.latitude, lon: l.longitude, acc: Math.round(l.accuracy), ts: l.time }); });
     if (R !== r && r.wid != null) B.removeWatcher({ id: r.wid });   /* se paró mientras se concedía el permiso */
   } catch (e) { r.wid = null; }
 }
